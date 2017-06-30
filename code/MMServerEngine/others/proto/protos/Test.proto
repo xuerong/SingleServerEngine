@@ -1,0 +1,14 @@
+option java_package = "com.protocol";
+//20001
+message CSTest{
+    required string csStr           = 1 ;
+}
+message SCTest{
+    required string scStr           = 1 ;
+}
+message CSTest1{
+    required string scStr           = 1 ;
+}
+message SCTest1{
+    required string scStr           = 1 ;
+}

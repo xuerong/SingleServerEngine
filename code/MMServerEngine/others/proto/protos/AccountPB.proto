@@ -1,0 +1,21 @@
+option java_package = "com.protocol";
+//option java_outer_classname = "AccountPB";
+//10001
+message CSLogin
+{
+	required string accountId 			= 1;
+	required string url      			= 2;
+	required string ip       			= 3;
+}
+message SCLogin
+{
+	required string sessionId		= 1;
+}
+message CSLogout
+{
+	required string accountId 			= 1;
+}
+message SCLogout
+{
+
+}
