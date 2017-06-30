@@ -14,7 +14,7 @@ public final class SysConstantDefine {
     // -------------------------------------------------------------------------------------------------NetEvent------------------------
     public static final int NETEVENTEXCEPTION = -1000; // netEvent异常返回
     public static final int CACHEUPDATE = 1000; // 缓存更新
-    public static final int ASYNCDATA = 1003; // 异步更新数据
+//    public static final int ASYNCDATA = 1003; // 异步更新数据
     public static final int GETASYNCDATABELONGLISTKEY = 1005; // 从异步数据更新从DB获取的list
     public static final int TellMainServerSelfInfo = 1006; // 通知mainServer自己的服务器信息
     public static final int TellServersNewInfo = 1007; // 通知其它服务器新增了服务器

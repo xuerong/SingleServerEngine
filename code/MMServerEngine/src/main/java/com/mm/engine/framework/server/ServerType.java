@@ -16,7 +16,7 @@ public final class ServerType {
 
     public static void setServerType(String serverTypeStr){
         if(serverTypeStr == null){
-            serverType = NODE_SERVER;
+            serverType = MAIN_SERVER|NODE_SERVER|ASYNC_SERVER;
         }else{
             String[] tStrs  = serverTypeStr.split("\\|");
             int type = 0;

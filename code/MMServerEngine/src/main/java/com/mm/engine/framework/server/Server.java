@@ -132,12 +132,7 @@ public final class Server {
      * @param args
      */
     public static void main(String[] args){
-        String serverTypeStr = args[0];
-        EngineConfigure configure = new EngineConfigure(serverTypeStr);
-        if(args.length>1){
-            System.out.println(args[1]);
-            configure.changeEntrancePort(args[1]);
-        }
+        EngineConfigure configure = new EngineConfigure();
 
         Server.init(configure);
         Server.start();

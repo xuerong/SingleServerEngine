@@ -120,11 +120,7 @@ public class AsyncService {
             threadNum.set(t);
         }
         asyncData.setThreadNum(t);
-
-        NetEventData eventData = new NetEventData(SysConstantDefine.ASYNCDATA);
-        eventData.setParam(asyncData);
-        NetEventData ret = netEventService.fireAsyncServerNetEventSyn(eventData); // 需要同步发送
-        List<AsyncData> result = (List<AsyncData>)ret.getParam();
+        receiveAsyncData(asyncData);
     }
 
     /**
@@ -139,10 +135,7 @@ public class AsyncService {
         for(AsyncData asyncData : asyncDataList){
             asyncData.setThreadNum(t);
         }
-        NetEventData eventData = new NetEventData(SysConstantDefine.ASYNCDATA);
-        eventData.setParam(asyncDataList);
-        NetEventData ret = netEventService.fireAsyncServerNetEventSyn(eventData); // 需要同步发送
-        List<AsyncData> result = (List<AsyncData>)ret.getParam();
+        receiveAsyncData(asyncDataList);
     }
     /**
      * 从异步服务器中获取满足条件的对象
@@ -150,31 +143,23 @@ public class AsyncService {
      * 同时将对应的listKey记录到异步服务器中，以便新数据插入时更新对应的list
      */
     public List<AsyncData> getAsyncDataBelongListKey(String listKey){
-        NetEventData eventData = new NetEventData(SysConstantDefine.GETASYNCDATABELONGLISTKEY);
-        eventData.setParam(listKey);
-        NetEventData ret = netEventService.fireAsyncServerNetEventSyn(eventData); // 需要同步发送
-        List<AsyncData> result = (List<AsyncData>)ret.getParam();
-        return result;
+        return receiveRefreshDBList(listKey);
     }
     /// 上面的四个函数，处理其他服务器发送过来的异步数据库请求
-    @NetEventListener(netEvent = SysConstantDefine.ASYNCDATA)
-    public NetEventData receiveAsyncData(NetEventData eventData){
-        if(eventData.getParam() instanceof AsyncData){
-            AsyncData asyncData = (AsyncData)eventData.getParam();
+    public void receiveAsyncData(Object object){
+        if(object instanceof AsyncData){
+            AsyncData asyncData = (AsyncData)object;
             doReceiveAsyncData(asyncData);
-        }else if(eventData.getParam() instanceof List){
-            List<AsyncData> asyncDataList = (List<AsyncData>)eventData.getParam();
+        }else if(object instanceof List){
+            List<AsyncData> asyncDataList = (List<AsyncData>)object;
             for(AsyncData asyncData : asyncDataList){
                 doReceiveAsyncData(asyncData);
             }
         }
-        return new NetEventData(eventData.getNetEvent(),null);
     }
 
     // 其他服务器发送来的，异步服务器有的对应list的对象和更新状态
-    @NetEventListener(netEvent = SysConstantDefine.GETASYNCDATABELONGLISTKEY)
-    public NetEventData receiveRefreshDBList(NetEventData eventData){
-        String listKey = (String)eventData.getParam();
+    public List<AsyncData> receiveRefreshDBList(String listKey){
         // 查看并插入listKeys插入
         String classKey = KeyParser.getClassNameFromListKey(listKey);
         Set<String> listKeys = listKeysMap.get(classKey);
@@ -197,7 +182,7 @@ public class AsyncService {
                 }
             }
         }
-        return new NetEventData(eventData.getNetEvent(),result);
+        return result;
     }
     private void doReceiveAsyncData(AsyncData asyncData){
         if(asyncData.getOperType() == OperType.Insert || asyncData.getOperType() == OperType.Delete) {
