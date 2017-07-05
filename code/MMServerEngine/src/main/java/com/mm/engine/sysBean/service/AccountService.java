@@ -83,9 +83,9 @@ public class AccountService {
     }
     @Request(opcode = AccountOpcode.CSLogout)
     public RetPacket logout(Object data,Session session) throws Throwable{
-        if(!ServerType.isMainServer()){
-            throw new MMException("logout fail,this is not mainServer");
-        }
+//        if(!ServerType.isMainServer()){
+//            throw new MMException("logout fail,this is not mainServer");
+//        }
         AccountPB.CSLogout csLogoutMain = AccountPB.CSLogout.parseFrom((byte[])data);
         String accountId = csLogoutMain.getAccountId();
         accountSysService.logout(accountId);

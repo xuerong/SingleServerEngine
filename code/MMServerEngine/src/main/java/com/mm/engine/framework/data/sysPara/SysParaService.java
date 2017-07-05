@@ -57,6 +57,8 @@ public class SysParaService {
             for (Map.Entry<String, String> entry : storageParaMap.entrySet()) {
                 paraMap.put(entry.getKey(), entry.getValue()); // 存在则替换
             }
+        }else{
+            storageParaMap = new HashMap<String, String>();
         }
     }
 
@@ -149,6 +151,4 @@ public class SysParaService {
         storageParaMap.put(key, value);
         return old;
     }
-
-
 }

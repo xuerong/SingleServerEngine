@@ -40,6 +40,7 @@ public final class EngineConfigure {
         if(serverTypeStr!=null){
             ServerType.setServerType(serverTypeStr);
         }else{
+            ServerType.setServerType(serverTypeStr);
             // 从配置文件中取server类型，如果没有，就是默认类型nodeServer
         }
         // 初始化配置：从配置文件中读取
