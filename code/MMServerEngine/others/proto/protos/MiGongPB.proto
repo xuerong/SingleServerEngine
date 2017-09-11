@@ -1,3 +1,4 @@
+syntax = "proto3";
 option java_package = "com.protocol";
 //option java_outer_classname = "LivePB";
 // 12001
