@@ -1,0 +1,15 @@
+syntax = "proto3";
+option java_package = "com.protocol";
+//option java_outer_classname = "LivePB";
+// 12001
+//------------------------------------------------------房间外的
+message CSGetMiGongMap
+{
+
+}
+message SCGetMiGongMap
+{
+	repeated int32 map 			= 1; //
+}
+
+
