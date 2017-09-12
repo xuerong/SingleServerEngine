@@ -113,7 +113,7 @@ public class Ui extends Frame implements ActionListener{
     }
     /*主函数：测试函数（参数：地图的行和列，入口和出口）*/
     public static void main(String[] args) {
-        int size = 380;
+        int size = 50;
         new Ui(size,size,new Element(0,0),new Element(size-1,size-1));
     }
 }
