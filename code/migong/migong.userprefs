@@ -1,10 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SocketTest.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ClientSocket.cs">
     <Files>
-      <File FileName="Assets\Scripts\MapCreate.cs" Line="54" Column="60" />
-      <File FileName="Assets\Scripts\ClientSocket.cs" Line="31" Column="22" />
-      <File FileName="Assets\Scripts\SocketTest.cs" Line="21" Column="16" />
+      <File FileName="Assets\Scripts\MapCreate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ClientSocket.cs" Line="168" Column="6" />
+      <File FileName="Assets\Scripts\SocketTest.cs" Line="18" Column="18" />
+      <File FileName="Assets\Scripts\otherScripts\Socket\SocketManager.cs" Line="225" Column="33" />
+      <File FileName="Assets\Scripts\protobuf\AccountPB.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\protobuf\BasePB.Serializer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\protobuf\MiGongOpcode.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\protobuf\MiGongPB.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\protobuf\AccountPB.Serializer.cs" Line="966" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

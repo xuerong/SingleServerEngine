@@ -146,6 +146,21 @@
      <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ServiceModel\XmlProtoSerializer.cs" />
      <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\SubItemToken.cs" />
      <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\WireType.cs" />
+     <Compile Include="Assets\Scripts\protobuf\AccountOpcode.cs" />
+     <Compile Include="Assets\Scripts\protobuf\AccountPB.Serializer.cs" />
+     <Compile Include="Assets\Scripts\protobuf\AccountPB.cs" />
+     <Compile Include="Assets\Scripts\protobuf\BaseOpcode.cs" />
+     <Compile Include="Assets\Scripts\protobuf\BasePB.Serializer.cs" />
+     <Compile Include="Assets\Scripts\protobuf\BasePB.cs" />
+     <Compile Include="Assets\Scripts\protobuf\LiveOpcode.cs" />
+     <Compile Include="Assets\Scripts\protobuf\LivePB.Serializer.cs" />
+     <Compile Include="Assets\Scripts\protobuf\LivePB.cs" />
+     <Compile Include="Assets\Scripts\protobuf\MiGongOpcode.cs" />
+     <Compile Include="Assets\Scripts\protobuf\MiGongPB.cs" />
+     <Compile Include="Assets\Scripts\protobuf\ProtocolParser.cs" />
+     <Compile Include="Assets\Scripts\protobuf\RoomOpcode.cs" />
+     <Compile Include="Assets\Scripts\protobuf\RoomPB.Serializer.cs" />
+     <Compile Include="Assets\Scripts\protobuf\RoomPB.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

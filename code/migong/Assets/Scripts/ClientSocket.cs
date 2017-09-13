@@ -24,41 +24,41 @@ public class ClientSocket
 	/// <param name="port"></param>  
 	public void ConnectServer(string ip,int port)  
 	{  
-		try
-		{
-			clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);//创建套接字
-			IPAddress ipAddress = IPAddress.Parse(ip);//解析IP地址
-			IPEndPoint ipEndpoint = new IPEndPoint(ipAddress, port);
-			IAsyncResult result = clientSocket.BeginConnect(ipEndpoint, new AsyncCallback(_onConnect_Sucess), clientSocket);//异步连接
-			bool success = result.AsyncWaitHandle.WaitOne(5000, true);
-			if (!success) //超时
-			{
-				_onConnect_Outtime();
-			}
-		}
-		catch (System.Exception _e)
-		{
-			_onConnect_Fail();
-		}
-//		IPAddress mIp = IPAddress.Parse(ip);  
-//		IPEndPoint ip_end_point = new IPEndPoint(mIp, port);  
-//
-//		try {  
-////			IAsyncResult asyncResult = clientSocket.BeginConnect(ip_end_point,new System.AsyncCallback(_onConnect_Success),clientSocket);//异步连接
-////			bool success = asyncResult.AsyncWaitHandle.WaitOne(5000,true);
-////			if(!success){
-////				
-////			}
-//			clientSocket.Connect(ip_end_point);  
-//			IsConnected = true;  
-//			Debug.Log("连接服务器成功");  
-//		}  
-//		catch  
-//		{  
-//			IsConnected = false;  
-//			Debug.Log("连接服务器失败");  
-//			return;  
-//		}  
+//		try
+//		{
+//			clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);//创建套接字
+//			IPAddress ipAddress = IPAddress.Parse(ip);//解析IP地址
+//			IPEndPoint ipEndpoint = new IPEndPoint(ipAddress, port);
+//			IAsyncResult result = clientSocket.BeginConnect(ipEndpoint, new AsyncCallback(_onConnect_Sucess), clientSocket);//异步连接
+//			bool success = result.AsyncWaitHandle.WaitOne(5000, true);
+//			if (!success) //超时
+//			{
+//				_onConnect_Outtime();
+//			}
+//		}
+//		catch (System.Exception _e)
+//		{
+////			_onConnect_Fail();
+//		}
+		IPAddress mIp = IPAddress.Parse(ip);  
+		IPEndPoint ip_end_point = new IPEndPoint(mIp, port);  
+
+		try {  
+//			IAsyncResult asyncResult = clientSocket.BeginConnect(ip_end_point,new System.AsyncCallback(_onConnect_Success),clientSocket);//异步连接
+//			bool success = asyncResult.AsyncWaitHandle.WaitOne(5000,true);
+//			if(!success){
+//				
+//			}
+			clientSocket.Connect(ip_end_point);  
+			IsConnected = true;  
+			Debug.Log("连接服务器成功");  
+		}  
+		catch  
+		{  
+			IsConnected = false;  
+			Debug.Log("连接服务器失败");  
+			return;  
+		}  
 		//服务器下发数据长度  
 //		int receiveLength = clientSocket.Receive(result);  
 //		ByteBuffer buffer = new ByteBuffer(result);  
@@ -66,9 +66,9 @@ public class ClientSocket
 //		string data = buffer.ReadString();  
 //		Debug.Log("服务器返回数据：" + data);  
 
-		Thread receiveThread = new Thread(new ThreadStart(_onReceiveSocket));
-		receiveThread.IsBackground = true;
-		receiveThread.Start();
+//		Thread receiveThread = new Thread(new ThreadStart(_onReceiveSocket));
+//		receiveThread.IsBackground = true;
+//		receiveThread.Start();
 	}  
 	private void _onConnect_Sucess(IAsyncResult iar)
 	{
@@ -85,12 +85,13 @@ public class ClientSocket
 		}
 		catch (Exception _e)
 		{
-			Close();
+//			Close();
 		}
 	}
 	private void _onConnect_Outtime()
 	{
-		_close();
+		Debug.Log("连接超时");
+//		_close();
 	}
 
 	public void CloseConnect(){
@@ -107,30 +108,31 @@ public class ClientSocket
 		{
 			if (!clientSocket.Connected)
 			{
-				_isConnected = false;
-				_ReConnect();
+//				_isConnected = false;
+//				_ReConnect();
+
 				break;
 			}
 			try
 			{
-				int receiveLength = clientSocket.Receive(_tmpReceiveBuff);
-				if (receiveLength > 0)
-				{
-					_databuffer.AddBuffer(_tmpReceiveBuff, receiveLength);//将收到的数据添加到缓存器中
-					while (_databuffer.GetData(out _socketData))//取出一条完整数据
-					{
-						sEvent_NetMessageData tmpNetMessageData = new sEvent_NetMessageData();
-						tmpNetMessageData._eventType = _socketData._protocallType;
-						tmpNetMessageData._eventData = _socketData._data;
-
-						//锁死消息中心消息队列，并添加数据
-						lock (MessageCenter.Instance._netMessageDataQueue)
-						{
-							Debug.Log(tmpNetMessageData._eventType);
-							MessageCenter.Instance._netMessageDataQueue.Enqueue(tmpNetMessageData);
-						}
-					}
-				}
+//				int receiveLength = clientSocket.Receive(_tmpReceiveBuff);
+//				if (receiveLength > 0)
+//				{
+//					_databuffer.AddBuffer(_tmpReceiveBuff, receiveLength);//将收到的数据添加到缓存器中
+//					while (_databuffer.GetData(out _socketData))//取出一条完整数据
+//					{
+//						sEvent_NetMessageData tmpNetMessageData = new sEvent_NetMessageData();
+//						tmpNetMessageData._eventType = _socketData._protocallType;
+//						tmpNetMessageData._eventData = _socketData._data;
+//
+//						//锁死消息中心消息队列，并添加数据
+//						lock (MessageCenter.Instance._netMessageDataQueue)
+//						{
+//							Debug.Log(tmpNetMessageData._eventType);
+//							MessageCenter.Instance._netMessageDataQueue.Enqueue(tmpNetMessageData);
+//						}
+//					}
+//				}
 			}
 			catch (System.Exception e)
 			{
@@ -162,6 +164,9 @@ public class ClientSocket
 			clientSocket.Close();  
 		}  
 	}  
+	public void SendMessage(byte[] data){
+		// 
+	}
 
 	/// <summary>  
 	/// 数据转换，网络发送需要两部分数据，一是数据长度，二是主体数据  
