@@ -4,7 +4,10 @@ using System.Net;
 using System.Net.Sockets;  
 using System.IO;
 using System;
-using System.Threading; 
+using System.Threading;
+using System.Collections.Generic; 
+
+public delegate void ActionForReceive(int opcode,byte[] data);
 
 public class ClientSocket  
 {  
@@ -12,6 +15,10 @@ public class ClientSocket
 	private static Socket clientSocket;  
 	//是否已连接的标识  
 	public bool IsConnected = false;  
+
+
+	Dictionary<int,ActionForReceive> dic = new Dictionary<int,ActionForReceive>();
+
 
 	public ClientSocket(){  
 		clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);  
@@ -66,9 +73,9 @@ public class ClientSocket
 //		string data = buffer.ReadString();  
 //		Debug.Log("服务器返回数据：" + data);  
 
-//		Thread receiveThread = new Thread(new ThreadStart(_onReceiveSocket));
-//		receiveThread.IsBackground = true;
-//		receiveThread.Start();
+		Thread receiveThread = new Thread(new ThreadStart(_onReceiveSocket));
+		receiveThread.IsBackground = true;
+		receiveThread.Start();
 	}  
 	private void _onConnect_Sucess(IAsyncResult iar)
 	{
@@ -104,6 +111,15 @@ public class ClientSocket
 	/// </summary>
 	private void _onReceiveSocket()
 	{
+		byte[] _tmpReceiveBuff = new byte[1024];
+		ByteBuffer buf = ByteBuffer.Allocate (10240);
+		int length = 0;
+		bool isReadHead = false;
+
+		int size = 0;
+		// 
+		int opcode = 0;
+		int id = 0;
 		while (true)
 		{
 			if (!clientSocket.Connected)
@@ -115,27 +131,48 @@ public class ClientSocket
 			}
 			try
 			{
-//				int receiveLength = clientSocket.Receive(_tmpReceiveBuff);
-//				if (receiveLength > 0)
-//				{
-//					_databuffer.AddBuffer(_tmpReceiveBuff, receiveLength);//将收到的数据添加到缓存器中
-//					while (_databuffer.GetData(out _socketData))//取出一条完整数据
-//					{
-//						sEvent_NetMessageData tmpNetMessageData = new sEvent_NetMessageData();
-//						tmpNetMessageData._eventType = _socketData._protocallType;
-//						tmpNetMessageData._eventData = _socketData._data;
-//
-//						//锁死消息中心消息队列，并添加数据
-//						lock (MessageCenter.Instance._netMessageDataQueue)
-//						{
-//							Debug.Log(tmpNetMessageData._eventType);
-//							MessageCenter.Instance._netMessageDataQueue.Enqueue(tmpNetMessageData);
-//						}
-//					}
-//				}
+				int receiveLength = clientSocket.Receive(_tmpReceiveBuff);
+				if (receiveLength > 0)
+				{
+					buf.WriteBytes(_tmpReceiveBuff);
+					length += receiveLength;
+					if(length < 12){
+						continue;
+					}
+
+					if(!isReadHead){
+						size = buf.ReadInt();
+						opcode = buf.ReadInt();
+						id = buf.ReadInt();
+						Debug.Log("size:"+size+",opcode:"+opcode+",id:"+id);
+						isReadHead = true;
+						if(size > length-12){
+							continue;
+						}
+					}
+					if(size > length-12){
+						continue;
+					}
+
+					byte[] data = new byte[size];
+					buf.ReadBytes(data,0,size);
+					buf.Clear();
+					isReadHead = false;
+					length = 0;
+					Debug.Log("receiveLength4:"+receiveLength+",id:"+id);
+					if(dic.ContainsKey(id)){
+						ActionForReceive action = dic[id];
+						Debug.Log("receiveLength5:"+receiveLength);
+						if(action != null){
+							action.Invoke(opcode,data);
+							Debug.Log("receiveLength6:"+receiveLength);
+						}
+					}
+				}
 			}
 			catch (System.Exception e)
 			{
+				Debug.Log("e:"+e);
 				clientSocket.Disconnect(true);
 				clientSocket.Shutdown(SocketShutdown.Both);
 				clientSocket.Close();
@@ -147,25 +184,76 @@ public class ClientSocket
 	/// <summary>  
 	/// 发送数据给服务器  
 	/// </summary>  
-	public void SendMessage(string data)  
-	{  
+//	public void SendMessage(string data)  
+//	{  
+//		if (IsConnected == false)  
+//			return;  
+//		try  
+//		{  
+//			ByteBuffer buffer = ByteBuffer.Allocate(512);  
+//			buffer.WriteString(data);  
+//			clientSocket.Send(WriteMessage(buffer.ToBytes()));  
+//		}  
+//		catch  
+//		{  
+//			IsConnected = false;  
+//			clientSocket.Shutdown(SocketShutdown.Both);  
+//			clientSocket.Close();  
+//		}  
+//	}  
+	public void SendMessageAsyc(int id,int opcode ,byte[] data,ActionForReceive action){
+		// 
 		if (IsConnected == false)  
 			return;  
 		try  
 		{  
-			ByteBuffer buffer = new ByteBuffer();  
-			buffer.WriteString(data);  
-			clientSocket.Send(WriteMessage(buffer.ToBytes()));  
+			ByteBuffer buffer = ByteBuffer.Allocate(512);  
+			buffer.WriteInt(data.Length);
+			buffer.WriteInt(opcode);
+			buffer.WriteInt(id);
+			buffer.WriteBytes(data);
+			byte[] sendData = buffer.ToArray();
+
+			clientSocket.Send(sendData);  
+
+			dic.Add(id,action);
+
+			Debug.Log("send success,size = "+data.Length+",id:"+id);
+		}  
+		catch(Exception e)
+		{  
+			Debug.Log("send fail,"+e);
+			IsConnected = false;  
+			clientSocket.Shutdown(SocketShutdown.Both);  
+			clientSocket.Close();  
+
+		}  
+	}
+	public void SendMessage(int id,int opcode ,byte[] data){
+		// 
+		if (IsConnected == false)  
+			return;  
+		try  
+		{  
+			ByteBuffer buffer = ByteBuffer.Allocate(512);  
+			buffer.WriteInt(data.Length);
+			buffer.WriteInt(opcode);
+			buffer.WriteInt(id);
+			buffer.WriteBytes(data);
+			byte[] sendData = buffer.ToArray();
+
+			clientSocket.Send(sendData);  
+			Debug.Log("send success,size = "+data.Length);
+
+//			Monitor.Wait();
 		}  
 		catch  
 		{  
 			IsConnected = false;  
 			clientSocket.Shutdown(SocketShutdown.Both);  
 			clientSocket.Close();  
+			Debug.Log("send fail");
 		}  
-	}  
-	public void SendMessage(byte[] data){
-		// 
 	}
 
 	/// <summary>  

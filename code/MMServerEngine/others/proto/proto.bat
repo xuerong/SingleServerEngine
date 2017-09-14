@@ -1,9 +1,9 @@
 @echo off
 cd /d "%~dp0"
 
-set proto_file_name=AccountPB.proto
+set proto_file_name=MiGongPB.proto
 ::set opcode_class_name=AccountPB.java
-set start_index=10001
+set start_index=12001
 
 set opcode_class_name=%proto_file_name:PB.proto=Opcode.java%
 

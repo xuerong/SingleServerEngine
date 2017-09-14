@@ -1,11 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{CCD87D25-44D4-19BE-4016-7A4B5D0E9C94}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -13,6 +14,8 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
+    <LangVersion>6</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,142 +49,147 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\ByteBuffer.cs" />
-     <Compile Include="Assets\Scripts\ClientSocket.cs" />
-     <Compile Include="Assets\Scripts\MapCreate.cs" />
-     <Compile Include="Assets\Scripts\Pacman.cs" />
-     <Compile Include="Assets\Scripts\SocketTest.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Client.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\GameConst.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Server.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\ByteStreamBuff.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\DataBuff.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\EventDefinition.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\MessageCenter.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\ProtocalData\protocal_loginserver.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\ProtocalDefinition.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\SocketManager.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\BclHelpers.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\BufferExtension.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\BufferPool.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\CallbackAttributes.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Compiler\CompilerContext.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Compiler\CompilerDelegates.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Compiler\Local.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\DataFormat.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Extensible.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ExtensibleUtil.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\GlobalSuppressions.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Helpers.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\IExtensible.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\IExtension.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ImplicitFields.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\KeyValuePairProxy.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Meta\AttributeMap.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Meta\BasicList.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Meta\CallbackSet.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Meta\MetaType.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Meta\RuntimeTypeModel.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Meta\SubType.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Meta\TypeFormatEventArgs.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Meta\TypeModel.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Meta\ValueMember.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\NetObjectCache.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\PrefixStyle.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ProtoContractAttribute.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ProtoEnumAttribute.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ProtoException.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ProtoIgnoreAttribute.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ProtoIncludeAttribute.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ProtoMemberAttribute.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ProtoReader.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ProtoWriter.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\SerializationContext.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\ArrayDecorator.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\BlobSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\BooleanSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\ByteSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\CharSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\CompiledSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\DateTimeSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\DecimalSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\DefaultValueDecorator.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\DoubleSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\EnumSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\FieldDecorator.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\GuidSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\IProtoSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\IProtoTypeSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\ISerializerProxy.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\Int16Serializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\Int32Serializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\Int64Serializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\KeyValuePairDecorator.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\ListDecorator.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\MemberSpecifiedDecorator.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\NetObjectSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\NullDecorator.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\ParseableSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\PropertyDecorator.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\ProtoDecoratorBase.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\SByteSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\SingleSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\StringSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\SubItemSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\SurrogateSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\SystemTypeSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\TagDecorator.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\TimeSpanSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\TupleSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\TypeSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\UInt16Serializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\UInt32Serializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\UInt64Serializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\Serializers\UriDecorator.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ServiceModel\ProtoBehaviorAttribute.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ServiceModel\ProtoBehaviorExtensionElement.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ServiceModel\ProtoEndpointBehavior.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ServiceModel\ProtoOperationBehavior.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\ServiceModel\XmlProtoSerializer.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\SubItemToken.cs" />
-     <Compile Include="Assets\Scripts\otherScripts\Socket\protobuf\WireType.cs" />
-     <Compile Include="Assets\Scripts\protobuf\AccountOpcode.cs" />
-     <Compile Include="Assets\Scripts\protobuf\AccountPB.Serializer.cs" />
-     <Compile Include="Assets\Scripts\protobuf\AccountPB.cs" />
-     <Compile Include="Assets\Scripts\protobuf\BaseOpcode.cs" />
-     <Compile Include="Assets\Scripts\protobuf\BasePB.Serializer.cs" />
-     <Compile Include="Assets\Scripts\protobuf\BasePB.cs" />
-     <Compile Include="Assets\Scripts\protobuf\LiveOpcode.cs" />
-     <Compile Include="Assets\Scripts\protobuf\LivePB.Serializer.cs" />
-     <Compile Include="Assets\Scripts\protobuf\LivePB.cs" />
-     <Compile Include="Assets\Scripts\protobuf\MiGongOpcode.cs" />
-     <Compile Include="Assets\Scripts\protobuf\MiGongPB.cs" />
-     <Compile Include="Assets\Scripts\protobuf\ProtocolParser.cs" />
-     <Compile Include="Assets\Scripts\protobuf\RoomOpcode.cs" />
-     <Compile Include="Assets\Scripts\protobuf\RoomPB.Serializer.cs" />
-     <Compile Include="Assets\Scripts\protobuf\RoomPB.cs" />
- <Reference Include="UnityEngine.UI">
- <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Networking">
- <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.TestRunner">
- <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
- </Reference>
- <Reference Include="nunit.framework">
- <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.HoloLens">
- <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.VR">
- <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
- </Reference>
+    <Compile Include="Assets\CSharp vNext Support\AsyncTools\AsyncTools.cs" />
+    <Compile Include="Assets\CSharp vNext Support\AsyncTools\UnityScheduler.cs" />
+    <Compile Include="Assets\CSharp vNext Support\AsyncTools\UnitySynchronizationContext.cs" />
+    <Compile Include="Assets\CSharp vNext Support\AsyncTools\UnityTaskScheduler.cs" />
+    <Compile Include="Assets\CSharp vNext Support\FormattableString\FormattableString.cs" />
+    <Compile Include="Assets\CSharp vNext Support\FormattableString\FormattableStringFactory.cs" />
+    <Compile Include="Assets\Scripts\ByteBuffer.cs" />
+    <Compile Include="Assets\Scripts\ClientSocket.cs" />
+    <Compile Include="Assets\Scripts\MapCreate.cs" />
+    <Compile Include="Assets\Scripts\Pacman.cs" />
+    <Compile Include="Assets\Scripts\SocketTest.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\BclHelpers.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\BufferExtension.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\BufferPool.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\CallbackAttributes.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Compiler\CompilerContext.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Compiler\CompilerDelegates.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Compiler\Local.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\DataFormat.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Extensible.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ExtensibleUtil.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\GlobalSuppressions.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Helpers.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\IExtensible.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\IExtension.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ImplicitFields.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\KeyValuePairProxy.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Meta\AttributeMap.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Meta\BasicList.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Meta\CallbackSet.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Meta\MetaType.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Meta\RuntimeTypeModel.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Meta\SubType.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Meta\TypeFormatEventArgs.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Meta\TypeModel.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Meta\ValueMember.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\NetObjectCache.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\PrefixStyle.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ProtoContractAttribute.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ProtoEnumAttribute.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ProtoException.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ProtoIgnoreAttribute.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ProtoIncludeAttribute.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ProtoMemberAttribute.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ProtoReader.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ProtoWriter.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\SerializationContext.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\ArrayDecorator.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\BlobSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\BooleanSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\ByteSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\CharSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\CompiledSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\DateTimeSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\DecimalSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\DefaultValueDecorator.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\DoubleSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\EnumSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\FieldDecorator.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\GuidSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\IProtoSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\IProtoTypeSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\ISerializerProxy.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\Int16Serializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\Int32Serializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\Int64Serializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\KeyValuePairDecorator.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\ListDecorator.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\MemberSpecifiedDecorator.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\NetObjectSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\NullDecorator.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\ParseableSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\PropertyDecorator.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\ProtoDecoratorBase.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\SByteSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\SingleSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\StringSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\SubItemSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\SurrogateSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\SystemTypeSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\TagDecorator.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\TimeSpanSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\TupleSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\TypeSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\UInt16Serializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\UInt32Serializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\UInt64Serializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\Serializers\UriDecorator.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ServiceModel\ProtoBehaviorAttribute.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ServiceModel\ProtoBehaviorExtensionElement.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ServiceModel\ProtoEndpointBehavior.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ServiceModel\ProtoOperationBehavior.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\ServiceModel\XmlProtoSerializer.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\SubItemToken.cs" />
+    <Compile Include="Assets\Scripts\otherScripts\protobuf\WireType.cs" />
+    <Compile Include="Assets\Scripts\protobuf\AccountOpcode.cs" />
+    <Compile Include="Assets\Scripts\protobuf\AccountPB.Serializer.cs" />
+    <Compile Include="Assets\Scripts\protobuf\AccountPB.cs" />
+    <Compile Include="Assets\Scripts\protobuf\BaseOpcode.cs" />
+    <Compile Include="Assets\Scripts\protobuf\BasePB.Serializer.cs" />
+    <Compile Include="Assets\Scripts\protobuf\BasePB.cs" />
+    <Compile Include="Assets\Scripts\protobuf\LiveOpcode.cs" />
+    <Compile Include="Assets\Scripts\protobuf\LivePB.Serializer.cs" />
+    <Compile Include="Assets\Scripts\protobuf\LivePB.cs" />
+    <Compile Include="Assets\Scripts\protobuf\MiGongOpcode.cs" />
+    <Compile Include="Assets\Scripts\protobuf\MiGongPB.Serializer.cs" />
+    <Compile Include="Assets\Scripts\protobuf\MiGongPB.cs" />
+    <Compile Include="Assets\Scripts\protobuf\ProtocolParser.cs" />
+    <Compile Include="Assets\Scripts\protobuf\RoomOpcode.cs" />
+    <Compile Include="Assets\Scripts\protobuf\RoomPB.Serializer.cs" />
+    <Compile Include="Assets\Scripts\protobuf\RoomPB.cs" />
+    <None Include="Assets\CSharp vNext Support\AsyncTools\Plugins\AsyncBridge.Net35.xml" />
+    <None Include="Assets\CSharp vNext Support\AsyncTools\Plugins\System.Threading.xml" />
+    <Reference Include="UnityEngine.UI">
+      <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HoloLens">
+      <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VR">
+      <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="AsyncBridge.Net35">
+      <HintPath>E:/code/SingleServerEngine/code/migong/Assets/CSharp vNext Support/AsyncTools/Plugins/AsyncBridge.Net35.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>E:/code/SingleServerEngine/code/migong/Assets/CSharp vNext Support/AsyncTools/Plugins/System.Threading.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -191,5 +199,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
 </Project>

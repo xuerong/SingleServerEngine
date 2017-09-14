@@ -46,7 +46,7 @@ public class CreateMap {
         visited=new boolean[tr][td];								//用参数决定访问标志大小
         init(map);													//初始化，包括map和visited
         create3(in);													//构造地图
-        showMap();
+//        showMap();
     }
     /*
      * 初始化函数，主要功能：初始化地图、初始化访问情况（都为false）

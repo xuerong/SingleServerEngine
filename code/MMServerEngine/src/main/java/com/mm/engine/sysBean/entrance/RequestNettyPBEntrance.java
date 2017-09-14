@@ -77,19 +77,24 @@ public class RequestNettyPBEntrance extends Entrance {
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) { // (2)
             NettyPBPacket nettyPBPacket = (NettyPBPacket) msg;
+            log.info("nettyPBPacket.getOpcode() = "+nettyPBPacket.getOpcode());
             try {
+                int id = 0;
                 String sessionId = ctx.channel().attr(sessionKey).get();
                 RetPacket retPacket = null;
                 if (nettyPBPacket.getOpcode() == AccountOpcode.CSLogin) { // 登陆消息
                     retPacket = accountService.login(nettyPBPacket.getOpcode(),nettyPBPacket.getData(),ctx,sessionKey);
                 }else{
                     Session session = checkAndGetSession(sessionId);
+                    id = nettyPBPacket.getId();
                     retPacket = requestService.handle(nettyPBPacket.getOpcode(),nettyPBPacket.getData(),session);
                 }
                 if(retPacket == null){
                     throw new MMException("server error!");
                 }
                 nettyPBPacket.setOpcode(retPacket.getOpcode());
+                System.out.println("id:"+id);
+                nettyPBPacket.setId(id);
                 nettyPBPacket.setData((byte[])retPacket.getRetData());
                 ctx.writeAndFlush(nettyPBPacket);
             }catch (Throwable e){

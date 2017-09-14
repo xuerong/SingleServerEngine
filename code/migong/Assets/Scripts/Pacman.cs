@@ -13,7 +13,7 @@ public class Pacman : MonoBehaviour {
 		speed = 0.1f;
 		transform.position = new Vector3 (0.84f,0,0);
 		dest = transform.position;
-		transform.localScale = transform.localScale * 0.3f;
+		transform.localScale = transform.localScale * 0.06f;
 
 	}
 

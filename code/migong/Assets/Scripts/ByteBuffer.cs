@@ -1,147 +1,437 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 
 public class ByteBuffer
 {
-    MemoryStream stream = null;
-    BinaryWriter writer = null;
-    BinaryReader reader = null;
+	//字节缓存区
+	private byte[] buf;
+	//读取索引
+	private int readIndex = 0;
+	//写入索引
+	private int writeIndex = 0;
+	//读取索引标记
+	private int markReadIndex = 0;
+	//写入索引标记
+	private int markWirteIndex = 0;
+	//缓存区字节数组的长度
+	private int capacity;
 
-    public ByteBuffer()
-    {
-        stream = new MemoryStream();
-        writer = new BinaryWriter(stream);
-    }
+	/**
+     * 构造方法
+     */
+	private ByteBuffer(int capacity)
+	{
+		buf = new byte[capacity];
+		this.capacity = capacity;
+	}
 
-    public ByteBuffer(byte[] data)
-    {
-        if (data != null)
-        {
-            stream = new MemoryStream(data);
-            reader = new BinaryReader(stream);
-        }
-        else
-        {
-            stream = new MemoryStream();
-            writer = new BinaryWriter(stream);
-        }
-    }
+	/**
+     * 构造方法
+     */
+	private ByteBuffer(byte[] bytes)
+	{
+		buf = bytes;
+		this.capacity = bytes.Length;
+	}
 
-    public void Close()
-    {
-        if (writer != null) writer.Close();
-        if (reader != null) reader.Close();
+	/**
+     * 构建一个capacity长度的字节缓存区ByteBuffer对象
+     */
+	public static ByteBuffer Allocate(int capacity)
+	{
+		return new ByteBuffer(capacity);
+	}
 
-        stream.Close();
-        writer = null;
-        reader = null;
-        stream = null;
-    }
+	/**
+     * 构建一个以bytes为字节缓存区的ByteBuffer对象，一般不推荐使用
+     */
+	public static ByteBuffer Allocate(byte[] bytes)
+	{
+		return new ByteBuffer(bytes);
+	}
 
-    public void WriteByte(byte v)
-    {
-        writer.Write(v);
-    }
+	/**
+     * 根据length长度，确定大于此leng的最近的2次方数，如length=7，则返回值为8
+     */
+	private int FixLength(int length) 
+	{
+		int n = 2;
+		int b = 2;
+		while( b < length) {
+			b = 2 << n;
+			n++;
+		}
+		return b;
+	}
 
-    public void WriteInt(int v)
-    {
-        writer.Write((int)v);
-    }
+	/**
+     * 翻转字节数组，如果本地字节序列为低字节序列，则进行翻转以转换为高字节序列
+     */
+	private byte[] flip(byte[] bytes)
+	{
+		if (BitConverter.IsLittleEndian)
+		{
+			Array.Reverse(bytes);
+		}
+		return bytes;
+	}
 
-    public void WriteShort(ushort v)
-    {
-        writer.Write((ushort)v);
-    }
+	/**
+     * 确定内部字节缓存数组的大小
+     */
+	private int FixSizeAndReset(int currLen, int futureLen)
+	{
+		if (futureLen > currLen)
+		{
+			//以原大小的2次方数的两倍确定内部字节缓存区大小
+			int size = FixLength(currLen) * 2;
+			if (futureLen > size)
+			{
+				//以将来的大小的2次方的两倍确定内部字节缓存区大小
+				size = FixLength(futureLen) * 2;
+			}
+			byte[] newbuf = new byte[size];
+			Array.Copy(buf, 0, newbuf, 0, currLen);
+			buf = newbuf;
+			capacity = newbuf.Length;
+		}
+		return futureLen;
+	}
 
-    public void WriteLong(long v)
-    {
-        writer.Write((long)v);
-    }
+	/**
+     * 将bytes字节数组从startIndex开始的length字节写入到此缓存区
+     */
+	public void WriteBytes(byte[] bytes, int startIndex, int length)
+	{
+		lock (this)
+		{
+			int offset = length - startIndex;
+			if (offset <= 0) return;
+			int total = offset + writeIndex;
+			int len = buf.Length;
+			FixSizeAndReset(len, total);
+			for (int i = writeIndex, j = startIndex; i < total; i++, j++)
+			{
+				buf[i] = bytes[j];
+			}
+			writeIndex = total;
+		}
+	}
 
-    public void WriteFloat(float v)
-    {
-        byte[] temp = BitConverter.GetBytes(v);
-        Array.Reverse(temp);
-        writer.Write(BitConverter.ToSingle(temp, 0));
-    }
+	/**
+     * 将字节数组中从0到length的元素写入缓存区
+     */
+	public void WriteBytes(byte[] bytes, int length)
+	{
+		WriteBytes(bytes, 0, length);
+	}
 
-    public void WriteDouble(double v)
-    {
-        byte[] temp = BitConverter.GetBytes(v);
-        Array.Reverse(temp);
-        writer.Write(BitConverter.ToDouble(temp, 0));
-    }
+	/**
+     * 将字节数组全部写入缓存区
+     */
+	public void WriteBytes(byte[] bytes)
+	{
+		WriteBytes(bytes, bytes.Length);
+	}
 
-    public void WriteString(string v)
-    {
-        byte[] bytes = Encoding.UTF8.GetBytes(v);
-        writer.Write((ushort)bytes.Length);
-        writer.Write(bytes);
-    }
+	/**
+     * 将一个ByteBuffer的有效字节区写入此缓存区中
+     */
+	public void Write(ByteBuffer buffer)
+	{
+		if (buffer == null) return;
+		if (buffer.ReadableBytes() <= 0) return;
+		WriteBytes(buffer.ToArray());
+	}
 
-    public void WriteBytes(byte[] v)
-    {
-        writer.Write((int)v.Length);
-        writer.Write(v);
-    }
+	/**
+     * 写入一个int16数据
+     */
+	public void WriteShort(short value)
+	{
+		WriteBytes(flip(BitConverter.GetBytes(value)));
+	}
 
-    public byte ReadByte()
-    {
-        return reader.ReadByte();
-    }
+	/**
+     * 写入一个uint16数据
+     */
+	public void WriteUshort(ushort value)
+	{
+		WriteBytes(flip(BitConverter.GetBytes(value)));
+	}
 
-    public int ReadInt()
-    {
-        return (int)reader.ReadInt32();
-    }
+	/**
+     * 写入一个int32数据
+     */
+	public void WriteInt(int value)
+	{
+		//byte[] array = new byte[4];
+		//for (int i = 3; i >= 0; i--)
+		//{
+		//    array[i] = (byte)(value & 0xff);
+		//    value = value >> 8;
+		//}
+		//Array.Reverse(array);
+		//Write(array);
+		WriteBytes(flip(BitConverter.GetBytes(value)));
+	}
 
-    public ushort ReadShort()
-    {
-        return (ushort)reader.ReadInt16();
-    }
+	/**
+     * 写入一个uint32数据
+     */
+	public void WriteUint(uint value)
+	{
+		WriteBytes(flip(BitConverter.GetBytes(value)));
+	}
 
-    public long ReadLong()
-    {
-        return (long)reader.ReadInt64();
-    }
+	/**
+     * 写入一个int64数据
+     */
+	public void WriteLong(long value)
+	{
+		WriteBytes(flip(BitConverter.GetBytes(value)));
+	}
 
-    public float ReadFloat()
-    {
-        byte[] temp = BitConverter.GetBytes(reader.ReadSingle());
-        Array.Reverse(temp);
-        return BitConverter.ToSingle(temp, 0);
-    }
+	/**
+     * 写入一个uint64数据
+     */
+	public void WriteUlong(ulong value)
+	{
+		WriteBytes(flip(BitConverter.GetBytes(value)));
+	}
 
-    public double ReadDouble()
-    {
-        byte[] temp = BitConverter.GetBytes(reader.ReadDouble());
-        Array.Reverse(temp);
-        return BitConverter.ToDouble(temp, 0);
-    }
+	/**
+     * 写入一个float数据
+     */
+	public void WriteFloat(float value)
+	{
+		WriteBytes(flip(BitConverter.GetBytes(value)));
+	}
 
-    public string ReadString()
-    {
-        ushort len = ReadShort();
-        byte[] buffer = new byte[len];
-        buffer = reader.ReadBytes(len);
-        return Encoding.UTF8.GetString(buffer);
-    }
+	/**
+     * 写入一个byte数据
+     */
+	public void WriteByte(byte value)
+	{
+		lock (this)
+		{
+			int afterLen = writeIndex + 1;
+			int len = buf.Length;
+			FixSizeAndReset(len, afterLen);
+			buf[writeIndex] = value;
+			writeIndex = afterLen;
+		}
+	}
 
-    public byte[] ReadBytes()
-    {
-        int len = ReadInt();
-        return reader.ReadBytes(len);
-    }
+	/**
+     * 写入一个double类型数据
+     */
+	public void WriteDouble(double value) 
+	{
+		WriteBytes(flip(BitConverter.GetBytes(value)));
+	}
 
-    public byte[] ToBytes()
-    {
-        writer.Flush();
-        return stream.ToArray();
-    }
+	/**
+     * 读取一个字节
+     */
+	public byte ReadByte()
+	{
+		byte b = buf[readIndex];
+		readIndex++;
+		return b;
+	}
 
-    public void Flush()
-    {
-        writer.Flush();
-    }
+	/**
+     * 从读取索引位置开始读取len长度的字节数组
+     */
+	private byte[] Read(int len)
+	{
+		byte[] bytes = new byte[len];
+		Array.Copy(buf, readIndex, bytes, 0, len);
+		if (BitConverter.IsLittleEndian)
+		{
+			Array.Reverse(bytes);
+		}
+		readIndex += len;
+		return bytes;
+	}
+
+	/**
+     * 读取一个uint16数据
+     */
+	public ushort ReadUshort()
+	{
+		return BitConverter.ToUInt16(Read(2), 0);
+	}
+
+	/**
+     * 读取一个int16数据
+     */
+	public short ReadShort()
+	{
+		return BitConverter.ToInt16(Read(2), 0);
+	}
+
+	/**
+     * 读取一个uint32数据
+     */
+	public uint ReadUint()
+	{
+		return BitConverter.ToUInt32(Read(4), 0);
+	}
+
+	/**
+     * 读取一个int32数据
+     */
+	public int ReadInt()
+	{
+		return BitConverter.ToInt32(Read(4), 0);
+	}
+
+	/**
+     * 读取一个uint64数据
+     */
+	public ulong ReadUlong()
+	{
+		return BitConverter.ToUInt64(Read(8), 0);
+	}
+
+	/**
+     * 读取一个long数据
+     */
+	public long ReadLong()
+	{
+		return BitConverter.ToInt64(Read(8), 0);
+	}
+
+	/**
+     * 读取一个float数据
+     */
+	public float ReadFloat()
+	{
+		return BitConverter.ToSingle(Read(4), 0);
+	}
+
+	/**
+     * 读取一个double数据
+     */
+	public double ReadDouble() 
+	{
+		return BitConverter.ToDouble(Read(8), 0);
+	}
+
+	/**
+     * 从读取索引位置开始读取len长度的字节到disbytes目标字节数组中
+     * @params disstart 目标字节数组的写入索引
+     */
+	public void ReadBytes(byte[] disbytes, int disstart, int len)
+	{
+		int size = disstart + len;
+		for (int i = disstart; i < size; i++)
+		{
+			disbytes[i] = this.ReadByte();
+		}
+	}
+
+	/**
+     * 清除已读字节并重建缓存区
+     */
+	public void DiscardReadBytes() 
+	{
+		if(readIndex <= 0) return;
+		int len = buf.Length - readIndex;
+		byte[] newbuf = new byte[len];
+		Array.Copy(buf, readIndex, newbuf, 0, len);
+		buf = newbuf;
+		writeIndex -= readIndex;
+		markReadIndex -= readIndex;
+		if (markReadIndex < 0)
+		{
+			markReadIndex = readIndex;
+		}
+		markWirteIndex -= readIndex;
+		if (markWirteIndex < 0 || markWirteIndex < readIndex || markWirteIndex < markReadIndex)
+		{
+			markWirteIndex = writeIndex;
+		}
+		readIndex = 0;
+	}
+
+	/**
+     * 清空此对象
+     */
+	public void Clear()
+	{
+		buf = new byte[buf.Length];
+		readIndex = 0;
+		writeIndex = 0;
+		markReadIndex = 0;
+		markWirteIndex = 0;
+	}
+
+	/**
+     * 设置开始读取的索引
+     */
+	public void SetReaderIndex(int index)
+	{
+		if (index < 0) return;
+		readIndex = index;
+	}
+
+	/**
+     * 标记读取的索引位置
+     */
+	public void MarkReaderIndex()
+	{
+		markReadIndex = readIndex;
+	}
+
+	/**
+     * 标记写入的索引位置
+     */
+	public void MarkWriterIndex() 
+	{
+		markWirteIndex = writeIndex;
+	}
+
+	/**
+     * 将读取的索引位置重置为标记的读取索引位置
+     */
+	public void ResetReaderIndex() 
+	{
+		readIndex = markReadIndex;
+	}
+
+	/**
+     * 将写入的索引位置重置为标记的写入索引位置
+     */
+	public void ResetWriterIndex() 
+	{
+		writeIndex = markWirteIndex;
+	}
+
+	/**
+     * 可读的有效字节数
+     */
+	public int ReadableBytes()
+	{
+		return writeIndex - readIndex;
+	}
+
+	/**
+     * 获取可读的字节数组
+     */
+	public byte[] ToArray()
+	{
+		byte[] bytes = new byte[writeIndex];
+		Array.Copy(buf, 0, bytes, 0, bytes.Length);
+		return bytes;
+	}
+
+	/**
+     * 获取缓存区大小
+     */
+	public int GetCapacity()
+	{
+		return this.capacity;
+	}
 }

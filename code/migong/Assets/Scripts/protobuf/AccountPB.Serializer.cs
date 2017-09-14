@@ -14,43 +14,43 @@ using System.Collections.Generic;
 namespace Example
 {
     [System.Serializable()]
-    public partial class CSLoginMain
+    public partial class CSLogin
     {
         /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static CSLoginMain Deserialize(Stream stream)
+        public static CSLogin Deserialize(Stream stream)
         {
-            CSLoginMain instance = new CSLoginMain();
+            CSLogin instance = new CSLogin();
             Deserialize(stream, instance);
             return instance;
         }
 
         /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static CSLoginMain DeserializeLengthDelimited(Stream stream)
+        public static CSLogin DeserializeLengthDelimited(Stream stream)
         {
-            CSLoginMain instance = new CSLoginMain();
+            CSLogin instance = new CSLogin();
             DeserializeLengthDelimited(stream, instance);
             return instance;
         }
 
         /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static CSLoginMain DeserializeLength(Stream stream, int length)
+        public static CSLogin DeserializeLength(Stream stream, int length)
         {
-            CSLoginMain instance = new CSLoginMain();
+            CSLogin instance = new CSLogin();
             DeserializeLength(stream, length, instance);
             return instance;
         }
 
         /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
-        public static CSLoginMain Deserialize(byte[] buffer)
+        public static CSLogin Deserialize(byte[] buffer)
         {
-            CSLoginMain instance = new CSLoginMain();
+            CSLogin instance = new CSLogin();
             using (var ms = new MemoryStream(buffer))
                 Deserialize(ms, instance);
             return instance;
         }
 
         /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
-        public static Example.CSLoginMain Deserialize(byte[] buffer, Example.CSLoginMain instance)
+        public static Example.CSLogin Deserialize(byte[] buffer, Example.CSLogin instance)
         {
             using (var ms = new MemoryStream(buffer))
                 Deserialize(ms, instance);
@@ -58,7 +58,7 @@ namespace Example
         }
 
         /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
-        public static Example.CSLoginMain Deserialize(Stream stream, Example.CSLoginMain instance)
+        public static Example.CSLogin Deserialize(Stream stream, Example.CSLogin instance)
         {
             while (true)
             {
@@ -71,6 +71,14 @@ namespace Example
                     // Field 1 LengthDelimited
                     case 10:
                         instance.AccountId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                    // Field 2 LengthDelimited
+                    case 18:
+                        instance.Url = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                    // Field 3 LengthDelimited
+                    case 26:
+                        instance.Ip = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                 }
 
@@ -91,7 +99,7 @@ namespace Example
         }
 
         /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
-        public static Example.CSLoginMain DeserializeLengthDelimited(Stream stream, Example.CSLoginMain instance)
+        public static Example.CSLogin DeserializeLengthDelimited(Stream stream, Example.CSLogin instance)
         {
             long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
             limit += stream.Position;
@@ -114,6 +122,14 @@ namespace Example
                     case 10:
                         instance.AccountId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
+                    // Field 2 LengthDelimited
+                    case 18:
+                        instance.Url = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                    // Field 3 LengthDelimited
+                    case 26:
+                        instance.Ip = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -133,7 +149,7 @@ namespace Example
         }
 
         /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
-        public static Example.CSLoginMain DeserializeLength(Stream stream, int length, Example.CSLoginMain instance)
+        public static Example.CSLogin DeserializeLength(Stream stream, int length, Example.CSLogin instance)
         {
             long limit = stream.Position + length;
             while (true)
@@ -155,6 +171,14 @@ namespace Example
                     case 10:
                         instance.AccountId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
+                    // Field 2 LengthDelimited
+                    case 18:
+                        instance.Url = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                    // Field 3 LengthDelimited
+                    case 26:
+                        instance.Ip = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -174,7 +198,7 @@ namespace Example
         }
 
         /// <summary>Serialize the instance into the stream</summary>
-        public static void Serialize(Stream stream, CSLoginMain instance)
+        public static void Serialize(Stream stream, CSLogin instance)
         {
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
             if (instance.AccountId == null)
@@ -182,11 +206,21 @@ namespace Example
             // Key for field: 1, LengthDelimited
             stream.WriteByte(10);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.AccountId));
+            if (instance.Url == null)
+                throw new ArgumentNullException("Url", "Required by proto specification.");
+            // Key for field: 2, LengthDelimited
+            stream.WriteByte(18);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Url));
+            if (instance.Ip == null)
+                throw new ArgumentNullException("Ip", "Required by proto specification.");
+            // Key for field: 3, LengthDelimited
+            stream.WriteByte(26);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Ip));
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
         /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
-        public static byte[] SerializeToBytes(CSLoginMain instance)
+        public static byte[] SerializeToBytes(CSLogin instance)
         {
             using (var ms = new MemoryStream())
             {
@@ -195,7 +229,7 @@ namespace Example
             }
         }
         /// <summary>Helper: Serialize with a varint length prefix</summary>
-        public static void SerializeLengthDelimited(Stream stream, CSLoginMain instance)
+        public static void SerializeLengthDelimited(Stream stream, CSLogin instance)
         {
             var data = SerializeToBytes(instance);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
@@ -204,43 +238,43 @@ namespace Example
     }
 
     [System.Serializable()]
-    public partial class SCLoginMain
+    public partial class SCLogin
     {
         /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static SCLoginMain Deserialize(Stream stream)
+        public static SCLogin Deserialize(Stream stream)
         {
-            SCLoginMain instance = new SCLoginMain();
+            SCLogin instance = new SCLogin();
             Deserialize(stream, instance);
             return instance;
         }
 
         /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static SCLoginMain DeserializeLengthDelimited(Stream stream)
+        public static SCLogin DeserializeLengthDelimited(Stream stream)
         {
-            SCLoginMain instance = new SCLoginMain();
+            SCLogin instance = new SCLogin();
             DeserializeLengthDelimited(stream, instance);
             return instance;
         }
 
         /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static SCLoginMain DeserializeLength(Stream stream, int length)
+        public static SCLogin DeserializeLength(Stream stream, int length)
         {
-            SCLoginMain instance = new SCLoginMain();
+            SCLogin instance = new SCLogin();
             DeserializeLength(stream, length, instance);
             return instance;
         }
 
         /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
-        public static SCLoginMain Deserialize(byte[] buffer)
+        public static SCLogin Deserialize(byte[] buffer)
         {
-            SCLoginMain instance = new SCLoginMain();
+            SCLogin instance = new SCLogin();
             using (var ms = new MemoryStream(buffer))
                 Deserialize(ms, instance);
             return instance;
         }
 
         /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
-        public static Example.SCLoginMain Deserialize(byte[] buffer, Example.SCLoginMain instance)
+        public static Example.SCLogin Deserialize(byte[] buffer, Example.SCLogin instance)
         {
             using (var ms = new MemoryStream(buffer))
                 Deserialize(ms, instance);
@@ -248,7 +282,7 @@ namespace Example
         }
 
         /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
-        public static Example.SCLoginMain Deserialize(Stream stream, Example.SCLoginMain instance)
+        public static Example.SCLogin Deserialize(Stream stream, Example.SCLogin instance)
         {
             while (true)
             {
@@ -261,14 +295,6 @@ namespace Example
                     // Field 1 LengthDelimited
                     case 10:
                         instance.SessionId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
-                    // Field 2 LengthDelimited
-                    case 18:
-                        instance.Host = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
-                    // Field 3 Varint
-                    case 24:
-                        instance.Port = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -289,7 +315,7 @@ namespace Example
         }
 
         /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
-        public static Example.SCLoginMain DeserializeLengthDelimited(Stream stream, Example.SCLoginMain instance)
+        public static Example.SCLogin DeserializeLengthDelimited(Stream stream, Example.SCLogin instance)
         {
             long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
             limit += stream.Position;
@@ -312,14 +338,6 @@ namespace Example
                     case 10:
                         instance.SessionId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
-                    // Field 2 LengthDelimited
-                    case 18:
-                        instance.Host = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
-                    // Field 3 Varint
-                    case 24:
-                        instance.Port = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
-                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -339,7 +357,7 @@ namespace Example
         }
 
         /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
-        public static Example.SCLoginMain DeserializeLength(Stream stream, int length, Example.SCLoginMain instance)
+        public static Example.SCLogin DeserializeLength(Stream stream, int length, Example.SCLogin instance)
         {
             long limit = stream.Position + length;
             while (true)
@@ -361,14 +379,6 @@ namespace Example
                     case 10:
                         instance.SessionId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
-                    // Field 2 LengthDelimited
-                    case 18:
-                        instance.Host = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
-                    // Field 3 Varint
-                    case 24:
-                        instance.Port = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
-                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -388,7 +398,7 @@ namespace Example
         }
 
         /// <summary>Serialize the instance into the stream</summary>
-        public static void Serialize(Stream stream, SCLoginMain instance)
+        public static void Serialize(Stream stream, SCLogin instance)
         {
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
             if (instance.SessionId == null)
@@ -396,19 +406,11 @@ namespace Example
             // Key for field: 1, LengthDelimited
             stream.WriteByte(10);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.SessionId));
-            if (instance.Host == null)
-                throw new ArgumentNullException("Host", "Required by proto specification.");
-            // Key for field: 2, LengthDelimited
-            stream.WriteByte(18);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Host));
-            // Key for field: 3, Varint
-            stream.WriteByte(24);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Port);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
         /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
-        public static byte[] SerializeToBytes(SCLoginMain instance)
+        public static byte[] SerializeToBytes(SCLogin instance)
         {
             using (var ms = new MemoryStream())
             {
@@ -417,7 +419,7 @@ namespace Example
             }
         }
         /// <summary>Helper: Serialize with a varint length prefix</summary>
-        public static void SerializeLengthDelimited(Stream stream, SCLoginMain instance)
+        public static void SerializeLengthDelimited(Stream stream, SCLogin instance)
         {
             var data = SerializeToBytes(instance);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
@@ -426,43 +428,43 @@ namespace Example
     }
 
     [System.Serializable()]
-    public partial class CSLogoutMain
+    public partial class CSLogout
     {
         /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static CSLogoutMain Deserialize(Stream stream)
+        public static CSLogout Deserialize(Stream stream)
         {
-            CSLogoutMain instance = new CSLogoutMain();
+            CSLogout instance = new CSLogout();
             Deserialize(stream, instance);
             return instance;
         }
 
         /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static CSLogoutMain DeserializeLengthDelimited(Stream stream)
+        public static CSLogout DeserializeLengthDelimited(Stream stream)
         {
-            CSLogoutMain instance = new CSLogoutMain();
+            CSLogout instance = new CSLogout();
             DeserializeLengthDelimited(stream, instance);
             return instance;
         }
 
         /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static CSLogoutMain DeserializeLength(Stream stream, int length)
+        public static CSLogout DeserializeLength(Stream stream, int length)
         {
-            CSLogoutMain instance = new CSLogoutMain();
+            CSLogout instance = new CSLogout();
             DeserializeLength(stream, length, instance);
             return instance;
         }
 
         /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
-        public static CSLogoutMain Deserialize(byte[] buffer)
+        public static CSLogout Deserialize(byte[] buffer)
         {
-            CSLogoutMain instance = new CSLogoutMain();
+            CSLogout instance = new CSLogout();
             using (var ms = new MemoryStream(buffer))
                 Deserialize(ms, instance);
             return instance;
         }
 
         /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
-        public static Example.CSLogoutMain Deserialize(byte[] buffer, Example.CSLogoutMain instance)
+        public static Example.CSLogout Deserialize(byte[] buffer, Example.CSLogout instance)
         {
             using (var ms = new MemoryStream(buffer))
                 Deserialize(ms, instance);
@@ -470,7 +472,7 @@ namespace Example
         }
 
         /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
-        public static Example.CSLogoutMain Deserialize(Stream stream, Example.CSLogoutMain instance)
+        public static Example.CSLogout Deserialize(Stream stream, Example.CSLogout instance)
         {
             while (true)
             {
@@ -503,7 +505,7 @@ namespace Example
         }
 
         /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
-        public static Example.CSLogoutMain DeserializeLengthDelimited(Stream stream, Example.CSLogoutMain instance)
+        public static Example.CSLogout DeserializeLengthDelimited(Stream stream, Example.CSLogout instance)
         {
             long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
             limit += stream.Position;
@@ -545,7 +547,7 @@ namespace Example
         }
 
         /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
-        public static Example.CSLogoutMain DeserializeLength(Stream stream, int length, Example.CSLogoutMain instance)
+        public static Example.CSLogout DeserializeLength(Stream stream, int length, Example.CSLogout instance)
         {
             long limit = stream.Position + length;
             while (true)
@@ -586,7 +588,7 @@ namespace Example
         }
 
         /// <summary>Serialize the instance into the stream</summary>
-        public static void Serialize(Stream stream, CSLogoutMain instance)
+        public static void Serialize(Stream stream, CSLogout instance)
         {
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
             if (instance.AccountId == null)
@@ -598,7 +600,7 @@ namespace Example
         }
 
         /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
-        public static byte[] SerializeToBytes(CSLogoutMain instance)
+        public static byte[] SerializeToBytes(CSLogout instance)
         {
             using (var ms = new MemoryStream())
             {
@@ -607,7 +609,7 @@ namespace Example
             }
         }
         /// <summary>Helper: Serialize with a varint length prefix</summary>
-        public static void SerializeLengthDelimited(Stream stream, CSLogoutMain instance)
+        public static void SerializeLengthDelimited(Stream stream, CSLogout instance)
         {
             var data = SerializeToBytes(instance);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
@@ -616,43 +618,43 @@ namespace Example
     }
 
     [System.Serializable()]
-    public partial class SCLogoutMain
+    public partial class SCLogout
     {
         /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static SCLogoutMain Deserialize(Stream stream)
+        public static SCLogout Deserialize(Stream stream)
         {
-            SCLogoutMain instance = new SCLogoutMain();
+            SCLogout instance = new SCLogout();
             Deserialize(stream, instance);
             return instance;
         }
 
         /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static SCLogoutMain DeserializeLengthDelimited(Stream stream)
+        public static SCLogout DeserializeLengthDelimited(Stream stream)
         {
-            SCLogoutMain instance = new SCLogoutMain();
+            SCLogout instance = new SCLogout();
             DeserializeLengthDelimited(stream, instance);
             return instance;
         }
 
         /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static SCLogoutMain DeserializeLength(Stream stream, int length)
+        public static SCLogout DeserializeLength(Stream stream, int length)
         {
-            SCLogoutMain instance = new SCLogoutMain();
+            SCLogout instance = new SCLogout();
             DeserializeLength(stream, length, instance);
             return instance;
         }
 
         /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
-        public static SCLogoutMain Deserialize(byte[] buffer)
+        public static SCLogout Deserialize(byte[] buffer)
         {
-            SCLogoutMain instance = new SCLogoutMain();
+            SCLogout instance = new SCLogout();
             using (var ms = new MemoryStream(buffer))
                 Deserialize(ms, instance);
             return instance;
         }
 
         /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
-        public static Example.SCLogoutMain Deserialize(byte[] buffer, Example.SCLogoutMain instance)
+        public static Example.SCLogout Deserialize(byte[] buffer, Example.SCLogout instance)
         {
             using (var ms = new MemoryStream(buffer))
                 Deserialize(ms, instance);
@@ -660,7 +662,7 @@ namespace Example
         }
 
         /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
-        public static Example.SCLogoutMain Deserialize(Stream stream, Example.SCLogoutMain instance)
+        public static Example.SCLogout Deserialize(Stream stream, Example.SCLogout instance)
         {
             while (true)
             {
@@ -684,7 +686,7 @@ namespace Example
         }
 
         /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
-        public static Example.SCLogoutMain DeserializeLengthDelimited(Stream stream, Example.SCLogoutMain instance)
+        public static Example.SCLogout DeserializeLengthDelimited(Stream stream, Example.SCLogout instance)
         {
             long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
             limit += stream.Position;
@@ -717,7 +719,7 @@ namespace Example
         }
 
         /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
-        public static Example.SCLogoutMain DeserializeLength(Stream stream, int length, Example.SCLogoutMain instance)
+        public static Example.SCLogout DeserializeLength(Stream stream, int length, Example.SCLogout instance)
         {
             long limit = stream.Position + length;
             while (true)
@@ -749,14 +751,14 @@ namespace Example
         }
 
         /// <summary>Serialize the instance into the stream</summary>
-        public static void Serialize(Stream stream, SCLogoutMain instance)
+        public static void Serialize(Stream stream, SCLogout instance)
         {
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
         /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
-        public static byte[] SerializeToBytes(SCLogoutMain instance)
+        public static byte[] SerializeToBytes(SCLogout instance)
         {
             using (var ms = new MemoryStream())
             {
@@ -765,372 +767,7 @@ namespace Example
             }
         }
         /// <summary>Helper: Serialize with a varint length prefix</summary>
-        public static void SerializeLengthDelimited(Stream stream, SCLogoutMain instance)
-        {
-            var data = SerializeToBytes(instance);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
-            stream.Write(data, 0, data.Length);
-        }
-    }
-
-    [System.Serializable()]
-    public partial class CSLoginNode
-    {
-        /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static CSLoginNode Deserialize(Stream stream)
-        {
-            CSLoginNode instance = new CSLoginNode();
-            Deserialize(stream, instance);
-            return instance;
-        }
-
-        /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static CSLoginNode DeserializeLengthDelimited(Stream stream)
-        {
-            CSLoginNode instance = new CSLoginNode();
-            DeserializeLengthDelimited(stream, instance);
-            return instance;
-        }
-
-        /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static CSLoginNode DeserializeLength(Stream stream, int length)
-        {
-            CSLoginNode instance = new CSLoginNode();
-            DeserializeLength(stream, length, instance);
-            return instance;
-        }
-
-        /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
-        public static CSLoginNode Deserialize(byte[] buffer)
-        {
-            CSLoginNode instance = new CSLoginNode();
-            using (var ms = new MemoryStream(buffer))
-                Deserialize(ms, instance);
-            return instance;
-        }
-
-        /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
-        public static Example.CSLoginNode Deserialize(byte[] buffer, Example.CSLoginNode instance)
-        {
-            using (var ms = new MemoryStream(buffer))
-                Deserialize(ms, instance);
-            return instance;
-        }
-
-        /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
-        public static Example.CSLoginNode Deserialize(Stream stream, Example.CSLoginNode instance)
-        {
-            while (true)
-            {
-                int keyByte = stream.ReadByte();
-                if (keyByte == -1)
-                    break;
-                // Optimized reading of known fields with field ID < 16
-                switch (keyByte)
-                {
-                    // Field 1 LengthDelimited
-                    case 10:
-                        instance.AccountId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
-                    // Field 2 LengthDelimited
-                    case 18:
-                        instance.SessionId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
-                }
-
-                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
-
-                // Reading field ID > 16 and unknown field ID/wire type combinations
-                switch (key.Field)
-                {
-                    case 0:
-                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
-                    default:
-                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
-                        break;
-                }
-            }
-
-            return instance;
-        }
-
-        /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
-        public static Example.CSLoginNode DeserializeLengthDelimited(Stream stream, Example.CSLoginNode instance)
-        {
-            long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
-            limit += stream.Position;
-            while (true)
-            {
-                if (stream.Position >= limit)
-                {
-                    if (stream.Position == limit)
-                        break;
-                    else
-                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
-                }
-                int keyByte = stream.ReadByte();
-                if (keyByte == -1)
-                    throw new System.IO.EndOfStreamException();
-                // Optimized reading of known fields with field ID < 16
-                switch (keyByte)
-                {
-                    // Field 1 LengthDelimited
-                    case 10:
-                        instance.AccountId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
-                    // Field 2 LengthDelimited
-                    case 18:
-                        instance.SessionId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
-                }
-
-                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
-
-                // Reading field ID > 16 and unknown field ID/wire type combinations
-                switch (key.Field)
-                {
-                    case 0:
-                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
-                    default:
-                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
-                        break;
-                }
-            }
-
-            return instance;
-        }
-
-        /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
-        public static Example.CSLoginNode DeserializeLength(Stream stream, int length, Example.CSLoginNode instance)
-        {
-            long limit = stream.Position + length;
-            while (true)
-            {
-                if (stream.Position >= limit)
-                {
-                    if (stream.Position == limit)
-                        break;
-                    else
-                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
-                }
-                int keyByte = stream.ReadByte();
-                if (keyByte == -1)
-                    throw new System.IO.EndOfStreamException();
-                // Optimized reading of known fields with field ID < 16
-                switch (keyByte)
-                {
-                    // Field 1 LengthDelimited
-                    case 10:
-                        instance.AccountId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
-                    // Field 2 LengthDelimited
-                    case 18:
-                        instance.SessionId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
-                }
-
-                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
-
-                // Reading field ID > 16 and unknown field ID/wire type combinations
-                switch (key.Field)
-                {
-                    case 0:
-                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
-                    default:
-                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
-                        break;
-                }
-            }
-
-            return instance;
-        }
-
-        /// <summary>Serialize the instance into the stream</summary>
-        public static void Serialize(Stream stream, CSLoginNode instance)
-        {
-            var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
-            if (instance.AccountId == null)
-                throw new ArgumentNullException("AccountId", "Required by proto specification.");
-            // Key for field: 1, LengthDelimited
-            stream.WriteByte(10);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.AccountId));
-            if (instance.SessionId == null)
-                throw new ArgumentNullException("SessionId", "Required by proto specification.");
-            // Key for field: 2, LengthDelimited
-            stream.WriteByte(18);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.SessionId));
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
-        }
-
-        /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
-        public static byte[] SerializeToBytes(CSLoginNode instance)
-        {
-            using (var ms = new MemoryStream())
-            {
-                Serialize(ms, instance);
-                return ms.ToArray();
-            }
-        }
-        /// <summary>Helper: Serialize with a varint length prefix</summary>
-        public static void SerializeLengthDelimited(Stream stream, CSLoginNode instance)
-        {
-            var data = SerializeToBytes(instance);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
-            stream.Write(data, 0, data.Length);
-        }
-    }
-
-    [System.Serializable()]
-    public partial class SCLoginNode
-    {
-        /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static SCLoginNode Deserialize(Stream stream)
-        {
-            SCLoginNode instance = new SCLoginNode();
-            Deserialize(stream, instance);
-            return instance;
-        }
-
-        /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static SCLoginNode DeserializeLengthDelimited(Stream stream)
-        {
-            SCLoginNode instance = new SCLoginNode();
-            DeserializeLengthDelimited(stream, instance);
-            return instance;
-        }
-
-        /// <summary>Helper: create a new instance to deserializing into</summary>
-        public static SCLoginNode DeserializeLength(Stream stream, int length)
-        {
-            SCLoginNode instance = new SCLoginNode();
-            DeserializeLength(stream, length, instance);
-            return instance;
-        }
-
-        /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
-        public static SCLoginNode Deserialize(byte[] buffer)
-        {
-            SCLoginNode instance = new SCLoginNode();
-            using (var ms = new MemoryStream(buffer))
-                Deserialize(ms, instance);
-            return instance;
-        }
-
-        /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
-        public static Example.SCLoginNode Deserialize(byte[] buffer, Example.SCLoginNode instance)
-        {
-            using (var ms = new MemoryStream(buffer))
-                Deserialize(ms, instance);
-            return instance;
-        }
-
-        /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
-        public static Example.SCLoginNode Deserialize(Stream stream, Example.SCLoginNode instance)
-        {
-            while (true)
-            {
-                int keyByte = stream.ReadByte();
-                if (keyByte == -1)
-                    break;
-                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
-
-                // Reading field ID > 16 and unknown field ID/wire type combinations
-                switch (key.Field)
-                {
-                    case 0:
-                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
-                    default:
-                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
-                        break;
-                }
-            }
-
-            return instance;
-        }
-
-        /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
-        public static Example.SCLoginNode DeserializeLengthDelimited(Stream stream, Example.SCLoginNode instance)
-        {
-            long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
-            limit += stream.Position;
-            while (true)
-            {
-                if (stream.Position >= limit)
-                {
-                    if (stream.Position == limit)
-                        break;
-                    else
-                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
-                }
-                int keyByte = stream.ReadByte();
-                if (keyByte == -1)
-                    throw new System.IO.EndOfStreamException();
-                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
-
-                // Reading field ID > 16 and unknown field ID/wire type combinations
-                switch (key.Field)
-                {
-                    case 0:
-                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
-                    default:
-                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
-                        break;
-                }
-            }
-
-            return instance;
-        }
-
-        /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
-        public static Example.SCLoginNode DeserializeLength(Stream stream, int length, Example.SCLoginNode instance)
-        {
-            long limit = stream.Position + length;
-            while (true)
-            {
-                if (stream.Position >= limit)
-                {
-                    if (stream.Position == limit)
-                        break;
-                    else
-                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
-                }
-                int keyByte = stream.ReadByte();
-                if (keyByte == -1)
-                    throw new System.IO.EndOfStreamException();
-                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
-
-                // Reading field ID > 16 and unknown field ID/wire type combinations
-                switch (key.Field)
-                {
-                    case 0:
-                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
-                    default:
-                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
-                        break;
-                }
-            }
-
-            return instance;
-        }
-
-        /// <summary>Serialize the instance into the stream</summary>
-        public static void Serialize(Stream stream, SCLoginNode instance)
-        {
-            var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
-        }
-
-        /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
-        public static byte[] SerializeToBytes(SCLoginNode instance)
-        {
-            using (var ms = new MemoryStream())
-            {
-                Serialize(ms, instance);
-                return ms.ToArray();
-            }
-        }
-        /// <summary>Helper: Serialize with a varint length prefix</summary>
-        public static void SerializeLengthDelimited(Stream stream, SCLoginNode instance)
+        public static void SerializeLengthDelimited(Stream stream, SCLogout instance)
         {
             var data = SerializeToBytes(instance);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);

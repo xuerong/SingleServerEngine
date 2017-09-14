@@ -17,42 +17,29 @@ namespace Example
     /// <para>option java_outer_classname = "AccountPB";</para>
     /// <para>10001</para>
     /// </summary>
-    public partial class CSLoginMain
+    public partial class CSLogin
     {
         public string AccountId { get; set; }
 
-    }
+        public string Url { get; set; }
 
-    public partial class SCLoginMain
-    {
-        public string SessionId { get; set; }
-
-        public string Host { get; set; }
-
-        public int Port { get; set; }
+        public string Ip { get; set; }
 
     }
 
-    public partial class CSLogoutMain
+    public partial class SCLogin
     {
-        public string AccountId { get; set; }
-
-    }
-
-    public partial class SCLogoutMain
-    {
-    }
-
-    /// <summary> 登陆nodeServer</summary>
-    public partial class CSLoginNode
-    {
-        public string AccountId { get; set; }
-
         public string SessionId { get; set; }
 
     }
 
-    public partial class SCLoginNode
+    public partial class CSLogout
+    {
+        public string AccountId { get; set; }
+
+    }
+
+    public partial class SCLogout
     {
     }
 

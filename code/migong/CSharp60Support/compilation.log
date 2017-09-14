@@ -1,0 +1,124 @@
+********************************************************************************
+*                   Thursday, September 14, 2017 8:43:20 PM                    *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 2.0.3.30
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: E:\code\SingleServerEngine\code\migong
+Target profile directory: E:\Program Files (x86)\Unity\Editor\Data\Mono\lib\mono\unity
+Unity 'Data' or 'Frameworks' directory: E:/Program Files (x86)/Unity/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: E:\code\SingleServerEngine\code\migong\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -nologo -r:"E:\Program Files (x86)\Unity\Editor\Data\Mono\lib\mono\unity\mscorlib.dll" -r:"E:\Program Files (x86)\Unity\Editor\Data\Mono\lib\mono\unity\System.dll" -r:"E:\Program Files (x86)\Unity\Editor\Data\Mono\lib\mono\unity\System.Core.dll" -r:"E:\Program Files (x86)\Unity\Editor\Data\Mono\lib\mono\unity\System.Xml.dll" @Temp/UnityTempFile-4d06358b80a9cd947a6e7b9c1d8140bf 
+Exit code: 0
+Elapsed time: 0.79 sec
+
+- Compiler output (0 lines):
+
+- Compiler errors (2 lines):
+0: Assets\Scripts\ClientSocket.cs(93,20): warning CS0168: The variable '_e' is declared but never used
+1: Assets\Scripts\SocketTest.cs(9,15): warning CS0649: Field 'SocketTest.mSocket' is never assigned to, and will always have its default value null
+
+- PDB to MDB conversion --------------------------------------
+
+Process: E:\code\SingleServerEngine\code\migong\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.13 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                   Thursday, September 14, 2017 8:43:22 PM                    *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 2.0.3.30
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: E:\code\SingleServerEngine\code\migong
+Target profile directory: E:\Program Files (x86)\Unity\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api
+Unity 'Data' or 'Frameworks' directory: E:/Program Files (x86)/Unity/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: E:\code\SingleServerEngine\code\migong\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -nologo -r:"E:\Program Files (x86)\Unity\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\mscorlib.dll" -r:"E:\Program Files (x86)\Unity\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\System.dll" -r:"E:\Program Files (x86)\Unity\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\System.Core.dll" -r:"E:\Program Files (x86)\Unity\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\System.Xml.dll" @Temp/UnityTempFile-5dd1122da01f8fd45b018c37ea860c91 
+Exit code: 0
+Elapsed time: 0.38 sec
+
+- Compiler output (0 lines):
+
+- Compiler errors (0 lines):
+
+- PDB to MDB conversion --------------------------------------
+
+Process: E:\code\SingleServerEngine\code\migong\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.05 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                   Thursday, September 14, 2017 8:45:59 PM                    *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 2.0.3.30
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: E:\code\SingleServerEngine\code\migong
+Target profile directory: E:\Program Files (x86)\Unity\Editor\Data\Mono\lib\mono\unity
+Unity 'Data' or 'Frameworks' directory: E:/Program Files (x86)/Unity/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: E:\code\SingleServerEngine\code\migong\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -nologo -r:"E:\Program Files (x86)\Unity\Editor\Data\Mono\lib\mono\unity\mscorlib.dll" -r:"E:\Program Files (x86)\Unity\Editor\Data\Mono\lib\mono\unity\System.dll" -r:"E:\Program Files (x86)\Unity\Editor\Data\Mono\lib\mono\unity\System.Core.dll" -r:"E:\Program Files (x86)\Unity\Editor\Data\Mono\lib\mono\unity\System.Xml.dll" @Temp/UnityTempFile-5c6019f12cc60074eb4f66abf180445b 
+Exit code: 0
+Elapsed time: 0.86 sec
+
+- Compiler output (0 lines):
+
+- Compiler errors (2 lines):
+0: Assets\Scripts\ClientSocket.cs(93,20): warning CS0168: The variable '_e' is declared but never used
+1: Assets\Scripts\SocketTest.cs(9,15): warning CS0649: Field 'SocketTest.mSocket' is never assigned to, and will always have its default value null
+
+- PDB to MDB conversion --------------------------------------
+
+Process: E:\code\SingleServerEngine\code\migong\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.15 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                   Thursday, September 14, 2017 8:46:01 PM                    *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 2.0.3.30
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: E:\code\SingleServerEngine\code\migong
+Target profile directory: E:\Program Files (x86)\Unity\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api
+Unity 'Data' or 'Frameworks' directory: E:/Program Files (x86)/Unity/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: E:\code\SingleServerEngine\code\migong\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -nologo -r:"E:\Program Files (x86)\Unity\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\mscorlib.dll" -r:"E:\Program Files (x86)\Unity\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\System.dll" -r:"E:\Program Files (x86)\Unity\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\System.Core.dll" -r:"E:\Program Files (x86)\Unity\Editor\Data\MonoBleedingEdge\lib\mono\2.0-api\System.Xml.dll" @Temp/UnityTempFile-db51738327bc1b84daff0af69ef1c1d0 
+Exit code: 0
+Elapsed time: 0.37 sec
+
+- Compiler output (0 lines):
+
+- Compiler errors (0 lines):
+
+- PDB to MDB conversion --------------------------------------
+
+Process: E:\code\SingleServerEngine\code\migong\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.05 sec
+
+- pdb2mdb.exe output (0 lines):

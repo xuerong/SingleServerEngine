@@ -15,6 +15,6 @@ public class RequestNettyPBEncoder extends MessageToByteEncoder {
         byteBuf.writeInt(nettyPBPacket.getOpcode());
         byteBuf.writeInt(nettyPBPacket.getId());
         byteBuf.writeBytes(nettyPBPacket.getData());
-
+        System.out.println("sendLength"+nettyPBPacket.getData().length+",id:"+nettyPBPacket.getId());
     }
 }

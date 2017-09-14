@@ -40,7 +40,7 @@ public class RoomNettyPBEntrance  extends Entrance {
 
         channel = NettyHelper.createAndStart(
                 port,RoomNettyPBEncoder.class,RoomNettyPBDecoder.class,RoomNettyPBHandler.class,name);
-        log.info("RequestNettyPBEntrance bind port :"+port);
+        log.info("RoomNettyPBEntrance bind port :"+port);
     }
 
     @Override
