@@ -46,7 +46,29 @@ public class CreateMap {
         visited=new boolean[tr][td];								//用参数决定访问标志大小
         init(map);													//初始化，包括map和visited
         create3(in);													//构造地图
+        addWalls(tr,td);
 //        showMap();
+    }
+
+    /***
+     * 添加上面的墙和左边的墙
+     */
+    public void addWalls(int tr,int td){
+        byte[][] newMap = new byte[tr+1][td+1];
+        for(int i=0;i<tr+1;i++){
+            for(int j=0;j<td+1;j++){
+                if(i == 0 && j == 0){
+                    newMap[i][j] = 0;
+                }else if(i == 0){
+                    newMap[i][j] = 2;
+                }else if(j == 0){
+                    newMap[i][j] = 1;
+                }else{
+                    newMap[i][j] = map[i-1][j-1];
+                }
+            }
+        }
+        map = newMap;
     }
     /*
      * 初始化函数，主要功能：初始化地图、初始化访问情况（都为false）

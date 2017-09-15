@@ -24,9 +24,18 @@ public class MiGongService {
         System.out.println("do request getMap");
         MiGongPB.SCGetMiGongMap.Builder builder = MiGongPB.SCGetMiGongMap.newBuilder();
 
-        int size = 50;
+        int size = 20;
         CreateMap myMap=new CreateMap(size,size,new Element(0,0),new Element(size-1,size-1));							//随机产生地图
         byte[][] map=myMap.getMap();											//获取地图数组
+
+        // 拆墙
+        int num = 0;
+        for(int i=0;i<num;i++){
+            int x=(int)(Math.random()*(size-2))+1;					//1---tr-1
+            int y=(int)(Math.random()*(size-2))+1;					//1---td-1
+            map[x][y]=0;
+        }
+
         List<Integer> integers = new ArrayList<>(size*size);
         for(byte[] aa : map){
             for(byte bb : aa){

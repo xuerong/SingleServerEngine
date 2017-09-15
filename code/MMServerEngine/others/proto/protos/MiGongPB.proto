@@ -2,14 +2,30 @@
 option java_package = "com.protocol";
 //option java_outer_classname = "LivePB";
 // 12001
-//------------------------------------------------------房间外的
+//
 message CSGetMiGongMap
 {
-
 }
 message SCGetMiGongMap
 {
 	repeated int32 map 			= 1; //
+}
+//
+message CSSendWalkingRoute
+{
+	repeated int32 route 			= 1; //
+}
+message SCSendWalkingRoute
+{
+}
+//
+message CSCommon
+{
+	repeated string route 			= 1; //
+}
+message SCCommon
+{
+	repeated string route 			= 1; //
 }
 
 

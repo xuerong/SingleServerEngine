@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bc38930ccc83455d9143c94508d2c02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapCreate: {fileID: 850168722}
   speed: 0.1
 --- !u!50 &23029772
 Rigidbody2D:
@@ -362,6 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90106bfc935934c5b97762fcf6d31312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 474875199}
 --- !u!4 &850168723
 Transform:
   m_ObjectHideFlags: 0

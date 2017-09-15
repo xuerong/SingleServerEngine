@@ -6,6 +6,7 @@ using com.protocol;
 using System.Threading;
 
 public class MapCreate : MonoBehaviour {
+	public GameObject camera;
 	ClientSocket mSocket;
 	public int[][] map = new int[][]{ 
 		new int[]{0,2	,2,	2,		2},
@@ -16,7 +17,7 @@ public class MapCreate : MonoBehaviour {
 	};
 
 	int x = 0,y = 0;
-	static float myScale = 0.1f;
+	static float myScale = 0.2f;
 	static float nodeX = 1.9f * myScale,nodeY = 1.9f * myScale;
 	// Use this for initialization
 	bool canCreate = false;
@@ -56,6 +57,16 @@ public class MapCreate : MonoBehaviour {
 
 
 	}
+	// 注意顺序，从上向下，从下向上
+	public int getPointByPosition(Vector2 pos){
+		int x = (int)(pos.x / nodeX);
+		int y = (int)(pos.y / nodeY);
+		int tr=map.Length;
+		int i = (tr - y - 1);
+		int td=map[0].Length;
+		return i * td + x;
+	}
+
 	private void createMap(){
 		//		transform.localScale = new Vector3 (0.1f,0.1f,1); // 这样为啥不行
 		int tr=map.Length;											//行数和列数
@@ -98,6 +109,10 @@ public class MapCreate : MonoBehaviour {
 				}
 			}
 		}
+		// 修改相机位置
+		camera.transform.position = new Vector3(nodeX*(tr-1)/2,nodeY * (td-1)/2,camera.transform.position.z);
+		// 修改相机大小
+		camera.transform.localScale = new Vector3(Mathf.Max(tr,td)/20,Mathf.Max(tr,td)/20,camera.transform.localScale.z);
 	}
 	// Update is called once per frame
 	void Update () {

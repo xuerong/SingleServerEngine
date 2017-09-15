@@ -159,13 +159,10 @@ public class ClientSocket
 					buf.Clear();
 					isReadHead = false;
 					length = 0;
-					Debug.Log("receiveLength4:"+receiveLength+",id:"+id);
 					if(dic.ContainsKey(id)){
 						ActionForReceive action = dic[id];
-						Debug.Log("receiveLength5:"+receiveLength);
 						if(action != null){
 							action.Invoke(opcode,data);
-							Debug.Log("receiveLength6:"+receiveLength);
 						}
 					}
 				}
@@ -243,7 +240,7 @@ public class ClientSocket
 			byte[] sendData = buffer.ToArray();
 
 			clientSocket.Send(sendData);  
-			Debug.Log("send success,size = "+data.Length);
+//			Debug.Log("send success,size = "+data.Length);
 
 //			Monitor.Wait();
 		}  

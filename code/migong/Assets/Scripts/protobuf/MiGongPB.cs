@@ -17,7 +17,7 @@ namespace Example
     /// <para>syntax = "proto3";</para>
     /// <para>option java_outer_classname = "LivePB";</para>
     /// <para> 12001</para>
-    /// <para>------------------------------------------------------房间外的</para>
+    /// <para>获取地图</para>
     /// </summary>
     public partial class CSGetMiGongMap
     {
@@ -26,6 +26,30 @@ namespace Example
     public partial class SCGetMiGongMap
     {
         public List<int> Map { get; set; }
+
+    }
+
+    /// <summary> 返回行走路线</summary>
+    public partial class CSSendWalkingRoute
+    {
+        public List<int> Route { get; set; }
+
+    }
+
+    public partial class SCSendWalkingRoute
+    {
+    }
+
+    /// <summary> 通用协议</summary>
+    public partial class CSCommon
+    {
+        public List<string> Route { get; set; }
+
+    }
+
+    public partial class SCCommon
+    {
+        public List<string> Route { get; set; }
 
     }
 
