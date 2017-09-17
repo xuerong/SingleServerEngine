@@ -77,7 +77,7 @@ public class RequestNettyPBEntrance extends Entrance {
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) { // (2)
             NettyPBPacket nettyPBPacket = (NettyPBPacket) msg;
-            log.info("nettyPBPacket.getOpcode() = "+nettyPBPacket.getOpcode());
+//            log.info("nettyPBPacket.getOpcode() = "+nettyPBPacket.getOpcode());
             try {
                 int id = 0;
                 String sessionId = ctx.channel().attr(sessionKey).get();
@@ -93,7 +93,7 @@ public class RequestNettyPBEntrance extends Entrance {
                     throw new MMException("server error!");
                 }
                 nettyPBPacket.setOpcode(retPacket.getOpcode());
-                System.out.println("id:"+id);
+//                System.out.println("id:"+id);
                 nettyPBPacket.setId(id);
                 nettyPBPacket.setData((byte[])retPacket.getRetData());
                 ctx.writeAndFlush(nettyPBPacket);

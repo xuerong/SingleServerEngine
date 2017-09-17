@@ -25,13 +25,13 @@ public class MapCreate : MonoBehaviour {
 	void Start () {
 
 		mSocket = new ClientSocket();  
-		mSocket.ConnectServer("10.1.6.254", 8003);  
+		mSocket.ConnectServer("127.0.0.1", 8003);  
 		//		mSocket.SendMessage("服务器傻逼！");  
 
 		CSLogin node = new CSLogin ();
 		node.AccountId = "asdfadf";
 		node.Url = "sdf";
-		node.Ip = "10.1.6.254";
+		node.Ip = "127.0.0.1";
 		byte[] data = CSLogin.SerializeToBytes (node);
 		mSocket.SendMessage (10,(int)AccountOpcode.CSLogin,data);
 		Thread.Sleep (100);
@@ -112,7 +112,10 @@ public class MapCreate : MonoBehaviour {
 		// 修改相机位置
 		camera.transform.position = new Vector3(nodeX*(tr-1)/2,nodeY * (td-1)/2,camera.transform.position.z);
 		// 修改相机大小
-		camera.transform.localScale = new Vector3(Mathf.Max(tr,td)/20,Mathf.Max(tr,td)/20,camera.transform.localScale.z);
+//		camera.transform.localScale = new Vector3(Mathf.Max(tr,td)/20,Mathf.Max(tr,td)/20,camera.transform.localScale.z);
+		//
+		Camera ca = camera.GetComponent<Camera>();
+		ca.orthographicSize = ca.orthographicSize * Mathf.Max (tr, td) / 20;
 	}
 	// Update is called once per frame
 	void Update () {
