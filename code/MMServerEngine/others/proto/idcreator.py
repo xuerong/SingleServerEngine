@@ -10,7 +10,7 @@ start_index = int(sys.argv[3])
 
 java_class_path = "com/protocol/"+java_class_name
 
-proto_file = open(proto_file_name,"r")
+proto_file = open(proto_file_name,encoding='utf-8')
 lines = proto_file.readlines()
 
 #删除旧文件

@@ -2,9 +2,9 @@ package com.migong;
 
 import com.migong.map.CreateMap;
 
-public abstract class Room {
+public abstract class MiGongRoom {
     private CreateMap createMap;
-    public Room(CreateMap createMap){
+    public MiGongRoom(CreateMap createMap){
         this.createMap = createMap;
     }
 

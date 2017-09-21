@@ -2,307 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="00cb5296-5696-4a4e-9caa-4a423b9d2f2f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/migong/Room.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/migong/SingleRoom.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/AsyncTools.cs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/AsyncTools.cs.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/Plugins.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/Plugins/AsyncBridge.Net35.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/Plugins/AsyncBridge.Net35.dll.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/Plugins/AsyncBridge.Net35.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/Plugins/AsyncBridge.Net35.xml.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/Plugins/System.Threading.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/Plugins/System.Threading.dll.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/Plugins/System.Threading.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/Plugins/System.Threading.xml.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/UnityScheduler.cs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/UnityScheduler.cs.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/UnitySynchronizationContext.cs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/UnitySynchronizationContext.cs.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/UnityTaskScheduler.cs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/AsyncTools/UnityTaskScheduler.cs.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/Editor.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/Editor/CSharpVNextSupport.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/Editor/CSharpVNextSupport.dll.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/Editor/UnitySchedulerEditor.cs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/Editor/UnitySchedulerEditor.cs.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/FormattableString.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/FormattableString/FormattableString.cs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/FormattableString/FormattableString.cs.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/FormattableString/FormattableStringFactory.cs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/CSharp vNext Support/FormattableString/FormattableStringFactory.cs.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Assets/Scripts/otherScripts/Socket.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/0016c9be79865ae43ab56dab4c60e2d9" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/0016c9be79865ae43ab56dab4c60e2d9.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/30/307433eba81a469ab1e2084d52d1a5a2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/30/307433eba81a469ab1e2084d52d1a5a2.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/31/31cb7cff77bc5ba44ba9dcc254122cfd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/31/31cb7cff77bc5ba44ba9dcc254122cfd.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/3f/3f75f902cf93cf144becd3aeb61a5cb0" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/3f/3f75f902cf93cf144becd3aeb61a5cb0.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/42/4263742f7d8ddd34a8d5906cc734cb47" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/42/4263742f7d8ddd34a8d5906cc734cb47.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/47/479914c9660664647a10490e8dace439" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/47/479914c9660664647a10490e8dace439.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/65/6572fb060b35dd640a4d9b7dcb4d05ca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/65/6572fb060b35dd640a4d9b7dcb4d05ca.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/6c/6cdf1e5c78d14720aaadccd4c792df96" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/6c/6cdf1e5c78d14720aaadccd4c792df96.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/7d/7df038e9fb8ffa940ba490cc3094b284" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/7d/7df038e9fb8ffa940ba490cc3094b284.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/94/94133cd8b5ef43349b9e07e1f80baaa7" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/94/94133cd8b5ef43349b9e07e1f80baaa7.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/99/998646c27a6d1084499e5fd0e2ab0c2e" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/99/998646c27a6d1084499e5fd0e2ab0c2e.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ab/abcd1fe92309a994293767b78d3cd211" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ab/abcd1fe92309a994293767b78d3cd211.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ad/ad1316e00c55aa44d8b28322993767d4" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ad/ad1316e00c55aa44d8b28322993767d4.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/bb/bbd1369ea73b6ba4296050f386781e01" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/bb/bbd1369ea73b6ba4296050f386781e01.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/bd/bd6f26ee6280c2d42a6d003d346592fa" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/bd/bd6f26ee6280c2d42a6d003d346592fa.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/c6/c6ed32ab61f5b734595610cb1f0771db" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/c6/c6ed32ab61f5b734595610cb1f0771db.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/d9/d9cf142eb8682f045ada13ed3f45efc6" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/d9/d9cf142eb8682f045ada13ed3f45efc6.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/df/df22b0b85c54d7648af866dc9beb2712" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/df/df22b0b85c54d7648af866dc9beb2712.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/e4/e4f9cb46e577ef8479f0e8e582cb6333" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/e4/e4f9cb46e577ef8479f0e8e582cb6333.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/fd/fd7028abf67117e4a98bcde72172cdbe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../migong/Library/metadata/fd/fd7028abf67117e4a98bcde72172cdbe.info" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/others/table/tables/MiGongLevel.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/migong/entity/UserMiGong.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/migong/MiGongService.class" afterPath="$PROJECT_DIR$/target/classes/com/migong/MiGongService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/EditorUserBuildSettings.asset" afterPath="$PROJECT_DIR$/../migong/Library/EditorUserBuildSettings.asset" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/InspectorExpandedItems.asset" afterPath="$PROJECT_DIR$/../migong/Library/InspectorExpandedItems.asset" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/ScriptAssemblies/Assembly-CSharp.dll" afterPath="$PROJECT_DIR$/../migong/Library/ScriptAssemblies/Assembly-CSharp.dll" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/ScriptAssemblies/Assembly-CSharp.dll.mdb" afterPath="$PROJECT_DIR$/../migong/Library/ScriptAssemblies/Assembly-CSharp.dll.mdb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/ScriptMapper" afterPath="$PROJECT_DIR$/../migong/Library/ScriptMapper" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/assetDatabase3" afterPath="$PROJECT_DIR$/../migong/Library/assetDatabase3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000001000000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000001000000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000002000000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000002000000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000002000000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000002000000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000003000000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000003000000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000003000000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000003000000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000004000000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000004000000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000004000000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000004000000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000004100000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000004100000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000004100000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000004100000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000005000000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000005000000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000005100000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000005100000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000005100000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000005100000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000006000000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000006000000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000006000000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000006000000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000006100000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000006100000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000006100000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000006100000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000007000000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000007000000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000007000000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000007000000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000007100000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000007100000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000007100000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000007100000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000008000000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000008000000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000008000000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000008000000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000009000000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000009000000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000009000000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/00000000000000009000000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000a000000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000a000000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000a000000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000a000000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000a100000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000a100000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000a100000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000a100000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000b000000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000b000000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000b000000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000b000000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000c000000000000000" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000c000000000000000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000c000000000000000.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/00/0000000000000000c000000000000000.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/02/02a8d6cbb16eb454ba7367562045fb95" afterPath="$PROJECT_DIR$/../migong/Library/metadata/02/02a8d6cbb16eb454ba7367562045fb95" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/04/04f379bf61dba2840b78eae370e811f4" afterPath="$PROJECT_DIR$/../migong/Library/metadata/04/04f379bf61dba2840b78eae370e811f4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/05/05d7fa5ab5b823145a785dc992408b82" afterPath="$PROJECT_DIR$/../migong/Library/metadata/05/05d7fa5ab5b823145a785dc992408b82" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/06/06e44a6d6103f4c409a712dee3bc716f" afterPath="$PROJECT_DIR$/../migong/Library/metadata/06/06e44a6d6103f4c409a712dee3bc716f" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/07/07b191a7a3535264ba4c71406b0720ae" afterPath="$PROJECT_DIR$/../migong/Library/metadata/07/07b191a7a3535264ba4c71406b0720ae" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/07/07ea273d969e247d6bfa8e9f36d19585" afterPath="$PROJECT_DIR$/../migong/Library/metadata/07/07ea273d969e247d6bfa8e9f36d19585" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/09/09bdcdbc980564517b55da55c3f9af53" afterPath="$PROJECT_DIR$/../migong/Library/metadata/09/09bdcdbc980564517b55da55c3f9af53" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/0a/0a3c599d3caeae842b7d043897d9c954" afterPath="$PROJECT_DIR$/../migong/Library/metadata/0a/0a3c599d3caeae842b7d043897d9c954" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/0b/0b3d0af4961454e41b2bffa3c529fe19" afterPath="$PROJECT_DIR$/../migong/Library/metadata/0b/0b3d0af4961454e41b2bffa3c529fe19" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/0b/0bc38930ccc83455d9143c94508d2c02" afterPath="$PROJECT_DIR$/../migong/Library/metadata/0b/0bc38930ccc83455d9143c94508d2c02" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/0d/0d3bb855445e36e479c85976fc88383a" afterPath="$PROJECT_DIR$/../migong/Library/metadata/0d/0d3bb855445e36e479c85976fc88383a" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/10/107fd48538f5ac64289ef5948ee86ec8" afterPath="$PROJECT_DIR$/../migong/Library/metadata/10/107fd48538f5ac64289ef5948ee86ec8" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/12/129fe0d15e2d26845b89972ff4132770" afterPath="$PROJECT_DIR$/../migong/Library/metadata/12/129fe0d15e2d26845b89972ff4132770" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/12/12fd8a0055b84bb59e84c9835a37e333" afterPath="$PROJECT_DIR$/../migong/Library/metadata/12/12fd8a0055b84bb59e84c9835a37e333" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/13/13a8c85a287ebaf4abec425ec439e2ba" afterPath="$PROJECT_DIR$/../migong/Library/metadata/13/13a8c85a287ebaf4abec425ec439e2ba" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/15/159c6882cc7f77f469712777c778c48e" afterPath="$PROJECT_DIR$/../migong/Library/metadata/15/159c6882cc7f77f469712777c778c48e" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/15/15b497901283a524eb9094bcc29e8d68" afterPath="$PROJECT_DIR$/../migong/Library/metadata/15/15b497901283a524eb9094bcc29e8d68" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/19/1999c89027dfa1f40b03d7858d4f0e8b" afterPath="$PROJECT_DIR$/../migong/Library/metadata/19/1999c89027dfa1f40b03d7858d4f0e8b" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/1a/1a03fbc8ccafd492c97df48f4c5e736f" afterPath="$PROJECT_DIR$/../migong/Library/metadata/1a/1a03fbc8ccafd492c97df48f4c5e736f" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/1a/1a571daf1354fe9408181ab3bc71888f" afterPath="$PROJECT_DIR$/../migong/Library/metadata/1a/1a571daf1354fe9408181ab3bc71888f" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/1a/1ae7d86701e9a4b47affed4b0aec2945" afterPath="$PROJECT_DIR$/../migong/Library/metadata/1a/1ae7d86701e9a4b47affed4b0aec2945" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/1b/1b2722401a65aec46bb410cfccc52341" afterPath="$PROJECT_DIR$/../migong/Library/metadata/1b/1b2722401a65aec46bb410cfccc52341" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/1b/1bc2ea78e944841a5a709b3cf5dc4bc7" afterPath="$PROJECT_DIR$/../migong/Library/metadata/1b/1bc2ea78e944841a5a709b3cf5dc4bc7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/1c/1c58a348692d4b94b9a6198018e6d988" afterPath="$PROJECT_DIR$/../migong/Library/metadata/1c/1c58a348692d4b94b9a6198018e6d988" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/1c/1c6d1fbb51834b64847b1b73a75bfc77" afterPath="$PROJECT_DIR$/../migong/Library/metadata/1c/1c6d1fbb51834b64847b1b73a75bfc77" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/1d/1d6293d7780c64b11987cbd26e536b5f" afterPath="$PROJECT_DIR$/../migong/Library/metadata/1d/1d6293d7780c64b11987cbd26e536b5f" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/1d/1d6293d7780c64b11987cbd26e536b5f.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/1d/1d6293d7780c64b11987cbd26e536b5f.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/1f/1f700ee36eb914db7819b4f3e94807f6" afterPath="$PROJECT_DIR$/../migong/Library/metadata/1f/1f700ee36eb914db7819b4f3e94807f6" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/21/21eff446d50eaf44a85985cd4c0b6fa1" afterPath="$PROJECT_DIR$/../migong/Library/metadata/21/21eff446d50eaf44a85985cd4c0b6fa1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/23/2384fd66c726f8f4eaa25fcfabbe6d9a" afterPath="$PROJECT_DIR$/../migong/Library/metadata/23/2384fd66c726f8f4eaa25fcfabbe6d9a" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/26/2641ff71ecea82b4784b68b634130768" afterPath="$PROJECT_DIR$/../migong/Library/metadata/26/2641ff71ecea82b4784b68b634130768" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/26/2682a692a2be7e14e901a738c7806da0" afterPath="$PROJECT_DIR$/../migong/Library/metadata/26/2682a692a2be7e14e901a738c7806da0" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/32/32188fd89022c154c81befa2f0e00be0" afterPath="$PROJECT_DIR$/../migong/Library/metadata/32/32188fd89022c154c81befa2f0e00be0" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/32/328cc881519068e4eb7db4bb907ad2d9" afterPath="$PROJECT_DIR$/../migong/Library/metadata/32/328cc881519068e4eb7db4bb907ad2d9" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/34/348a65d262f71c143a322581829d20b1" afterPath="$PROJECT_DIR$/../migong/Library/metadata/34/348a65d262f71c143a322581829d20b1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/35/35ae7dc05c31f3b4eb565f03d09a842d" afterPath="$PROJECT_DIR$/../migong/Library/metadata/35/35ae7dc05c31f3b4eb565f03d09a842d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/38/38c8faf1788024c02930a0c68a6e0edc" afterPath="$PROJECT_DIR$/../migong/Library/metadata/38/38c8faf1788024c02930a0c68a6e0edc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/39/39e934f11f1979f459dc9c3c0f5507c8" afterPath="$PROJECT_DIR$/../migong/Library/metadata/39/39e934f11f1979f459dc9c3c0f5507c8" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/3a/3aebf571856b92845a0616221ad1b9a8" afterPath="$PROJECT_DIR$/../migong/Library/metadata/3a/3aebf571856b92845a0616221ad1b9a8" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/40/405b9b51bb344a128608d968297df79c" afterPath="$PROJECT_DIR$/../migong/Library/metadata/40/405b9b51bb344a128608d968297df79c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/41/4113173d5e95493ab8765d7b08371de4" afterPath="$PROJECT_DIR$/../migong/Library/metadata/41/4113173d5e95493ab8765d7b08371de4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/41/4113173d5e95493ab8765d7b08371de4.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/41/4113173d5e95493ab8765d7b08371de4.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/44/44431c6f042ffa5468b0897cf5d16d8f" afterPath="$PROJECT_DIR$/../migong/Library/metadata/44/44431c6f042ffa5468b0897cf5d16d8f" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/46/463f4542ca8a417428bfdd4b43dee6b1" afterPath="$PROJECT_DIR$/../migong/Library/metadata/46/463f4542ca8a417428bfdd4b43dee6b1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/4a/4a082fbd14e144f558dd5af7d8c20870" afterPath="$PROJECT_DIR$/../migong/Library/metadata/4a/4a082fbd14e144f558dd5af7d8c20870" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/4b/4b3fa4bde7f1451a8218c03ee6a8ded8" afterPath="$PROJECT_DIR$/../migong/Library/metadata/4b/4b3fa4bde7f1451a8218c03ee6a8ded8" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/4b/4ba2329b63d54f0187bcaa12486b1b0f" afterPath="$PROJECT_DIR$/../migong/Library/metadata/4b/4ba2329b63d54f0187bcaa12486b1b0f" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/4e/4ec52c1ffa431fa4ab6fe48ffd99c0c9" afterPath="$PROJECT_DIR$/../migong/Library/metadata/4e/4ec52c1ffa431fa4ab6fe48ffd99c0c9" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/4e/4ec52c1ffa431fa4ab6fe48ffd99c0c9.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/4e/4ec52c1ffa431fa4ab6fe48ffd99c0c9.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/50/50559623639c4c648ad4a4f248f227cb" afterPath="$PROJECT_DIR$/../migong/Library/metadata/50/50559623639c4c648ad4a4f248f227cb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/51/517af1b5b81b93b43b9745d58f017562" afterPath="$PROJECT_DIR$/../migong/Library/metadata/51/517af1b5b81b93b43b9745d58f017562" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/53/53d50a4e96b090c4fa0daaf34abb8764" afterPath="$PROJECT_DIR$/../migong/Library/metadata/53/53d50a4e96b090c4fa0daaf34abb8764" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/53/53ebcfaa2e1e4e2dbc85882cd5a73fa1" afterPath="$PROJECT_DIR$/../migong/Library/metadata/53/53ebcfaa2e1e4e2dbc85882cd5a73fa1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/53/53ebcfaa2e1e4e2dbc85882cd5a73fa1.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/53/53ebcfaa2e1e4e2dbc85882cd5a73fa1.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/55/55225b88a941f492f9407005901d4b99" afterPath="$PROJECT_DIR$/../migong/Library/metadata/55/55225b88a941f492f9407005901d4b99" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/57/572779f4c156543a19a62d498c36aa72" afterPath="$PROJECT_DIR$/../migong/Library/metadata/57/572779f4c156543a19a62d498c36aa72" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/57/5782f9e9e6e0bb94bac99aeea24814fc" afterPath="$PROJECT_DIR$/../migong/Library/metadata/57/5782f9e9e6e0bb94bac99aeea24814fc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/5b/5b246adf77865034a8d35db9bf3857e9" afterPath="$PROJECT_DIR$/../migong/Library/metadata/5b/5b246adf77865034a8d35db9bf3857e9" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/5c/5cacaa187d6384b4d89e7a62af9f5935" afterPath="$PROJECT_DIR$/../migong/Library/metadata/5c/5cacaa187d6384b4d89e7a62af9f5935" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/5d/5d1252bb2823e4b61954c51006a0b348" afterPath="$PROJECT_DIR$/../migong/Library/metadata/5d/5d1252bb2823e4b61954c51006a0b348" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/5f/5f32cd94baa94578a686d4b9d6b660f7" afterPath="$PROJECT_DIR$/../migong/Library/metadata/5f/5f32cd94baa94578a686d4b9d6b660f7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/61/61d053a4e5aa19e49aa37e78c951318f" afterPath="$PROJECT_DIR$/../migong/Library/metadata/61/61d053a4e5aa19e49aa37e78c951318f" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/61/61dce2f4813de7046803c7f9e689f488" afterPath="$PROJECT_DIR$/../migong/Library/metadata/61/61dce2f4813de7046803c7f9e689f488" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/63/639f41c96e8938141978f30545665d35" afterPath="$PROJECT_DIR$/../migong/Library/metadata/63/639f41c96e8938141978f30545665d35" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/64/64993abd771cc924f9da0a42c40cee0d" afterPath="$PROJECT_DIR$/../migong/Library/metadata/64/64993abd771cc924f9da0a42c40cee0d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/64/649b51c580e35e44481f86633a1c0866" afterPath="$PROJECT_DIR$/../migong/Library/metadata/64/649b51c580e35e44481f86633a1c0866" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/64/64e6397bf4c7dfe439779105c3f383a1" afterPath="$PROJECT_DIR$/../migong/Library/metadata/64/64e6397bf4c7dfe439779105c3f383a1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/67/679f3c3c9bf09ec45a9ff8d59a438827" afterPath="$PROJECT_DIR$/../migong/Library/metadata/67/679f3c3c9bf09ec45a9ff8d59a438827" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/69/69dd1948037ab9a48978b18a72809fb3" afterPath="$PROJECT_DIR$/../migong/Library/metadata/69/69dd1948037ab9a48978b18a72809fb3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/6c/6cdc241733badc5419a0d99f361a5470" afterPath="$PROJECT_DIR$/../migong/Library/metadata/6c/6cdc241733badc5419a0d99f361a5470" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/6d/6d14691ffb38e4668b1740a64016bc63" afterPath="$PROJECT_DIR$/../migong/Library/metadata/6d/6d14691ffb38e4668b1740a64016bc63" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/6d/6d14691ffb38e4668b1740a64016bc63.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/6d/6d14691ffb38e4668b1740a64016bc63.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/73/737cabe8efd91934bb56f55678c35107" afterPath="$PROJECT_DIR$/../migong/Library/metadata/73/737cabe8efd91934bb56f55678c35107" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/73/739bbd9f364b4268874f9fd86ab3beef" afterPath="$PROJECT_DIR$/../migong/Library/metadata/73/739bbd9f364b4268874f9fd86ab3beef" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/74/74c0e6b7d5851444480dd5a2d4507dee" afterPath="$PROJECT_DIR$/../migong/Library/metadata/74/74c0e6b7d5851444480dd5a2d4507dee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/74/74e4ed2ee5b874ac2880e50e15abf6c7" afterPath="$PROJECT_DIR$/../migong/Library/metadata/74/74e4ed2ee5b874ac2880e50e15abf6c7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/74/74e4ed2ee5b874ac2880e50e15abf6c7.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/74/74e4ed2ee5b874ac2880e50e15abf6c7.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/75/75821abfdee75f24aaf8cbd26dcc1387" afterPath="$PROJECT_DIR$/../migong/Library/metadata/75/75821abfdee75f24aaf8cbd26dcc1387" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/76/76b77b4b92f344e4982ce77f5899620c" afterPath="$PROJECT_DIR$/../migong/Library/metadata/76/76b77b4b92f344e4982ce77f5899620c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/77/77147fce06e16474da06b535fc1c1103" afterPath="$PROJECT_DIR$/../migong/Library/metadata/77/77147fce06e16474da06b535fc1c1103" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/77/77a2c6e9c0528d84cad810489ae7e0a2" afterPath="$PROJECT_DIR$/../migong/Library/metadata/77/77a2c6e9c0528d84cad810489ae7e0a2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/7a/7ab07ef6efcbbf0419c752331bc4a6dd" afterPath="$PROJECT_DIR$/../migong/Library/metadata/7a/7ab07ef6efcbbf0419c752331bc4a6dd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/7b/7b05db7bfeab93249a4db6af50048f5d" afterPath="$PROJECT_DIR$/../migong/Library/metadata/7b/7b05db7bfeab93249a4db6af50048f5d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/80/80a3616ca19596e4da0f10f14d241e9f" afterPath="$PROJECT_DIR$/../migong/Library/metadata/80/80a3616ca19596e4da0f10f14d241e9f" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/83/8382b2bb260241859771b69b7f377a8d" afterPath="$PROJECT_DIR$/../migong/Library/metadata/83/8382b2bb260241859771b69b7f377a8d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/85/852e56802eb941638acbb491814497b0" afterPath="$PROJECT_DIR$/../migong/Library/metadata/85/852e56802eb941638acbb491814497b0" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/86/86f4de9468454445ac2f39e207fafa3a" afterPath="$PROJECT_DIR$/../migong/Library/metadata/86/86f4de9468454445ac2f39e207fafa3a" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/87/870353891bb340e2b2a9c8707e7419ba" afterPath="$PROJECT_DIR$/../migong/Library/metadata/87/870353891bb340e2b2a9c8707e7419ba" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/8b/8bbc0930efe01c148bd36bda3381c5ca" afterPath="$PROJECT_DIR$/../migong/Library/metadata/8b/8bbc0930efe01c148bd36bda3381c5ca" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/8c/8cd05cc865ff8ef4897cb958d30bf2f7" afterPath="$PROJECT_DIR$/../migong/Library/metadata/8c/8cd05cc865ff8ef4897cb958d30bf2f7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/8d/8d11f54472cbe7a498f94bcc8ed905e1" afterPath="$PROJECT_DIR$/../migong/Library/metadata/8d/8d11f54472cbe7a498f94bcc8ed905e1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/8e/8e0cd8ed44d4412cbe0642067abc9e44" afterPath="$PROJECT_DIR$/../migong/Library/metadata/8e/8e0cd8ed44d4412cbe0642067abc9e44" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/8e/8e7066e382b0fc749b25dbb1a3004dfe" afterPath="$PROJECT_DIR$/../migong/Library/metadata/8e/8e7066e382b0fc749b25dbb1a3004dfe" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/90/90106bfc935934c5b97762fcf6d31312" afterPath="$PROJECT_DIR$/../migong/Library/metadata/90/90106bfc935934c5b97762fcf6d31312" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/90/9050c5629b1fcd6429ba6a017a37b668" afterPath="$PROJECT_DIR$/../migong/Library/metadata/90/9050c5629b1fcd6429ba6a017a37b668" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/90/9078b7128e594410d9b89e5b24cffd01" afterPath="$PROJECT_DIR$/../migong/Library/metadata/90/9078b7128e594410d9b89e5b24cffd01" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/91/91e389fd8b7a7a442986f84c53e11083" afterPath="$PROJECT_DIR$/../migong/Library/metadata/91/91e389fd8b7a7a442986f84c53e11083" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/92/92159fac1eb971d42a1db05a7de5cf61" afterPath="$PROJECT_DIR$/../migong/Library/metadata/92/92159fac1eb971d42a1db05a7de5cf61" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/92/92f005c1fb76ed747afd47ce768457b9" afterPath="$PROJECT_DIR$/../migong/Library/metadata/92/92f005c1fb76ed747afd47ce768457b9" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/94/9466f854be9000244ab02a29c1778201" afterPath="$PROJECT_DIR$/../migong/Library/metadata/94/9466f854be9000244ab02a29c1778201" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/95/95703954811683646871ba61850e5082" afterPath="$PROJECT_DIR$/../migong/Library/metadata/95/95703954811683646871ba61850e5082" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/95/9586ff87be231114ba7eb15b17e0a18e" afterPath="$PROJECT_DIR$/../migong/Library/metadata/95/9586ff87be231114ba7eb15b17e0a18e" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/97/97decbdab0634cdd991f8d23ddf0dead" afterPath="$PROJECT_DIR$/../migong/Library/metadata/97/97decbdab0634cdd991f8d23ddf0dead" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/98/9836e37cac6eb1441a81efacce0f8cda" afterPath="$PROJECT_DIR$/../migong/Library/metadata/98/9836e37cac6eb1441a81efacce0f8cda" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/98/98abf5e76d129c94eb609ca5d8471ad6" afterPath="$PROJECT_DIR$/../migong/Library/metadata/98/98abf5e76d129c94eb609ca5d8471ad6" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/99/9918407e9b0d0a945854f7610a9a8e11" afterPath="$PROJECT_DIR$/../migong/Library/metadata/99/9918407e9b0d0a945854f7610a9a8e11" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/9a/9a13f2461f00c4a4292c438330a09705" afterPath="$PROJECT_DIR$/../migong/Library/metadata/9a/9a13f2461f00c4a4292c438330a09705" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/a1/a121323a289a0484baf2f0e62e215904" afterPath="$PROJECT_DIR$/../migong/Library/metadata/a1/a121323a289a0484baf2f0e62e215904" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/a2/a2de89f2259b5bf4bbc5aea77a488953" afterPath="$PROJECT_DIR$/../migong/Library/metadata/a2/a2de89f2259b5bf4bbc5aea77a488953" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/a7/a70c0cc8817148a418ea77eac4fd3874" afterPath="$PROJECT_DIR$/../migong/Library/metadata/a7/a70c0cc8817148a418ea77eac4fd3874" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ab/abd5314b6a3c0054591e9746c777b677" afterPath="$PROJECT_DIR$/../migong/Library/metadata/ab/abd5314b6a3c0054591e9746c777b677" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ad/adebbd281f1a4ef3a30be7f21937e02f" afterPath="$PROJECT_DIR$/../migong/Library/metadata/ad/adebbd281f1a4ef3a30be7f21937e02f" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ae/aead1d979985d794ebe513c7b8b936cc" afterPath="$PROJECT_DIR$/../migong/Library/metadata/ae/aead1d979985d794ebe513c7b8b936cc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ae/aed5d784556e37d4b889ce2273c5eb97" afterPath="$PROJECT_DIR$/../migong/Library/metadata/ae/aed5d784556e37d4b889ce2273c5eb97" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/af/afbef62b376342547b74bae98e8e6652" afterPath="$PROJECT_DIR$/../migong/Library/metadata/af/afbef62b376342547b74bae98e8e6652" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/af/afcba99805e5f624f812a389c9106e59" afterPath="$PROJECT_DIR$/../migong/Library/metadata/af/afcba99805e5f624f812a389c9106e59" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/b0/b00dbab0a05bdd145822289c4ada51bb" afterPath="$PROJECT_DIR$/../migong/Library/metadata/b0/b00dbab0a05bdd145822289c4ada51bb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/b0/b04638e4867513d4ebda89925d9f74dc" afterPath="$PROJECT_DIR$/../migong/Library/metadata/b0/b04638e4867513d4ebda89925d9f74dc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/b1/b16707cd89d4845da933946af350527d" afterPath="$PROJECT_DIR$/../migong/Library/metadata/b1/b16707cd89d4845da933946af350527d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/b1/b1a501ac301bab24c88d8b24f1a90fe3" afterPath="$PROJECT_DIR$/../migong/Library/metadata/b1/b1a501ac301bab24c88d8b24f1a90fe3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/b1/b1bf07b0ea1542542850e4aa53cb87fb" afterPath="$PROJECT_DIR$/../migong/Library/metadata/b1/b1bf07b0ea1542542850e4aa53cb87fb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/b2/b2b693dffac3a4433b3114fea0b7fd4e" afterPath="$PROJECT_DIR$/../migong/Library/metadata/b2/b2b693dffac3a4433b3114fea0b7fd4e" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/b2/b2bead50dbf86924f8e51f03ddbebf70" afterPath="$PROJECT_DIR$/../migong/Library/metadata/b2/b2bead50dbf86924f8e51f03ddbebf70" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/b5/b5424d53ba8343743827a86dc3846d25" afterPath="$PROJECT_DIR$/../migong/Library/metadata/b5/b5424d53ba8343743827a86dc3846d25" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/b5/b5450a7a74797e6478900ea90244b5f6" afterPath="$PROJECT_DIR$/../migong/Library/metadata/b5/b5450a7a74797e6478900ea90244b5f6" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/bb/bbcaf536978a66546b9f27b4bd58b3d8" afterPath="$PROJECT_DIR$/../migong/Library/metadata/bb/bbcaf536978a66546b9f27b4bd58b3d8" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/bd/bd7f006924a90db49ac8f84308890eb5" afterPath="$PROJECT_DIR$/../migong/Library/metadata/bd/bd7f006924a90db49ac8f84308890eb5" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/c0/c08b9298d0517a74aa3656d39c0bc350" afterPath="$PROJECT_DIR$/../migong/Library/metadata/c0/c08b9298d0517a74aa3656d39c0bc350" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/c2/c2c2eaea1b04b436aa38d4eac94a66d4" afterPath="$PROJECT_DIR$/../migong/Library/metadata/c2/c2c2eaea1b04b436aa38d4eac94a66d4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/c3/c3e316cdcfa5a4bbba26b1acfaeec123" afterPath="$PROJECT_DIR$/../migong/Library/metadata/c3/c3e316cdcfa5a4bbba26b1acfaeec123" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/c5/c5a21e103042ada4cb379f469750b309" afterPath="$PROJECT_DIR$/../migong/Library/metadata/c5/c5a21e103042ada4cb379f469750b309" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/c5/c5ca9e732084a6043ad441f890db9987" afterPath="$PROJECT_DIR$/../migong/Library/metadata/c5/c5ca9e732084a6043ad441f890db9987" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/c7/c714b95d84b734cbaabe406e43185c3a" afterPath="$PROJECT_DIR$/../migong/Library/metadata/c7/c714b95d84b734cbaabe406e43185c3a" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/c7/c714b95d84b734cbaabe406e43185c3a.info" afterPath="$PROJECT_DIR$/../migong/Library/metadata/c7/c714b95d84b734cbaabe406e43185c3a.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ce/ce9616e87b13c534aa8212f706bae037" afterPath="$PROJECT_DIR$/../migong/Library/metadata/ce/ce9616e87b13c534aa8212f706bae037" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/d1/d1266952e1f199c4a8e7008eab0c4076" afterPath="$PROJECT_DIR$/../migong/Library/metadata/d1/d1266952e1f199c4a8e7008eab0c4076" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/d1/d1980382e3e9fc147b04a9cca1bb0a8b" afterPath="$PROJECT_DIR$/../migong/Library/metadata/d1/d1980382e3e9fc147b04a9cca1bb0a8b" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/d1/d1b853728ba3e9847a68691ba2e24122" afterPath="$PROJECT_DIR$/../migong/Library/metadata/d1/d1b853728ba3e9847a68691ba2e24122" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/d5/d53b83afc78826b4994990b487b9d299" afterPath="$PROJECT_DIR$/../migong/Library/metadata/d5/d53b83afc78826b4994990b487b9d299" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/d6/d6e1cf62ef4c2ad4e9e34cac570dcacb" afterPath="$PROJECT_DIR$/../migong/Library/metadata/d6/d6e1cf62ef4c2ad4e9e34cac570dcacb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/d8/d80b33a618968c24fadfd345bfb41398" afterPath="$PROJECT_DIR$/../migong/Library/metadata/d8/d80b33a618968c24fadfd345bfb41398" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/d8/d8173fae1cc556d409cbb64b24a6dbe8" afterPath="$PROJECT_DIR$/../migong/Library/metadata/d8/d8173fae1cc556d409cbb64b24a6dbe8" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/d9/d91035c548f23744c9bfb107348ed1c0" afterPath="$PROJECT_DIR$/../migong/Library/metadata/d9/d91035c548f23744c9bfb107348ed1c0" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/d9/d96143a72f12c9041a30c6043068644f" afterPath="$PROJECT_DIR$/../migong/Library/metadata/d9/d96143a72f12c9041a30c6043068644f" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/d9/d98212437da3884469b61dcf349bfd2c" afterPath="$PROJECT_DIR$/../migong/Library/metadata/d9/d98212437da3884469b61dcf349bfd2c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/da/dad1129290331be46b270b16b7a3f1fa" afterPath="$PROJECT_DIR$/../migong/Library/metadata/da/dad1129290331be46b270b16b7a3f1fa" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/dc/dc443db3e92b4983b9738c1131f555cb" afterPath="$PROJECT_DIR$/../migong/Library/metadata/dc/dc443db3e92b4983b9738c1131f555cb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/de/dee451f3719471443a1db6678caaee30" afterPath="$PROJECT_DIR$/../migong/Library/metadata/de/dee451f3719471443a1db6678caaee30" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/e1/e1007cd261c84053beb0c3537782908d" afterPath="$PROJECT_DIR$/../migong/Library/metadata/e1/e1007cd261c84053beb0c3537782908d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/e1/e154f000fac3b1a4fa2f69fe751ba856" afterPath="$PROJECT_DIR$/../migong/Library/metadata/e1/e154f000fac3b1a4fa2f69fe751ba856" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/e1/e1632088f6a4562478f5052e883896a2" afterPath="$PROJECT_DIR$/../migong/Library/metadata/e1/e1632088f6a4562478f5052e883896a2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/e2/e202c0c5ce474b0468b65aab1683e620" afterPath="$PROJECT_DIR$/../migong/Library/metadata/e2/e202c0c5ce474b0468b65aab1683e620" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/e3/e36f6e57189a01144a123295616d5f62" afterPath="$PROJECT_DIR$/../migong/Library/metadata/e3/e36f6e57189a01144a123295616d5f62" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/e5/e555114770bc93c47aaaf153274039cf" afterPath="$PROJECT_DIR$/../migong/Library/metadata/e5/e555114770bc93c47aaaf153274039cf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/e7/e755dcca25fe4774da601f74d90e7d32" afterPath="$PROJECT_DIR$/../migong/Library/metadata/e7/e755dcca25fe4774da601f74d90e7d32" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/e7/e769e6c857c0da74fbafd9a1fdea5796" afterPath="$PROJECT_DIR$/../migong/Library/metadata/e7/e769e6c857c0da74fbafd9a1fdea5796" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/e9/e91ccb00efe9207479fb61972a10593b" afterPath="$PROJECT_DIR$/../migong/Library/metadata/e9/e91ccb00efe9207479fb61972a10593b" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/e9/e981b313784abec439dcd3009e29a830" afterPath="$PROJECT_DIR$/../migong/Library/metadata/e9/e981b313784abec439dcd3009e29a830" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ec/ece5901fd23a2064fa97f1a0ee4d0a9e" afterPath="$PROJECT_DIR$/../migong/Library/metadata/ec/ece5901fd23a2064fa97f1a0ee4d0a9e" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ed/ed0a8010153fb4b49ae749c1f3712a87" afterPath="$PROJECT_DIR$/../migong/Library/metadata/ed/ed0a8010153fb4b49ae749c1f3712a87" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ee/ee6eec3cfd1be28429874db2523c67f6" afterPath="$PROJECT_DIR$/../migong/Library/metadata/ee/ee6eec3cfd1be28429874db2523c67f6" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/ef/ef872fb8d5d626c42bf949911f43a71d" afterPath="$PROJECT_DIR$/../migong/Library/metadata/ef/ef872fb8d5d626c42bf949911f43a71d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/f1/f172ba1ea5b431b4ea7221eb870cf910" afterPath="$PROJECT_DIR$/../migong/Library/metadata/f1/f172ba1ea5b431b4ea7221eb870cf910" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/f2/f23e53173893ab14e8719744d7c00b60" afterPath="$PROJECT_DIR$/../migong/Library/metadata/f2/f23e53173893ab14e8719744d7c00b60" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/f5/f5f67c52d1564df4a8936ccd202a3bd8" afterPath="$PROJECT_DIR$/../migong/Library/metadata/f5/f5f67c52d1564df4a8936ccd202a3bd8" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/f7/f70555f144d8491a825f0804e09c671c" afterPath="$PROJECT_DIR$/../migong/Library/metadata/f7/f70555f144d8491a825f0804e09c671c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/f7/f7b54ff4a43d4fcf81b4538b678e0bcc" afterPath="$PROJECT_DIR$/../migong/Library/metadata/f7/f7b54ff4a43d4fcf81b4538b678e0bcc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/f8/f8ac60a7b746068429409b7020b9f0b3" afterPath="$PROJECT_DIR$/../migong/Library/metadata/f8/f8ac60a7b746068429409b7020b9f0b3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/fa/fa1f81c554785314786d417746eab9ef" afterPath="$PROJECT_DIR$/../migong/Library/metadata/fa/fa1f81c554785314786d417746eab9ef" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/fa/fa420d89209ce3046a640c81cd310d3b" afterPath="$PROJECT_DIR$/../migong/Library/metadata/fa/fa420d89209ce3046a640c81cd310d3b" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/fc/fc7ba376740f47547b33aa9f6aee5643" afterPath="$PROJECT_DIR$/../migong/Library/metadata/fc/fc7ba376740f47547b33aa9f6aee5643" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/metadata/fe/fe2387e1480d3fe429984ef6a91626bb" afterPath="$PROJECT_DIR$/../migong/Library/metadata/fe/fe2387e1480d3fe429984ef6a91626bb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mm/engine/sysBean/entrance/RequestNettyPBEntrance$RequestNettyPBHandler.class" afterPath="$PROJECT_DIR$/target/classes/com/mm/engine/sysBean/entrance/RequestNettyPBEntrance$RequestNettyPBHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongOpcode.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongOpcode.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$1.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSCommon$1.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSCommon$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSCommon$Builder.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSCommon$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSCommon.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSCommon.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSGetMiGongMap$1.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSGetMiGongMap$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSGetMiGongMap$Builder.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSGetMiGongMap$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSGetMiGongMap.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSGetMiGongMap.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSGetMiGongMapOrBuilder.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSGetMiGongMapOrBuilder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSSendWalkingRoute$1.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSSendWalkingRoute$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSSendWalkingRoute$Builder.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSSendWalkingRoute$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSSendWalkingRoute.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$CSSendWalkingRoute.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCCommon$1.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCCommon$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCCommon$Builder.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCCommon$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCCommon.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCCommon.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCGetMiGongMap$1.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCGetMiGongMap$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCGetMiGongMap$Builder.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCGetMiGongMap$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCGetMiGongMap.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCGetMiGongMap.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCGetMiGongMapOrBuilder.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCGetMiGongMapOrBuilder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCSendWalkingRoute$1.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCSendWalkingRoute$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCSendWalkingRoute$Builder.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCSendWalkingRoute$Builder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCSendWalkingRoute.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB$SCSendWalkingRoute.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB.class" afterPath="$PROJECT_DIR$/target/classes/com/protocol/MiGongPB.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/others/proto/MiGongOpcode.cs" afterPath="$PROJECT_DIR$/others/proto/MiGongOpcode.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/others/proto/com/protocol/MiGongOpcode.java" afterPath="$PROJECT_DIR$/others/proto/com/protocol/MiGongOpcode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/others/proto/com/protocol/MiGongPB.java" afterPath="$PROJECT_DIR$/others/proto/com/protocol/MiGongPB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/others/proto/csharp/csharpfile/MiGongPB.Serializer.cs" afterPath="$PROJECT_DIR$/others/proto/csharp/csharpfile/MiGongPB.Serializer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/others/proto/csharp/csharpfile/MiGongPB.cs" afterPath="$PROJECT_DIR$/others/proto/csharp/csharpfile/MiGongPB.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/others/proto/idcreator.py" afterPath="$PROJECT_DIR$/others/proto/idcreator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/others/proto/protos/MiGongPB.proto" afterPath="$PROJECT_DIR$/others/proto/protos/MiGongPB.proto" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/others/table/table.bat" afterPath="$PROJECT_DIR$/others/table/table.bat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/migong/MiGongService.java" afterPath="$PROJECT_DIR$/src/main/java/com/migong/MiGongService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RequestNettyPBEntrance.java" afterPath="$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RequestNettyPBEntrance.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Assembly-CSharp-Editor.csproj" afterPath="$PROJECT_DIR$/../migong/Assembly-CSharp-Editor.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Assembly-CSharp.csproj" afterPath="$PROJECT_DIR$/../migong/Assembly-CSharp.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Assets/Scripts/MapCreate.cs" afterPath="$PROJECT_DIR$/../migong/Assets/Scripts/MapCreate.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Assets/Scripts/protobuf/AccountPB.Serializer.cs" afterPath="$PROJECT_DIR$/../migong/Assets/Scripts/protobuf/AccountPB.Serializer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Assets/Scripts/protobuf/ProtocolParser.cs" afterPath="$PROJECT_DIR$/../migong/Assets/Scripts/protobuf/ProtocolParser.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Assets/Scripts/protobuf/ProtocolParser.cs.meta" afterPath="$PROJECT_DIR$/../migong/Assets/Scripts/protobuf/ProtocolParser.cs.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Assets/migong.unity" afterPath="$PROJECT_DIR$/../migong/Assets/migong.unity" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/AssetImportState" afterPath="$PROJECT_DIR$/../migong/Library/AssetImportState" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/ScriptAssemblies/BuiltinAssemblies.stamp" afterPath="$PROJECT_DIR$/../migong/Library/ScriptAssemblies/BuiltinAssemblies.stamp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/Library/shadercompiler-UnityShaderCompiler0.log" afterPath="$PROJECT_DIR$/../migong/Library/shadercompiler-UnityShaderCompiler0.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/ProjectSettings/ProjectVersion.txt" afterPath="$PROJECT_DIR$/../migong/ProjectSettings/ProjectVersion.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/migong.sln" afterPath="$PROJECT_DIR$/../migong/migong.sln" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../migong/migong.userprefs" afterPath="$PROJECT_DIR$/../migong/migong.userprefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mm/engine/framework/control/job/JobDb.java" afterPath="$PROJECT_DIR$/src/main/java/com/mm/engine/framework/control/job/JobDb.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/DataService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/DataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/protocol/MiGongOpcode.java" afterPath="$PROJECT_DIR$/src/main/java/com/protocol/MiGongOpcode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/protocol/MiGongPB.java" afterPath="$PROJECT_DIR$/src/main/java/com/protocol/MiGongPB.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/migong/Room.java" afterPath="$PROJECT_DIR$/src/main/java/com/migong/MiGongRoom.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/migong/SingleRoom.java" afterPath="$PROJECT_DIR$/src/main/java/com/migong/SingleMiGongRoom.java" />
     </list>
     <ignored path="MMServerEngine.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -315,6 +58,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -329,28 +73,67 @@
     <expand />
     <select />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="MMServerEngine" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MiGongService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MiGongService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/MiGongService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyTestService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/MyTestService.java">
+      <file leaf-file-name="table.bat" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/others/table/table.bat">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="53" column="26" lean-forward="false" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MiGongLevel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/others/table/com/table/MiGongLevel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.33015007">
+              <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sheet1.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/others/table/com/table/Sheet1.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SysPara.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/others/sysPara/com/sys/SysPara.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/DataService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="74" column="17" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -359,91 +142,38 @@
       <file leaf-file-name="Account.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/entity/account/Account.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="26" column="33" lean-forward="false" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginSegment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/entity/account/LoginSegment.java">
+      <file leaf-file-name="SendMessageGroup.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/entity/account/sendMessage/SendMessageGroup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Room.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/control/room/Room.java">
+      <file leaf-file-name="DefaultSendMessageGroupStorage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/entity/account/sendMessage/DefaultSendMessageGroupStorage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="66" column="11" lean-forward="true" selection-start-line="66" selection-start-column="11" selection-end-line="66" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="25" column="62" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Session.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/entity/session/Session.java">
+      <file leaf-file-name="JobDb.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/control/job/JobDb.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SingleRoom.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/SingleRoom.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="27" lean-forward="false" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-              <folding>
-                <element signature="e#161#162#0" expanded="true" />
-                <element signature="e#193#194#0" expanded="true" />
-                <element signature="e#250#251#0" expanded="true" />
-                <element signature="e#289#290#0" expanded="true" />
-                <element signature="e#323#324#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Room.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/Room.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-              <folding>
-                <element signature="e#153#154#0" expanded="true" />
-                <element signature="e#195#196#0" expanded="true" />
-                <element signature="e#234#235#0" expanded="true" />
-                <element signature="e#266#267#0" expanded="true" />
-                <element signature="e#319#320#0" expanded="true" />
-                <element signature="e#361#362#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CreateMap.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/map/CreateMap.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ui.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/map/Ui.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="45" column="24" lean-forward="true" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -481,12 +211,19 @@
         <option value="$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/MyTestService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RequestNettyPBEncoder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/migong/map/CreateMap.java" />
-        <option value="$PROJECT_DIR$/others/proto/protos/MiGongPB.proto" />
         <option value="$PROJECT_DIR$/others/proto/com/protocol/MiGongOpcode.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RequestNettyPBEntrance.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/migong/Room.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/migong/SingleRoom.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/migong/SingleMiGongRoom.java" />
+        <option value="$PROJECT_DIR$/others/proto/protos/MiGongPB.proto" />
+        <option value="$PROJECT_DIR$/others/proto/idcreator.py" />
+        <option value="$PROJECT_DIR$/others/proto/MiGongOpcode.cs" />
+        <option value="$PROJECT_DIR$/src/main/java/com/migong/entity/UserMiGong.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mm/engine/framework/control/job/JobDb.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/DataService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/migong/MiGongService.java" />
+        <option value="$PROJECT_DIR$/others/table/table.bat" />
       </list>
     </option>
   </component>
@@ -496,11 +233,28 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-148" />
+    <option name="y" value="32" />
     <option name="width" value="1936" />
     <option name="height" value="1176" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -517,205 +271,468 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
-          <expand>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="others" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="others" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="others" type="462c0819:PsiDirectoryNode" />
-              <item name="proto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="others" type="462c0819:PsiDirectoryNode" />
-              <item name="proto" type="462c0819:PsiDirectoryNode" />
-              <item name="csharp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="others" type="462c0819:PsiDirectoryNode" />
-              <item name="proto" type="462c0819:PsiDirectoryNode" />
-              <item name="csharp" type="462c0819:PsiDirectoryNode" />
-              <item name="csharpfile" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="others" type="462c0819:PsiDirectoryNode" />
-              <item name="proto" type="462c0819:PsiDirectoryNode" />
-              <item name="protos" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="migong" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="account" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="session" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="sysBean" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="sysBean" type="462c0819:PsiDirectoryNode" />
-              <item name="dbentity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="table" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MMServerEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MMServerEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sysBean" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="framework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="migong" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="migong" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="others" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="table" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="others" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="table" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tables" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="others" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="table" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="table" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="others" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sysPara" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="others" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="others" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="others" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="others" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="csharp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMServerEngine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="others" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protocol" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="AndroidView" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\code\SingleServerEngine\code\MMServerEngine\others\table\tables" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -729,8 +746,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Server">
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Batch.table">
+    <configuration default="false" name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.mm.engine.framework.server.*" />
@@ -748,125 +765,55 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="mmserverengine" />
       <envs />
+      <method />
     </configuration>
-    <configuration name="Ui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.migong.map.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="com.migong.map.Ui" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="mmserverengine" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+    <configuration default="false" name="proto.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/others/proto" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/others/proto/proto.sh" />
       <option name="PARAMETERS" value="" />
-      <module name="" />
+      <module name="mmserverengine" />
       <envs />
+      <method />
     </configuration>
-    <configuration default="true" type="BatchConfigurationType" factoryName="Batch">
+    <configuration default="false" name="proto" type="BatchConfigurationType" factoryName="Batch" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="E:\code\SingleServerEngine\code\MMServerEngine\others\proto\csharp" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
       <module name="mmserverengine" />
-      <option name="SCRIPT_NAME" value="" />
+      <option name="SCRIPT_NAME" value="proto.bat" />
       <option name="PARAMETERS" value="" />
+      <method />
     </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
+    <configuration default="false" name="proto (1)" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="E:\code\SingleServerEngine\code\MMServerEngine\others\proto" />
+      <option name="PARENT_ENVS" value="true" />
       <envs />
-      <patterns />
+      <module name="mmserverengine" />
+      <option name="SCRIPT_NAME" value="proto.bat" />
+      <option name="PARAMETERS" value="" />
+      <method />
+    </configuration>
+    <configuration default="false" name="table" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="E:\code\SingleServerEngine\code\MMServerEngine\others\table" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <module name="mmserverengine" />
+      <option name="SCRIPT_NAME" value="table.bat" />
+      <option name="PARAMETERS" value="" />
+      <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
+      <method />
     </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
@@ -927,6 +874,50 @@
       <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="BatchConfigurationType" factoryName="Batch">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <module name="mmserverengine" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <method />
+    </configuration>
     <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -941,6 +932,27 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
@@ -1013,6 +1025,42 @@
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
       <method />
     </configuration>
     <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
@@ -1148,54 +1196,24 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration name="proto (1)" type="BatchConfigurationType" factoryName="Batch" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="WORKING_DIRECTORY" value="E:\code\SingleServerEngine\code\MMServerEngine\others\proto" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <module name="mmserverengine" />
-      <option name="SCRIPT_NAME" value="proto.bat" />
-      <option name="PARAMETERS" value="" />
-    </configuration>
-    <configuration name="proto" type="BatchConfigurationType" factoryName="Batch" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="WORKING_DIRECTORY" value="E:\code\SingleServerEngine\code\MMServerEngine\others\proto\csharp" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <module name="mmserverengine" />
-      <option name="SCRIPT_NAME" value="proto.bat" />
-      <option name="PARAMETERS" value="" />
-    </configuration>
-    <configuration name="proto.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="INTERPRETER_PATH" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/others/proto" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/others/proto/proto.sh" />
-      <option name="PARAMETERS" value="" />
-      <module name="mmserverengine" />
-      <envs />
-    </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Application.Ui" />
-      <item index="1" class="java.lang.String" itemvalue="Application.Server" />
-      <item index="2" class="java.lang.String" itemvalue="Bash.proto.sh" />
-      <item index="3" class="java.lang.String" itemvalue="Batch.proto" />
-      <item index="4" class="java.lang.String" itemvalue="Batch.proto (1)" />
+      <item index="0" class="java.lang.String" itemvalue="Application.Server" />
+      <item index="1" class="java.lang.String" itemvalue="Bash.proto.sh" />
+      <item index="2" class="java.lang.String" itemvalue="Batch.proto" />
+      <item index="3" class="java.lang.String" itemvalue="Batch.proto (1)" />
+      <item index="4" class="java.lang.String" itemvalue="Batch.table" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Server" />
-        <item index="1" class="java.lang.String" itemvalue="Batch.proto (1)" />
-        <item index="2" class="java.lang.String" itemvalue="Batch.proto" />
-        <item index="3" class="java.lang.String" itemvalue="Bash.proto.sh" />
-        <item index="4" class="java.lang.String" itemvalue="Application.Ui" />
+        <item index="0" class="java.lang.String" itemvalue="Batch.table" />
+        <item index="1" class="java.lang.String" itemvalue="Batch.proto" />
+        <item index="2" class="java.lang.String" itemvalue="Batch.proto (1)" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Server" />
+        <item index="4" class="java.lang.String" itemvalue="Bash.proto.sh" />
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration" cleanupOnStartRun="true">
     <configuration />
     <supportedVersion>125</supportedVersion>
@@ -1205,7 +1223,6 @@
       <changelist id="00cb5296-5696-4a4e-9caa-4a423b9d2f2f" name="Default" comment="" />
       <created>1505198018500</created>
       <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
       <updated>1505198018500</updated>
       <workItem from="1505638805903" duration="7372000" />
     </task>
@@ -1224,38 +1241,38 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="961" extended-state="6" />
+    <frame x="-148" y="32" width="1936" height="1176" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24940476" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4015748" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2489339" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25957856" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27334082" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27011493" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1283,204 +1300,45 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/net/code/netty/DefaultNettyEncoder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="24" column="33" lean-forward="false" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/net/client/socket/NettyClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="62" column="52" lean-forward="false" selection-start-line="62" selection-start-column="52" selection-end-line="62" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/net/code/netty/DefaultNettyDecoder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/others/proto/csharp/csharpfile/AccountOpcode.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/others/proto/protos/AccountPB.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/netTest/NettyTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="20" column="70" lean-forward="false" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RequestJettyPBEntrance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/netTest/AccountTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RoomNettyPBEntrance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="43" column="5" lean-forward="false" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RoomNettyPBDecoder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/service/AccountService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="60" column="83" lean-forward="false" selection-start-line="60" selection-start-column="76" selection-end-line="60" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.4.Final/netty-all-4.1.4.Final.jar!/io/netty/buffer/ByteBuf.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="238" column="28" lean-forward="false" selection-start-line="238" selection-start-column="28" selection-end-line="238" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/others/proto/com/protocol/MiGongPB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1109#1110#0" expanded="false" />
-            <element signature="e#1145#1146#0" expanded="false" />
-            <element signature="e#1202#1203#0" expanded="false" />
-            <element signature="e#1238#1239#0" expanded="false" />
-            <element signature="e#1414#1415#0" expanded="false" />
-            <element signature="e#1453#1454#0" expanded="false" />
-            <element signature="e#2753#2754#0" expanded="false" />
-            <element signature="e#2837#2838#0" expanded="false" />
-            <element signature="e#3315#3331#0" expanded="false" />
-            <element signature="e#3751#3752#0" expanded="false" />
-            <element signature="e#3778#3779#0" expanded="false" />
-            <element signature="e#8157#8158#0" expanded="false" />
-            <element signature="e#8245#8246#0" expanded="false" />
-            <element signature="e#8718#8719#0" expanded="false" />
-            <element signature="e#8769#8770#0" expanded="false" />
-            <element signature="e#9126#9127#0" expanded="false" />
-            <element signature="e#9164#9165#0" expanded="false" />
-            <element signature="e#9280#9281#0" expanded="false" />
-            <element signature="e#9339#9340#0" expanded="false" />
-            <element signature="e#9431#9432#0" expanded="false" />
-            <element signature="e#9519#9520#0" expanded="false" />
-            <element signature="e#10779#10780#0" expanded="false" />
-            <element signature="e#10808#10809#0" expanded="false" />
-            <element signature="e#12906#12907#0" expanded="false" />
-            <element signature="e#12942#12943#0" expanded="false" />
-            <element signature="e#12999#13000#0" expanded="false" />
-            <element signature="e#13035#13036#0" expanded="false" />
-            <element signature="e#13211#13212#0" expanded="false" />
-            <element signature="e#13250#13251#0" expanded="false" />
-            <element signature="e#15584#15585#0" expanded="false" />
-            <element signature="e#15668#15669#0" expanded="false" />
-            <element signature="e#16146#16162#0" expanded="false" />
-            <element signature="e#16582#16583#0" expanded="false" />
-            <element signature="e#16609#16610#0" expanded="false" />
-            <element signature="e#16905#16906#0" expanded="false" />
-            <element signature="e#16930#16931#0" expanded="false" />
-            <element signature="e#17055#17056#0" expanded="false" />
-            <element signature="e#17087#17088#0" expanded="false" />
-            <element signature="e#17216#17217#0" expanded="false" />
-            <element signature="e#17252#17253#0" expanded="false" />
-            <element signature="e#17285#17286#0" expanded="false" />
-            <element signature="e#17339#17340#0" expanded="false" />
-            <element signature="e#21959#21960#0" expanded="false" />
-            <element signature="e#22047#22048#0" expanded="false" />
-            <element signature="e#22520#22521#0" expanded="false" />
-            <element signature="e#22571#22572#0" expanded="false" />
-            <element signature="e#22928#22929#0" expanded="false" />
-            <element signature="e#22966#22967#0" expanded="false" />
-            <element signature="e#23181#23182#0" expanded="false" />
-            <element signature="e#23240#23241#0" expanded="false" />
-            <element signature="e#23332#23333#0" expanded="false" />
-            <element signature="e#23420#23421#0" expanded="false" />
-            <element signature="e#25219#25220#0" expanded="false" />
-            <element signature="e#25248#25249#0" expanded="false" />
-            <element signature="e#26488#26489#0" expanded="false" />
-            <element signature="e#26557#26558#0" expanded="false" />
-            <element signature="e#26696#26697#0" expanded="false" />
-            <element signature="e#26732#26733#0" expanded="false" />
-            <element signature="e#26875#26876#0" expanded="false" />
-            <element signature="e#26915#26916#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/map/Element.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/map/Stack.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/control/request/RequestService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/control/ServiceHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="38" column="19" lean-forward="false" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="19" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/tool/helper/BeanHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="25" column="19" lean-forward="false" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/tool/helper/ClassHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="16" column="3" lean-forward="false" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/2.5.0/protobuf-java-2.5.0.jar!/com/google/protobuf/AbstractMessageLite.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="175" column="55" lean-forward="false" selection-start-line="175" selection-start-column="55" selection-end-line="175" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="175" column="55" selection-start-line="175" selection-start-column="55" selection-end-line="175" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/net/code/RetPacketImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="12" column="11" lean-forward="false" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
           <folding>
             <element signature="e#632#633#0" expanded="false" />
             <element signature="e#661#662#0" expanded="false" />
@@ -1494,261 +1352,445 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/net/entrance/socket/NetEventNettyEntrance.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="49" column="27" lean-forward="false" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="27" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/net/entrance/socket/SocketPacket.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/others/proto/MiGongPB.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/others/proto/csharp/proto.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="26" lean-forward="false" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/others/proto/proto.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="5" lean-forward="false" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/protocol/MiGongOpcode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="111" column="17" lean-forward="false" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="111" column="17" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mmserver.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/others/database/account.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/others/database/job.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/others/database/sendMessageGroup.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/others/database/sysPara.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/others/database/table.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RequestNettyPBEncoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RequestNettyPBDecoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RequestNettyPBEntrance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/map/Ui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="24" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/map/CreateMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#10428#10429#0" expanded="false" />
+            <element signature="e#10454#10455#0" expanded="false" />
+            <element signature="e#10482#10483#0" expanded="false" />
+            <element signature="e#10507#10508#0" expanded="false" />
+            <element signature="e#10536#10537#0" expanded="false" />
+            <element signature="e#10562#10563#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/MyTestService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="26" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#4969#4970#0" expanded="false" />
+            <element signature="e#5018#5019#0" expanded="false" />
+            <element signature="e#5117#5118#0" expanded="false" />
+            <element signature="e#5166#5167#0" expanded="false" />
+            <element signature="e#5354#5355#0" expanded="false" />
+            <element signature="e#5402#5403#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/entity/account/LoginSegment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+          <folding>
+            <element signature="e#272#273#0" expanded="false" />
+            <element signature="e#302#303#0" expanded="false" />
+            <element signature="e#349#350#0" expanded="false" />
+            <element signature="e#387#388#0" expanded="false" />
+            <element signature="e#422#423#0" expanded="false" />
+            <element signature="e#452#453#0" expanded="false" />
+            <element signature="e#499#500#0" expanded="false" />
+            <element signature="e#537#538#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/control/room/Room.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="11" selection-start-line="66" selection-start-column="11" selection-end-line="66" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1773#1774#0" expanded="false" />
+            <element signature="e#1821#1822#0" expanded="false" />
+            <element signature="e#3628#3629#0" expanded="false" />
+            <element signature="e#3685#3686#0" expanded="false" />
+            <element signature="e#4678#4679#0" expanded="false" />
+            <element signature="e#4703#4704#0" expanded="false" />
+            <element signature="e#4736#4737#0" expanded="false" />
+            <element signature="e#4764#4765#0" expanded="false" />
+            <element signature="e#4795#4796#0" expanded="false" />
+            <element signature="e#4822#4823#0" expanded="false" />
+            <element signature="e#4862#4863#0" expanded="false" />
+            <element signature="e#4894#4895#0" expanded="false" />
+            <element signature="e#4930#4931#0" expanded="false" />
+            <element signature="e#4957#4958#0" expanded="false" />
+            <element signature="e#5002#5003#0" expanded="false" />
+            <element signature="e#5034#5035#0" expanded="false" />
+            <element signature="e#5103#5104#0" expanded="false" />
+            <element signature="e#5136#5137#0" expanded="false" />
+            <element signature="e#5220#5221#0" expanded="false" />
+            <element signature="e#5264#5265#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/MiGongRoom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/SingleMiGongRoom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/others/proto/csharp/csharpfile/AccountPB.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/others/proto/csharp/csharpfile/AccountPB.Serializer.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="581">
-          <caret line="75" column="28" lean-forward="false" selection-start-line="75" selection-start-column="28" selection-end-line="75" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="762" column="45" selection-start-line="762" selection-start-column="45" selection-end-line="762" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mmserver.properties">
+    <entry file="file://$PROJECT_DIR$/others/proto/proto.bat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/others/database/account.sql">
+    <entry file="file://$PROJECT_DIR$/others/proto/idcreator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="37" lean-forward="false" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/others/database/job.sql">
+    <entry file="file://$PROJECT_DIR$/others/proto/csharp/proto.bat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="20" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/others/database/sendMessageGroup.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/others/database/sysPara.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <marker date="1504959086000" expanded="true" signature="0:288" ph="/* Navicat M... " />
-            <marker date="1504959086000" expanded="true" signature="412:442" ph="DROP TABLE I... " />
-            <marker date="1504959086000" expanded="true" signature="444:593" ph="CREATE TABLE... syspara" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/others/database/table.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/others/proto/protos/MiGongPB.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/others/proto/com/protocol/MiGongOpcode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="53" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="53" />
+          <caret line="4" column="53" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="53" />
+          <caret line="5" column="51" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="51" />
+          <caret line="6" column="51" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="51" />
+          <caret line="7" column="49" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="49" />
+          <caret line="8" column="49" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="49" />
+          <caret line="9" column="46" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="46" />
+          <caret line="10" column="46" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="46" />
+          <caret line="11" column="47" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="47" />
+          <caret line="12" column="47" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="47" />
+          <caret line="13" column="54" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="54" />
+          <caret line="14" column="48" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="48" />
+          <caret line="15" column="51" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="51" />
+          <caret line="16" column="44" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="44" />
+          <caret line="17" column="43" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="43" />
+          <caret line="18" column="43" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="43" />
+          <caret line="19" column="47" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="47" />
+          <caret line="20" column="46" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="46" />
+          <caret line="21" column="46" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="46" />
+          <caret line="22" column="50" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="50" />
+          <caret line="23" column="47" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="47" />
+          <caret line="24" column="55" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="55" />
+          <caret line="25" column="48" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="48" />
+          <caret line="26" column="48" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="48" />
+          <caret line="27" column="55" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="55" />
+          <caret line="28" column="55" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="55" />
+          <caret line="29" column="45" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="45" />
+          <caret line="30" column="45" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/others/proto/MiGongPB.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/entity/session/Session.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/others/proto/MiGongOpcode.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/protocol/MiGongPB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="990" column="6" lean-forward="false" selection-start-line="990" selection-start-column="6" selection-end-line="990" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1241" column="15" selection-start-line="1241" selection-start-column="15" selection-end-line="1241" selection-end-column="15" />
           <folding>
-            <element signature="e#33614#33615#0" expanded="true" />
-            <element signature="e#33641#33642#0" expanded="true" />
+            <element signature="e#40387#40388#0" expanded="false" />
+            <element signature="e#40414#40415#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RequestNettyPBEncoder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/dbentity/DBTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RequestNettyPBDecoder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/control/job/Job.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/entrance/RequestNettyPBEntrance.java">
+    <entry file="file://$PROJECT_DIR$/others/proto/protos/MiGongPB.proto">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="80" column="17" lean-forward="true" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
+        <state vertical-scroll-proportion="-13.357142">
+          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/map/Ui.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/entity/UserMiGong.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="45" column="24" lean-forward="true" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/map/CreateMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/Room.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
           <folding>
-            <element signature="e#153#154#0" expanded="true" />
-            <element signature="e#195#196#0" expanded="true" />
-            <element signature="e#234#235#0" expanded="true" />
-            <element signature="e#266#267#0" expanded="true" />
-            <element signature="e#319#320#0" expanded="true" />
-            <element signature="e#361#362#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#456#457#0" expanded="true" />
+            <element signature="e#500#501#0" expanded="true" />
+            <element signature="e#536#537#0" expanded="true" />
+            <element signature="e#565#566#0" expanded="true" />
+            <element signature="e#593#594#0" expanded="true" />
+            <element signature="e#632#633#0" expanded="true" />
+            <element signature="e#666#667#0" expanded="true" />
+            <element signature="e#694#695#0" expanded="true" />
+            <element signature="e#721#722#0" expanded="true" />
+            <element signature="e#758#759#0" expanded="true" />
+            <element signature="e#790#791#0" expanded="true" />
+            <element signature="e#819#820#0" expanded="true" />
+            <element signature="e#847#848#0" expanded="true" />
+            <element signature="e#886#887#0" expanded="true" />
+            <element signature="e#920#921#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/SingleRoom.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/control/job/DefaultJobStorage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="27" lean-forward="false" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-          <folding>
-            <element signature="e#161#162#0" expanded="true" />
-            <element signature="e#193#194#0" expanded="true" />
-            <element signature="e#250#251#0" expanded="true" />
-            <element signature="e#289#290#0" expanded="true" />
-            <element signature="e#323#324#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/entity/session/Session.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/sysBean/MyTestService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/entity/account/sendMessage/DefaultSendMessageGroupStorage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="53" column="26" lean-forward="false" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="62" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/entity/account/LoginSegment.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/entity/account/sendMessage/SendMessageGroup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/control/room/Room.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="66" column="11" lean-forward="true" selection-start-line="66" selection-start-column="11" selection-end-line="66" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/entity/account/Account.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="26" column="33" lean-forward="false" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/control/job/JobDb.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mm/engine/framework/data/DataService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="74" column="17" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/others/sysPara/com/sys/SysPara.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/others/table/table.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/others/table/com/table/Sheet1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/migong/MiGongService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/others/table/com/table/MiGongLevel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33015007">
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>

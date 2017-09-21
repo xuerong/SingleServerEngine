@@ -21,6 +21,8 @@ public class JobDb implements Serializable {
     private String serviceClass;
     private Object[] params; // 参数要能够序列化
 
+    public JobDb(){}
+
     public String getId() {
         return id;
     }

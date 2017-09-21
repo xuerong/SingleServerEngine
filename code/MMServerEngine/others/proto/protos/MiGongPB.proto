@@ -3,14 +3,136 @@ option java_package = "com.protocol";
 //option java_outer_classname = "LivePB";
 // 12001
 //
+//////////////////////////////////////////////////////////推图/////////////////////////////////////
+// 进入游戏时，获取迷宫的配置，和当前所处于的关卡
+message CSGetMiGongLevel
+{
+}
+message SCGetMiGongLevel
+{
+    repeated int32 passCountInLevel 			= 1; // 配置的，各个level对应的关卡数量
+    required int32 openLevel           = 2; // 已经开启的leve
+    required int32 openPass            = 3; // 已经开启的关卡
+}
+// 获取迷宫
 message CSGetMiGongMap
 {
+	required int32 level           = 1;
+    required int32 pass            = 2;
 }
 message SCGetMiGongMap
 {
 	repeated int32 map 			= 1; //
+	required int32 time 			= 2; // 时间
+	required int32 start 			= 3; // 起点
+	required int32 end 			= 4; // 终点
 }
-//
+// 成功或失败 :
+message CSPassFinish
+{
+	required int32 level           = 1;
+	required int32 pass            = 2;
+	required int32 success         = 3;
+	repeated string route 	     = 4; //
+}
+message SCPassFinish
+{
+	required int32 openLevel           = 1; // 已经开启的leve
+	required int32 openPass            = 2; // 已经开启的关卡
+	required int32 success         = 3; // 服务器判定是否过关
+}
+// 使用道具
+message CSUseItem
+{
+	required int32 itemId           = 1;
+}
+message SCUseItem
+{
+}
+/////////////////////////////////////////////////////////////////联机对战///////////////////////////////////////
+// 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳
+// 请求匹配，返回房间及信息，开始游戏，发送操作（移动，道具），接收操作，发送到达终点，接收到达终点，接收游戏结束，房间心跳
+// 请求匹配
+message CSMatching
+{
+}
+message SCMatching
+{
+}
+// 推送，匹配成功：地图，自己的起点，终点。其他人的起点，终点，玩家名，玩家编号
+message SCMatchingSuccess
+{
+	repeated int32 map 			= 1; //
+	required int32 start 			= 2; // 起点
+	required int32 end 			= 3; // 终点
+	repeated PBOtherInfo otherInfos 	     = 4; // 其它玩家信息
+}
+message PBOtherInfo
+{
+	required string userId 			= 1; // 玩家id
+	required string userName 			= 2; // 玩家名
+	required int32 start 			= 3; // 起点
+	required int32 end 			= 4; // 终点
+}
+// 推送，匹配失败
+message SCMatchingFail
+{
+}
+// 推送，开始游戏
+message SCBegin
+{
+}
+// 玩家移动操作
+message CSMove
+{
+	required int32 pos 			= 1; // 当前位置
+	required int32 dir 			= 2; // 方向
+	required int32 speed 			= 3; // 速度
+}
+message SCMove
+{
+}
+// 推送移动操作
+message SCUserMove
+{
+	required int32 pos 			= 1; // 当前位置
+	required int32 dir 			= 2; // 方向
+	required int32 speed 			= 3; // 速度
+	required int32 frame 			= 4; // 帧数
+}
+// 玩家到达终点
+message CSArrived
+{
+	required int32 pos 			= 1; // 当前位置
+}
+message SCArrived
+{
+}
+// 推送，玩家到达终点
+message SCUserArrived
+{
+	required string userId 			= 1; // 玩家id
+}
+// 推送，游戏结束：排名
+message SCGameOver
+{
+	repeated PBGameOverUserInfo userInfos 	     = 1; // 玩家排名
+}
+message PBGameOverUserInfo
+{
+	required string userId 			= 1; // 玩家id
+	required string userName 			= 2; // 玩家名称
+	required int32 rank 			= 3; // 排名
+	required int32 score 			= 4; // 分数
+}
+// 房间心跳包
+message CSRoomHeart
+{
+}
+message SCRoomHeart
+{
+}
+////////////////////
 message CSSendWalkingRoute
 {
 	repeated int32 route 			= 1; //

@@ -9,6 +9,7 @@ import com.mm.engine.framework.data.persistence.orm.DataSet;
 import com.mm.engine.framework.data.tx.AsyncService;
 import com.mm.engine.framework.data.tx.LockerService;
 import com.mm.engine.framework.data.tx.TxCacheService;
+import com.mm.engine.framework.security.exception.MMException;
 import com.mm.engine.framework.tool.helper.BeanHelper;
 
 import java.util.*;
@@ -66,6 +67,17 @@ public class DataService {
             return map.get(key);
         }
         return null;
+    }
+    public <T> T selectCreateIfAbsent(Class<T> entityClass, String condition, Object... params){
+        T result = selectObject(entityClass,condition,params);
+        if(result == null){
+            try {
+                result = entityClass.newInstance();
+            }catch (Throwable e){
+                throw new MMException(e);
+            }
+        }
+        return result;
     }
     /**
      * 查询一个对象，condition必须是主键，否则请用selectList

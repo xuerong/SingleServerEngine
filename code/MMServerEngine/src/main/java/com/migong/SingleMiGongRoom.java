@@ -2,11 +2,11 @@ package com.migong;
 
 import com.migong.map.CreateMap;
 
-public class SingleRoom extends Room{
+public class SingleMiGongRoom extends MiGongRoom {
 
     private int level;
 
-    public SingleRoom(CreateMap createMap) {
+    public SingleMiGongRoom(CreateMap createMap) {
         super(createMap);
     }
 
