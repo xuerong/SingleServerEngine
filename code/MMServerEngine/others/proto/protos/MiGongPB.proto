@@ -24,8 +24,9 @@ message SCGetMiGongMap
 {
 	repeated int32 map 			= 1; //
 	required int32 time 			= 2; // 时间
-	required int32 start 			= 3; // 起点
-	required int32 end 			= 4; // 终点
+	required int32 speed 			= 3; // 速度
+	required int32 start 			= 4; // 起点
+	required int32 end 			= 5; // 终点
 }
 // 成功或失败 :
 message CSPassFinish
@@ -63,9 +64,10 @@ message SCMatching
 message SCMatchingSuccess
 {
 	repeated int32 map 			= 1; //
-	required int32 start 			= 2; // 起点
-	required int32 end 			= 3; // 终点
-	repeated PBOtherInfo otherInfos 	     = 4; // 其它玩家信息
+	required int32 speed 			= 2; // 速度
+	required int32 start 			= 3; // 起点
+	required int32 end 			= 4; // 终点
+	repeated PBOtherInfo otherInfos 	     = 5; // 其它玩家信息
 }
 message PBOtherInfo
 {

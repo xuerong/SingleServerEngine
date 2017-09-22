@@ -14,6 +14,9 @@ public class Element {
         this.x=x;
         this.y=y;
     }
+    public int toInt(int size){
+        return x*size+y;
+    }
     /* 克隆函数（注意：直接讲一个Element付给另一个Element，传递的只是地址，而用该函数可以实现值传递）*/
     public Element clone(){										//克隆函数，实现值传递
         return new Element(this.x,this.y);

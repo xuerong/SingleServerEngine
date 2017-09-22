@@ -675,10 +675,14 @@ namespace Example
                         continue;
                     // Field 3 Varint
                     case 24:
-                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 4 Varint
                     case 32:
+                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 5 Varint
+                    case 40:
                         instance.End = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -732,10 +736,14 @@ namespace Example
                         continue;
                     // Field 3 Varint
                     case 24:
-                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 4 Varint
                     case 32:
+                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 5 Varint
+                    case 40:
                         instance.End = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -788,10 +796,14 @@ namespace Example
                         continue;
                     // Field 3 Varint
                     case 24:
-                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 4 Varint
                     case 32:
+                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 5 Varint
+                    case 40:
                         instance.End = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -830,9 +842,12 @@ namespace Example
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Time);
             // Key for field: 3, Varint
             stream.WriteByte(24);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Start);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Speed);
             // Key for field: 4, Varint
             stream.WriteByte(32);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Start);
+            // Key for field: 5, Varint
+            stream.WriteByte(40);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.End);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
@@ -2049,14 +2064,18 @@ namespace Example
                         continue;
                     // Field 2 Varint
                     case 16:
-                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 3 Varint
                     case 24:
+                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 4 Varint
+                    case 32:
                         instance.End = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 4 LengthDelimited
-                    case 34:
+                    // Field 5 LengthDelimited
+                    case 42:
                         // repeated
                         instance.OtherInfos.Add(Example.PBOtherInfo.DeserializeLengthDelimited(stream));
                         continue;
@@ -2109,14 +2128,18 @@ namespace Example
                         continue;
                     // Field 2 Varint
                     case 16:
-                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 3 Varint
                     case 24:
+                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 4 Varint
+                    case 32:
                         instance.End = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 4 LengthDelimited
-                    case 34:
+                    // Field 5 LengthDelimited
+                    case 42:
                         // repeated
                         instance.OtherInfos.Add(Example.PBOtherInfo.DeserializeLengthDelimited(stream));
                         continue;
@@ -2168,14 +2191,18 @@ namespace Example
                         continue;
                     // Field 2 Varint
                     case 16:
-                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 3 Varint
                     case 24:
+                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 4 Varint
+                    case 32:
                         instance.End = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 4 LengthDelimited
-                    case 34:
+                    // Field 5 LengthDelimited
+                    case 42:
                         // repeated
                         instance.OtherInfos.Add(Example.PBOtherInfo.DeserializeLengthDelimited(stream));
                         continue;
@@ -2212,22 +2239,25 @@ namespace Example
             }
             // Key for field: 2, Varint
             stream.WriteByte(16);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Start);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Speed);
             // Key for field: 3, Varint
             stream.WriteByte(24);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Start);
+            // Key for field: 4, Varint
+            stream.WriteByte(32);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.End);
             if (instance.OtherInfos != null)
             {
-                foreach (var i4 in instance.OtherInfos)
+                foreach (var i5 in instance.OtherInfos)
                 {
-                    // Key for field: 4, LengthDelimited
-                    stream.WriteByte(34);
+                    // Key for field: 5, LengthDelimited
+                    stream.WriteByte(42);
                     ﻿msField.SetLength(0);
-                    Example.PBOtherInfo.Serialize(msField, i4);
+                    Example.PBOtherInfo.Serialize(msField, i5);
                     // Length delimited byte array
-                    uint length4 = (uint)msField.Length;
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length4);
-                    stream.Write(msField.GetBuffer(), 0, (int)length4);
+                    uint length5 = (uint)msField.Length;
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length5);
+                    stream.Write(msField.GetBuffer(), 0, (int)length5);
 
                 }
             }

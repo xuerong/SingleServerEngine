@@ -1644,9 +1644,27 @@ public final class MiGongPB {
      */
     int getTime();
 
-    // required int32 start = 3;
+    // required int32 speed = 3;
     /**
-     * <code>required int32 start = 3;</code>
+     * <code>required int32 speed = 3;</code>
+     *
+     * <pre>
+     * 速度
+     * </pre>
+     */
+    boolean hasSpeed();
+    /**
+     * <code>required int32 speed = 3;</code>
+     *
+     * <pre>
+     * 速度
+     * </pre>
+     */
+    int getSpeed();
+
+    // required int32 start = 4;
+    /**
+     * <code>required int32 start = 4;</code>
      *
      * <pre>
      * 起点
@@ -1654,7 +1672,7 @@ public final class MiGongPB {
      */
     boolean hasStart();
     /**
-     * <code>required int32 start = 3;</code>
+     * <code>required int32 start = 4;</code>
      *
      * <pre>
      * 起点
@@ -1662,9 +1680,9 @@ public final class MiGongPB {
      */
     int getStart();
 
-    // required int32 end = 4;
+    // required int32 end = 5;
     /**
-     * <code>required int32 end = 4;</code>
+     * <code>required int32 end = 5;</code>
      *
      * <pre>
      * 终点
@@ -1672,7 +1690,7 @@ public final class MiGongPB {
      */
     boolean hasEnd();
     /**
-     * <code>required int32 end = 4;</code>
+     * <code>required int32 end = 5;</code>
      *
      * <pre>
      * 终点
@@ -1759,11 +1777,16 @@ public final class MiGongPB {
             }
             case 24: {
               bitField0_ |= 0x00000002;
-              start_ = input.readInt32();
+              speed_ = input.readInt32();
               break;
             }
             case 32: {
               bitField0_ |= 0x00000004;
+              start_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
               end_ = input.readInt32();
               break;
             }
@@ -1866,21 +1889,45 @@ public final class MiGongPB {
       return time_;
     }
 
-    // required int32 start = 3;
-    public static final int START_FIELD_NUMBER = 3;
+    // required int32 speed = 3;
+    public static final int SPEED_FIELD_NUMBER = 3;
+    private int speed_;
+    /**
+     * <code>required int32 speed = 3;</code>
+     *
+     * <pre>
+     * 速度
+     * </pre>
+     */
+    public boolean hasSpeed() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 speed = 3;</code>
+     *
+     * <pre>
+     * 速度
+     * </pre>
+     */
+    public int getSpeed() {
+      return speed_;
+    }
+
+    // required int32 start = 4;
+    public static final int START_FIELD_NUMBER = 4;
     private int start_;
     /**
-     * <code>required int32 start = 3;</code>
+     * <code>required int32 start = 4;</code>
      *
      * <pre>
      * 起点
      * </pre>
      */
     public boolean hasStart() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required int32 start = 3;</code>
+     * <code>required int32 start = 4;</code>
      *
      * <pre>
      * 起点
@@ -1890,21 +1937,21 @@ public final class MiGongPB {
       return start_;
     }
 
-    // required int32 end = 4;
-    public static final int END_FIELD_NUMBER = 4;
+    // required int32 end = 5;
+    public static final int END_FIELD_NUMBER = 5;
     private int end_;
     /**
-     * <code>required int32 end = 4;</code>
+     * <code>required int32 end = 5;</code>
      *
      * <pre>
      * 终点
      * </pre>
      */
     public boolean hasEnd() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required int32 end = 4;</code>
+     * <code>required int32 end = 5;</code>
      *
      * <pre>
      * 终点
@@ -1917,6 +1964,7 @@ public final class MiGongPB {
     private void initFields() {
       map_ = java.util.Collections.emptyList();
       time_ = 0;
+      speed_ = 0;
       start_ = 0;
       end_ = 0;
     }
@@ -1926,6 +1974,10 @@ public final class MiGongPB {
       if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasTime()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSpeed()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -1951,10 +2003,13 @@ public final class MiGongPB {
         output.writeInt32(2, time_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(3, start_);
+        output.writeInt32(3, speed_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(4, end_);
+        output.writeInt32(4, start_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, end_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1980,11 +2035,15 @@ public final class MiGongPB {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, start_);
+          .computeInt32Size(3, speed_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, end_);
+          .computeInt32Size(4, start_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, end_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2106,10 +2165,12 @@ public final class MiGongPB {
         bitField0_ = (bitField0_ & ~0x00000001);
         time_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        start_ = 0;
+        speed_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        end_ = 0;
+        start_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        end_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -2150,9 +2211,13 @@ public final class MiGongPB {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.start_ = start_;
+        result.speed_ = speed_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
+        }
+        result.start_ = start_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
         }
         result.end_ = end_;
         result.bitField0_ = to_bitField0_;
@@ -2184,6 +2249,9 @@ public final class MiGongPB {
         if (other.hasTime()) {
           setTime(other.getTime());
         }
+        if (other.hasSpeed()) {
+          setSpeed(other.getSpeed());
+        }
         if (other.hasStart()) {
           setStart(other.getStart());
         }
@@ -2196,6 +2264,10 @@ public final class MiGongPB {
 
       public final boolean isInitialized() {
         if (!hasTime()) {
+          
+          return false;
+        }
+        if (!hasSpeed()) {
           
           return false;
         }
@@ -2365,20 +2437,69 @@ public final class MiGongPB {
         return this;
       }
 
-      // required int32 start = 3;
+      // required int32 speed = 3;
+      private int speed_ ;
+      /**
+       * <code>required int32 speed = 3;</code>
+       *
+       * <pre>
+       * 速度
+       * </pre>
+       */
+      public boolean hasSpeed() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 speed = 3;</code>
+       *
+       * <pre>
+       * 速度
+       * </pre>
+       */
+      public int getSpeed() {
+        return speed_;
+      }
+      /**
+       * <code>required int32 speed = 3;</code>
+       *
+       * <pre>
+       * 速度
+       * </pre>
+       */
+      public Builder setSpeed(int value) {
+        bitField0_ |= 0x00000004;
+        speed_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 speed = 3;</code>
+       *
+       * <pre>
+       * 速度
+       * </pre>
+       */
+      public Builder clearSpeed() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        speed_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 start = 4;
       private int start_ ;
       /**
-       * <code>required int32 start = 3;</code>
+       * <code>required int32 start = 4;</code>
        *
        * <pre>
        * 起点
        * </pre>
        */
       public boolean hasStart() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required int32 start = 3;</code>
+       * <code>required int32 start = 4;</code>
        *
        * <pre>
        * 起点
@@ -2388,46 +2509,46 @@ public final class MiGongPB {
         return start_;
       }
       /**
-       * <code>required int32 start = 3;</code>
+       * <code>required int32 start = 4;</code>
        *
        * <pre>
        * 起点
        * </pre>
        */
       public Builder setStart(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         start_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 start = 3;</code>
+       * <code>required int32 start = 4;</code>
        *
        * <pre>
        * 起点
        * </pre>
        */
       public Builder clearStart() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         start_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 end = 4;
+      // required int32 end = 5;
       private int end_ ;
       /**
-       * <code>required int32 end = 4;</code>
+       * <code>required int32 end = 5;</code>
        *
        * <pre>
        * 终点
        * </pre>
        */
       public boolean hasEnd() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required int32 end = 4;</code>
+       * <code>required int32 end = 5;</code>
        *
        * <pre>
        * 终点
@@ -2437,27 +2558,27 @@ public final class MiGongPB {
         return end_;
       }
       /**
-       * <code>required int32 end = 4;</code>
+       * <code>required int32 end = 5;</code>
        *
        * <pre>
        * 终点
        * </pre>
        */
       public Builder setEnd(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         end_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 end = 4;</code>
+       * <code>required int32 end = 5;</code>
        *
        * <pre>
        * 终点
        * </pre>
        */
       public Builder clearEnd() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         end_ = 0;
         onChanged();
         return this;
@@ -5357,9 +5478,27 @@ public final class MiGongPB {
      */
     int getMap(int index);
 
-    // required int32 start = 2;
+    // required int32 speed = 2;
     /**
-     * <code>required int32 start = 2;</code>
+     * <code>required int32 speed = 2;</code>
+     *
+     * <pre>
+     * 速度
+     * </pre>
+     */
+    boolean hasSpeed();
+    /**
+     * <code>required int32 speed = 2;</code>
+     *
+     * <pre>
+     * 速度
+     * </pre>
+     */
+    int getSpeed();
+
+    // required int32 start = 3;
+    /**
+     * <code>required int32 start = 3;</code>
      *
      * <pre>
      * 起点
@@ -5367,7 +5506,7 @@ public final class MiGongPB {
      */
     boolean hasStart();
     /**
-     * <code>required int32 start = 2;</code>
+     * <code>required int32 start = 3;</code>
      *
      * <pre>
      * 起点
@@ -5375,9 +5514,9 @@ public final class MiGongPB {
      */
     int getStart();
 
-    // required int32 end = 3;
+    // required int32 end = 4;
     /**
-     * <code>required int32 end = 3;</code>
+     * <code>required int32 end = 4;</code>
      *
      * <pre>
      * 终点
@@ -5385,7 +5524,7 @@ public final class MiGongPB {
      */
     boolean hasEnd();
     /**
-     * <code>required int32 end = 3;</code>
+     * <code>required int32 end = 4;</code>
      *
      * <pre>
      * 终点
@@ -5393,9 +5532,9 @@ public final class MiGongPB {
      */
     int getEnd();
 
-    // repeated .PBOtherInfo otherInfos = 4;
+    // repeated .PBOtherInfo otherInfos = 5;
     /**
-     * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+     * <code>repeated .PBOtherInfo otherInfos = 5;</code>
      *
      * <pre>
      * 其它玩家信息
@@ -5404,7 +5543,7 @@ public final class MiGongPB {
     java.util.List<com.protocol.MiGongPB.PBOtherInfo> 
         getOtherInfosList();
     /**
-     * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+     * <code>repeated .PBOtherInfo otherInfos = 5;</code>
      *
      * <pre>
      * 其它玩家信息
@@ -5412,7 +5551,7 @@ public final class MiGongPB {
      */
     com.protocol.MiGongPB.PBOtherInfo getOtherInfos(int index);
     /**
-     * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+     * <code>repeated .PBOtherInfo otherInfos = 5;</code>
      *
      * <pre>
      * 其它玩家信息
@@ -5420,7 +5559,7 @@ public final class MiGongPB {
      */
     int getOtherInfosCount();
     /**
-     * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+     * <code>repeated .PBOtherInfo otherInfos = 5;</code>
      *
      * <pre>
      * 其它玩家信息
@@ -5429,7 +5568,7 @@ public final class MiGongPB {
     java.util.List<? extends com.protocol.MiGongPB.PBOtherInfoOrBuilder> 
         getOtherInfosOrBuilderList();
     /**
-     * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+     * <code>repeated .PBOtherInfo otherInfos = 5;</code>
      *
      * <pre>
      * 其它玩家信息
@@ -5516,18 +5655,23 @@ public final class MiGongPB {
             }
             case 16: {
               bitField0_ |= 0x00000001;
-              start_ = input.readInt32();
+              speed_ = input.readInt32();
               break;
             }
             case 24: {
               bitField0_ |= 0x00000002;
+              start_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
               end_ = input.readInt32();
               break;
             }
-            case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                 otherInfos_ = new java.util.ArrayList<com.protocol.MiGongPB.PBOtherInfo>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000010;
               }
               otherInfos_.add(input.readMessage(com.protocol.MiGongPB.PBOtherInfo.PARSER, extensionRegistry));
               break;
@@ -5543,7 +5687,7 @@ public final class MiGongPB {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           map_ = java.util.Collections.unmodifiableList(map_);
         }
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           otherInfos_ = java.util.Collections.unmodifiableList(otherInfos_);
         }
         this.unknownFields = unknownFields.build();
@@ -5610,21 +5754,45 @@ public final class MiGongPB {
       return map_.get(index);
     }
 
-    // required int32 start = 2;
-    public static final int START_FIELD_NUMBER = 2;
+    // required int32 speed = 2;
+    public static final int SPEED_FIELD_NUMBER = 2;
+    private int speed_;
+    /**
+     * <code>required int32 speed = 2;</code>
+     *
+     * <pre>
+     * 速度
+     * </pre>
+     */
+    public boolean hasSpeed() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 speed = 2;</code>
+     *
+     * <pre>
+     * 速度
+     * </pre>
+     */
+    public int getSpeed() {
+      return speed_;
+    }
+
+    // required int32 start = 3;
+    public static final int START_FIELD_NUMBER = 3;
     private int start_;
     /**
-     * <code>required int32 start = 2;</code>
+     * <code>required int32 start = 3;</code>
      *
      * <pre>
      * 起点
      * </pre>
      */
     public boolean hasStart() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required int32 start = 2;</code>
+     * <code>required int32 start = 3;</code>
      *
      * <pre>
      * 起点
@@ -5634,21 +5802,21 @@ public final class MiGongPB {
       return start_;
     }
 
-    // required int32 end = 3;
-    public static final int END_FIELD_NUMBER = 3;
+    // required int32 end = 4;
+    public static final int END_FIELD_NUMBER = 4;
     private int end_;
     /**
-     * <code>required int32 end = 3;</code>
+     * <code>required int32 end = 4;</code>
      *
      * <pre>
      * 终点
      * </pre>
      */
     public boolean hasEnd() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required int32 end = 3;</code>
+     * <code>required int32 end = 4;</code>
      *
      * <pre>
      * 终点
@@ -5658,11 +5826,11 @@ public final class MiGongPB {
       return end_;
     }
 
-    // repeated .PBOtherInfo otherInfos = 4;
-    public static final int OTHERINFOS_FIELD_NUMBER = 4;
+    // repeated .PBOtherInfo otherInfos = 5;
+    public static final int OTHERINFOS_FIELD_NUMBER = 5;
     private java.util.List<com.protocol.MiGongPB.PBOtherInfo> otherInfos_;
     /**
-     * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+     * <code>repeated .PBOtherInfo otherInfos = 5;</code>
      *
      * <pre>
      * 其它玩家信息
@@ -5672,7 +5840,7 @@ public final class MiGongPB {
       return otherInfos_;
     }
     /**
-     * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+     * <code>repeated .PBOtherInfo otherInfos = 5;</code>
      *
      * <pre>
      * 其它玩家信息
@@ -5683,7 +5851,7 @@ public final class MiGongPB {
       return otherInfos_;
     }
     /**
-     * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+     * <code>repeated .PBOtherInfo otherInfos = 5;</code>
      *
      * <pre>
      * 其它玩家信息
@@ -5693,7 +5861,7 @@ public final class MiGongPB {
       return otherInfos_.size();
     }
     /**
-     * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+     * <code>repeated .PBOtherInfo otherInfos = 5;</code>
      *
      * <pre>
      * 其它玩家信息
@@ -5703,7 +5871,7 @@ public final class MiGongPB {
       return otherInfos_.get(index);
     }
     /**
-     * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+     * <code>repeated .PBOtherInfo otherInfos = 5;</code>
      *
      * <pre>
      * 其它玩家信息
@@ -5716,6 +5884,7 @@ public final class MiGongPB {
 
     private void initFields() {
       map_ = java.util.Collections.emptyList();
+      speed_ = 0;
       start_ = 0;
       end_ = 0;
       otherInfos_ = java.util.Collections.emptyList();
@@ -5725,6 +5894,10 @@ public final class MiGongPB {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!hasSpeed()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       if (!hasStart()) {
         memoizedIsInitialized = 0;
         return false;
@@ -5750,13 +5923,16 @@ public final class MiGongPB {
         output.writeInt32(1, map_.get(i));
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(2, start_);
+        output.writeInt32(2, speed_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(3, end_);
+        output.writeInt32(3, start_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(4, end_);
       }
       for (int i = 0; i < otherInfos_.size(); i++) {
-        output.writeMessage(4, otherInfos_.get(i));
+        output.writeMessage(5, otherInfos_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -5778,15 +5954,19 @@ public final class MiGongPB {
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, start_);
+          .computeInt32Size(2, speed_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, end_);
+          .computeInt32Size(3, start_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, end_);
       }
       for (int i = 0; i < otherInfos_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, otherInfos_.get(i));
+          .computeMessageSize(5, otherInfos_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5911,13 +6091,15 @@ public final class MiGongPB {
         super.clear();
         map_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
-        start_ = 0;
+        speed_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        end_ = 0;
+        start_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        end_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (otherInfosBuilder_ == null) {
           otherInfos_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
         } else {
           otherInfosBuilder_.clear();
         }
@@ -5957,15 +6139,19 @@ public final class MiGongPB {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.start_ = start_;
+        result.speed_ = speed_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
+        result.start_ = start_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
         result.end_ = end_;
         if (otherInfosBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
             otherInfos_ = java.util.Collections.unmodifiableList(otherInfos_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000010);
           }
           result.otherInfos_ = otherInfos_;
         } else {
@@ -5997,6 +6183,9 @@ public final class MiGongPB {
           }
           onChanged();
         }
+        if (other.hasSpeed()) {
+          setSpeed(other.getSpeed());
+        }
         if (other.hasStart()) {
           setStart(other.getStart());
         }
@@ -6007,7 +6196,7 @@ public final class MiGongPB {
           if (!other.otherInfos_.isEmpty()) {
             if (otherInfos_.isEmpty()) {
               otherInfos_ = other.otherInfos_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
             } else {
               ensureOtherInfosIsMutable();
               otherInfos_.addAll(other.otherInfos_);
@@ -6020,7 +6209,7 @@ public final class MiGongPB {
               otherInfosBuilder_.dispose();
               otherInfosBuilder_ = null;
               otherInfos_ = other.otherInfos_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
               otherInfosBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getOtherInfosFieldBuilder() : null;
@@ -6034,6 +6223,10 @@ public final class MiGongPB {
       }
 
       public final boolean isInitialized() {
+        if (!hasSpeed()) {
+          
+          return false;
+        }
         if (!hasStart()) {
           
           return false;
@@ -6157,20 +6350,69 @@ public final class MiGongPB {
         return this;
       }
 
-      // required int32 start = 2;
+      // required int32 speed = 2;
+      private int speed_ ;
+      /**
+       * <code>required int32 speed = 2;</code>
+       *
+       * <pre>
+       * 速度
+       * </pre>
+       */
+      public boolean hasSpeed() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 speed = 2;</code>
+       *
+       * <pre>
+       * 速度
+       * </pre>
+       */
+      public int getSpeed() {
+        return speed_;
+      }
+      /**
+       * <code>required int32 speed = 2;</code>
+       *
+       * <pre>
+       * 速度
+       * </pre>
+       */
+      public Builder setSpeed(int value) {
+        bitField0_ |= 0x00000002;
+        speed_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 speed = 2;</code>
+       *
+       * <pre>
+       * 速度
+       * </pre>
+       */
+      public Builder clearSpeed() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        speed_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 start = 3;
       private int start_ ;
       /**
-       * <code>required int32 start = 2;</code>
+       * <code>required int32 start = 3;</code>
        *
        * <pre>
        * 起点
        * </pre>
        */
       public boolean hasStart() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required int32 start = 2;</code>
+       * <code>required int32 start = 3;</code>
        *
        * <pre>
        * 起点
@@ -6180,46 +6422,46 @@ public final class MiGongPB {
         return start_;
       }
       /**
-       * <code>required int32 start = 2;</code>
+       * <code>required int32 start = 3;</code>
        *
        * <pre>
        * 起点
        * </pre>
        */
       public Builder setStart(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         start_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 start = 2;</code>
+       * <code>required int32 start = 3;</code>
        *
        * <pre>
        * 起点
        * </pre>
        */
       public Builder clearStart() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         start_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 end = 3;
+      // required int32 end = 4;
       private int end_ ;
       /**
-       * <code>required int32 end = 3;</code>
+       * <code>required int32 end = 4;</code>
        *
        * <pre>
        * 终点
        * </pre>
        */
       public boolean hasEnd() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required int32 end = 3;</code>
+       * <code>required int32 end = 4;</code>
        *
        * <pre>
        * 终点
@@ -6229,39 +6471,39 @@ public final class MiGongPB {
         return end_;
       }
       /**
-       * <code>required int32 end = 3;</code>
+       * <code>required int32 end = 4;</code>
        *
        * <pre>
        * 终点
        * </pre>
        */
       public Builder setEnd(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         end_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 end = 3;</code>
+       * <code>required int32 end = 4;</code>
        *
        * <pre>
        * 终点
        * </pre>
        */
       public Builder clearEnd() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         end_ = 0;
         onChanged();
         return this;
       }
 
-      // repeated .PBOtherInfo otherInfos = 4;
+      // repeated .PBOtherInfo otherInfos = 5;
       private java.util.List<com.protocol.MiGongPB.PBOtherInfo> otherInfos_ =
         java.util.Collections.emptyList();
       private void ensureOtherInfosIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           otherInfos_ = new java.util.ArrayList<com.protocol.MiGongPB.PBOtherInfo>(otherInfos_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000010;
          }
       }
 
@@ -6269,7 +6511,7 @@ public final class MiGongPB {
           com.protocol.MiGongPB.PBOtherInfo, com.protocol.MiGongPB.PBOtherInfo.Builder, com.protocol.MiGongPB.PBOtherInfoOrBuilder> otherInfosBuilder_;
 
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6283,7 +6525,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6297,7 +6539,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6311,7 +6553,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6332,7 +6574,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6350,7 +6592,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6370,7 +6612,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6391,7 +6633,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6409,7 +6651,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6427,7 +6669,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6445,7 +6687,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6454,7 +6696,7 @@ public final class MiGongPB {
       public Builder clearOtherInfos() {
         if (otherInfosBuilder_ == null) {
           otherInfos_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
           otherInfosBuilder_.clear();
@@ -6462,7 +6704,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6479,7 +6721,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6490,7 +6732,7 @@ public final class MiGongPB {
         return getOtherInfosFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6504,7 +6746,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6519,7 +6761,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6530,7 +6772,7 @@ public final class MiGongPB {
             com.protocol.MiGongPB.PBOtherInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6542,7 +6784,7 @@ public final class MiGongPB {
             index, com.protocol.MiGongPB.PBOtherInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .PBOtherInfo otherInfos = 4;</code>
+       * <code>repeated .PBOtherInfo otherInfos = 5;</code>
        *
        * <pre>
        * 其它玩家信息
@@ -6559,7 +6801,7 @@ public final class MiGongPB {
           otherInfosBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.protocol.MiGongPB.PBOtherInfo, com.protocol.MiGongPB.PBOtherInfo.Builder, com.protocol.MiGongPB.PBOtherInfoOrBuilder>(
                   otherInfos_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
                   isClean());
           otherInfos_ = null;
@@ -15776,32 +16018,32 @@ public final class MiGongPB {
       "vel\"Q\n\020SCGetMiGongLevel\022\030\n\020passCountInLe" +
       "vel\030\001 \003(\005\022\021\n\topenLevel\030\002 \002(\005\022\020\n\010openPass" +
       "\030\003 \002(\005\"-\n\016CSGetMiGongMap\022\r\n\005level\030\001 \002(\005\022" +
-      "\014\n\004pass\030\002 \002(\005\"G\n\016SCGetMiGongMap\022\013\n\003map\030\001" +
-      " \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005start\030\003 \002(\005\022\013\n\003end" +
-      "\030\004 \002(\005\"K\n\014CSPassFinish\022\r\n\005level\030\001 \002(\005\022\014\n" +
-      "\004pass\030\002 \002(\005\022\017\n\007success\030\003 \002(\005\022\r\n\005route\030\004 " +
-      "\003(\t\"D\n\014SCPassFinish\022\021\n\topenLevel\030\001 \002(\005\022\020" +
-      "\n\010openPass\030\002 \002(\005\022\017\n\007success\030\003 \002(\005\"\033\n\tCSU",
-      "seItem\022\016\n\006itemId\030\001 \002(\005\"\013\n\tSCUseItem\"\014\n\nC" +
-      "SMatching\"\014\n\nSCMatching\"^\n\021SCMatchingSuc" +
-      "cess\022\013\n\003map\030\001 \003(\005\022\r\n\005start\030\002 \002(\005\022\013\n\003end\030" +
-      "\003 \002(\005\022 \n\notherInfos\030\004 \003(\0132\014.PBOtherInfo\"" +
-      "K\n\013PBOtherInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010userNa" +
-      "me\030\002 \002(\t\022\r\n\005start\030\003 \002(\005\022\013\n\003end\030\004 \002(\005\"\020\n\016" +
-      "SCMatchingFail\"\t\n\007SCBegin\"1\n\006CSMove\022\013\n\003p" +
-      "os\030\001 \002(\005\022\013\n\003dir\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\"\010\n\006" +
-      "SCMove\"D\n\nSCUserMove\022\013\n\003pos\030\001 \002(\005\022\013\n\003dir" +
-      "\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005frame\030\004 \002(\005\"\030\n\t",
-      "CSArrived\022\013\n\003pos\030\001 \002(\005\"\013\n\tSCArrived\"\037\n\rS" +
-      "CUserArrived\022\016\n\006userId\030\001 \002(\t\"4\n\nSCGameOv" +
-      "er\022&\n\tuserInfos\030\001 \003(\0132\023.PBGameOverUserIn" +
-      "fo\"S\n\022PBGameOverUserInfo\022\016\n\006userId\030\001 \002(\t" +
-      "\022\020\n\010userName\030\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005scor" +
-      "e\030\004 \002(\005\"\r\n\013CSRoomHeart\"\r\n\013SCRoomHeart\"#\n" +
-      "\022CSSendWalkingRoute\022\r\n\005route\030\001 \003(\005\"\024\n\022SC" +
-      "SendWalkingRoute\"\031\n\010CSCommon\022\r\n\005route\030\001 " +
-      "\003(\t\"\031\n\010SCCommon\022\r\n\005route\030\001 \003(\tB\016\n\014com.pr" +
-      "otocol"
+      "\014\n\004pass\030\002 \002(\005\"V\n\016SCGetMiGongMap\022\013\n\003map\030\001" +
+      " \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005sta" +
+      "rt\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\"K\n\014CSPassFinish\022\r\n" +
+      "\005level\030\001 \002(\005\022\014\n\004pass\030\002 \002(\005\022\017\n\007success\030\003 " +
+      "\002(\005\022\r\n\005route\030\004 \003(\t\"D\n\014SCPassFinish\022\021\n\top" +
+      "enLevel\030\001 \002(\005\022\020\n\010openPass\030\002 \002(\005\022\017\n\007succe",
+      "ss\030\003 \002(\005\"\033\n\tCSUseItem\022\016\n\006itemId\030\001 \002(\005\"\013\n" +
+      "\tSCUseItem\"\014\n\nCSMatching\"\014\n\nSCMatching\"m" +
+      "\n\021SCMatchingSuccess\022\013\n\003map\030\001 \003(\005\022\r\n\005spee" +
+      "d\030\002 \002(\005\022\r\n\005start\030\003 \002(\005\022\013\n\003end\030\004 \002(\005\022 \n\no" +
+      "therInfos\030\005 \003(\0132\014.PBOtherInfo\"K\n\013PBOther" +
+      "Info\022\016\n\006userId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\r" +
+      "\n\005start\030\003 \002(\005\022\013\n\003end\030\004 \002(\005\"\020\n\016SCMatching" +
+      "Fail\"\t\n\007SCBegin\"1\n\006CSMove\022\013\n\003pos\030\001 \002(\005\022\013" +
+      "\n\003dir\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\"\010\n\006SCMove\"D\n\n" +
+      "SCUserMove\022\013\n\003pos\030\001 \002(\005\022\013\n\003dir\030\002 \002(\005\022\r\n\005",
+      "speed\030\003 \002(\005\022\r\n\005frame\030\004 \002(\005\"\030\n\tCSArrived\022" +
+      "\013\n\003pos\030\001 \002(\005\"\013\n\tSCArrived\"\037\n\rSCUserArriv" +
+      "ed\022\016\n\006userId\030\001 \002(\t\"4\n\nSCGameOver\022&\n\tuser" +
+      "Infos\030\001 \003(\0132\023.PBGameOverUserInfo\"S\n\022PBGa" +
+      "meOverUserInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010userNa" +
+      "me\030\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005score\030\004 \002(\005\"\r\n" +
+      "\013CSRoomHeart\"\r\n\013SCRoomHeart\"#\n\022CSSendWal" +
+      "kingRoute\022\r\n\005route\030\001 \003(\005\"\024\n\022SCSendWalkin" +
+      "gRoute\"\031\n\010CSCommon\022\r\n\005route\030\001 \003(\t\"\031\n\010SCC" +
+      "ommon\022\r\n\005route\030\001 \003(\tB\016\n\014com.protocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15831,7 +16073,7 @@ public final class MiGongPB {
           internal_static_SCGetMiGongMap_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCGetMiGongMap_descriptor,
-              new java.lang.String[] { "Map", "Time", "Start", "End", });
+              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", });
           internal_static_CSPassFinish_descriptor =
             getDescriptor().getMessageTypes().get(4);
           internal_static_CSPassFinish_fieldAccessorTable = new
@@ -15873,7 +16115,7 @@ public final class MiGongPB {
           internal_static_SCMatchingSuccess_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatchingSuccess_descriptor,
-              new java.lang.String[] { "Map", "Start", "End", "OtherInfos", });
+              new java.lang.String[] { "Map", "Speed", "Start", "End", "OtherInfos", });
           internal_static_PBOtherInfo_descriptor =
             getDescriptor().getMessageTypes().get(11);
           internal_static_PBOtherInfo_fieldAccessorTable = new

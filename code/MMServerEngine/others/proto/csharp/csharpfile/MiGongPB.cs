@@ -53,6 +53,9 @@ namespace Example
         public int Time { get; set; }
 
         /// <summary> 时间</summary>
+        public int Speed { get; set; }
+
+        /// <summary> 速度</summary>
         public int Start { get; set; }
 
         /// <summary> 起点</summary>
@@ -115,6 +118,9 @@ namespace Example
     {
         public List<int> Map { get; set; }
 
+        public int Speed { get; set; }
+
+        /// <summary> 速度</summary>
         public int Start { get; set; }
 
         /// <summary> 起点</summary>
