@@ -4,21 +4,27 @@ import com.migong.entity.MiGongPassInfo;
 import com.migong.entity.UserMiGong;
 import com.migong.map.CreateMap;
 import com.migong.map.Element;
+import com.mm.engine.framework.control.annotation.EventListener;
 import com.mm.engine.framework.control.annotation.Request;
 import com.mm.engine.framework.control.annotation.Service;
+import com.mm.engine.framework.control.annotation.Updatable;
+import com.mm.engine.framework.control.event.EventData;
 import com.mm.engine.framework.data.DataService;
+import com.mm.engine.framework.data.EntityCreator;
+import com.mm.engine.framework.data.entity.account.LogoutEventData;
 import com.mm.engine.framework.data.entity.session.Session;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.code.RetPacketImpl;
 import com.mm.engine.framework.security.exception.ToClientException;
+import com.mm.engine.framework.server.SysConstantDefine;
 import com.protocol.MiGongOpcode;
 import com.protocol.MiGongPB;
 import com.table.MiGongLevel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -34,11 +40,48 @@ import java.util.concurrent.ConcurrentHashMap;
  * 5、开始和结束的时候也要发
  *
  * 道具：加速，瞬移，提示一定路段，
+ *
+ * public static final int CSGetMiGongLevel = 12001;
+ public static final int SCGetMiGongLevel = 12002;
+ public static final int CSGetMiGongMap = 12003;
+ public static final int SCGetMiGongMap = 12004;
+ public static final int CSPassFinish = 12005;
+ public static final int SCPassFinish = 12006;
+ public static final int CSUseItem = 12007;
+ public static final int SCUseItem = 12008;
+ public static final int CSMatching = 12009;
+ public static final int SCMatching = 12010;
+ public static final int SCMatchingSuccess = 12011;
+ public static final int PBOtherInfo = 12012;
+ public static final int SCMatchingFail = 12013;
+ public static final int SCBegin = 12014;
+ public static final int CSMove = 12015;
+ public static final int SCMove = 12016;
+ public static final int SCUserMove = 12017;
+ public static final int CSArrived = 12018;
+ public static final int SCArrived = 12019;
+ public static final int SCUserArrived = 12020;
+ public static final int SCGameOver = 12021;
+ public static final int PBGameOverUserInfo = 12022;
+ public static final int CSRoomHeart = 12023;
+ public static final int SCRoomHeart = 12024;
+ public static final int CSSendWalkingRoute = 12025;
+ public static final int SCSendWalkingRoute = 12026;
+ public static final int CSCommon = 12027;
+ public static final int SCCommon = 12028;
  */
 @Service(init = "init")
 public class MiGongService {
+    private static final Logger log = LoggerFactory.getLogger(MiGongService.class);
+
     private DataService dataService;
-//    ConcurrentHashMap<>
+    /**
+     * 这个是玩家获取迷宫后缓存的该迷宫信息，在玩家过关的时候用来校验是否正常过关。同时在如下几种情况下要清除：
+     * 1、玩家断开连接
+     * 2、到点失败
+     */
+    ConcurrentHashMap<String,MiGongPassInfo> miGongPassInfoMap = new ConcurrentHashMap<>();
+
 
     private final Map<Integer,MiGongLevel> levelMap = new HashMap<>();
     public void init(){
@@ -47,34 +90,41 @@ public class MiGongService {
             levelMap.put(miGongLevel.getLevel(),miGongLevel);
         }
     }
+    @Request(opcode = MiGongOpcode.CSGetMiGongLevel)
+    public RetPacket getMiGongLevel(Object clientData, Session session) throws Throwable{
+        MiGongPB.CSGetMiGongLevel getMiGongLevel = MiGongPB.CSGetMiGongLevel.parseFrom((byte[])clientData);
+        UserMiGong userMiGong = get(session.getAccountId());
+        //
+        MiGongPB.SCGetMiGongLevel.Builder builder = MiGongPB.SCGetMiGongLevel.newBuilder();
+        builder.setOpenLevel(userMiGong.getLevel());
+        builder.setOpenPass(userMiGong.getPass());
+        for(MiGongLevel miGongLevel : MiGongLevel.datas){
+            builder.addPassCountInLevel(miGongLevel.getPass());
+        }
+        return new RetPacketImpl(MiGongOpcode.SCGetMiGongLevel, builder.build().toByteArray());
+    }
     @Request(opcode = MiGongOpcode.CSGetMiGongMap)
     public RetPacket getMap(Object clientData, Session session) throws Throwable{
         System.out.println("do request getMap");
         MiGongPB.CSGetMiGongMap getMiGongMap = MiGongPB.CSGetMiGongMap.parseFrom((byte[])clientData);
-        UserMiGong userMiGong = dataService.selectCreateIfAbsent(UserMiGong.class,"userId={}",session.getAccountId());
+        UserMiGong userMiGong = get(session.getAccountId());
         // 当前等级和关卡
-        MiGongLevel miGongLevel = levelMap.get(getMiGongMap.getLevel());
-        if(miGongLevel == null || miGongLevel.getPass() < getMiGongMap.getPass() || getMiGongMap.getPass() < 1){
-            throw new ToClientException("Invalid params");
-        }
-        if(getMiGongMap.getLevel() >= userMiGong.getLevel()){
-            if(getMiGongMap.getLevel() == userMiGong.getLevel() && getMiGongMap.getPass() > userMiGong.getPass()+1){
-                throw new ToClientException("Invalid params");
-            }
-            if(getMiGongMap.getLevel() > userMiGong.getLevel()){
-                if(getMiGongMap.getLevel() != userMiGong.getLevel() +1 || getMiGongMap.getPass() != 1 ||
-                        (userMiGong.getLevel() >0 && userMiGong.getPass() < levelMap.get(userMiGong.getLevel()).getPass())){
-                    throw new ToClientException("Invalid params");
-                }
-            }
+        checkLevelAndPass(getMiGongMap.getLevel(),getMiGongMap.getPass(),userMiGong);
+        if(miGongPassInfoMap.containsKey(session.getAccountId())){
+            miGongPassInfoMap.remove(session.getAccountId());
+            log.error("do CSGetMiGongMap but miGongPassInfoMap has data,accountId = {}",session.getAccountId());
         }
         //
+        MiGongLevel miGongLevel = levelMap.get(getMiGongMap.getLevel());
         MiGongPassInfo miGongPassInfo = new MiGongPassInfo();
+        miGongPassInfo.setLevel(getMiGongMap.getLevel());
+        miGongPassInfo.setPass(getMiGongMap.getPass());
         miGongPassInfo.setDifficulty(miGongLevel.getDifficulty());
+        miGongPassInfo.setStartTime(new Timestamp(System.currentTimeMillis()));
         miGongPassInfo = miGongParamsByDifficulty(miGongPassInfo);
         MiGongPB.SCGetMiGongMap.Builder builder = MiGongPB.SCGetMiGongMap.newBuilder();
 
-        CreateMap myMap=miGongPassInfo.getCreateMap();							//随机产生地图
+        CreateMap myMap=miGongPassInfo.getCreateMap();							//地图
 
 
         List<Integer> integers = new ArrayList<>(miGongPassInfo.getSize()*miGongPassInfo.getSize());
@@ -88,12 +138,90 @@ public class MiGongService {
         builder.setSpeed(miGongPassInfo.getSpeed());
         builder.setStart(miGongPassInfo.getStart().toInt(miGongPassInfo.getSize()));
         builder.setEnd(miGongPassInfo.getEnd().toInt(miGongPassInfo.getSize()));
-
+        miGongPassInfoMap.put(session.getAccountId(),miGongPassInfo);
         byte[] sendData = builder.build().toByteArray();
-//        System.out.println("builder.getMapList().size() = "+builder.getMapList().size()+",sendData length:"+sendData.length);
         return new RetPacketImpl(MiGongOpcode.SCGetMiGongMap, sendData);
     }
+    private UserMiGong get(String userId){
+        UserMiGong userMiGong = dataService.selectObject(UserMiGong.class,"userId=?",userId);
+        if(userMiGong == null){
+            userMiGong = new UserMiGong();
+            userMiGong.setUserId(userId);
+            dataService.insert(userMiGong);
+        }
+        return userMiGong;
+    }
 
+    @Request(opcode = MiGongOpcode.CSPassFinish)
+    public RetPacket passFinish(Object clientData, Session session) throws Throwable{
+        MiGongPB.CSPassFinish passFinish = MiGongPB.CSPassFinish.parseFrom((byte[])clientData);
+        // 校验关卡
+        MiGongPassInfo miGongPassInfo = miGongPassInfoMap.remove(session.getAccountId());
+        if(miGongPassInfo == null || miGongPassInfo.getLevel() != passFinish.getLevel() || miGongPassInfo.getPass() != passFinish.getPass()){
+            throw new ToClientException("Invalid params");
+        }
+        UserMiGong userMiGong = get(session.getAccountId());
+        checkLevelAndPass(passFinish.getLevel(),passFinish.getPass(),userMiGong);
+        boolean isSuccess = false;
+        if(passFinish.getSuccess() > 0){
+            // 校验
+            List<Integer> routeList = passFinish.getRouteList();
+            isSuccess = miGongPassInfo.getCreateMap().checkRouteWithoutSkill(routeList);
+        }
+        //
+        if(isSuccess){
+            if(passFinish.getLevel() > userMiGong.getLevel() || passFinish.getPass() > userMiGong.getPass()){
+                userMiGong.setLevel(passFinish.getLevel());
+                userMiGong.setPass(passFinish.getPass());
+                dataService.update(userMiGong);
+            }
+        }
+        MiGongPB.SCPassFinish.Builder builder = MiGongPB.SCPassFinish.newBuilder();
+        builder.setOpenLevel(userMiGong.getLevel());
+        builder.setOpenPass(userMiGong.getPass());
+        builder.setSuccess(isSuccess?1:0);
+        return new RetPacketImpl(MiGongOpcode.SCGetMiGongLevel, builder.build().toByteArray());
+    }
+
+    /**
+     * 每分钟检查一次，去掉过期的MiGongPassInfo
+     * 注意：要过期一段时间，否则，有些是延时20s
+     * @param interval
+     */
+    @Updatable(isAsynchronous = false,cycle = 60000)
+    public void checkMiGongPassInfo(int interval){
+        long currentTime = System.currentTimeMillis();
+        for(Map.Entry<String,MiGongPassInfo> entry : miGongPassInfoMap.entrySet()){
+            MiGongPassInfo miGongPassInfo = entry.getValue();
+            if((miGongPassInfo.getTime()+20)*1000 < currentTime - miGongPassInfo.getStartTime().getTime()){
+                miGongPassInfoMap.remove(entry.getKey());
+            }
+        }
+    }
+    /**
+     * 检车对应关卡是否可以进入
+     * @param level
+     * @param pass
+     * @param userMiGong
+     * @throws Throwable
+     */
+    private void checkLevelAndPass(int level,int pass,UserMiGong userMiGong) throws Throwable{
+        MiGongLevel miGongLevel = levelMap.get(level);
+        if(miGongLevel == null || miGongLevel.getPass() < pass || pass < 1){
+            throw new ToClientException("Invalid params");
+        }
+        if(level >= userMiGong.getLevel()){
+            if(level == userMiGong.getLevel() && pass > userMiGong.getPass()+1){
+                throw new ToClientException("Invalid params");
+            }
+            if(level > userMiGong.getLevel()){
+                if(level != userMiGong.getLevel() +1 || pass != 1 ||
+                        (userMiGong.getLevel() >0 && userMiGong.getPass() < levelMap.get(userMiGong.getLevel()).getPass())){
+                    throw new ToClientException("Invalid params");
+                }
+            }
+        }
+    }
     /**
      * 根据难度，获取迷宫的大小和开门数，额，后面做成配置也好
      * 大小和开门数相对于难度的系数
@@ -130,10 +258,16 @@ public class MiGongService {
         MiGongPB.CSSendWalkingRoute csSendWalkingRoute = MiGongPB.CSSendWalkingRoute.parseFrom((byte[])clientData);
         List<Integer> list = csSendWalkingRoute.getRouteList();
 
-        // 校验
+        // TODO 校验
 
         MiGongPB.SCSendWalkingRoute.Builder builder = MiGongPB.SCSendWalkingRoute.newBuilder();
         return new RetPacketImpl(MiGongOpcode.SCSendWalkingRoute, builder.build().toByteArray());
     }
 
+    @EventListener(event = SysConstantDefine.Event_AccountLogout)
+    public void onAccountLogout(EventData data){
+        // 清理缓存的miGongPassInfoMap   清理信息
+        final LogoutEventData logoutEventData = (LogoutEventData)data.getData();
+        miGongPassInfoMap.remove(logoutEventData.getSession().getAccountId());
+    }
 }

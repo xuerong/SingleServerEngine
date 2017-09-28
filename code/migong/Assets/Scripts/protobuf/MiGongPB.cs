@@ -17,19 +17,227 @@ namespace Example
     /// <para>syntax = "proto3";</para>
     /// <para>option java_outer_classname = "LivePB";</para>
     /// <para> 12001</para>
-    /// <para>获取地图</para>
+    /// <para></para>
+    /// <para>推图/////////////////////////////////////</para>
+    /// <para> 进入游戏时，获取迷宫的配置，和当前所处于的关卡</para>
     /// </summary>
+    public partial class CSGetMiGongLevel
+    {
+    }
+
+    public partial class SCGetMiGongLevel
+    {
+        public List<int> PassCountInLevel { get; set; }
+
+        /// <summary> 配置的，各个level对应的关卡数量</summary>
+        public int OpenLevel { get; set; }
+
+        /// <summary> 已经开启的leve</summary>
+        public int OpenPass { get; set; }
+
+    }
+
+    /// <summary> 获取迷宫</summary>
     public partial class CSGetMiGongMap
     {
+        public int Level { get; set; }
+
+        public int Pass { get; set; }
+
     }
 
     public partial class SCGetMiGongMap
     {
         public List<int> Map { get; set; }
 
+        public int Time { get; set; }
+
+        /// <summary> 时间</summary>
+        public int Speed { get; set; }
+
+        /// <summary> 速度</summary>
+        public int Start { get; set; }
+
+        /// <summary> 起点</summary>
+        public int End { get; set; }
+
     }
 
-    /// <summary> 返回行走路线</summary>
+    /// <summary> 成功或失败 :</summary>
+    public partial class CSPassFinish
+    {
+        public int Level { get; set; }
+
+        public int Pass { get; set; }
+
+        public int Success { get; set; }
+
+        public List<int> Route { get; set; }
+
+    }
+
+    public partial class SCPassFinish
+    {
+        public int OpenLevel { get; set; }
+
+        /// <summary> 已经开启的leve</summary>
+        public int OpenPass { get; set; }
+
+        /// <summary> 已经开启的关卡</summary>
+        public int Success { get; set; }
+
+    }
+
+    /// <summary> 使用道具</summary>
+    public partial class CSUseItem
+    {
+        public int ItemId { get; set; }
+
+    }
+
+    public partial class SCUseItem
+    {
+    }
+
+    /// <summary>
+    /// <para>联机对战///////////////////////////////////////</para>
+    /// <para> 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳</para>
+    /// <para> 请求匹配，返回房间及信息，开始游戏，发送操作（移动，道具），接收操作，发送到达终点，接收到达终点，接收游戏结束，房间心跳</para>
+    /// <para> 请求匹配</para>
+    /// </summary>
+    public partial class CSMatching
+    {
+    }
+
+    public partial class SCMatching
+    {
+    }
+
+    /// <summary> 推送，匹配成功：地图，自己的起点，终点。其他人的起点，终点，玩家名，玩家编号</summary>
+    public partial class SCMatchingSuccess
+    {
+        public List<int> Map { get; set; }
+
+        public int Speed { get; set; }
+
+        /// <summary> 速度</summary>
+        public int Start { get; set; }
+
+        /// <summary> 起点</summary>
+        public int End { get; set; }
+
+        /// <summary> 终点</summary>
+        public List<Example.PBOtherInfo> OtherInfos { get; set; }
+
+    }
+
+    public partial class PBOtherInfo
+    {
+        public string UserId { get; set; }
+
+        /// <summary> 玩家id</summary>
+        public string UserName { get; set; }
+
+        /// <summary> 玩家名</summary>
+        public int Start { get; set; }
+
+        /// <summary> 起点</summary>
+        public int End { get; set; }
+
+    }
+
+    /// <summary> 推送，匹配失败</summary>
+    public partial class SCMatchingFail
+    {
+    }
+
+    /// <summary> 推送，开始游戏</summary>
+    public partial class SCBegin
+    {
+    }
+
+    /// <summary> 玩家移动操作</summary>
+    public partial class CSMove
+    {
+        public int Pos { get; set; }
+
+        /// <summary> 当前位置</summary>
+        public int Dir { get; set; }
+
+        /// <summary> 方向</summary>
+        public int Speed { get; set; }
+
+    }
+
+    public partial class SCMove
+    {
+    }
+
+    /// <summary> 推送移动操作</summary>
+    public partial class SCUserMove
+    {
+        public int Pos { get; set; }
+
+        /// <summary> 当前位置</summary>
+        public int Dir { get; set; }
+
+        /// <summary> 方向</summary>
+        public int Speed { get; set; }
+
+        /// <summary> 速度</summary>
+        public int Frame { get; set; }
+
+    }
+
+    /// <summary> 玩家到达终点</summary>
+    public partial class CSArrived
+    {
+        public int Pos { get; set; }
+
+    }
+
+    public partial class SCArrived
+    {
+    }
+
+    /// <summary> 推送，玩家到达终点</summary>
+    public partial class SCUserArrived
+    {
+        public string UserId { get; set; }
+
+    }
+
+    /// <summary> 推送，游戏结束：排名</summary>
+    public partial class SCGameOver
+    {
+        public List<Example.PBGameOverUserInfo> UserInfos { get; set; }
+
+    }
+
+    public partial class PBGameOverUserInfo
+    {
+        public string UserId { get; set; }
+
+        /// <summary> 玩家id</summary>
+        public string UserName { get; set; }
+
+        /// <summary> 玩家名称</summary>
+        public int Rank { get; set; }
+
+        /// <summary> 排名</summary>
+        public int Score { get; set; }
+
+    }
+
+    /// <summary> 房间心跳包</summary>
+    public partial class CSRoomHeart
+    {
+    }
+
+    public partial class SCRoomHeart
+    {
+    }
+
     public partial class CSSendWalkingRoute
     {
         public List<int> Route { get; set; }
@@ -40,7 +248,6 @@ namespace Example
     {
     }
 
-    /// <summary> 通用协议</summary>
     public partial class CSCommon
     {
         public List<string> Route { get; set; }

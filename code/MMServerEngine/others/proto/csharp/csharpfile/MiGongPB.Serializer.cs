@@ -918,7 +918,7 @@ namespace Example
         public static Example.CSPassFinish Deserialize(Stream stream, Example.CSPassFinish instance)
         {
             if (instance.Route == null)
-                instance.Route = new List<string>();
+                instance.Route = new List<int>();
             while (true)
             {
                 int keyByte = stream.ReadByte();
@@ -939,10 +939,10 @@ namespace Example
                     case 24:
                         instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 4 LengthDelimited
-                    case 34:
+                    // Field 4 Varint
+                    case 32:
                         // repeated
-                        instance.Route.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        instance.Route.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                 }
 
@@ -966,7 +966,7 @@ namespace Example
         public static Example.CSPassFinish DeserializeLengthDelimited(Stream stream, Example.CSPassFinish instance)
         {
             if (instance.Route == null)
-                instance.Route = new List<string>();
+                instance.Route = new List<int>();
             long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
             limit += stream.Position;
             while (true)
@@ -996,10 +996,10 @@ namespace Example
                     case 24:
                         instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 4 LengthDelimited
-                    case 34:
+                    // Field 4 Varint
+                    case 32:
                         // repeated
-                        instance.Route.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        instance.Route.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                 }
 
@@ -1023,7 +1023,7 @@ namespace Example
         public static Example.CSPassFinish DeserializeLength(Stream stream, int length, Example.CSPassFinish instance)
         {
             if (instance.Route == null)
-                instance.Route = new List<string>();
+                instance.Route = new List<int>();
             long limit = stream.Position + length;
             while (true)
             {
@@ -1052,10 +1052,10 @@ namespace Example
                     case 24:
                         instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 4 LengthDelimited
-                    case 34:
+                    // Field 4 Varint
+                    case 32:
                         // repeated
-                        instance.Route.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        instance.Route.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                 }
 
@@ -1092,9 +1092,9 @@ namespace Example
             {
                 foreach (var i4 in instance.Route)
                 {
-                    // Key for field: 4, LengthDelimited
-                    stream.WriteByte(34);
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(i4));
+                    // Key for field: 4, Varint
+                    stream.WriteByte(32);
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i4);
                 }
             }
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);

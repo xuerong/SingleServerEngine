@@ -3,6 +3,8 @@ package com.migong.entity;
 import com.migong.map.CreateMap;
 import com.migong.map.Element;
 
+import java.sql.Timestamp;
+
 /**
  * Created by Administrator on 2017/9/22.
  * 这个不进行存储了，就是暂存玩家正在玩的关卡信息
@@ -16,6 +18,9 @@ public class MiGongPassInfo {
     private int size;
     private int door;
     private int difficulty;
+    private int level;
+    private int pass;
+    private Timestamp startTime; // 开始时间
 
     public CreateMap getCreateMap() {
         return createMap;
@@ -79,5 +84,29 @@ public class MiGongPassInfo {
 
     public void setDoor(int door) {
         this.door = door;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getPass() {
+        return pass;
+    }
+
+    public void setPass(int pass) {
+        this.pass = pass;
+    }
+
+    public Timestamp getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
     }
 }

@@ -7,11 +7,9 @@ using System;
 using System.Threading;
 using System.Collections.Generic; 
 
-public delegate void ActionForReceive(int opcode,byte[] data);
-
 public class ClientSocket  
 {  
-	private static byte[] result = new byte[1024];  
+//	private static byte[] result = new byte[1024];  
 	private static Socket clientSocket;  
 	//是否已连接的标识  
 	public bool IsConnected = false;  

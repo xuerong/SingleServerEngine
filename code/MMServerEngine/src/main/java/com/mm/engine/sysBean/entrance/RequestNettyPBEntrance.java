@@ -79,14 +79,12 @@ public class RequestNettyPBEntrance extends Entrance {
             NettyPBPacket nettyPBPacket = (NettyPBPacket) msg;
 //            log.info("nettyPBPacket.getOpcode() = "+nettyPBPacket.getOpcode());
             try {
-                int id = 0;
                 String sessionId = ctx.channel().attr(sessionKey).get();
                 RetPacket retPacket = null;
                 if (nettyPBPacket.getOpcode() == AccountOpcode.CSLogin) { // 登陆消息
                     retPacket = accountService.login(nettyPBPacket.getOpcode(),nettyPBPacket.getData(),ctx,sessionKey);
                 }else{
                     Session session = checkAndGetSession(sessionId);
-                    id = nettyPBPacket.getId();
                     retPacket = requestService.handle(nettyPBPacket.getOpcode(),nettyPBPacket.getData(),session);
                 }
                 if(retPacket == null){
@@ -94,7 +92,6 @@ public class RequestNettyPBEntrance extends Entrance {
                 }
                 nettyPBPacket.setOpcode(retPacket.getOpcode());
 //                System.out.println("id:"+id);
-                nettyPBPacket.setId(id);
                 nettyPBPacket.setData((byte[])retPacket.getRetData());
                 ctx.writeAndFlush(nettyPBPacket);
             }catch (Throwable e){
@@ -108,6 +105,8 @@ public class RequestNettyPBEntrance extends Entrance {
                     errCode = toClientException.getErrCode();
                     errMsg = toClientException.getMessage();
                     log.error("ToClientException:"+toClientException.getMessage());
+                }else {
+                    log.error("",e);
                 }
                 BasePB.SCException.Builder scException = BasePB.SCException.newBuilder();
                 scException.setErrCode(errCode);

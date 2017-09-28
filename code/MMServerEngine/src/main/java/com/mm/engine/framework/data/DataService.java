@@ -68,11 +68,13 @@ public class DataService {
         }
         return null;
     }
-    public <T> T selectCreateIfAbsent(Class<T> entityClass, String condition, Object... params){
+    public <T> T selectCreateIfAbsent(Class<T> entityClass,EntityCreator entityCreator, String condition, Object... params){
         T result = selectObject(entityClass,condition,params);
         if(result == null){
             try {
                 result = entityClass.newInstance();
+                entityCreator.create(result);
+                insert(result);
             }catch (Throwable e){
                 throw new MMException(e);
             }

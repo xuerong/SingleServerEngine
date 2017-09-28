@@ -5,4 +5,5 @@ using UnityEngine;
 public class ButtonIndex : MonoBehaviour {
 
 	public string index;
+	public int level;
 }

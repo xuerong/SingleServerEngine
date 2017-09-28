@@ -34,7 +34,7 @@ message CSPassFinish
 	required int32 level           = 1;
 	required int32 pass            = 2;
 	required int32 success         = 3;
-	repeated string route 	     = 4; //
+	repeated int32 route 	     = 4; //
 }
 message SCPassFinish
 {

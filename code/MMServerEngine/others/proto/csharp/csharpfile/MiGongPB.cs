@@ -72,7 +72,7 @@ namespace Example
 
         public int Success { get; set; }
 
-        public List<string> Route { get; set; }
+        public List<int> Route { get; set; }
 
     }
 

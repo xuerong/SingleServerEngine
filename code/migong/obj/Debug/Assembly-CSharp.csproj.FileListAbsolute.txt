@@ -1,0 +1,2 @@
+E:\code\SingleServerEngine\code\migong\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+E:\code\SingleServerEngine\code\migong\obj\Debug\Assembly-CSharp.dll

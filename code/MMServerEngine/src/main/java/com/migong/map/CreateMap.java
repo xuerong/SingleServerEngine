@@ -70,6 +70,67 @@ public class CreateMap {
         }
         map = newMap;
     }
+
+    /**
+     * 给一个路径是否通
+     * 如果后面有技能，这个判断就可能出问题，要添加
+     */
+    public boolean checkRouteWithoutSkill(List<Integer> routes){
+        if(routes == null || routes.size() < 1){
+            return false;
+        }
+        //
+        int lastX = routes.get(0)/td,lastY = routes.get(0)%td;
+        // 判断首
+        if(lastX != in.x || lastY != in.y){
+            return false;
+        }
+        //
+        boolean first = true;
+        for(int step : routes){
+            if(first){
+                first = false;
+                continue;
+            }
+            int x = step/td;
+            int y = step%td;
+            // 相邻
+            if(Math.abs(x - lastX) + Math.abs(y - lastY) != 1){
+                return false;
+            }
+            // 通路
+            if(!checkDoor(lastX,lastY,x,y)){
+                return false;
+            }
+            lastX = x;
+            lastY = y;
+        }
+        if(lastX != out.x || lastY != out.y){
+            return false;
+        }
+        return true;
+    }
+    private boolean checkDoor(int lastX,int lastY,int x,int y){
+        byte last = map[lastX][lastY];
+        byte cur = map[x][y];
+        // 左走
+        if(lastX == x && lastY - y == 1){
+            return (cur & 1) > 0;
+        }
+        // 右走
+        if(lastX == x && lastY - y == -1){
+            return (last & 1) > 0;
+        }
+        // 上
+        if(lastX - x == 1 && lastY == y){
+            return (cur & 2) > 0;
+        }
+        // 下
+        if(lastX - x == -1 && lastY == y){
+            return (last & 2) > 0;
+        }
+        return false;
+    }
     /*
      * 初始化函数，主要功能：初始化地图、初始化访问情况（都为false）
      * 地突出视情况：左上角为（东西南北15），上面一排为（东南北11），左边一排为（东西南7）、其余为（东南3）

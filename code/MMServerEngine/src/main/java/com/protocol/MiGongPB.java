@@ -2628,37 +2628,28 @@ public final class MiGongPB {
      */
     int getSuccess();
 
-    // repeated string route = 4;
+    // repeated int32 route = 4;
     /**
-     * <code>repeated string route = 4;</code>
+     * <code>repeated int32 route = 4;</code>
      *
      * <pre>
      * </pre>
      */
-    java.util.List<java.lang.String>
-    getRouteList();
+    java.util.List<java.lang.Integer> getRouteList();
     /**
-     * <code>repeated string route = 4;</code>
+     * <code>repeated int32 route = 4;</code>
      *
      * <pre>
      * </pre>
      */
     int getRouteCount();
     /**
-     * <code>repeated string route = 4;</code>
+     * <code>repeated int32 route = 4;</code>
      *
      * <pre>
      * </pre>
      */
-    java.lang.String getRoute(int index);
-    /**
-     * <code>repeated string route = 4;</code>
-     *
-     * <pre>
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getRouteBytes(int index);
+    int getRoute(int index);
   }
   /**
    * Protobuf type {@code CSPassFinish}
@@ -2730,12 +2721,25 @@ public final class MiGongPB {
               success_ = input.readInt32();
               break;
             }
-            case 34: {
+            case 32: {
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                route_ = new com.google.protobuf.LazyStringArrayList();
+                route_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000008;
               }
-              route_.add(input.readBytes());
+              route_.add(input.readInt32());
+              break;
+            }
+            case 34: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
+                route_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                route_.add(input.readInt32());
+              }
+              input.popLimit(limit);
               break;
             }
           }
@@ -2747,7 +2751,7 @@ public final class MiGongPB {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          route_ = new com.google.protobuf.UnmodifiableLazyStringList(route_);
+          route_ = java.util.Collections.unmodifiableList(route_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2829,21 +2833,21 @@ public final class MiGongPB {
       return success_;
     }
 
-    // repeated string route = 4;
+    // repeated int32 route = 4;
     public static final int ROUTE_FIELD_NUMBER = 4;
-    private com.google.protobuf.LazyStringList route_;
+    private java.util.List<java.lang.Integer> route_;
     /**
-     * <code>repeated string route = 4;</code>
+     * <code>repeated int32 route = 4;</code>
      *
      * <pre>
      * </pre>
      */
-    public java.util.List<java.lang.String>
+    public java.util.List<java.lang.Integer>
         getRouteList() {
       return route_;
     }
     /**
-     * <code>repeated string route = 4;</code>
+     * <code>repeated int32 route = 4;</code>
      *
      * <pre>
      * </pre>
@@ -2852,30 +2856,20 @@ public final class MiGongPB {
       return route_.size();
     }
     /**
-     * <code>repeated string route = 4;</code>
+     * <code>repeated int32 route = 4;</code>
      *
      * <pre>
      * </pre>
      */
-    public java.lang.String getRoute(int index) {
+    public int getRoute(int index) {
       return route_.get(index);
-    }
-    /**
-     * <code>repeated string route = 4;</code>
-     *
-     * <pre>
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getRouteBytes(int index) {
-      return route_.getByteString(index);
     }
 
     private void initFields() {
       level_ = 0;
       pass_ = 0;
       success_ = 0;
-      route_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      route_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2911,7 +2905,7 @@ public final class MiGongPB {
         output.writeInt32(3, success_);
       }
       for (int i = 0; i < route_.size(); i++) {
-        output.writeBytes(4, route_.getByteString(i));
+        output.writeInt32(4, route_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -2938,7 +2932,7 @@ public final class MiGongPB {
         int dataSize = 0;
         for (int i = 0; i < route_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(route_.getByteString(i));
+            .computeInt32SizeNoTag(route_.get(i));
         }
         size += dataSize;
         size += 1 * getRouteList().size();
@@ -3069,7 +3063,7 @@ public final class MiGongPB {
         bitField0_ = (bitField0_ & ~0x00000002);
         success_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        route_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        route_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
@@ -3112,8 +3106,7 @@ public final class MiGongPB {
         }
         result.success_ = success_;
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          route_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              route_);
+          route_ = java.util.Collections.unmodifiableList(route_);
           bitField0_ = (bitField0_ & ~0x00000008);
         }
         result.route_ = route_;
@@ -3290,26 +3283,26 @@ public final class MiGongPB {
         return this;
       }
 
-      // repeated string route = 4;
-      private com.google.protobuf.LazyStringList route_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      // repeated int32 route = 4;
+      private java.util.List<java.lang.Integer> route_ = java.util.Collections.emptyList();
       private void ensureRouteIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          route_ = new com.google.protobuf.LazyStringArrayList(route_);
+          route_ = new java.util.ArrayList<java.lang.Integer>(route_);
           bitField0_ |= 0x00000008;
          }
       }
       /**
-       * <code>repeated string route = 4;</code>
+       * <code>repeated int32 route = 4;</code>
        *
        * <pre>
        * </pre>
        */
-      public java.util.List<java.lang.String>
+      public java.util.List<java.lang.Integer>
           getRouteList() {
         return java.util.Collections.unmodifiableList(route_);
       }
       /**
-       * <code>repeated string route = 4;</code>
+       * <code>repeated int32 route = 4;</code>
        *
        * <pre>
        * </pre>
@@ -3318,94 +3311,61 @@ public final class MiGongPB {
         return route_.size();
       }
       /**
-       * <code>repeated string route = 4;</code>
+       * <code>repeated int32 route = 4;</code>
        *
        * <pre>
        * </pre>
        */
-      public java.lang.String getRoute(int index) {
+      public int getRoute(int index) {
         return route_.get(index);
       }
       /**
-       * <code>repeated string route = 4;</code>
-       *
-       * <pre>
-       * </pre>
-       */
-      public com.google.protobuf.ByteString
-          getRouteBytes(int index) {
-        return route_.getByteString(index);
-      }
-      /**
-       * <code>repeated string route = 4;</code>
+       * <code>repeated int32 route = 4;</code>
        *
        * <pre>
        * </pre>
        */
       public Builder setRoute(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureRouteIsMutable();
+          int index, int value) {
+        ensureRouteIsMutable();
         route_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string route = 4;</code>
+       * <code>repeated int32 route = 4;</code>
        *
        * <pre>
        * </pre>
        */
-      public Builder addRoute(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureRouteIsMutable();
+      public Builder addRoute(int value) {
+        ensureRouteIsMutable();
         route_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string route = 4;</code>
+       * <code>repeated int32 route = 4;</code>
        *
        * <pre>
        * </pre>
        */
       public Builder addAllRoute(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureRouteIsMutable();
         super.addAll(values, route_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string route = 4;</code>
+       * <code>repeated int32 route = 4;</code>
        *
        * <pre>
        * </pre>
        */
       public Builder clearRoute() {
-        route_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        route_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000008);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string route = 4;</code>
-       *
-       * <pre>
-       * </pre>
-       */
-      public Builder addRouteBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureRouteIsMutable();
-        route_.add(value);
         onChanged();
         return this;
       }
@@ -16022,7 +15982,7 @@ public final class MiGongPB {
       " \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005sta" +
       "rt\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\"K\n\014CSPassFinish\022\r\n" +
       "\005level\030\001 \002(\005\022\014\n\004pass\030\002 \002(\005\022\017\n\007success\030\003 " +
-      "\002(\005\022\r\n\005route\030\004 \003(\t\"D\n\014SCPassFinish\022\021\n\top" +
+      "\002(\005\022\r\n\005route\030\004 \003(\005\"D\n\014SCPassFinish\022\021\n\top" +
       "enLevel\030\001 \002(\005\022\020\n\010openPass\030\002 \002(\005\022\017\n\007succe",
       "ss\030\003 \002(\005\"\033\n\tCSUseItem\022\016\n\006itemId\030\001 \002(\005\"\013\n" +
       "\tSCUseItem\"\014\n\nCSMatching\"\014\n\nSCMatching\"m" +
