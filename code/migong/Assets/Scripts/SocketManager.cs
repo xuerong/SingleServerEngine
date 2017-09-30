@@ -17,6 +17,11 @@ public class SyncObject{
 }
 
 public class SocketManager : MonoBehaviour {
+	/**
+	 * BlockingQueue 用来发包
+	 * Queue queue = Queue.Synchronized (new Queue ());
+	 * Queue 当count>0的时候加锁取值，去锁执行
+	 */
 
 	private static int idIndex = 0;
 
@@ -26,6 +31,7 @@ public class SocketManager : MonoBehaviour {
 
 
 	static volatile Dictionary<int,ActionForReceive> dic = new Dictionary<int,ActionForReceive>();
+//	static volatile Dictionary<int,ActionForReceive> invoke = new Dictionary<int,ActionForReceive>();
 	static volatile Dictionary<int,SyncObject> syncObjects = new Dictionary<int,SyncObject>();
 
 	private static System.Object locker = new System.Object ();
@@ -39,15 +45,16 @@ public class SocketManager : MonoBehaviour {
 
 	public static void ConnectServerAndLogin(){
 		lock (locker) {
-			ConnectServer ();
-			CSLogin node = new CSLogin ();
-			node.AccountId = "asdfadf";
-			node.Url = "sdf";
-			node.Ip = "127.0.0.1";
-			byte[] data = CSLogin.SerializeToBytes (node);
-			byte[] loginData = SocketManager.SendMessageSync ((int)AccountOpcode.CSLogin, data);
-			SCLogin scLogin = SCLogin.Deserialize (loginData);
-			Debug.Log ("login success,sessionId = " + scLogin.SessionId);
+			if (ConnectServer ()) {
+				CSLogin node = new CSLogin ();
+				node.AccountId = "asdfadf";
+				node.Url = "sdf";
+				node.Ip = "127.0.0.1";
+				byte[] data = CSLogin.SerializeToBytes (node);
+				byte[] loginData = SocketManager.SendMessageSync ((int)AccountOpcode.CSLogin, data);
+				SCLogin scLogin = SCLogin.Deserialize (loginData);
+				Debug.Log ("login success,sessionId = " + scLogin.SessionId);
+			}
 		}
 	}
 
@@ -56,10 +63,10 @@ public class SocketManager : MonoBehaviour {
 	/// </summary>  
 	/// <param name="ip"></param>  
 	/// <param name="port"></param>  
-	public static void ConnectServer()  
+	public static bool ConnectServer()  
 	{  
 		if (IsConnected) {
-			return;
+			return IsConnected;
 		}
 		string ip = "127.0.0.1";
 		int port = 8003;
@@ -76,13 +83,14 @@ public class SocketManager : MonoBehaviour {
 		} catch {  
 			IsConnected = false;  
 			Debug.Log ("连接服务器失败");  
-			return;  
+			return IsConnected;  
 		} 
 		if (IsConnected) {
 			Thread receiveThread = new Thread (new ThreadStart (_onReceiveSocket));
 			receiveThread.IsBackground = true;
 			receiveThread.Start ();
 		}
+		return IsConnected;  
 	}  
 	public static void CloseConnect(){
 		lock (locker) {
@@ -198,7 +206,7 @@ public class SocketManager : MonoBehaviour {
 		if (IsConnected == false)  {
 			ConnectServerAndLogin ();
 			if (!IsConnected) {
-				return;
+				throw new Exception("server is not connect");
 			}
 		}
 		try  
@@ -231,7 +239,7 @@ public class SocketManager : MonoBehaviour {
 		if (IsConnected == false)  {
 			ConnectServerAndLogin ();
 			if (!IsConnected) {
-				return null;
+				throw new Exception("server is not connect");
 			}
 		}
 		try  
@@ -277,7 +285,7 @@ public class SocketManager : MonoBehaviour {
 		if (IsConnected == false)  {
 			ConnectServerAndLogin ();
 			if (!IsConnected) {
-				return;
+				throw new Exception("server is not connect");
 			}
 		}
 		try  

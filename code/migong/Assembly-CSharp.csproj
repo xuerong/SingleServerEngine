@@ -49,6 +49,9 @@
      <Compile Include="Assets\Scripts\ButtonIndex.cs" />
      <Compile Include="Assets\Scripts\ByteBuffer.cs" />
      <Compile Include="Assets\Scripts\ClientSocket.cs" />
+     <Compile Include="Assets\Scripts\DragControl.cs" />
+     <Compile Include="Assets\Scripts\EventTriggerListener.cs" />
+     <Compile Include="Assets\Scripts\JoystackCc.cs" />
      <Compile Include="Assets\Scripts\MainPanel.cs" />
      <Compile Include="Assets\Scripts\MapCreate.cs" />
      <Compile Include="Assets\Scripts\Pacman.cs" />

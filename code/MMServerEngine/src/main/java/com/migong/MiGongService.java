@@ -137,6 +137,7 @@ public class MiGongService {
         builder.setTime(miGongPassInfo.getTime());
         builder.setSpeed(miGongPassInfo.getSpeed());
         builder.setStart(miGongPassInfo.getStart().toInt(miGongPassInfo.getSize()));
+        System.out.println("miGongPassInfo.getEnd():"+miGongPassInfo.getEnd());
         builder.setEnd(miGongPassInfo.getEnd().toInt(miGongPassInfo.getSize()));
         miGongPassInfoMap.put(session.getAccountId(),miGongPassInfo);
         byte[] sendData = builder.build().toByteArray();
@@ -233,13 +234,15 @@ public class MiGongService {
      */
     private MiGongPassInfo miGongParamsByDifficulty(MiGongPassInfo miGongPassInfo){
         int difficulty = miGongPassInfo.getDifficulty();
-        int size = difficulty*5+15;
+        int size = difficulty*5+15+1;
         int door = 0;
         miGongPassInfo.setSize(size);
         miGongPassInfo.setDoor(door);
-        miGongPassInfo.setStart(new Element(0,0));
-        miGongPassInfo.setEnd(new Element(size-1,size-1));
-        CreateMap createMap = new CreateMap(size,size,new Element(0,0),new Element(size-1,size-1));
+        Element startElement = new Element(1,1);
+        miGongPassInfo.setStart(startElement);
+        Element endElement = new Element(size-1,size-1);
+        miGongPassInfo.setEnd(endElement);
+        CreateMap createMap = new CreateMap(size-1,size-1,startElement,endElement);
         miGongPassInfo.setCreateMap(createMap);
         byte[][] map=createMap.getMap();											//获取地图数组
         // 拆墙

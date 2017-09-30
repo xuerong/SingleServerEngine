@@ -1,22 +1,25 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MapCreate.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SocketManager.cs">
     <Files>
       <File FileName="Assets\Scripts\protobuf\AccountPB.Serializer.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\otherScripts\protobuf\Extensible.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\AccountOpcode.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\AccountPB.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MapCreate.cs" Line="76" Column="95" />
+      <File FileName="Assets\Scripts\MapCreate.cs" Line="102" Column="21" />
       <File FileName="Assets\Scripts\protobuf\ProtocolParser.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Pacman.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Pacman.cs" Line="83" Column="1" />
       <File FileName="Assets\Scripts\SocketTest.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\ClientSocket.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MainPanel.cs" Line="53" Column="3" />
+      <File FileName="Assets\Scripts\MainPanel.cs" Line="84" Column="67" />
       <File FileName="Assets\Scripts\ButtonIndex.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SocketManager.cs" Line="257" Column="42" />
+      <File FileName="Assets\Scripts\SocketManager.cs" Line="23" Column="31" />
       <File FileName="Assets\Scripts\ByteBuffer.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\BaseOpcode.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\MiGongPB.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\JoystackCc.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\EventTriggerListener.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\DragControl.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

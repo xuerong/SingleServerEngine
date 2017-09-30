@@ -46,6 +46,7 @@ public class MainPanel : MonoBehaviour {
 			}
 			text.text = "level"+i+"("+curPass+"/"+level.PassCountInLevel[i]+")";
 		}
+
 	}
 	
 	// Update is called once per frame
@@ -70,6 +71,7 @@ public class MainPanel : MonoBehaviour {
 		mapCreate.Pass = 1;
 
 		SCGetMiGongMap scmap = SCGetMiGongMap.Deserialize(ret);
+
 		int[] mapInt = scmap.Map.ToArray();
 		int size = (int)Mathf.Sqrt(mapInt.Length);
 		mapCreate.map = new int[size][];
@@ -79,7 +81,9 @@ public class MainPanel : MonoBehaviour {
 				mapCreate.map[i][j] = mapInt[i*size+j];
 			}
 		}
-		Debug.Log("map size:"+size);
+		mapCreate.startPoint = new Vector2 (scmap.Start%size,scmap.Start/size);
+		mapCreate.endPoint = new Vector2 (scmap.End%size,scmap.End/size);
+		Debug.Log("map size:"+size+",scmap.End:"+scmap.End);
 
 		gamePanelGo.transform.parent = transform;
 		gamePanelGo.transform.localPosition = new Vector3(0,0,0);

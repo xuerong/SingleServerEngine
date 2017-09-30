@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+using Example;
+using com.protocol;
 
 public class Pacman : MonoBehaviour {
 
 	public MapCreate mapCreate;
 	public float speed = 0.04f;
+
+	public int Dir = 0;
 
 	Vector2 dest = Vector2.zero;
 
@@ -16,18 +20,32 @@ public class Pacman : MonoBehaviour {
 	bool isControl = false;
 
 	int lastPoint = 0;// 上一个点
+
+	Animator animator;
+	Rigidbody2D digidbody;
+
 	List<int> route = new List<int>();
+
+	bool passFinish;
 	void Start () {
 		speed = 0.04f;
-		transform.position = new Vector3 (0.38f,0.01f,0);
+
+		transform.position = mapCreate.getStartPointWithScale ();
+
 		dest = transform.position;
 		transform.localScale = transform.localScale * 0.12f;
 
 		c = GetComponent<CircleCollider2D> ();
 		radius = c.radius * Mathf.Max (transform.localScale.x, transform.localScale.y);
+
+		animator = GetComponent<Animator> ();
+		digidbody = GetComponent<Rigidbody2D> ();
 	}
 
 	void FixedUpdate () {
+		if (passFinish) {
+			return;
+		}
 		isControl = false;
 
 		int dir = getDir ();
@@ -46,26 +64,28 @@ public class Pacman : MonoBehaviour {
 
 			// Animation Parameters
 			Vector2 dirVec = dest - (Vector2)transform.position;
-			GetComponent<Animator>().SetFloat("DirX", dirVec.x);
-			GetComponent<Animator>().SetFloat("DirY", dirVec.y);
+			animator.SetFloat("DirX", dirVec.x);
+			animator.SetFloat("DirY", dirVec.y);
 
 			// 记录行踪
-			int curPoint = mapCreate.getPointByPosition(new Vector2(transform.position.x + radius/2,transform.position.y + radius/2));
+			int curPoint = mapCreate.getPointByPosition(new Vector2(transform.position.x,transform.position.y));
 			if (curPoint != lastPoint) {
 				route.Add (curPoint);
 				lastPoint = curPoint;
-				if (route.Count % 10 == 0) {
-					StringBuilder sb = new StringBuilder ();
-					foreach(int po in route){
-						sb.Append (po+",");
-					}
-					Debug.Log (sb.ToString());
-				}
+//				if (route.Count % 10 == 0) {
+//					StringBuilder sb = new StringBuilder ();
+//					foreach(int po in route){
+//						sb.Append (po+",");
+//					}
+//					Debug.Log (sb.ToString());
+//				}
+				passFinish = true;
+
 			}
 		}
 		if (dest != (Vector2)transform.position) {
 			if (isControl && valid (dest)) {
-				GetComponent<Rigidbody2D> ().MovePosition (dest);
+				digidbody.MovePosition (dest);
 			} else {
 				dest = (Vector2)transform.position;
 			}
@@ -85,7 +105,7 @@ public class Pacman : MonoBehaviour {
 		else if (Input.GetKey (KeyCode.LeftArrow) ) {
 			return 4;
 		}
-		return 0;
+		return Dir;
 	}
 
 	void fixDest(){

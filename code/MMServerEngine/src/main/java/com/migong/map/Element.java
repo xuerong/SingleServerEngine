@@ -25,4 +25,8 @@ public class Element {
     public boolean equals(Element a){							//比较函数，实现值比较
         return a.x==this.x&&a.y==this.y;
     }
+
+    public String toString(){
+        return x+","+y;
+    }
 }
