@@ -1,6 +1,8 @@
 package com.migong;
 
+import com.migong.entity.MatchingUser;
 import com.migong.entity.MiGongPassInfo;
+import com.migong.entity.MiGongThreadFactory;
 import com.migong.entity.UserMiGong;
 import com.migong.map.CreateMap;
 import com.migong.map.Element;
@@ -12,6 +14,7 @@ import com.mm.engine.framework.control.event.EventData;
 import com.mm.engine.framework.data.DataService;
 import com.mm.engine.framework.data.EntityCreator;
 import com.mm.engine.framework.data.entity.account.LogoutEventData;
+import com.mm.engine.framework.data.entity.account.sendMessage.SendMessageService;
 import com.mm.engine.framework.data.entity.session.Session;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.code.RetPacketImpl;
@@ -25,7 +28,8 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Timestamp;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 功能：
@@ -75,13 +79,26 @@ public class MiGongService {
     private static final Logger log = LoggerFactory.getLogger(MiGongService.class);
 
     private DataService dataService;
+    private SendMessageService sendMessageService;
     /**
      * 这个是玩家获取迷宫后缓存的该迷宫信息，在玩家过关的时候用来校验是否正常过关。同时在如下几种情况下要清除：
      * 1、玩家断开连接
      * 2、到点失败
      */
     ConcurrentHashMap<String,MiGongPassInfo> miGongPassInfoMap = new ConcurrentHashMap<>();
+    /**
+     * 匹配中的玩家，grade（段位）- （accountId-开始匹配时间）
+     */
+    ConcurrentHashMap<Integer,ConcurrentLinkedQueue<MatchingUser>> matchingUsers = new ConcurrentHashMap<>();
 
+    /**
+     * 匹配时间超时的消息推送
+     */
+    ExecutorService matchOutTimeExecutor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1, new MiGongThreadFactory("matchOutTime"));
+    /**
+     * 匹配成功的房间创建
+     */
+    ExecutorService roomCreateExecutor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1, new MiGongThreadFactory("roomCreate"));
 
     private final Map<Integer,MiGongLevel> levelMap = new HashMap<>();
     public void init(){
@@ -189,7 +206,7 @@ public class MiGongService {
      * 注意：要过期一段时间，否则，有些是延时20s
      * @param interval
      */
-    @Updatable(isAsynchronous = false,cycle = 60000)
+    @Updatable(isAsynchronous = true,cycle = 60000)
     public void checkMiGongPassInfo(int interval){
         long currentTime = System.currentTimeMillis();
         for(Map.Entry<String,MiGongPassInfo> entry : miGongPassInfoMap.entrySet()){
@@ -272,5 +289,155 @@ public class MiGongService {
         // 清理缓存的miGongPassInfoMap   清理信息
         final LogoutEventData logoutEventData = (LogoutEventData)data.getData();
         miGongPassInfoMap.remove(logoutEventData.getSession().getAccountId());
+        // todo 从Matching的queue中移除
+    }
+    /////////////////////////////////////////////////////////////联网对战
+
+    /**
+     *匹配对战 ：把玩家放入匹配队列，查看队列大小，大于匹配数则开新线程开房间，
+     */
+    @Request(opcode = MiGongOpcode.CSMatching)
+    public RetPacket matching(Object clientData, Session session) throws Throwable{
+        UserMiGong userMiGong = get(session.getAccountId());
+        ConcurrentLinkedQueue<MatchingUser> queue = getMatchingQueue(scoreToGrade(userMiGong.getScore()));
+        queue.offer(new MatchingUser(session,System.currentTimeMillis()));
+        MiGongPB.SCMatching.Builder builder = MiGongPB.SCMatching.newBuilder();
+        return new RetPacketImpl(MiGongOpcode.SCMatching, builder.build().toByteArray());
+    }
+    /**
+     * 每秒执行一次匹配，如果小于匹配数量，检查等待时间
+     * @param interval
+     */
+    @Updatable(isAsynchronous = true,cycle = 1000)
+    public void doMatching(int interval){
+        if(matchingUsers.size() > 1000){
+            log.warn("grade count is too much! size = {}",matchingUsers.size());
+        }
+        long currentTime = System.currentTimeMillis();
+        for(Map.Entry<Integer,ConcurrentLinkedQueue<MatchingUser>> entry : matchingUsers.entrySet()){
+            ConcurrentLinkedQueue<MatchingUser> queue = entry.getValue();
+            List<MatchingUser> matchingUserList = new ArrayList<>();
+            while (!queue.isEmpty()){
+                MatchingUser matchingUser = queue.poll();
+                if(currentTime - matchingUser.getBeginTime() > MiGongRoom.MAX_WAIT_TIME){
+                    matchOutTimeExecutor.execute(new SendMatchFailRunnable(matchingUser));
+                }else if(!matchingUser.getSession().isAvailable()){
+                    log.info("session is not available , user maybe logout");
+                }else{
+                    // 加入匹配
+                    matchingUserList.add(matchingUser);
+                    if(matchingUserList.size() >= MiGongRoom.USER_COUNT){
+                        roomCreateExecutor.execute(new Runnable() {
+                            @Override
+                            public void run() {
+
+                            }
+                        });
+                        // 创建房间
+                        roomCreateExecutor.execute(new CreateRoomRunnable(entry.getKey(),matchingUserList));
+                        // 创建新的容器
+                        matchingUserList = new ArrayList<>();
+                    }
+                }
+            }
+            if(matchingUserList.size() > 0){
+                for(MatchingUser matchingUser : matchingUserList){
+                    queue.offer(matchingUser); // 放回去
+                }
+            }
+        }
+    }
+    class SendMatchFailRunnable implements Runnable{
+        MatchingUser matchingUser;
+        protected SendMatchFailRunnable(MatchingUser matchingUser){
+            this.matchingUser = matchingUser;
+        }
+        @Override
+        public void run() {
+            MiGongPB.SCMatchingFail.Builder builder = MiGongPB.SCMatchingFail.newBuilder();
+            sendMessageService.sendMessage(matchingUser.getSession().getAccountId(), MiGongOpcode.SCMatchingFail,builder.build().toByteArray());
+        }
+    }
+    class CreateRoomRunnable implements Runnable{
+        private int grade;
+        private List<MatchingUser> matchingUserList;
+        protected  CreateRoomRunnable(int grade,List<MatchingUser> matchingUserList){
+            this.grade = grade;
+            this.matchingUserList = matchingUserList;
+        }
+        @Override
+        public void run() {
+            // 创建房间
+            createRoom(grade,matchingUserList);
+        }
+    }
+
+    /**
+     * 根据段位创建迷宫房间
+     * @return
+     */
+    private void createRoom(int grade,List<MatchingUser> matchingUserList){
+        int size = grade*2+15+1;
+        int door = 0;
+        Element startElement = new Element(1,1);
+        Element endElement = new Element(size-1,size-1);
+        // todo 这个需要重新设计，因为这个是针对一个入口一个出口的，多个玩家要考虑有多个入口和多个出口，暂且可以统一入口和出口
+        CreateMap createMap = new CreateMap(size-1,size-1,startElement,endElement);
+
+        MultiMiGongRoom multiMiGongRoom = new MultiMiGongRoom(createMap,matchingUserList);
+
+
+        // 推动消息
+    }
+
+    private ConcurrentLinkedQueue<MatchingUser> getMatchingQueue(int grade){
+        ConcurrentLinkedQueue<MatchingUser> queue = matchingUsers.get(grade);
+        if(queue == null){
+            ConcurrentLinkedQueue<MatchingUser> _queue = new ConcurrentLinkedQueue<MatchingUser>();
+            matchingUsers.putIfAbsent(grade,_queue);
+            queue = matchingUsers.get(grade);
+        }
+        return queue;
+    }
+    // 分数转段位，首先段位不能太多
+    private int scoreToGrade(int score){
+        return score/10;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -35,6 +35,8 @@ public class Session extends CacheEntity{
     private ConnectionClose connectionClose;
     // 属性
     private Map<String,Object> attrs;
+    // 是否可用，当登出的时候，设置成false，应为有可能被其它功能引用
+    private boolean available;
 
     public Session(String url, String sessionIdPrefix, String ip, Date createTime){
         this.url=url;
@@ -44,6 +46,7 @@ public class Session extends CacheEntity{
         this.createTime=createTime;
         this.lastUpdateTime=createTime;
         attrs = new ConcurrentHashMap<>();
+        available = true;
     }
 
     public Object getAttr(String key){
@@ -115,6 +118,14 @@ public class Session extends CacheEntity{
 
     public void setConnectionClose(ConnectionClose connectionClose) {
         this.connectionClose = connectionClose;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     public void closeConnect(){

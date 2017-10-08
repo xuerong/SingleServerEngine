@@ -174,6 +174,7 @@ public class AccountSysService {
         logoutEventData.setLogoutReason(logoutReason);
         eventService.fireEventSyn(logoutEventData,SysConstantDefine.Event_AccountLogout);
         //强制掉线
+        session.setAvailable(false);
         session.closeConnect();
     }
 

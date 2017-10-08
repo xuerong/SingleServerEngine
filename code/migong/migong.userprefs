@@ -1,25 +1,22 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SocketManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MapCreate.cs">
     <Files>
-      <File FileName="Assets\Scripts\protobuf\AccountPB.Serializer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\otherScripts\protobuf\Extensible.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\protobuf\AccountOpcode.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\protobuf\AccountPB.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MapCreate.cs" Line="102" Column="21" />
-      <File FileName="Assets\Scripts\protobuf\ProtocolParser.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Pacman.cs" Line="83" Column="1" />
-      <File FileName="Assets\Scripts\SocketTest.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ClientSocket.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MainPanel.cs" Line="84" Column="67" />
-      <File FileName="Assets\Scripts\ButtonIndex.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SocketManager.cs" Line="23" Column="31" />
-      <File FileName="Assets\Scripts\ByteBuffer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\protobuf\BaseOpcode.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\protobuf\MiGongPB.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\JoystackCc.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EventTriggerListener.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DragControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/protobuf/ProtocolParser.cs" Line="616" Column="1" />
+      <File FileName="Assets/Scripts/protobuf/AccountPB.Serializer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/otherScripts/protobuf/Extensible.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/protobuf/AccountOpcode.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/protobuf/AccountPB.cs" Line="20" Column="31" />
+      <File FileName="Assets/Scripts/MapCreate.cs" Line="129" Column="25" />
+      <File FileName="Assets/Scripts/protobuf/RoomOpcode.cs" Line="12" Column="3" />
+      <File FileName="Assets/Scripts/protobuf/MiGongPB.cs" Line="18" Column="19" />
+      <File FileName="Assets/Scripts/protobuf/MiGongPB.Serializer.cs" Line="96" Column="54" />
+      <File FileName="Assets/Scripts/protobuf/RoomPB.Serializer.cs" Line="73" Column="65" />
+      <File FileName="Assets/Scripts/SocketTest.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ClientSocket.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MainPanel.cs" Line="20" Column="46" />
+      <File FileName="Assets/Scripts/ButtonIndex.cs" Line="7" Column="22" />
+      <File FileName="Assets/Scripts/Pacman.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
