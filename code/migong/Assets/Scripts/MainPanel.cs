@@ -26,7 +26,7 @@ public class MainPanel : MonoBehaviour {
 
 			GameObject up = Instantiate(button) as GameObject;
 			up.transform.SetParent (btnObj.transform);
-			up.transform.position = new Vector3 (width/2, height/6 * (i+1),0);
+			up.transform.position = new Vector3 (width/2, height/8 * (i+1),0);
 
 			Button b1 = up.GetComponent<Button> ();
 			ButtonIndex buttonIndex = up.GetComponent<ButtonIndex> ();
@@ -46,16 +46,39 @@ public class MainPanel : MonoBehaviour {
 			}
 			text.text = "level"+i+"("+curPass+"/"+level.PassCountInLevel[i]+")";
 		}
-
+		// 联网对战按钮
+		GameObject pvpBattle = Instantiate(button) as GameObject;
+		pvpBattle.transform.SetParent (btnObj.transform);
+		pvpBattle.transform.position = new Vector3 (width/2, height/8 * (count),0);
+		Button bt = pvpBattle.GetComponent<Button> ();
+		bt.onClick.AddListener (delegate() {OnPvpClick();});
+		//
+		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingSuccess, matchSuccess);
+		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingFail, delegate(int opcode, byte[] receiveData) {
+			Debug.Log("");
+		});
+		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCBegin, delegate(int opcode, byte[] receiveData) {
+			Debug.Log("");
+		});
 	}
-	
+
+	public void matchSuccess(int opcode, byte[] data){
+		SCMatchingSuccess matchingSuccess = SCMatchingSuccess.Deserialize (data);
+		createMap(1,matchingSuccess.Map.ToArray(),matchingSuccess.Start,matchingSuccess.End,1,1,matchingSuccess.OtherInfos);
+	}
+
 	// Update is called once per frame
 	void Update () {
 	}
 
+	public void OnPvpClick(){
+		CSMatching matching = new CSMatching ();
+		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSMatching, CSMatching.SerializeToBytes(matching),delegate(int opcode, byte[] data) {
+			Debug.Log("send matching success,opcode = "+opcode);
+		});
+	}
 
 	public void OnClick(ButtonIndex buttonIndex){
-		Debug.Log ("aaaa"+buttonIndex.index);
 		CSGetMiGongMap miGongMap = new CSGetMiGongMap ();
 		miGongMap.Level = buttonIndex.level;
 		miGongMap.Pass = 1;
@@ -63,16 +86,20 @@ public class MainPanel : MonoBehaviour {
 
 		byte[] ret = SocketManager.SendMessageSync ((int)MiGongOpcode.CSGetMiGongMap, data);
 
+		SCGetMiGongMap scmap = SCGetMiGongMap.Deserialize(ret);
+
+		createMap (0,scmap.Map.ToArray (), scmap.Start, scmap.End, buttonIndex.level, 1,null);
+	}
+	private void createMap(int mode,int[] mapInt,int start,int end,int level,int pass,List<PBOtherInfo> otherInfos){
 		Object gamePanel = Resources.Load ("GamePanel");
 		GameObject gamePanelGo = Instantiate(gamePanel) as GameObject;
 		GameObject mapGo = gamePanelGo.transform.Find ("map").gameObject;
 		MapCreate mapCreate = mapGo.GetComponent<MapCreate> ();
-		mapCreate.Level = buttonIndex.level;
-		mapCreate.Pass = 1;
+		mapCreate.Level = level;
+		mapCreate.Pass = pass;
 
-		SCGetMiGongMap scmap = SCGetMiGongMap.Deserialize(ret);
+		mapCreate.Mode = mode;
 
-		int[] mapInt = scmap.Map.ToArray();
 		int size = (int)Mathf.Sqrt(mapInt.Length);
 		mapCreate.map = new int[size][];
 		for(int i=0;i<size;i++){
@@ -81,11 +108,27 @@ public class MainPanel : MonoBehaviour {
 				mapCreate.map[i][j] = mapInt[i*size+j];
 			}
 		}
-		mapCreate.startPoint = new Vector2 (scmap.Start%size,scmap.Start/size);
-		mapCreate.endPoint = new Vector2 (scmap.End%size,scmap.End/size);
-		Debug.Log("map size:"+size+",scmap.End:"+scmap.End);
+		mapCreate.startPoint = new Vector2 (start%size,start/size);
+		mapCreate.endPoint = new Vector2 (end%size,end/size);
+		mapCreate.size = size;
+		Debug.Log("map size:"+size+",End:"+end);
 
 		gamePanelGo.transform.parent = transform;
 		gamePanelGo.transform.localPosition = new Vector3(0,0,0);
+
+		// 
+		if(mode == 1 && otherInfos != null){
+			Object pacmanIns = Resources.Load ("pacman");
+			foreach (PBOtherInfo otherInfo in otherInfos) {
+				GameObject pacmanGo = Instantiate(pacmanIns) as GameObject;
+
+				Pacman pacman = pacmanGo.GetComponent<Pacman> ();
+				pacman.userId = otherInfo.UserId;
+
+				pacman.mapCreate = mapCreate;
+
+				pacmanGo.transform.parent = gamePanelGo.transform;
+			}
+		}
 	}
 }

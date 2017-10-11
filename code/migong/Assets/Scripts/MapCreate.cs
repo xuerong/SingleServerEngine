@@ -15,6 +15,8 @@ public class MapCreate : MonoBehaviour{
 		new int[]{1,3,	2,	3,		3}
 	};
 
+	public int Mode; // 0单机，2pvp
+
 	public int Level;
 	public int Pass;
 
@@ -22,6 +24,7 @@ public class MapCreate : MonoBehaviour{
 
 	public Vector2 startPoint;
 	public Vector2 endPoint;
+	public int size;
 
 
 	int x = 0,y = 0;

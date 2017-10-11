@@ -188,6 +188,7 @@ public class AccountSysService {
     private Account createAccount(String id){
         Account account = new Account();
         account.setId(id);
+        account.setName(id); // todo 暂时用这个
         return account;
     }
 

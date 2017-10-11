@@ -103,7 +103,7 @@ namespace Example
     /// <para>联机对战///////////////////////////////////////</para>
     /// <para> 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳</para>
     /// <para> 请求匹配，返回房间及信息，开始游戏，发送操作（移动，道具），接收操作，发送到达终点，接收到达终点，接收游戏结束，房间心跳</para>
-    /// <para> 请求匹配</para>
+    /// <para> 请求匹配 TODO 取消匹配</para>
     /// </summary>
     public partial class CSMatching
     {
@@ -159,7 +159,10 @@ namespace Example
     /// <summary> 玩家移动操作</summary>
     public partial class CSMove
     {
-        public int Pos { get; set; }
+        public float PosX { get; set; }
+
+        /// <summary> 当前位置</summary>
+        public float PosY { get; set; }
 
         /// <summary> 当前位置</summary>
         public int Dir { get; set; }
@@ -176,7 +179,19 @@ namespace Example
     /// <summary> 推送移动操作</summary>
     public partial class SCUserMove
     {
-        public int Pos { get; set; }
+        public List<Example.PBUserMoveInfo> UserMoveInfos { get; set; }
+
+    }
+
+    public partial class PBUserMoveInfo
+    {
+        public string UserId { get; set; }
+
+        /// <summary> 当前位置</summary>
+        public float PosX { get; set; }
+
+        /// <summary> 当前位置</summary>
+        public float PosY { get; set; }
 
         /// <summary> 当前位置</summary>
         public int Dir { get; set; }

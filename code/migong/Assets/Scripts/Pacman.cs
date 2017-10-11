@@ -7,10 +7,16 @@ using com.protocol;
 
 public class Pacman : MonoBehaviour {
 
+	static Dictionary<string,Pacman> pacmanMap = new Dictionary<string, Pacman> ();
+	static List<CircleCollider2D> pacmanColliders = new List<CircleCollider2D> ();
+
 	public MapCreate mapCreate;
 	public float speed = 0.04f;
 
 	public int Dir = 0;
+	public int LastDir = 0;
+
+	public string userId = SocketManager.ACCOUNT_ID;
 
 	Vector2 dest = Vector2.zero;
 
@@ -28,6 +34,11 @@ public class Pacman : MonoBehaviour {
 
 	bool passFinish;
 	void Start () {
+		Debug.Log ("userId--------:"+userId+","+this.ToString());
+		if (userId == null || userId.Length == 0) {
+			this.userId = SocketManager.ACCOUNT_ID;
+		}
+		Debug.Log ("userId2--------:"+userId);
 		speed = 0.04f;
 
 		transform.position = mapCreate.getStartPointWithScale ();
@@ -40,6 +51,18 @@ public class Pacman : MonoBehaviour {
 
 		animator = GetComponent<Animator> ();
 		digidbody = GetComponent<Rigidbody2D> ();
+
+		// 联网模式
+		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCUserMove, userMoveAction);
+		//
+		if(pacmanColliders.Count > 0 ){
+			foreach(CircleCollider2D cc in pacmanColliders){
+				Physics2D.IgnoreCollision (cc,c);
+			}
+		}
+		pacmanColliders.Add (c);
+
+		pacmanMap.Add (userId,this);
 	}
 
 	void FixedUpdate () {
@@ -47,7 +70,9 @@ public class Pacman : MonoBehaviour {
 			return;
 		}
 		isControl = false;
-
+		if (userId == SocketManager.ACCOUNT_ID) {
+			keyboardDir ();
+		}
 		int dir = getDir ();
 		if (dir > 0) {
 			isControl = true;
@@ -79,7 +104,9 @@ public class Pacman : MonoBehaviour {
 //					}
 //					Debug.Log (sb.ToString());
 //				}
-				passFinish = true;
+				if (curPoint == mapCreate.endPoint.x * mapCreate.size + mapCreate.endPoint.x) {
+					passFinish = true;
+				}
 
 			}
 		}
@@ -91,23 +118,64 @@ public class Pacman : MonoBehaviour {
 			}
 		}
 	}
-
+	void keyboardDir(){
+		if (Input.GetKey (KeyCode.UpArrow)) {
+			setDir (1,0);
+		} else if (Input.GetKey (KeyCode.RightArrow)) {
+			setDir (2,0);
+		} else if (Input.GetKey (KeyCode.DownArrow)) {
+			setDir (3,0);
+		} else if (Input.GetKey (KeyCode.LeftArrow)) {
+			setDir (4,0);
+		} else {
+			setDir (0,0);
+		}
+	}
 	int getDir(){
-		if (Input.GetKey (KeyCode.UpArrow) ) {
-			return 1;
-		}
-		else if (Input.GetKey (KeyCode.RightArrow) ) {
-			return 2;
-		}
-		else if (Input.GetKey (KeyCode.DownArrow) ) {
-			return 3;
-		}
-		else if (Input.GetKey (KeyCode.LeftArrow) ) {
-			return 4;
-		}
 		return Dir;
 	}
 
+	public void setDir(int dir,int mode){
+		if (mode == 1) {
+			return;
+		}
+		if (LastDir == dir) {
+			return;
+		}
+//		Debug.Log (LastDir+","+dir);
+		if (mapCreate.Mode == 0) {
+			this.Dir = dir;
+		} else {
+			// 发送
+			CSMove move = new CSMove();
+			move.Dir = dir;
+			move.PosX = transform.localPosition.x;
+			move.PosY = transform.localPosition.y;
+			Debug.Log ("send:"+move.PosX+","+move.PosY);
+			move.Speed = 10;
+			byte[] data = CSMove.SerializeToBytes (move);
+			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSMove,data,delegate(int opcode, byte[] reData) {
+				
+			});
+		}
+		LastDir = dir;
+	}
+
+	public void userMoveAction(int opcode, byte[] data){
+		SCUserMove userMove = SCUserMove.Deserialize (data);
+		foreach(PBUserMoveInfo userMoveInfo in userMove.UserMoveInfos){
+//			userMoveInfo.Frame
+			if(userMoveInfo.UserId.Equals(SocketManager.ACCOUNT_ID)){
+				this.Dir = userMoveInfo.Dir;
+				transform.localPosition = new Vector3 (userMoveInfo.PosX,userMoveInfo.PosY,transform.localPosition.z);
+			}else{
+				Pacman pacman = pacmanMap [userMoveInfo.UserId];
+				pacman.Dir = userMoveInfo.Dir;
+				Debug.Log ("receive:"+userMoveInfo.PosX+","+userMoveInfo.PosY);
+				pacman.transform.localPosition = new Vector3 (userMoveInfo.PosX,userMoveInfo.PosY,pacman.transform.localPosition.z);
+			}
+		}
+	}
 	void fixDest(){
 		Vector2 pos = transform.position;
 		RaycastHit2D hit = Physics2D.Linecast(pos, dest*100);
@@ -136,9 +204,15 @@ public class Pacman : MonoBehaviour {
 		// Cast Line from 'next to Pac-Man' to 'Pac-Man'
 		Vector2 pos = transform.position;
 		RaycastHit2D hit = Physics2D.Linecast(dir, pos);
-		Collider2D c = GetComponent<Collider2D> ();
+//		Physics2D.lin
+//		Collider2D c = GetComponent<Collider2D> ();
 //		Debug.Log (dir+","+pos+","+c+","+hit.collider);
-		return (hit.collider == c);
-//		return true;
+		foreach(Collider2D cc in pacmanColliders){
+			if (hit.collider == cc) {
+				return true;
+			}
+		}
+//		return (hit.collider == c);
+		return true;
 	}
 }

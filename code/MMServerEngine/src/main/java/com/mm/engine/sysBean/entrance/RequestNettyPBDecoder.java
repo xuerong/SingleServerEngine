@@ -16,7 +16,7 @@ public class RequestNettyPBDecoder extends ByteToMessageDecoder {
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> list) throws Exception {
         int readAble =in.readableBytes();
-        System.out.println("readAble:"+readAble);
+//        System.out.println("readAble:"+readAble);
         if (readAble < size) {
             return;
         }

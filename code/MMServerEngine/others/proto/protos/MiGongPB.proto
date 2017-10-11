@@ -87,9 +87,10 @@ message SCBegin
 // 玩家移动操作
 message CSMove
 {
-	required int32 pos 			= 1; // 当前位置
-	required int32 dir 			= 2; // 方向
-	required int32 speed 			= 3; // 速度
+	required float posX 			= 1; // 当前位置
+	required float posY 			= 2; // 当前位置
+	required int32 dir 			= 3; // 方向
+	required int32 speed 			= 4; // 速度
 }
 message SCMove
 {
@@ -97,10 +98,16 @@ message SCMove
 // 推送移动操作
 message SCUserMove
 {
-	required int32 pos 			= 1; // 当前位置
-	required int32 dir 			= 2; // 方向
-	required int32 speed 			= 3; // 速度
-	required int32 frame 			= 4; // 帧数
+	repeated PBUserMoveInfo userMoveInfos		=1; // 玩家信息
+}
+message PBUserMoveInfo
+{
+	required string userId 			= 1; // 当前位置
+	required float posX 			= 2; // 当前位置
+	required float posY 			= 3; // 当前位置
+	required int32 dir 			= 4; // 方向
+	required int32 speed 			= 5; // 速度
+	required int32 frame 			= 6; // 帧数
 }
 // 玩家到达终点
 message CSArrived
