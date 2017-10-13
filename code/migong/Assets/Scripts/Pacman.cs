@@ -34,17 +34,15 @@ public class Pacman : MonoBehaviour {
 
 	bool passFinish;
 	void Start () {
-		Debug.Log ("userId--------:"+userId+","+this.ToString());
 		if (userId == null || userId.Length == 0) {
 			this.userId = SocketManager.ACCOUNT_ID;
 		}
-		Debug.Log ("userId2--------:"+userId);
-		speed = 0.04f;
+		speed = 0.2f;
 
 		transform.position = mapCreate.getStartPointWithScale ();
 
 		dest = transform.position;
-		transform.localScale = transform.localScale * 0.12f;
+		transform.localScale = transform.localScale * 0.6f;
 
 		c = GetComponent<CircleCollider2D> ();
 		radius = c.radius * Mathf.Max (transform.localScale.x, transform.localScale.y);
@@ -146,6 +144,7 @@ public class Pacman : MonoBehaviour {
 		if (mapCreate.Mode == 0) {
 			this.Dir = dir;
 		} else {
+			this.Dir = dir;
 			// 发送
 			CSMove move = new CSMove();
 			move.Dir = dir;
@@ -166,8 +165,8 @@ public class Pacman : MonoBehaviour {
 		foreach(PBUserMoveInfo userMoveInfo in userMove.UserMoveInfos){
 //			userMoveInfo.Frame
 			if(userMoveInfo.UserId.Equals(SocketManager.ACCOUNT_ID)){
-				this.Dir = userMoveInfo.Dir;
-				transform.localPosition = new Vector3 (userMoveInfo.PosX,userMoveInfo.PosY,transform.localPosition.z);
+//				this.Dir = userMoveInfo.Dir;
+//				transform.localPosition = new Vector3 (userMoveInfo.PosX,userMoveInfo.PosY,transform.localPosition.z);
 			}else{
 				Pacman pacman = pacmanMap [userMoveInfo.UserId];
 				pacman.Dir = userMoveInfo.Dir;

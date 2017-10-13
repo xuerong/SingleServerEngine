@@ -7,20 +7,20 @@
       <File FileName="Assets\Scripts\otherScripts\protobuf\Extensible.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\AccountOpcode.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\AccountPB.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MapCreate.cs" Line="91" Column="2" />
+      <File FileName="Assets\Scripts\MapCreate.cs" Line="31" Column="18" />
       <File FileName="Assets\Scripts\protobuf\RoomOpcode.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\MiGongPB.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\MiGongPB.Serializer.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\RoomPB.Serializer.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\SocketTest.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\ClientSocket.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MainPanel.cs" Line="122" Column="48" />
+      <File FileName="Assets\Scripts\MainPanel.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\ButtonIndex.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Pacman.cs" Line="65" Column="31" />
-      <File FileName="Assets\Scripts\SocketManager.cs" Line="19" Column="26" />
-      <File FileName="Assets\Scripts\JoystackCc.cs" Line="67" Column="3" />
+      <File FileName="Assets\Scripts\Pacman.cs" Line="40" Column="14" />
+      <File FileName="Assets\Scripts\SocketManager.cs" Line="73" Column="2" />
+      <File FileName="Assets\Scripts\JoystackCc.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\ByteBuffer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DragControl.cs" Line="17" Column="3" />
+      <File FileName="Assets\Scripts\DragControl.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
