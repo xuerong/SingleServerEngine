@@ -18,16 +18,17 @@ public class MiGongOpcode {
 	public static final int CSMove = 12015;
 	public static final int SCMove = 12016;
 	public static final int SCUserMove = 12017;
-	public static final int CSArrived = 12018;
-	public static final int SCArrived = 12019;
-	public static final int SCUserArrived = 12020;
-	public static final int SCGameOver = 12021;
-	public static final int PBGameOverUserInfo = 12022;
-	public static final int CSRoomHeart = 12023;
-	public static final int SCRoomHeart = 12024;
-	public static final int CSSendWalkingRoute = 12025;
-	public static final int SCSendWalkingRoute = 12026;
-	public static final int CSCommon = 12027;
-	public static final int SCCommon = 12028;
+	public static final int PBUserMoveInfo = 12018;
+	public static final int CSArrived = 12019;
+	public static final int SCArrived = 12020;
+	public static final int SCUserArrived = 12021;
+	public static final int SCGameOver = 12022;
+	public static final int PBGameOverUserInfo = 12023;
+	public static final int CSRoomHeart = 12024;
+	public static final int SCRoomHeart = 12025;
+	public static final int CSSendWalkingRoute = 12026;
+	public static final int SCSendWalkingRoute = 12027;
+	public static final int CSCommon = 12028;
+	public static final int SCCommon = 12029;
 
 }

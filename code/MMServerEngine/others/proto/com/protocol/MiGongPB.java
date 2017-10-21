@@ -4790,7 +4790,7 @@ public final class MiGongPB {
    *&#47;//////////////////////////////////////////////////////////////联机对战///////////////////////////////////////
    * 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳
    * 请求匹配，返回房间及信息，开始游戏，发送操作（移动，道具），接收操作，发送到达终点，接收到达终点，接收游戏结束，房间心跳
-   * 请求匹配
+   * 请求匹配 TODO 取消匹配
    * </pre>
    */
   public static final class CSMatching extends
@@ -4987,7 +4987,7 @@ public final class MiGongPB {
      *&#47;//////////////////////////////////////////////////////////////联机对战///////////////////////////////////////
      * 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳
      * 请求匹配，返回房间及信息，开始游戏，发送操作（移动，道具），接收操作，发送到达终点，接收到达终点，接收游戏结束，房间心跳
-     * 请求匹配
+     * 请求匹配 TODO 取消匹配
      * </pre>
      */
     public static final class Builder extends
@@ -8398,27 +8398,45 @@ public final class MiGongPB {
   public interface CSMoveOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required int32 pos = 1;
+    // required float posX = 1;
     /**
-     * <code>required int32 pos = 1;</code>
+     * <code>required float posX = 1;</code>
      *
      * <pre>
      * 当前位置
      * </pre>
      */
-    boolean hasPos();
+    boolean hasPosX();
     /**
-     * <code>required int32 pos = 1;</code>
+     * <code>required float posX = 1;</code>
      *
      * <pre>
      * 当前位置
      * </pre>
      */
-    int getPos();
+    float getPosX();
 
-    // required int32 dir = 2;
+    // required float posY = 2;
     /**
-     * <code>required int32 dir = 2;</code>
+     * <code>required float posY = 2;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    boolean hasPosY();
+    /**
+     * <code>required float posY = 2;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    float getPosY();
+
+    // required int32 dir = 3;
+    /**
+     * <code>required int32 dir = 3;</code>
      *
      * <pre>
      * 方向
@@ -8426,7 +8444,7 @@ public final class MiGongPB {
      */
     boolean hasDir();
     /**
-     * <code>required int32 dir = 2;</code>
+     * <code>required int32 dir = 3;</code>
      *
      * <pre>
      * 方向
@@ -8434,9 +8452,9 @@ public final class MiGongPB {
      */
     int getDir();
 
-    // required int32 speed = 3;
+    // required int32 speed = 4;
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>required int32 speed = 4;</code>
      *
      * <pre>
      * 速度
@@ -8444,7 +8462,7 @@ public final class MiGongPB {
      */
     boolean hasSpeed();
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>required int32 speed = 4;</code>
      *
      * <pre>
      * 速度
@@ -8507,18 +8525,23 @@ public final class MiGongPB {
               }
               break;
             }
-            case 8: {
+            case 13: {
               bitField0_ |= 0x00000001;
-              pos_ = input.readInt32();
+              posX_ = input.readFloat();
               break;
             }
-            case 16: {
+            case 21: {
               bitField0_ |= 0x00000002;
-              dir_ = input.readInt32();
+              posY_ = input.readFloat();
               break;
             }
             case 24: {
               bitField0_ |= 0x00000004;
+              dir_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
               speed_ = input.readInt32();
               break;
             }
@@ -8562,45 +8585,69 @@ public final class MiGongPB {
     }
 
     private int bitField0_;
-    // required int32 pos = 1;
-    public static final int POS_FIELD_NUMBER = 1;
-    private int pos_;
+    // required float posX = 1;
+    public static final int POSX_FIELD_NUMBER = 1;
+    private float posX_;
     /**
-     * <code>required int32 pos = 1;</code>
+     * <code>required float posX = 1;</code>
      *
      * <pre>
      * 当前位置
      * </pre>
      */
-    public boolean hasPos() {
+    public boolean hasPosX() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required int32 pos = 1;</code>
+     * <code>required float posX = 1;</code>
      *
      * <pre>
      * 当前位置
      * </pre>
      */
-    public int getPos() {
-      return pos_;
+    public float getPosX() {
+      return posX_;
     }
 
-    // required int32 dir = 2;
-    public static final int DIR_FIELD_NUMBER = 2;
+    // required float posY = 2;
+    public static final int POSY_FIELD_NUMBER = 2;
+    private float posY_;
+    /**
+     * <code>required float posY = 2;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    public boolean hasPosY() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required float posY = 2;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    public float getPosY() {
+      return posY_;
+    }
+
+    // required int32 dir = 3;
+    public static final int DIR_FIELD_NUMBER = 3;
     private int dir_;
     /**
-     * <code>required int32 dir = 2;</code>
+     * <code>required int32 dir = 3;</code>
      *
      * <pre>
      * 方向
      * </pre>
      */
     public boolean hasDir() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required int32 dir = 2;</code>
+     * <code>required int32 dir = 3;</code>
      *
      * <pre>
      * 方向
@@ -8610,21 +8657,21 @@ public final class MiGongPB {
       return dir_;
     }
 
-    // required int32 speed = 3;
-    public static final int SPEED_FIELD_NUMBER = 3;
+    // required int32 speed = 4;
+    public static final int SPEED_FIELD_NUMBER = 4;
     private int speed_;
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>required int32 speed = 4;</code>
      *
      * <pre>
      * 速度
      * </pre>
      */
     public boolean hasSpeed() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>required int32 speed = 4;</code>
      *
      * <pre>
      * 速度
@@ -8635,7 +8682,8 @@ public final class MiGongPB {
     }
 
     private void initFields() {
-      pos_ = 0;
+      posX_ = 0F;
+      posY_ = 0F;
       dir_ = 0;
       speed_ = 0;
     }
@@ -8644,7 +8692,11 @@ public final class MiGongPB {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasPos()) {
+      if (!hasPosX()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPosY()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -8664,13 +8716,16 @@ public final class MiGongPB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, pos_);
+        output.writeFloat(1, posX_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, dir_);
+        output.writeFloat(2, posY_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, speed_);
+        output.writeInt32(3, dir_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, speed_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -8683,15 +8738,19 @@ public final class MiGongPB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, pos_);
+          .computeFloatSize(1, posX_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, dir_);
+          .computeFloatSize(2, posY_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, speed_);
+          .computeInt32Size(3, dir_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, speed_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8813,12 +8872,14 @@ public final class MiGongPB {
 
       public Builder clear() {
         super.clear();
-        pos_ = 0;
+        posX_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000001);
-        dir_ = 0;
+        posY_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000002);
-        speed_ = 0;
+        dir_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        speed_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -8850,13 +8911,17 @@ public final class MiGongPB {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.pos_ = pos_;
+        result.posX_ = posX_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.dir_ = dir_;
+        result.posY_ = posY_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
+        }
+        result.dir_ = dir_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
         }
         result.speed_ = speed_;
         result.bitField0_ = to_bitField0_;
@@ -8875,8 +8940,11 @@ public final class MiGongPB {
 
       public Builder mergeFrom(com.protocol.MiGongPB.CSMove other) {
         if (other == com.protocol.MiGongPB.CSMove.getDefaultInstance()) return this;
-        if (other.hasPos()) {
-          setPos(other.getPos());
+        if (other.hasPosX()) {
+          setPosX(other.getPosX());
+        }
+        if (other.hasPosY()) {
+          setPosY(other.getPosY());
         }
         if (other.hasDir()) {
           setDir(other.getDir());
@@ -8889,7 +8957,11 @@ public final class MiGongPB {
       }
 
       public final boolean isInitialized() {
-        if (!hasPos()) {
+        if (!hasPosX()) {
+          
+          return false;
+        }
+        if (!hasPosY()) {
           
           return false;
         }
@@ -8923,69 +8995,118 @@ public final class MiGongPB {
       }
       private int bitField0_;
 
-      // required int32 pos = 1;
-      private int pos_ ;
+      // required float posX = 1;
+      private float posX_ ;
       /**
-       * <code>required int32 pos = 1;</code>
+       * <code>required float posX = 1;</code>
        *
        * <pre>
        * 当前位置
        * </pre>
        */
-      public boolean hasPos() {
+      public boolean hasPosX() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required int32 pos = 1;</code>
+       * <code>required float posX = 1;</code>
        *
        * <pre>
        * 当前位置
        * </pre>
        */
-      public int getPos() {
-        return pos_;
+      public float getPosX() {
+        return posX_;
       }
       /**
-       * <code>required int32 pos = 1;</code>
+       * <code>required float posX = 1;</code>
        *
        * <pre>
        * 当前位置
        * </pre>
        */
-      public Builder setPos(int value) {
+      public Builder setPosX(float value) {
         bitField0_ |= 0x00000001;
-        pos_ = value;
+        posX_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 pos = 1;</code>
+       * <code>required float posX = 1;</code>
        *
        * <pre>
        * 当前位置
        * </pre>
        */
-      public Builder clearPos() {
+      public Builder clearPosX() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        pos_ = 0;
+        posX_ = 0F;
         onChanged();
         return this;
       }
 
-      // required int32 dir = 2;
+      // required float posY = 2;
+      private float posY_ ;
+      /**
+       * <code>required float posY = 2;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public boolean hasPosY() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required float posY = 2;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public float getPosY() {
+        return posY_;
+      }
+      /**
+       * <code>required float posY = 2;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public Builder setPosY(float value) {
+        bitField0_ |= 0x00000002;
+        posY_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required float posY = 2;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public Builder clearPosY() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        posY_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      // required int32 dir = 3;
       private int dir_ ;
       /**
-       * <code>required int32 dir = 2;</code>
+       * <code>required int32 dir = 3;</code>
        *
        * <pre>
        * 方向
        * </pre>
        */
       public boolean hasDir() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required int32 dir = 2;</code>
+       * <code>required int32 dir = 3;</code>
        *
        * <pre>
        * 方向
@@ -8995,46 +9116,46 @@ public final class MiGongPB {
         return dir_;
       }
       /**
-       * <code>required int32 dir = 2;</code>
+       * <code>required int32 dir = 3;</code>
        *
        * <pre>
        * 方向
        * </pre>
        */
       public Builder setDir(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         dir_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 dir = 2;</code>
+       * <code>required int32 dir = 3;</code>
        *
        * <pre>
        * 方向
        * </pre>
        */
       public Builder clearDir() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         dir_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 speed = 3;
+      // required int32 speed = 4;
       private int speed_ ;
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>required int32 speed = 4;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public boolean hasSpeed() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>required int32 speed = 4;</code>
        *
        * <pre>
        * 速度
@@ -9044,27 +9165,27 @@ public final class MiGongPB {
         return speed_;
       }
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>required int32 speed = 4;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public Builder setSpeed(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         speed_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>required int32 speed = 4;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public Builder clearSpeed() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         speed_ = 0;
         onChanged();
         return this;
@@ -9393,77 +9514,50 @@ public final class MiGongPB {
   public interface SCUserMoveOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required int32 pos = 1;
+    // repeated .PBUserMoveInfo userMoveInfos = 1;
     /**
-     * <code>required int32 pos = 1;</code>
+     * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
      *
      * <pre>
-     * 当前位置
+     * 玩家信息
      * </pre>
      */
-    boolean hasPos();
+    java.util.List<com.protocol.MiGongPB.PBUserMoveInfo> 
+        getUserMoveInfosList();
     /**
-     * <code>required int32 pos = 1;</code>
+     * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
      *
      * <pre>
-     * 当前位置
+     * 玩家信息
      * </pre>
      */
-    int getPos();
-
-    // required int32 dir = 2;
+    com.protocol.MiGongPB.PBUserMoveInfo getUserMoveInfos(int index);
     /**
-     * <code>required int32 dir = 2;</code>
+     * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
      *
      * <pre>
-     * 方向
+     * 玩家信息
      * </pre>
      */
-    boolean hasDir();
+    int getUserMoveInfosCount();
     /**
-     * <code>required int32 dir = 2;</code>
+     * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
      *
      * <pre>
-     * 方向
+     * 玩家信息
      * </pre>
      */
-    int getDir();
-
-    // required int32 speed = 3;
+    java.util.List<? extends com.protocol.MiGongPB.PBUserMoveInfoOrBuilder> 
+        getUserMoveInfosOrBuilderList();
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
      *
      * <pre>
-     * 速度
+     * 玩家信息
      * </pre>
      */
-    boolean hasSpeed();
-    /**
-     * <code>required int32 speed = 3;</code>
-     *
-     * <pre>
-     * 速度
-     * </pre>
-     */
-    int getSpeed();
-
-    // required int32 frame = 4;
-    /**
-     * <code>required int32 frame = 4;</code>
-     *
-     * <pre>
-     * 帧数
-     * </pre>
-     */
-    boolean hasFrame();
-    /**
-     * <code>required int32 frame = 4;</code>
-     *
-     * <pre>
-     * 帧数
-     * </pre>
-     */
-    int getFrame();
+    com.protocol.MiGongPB.PBUserMoveInfoOrBuilder getUserMoveInfosOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code SCUserMove}
@@ -9520,24 +9614,12 @@ public final class MiGongPB {
               }
               break;
             }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              pos_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              dir_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              speed_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              frame_ = input.readInt32();
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                userMoveInfos_ = new java.util.ArrayList<com.protocol.MiGongPB.PBUserMoveInfo>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              userMoveInfos_.add(input.readMessage(com.protocol.MiGongPB.PBUserMoveInfo.PARSER, extensionRegistry));
               break;
             }
           }
@@ -9548,6 +9630,9 @@ public final class MiGongPB {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          userMoveInfos_ = java.util.Collections.unmodifiableList(userMoveInfos_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -9579,129 +9664,75 @@ public final class MiGongPB {
       return PARSER;
     }
 
-    private int bitField0_;
-    // required int32 pos = 1;
-    public static final int POS_FIELD_NUMBER = 1;
-    private int pos_;
+    // repeated .PBUserMoveInfo userMoveInfos = 1;
+    public static final int USERMOVEINFOS_FIELD_NUMBER = 1;
+    private java.util.List<com.protocol.MiGongPB.PBUserMoveInfo> userMoveInfos_;
     /**
-     * <code>required int32 pos = 1;</code>
+     * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
      *
      * <pre>
-     * 当前位置
+     * 玩家信息
      * </pre>
      */
-    public boolean hasPos() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+    public java.util.List<com.protocol.MiGongPB.PBUserMoveInfo> getUserMoveInfosList() {
+      return userMoveInfos_;
     }
     /**
-     * <code>required int32 pos = 1;</code>
+     * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
      *
      * <pre>
-     * 当前位置
+     * 玩家信息
      * </pre>
      */
-    public int getPos() {
-      return pos_;
-    }
-
-    // required int32 dir = 2;
-    public static final int DIR_FIELD_NUMBER = 2;
-    private int dir_;
-    /**
-     * <code>required int32 dir = 2;</code>
-     *
-     * <pre>
-     * 方向
-     * </pre>
-     */
-    public boolean hasDir() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+    public java.util.List<? extends com.protocol.MiGongPB.PBUserMoveInfoOrBuilder> 
+        getUserMoveInfosOrBuilderList() {
+      return userMoveInfos_;
     }
     /**
-     * <code>required int32 dir = 2;</code>
+     * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
      *
      * <pre>
-     * 方向
+     * 玩家信息
      * </pre>
      */
-    public int getDir() {
-      return dir_;
-    }
-
-    // required int32 speed = 3;
-    public static final int SPEED_FIELD_NUMBER = 3;
-    private int speed_;
-    /**
-     * <code>required int32 speed = 3;</code>
-     *
-     * <pre>
-     * 速度
-     * </pre>
-     */
-    public boolean hasSpeed() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+    public int getUserMoveInfosCount() {
+      return userMoveInfos_.size();
     }
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
      *
      * <pre>
-     * 速度
+     * 玩家信息
      * </pre>
      */
-    public int getSpeed() {
-      return speed_;
-    }
-
-    // required int32 frame = 4;
-    public static final int FRAME_FIELD_NUMBER = 4;
-    private int frame_;
-    /**
-     * <code>required int32 frame = 4;</code>
-     *
-     * <pre>
-     * 帧数
-     * </pre>
-     */
-    public boolean hasFrame() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+    public com.protocol.MiGongPB.PBUserMoveInfo getUserMoveInfos(int index) {
+      return userMoveInfos_.get(index);
     }
     /**
-     * <code>required int32 frame = 4;</code>
+     * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
      *
      * <pre>
-     * 帧数
+     * 玩家信息
      * </pre>
      */
-    public int getFrame() {
-      return frame_;
+    public com.protocol.MiGongPB.PBUserMoveInfoOrBuilder getUserMoveInfosOrBuilder(
+        int index) {
+      return userMoveInfos_.get(index);
     }
 
     private void initFields() {
-      pos_ = 0;
-      dir_ = 0;
-      speed_ = 0;
-      frame_ = 0;
+      userMoveInfos_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasPos()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasDir()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasSpeed()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasFrame()) {
-        memoizedIsInitialized = 0;
-        return false;
+      for (int i = 0; i < getUserMoveInfosCount(); i++) {
+        if (!getUserMoveInfos(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
       memoizedIsInitialized = 1;
       return true;
@@ -9710,17 +9741,8 @@ public final class MiGongPB {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, pos_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, dir_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, speed_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, frame_);
+      for (int i = 0; i < userMoveInfos_.size(); i++) {
+        output.writeMessage(1, userMoveInfos_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -9731,21 +9753,9 @@ public final class MiGongPB {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      for (int i = 0; i < userMoveInfos_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, pos_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, dir_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, speed_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, frame_);
+          .computeMessageSize(1, userMoveInfos_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9859,6 +9869,7 @@ public final class MiGongPB {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getUserMoveInfosFieldBuilder();
         }
       }
       private static Builder create() {
@@ -9867,14 +9878,12 @@ public final class MiGongPB {
 
       public Builder clear() {
         super.clear();
-        pos_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        dir_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        speed_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        frame_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        if (userMoveInfosBuilder_ == null) {
+          userMoveInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          userMoveInfosBuilder_.clear();
+        }
         return this;
       }
 
@@ -9902,24 +9911,15 @@ public final class MiGongPB {
       public com.protocol.MiGongPB.SCUserMove buildPartial() {
         com.protocol.MiGongPB.SCUserMove result = new com.protocol.MiGongPB.SCUserMove(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
+        if (userMoveInfosBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            userMoveInfos_ = java.util.Collections.unmodifiableList(userMoveInfos_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.userMoveInfos_ = userMoveInfos_;
+        } else {
+          result.userMoveInfos_ = userMoveInfosBuilder_.build();
         }
-        result.pos_ = pos_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.dir_ = dir_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.speed_ = speed_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.frame_ = frame_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -9935,38 +9935,42 @@ public final class MiGongPB {
 
       public Builder mergeFrom(com.protocol.MiGongPB.SCUserMove other) {
         if (other == com.protocol.MiGongPB.SCUserMove.getDefaultInstance()) return this;
-        if (other.hasPos()) {
-          setPos(other.getPos());
-        }
-        if (other.hasDir()) {
-          setDir(other.getDir());
-        }
-        if (other.hasSpeed()) {
-          setSpeed(other.getSpeed());
-        }
-        if (other.hasFrame()) {
-          setFrame(other.getFrame());
+        if (userMoveInfosBuilder_ == null) {
+          if (!other.userMoveInfos_.isEmpty()) {
+            if (userMoveInfos_.isEmpty()) {
+              userMoveInfos_ = other.userMoveInfos_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureUserMoveInfosIsMutable();
+              userMoveInfos_.addAll(other.userMoveInfos_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.userMoveInfos_.isEmpty()) {
+            if (userMoveInfosBuilder_.isEmpty()) {
+              userMoveInfosBuilder_.dispose();
+              userMoveInfosBuilder_ = null;
+              userMoveInfos_ = other.userMoveInfos_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              userMoveInfosBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUserMoveInfosFieldBuilder() : null;
+            } else {
+              userMoveInfosBuilder_.addAllMessages(other.userMoveInfos_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasPos()) {
-          
-          return false;
-        }
-        if (!hasDir()) {
-          
-          return false;
-        }
-        if (!hasSpeed()) {
-          
-          return false;
-        }
-        if (!hasFrame()) {
-          
-          return false;
+        for (int i = 0; i < getUserMoveInfosCount(); i++) {
+          if (!getUserMoveInfos(i).isInitialized()) {
+            
+            return false;
+          }
         }
         return true;
       }
@@ -9990,200 +9994,316 @@ public final class MiGongPB {
       }
       private int bitField0_;
 
-      // required int32 pos = 1;
-      private int pos_ ;
-      /**
-       * <code>required int32 pos = 1;</code>
-       *
-       * <pre>
-       * 当前位置
-       * </pre>
-       */
-      public boolean hasPos() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required int32 pos = 1;</code>
-       *
-       * <pre>
-       * 当前位置
-       * </pre>
-       */
-      public int getPos() {
-        return pos_;
-      }
-      /**
-       * <code>required int32 pos = 1;</code>
-       *
-       * <pre>
-       * 当前位置
-       * </pre>
-       */
-      public Builder setPos(int value) {
-        bitField0_ |= 0x00000001;
-        pos_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int32 pos = 1;</code>
-       *
-       * <pre>
-       * 当前位置
-       * </pre>
-       */
-      public Builder clearPos() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        pos_ = 0;
-        onChanged();
-        return this;
+      // repeated .PBUserMoveInfo userMoveInfos = 1;
+      private java.util.List<com.protocol.MiGongPB.PBUserMoveInfo> userMoveInfos_ =
+        java.util.Collections.emptyList();
+      private void ensureUserMoveInfosIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          userMoveInfos_ = new java.util.ArrayList<com.protocol.MiGongPB.PBUserMoveInfo>(userMoveInfos_);
+          bitField0_ |= 0x00000001;
+         }
       }
 
-      // required int32 dir = 2;
-      private int dir_ ;
-      /**
-       * <code>required int32 dir = 2;</code>
-       *
-       * <pre>
-       * 方向
-       * </pre>
-       */
-      public boolean hasDir() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required int32 dir = 2;</code>
-       *
-       * <pre>
-       * 方向
-       * </pre>
-       */
-      public int getDir() {
-        return dir_;
-      }
-      /**
-       * <code>required int32 dir = 2;</code>
-       *
-       * <pre>
-       * 方向
-       * </pre>
-       */
-      public Builder setDir(int value) {
-        bitField0_ |= 0x00000002;
-        dir_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int32 dir = 2;</code>
-       *
-       * <pre>
-       * 方向
-       * </pre>
-       */
-      public Builder clearDir() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        dir_ = 0;
-        onChanged();
-        return this;
-      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.protocol.MiGongPB.PBUserMoveInfo, com.protocol.MiGongPB.PBUserMoveInfo.Builder, com.protocol.MiGongPB.PBUserMoveInfoOrBuilder> userMoveInfosBuilder_;
 
-      // required int32 speed = 3;
-      private int speed_ ;
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
        *
        * <pre>
-       * 速度
+       * 玩家信息
        * </pre>
        */
-      public boolean hasSpeed() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+      public java.util.List<com.protocol.MiGongPB.PBUserMoveInfo> getUserMoveInfosList() {
+        if (userMoveInfosBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(userMoveInfos_);
+        } else {
+          return userMoveInfosBuilder_.getMessageList();
+        }
       }
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
        *
        * <pre>
-       * 速度
+       * 玩家信息
        * </pre>
        */
-      public int getSpeed() {
-        return speed_;
+      public int getUserMoveInfosCount() {
+        if (userMoveInfosBuilder_ == null) {
+          return userMoveInfos_.size();
+        } else {
+          return userMoveInfosBuilder_.getCount();
+        }
       }
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
        *
        * <pre>
-       * 速度
+       * 玩家信息
        * </pre>
        */
-      public Builder setSpeed(int value) {
-        bitField0_ |= 0x00000004;
-        speed_ = value;
-        onChanged();
+      public com.protocol.MiGongPB.PBUserMoveInfo getUserMoveInfos(int index) {
+        if (userMoveInfosBuilder_ == null) {
+          return userMoveInfos_.get(index);
+        } else {
+          return userMoveInfosBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public Builder setUserMoveInfos(
+          int index, com.protocol.MiGongPB.PBUserMoveInfo value) {
+        if (userMoveInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserMoveInfosIsMutable();
+          userMoveInfos_.set(index, value);
+          onChanged();
+        } else {
+          userMoveInfosBuilder_.setMessage(index, value);
+        }
         return this;
       }
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
        *
        * <pre>
-       * 速度
+       * 玩家信息
        * </pre>
        */
-      public Builder clearSpeed() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        speed_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // required int32 frame = 4;
-      private int frame_ ;
-      /**
-       * <code>required int32 frame = 4;</code>
-       *
-       * <pre>
-       * 帧数
-       * </pre>
-       */
-      public boolean hasFrame() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>required int32 frame = 4;</code>
-       *
-       * <pre>
-       * 帧数
-       * </pre>
-       */
-      public int getFrame() {
-        return frame_;
-      }
-      /**
-       * <code>required int32 frame = 4;</code>
-       *
-       * <pre>
-       * 帧数
-       * </pre>
-       */
-      public Builder setFrame(int value) {
-        bitField0_ |= 0x00000008;
-        frame_ = value;
-        onChanged();
+      public Builder setUserMoveInfos(
+          int index, com.protocol.MiGongPB.PBUserMoveInfo.Builder builderForValue) {
+        if (userMoveInfosBuilder_ == null) {
+          ensureUserMoveInfosIsMutable();
+          userMoveInfos_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          userMoveInfosBuilder_.setMessage(index, builderForValue.build());
+        }
         return this;
       }
       /**
-       * <code>required int32 frame = 4;</code>
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
        *
        * <pre>
-       * 帧数
+       * 玩家信息
        * </pre>
        */
-      public Builder clearFrame() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        frame_ = 0;
-        onChanged();
+      public Builder addUserMoveInfos(com.protocol.MiGongPB.PBUserMoveInfo value) {
+        if (userMoveInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserMoveInfosIsMutable();
+          userMoveInfos_.add(value);
+          onChanged();
+        } else {
+          userMoveInfosBuilder_.addMessage(value);
+        }
         return this;
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public Builder addUserMoveInfos(
+          int index, com.protocol.MiGongPB.PBUserMoveInfo value) {
+        if (userMoveInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserMoveInfosIsMutable();
+          userMoveInfos_.add(index, value);
+          onChanged();
+        } else {
+          userMoveInfosBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public Builder addUserMoveInfos(
+          com.protocol.MiGongPB.PBUserMoveInfo.Builder builderForValue) {
+        if (userMoveInfosBuilder_ == null) {
+          ensureUserMoveInfosIsMutable();
+          userMoveInfos_.add(builderForValue.build());
+          onChanged();
+        } else {
+          userMoveInfosBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public Builder addUserMoveInfos(
+          int index, com.protocol.MiGongPB.PBUserMoveInfo.Builder builderForValue) {
+        if (userMoveInfosBuilder_ == null) {
+          ensureUserMoveInfosIsMutable();
+          userMoveInfos_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          userMoveInfosBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public Builder addAllUserMoveInfos(
+          java.lang.Iterable<? extends com.protocol.MiGongPB.PBUserMoveInfo> values) {
+        if (userMoveInfosBuilder_ == null) {
+          ensureUserMoveInfosIsMutable();
+          super.addAll(values, userMoveInfos_);
+          onChanged();
+        } else {
+          userMoveInfosBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public Builder clearUserMoveInfos() {
+        if (userMoveInfosBuilder_ == null) {
+          userMoveInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          userMoveInfosBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public Builder removeUserMoveInfos(int index) {
+        if (userMoveInfosBuilder_ == null) {
+          ensureUserMoveInfosIsMutable();
+          userMoveInfos_.remove(index);
+          onChanged();
+        } else {
+          userMoveInfosBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBUserMoveInfo.Builder getUserMoveInfosBuilder(
+          int index) {
+        return getUserMoveInfosFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBUserMoveInfoOrBuilder getUserMoveInfosOrBuilder(
+          int index) {
+        if (userMoveInfosBuilder_ == null) {
+          return userMoveInfos_.get(index);  } else {
+          return userMoveInfosBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public java.util.List<? extends com.protocol.MiGongPB.PBUserMoveInfoOrBuilder> 
+           getUserMoveInfosOrBuilderList() {
+        if (userMoveInfosBuilder_ != null) {
+          return userMoveInfosBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(userMoveInfos_);
+        }
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBUserMoveInfo.Builder addUserMoveInfosBuilder() {
+        return getUserMoveInfosFieldBuilder().addBuilder(
+            com.protocol.MiGongPB.PBUserMoveInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBUserMoveInfo.Builder addUserMoveInfosBuilder(
+          int index) {
+        return getUserMoveInfosFieldBuilder().addBuilder(
+            index, com.protocol.MiGongPB.PBUserMoveInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PBUserMoveInfo userMoveInfos = 1;</code>
+       *
+       * <pre>
+       * 玩家信息
+       * </pre>
+       */
+      public java.util.List<com.protocol.MiGongPB.PBUserMoveInfo.Builder> 
+           getUserMoveInfosBuilderList() {
+        return getUserMoveInfosFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.protocol.MiGongPB.PBUserMoveInfo, com.protocol.MiGongPB.PBUserMoveInfo.Builder, com.protocol.MiGongPB.PBUserMoveInfoOrBuilder> 
+          getUserMoveInfosFieldBuilder() {
+        if (userMoveInfosBuilder_ == null) {
+          userMoveInfosBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.protocol.MiGongPB.PBUserMoveInfo, com.protocol.MiGongPB.PBUserMoveInfo.Builder, com.protocol.MiGongPB.PBUserMoveInfoOrBuilder>(
+                  userMoveInfos_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          userMoveInfos_ = null;
+        }
+        return userMoveInfosBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:SCUserMove)
@@ -10195,6 +10315,1138 @@ public final class MiGongPB {
     }
 
     // @@protoc_insertion_point(class_scope:SCUserMove)
+  }
+
+  public interface PBUserMoveInfoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required string userId = 1;
+    /**
+     * <code>required string userId = 1;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required string userId = 1;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>required string userId = 1;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    // required float posX = 2;
+    /**
+     * <code>required float posX = 2;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    boolean hasPosX();
+    /**
+     * <code>required float posX = 2;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    float getPosX();
+
+    // required float posY = 3;
+    /**
+     * <code>required float posY = 3;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    boolean hasPosY();
+    /**
+     * <code>required float posY = 3;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    float getPosY();
+
+    // required int32 dir = 4;
+    /**
+     * <code>required int32 dir = 4;</code>
+     *
+     * <pre>
+     * 方向
+     * </pre>
+     */
+    boolean hasDir();
+    /**
+     * <code>required int32 dir = 4;</code>
+     *
+     * <pre>
+     * 方向
+     * </pre>
+     */
+    int getDir();
+
+    // required int32 speed = 5;
+    /**
+     * <code>required int32 speed = 5;</code>
+     *
+     * <pre>
+     * 速度
+     * </pre>
+     */
+    boolean hasSpeed();
+    /**
+     * <code>required int32 speed = 5;</code>
+     *
+     * <pre>
+     * 速度
+     * </pre>
+     */
+    int getSpeed();
+
+    // required int32 frame = 6;
+    /**
+     * <code>required int32 frame = 6;</code>
+     *
+     * <pre>
+     * 帧数
+     * </pre>
+     */
+    boolean hasFrame();
+    /**
+     * <code>required int32 frame = 6;</code>
+     *
+     * <pre>
+     * 帧数
+     * </pre>
+     */
+    int getFrame();
+  }
+  /**
+   * Protobuf type {@code PBUserMoveInfo}
+   */
+  public static final class PBUserMoveInfo extends
+      com.google.protobuf.GeneratedMessage
+      implements PBUserMoveInfoOrBuilder {
+    // Use PBUserMoveInfo.newBuilder() to construct.
+    private PBUserMoveInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PBUserMoveInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PBUserMoveInfo defaultInstance;
+    public static PBUserMoveInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PBUserMoveInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PBUserMoveInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readBytes();
+              break;
+            }
+            case 21: {
+              bitField0_ |= 0x00000002;
+              posX_ = input.readFloat();
+              break;
+            }
+            case 29: {
+              bitField0_ |= 0x00000004;
+              posY_ = input.readFloat();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              dir_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              speed_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              frame_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.protocol.MiGongPB.internal_static_PBUserMoveInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.protocol.MiGongPB.internal_static_PBUserMoveInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.protocol.MiGongPB.PBUserMoveInfo.class, com.protocol.MiGongPB.PBUserMoveInfo.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PBUserMoveInfo> PARSER =
+        new com.google.protobuf.AbstractParser<PBUserMoveInfo>() {
+      public PBUserMoveInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PBUserMoveInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PBUserMoveInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required string userId = 1;
+    public static final int USERID_FIELD_NUMBER = 1;
+    private java.lang.Object userId_;
+    /**
+     * <code>required string userId = 1;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string userId = 1;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string userId = 1;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // required float posX = 2;
+    public static final int POSX_FIELD_NUMBER = 2;
+    private float posX_;
+    /**
+     * <code>required float posX = 2;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    public boolean hasPosX() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required float posX = 2;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    public float getPosX() {
+      return posX_;
+    }
+
+    // required float posY = 3;
+    public static final int POSY_FIELD_NUMBER = 3;
+    private float posY_;
+    /**
+     * <code>required float posY = 3;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    public boolean hasPosY() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required float posY = 3;</code>
+     *
+     * <pre>
+     * 当前位置
+     * </pre>
+     */
+    public float getPosY() {
+      return posY_;
+    }
+
+    // required int32 dir = 4;
+    public static final int DIR_FIELD_NUMBER = 4;
+    private int dir_;
+    /**
+     * <code>required int32 dir = 4;</code>
+     *
+     * <pre>
+     * 方向
+     * </pre>
+     */
+    public boolean hasDir() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 dir = 4;</code>
+     *
+     * <pre>
+     * 方向
+     * </pre>
+     */
+    public int getDir() {
+      return dir_;
+    }
+
+    // required int32 speed = 5;
+    public static final int SPEED_FIELD_NUMBER = 5;
+    private int speed_;
+    /**
+     * <code>required int32 speed = 5;</code>
+     *
+     * <pre>
+     * 速度
+     * </pre>
+     */
+    public boolean hasSpeed() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 speed = 5;</code>
+     *
+     * <pre>
+     * 速度
+     * </pre>
+     */
+    public int getSpeed() {
+      return speed_;
+    }
+
+    // required int32 frame = 6;
+    public static final int FRAME_FIELD_NUMBER = 6;
+    private int frame_;
+    /**
+     * <code>required int32 frame = 6;</code>
+     *
+     * <pre>
+     * 帧数
+     * </pre>
+     */
+    public boolean hasFrame() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required int32 frame = 6;</code>
+     *
+     * <pre>
+     * 帧数
+     * </pre>
+     */
+    public int getFrame() {
+      return frame_;
+    }
+
+    private void initFields() {
+      userId_ = "";
+      posX_ = 0F;
+      posY_ = 0F;
+      dir_ = 0;
+      speed_ = 0;
+      frame_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPosX()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPosY()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDir()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSpeed()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasFrame()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeFloat(2, posX_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeFloat(3, posY_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, dir_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, speed_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, frame_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(2, posX_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(3, posY_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, dir_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, speed_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, frame_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.protocol.MiGongPB.PBUserMoveInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.PBUserMoveInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.PBUserMoveInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.PBUserMoveInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.PBUserMoveInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.PBUserMoveInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.PBUserMoveInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.protocol.MiGongPB.PBUserMoveInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.PBUserMoveInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.PBUserMoveInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.protocol.MiGongPB.PBUserMoveInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PBUserMoveInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.protocol.MiGongPB.PBUserMoveInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.protocol.MiGongPB.internal_static_PBUserMoveInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.protocol.MiGongPB.internal_static_PBUserMoveInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.protocol.MiGongPB.PBUserMoveInfo.class, com.protocol.MiGongPB.PBUserMoveInfo.Builder.class);
+      }
+
+      // Construct using com.protocol.MiGongPB.PBUserMoveInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        posX_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        posY_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        dir_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        speed_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        frame_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.protocol.MiGongPB.internal_static_PBUserMoveInfo_descriptor;
+      }
+
+      public com.protocol.MiGongPB.PBUserMoveInfo getDefaultInstanceForType() {
+        return com.protocol.MiGongPB.PBUserMoveInfo.getDefaultInstance();
+      }
+
+      public com.protocol.MiGongPB.PBUserMoveInfo build() {
+        com.protocol.MiGongPB.PBUserMoveInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.protocol.MiGongPB.PBUserMoveInfo buildPartial() {
+        com.protocol.MiGongPB.PBUserMoveInfo result = new com.protocol.MiGongPB.PBUserMoveInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.posX_ = posX_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.posY_ = posY_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.dir_ = dir_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.speed_ = speed_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.frame_ = frame_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.protocol.MiGongPB.PBUserMoveInfo) {
+          return mergeFrom((com.protocol.MiGongPB.PBUserMoveInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.protocol.MiGongPB.PBUserMoveInfo other) {
+        if (other == com.protocol.MiGongPB.PBUserMoveInfo.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          bitField0_ |= 0x00000001;
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (other.hasPosX()) {
+          setPosX(other.getPosX());
+        }
+        if (other.hasPosY()) {
+          setPosY(other.getPosY());
+        }
+        if (other.hasDir()) {
+          setDir(other.getDir());
+        }
+        if (other.hasSpeed()) {
+          setSpeed(other.getSpeed());
+        }
+        if (other.hasFrame()) {
+          setFrame(other.getFrame());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasPosX()) {
+          
+          return false;
+        }
+        if (!hasPosY()) {
+          
+          return false;
+        }
+        if (!hasDir()) {
+          
+          return false;
+        }
+        if (!hasSpeed()) {
+          
+          return false;
+        }
+        if (!hasFrame()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.protocol.MiGongPB.PBUserMoveInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.protocol.MiGongPB.PBUserMoveInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required string userId = 1;
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>required string userId = 1;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string userId = 1;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string userId = 1;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string userId = 1;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string userId = 1;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string userId = 1;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required float posX = 2;
+      private float posX_ ;
+      /**
+       * <code>required float posX = 2;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public boolean hasPosX() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required float posX = 2;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public float getPosX() {
+        return posX_;
+      }
+      /**
+       * <code>required float posX = 2;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public Builder setPosX(float value) {
+        bitField0_ |= 0x00000002;
+        posX_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required float posX = 2;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public Builder clearPosX() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        posX_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      // required float posY = 3;
+      private float posY_ ;
+      /**
+       * <code>required float posY = 3;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public boolean hasPosY() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required float posY = 3;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public float getPosY() {
+        return posY_;
+      }
+      /**
+       * <code>required float posY = 3;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public Builder setPosY(float value) {
+        bitField0_ |= 0x00000004;
+        posY_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required float posY = 3;</code>
+       *
+       * <pre>
+       * 当前位置
+       * </pre>
+       */
+      public Builder clearPosY() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        posY_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      // required int32 dir = 4;
+      private int dir_ ;
+      /**
+       * <code>required int32 dir = 4;</code>
+       *
+       * <pre>
+       * 方向
+       * </pre>
+       */
+      public boolean hasDir() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int32 dir = 4;</code>
+       *
+       * <pre>
+       * 方向
+       * </pre>
+       */
+      public int getDir() {
+        return dir_;
+      }
+      /**
+       * <code>required int32 dir = 4;</code>
+       *
+       * <pre>
+       * 方向
+       * </pre>
+       */
+      public Builder setDir(int value) {
+        bitField0_ |= 0x00000008;
+        dir_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 dir = 4;</code>
+       *
+       * <pre>
+       * 方向
+       * </pre>
+       */
+      public Builder clearDir() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        dir_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 speed = 5;
+      private int speed_ ;
+      /**
+       * <code>required int32 speed = 5;</code>
+       *
+       * <pre>
+       * 速度
+       * </pre>
+       */
+      public boolean hasSpeed() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required int32 speed = 5;</code>
+       *
+       * <pre>
+       * 速度
+       * </pre>
+       */
+      public int getSpeed() {
+        return speed_;
+      }
+      /**
+       * <code>required int32 speed = 5;</code>
+       *
+       * <pre>
+       * 速度
+       * </pre>
+       */
+      public Builder setSpeed(int value) {
+        bitField0_ |= 0x00000010;
+        speed_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 speed = 5;</code>
+       *
+       * <pre>
+       * 速度
+       * </pre>
+       */
+      public Builder clearSpeed() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        speed_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 frame = 6;
+      private int frame_ ;
+      /**
+       * <code>required int32 frame = 6;</code>
+       *
+       * <pre>
+       * 帧数
+       * </pre>
+       */
+      public boolean hasFrame() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required int32 frame = 6;</code>
+       *
+       * <pre>
+       * 帧数
+       * </pre>
+       */
+      public int getFrame() {
+        return frame_;
+      }
+      /**
+       * <code>required int32 frame = 6;</code>
+       *
+       * <pre>
+       * 帧数
+       * </pre>
+       */
+      public Builder setFrame(int value) {
+        bitField0_ |= 0x00000020;
+        frame_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 frame = 6;</code>
+       *
+       * <pre>
+       * 帧数
+       * </pre>
+       */
+      public Builder clearFrame() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        frame_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PBUserMoveInfo)
+    }
+
+    static {
+      defaultInstance = new PBUserMoveInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PBUserMoveInfo)
   }
 
   public interface CSArrivedOrBuilder
@@ -15911,6 +17163,11 @@ public final class MiGongPB {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_SCUserMove_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PBUserMoveInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PBUserMoveInfo_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_CSArrived_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -15991,19 +17248,22 @@ public final class MiGongPB {
       "therInfos\030\005 \003(\0132\014.PBOtherInfo\"K\n\013PBOther" +
       "Info\022\016\n\006userId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\r" +
       "\n\005start\030\003 \002(\005\022\013\n\003end\030\004 \002(\005\"\020\n\016SCMatching" +
-      "Fail\"\t\n\007SCBegin\"1\n\006CSMove\022\013\n\003pos\030\001 \002(\005\022\013" +
-      "\n\003dir\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\"\010\n\006SCMove\"D\n\n" +
-      "SCUserMove\022\013\n\003pos\030\001 \002(\005\022\013\n\003dir\030\002 \002(\005\022\r\n\005",
-      "speed\030\003 \002(\005\022\r\n\005frame\030\004 \002(\005\"\030\n\tCSArrived\022" +
-      "\013\n\003pos\030\001 \002(\005\"\013\n\tSCArrived\"\037\n\rSCUserArriv" +
-      "ed\022\016\n\006userId\030\001 \002(\t\"4\n\nSCGameOver\022&\n\tuser" +
-      "Infos\030\001 \003(\0132\023.PBGameOverUserInfo\"S\n\022PBGa" +
-      "meOverUserInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010userNa" +
-      "me\030\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005score\030\004 \002(\005\"\r\n" +
-      "\013CSRoomHeart\"\r\n\013SCRoomHeart\"#\n\022CSSendWal" +
-      "kingRoute\022\r\n\005route\030\001 \003(\005\"\024\n\022SCSendWalkin" +
-      "gRoute\"\031\n\010CSCommon\022\r\n\005route\030\001 \003(\t\"\031\n\010SCC" +
-      "ommon\022\r\n\005route\030\001 \003(\tB\016\n\014com.protocol"
+      "Fail\"\t\n\007SCBegin\"@\n\006CSMove\022\014\n\004posX\030\001 \002(\002\022" +
+      "\014\n\004posY\030\002 \002(\002\022\013\n\003dir\030\003 \002(\005\022\r\n\005speed\030\004 \002(" +
+      "\005\"\010\n\006SCMove\"4\n\nSCUserMove\022&\n\ruserMoveInf",
+      "os\030\001 \003(\0132\017.PBUserMoveInfo\"g\n\016PBUserMoveI" +
+      "nfo\022\016\n\006userId\030\001 \002(\t\022\014\n\004posX\030\002 \002(\002\022\014\n\004pos" +
+      "Y\030\003 \002(\002\022\013\n\003dir\030\004 \002(\005\022\r\n\005speed\030\005 \002(\005\022\r\n\005f" +
+      "rame\030\006 \002(\005\"\030\n\tCSArrived\022\013\n\003pos\030\001 \002(\005\"\013\n\t" +
+      "SCArrived\"\037\n\rSCUserArrived\022\016\n\006userId\030\001 \002" +
+      "(\t\"4\n\nSCGameOver\022&\n\tuserInfos\030\001 \003(\0132\023.PB" +
+      "GameOverUserInfo\"S\n\022PBGameOverUserInfo\022\016" +
+      "\n\006userId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\014\n\004rank" +
+      "\030\003 \002(\005\022\r\n\005score\030\004 \002(\005\"\r\n\013CSRoomHeart\"\r\n\013" +
+      "SCRoomHeart\"#\n\022CSSendWalkingRoute\022\r\n\005rou",
+      "te\030\001 \003(\005\"\024\n\022SCSendWalkingRoute\"\031\n\010CSComm" +
+      "on\022\r\n\005route\030\001 \003(\t\"\031\n\010SCCommon\022\r\n\005route\030\001" +
+      " \003(\tB\016\n\014com.protocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -16099,7 +17359,7 @@ public final class MiGongPB {
           internal_static_CSMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSMove_descriptor,
-              new java.lang.String[] { "Pos", "Dir", "Speed", });
+              new java.lang.String[] { "PosX", "PosY", "Dir", "Speed", });
           internal_static_SCMove_descriptor =
             getDescriptor().getMessageTypes().get(15);
           internal_static_SCMove_fieldAccessorTable = new
@@ -16111,69 +17371,75 @@ public final class MiGongPB {
           internal_static_SCUserMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUserMove_descriptor,
-              new java.lang.String[] { "Pos", "Dir", "Speed", "Frame", });
-          internal_static_CSArrived_descriptor =
+              new java.lang.String[] { "UserMoveInfos", });
+          internal_static_PBUserMoveInfo_descriptor =
             getDescriptor().getMessageTypes().get(17);
+          internal_static_PBUserMoveInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PBUserMoveInfo_descriptor,
+              new java.lang.String[] { "UserId", "PosX", "PosY", "Dir", "Speed", "Frame", });
+          internal_static_CSArrived_descriptor =
+            getDescriptor().getMessageTypes().get(18);
           internal_static_CSArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSArrived_descriptor,
               new java.lang.String[] { "Pos", });
           internal_static_SCArrived_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(19);
           internal_static_SCArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCArrived_descriptor,
               new java.lang.String[] { });
           internal_static_SCUserArrived_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_SCUserArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUserArrived_descriptor,
               new java.lang.String[] { "UserId", });
           internal_static_SCGameOver_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_SCGameOver_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCGameOver_descriptor,
               new java.lang.String[] { "UserInfos", });
           internal_static_PBGameOverUserInfo_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(22);
           internal_static_PBGameOverUserInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBGameOverUserInfo_descriptor,
               new java.lang.String[] { "UserId", "UserName", "Rank", "Score", });
           internal_static_CSRoomHeart_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_CSRoomHeart_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSRoomHeart_descriptor,
               new java.lang.String[] { });
           internal_static_SCRoomHeart_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_SCRoomHeart_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCRoomHeart_descriptor,
               new java.lang.String[] { });
           internal_static_CSSendWalkingRoute_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_CSSendWalkingRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSSendWalkingRoute_descriptor,
               new java.lang.String[] { "Route", });
           internal_static_SCSendWalkingRoute_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_SCSendWalkingRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCSendWalkingRoute_descriptor,
               new java.lang.String[] { });
           internal_static_CSCommon_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_CSCommon_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSCommon_descriptor,
               new java.lang.String[] { "Route", });
           internal_static_SCCommon_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_SCCommon_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCCommon_descriptor,

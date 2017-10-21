@@ -15,6 +15,8 @@ public class MapCreate : MonoBehaviour{
 		new int[]{1,3,	2,	3,		3}
 	};
 
+	public int Mode; // 0单机，2pvp
+
 	public int Level;
 	public int Pass;
 
@@ -22,11 +24,13 @@ public class MapCreate : MonoBehaviour{
 
 	public Vector2 startPoint;
 	public Vector2 endPoint;
+	public int size;
 
 
 	int x = 0,y = 0;
-	static float myScale = 0.2f;
-	public float nodeX = 1.9f * myScale,nodeY = 1.9f * myScale;
+	static float myScale = 1f;
+
+	public float nodeX = 0,nodeY = 0;
 
 	Camera ca;
 	float defaultOrthographicSize = 5;
@@ -34,6 +38,10 @@ public class MapCreate : MonoBehaviour{
 	int tr = 0,td = 0;
 	// Use this for initialization
 	void Start () {
+		// 0.21 碰撞体的宽，1.9碰撞体的长
+		float wallWidth = 0.21f * myScale;
+		nodeX = 1.9f * myScale - wallWidth*2 ;nodeY = 1.9f * myScale - wallWidth*2;
+
 		createMap ();
 	}
 	// 注意顺序，从上向下，从下向上

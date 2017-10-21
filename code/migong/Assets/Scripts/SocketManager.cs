@@ -16,7 +16,14 @@ public class SyncObject{
 	public volatile byte[] Data;
 }
 
+public class AsyncObject{
+	public volatile int Opcode;
+	public volatile byte[] Data;
+	public volatile ActionForReceive action;
+}
+
 public class SocketManager : MonoBehaviour {
+	public static string ACCOUNT_ID = "asdfadf66";
 	/**
 	 * BlockingQueue 用来发包
 	 * Queue queue = Queue.Synchronized (new Queue ());
@@ -31,8 +38,12 @@ public class SocketManager : MonoBehaviour {
 
 
 	static volatile Dictionary<int,ActionForReceive> dic = new Dictionary<int,ActionForReceive>();
+	// 执行dic中的东西
+	static Queue<AsyncObject> invokeQueue = new Queue<AsyncObject>();
 //	static volatile Dictionary<int,ActionForReceive> invoke = new Dictionary<int,ActionForReceive>();
 	static volatile Dictionary<int,SyncObject> syncObjects = new Dictionary<int,SyncObject>();
+	// 推送消息的处理
+	static volatile Dictionary<int,ActionForReceive> serverSendData = new Dictionary<int,ActionForReceive>();
 
 	private static System.Object locker = new System.Object ();
 
@@ -43,11 +54,28 @@ public class SocketManager : MonoBehaviour {
 		}
 	}
 
+	void Update(){
+		if (invokeQueue.Count > 0) {
+			lock (invokeQueue) {
+				while (invokeQueue.Count > 0) {
+					AsyncObject asyncObject = invokeQueue.Dequeue ();
+					asyncObject.action.Invoke (asyncObject.Opcode,asyncObject.Data);
+				}
+			}
+		}
+	}
+
+	public static void AddServerSendReceive(int opcode,ActionForReceive actionFroReceive){
+		if (!serverSendData.ContainsKey (opcode)) {
+			serverSendData.Add (opcode, actionFroReceive);
+		}
+	}
+
 	public static void ConnectServerAndLogin(){
 		lock (locker) {
 			if (ConnectServer ()) {
 				CSLogin node = new CSLogin ();
-				node.AccountId = "asdfadf";
+				node.AccountId = ACCOUNT_ID;
 				node.Url = "sdf";
 				node.Ip = "127.0.0.1";
 				byte[] data = CSLogin.SerializeToBytes (node);
@@ -139,7 +167,7 @@ public class SocketManager : MonoBehaviour {
 						size = buf.ReadInt();
 						opcode = buf.ReadInt();
 						id = buf.ReadInt();
-						Debug.Log("size:"+size+",opcode:"+opcode+",id:"+id);
+//						Debug.Log("size:"+size+",opcode:"+opcode+",id:"+id);
 						isReadHead = true;
 						if(size > length-12){
 							continue;
@@ -160,9 +188,11 @@ public class SocketManager : MonoBehaviour {
 							Debug.LogError("error:errorCode = "+exception.ErrCode+",errorMsg = "+exception.ErrMsg);
 						}else{
 							ActionForReceive action = dic[id];
-							if(action != null){
-								action.Invoke(opcode,data);
-							}
+							AsyncObject o = new AsyncObject();
+							o.Opcode = opcode;
+							o.Data = data;
+							o.action = action;
+							invokeQueue.Enqueue(o);
 						}
 						dic.Remove(id);
 					}else if(syncObjects.ContainsKey(id)){
@@ -185,7 +215,15 @@ public class SocketManager : MonoBehaviour {
 							SCException exception = SCException.Deserialize(data);
 							Debug.LogError("error:errorCode = "+exception.ErrCode+",errorMsg = "+exception.ErrMsg);
 						}else{
-							Debug.Log("opcode = "+opcode+",");
+							if(serverSendData.ContainsKey(opcode)){
+								ActionForReceive action = serverSendData[opcode];
+								AsyncObject o = new AsyncObject();
+								o.Opcode = opcode;
+								o.Data = data;
+								o.action = action;
+								invokeQueue.Enqueue(o);
+							}
+//							Debug.Log("opcode = "+opcode+",");
 						}
 					}
 				}
@@ -223,7 +261,7 @@ public class SocketManager : MonoBehaviour {
 
 			dic.Add(id,action);
 
-			Debug.Log("send success,size = "+data.Length+",id:"+id);
+//			Debug.Log("send success,size = "+data.Length+",id:"+id);
 		}  
 		catch(Exception e)
 		{  

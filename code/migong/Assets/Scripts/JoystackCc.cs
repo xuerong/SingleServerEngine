@@ -63,7 +63,7 @@ public class JoystackCc : MonoBehaviour {
 
 		mTrans = transform;
 
-		pacman = transform.parent.parent.parent.Find("pacman_0").gameObject.GetComponent<Pacman>();;
+		pacman = transform.parent.parent.parent.Find("pacman").gameObject.GetComponent<Pacman>();;
 	}
 
 
@@ -91,18 +91,18 @@ public class JoystackCc : MonoBehaviour {
 		// 根据MovePosiNorm设置Paceman的Dir
 //		pacman.Dir
 		if (MovePosiNorm == Vector3.zero) {
-			pacman.Dir = 0;
+			pacman.setDir (0,1);
 		} else if (Mathf.Abs (MovePosiNorm.x) >= Mathf.Abs (MovePosiNorm.y)) {
 			if (MovePosiNorm.x > 0) {
-				pacman.Dir = 2;
+				pacman.setDir (2,1);
 			} else {
-				pacman.Dir = 4;
+				pacman.setDir (4,1);
 			}
 		} else {
 			if (MovePosiNorm.y > 0) {
-				pacman.Dir = 1;
+				pacman.setDir (1,1);
 			} else {
-				pacman.Dir = 3;
+				pacman.setDir (3,1);
 			}
 		}
 	}
