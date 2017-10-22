@@ -7,59 +7,121 @@ using com.protocol;
 using Example;
 
 public class MainPanel : MonoBehaviour {
-	public GameObject camera;
+	public GameObject uiMain;
+	public GameObject uiLevel;
+	public GameObject uiUnlimit;
+	public GameObject uiOnline;
+
+	public GameObject ui;
 	// Use this for initialization
 	void Start () {
+		show (uiMain);
+		// 给主界面按钮加事件
+		string canvasPath = "main/ui/uiMain/Canvas/";
+		Button levelButton = GameObject.Find (canvasPath+"level").GetComponent<Button>();
+		levelButton.onClick.AddListener (delegate() {
+			// 打开level 界面
+			Debug.Log("open level window");
+			openLevelWindow();
+		});
+		Button unlimitButton = GameObject.Find (canvasPath+"unlimit").GetComponent<Button>();
+		unlimitButton.onClick.AddListener (delegate() {
+			// 打开unlimit 界面
+			Debug.Log("open unlimit window");
+			show (uiUnlimit);
+		});
+		Button onlineButton = GameObject.Find (canvasPath+"online").GetComponent<Button>();
+		onlineButton.onClick.AddListener (delegate() {
+			// 打开online 界面
+			Debug.Log("open online window");
+			show (uiOnline);
+		});
+		// uiLevel 关闭按钮
+		GameObject closeGo = GameObject.Find ("main/ui/uiLevel/Canvas/close");
+		Button closeButton = closeGo.GetComponent<Button> ();
+		closeButton.onClick.AddListener (delegate() {
+			show (uiMain);
+		});
+
+		// 联网对战按钮
+//		GameObject pvpBattle = Instantiate(button) as GameObject;
+//		pvpBattle.transform.SetParent (canvasGo.transform);
+//		pvpBattle.transform.position = new Vector3 (width/2, height/8 * (count),0);
+//		Button bt = pvpBattle.GetComponent<Button> ();
+//		bt.onClick.AddListener (delegate() {OnPvpClick();});
+//		//
+//		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingSuccess, matchSuccess);
+//		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingFail, delegate(int opcode, byte[] receiveData) {
+//			Debug.Log("");
+//		});
+//		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCBegin, delegate(int opcode, byte[] receiveData) {
+//			Debug.Log("");
+//		});
+	}
+
+	private void openLevelWindow(){
+		show (uiLevel);
+		//
+
 		//获取按钮游戏对象
 		Object button = Resources.Load ("Button");
-		GameObject btnObj = GameObject.Find ("main/Canvas");
-		RectTransform rts = btnObj.GetComponent<RectTransform> ();
-		float width = rts.rect.width;
-		float height = rts.rect.height;
 
+		GameObject content = GameObject.Find ("main/ui/uiLevel/Canvas/scrollView/Viewport/Content");
+		for (int i = 0; i < content.transform.childCount; i++) {
+			Destroy (content.transform.GetChild(i).gameObject);		
+		}
 		// 获取当前关卡
 		CSGetMiGongLevel getMiGongLevel = new CSGetMiGongLevel();
-		byte[] data = SocketManager.SendMessageSync ((int)MiGongOpcode.CSGetMiGongLevel, CSGetMiGongLevel.SerializeToBytes (getMiGongLevel));
-		SCGetMiGongLevel level = SCGetMiGongLevel.Deserialize (data);
-		int count = level.PassCountInLevel.Count;
-		for (int i = 0; i < count; i++) {
+		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetMiGongLevel, CSGetMiGongLevel.SerializeToBytes (getMiGongLevel),delegate(int opcode, byte[] data) {
+			SCGetMiGongLevel level = SCGetMiGongLevel.Deserialize (data);
+			int count = level.PassCountInLevel.Count;
+			float dis = 20f;
 
 			GameObject up = Instantiate(button) as GameObject;
-			up.transform.SetParent (btnObj.transform);
-			up.transform.position = new Vector3 (width/2, height/8 * (i+1),0);
+			RectTransform buRec = up.GetComponent<RectTransform> ();
+			Destroy(up);
 
-			Button b1 = up.GetComponent<Button> ();
-			ButtonIndex buttonIndex = up.GetComponent<ButtonIndex> ();
-			buttonIndex.index = "level" + (i + 1);
-			buttonIndex.level = (i + 1);
-			b1.onClick.AddListener (delegate() {OnClick(buttonIndex);});
+			RectTransform contentTrans = content.GetComponent<RectTransform> ();
+			contentTrans.sizeDelta = new Vector2 ((buRec.rect.width + dis) * count + dis,contentTrans.rect.height);
 
-			GameObject textGo = up.transform.Find ("Text").gameObject;
-			Text text = textGo.GetComponent<Text> ();
-			int curPass;
-			if (i == level.OpenLevel) {
-				curPass = level.OpenPass;
-			} else if (i < level.OpenLevel) {
-				curPass = level.PassCountInLevel [i];
-			} else {
-				curPass = 0;
+			for (int i = 0; i < count; i++) {
+				up = Instantiate(button) as GameObject;
+				up.transform.parent = content.transform;
+				up.transform.localPosition = new Vector3 ((buRec.rect.width+dis)*i+dis, 0,0);
+				up.transform.localScale = new Vector3 (1,1,1);
+
+				Button b1 = up.GetComponent<Button> ();
+
+				ButtonIndex buttonIndex = up.GetComponent<ButtonIndex> ();
+				buttonIndex.index = "level" + (i + 1);
+				buttonIndex.level = (i + 1);
+				b1.onClick.AddListener (delegate() {OnClick(buttonIndex);});
+
+				GameObject textGo = up.transform.Find ("Text").gameObject;
+				Text text = textGo.GetComponent<Text> ();
+				int curPass;
+				if (i == level.OpenLevel) {
+					curPass = level.OpenPass;
+				} else if (i < level.OpenLevel) {
+					curPass = level.PassCountInLevel [i];
+				} else {
+					curPass = 0;
+				}
+				text.text = "level"+i+"("+curPass+"/"+level.PassCountInLevel[i]+")";
 			}
-			text.text = "level"+i+"("+curPass+"/"+level.PassCountInLevel[i]+")";
-		}
-		// 联网对战按钮
-		GameObject pvpBattle = Instantiate(button) as GameObject;
-		pvpBattle.transform.SetParent (btnObj.transform);
-		pvpBattle.transform.position = new Vector3 (width/2, height/8 * (count),0);
-		Button bt = pvpBattle.GetComponent<Button> ();
-		bt.onClick.AddListener (delegate() {OnPvpClick();});
-		//
-		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingSuccess, matchSuccess);
-		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingFail, delegate(int opcode, byte[] receiveData) {
-			Debug.Log("");
 		});
-		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCBegin, delegate(int opcode, byte[] receiveData) {
-			Debug.Log("");
-		});
+	}
+		
+	public void showMainPanel(){
+		ui.SetActive (true);
+		show (uiMain);
+	}
+	public void show(GameObject showUi){
+		uiMain.SetActive (false);
+		uiLevel.SetActive (false);
+		uiUnlimit.SetActive (false);
+		uiOnline.SetActive (false);
+		showUi.SetActive (true);
 	}
 
 	public void matchSuccess(int opcode, byte[] data){
@@ -83,12 +145,11 @@ public class MainPanel : MonoBehaviour {
 		miGongMap.Level = buttonIndex.level;
 		miGongMap.Pass = 1;
 		byte[] data = CSGetMiGongMap.SerializeToBytes (miGongMap);
-
-		byte[] ret = SocketManager.SendMessageSync ((int)MiGongOpcode.CSGetMiGongMap, data);
-
-		SCGetMiGongMap scmap = SCGetMiGongMap.Deserialize(ret);
-
-		createMap (0,scmap.Map.ToArray (), scmap.Start, scmap.End, buttonIndex.level, 1,null);
+		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetMiGongMap, data,delegate(int opcode, byte[] ret) {
+			SCGetMiGongMap scmap = SCGetMiGongMap.Deserialize(ret);
+			createMap (0,scmap.Map.ToArray (), scmap.Start, scmap.End, buttonIndex.level, 1,null);
+		});
+		ui.SetActive (false);
 	}
 	private void createMap(int mode,int[] mapInt,int start,int end,int level,int pass,List<PBOtherInfo> otherInfos){
 		Object gamePanel = Resources.Load ("GamePanel");

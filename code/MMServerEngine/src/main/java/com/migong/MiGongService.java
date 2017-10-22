@@ -276,7 +276,7 @@ public class MiGongService {
             int y=(int)(Math.random()*(size-2))+1;					//1---td-1
             map[x][y]=0;
         }
-        miGongPassInfo.setTime(difficulty*30);
+        miGongPassInfo.setTime(difficulty*300);
         miGongPassInfo.setSpeed(10);
         return miGongPassInfo;
     }

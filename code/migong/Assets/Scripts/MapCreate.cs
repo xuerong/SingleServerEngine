@@ -5,8 +5,12 @@ using Example;
 using com.protocol;
 using System.Threading;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MapCreate : MonoBehaviour{
+	public Button closeButton;
+	public Button okButton;
+
 	public int[][] map = new int[][]{ 
 		new int[]{0,2	,2,	2,		2},
 		new int[]{1,1	,0,	2,		1},
@@ -36,8 +40,25 @@ public class MapCreate : MonoBehaviour{
 	float defaultOrthographicSize = 5;
 
 	int tr = 0,td = 0;
+
+	public Dictionary<string,Pacman> pacmanMap = new Dictionary<string, Pacman> ();
+	public List<CircleCollider2D> pacmanColliders = new List<CircleCollider2D> ();
 	// Use this for initialization
 	void Start () {
+		// 设置button
+		closeButton.onClick.AddListener(delegate {
+			passFinish(false,null);
+			Destroy(transform.parent.gameObject);
+			GameObject mainGo = GameObject.Find ("main");
+			MainPanel mainPanel = mainGo.GetComponent<MainPanel>();
+			mainPanel.showMainPanel();;
+		});
+		okButton.onClick.AddListener(delegate {
+			Destroy(transform.parent.gameObject);
+			GameObject mainGo = GameObject.Find ("main");
+			MainPanel mainPanel = mainGo.GetComponent<MainPanel>();
+			mainPanel.showMainPanel();;
+		});
 		// 0.21 碰撞体的宽，1.9碰撞体的长
 		float wallWidth = 0.21f * myScale;
 		nodeX = 1.9f * myScale - wallWidth*2 ;nodeY = 1.9f * myScale - wallWidth*2;
@@ -106,10 +127,15 @@ public class MapCreate : MonoBehaviour{
 		pf.Success = success ? 1 : 0;
 		pf.Level = this.Level;
 		pf.Pass = this.Pass;
+		if (route == null) {
+//			route =
+		}
 		pf.Route = route;
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSPassFinish, CSPassFinish.SerializeToBytes (pf), delegate(int opcode, byte[] data) {
 			
 		});
+		GameObject settleGo = transform.parent.Find ("Canvas/settle").gameObject;
+		settleGo.SetActive (true);
 	}
 
 }

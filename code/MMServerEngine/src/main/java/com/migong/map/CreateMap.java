@@ -79,6 +79,7 @@ public class CreateMap {
         if(routes == null || routes.size() < 1){
             return false;
         }
+        int td = this.td+1;
         //
         int lastX = routes.get(0)/td,lastY = routes.get(0)%td;
         // 判断首
@@ -115,19 +116,19 @@ public class CreateMap {
         byte cur = map[x][y];
         // 左走
         if(lastX == x && lastY - y == 1){
-            return (cur & 1) > 0;
+            return (cur & 1) == 0;
         }
         // 右走
         if(lastX == x && lastY - y == -1){
-            return (last & 1) > 0;
+            return (last & 1) == 0;
         }
         // 上
         if(lastX - x == 1 && lastY == y){
-            return (cur & 2) > 0;
+            return (cur & 2) == 0;
         }
         // 下
         if(lastX - x == -1 && lastY == y){
-            return (last & 2) > 0;
+            return (last & 2) == 0;
         }
         return false;
     }

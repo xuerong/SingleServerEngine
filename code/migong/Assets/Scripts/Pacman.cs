@@ -7,8 +7,8 @@ using com.protocol;
 
 public class Pacman : MonoBehaviour {
 
-	static Dictionary<string,Pacman> pacmanMap = new Dictionary<string, Pacman> ();
-	static List<CircleCollider2D> pacmanColliders = new List<CircleCollider2D> ();
+	Dictionary<string,Pacman> pacmanMap ;
+	List<CircleCollider2D> pacmanColliders ;
 
 	public MapCreate mapCreate;
 	public float speed = 0.04f;
@@ -34,6 +34,9 @@ public class Pacman : MonoBehaviour {
 
 	bool passFinish;
 	void Start () {
+		pacmanMap = mapCreate.pacmanMap;
+		pacmanColliders = mapCreate.pacmanColliders;
+
 		if (userId == null || userId.Length == 0) {
 			this.userId = SocketManager.ACCOUNT_ID;
 		}
@@ -96,14 +99,15 @@ public class Pacman : MonoBehaviour {
 				route.Add (curPoint);
 				lastPoint = curPoint;
 //				if (route.Count % 10 == 0) {
-//					StringBuilder sb = new StringBuilder ();
-//					foreach(int po in route){
-//						sb.Append (po+",");
-//					}
-//					Debug.Log (sb.ToString());
+					StringBuilder sb = new StringBuilder ();
+					foreach(int po in route){
+						sb.Append (po+",");
+					}
+					Debug.Log (sb.ToString());
 //				}
 				if (curPoint == mapCreate.endPoint.x * mapCreate.size + mapCreate.endPoint.x) {
 					passFinish = true;
+					mapCreate.passFinish (passFinish, route);
 				}
 
 			}
