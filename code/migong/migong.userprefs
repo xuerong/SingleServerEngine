@@ -1,9 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainPanel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SocketManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/SocketManager.cs" Line="316" Column="1" />
-      <File FileName="Assets/Scripts/MainPanel.cs" Line="74" Column="23" />
+      <File FileName="Assets/Scripts/SocketManager.cs" Line="38" Column="44" />
+      <File FileName="Assets/Scripts/Pacman.cs" Line="110" Column="21" />
+      <File FileName="Assets/Scripts/protobuf/MiGongPB.Serializer.cs" Line="2230" Column="90" />
+      <File FileName="Assets/Scripts/MainPanel.cs" Line="42" Column="32" />
+      <File FileName="Assets/Scripts/protobuf/MiGongOpcode.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MapCreate.cs" Line="56" Column="7" />
+      <File FileName="Assets/Scripts/WarnDialog.cs" Line="28" Column="3" />
+      <File FileName="Assets/Scripts/protobuf/MiGongPB.cs" Line="108" Column="5" />
+      <File FileName="Assets/Scripts/protobuf/ProtocolParser.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
