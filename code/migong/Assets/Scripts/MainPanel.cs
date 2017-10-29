@@ -28,7 +28,7 @@ public class MainPanel : MonoBehaviour {
 		unlimitButton.onClick.AddListener (delegate() {
 			// 打开unlimit 界面
 			Debug.Log("open unlimit window");
-			show (uiUnlimit);
+			openUnlimitWindow();
 		});
 		Button onlineButton = GameObject.Find (canvasPath+"online").GetComponent<Button>();
 		onlineButton.onClick.AddListener (delegate() {
@@ -40,6 +40,15 @@ public class MainPanel : MonoBehaviour {
 		GameObject closeGo = GameObject.Find ("main/ui/uiLevel/Canvas/close");
 		Button closeButton = closeGo.GetComponent<Button> ();
 		closeButton.onClick.AddListener (delegate() {
+			show (uiMain);
+		});
+		// uiUnlimit 关闭按钮和进入按钮
+		Button go = GameObject.Find ("main/ui/uiUnlimit/Canvas/go").GetComponent<Button>();
+		go.onClick.AddListener (delegate() {
+
+		});
+		Button close = GameObject.Find ("main/ui/uiUnlimit/Canvas/close").GetComponent<Button>();
+		close.onClick.AddListener (delegate() {
 			show (uiMain);
 		});
 
@@ -108,6 +117,41 @@ public class MainPanel : MonoBehaviour {
 					curPass = 0;
 				}
 				text.text = "level"+i+"("+curPass+"/"+level.PassCountInLevel[i]+")";
+			}
+		});
+	}
+
+	private void openUnlimitWindow(){
+		show (uiUnlimit);
+		//
+
+		//获取按钮游戏对象
+		Object button = Resources.Load ("UnlimitItem");
+
+		GameObject content = GameObject.Find ("main/ui/uiUnlimit/Canvas/scrollView/Viewport/Content");
+		for (int i = 0; i < content.transform.childCount; i++) {
+			Destroy (content.transform.GetChild(i).gameObject);		
+		}
+		// 获取当前关卡
+		CSGetMiGongLevel getMiGongLevel = new CSGetMiGongLevel();
+		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetMiGongLevel, CSGetMiGongLevel.SerializeToBytes (getMiGongLevel),delegate(int opcode, byte[] data) {
+			SCGetMiGongLevel level = SCGetMiGongLevel.Deserialize (data);
+			int count = level.PassCountInLevel.Count;
+			float dis = 20f;
+
+			GameObject up = Instantiate(button) as GameObject;
+			RectTransform buRec = up.GetComponent<RectTransform> ();
+			Destroy(up);
+
+			RectTransform contentTrans = content.GetComponent<RectTransform> ();
+			contentTrans.sizeDelta = new Vector2 (contentTrans.rect.width,(buRec.rect.height + dis) * count + dis);
+
+			for (int i = 0; i < count; i++) {
+				up = Instantiate(button) as GameObject;
+				up.transform.parent = content.transform;
+				up.transform.localPosition = new Vector3 (0, -((buRec.rect.height+dis)*i+dis),0);
+				up.transform.localScale = new Vector3 (1,1,1);
+				// 生成各个玩家的排名item
 			}
 		});
 	}

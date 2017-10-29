@@ -35,6 +35,7 @@ public class SocketManager : MonoBehaviour {
 	private static Socket clientSocket;  
 	//是否已连接的标识  
 	public static bool IsConnected = false;
+//	public static bool IsConnecting = false;
 
 
 	static volatile Dictionary<int,ActionForReceive> dic = new Dictionary<int,ActionForReceive>();
@@ -48,7 +49,7 @@ public class SocketManager : MonoBehaviour {
 	private static System.Object locker = new System.Object ();
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		if (!IsConnected) {
 			ConnectServerAndLogin ();
 		}
@@ -104,13 +105,16 @@ public class SocketManager : MonoBehaviour {
 		IPAddress mIp = IPAddress.Parse (ip);  
 		IPEndPoint ip_end_point = new IPEndPoint (mIp, port);  
 
-		try {  
+		try {
 			clientSocket.Connect (ip_end_point);  
 			IsConnected = true;  
 			Debug.Log ("连接服务器成功");  
-		} catch {  
+		} catch (Exception e){  
 			IsConnected = false;  
-			Debug.Log ("连接服务器失败");  
+			Debug.Log ("连接服务器失败"+e);  
+			WarnDialog.showWarnDialog ("连接服务器失败",delegate() {
+//				ConnectServer();
+			});
 			return IsConnected;  
 		} 
 		if (IsConnected) {

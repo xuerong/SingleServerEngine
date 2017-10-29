@@ -47,11 +47,13 @@ public class MapCreate : MonoBehaviour{
 	void Start () {
 		// 设置button
 		closeButton.onClick.AddListener(delegate {
-			passFinish(false,null);
-			Destroy(transform.parent.gameObject);
-			GameObject mainGo = GameObject.Find ("main");
-			MainPanel mainPanel = mainGo.GetComponent<MainPanel>();
-			mainPanel.showMainPanel();;
+			WarnDialog.showWarnDialog("exit?",delegate {
+				passFinish(false,null);
+				Destroy(transform.parent.gameObject);
+				GameObject mainGo = GameObject.Find ("main");
+				MainPanel mainPanel = mainGo.GetComponent<MainPanel>();
+				mainPanel.showMainPanel();;
+			});
 		});
 		okButton.onClick.AddListener(delegate {
 			Destroy(transform.parent.gameObject);
@@ -132,7 +134,9 @@ public class MapCreate : MonoBehaviour{
 		}
 		pf.Route = route;
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSPassFinish, CSPassFinish.SerializeToBytes (pf), delegate(int opcode, byte[] data) {
-			
+			SCPassFinish pas = SCPassFinish.Deserialize(data);
+			GameObject go = transform.parent.Find ("Canvas/settle").gameObject;
+			go.transform.Find("Text").GetComponent<Text>().text=pas.Success==1?"SUCCESS":"Fail";
 		});
 		GameObject settleGo = transform.parent.Find ("Canvas/settle").gameObject;
 		settleGo.SetActive (true);

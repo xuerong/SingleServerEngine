@@ -13,6 +13,7 @@ public class UserMiGong implements Serializable {
     private int level; // 当前等级
     private int pass; // 当前关卡
     private int score;
+    private int passUnlimited; // 无线关卡关数
 
     public String getUserId() {
         return userId;
@@ -44,5 +45,13 @@ public class UserMiGong implements Serializable {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getPassUnlimited() {
+        return passUnlimited;
+    }
+
+    public void setPassUnlimited(int passUnlimited) {
+        this.passUnlimited = passUnlimited;
     }
 }

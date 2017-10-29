@@ -99,11 +99,11 @@ public class Pacman : MonoBehaviour {
 				route.Add (curPoint);
 				lastPoint = curPoint;
 //				if (route.Count % 10 == 0) {
-					StringBuilder sb = new StringBuilder ();
-					foreach(int po in route){
-						sb.Append (po+",");
-					}
-					Debug.Log (sb.ToString());
+//					StringBuilder sb = new StringBuilder ();
+//					foreach(int po in route){
+//						sb.Append (po+",");
+//					}
+//					Debug.Log (sb.ToString());
 //				}
 				if (curPoint == mapCreate.endPoint.x * mapCreate.size + mapCreate.endPoint.x) {
 					passFinish = true;

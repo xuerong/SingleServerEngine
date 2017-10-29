@@ -163,6 +163,7 @@
      <Compile Include="Assets\Scripts\protobuf\RoomPB.Serializer.cs" />
      <Compile Include="Assets\Scripts\SocketManager.cs" />
      <Compile Include="Assets\Scripts\SocketTest.cs" />
+     <Compile Include="Assets\Scripts\WarnDialog.cs" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>

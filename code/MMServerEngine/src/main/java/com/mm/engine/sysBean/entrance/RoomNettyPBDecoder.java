@@ -27,7 +27,9 @@ public class RoomNettyPBDecoder extends ByteToMessageDecoder {
             opcode = in.readInt();
             id = in.readInt();
             roomId = in.readInt();
-
+            if(opcode == 0){
+                System.out.println("");
+            }
             isReadHead = true;
             if(size>readAble - headSize){
                 return;
@@ -35,6 +37,9 @@ public class RoomNettyPBDecoder extends ByteToMessageDecoder {
         }
         ByteBuf b = in.readBytes(size); // 这里有data
         byte[]  bbb = new byte[size];
+        if(opcode == 0){
+            System.out.println(bbb);
+        }
         b.getBytes(0,bbb);
         // add之后好像in就被重置了
         RoomNetData roomNetData = new RoomNetData();
