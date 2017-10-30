@@ -24,6 +24,7 @@ public class AsyncObject{
 
 public class SocketManager : MonoBehaviour {
 	public static string ACCOUNT_ID = "asdfadf66";
+	public static int MAX_SEND_COUNT = 5; // 一次最大发送消息
 	/**
 	 * BlockingQueue 用来发包
 	 * Queue queue = Queue.Synchronized (new Queue ());
@@ -34,10 +35,13 @@ public class SocketManager : MonoBehaviour {
 
 	private static Socket clientSocket;  
 	//是否已连接的标识  
-	public static bool IsConnected = false;
-//	public static bool IsConnecting = false;
+	public static volatile bool IsConnected = false;
+	public static volatile bool IsConnecting = false;
+	public static volatile bool IsLogin = false;
 
-
+	// 发送消息的queue
+	static Queue<AsyncObject> sendQueue = new Queue<AsyncObject>();
+	// 后端推送消息的处理
 	static volatile Dictionary<int,ActionForReceive> dic = new Dictionary<int,ActionForReceive>();
 	// 执行dic中的东西
 	static Queue<AsyncObject> invokeQueue = new Queue<AsyncObject>();
@@ -45,7 +49,7 @@ public class SocketManager : MonoBehaviour {
 	static volatile Dictionary<int,SyncObject> syncObjects = new Dictionary<int,SyncObject>();
 	// 推送消息的处理
 	static volatile Dictionary<int,ActionForReceive> serverSendData = new Dictionary<int,ActionForReceive>();
-
+	//
 	private static System.Object locker = new System.Object ();
 
 	// Use this for initialization
@@ -56,6 +60,21 @@ public class SocketManager : MonoBehaviour {
 	}
 
 	void Update(){
+		// 发送
+		if (IsConnected && IsLogin) {
+			if (sendQueue.Count > 0) {
+				int count = 0;
+				while (sendQueue.Count > 0 && count++ < MAX_SEND_COUNT) {
+					AsyncObject asyncObject = sendQueue.Dequeue ();
+					_SendMessageAsyc (asyncObject.Opcode, asyncObject.Data, asyncObject.action);
+				}
+			}
+		} else {
+			if (sendQueue.Count > 0) { // 除了启动时的连接，有发送消息的时候再连
+				ConnectServerAndLogin ();
+			}
+		}
+		// 接收的处理
 		if (invokeQueue.Count > 0) {
 			lock (invokeQueue) {
 				while (invokeQueue.Count > 0) {
@@ -74,15 +93,26 @@ public class SocketManager : MonoBehaviour {
 
 	public static void ConnectServerAndLogin(){
 		lock (locker) {
-			if (ConnectServer ()) {
-				CSLogin node = new CSLogin ();
-				node.AccountId = ACCOUNT_ID;
-				node.Url = "sdf";
-				node.Ip = "127.0.0.1";
-				byte[] data = CSLogin.SerializeToBytes (node);
-				byte[] loginData = SocketManager.SendMessageSync ((int)AccountOpcode.CSLogin, data);
-				SCLogin scLogin = SCLogin.Deserialize (loginData);
-				Debug.Log ("login success,sessionId = " + scLogin.SessionId);
+			if (!IsConnected && !IsConnecting) {
+				IsConnecting = true;
+
+				Thread connectThread = new Thread (new ThreadStart (delegate() {
+					if (ConnectServer ()) {
+						IsConnected = true;
+						CSLogin node = new CSLogin ();
+						node.AccountId = ACCOUNT_ID;
+						node.Url = "sdf";
+						node.Ip = "127.0.0.1";
+						byte[] data = CSLogin.SerializeToBytes (node);
+						byte[] loginData = SocketManager.SendMessageSync ((int)AccountOpcode.CSLogin, data);
+						SCLogin scLogin = SCLogin.Deserialize (loginData);
+						Debug.Log ("login success,sessionId = " + scLogin.SessionId);
+						IsLogin = true;
+					}
+					IsConnecting = false;
+				}));
+				connectThread.IsBackground = true;
+				connectThread.Start ();
 			}
 		}
 	}
@@ -92,11 +122,9 @@ public class SocketManager : MonoBehaviour {
 	/// </summary>  
 	/// <param name="ip"></param>  
 	/// <param name="port"></param>  
-	public static bool ConnectServer()  
+	private static bool ConnectServer()  
 	{  
-		if (IsConnected) {
-			return IsConnected;
-		}
+		bool ret = false;
 		string ip = "127.0.0.1";
 		int port = 8003;
 		if (clientSocket == null) {
@@ -105,30 +133,35 @@ public class SocketManager : MonoBehaviour {
 		IPAddress mIp = IPAddress.Parse (ip);  
 		IPEndPoint ip_end_point = new IPEndPoint (mIp, port);  
 
+		clientSocket.SendTimeout = 2000;
+//		clientSocket.ReceiveTimeout = 2000;
+		clientSocket.SendBufferSize = 81920;
+		clientSocket.ReceiveBufferSize = 81920;
 		try {
 			clientSocket.Connect (ip_end_point);  
-			IsConnected = true;  
+			ret = true;  
 			Debug.Log ("连接服务器成功");  
 		} catch (Exception e){  
-			IsConnected = false;  
+			ret = false;  
 			Debug.Log ("连接服务器失败"+e);  
 			WarnDialog.showWarnDialog ("连接服务器失败",delegate() {
 //				ConnectServer();
 			});
-			return IsConnected;  
+			return ret;  
 		} 
-		if (IsConnected) {
+		if (ret) {
 			Thread receiveThread = new Thread (new ThreadStart (_onReceiveSocket));
 			receiveThread.IsBackground = true;
 			receiveThread.Start ();
 		}
-		return IsConnected;  
+		return ret;  
 	}  
 	public static void CloseConnect(){
 		lock (locker) {
 			if (clientSocket != null && clientSocket.Connected) {
 				clientSocket.Close ();
 				IsConnected = false;
+				IsLogin = false;
 			}
 		}
 	}
@@ -244,13 +277,21 @@ public class SocketManager : MonoBehaviour {
 	}
 
 	public static void SendMessageAsyc(int opcode ,byte[] data,ActionForReceive action){
+		AsyncObject asyncObject = new AsyncObject ();
+		asyncObject.action = action;
+		asyncObject.Data = data;
+		asyncObject.Opcode = opcode;
+		sendQueue.Enqueue (asyncObject);
+	}
+
+	private static void _SendMessageAsyc(int opcode ,byte[] data,ActionForReceive action){
 		// 
-		if (IsConnected == false)  {
-			ConnectServerAndLogin ();
-			if (!IsConnected) {
-				throw new Exception("server is not connect");
-			}
-		}
+//		if (IsConnected == false)  {
+//			ConnectServerAndLogin ();
+//			if (!IsConnected) {
+//				throw new Exception("server is not connect");
+//			}
+//		}
 		try  
 		{  	
 			int id = Interlocked.Increment(ref idIndex);
@@ -276,7 +317,10 @@ public class SocketManager : MonoBehaviour {
 			throw new Exception(e.Message);
 		}  
 	}
-
+	/**
+	 * 不要在主线程用，会阻塞主线程
+	 * 如果需要可以在主线程调用的同步网络io，可以考虑用协程做
+	 **/
 	public static byte[] SendMessageSync(int opcode ,byte[] data){
 		if (IsConnected == false)  {
 			ConnectServerAndLogin ();
@@ -322,36 +366,6 @@ public class SocketManager : MonoBehaviour {
 		return null;
 	}
 
-	public static void SendMessage(int id,int opcode ,byte[] data){
-		// 
-		if (IsConnected == false)  {
-			ConnectServerAndLogin ();
-			if (!IsConnected) {
-				throw new Exception("server is not connect");
-			}
-		}
-		try  
-		{  
-			ByteBuffer buffer = ByteBuffer.Allocate(512);  
-			buffer.WriteInt(data.Length);
-			buffer.WriteInt(opcode);
-			buffer.WriteInt(id);
-			buffer.WriteBytes(data);
-			byte[] sendData = buffer.ToArray();
-
-			clientSocket.Send(sendData);  
-			//			Debug.Log("send success,size = "+data.Length);
-			//			Monitor.Wait();
-		}  
-		catch (Exception e)
-		{  
-//			IsConnected = false;  
-//			clientSocket.Shutdown(SocketShutdown.Both);  
-//			clientSocket.Close();  
-			Debug.Log("send fail");
-			throw new Exception(e.Message);
-		}  
-	}
 	void OnDestroy () {
 		SocketManager.CloseConnect ();
 		Debug.Log("close connect");  

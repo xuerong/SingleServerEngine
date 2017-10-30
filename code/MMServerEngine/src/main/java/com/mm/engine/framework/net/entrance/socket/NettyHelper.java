@@ -77,6 +77,8 @@ public class NettyHelper {
                         })
                         .option(ChannelOption.SO_BACKLOG, 128)          // (5)backlog 指定了内核为此套接口排队的最大连接个数
                         .option(ChannelOption.TCP_NODELAY, true)
+                        .childOption(ChannelOption.RCVBUF_ALLOCATOR,
+                                new AdaptiveRecvByteBufAllocator(512, 512, 81920))
                         .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
                 // Bind and start to accept incoming connections.
                 ChannelFuture f = b.bind(port); // (7)
