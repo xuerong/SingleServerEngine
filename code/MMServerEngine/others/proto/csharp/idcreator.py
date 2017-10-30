@@ -11,7 +11,7 @@ cs_class_name = sys.argv[2]
 start_index = int(sys.argv[3])
 builder_class_name = sys.argv[4]
 
-proto_file = open(proto_file_name,"r")
+proto_file = open(proto_file_name,'r',encoding='utf-8')
 lines = proto_file.readlines()
 
 if os.path.exists(cs_class_name):
@@ -19,7 +19,7 @@ if os.path.exists(cs_class_name):
 
 # 初始化CS文件
 newCSharplines = []
-newCSharpFile = open(cs_class_name,"wb")
+newCSharpFile = open(cs_class_name,"w")
 newCSharpFile.write("//Auto Generate File, Do NOT Modify!!!!!!!!!!!!!!!\n")
 newCSharpFile.write("using System;\n")
 newCSharpFile.write("namespace com.protocol\n")
@@ -43,7 +43,7 @@ for line in lines:
 
 		newCSharpFile.write( "\t\t%s = %s,\n" % (message_name,start_index))
 		start_index = start_index + 1
-		print message_name
+		print (message_name)
 
 #c sharp文件结束
 newCSharpFile.write("\n\t}\n")

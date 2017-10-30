@@ -27,6 +27,7 @@ message SCGetMiGongMap
 	required int32 speed 			= 3; // 速度
 	required int32 start 			= 4; // 起点
 	required int32 end 			= 5; // 终点
+	repeated int32 beanPos 			= 6; // 豆子的位置
 }
 // 成功或失败 :
 message CSPassFinish
@@ -50,6 +51,35 @@ message CSUseItem
 message SCUseItem
 {
 }
+/////////////////////////////////////////////////////////////////无尽版///////////////////////////////////////
+message CSUnlimitedInfo
+{
+}
+message SCUnlimitedInfo
+{
+	repeated PBUnlimitedRankInfo unlimitedRankInfo		=1;
+	required int32 pass 			= 2; // 关卡数
+	required int32 rank 			= 3; // 排名
+}
+message PBUnlimitedRankInfo
+{
+	required string userId 			= 1; // 玩家id
+	required string userName 			= 2; // 玩家名
+	required int32 pass 			= 3; // 关卡数
+	required int32 rank 			= 4; // 排名
+}
+message CSUnlimitedGo
+{
+}
+message SCUnlimitedGo
+{
+	repeated int32 map 			= 1; //
+	required int32 time 			= 2; // 时间
+	required int32 speed 			= 3; // 速度
+	required int32 start 			= 4; // 起点
+	required int32 end 			= 5; // 终点
+	repeated int32 beanPos 			= 6; // 豆子的位置
+}
 /////////////////////////////////////////////////////////////////联机对战///////////////////////////////////////
 // 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳
 // 请求匹配，返回房间及信息，开始游戏，发送操作（移动，道具），接收操作，发送到达终点，接收到达终点，接收游戏结束，房间心跳
@@ -60,14 +90,23 @@ message CSMatching
 message SCMatching
 {
 }
+// 取消匹配
+message CSCancelMatching
+{
+}
+message SCCancelMatching
+{
+}
 // 推送，匹配成功：地图，自己的起点，终点。其他人的起点，终点，玩家名，玩家编号
 message SCMatchingSuccess
 {
 	repeated int32 map 			= 1; //
-	required int32 speed 			= 2; // 速度
-	required int32 start 			= 3; // 起点
-	required int32 end 			= 4; // 终点
-	repeated PBOtherInfo otherInfos 	     = 5; // 其它玩家信息
+	required int32 time 			= 2; // 时间
+	required int32 speed 			= 3; // 速度
+	required int32 start 			= 4; // 起点
+	required int32 end 			= 5; // 终点
+	repeated PBOtherInfo otherInfos 	     = 6; // 其它玩家信息
+	repeated int32 beanPos 			= 7; // 豆子的位置
 }
 message PBOtherInfo
 {
@@ -108,6 +147,20 @@ message PBUserMoveInfo
 	required int32 dir 			= 4; // 方向
 	required int32 speed 			= 5; // 速度
 	required int32 frame 			= 6; // 帧数
+}
+// 玩家吃豆
+message CSEatBean
+{
+	required int32 beanPos 			= 1; // 豆的位置
+}
+message SCEatBean
+{
+}
+// 推送吃豆
+message SCSendEatBean
+{
+	required string userId 			= 1; // 玩家id
+	required int32 beanPos 			= 2; // 豆的位置
 }
 // 玩家到达终点
 message CSArrived

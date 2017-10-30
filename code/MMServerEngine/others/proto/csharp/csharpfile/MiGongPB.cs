@@ -61,6 +61,9 @@ namespace Example
         /// <summary> 起点</summary>
         public int End { get; set; }
 
+        /// <summary> 终点</summary>
+        public List<int> BeanPos { get; set; }
+
     }
 
     /// <summary> 成功或失败 :</summary>
@@ -99,6 +102,61 @@ namespace Example
     {
     }
 
+    /// <summary>无尽版///////////////////////////////////////</summary>
+    public partial class CSUnlimitedInfo
+    {
+    }
+
+    public partial class SCUnlimitedInfo
+    {
+        public List<Example.PBUnlimitedRankInfo> UnlimitedRankInfo { get; set; }
+
+        public int Pass { get; set; }
+
+        /// <summary> 关卡数</summary>
+        public int Rank { get; set; }
+
+    }
+
+    public partial class PBUnlimitedRankInfo
+    {
+        public string UserId { get; set; }
+
+        /// <summary> 玩家id</summary>
+        public string UserName { get; set; }
+
+        /// <summary> 玩家名</summary>
+        public int Pass { get; set; }
+
+        /// <summary> 关卡数</summary>
+        public int Rank { get; set; }
+
+    }
+
+    public partial class CSUnlimitedGo
+    {
+    }
+
+    public partial class SCUnlimitedGo
+    {
+        public List<int> Map { get; set; }
+
+        public int Time { get; set; }
+
+        /// <summary> 时间</summary>
+        public int Speed { get; set; }
+
+        /// <summary> 速度</summary>
+        public int Start { get; set; }
+
+        /// <summary> 起点</summary>
+        public int End { get; set; }
+
+        /// <summary> 终点</summary>
+        public List<int> BeanPos { get; set; }
+
+    }
+
     /// <summary>
     /// <para>联机对战///////////////////////////////////////</para>
     /// <para> 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳</para>
@@ -113,11 +171,23 @@ namespace Example
     {
     }
 
+    /// <summary> 取消匹配</summary>
+    public partial class CSCancelMatching
+    {
+    }
+
+    public partial class SCCancelMatching
+    {
+    }
+
     /// <summary> 推送，匹配成功：地图，自己的起点，终点。其他人的起点，终点，玩家名，玩家编号</summary>
     public partial class SCMatchingSuccess
     {
         public List<int> Map { get; set; }
 
+        public int Time { get; set; }
+
+        /// <summary> 时间</summary>
         public int Speed { get; set; }
 
         /// <summary> 速度</summary>
@@ -128,6 +198,9 @@ namespace Example
 
         /// <summary> 终点</summary>
         public List<Example.PBOtherInfo> OtherInfos { get; set; }
+
+        /// <summary> 其它玩家信息</summary>
+        public List<int> BeanPos { get; set; }
 
     }
 
@@ -201,6 +274,27 @@ namespace Example
 
         /// <summary> 速度</summary>
         public int Frame { get; set; }
+
+    }
+
+    /// <summary> 玩家吃豆</summary>
+    public partial class CSEatBean
+    {
+        public int BeanPos { get; set; }
+
+    }
+
+    public partial class SCEatBean
+    {
+    }
+
+    /// <summary> 推送吃豆</summary>
+    public partial class SCSendEatBean
+    {
+        public string UserId { get; set; }
+
+        /// <summary> 玩家id</summary>
+        public int BeanPos { get; set; }
 
     }
 
