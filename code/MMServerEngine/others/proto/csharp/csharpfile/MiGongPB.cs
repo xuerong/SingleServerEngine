@@ -62,7 +62,17 @@ namespace Example
         public int End { get; set; }
 
         /// <summary> 终点</summary>
-        public List<int> BeanPos { get; set; }
+        public List<Example.PBBeanInfo> Beans { get; set; }
+
+    }
+
+    /// <summary> 豆子信息</summary>
+    public partial class PBBeanInfo
+    {
+        public int Pos { get; set; }
+
+        /// <summary> 豆子的位置</summary>
+        public int Score { get; set; }
 
     }
 
@@ -153,7 +163,7 @@ namespace Example
         public int End { get; set; }
 
         /// <summary> 终点</summary>
-        public List<int> BeanPos { get; set; }
+        public List<Example.PBBeanInfo> Beans { get; set; }
 
     }
 
@@ -200,7 +210,7 @@ namespace Example
         public List<Example.PBOtherInfo> OtherInfos { get; set; }
 
         /// <summary> 其它玩家信息</summary>
-        public List<int> BeanPos { get; set; }
+        public List<Example.PBBeanInfo> Beans { get; set; }
 
     }
 

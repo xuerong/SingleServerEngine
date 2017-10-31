@@ -27,7 +27,13 @@ message SCGetMiGongMap
 	required int32 speed 			= 3; // 速度
 	required int32 start 			= 4; // 起点
 	required int32 end 			= 5; // 终点
-	repeated int32 beanPos 			= 6; // 豆子的位置
+	repeated PBBeanInfo beans 			= 6; // 豆子
+}
+// 豆子信息
+message PBBeanInfo
+{
+	required int32 pos 			= 1; // 豆子的位置
+	required int32 score 			= 2; // 豆子的分数
 }
 // 成功或失败 :
 message CSPassFinish
@@ -78,7 +84,7 @@ message SCUnlimitedGo
 	required int32 speed 			= 3; // 速度
 	required int32 start 			= 4; // 起点
 	required int32 end 			= 5; // 终点
-	repeated int32 beanPos 			= 6; // 豆子的位置
+	repeated PBBeanInfo beans 			= 6; // 豆子的位置
 }
 /////////////////////////////////////////////////////////////////联机对战///////////////////////////////////////
 // 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳
@@ -106,7 +112,7 @@ message SCMatchingSuccess
 	required int32 start 			= 4; // 起点
 	required int32 end 			= 5; // 终点
 	repeated PBOtherInfo otherInfos 	     = 6; // 其它玩家信息
-	repeated int32 beanPos 			= 7; // 豆子的位置
+	repeated PBBeanInfo beans 			= 7; // 豆子的位置
 }
 message PBOtherInfo
 {

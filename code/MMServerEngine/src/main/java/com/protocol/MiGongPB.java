@@ -1698,31 +1698,50 @@ public final class MiGongPB {
      */
     int getEnd();
 
-    // repeated int32 beanPos = 6;
+    // repeated .PBBeanInfo beans = 6;
     /**
-     * <code>repeated int32 beanPos = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 6;</code>
      *
      * <pre>
-     * 豆子的位置
+     * 豆子
      * </pre>
      */
-    java.util.List<java.lang.Integer> getBeanPosList();
+    java.util.List<com.protocol.MiGongPB.PBBeanInfo> 
+        getBeansList();
     /**
-     * <code>repeated int32 beanPos = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 6;</code>
      *
      * <pre>
-     * 豆子的位置
+     * 豆子
      * </pre>
      */
-    int getBeanPosCount();
+    com.protocol.MiGongPB.PBBeanInfo getBeans(int index);
     /**
-     * <code>repeated int32 beanPos = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 6;</code>
      *
      * <pre>
-     * 豆子的位置
+     * 豆子
      * </pre>
      */
-    int getBeanPos(int index);
+    int getBeansCount();
+    /**
+     * <code>repeated .PBBeanInfo beans = 6;</code>
+     *
+     * <pre>
+     * 豆子
+     * </pre>
+     */
+    java.util.List<? extends com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
+        getBeansOrBuilderList();
+    /**
+     * <code>repeated .PBBeanInfo beans = 6;</code>
+     *
+     * <pre>
+     * 豆子
+     * </pre>
+     */
+    com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code SCGetMiGongMap}
@@ -1816,25 +1835,12 @@ public final class MiGongPB {
               end_ = input.readInt32();
               break;
             }
-            case 48: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-                beanPos_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000020;
-              }
-              beanPos_.add(input.readInt32());
-              break;
-            }
             case 50: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
-                beanPos_ = new java.util.ArrayList<java.lang.Integer>();
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                beans_ = new java.util.ArrayList<com.protocol.MiGongPB.PBBeanInfo>();
                 mutable_bitField0_ |= 0x00000020;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                beanPos_.add(input.readInt32());
-              }
-              input.popLimit(limit);
+              beans_.add(input.readMessage(com.protocol.MiGongPB.PBBeanInfo.PARSER, extensionRegistry));
               break;
             }
           }
@@ -1849,7 +1855,7 @@ public final class MiGongPB {
           map_ = java.util.Collections.unmodifiableList(map_);
         }
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-          beanPos_ = java.util.Collections.unmodifiableList(beanPos_);
+          beans_ = java.util.Collections.unmodifiableList(beans_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2011,39 +2017,60 @@ public final class MiGongPB {
       return end_;
     }
 
-    // repeated int32 beanPos = 6;
-    public static final int BEANPOS_FIELD_NUMBER = 6;
-    private java.util.List<java.lang.Integer> beanPos_;
+    // repeated .PBBeanInfo beans = 6;
+    public static final int BEANS_FIELD_NUMBER = 6;
+    private java.util.List<com.protocol.MiGongPB.PBBeanInfo> beans_;
     /**
-     * <code>repeated int32 beanPos = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 6;</code>
      *
      * <pre>
-     * 豆子的位置
+     * 豆子
      * </pre>
      */
-    public java.util.List<java.lang.Integer>
-        getBeanPosList() {
-      return beanPos_;
+    public java.util.List<com.protocol.MiGongPB.PBBeanInfo> getBeansList() {
+      return beans_;
     }
     /**
-     * <code>repeated int32 beanPos = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 6;</code>
      *
      * <pre>
-     * 豆子的位置
+     * 豆子
      * </pre>
      */
-    public int getBeanPosCount() {
-      return beanPos_.size();
+    public java.util.List<? extends com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
+        getBeansOrBuilderList() {
+      return beans_;
     }
     /**
-     * <code>repeated int32 beanPos = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 6;</code>
      *
      * <pre>
-     * 豆子的位置
+     * 豆子
      * </pre>
      */
-    public int getBeanPos(int index) {
-      return beanPos_.get(index);
+    public int getBeansCount() {
+      return beans_.size();
+    }
+    /**
+     * <code>repeated .PBBeanInfo beans = 6;</code>
+     *
+     * <pre>
+     * 豆子
+     * </pre>
+     */
+    public com.protocol.MiGongPB.PBBeanInfo getBeans(int index) {
+      return beans_.get(index);
+    }
+    /**
+     * <code>repeated .PBBeanInfo beans = 6;</code>
+     *
+     * <pre>
+     * 豆子
+     * </pre>
+     */
+    public com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
+        int index) {
+      return beans_.get(index);
     }
 
     private void initFields() {
@@ -2052,7 +2079,7 @@ public final class MiGongPB {
       speed_ = 0;
       start_ = 0;
       end_ = 0;
-      beanPos_ = java.util.Collections.emptyList();
+      beans_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2074,6 +2101,12 @@ public final class MiGongPB {
       if (!hasEnd()) {
         memoizedIsInitialized = 0;
         return false;
+      }
+      for (int i = 0; i < getBeansCount(); i++) {
+        if (!getBeans(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
       memoizedIsInitialized = 1;
       return true;
@@ -2097,8 +2130,8 @@ public final class MiGongPB {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(5, end_);
       }
-      for (int i = 0; i < beanPos_.size(); i++) {
-        output.writeInt32(6, beanPos_.get(i));
+      for (int i = 0; i < beans_.size(); i++) {
+        output.writeMessage(6, beans_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -2134,14 +2167,9 @@ public final class MiGongPB {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, end_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < beanPos_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(beanPos_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getBeanPosList().size();
+      for (int i = 0; i < beans_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, beans_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2251,6 +2279,7 @@ public final class MiGongPB {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getBeansFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2269,8 +2298,12 @@ public final class MiGongPB {
         bitField0_ = (bitField0_ & ~0x00000008);
         end_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        beanPos_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
+        if (beansBuilder_ == null) {
+          beans_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+        } else {
+          beansBuilder_.clear();
+        }
         return this;
       }
 
@@ -2320,11 +2353,15 @@ public final class MiGongPB {
           to_bitField0_ |= 0x00000008;
         }
         result.end_ = end_;
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          beanPos_ = java.util.Collections.unmodifiableList(beanPos_);
-          bitField0_ = (bitField0_ & ~0x00000020);
+        if (beansBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            beans_ = java.util.Collections.unmodifiableList(beans_);
+            bitField0_ = (bitField0_ & ~0x00000020);
+          }
+          result.beans_ = beans_;
+        } else {
+          result.beans_ = beansBuilder_.build();
         }
-        result.beanPos_ = beanPos_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2363,15 +2400,31 @@ public final class MiGongPB {
         if (other.hasEnd()) {
           setEnd(other.getEnd());
         }
-        if (!other.beanPos_.isEmpty()) {
-          if (beanPos_.isEmpty()) {
-            beanPos_ = other.beanPos_;
-            bitField0_ = (bitField0_ & ~0x00000020);
-          } else {
-            ensureBeanPosIsMutable();
-            beanPos_.addAll(other.beanPos_);
+        if (beansBuilder_ == null) {
+          if (!other.beans_.isEmpty()) {
+            if (beans_.isEmpty()) {
+              beans_ = other.beans_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+            } else {
+              ensureBeansIsMutable();
+              beans_.addAll(other.beans_);
+            }
+            onChanged();
           }
-          onChanged();
+        } else {
+          if (!other.beans_.isEmpty()) {
+            if (beansBuilder_.isEmpty()) {
+              beansBuilder_.dispose();
+              beansBuilder_ = null;
+              beans_ = other.beans_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+              beansBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getBeansFieldBuilder() : null;
+            } else {
+              beansBuilder_.addAllMessages(other.beans_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2393,6 +2446,12 @@ public final class MiGongPB {
         if (!hasEnd()) {
           
           return false;
+        }
+        for (int i = 0; i < getBeansCount(); i++) {
+          if (!getBeans(i).isInitialized()) {
+            
+            return false;
+          }
         }
         return true;
       }
@@ -2699,98 +2758,316 @@ public final class MiGongPB {
         return this;
       }
 
-      // repeated int32 beanPos = 6;
-      private java.util.List<java.lang.Integer> beanPos_ = java.util.Collections.emptyList();
-      private void ensureBeanPosIsMutable() {
+      // repeated .PBBeanInfo beans = 6;
+      private java.util.List<com.protocol.MiGongPB.PBBeanInfo> beans_ =
+        java.util.Collections.emptyList();
+      private void ensureBeansIsMutable() {
         if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          beanPos_ = new java.util.ArrayList<java.lang.Integer>(beanPos_);
+          beans_ = new java.util.ArrayList<com.protocol.MiGongPB.PBBeanInfo>(beans_);
           bitField0_ |= 0x00000020;
          }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder> beansBuilder_;
+
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
-       * 豆子的位置
+       * 豆子
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getBeanPosList() {
-        return java.util.Collections.unmodifiableList(beanPos_);
+      public java.util.List<com.protocol.MiGongPB.PBBeanInfo> getBeansList() {
+        if (beansBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(beans_);
+        } else {
+          return beansBuilder_.getMessageList();
+        }
       }
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
-       * 豆子的位置
+       * 豆子
        * </pre>
        */
-      public int getBeanPosCount() {
-        return beanPos_.size();
+      public int getBeansCount() {
+        if (beansBuilder_ == null) {
+          return beans_.size();
+        } else {
+          return beansBuilder_.getCount();
+        }
       }
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
-       * 豆子的位置
+       * 豆子
        * </pre>
        */
-      public int getBeanPos(int index) {
-        return beanPos_.get(index);
+      public com.protocol.MiGongPB.PBBeanInfo getBeans(int index) {
+        if (beansBuilder_ == null) {
+          return beans_.get(index);
+        } else {
+          return beansBuilder_.getMessage(index);
+        }
       }
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
-       * 豆子的位置
+       * 豆子
        * </pre>
        */
-      public Builder setBeanPos(
-          int index, int value) {
-        ensureBeanPosIsMutable();
-        beanPos_.set(index, value);
-        onChanged();
+      public Builder setBeans(
+          int index, com.protocol.MiGongPB.PBBeanInfo value) {
+        if (beansBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBeansIsMutable();
+          beans_.set(index, value);
+          onChanged();
+        } else {
+          beansBuilder_.setMessage(index, value);
+        }
         return this;
       }
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
-       * 豆子的位置
+       * 豆子
        * </pre>
        */
-      public Builder addBeanPos(int value) {
-        ensureBeanPosIsMutable();
-        beanPos_.add(value);
-        onChanged();
+      public Builder setBeans(
+          int index, com.protocol.MiGongPB.PBBeanInfo.Builder builderForValue) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          beans_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          beansBuilder_.setMessage(index, builderForValue.build());
+        }
         return this;
       }
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
-       * 豆子的位置
+       * 豆子
        * </pre>
        */
-      public Builder addAllBeanPos(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureBeanPosIsMutable();
-        super.addAll(values, beanPos_);
-        onChanged();
+      public Builder addBeans(com.protocol.MiGongPB.PBBeanInfo value) {
+        if (beansBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBeansIsMutable();
+          beans_.add(value);
+          onChanged();
+        } else {
+          beansBuilder_.addMessage(value);
+        }
         return this;
       }
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
-       * 豆子的位置
+       * 豆子
        * </pre>
        */
-      public Builder clearBeanPos() {
-        beanPos_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
-        onChanged();
+      public Builder addBeans(
+          int index, com.protocol.MiGongPB.PBBeanInfo value) {
+        if (beansBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBeansIsMutable();
+          beans_.add(index, value);
+          onChanged();
+        } else {
+          beansBuilder_.addMessage(index, value);
+        }
         return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子
+       * </pre>
+       */
+      public Builder addBeans(
+          com.protocol.MiGongPB.PBBeanInfo.Builder builderForValue) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          beans_.add(builderForValue.build());
+          onChanged();
+        } else {
+          beansBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子
+       * </pre>
+       */
+      public Builder addBeans(
+          int index, com.protocol.MiGongPB.PBBeanInfo.Builder builderForValue) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          beans_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          beansBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子
+       * </pre>
+       */
+      public Builder addAllBeans(
+          java.lang.Iterable<? extends com.protocol.MiGongPB.PBBeanInfo> values) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          super.addAll(values, beans_);
+          onChanged();
+        } else {
+          beansBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子
+       * </pre>
+       */
+      public Builder clearBeans() {
+        if (beansBuilder_ == null) {
+          beans_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+          onChanged();
+        } else {
+          beansBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子
+       * </pre>
+       */
+      public Builder removeBeans(int index) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          beans_.remove(index);
+          onChanged();
+        } else {
+          beansBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBBeanInfo.Builder getBeansBuilder(
+          int index) {
+        return getBeansFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
+          int index) {
+        if (beansBuilder_ == null) {
+          return beans_.get(index);  } else {
+          return beansBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子
+       * </pre>
+       */
+      public java.util.List<? extends com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
+           getBeansOrBuilderList() {
+        if (beansBuilder_ != null) {
+          return beansBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(beans_);
+        }
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBBeanInfo.Builder addBeansBuilder() {
+        return getBeansFieldBuilder().addBuilder(
+            com.protocol.MiGongPB.PBBeanInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBBeanInfo.Builder addBeansBuilder(
+          int index) {
+        return getBeansFieldBuilder().addBuilder(
+            index, com.protocol.MiGongPB.PBBeanInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子
+       * </pre>
+       */
+      public java.util.List<com.protocol.MiGongPB.PBBeanInfo.Builder> 
+           getBeansBuilderList() {
+        return getBeansFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
+          getBeansFieldBuilder() {
+        if (beansBuilder_ == null) {
+          beansBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder>(
+                  beans_,
+                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  getParentForChildren(),
+                  isClean());
+          beans_ = null;
+        }
+        return beansBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:SCGetMiGongMap)
@@ -2802,6 +3079,571 @@ public final class MiGongPB {
     }
 
     // @@protoc_insertion_point(class_scope:SCGetMiGongMap)
+  }
+
+  public interface PBBeanInfoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int32 pos = 1;
+    /**
+     * <code>required int32 pos = 1;</code>
+     *
+     * <pre>
+     * 豆子的位置
+     * </pre>
+     */
+    boolean hasPos();
+    /**
+     * <code>required int32 pos = 1;</code>
+     *
+     * <pre>
+     * 豆子的位置
+     * </pre>
+     */
+    int getPos();
+
+    // required int32 score = 2;
+    /**
+     * <code>required int32 score = 2;</code>
+     *
+     * <pre>
+     * 豆子的分数
+     * </pre>
+     */
+    boolean hasScore();
+    /**
+     * <code>required int32 score = 2;</code>
+     *
+     * <pre>
+     * 豆子的分数
+     * </pre>
+     */
+    int getScore();
+  }
+  /**
+   * Protobuf type {@code PBBeanInfo}
+   *
+   * <pre>
+   * 豆子信息
+   * </pre>
+   */
+  public static final class PBBeanInfo extends
+      com.google.protobuf.GeneratedMessage
+      implements PBBeanInfoOrBuilder {
+    // Use PBBeanInfo.newBuilder() to construct.
+    private PBBeanInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PBBeanInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PBBeanInfo defaultInstance;
+    public static PBBeanInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PBBeanInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PBBeanInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              pos_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              score_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.protocol.MiGongPB.internal_static_PBBeanInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.protocol.MiGongPB.internal_static_PBBeanInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.protocol.MiGongPB.PBBeanInfo.class, com.protocol.MiGongPB.PBBeanInfo.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PBBeanInfo> PARSER =
+        new com.google.protobuf.AbstractParser<PBBeanInfo>() {
+      public PBBeanInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PBBeanInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PBBeanInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int32 pos = 1;
+    public static final int POS_FIELD_NUMBER = 1;
+    private int pos_;
+    /**
+     * <code>required int32 pos = 1;</code>
+     *
+     * <pre>
+     * 豆子的位置
+     * </pre>
+     */
+    public boolean hasPos() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 pos = 1;</code>
+     *
+     * <pre>
+     * 豆子的位置
+     * </pre>
+     */
+    public int getPos() {
+      return pos_;
+    }
+
+    // required int32 score = 2;
+    public static final int SCORE_FIELD_NUMBER = 2;
+    private int score_;
+    /**
+     * <code>required int32 score = 2;</code>
+     *
+     * <pre>
+     * 豆子的分数
+     * </pre>
+     */
+    public boolean hasScore() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 score = 2;</code>
+     *
+     * <pre>
+     * 豆子的分数
+     * </pre>
+     */
+    public int getScore() {
+      return score_;
+    }
+
+    private void initFields() {
+      pos_ = 0;
+      score_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasPos()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasScore()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, pos_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, score_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, pos_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, score_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.protocol.MiGongPB.PBBeanInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.PBBeanInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.PBBeanInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.PBBeanInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.PBBeanInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.PBBeanInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.PBBeanInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.protocol.MiGongPB.PBBeanInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.PBBeanInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.PBBeanInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.protocol.MiGongPB.PBBeanInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PBBeanInfo}
+     *
+     * <pre>
+     * 豆子信息
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.protocol.MiGongPB.PBBeanInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.protocol.MiGongPB.internal_static_PBBeanInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.protocol.MiGongPB.internal_static_PBBeanInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.protocol.MiGongPB.PBBeanInfo.class, com.protocol.MiGongPB.PBBeanInfo.Builder.class);
+      }
+
+      // Construct using com.protocol.MiGongPB.PBBeanInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        pos_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        score_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.protocol.MiGongPB.internal_static_PBBeanInfo_descriptor;
+      }
+
+      public com.protocol.MiGongPB.PBBeanInfo getDefaultInstanceForType() {
+        return com.protocol.MiGongPB.PBBeanInfo.getDefaultInstance();
+      }
+
+      public com.protocol.MiGongPB.PBBeanInfo build() {
+        com.protocol.MiGongPB.PBBeanInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.protocol.MiGongPB.PBBeanInfo buildPartial() {
+        com.protocol.MiGongPB.PBBeanInfo result = new com.protocol.MiGongPB.PBBeanInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.pos_ = pos_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.score_ = score_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.protocol.MiGongPB.PBBeanInfo) {
+          return mergeFrom((com.protocol.MiGongPB.PBBeanInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.protocol.MiGongPB.PBBeanInfo other) {
+        if (other == com.protocol.MiGongPB.PBBeanInfo.getDefaultInstance()) return this;
+        if (other.hasPos()) {
+          setPos(other.getPos());
+        }
+        if (other.hasScore()) {
+          setScore(other.getScore());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasPos()) {
+          
+          return false;
+        }
+        if (!hasScore()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.protocol.MiGongPB.PBBeanInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.protocol.MiGongPB.PBBeanInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int32 pos = 1;
+      private int pos_ ;
+      /**
+       * <code>required int32 pos = 1;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public boolean hasPos() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 pos = 1;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public int getPos() {
+        return pos_;
+      }
+      /**
+       * <code>required int32 pos = 1;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public Builder setPos(int value) {
+        bitField0_ |= 0x00000001;
+        pos_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 pos = 1;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public Builder clearPos() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        pos_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 score = 2;
+      private int score_ ;
+      /**
+       * <code>required int32 score = 2;</code>
+       *
+       * <pre>
+       * 豆子的分数
+       * </pre>
+       */
+      public boolean hasScore() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 score = 2;</code>
+       *
+       * <pre>
+       * 豆子的分数
+       * </pre>
+       */
+      public int getScore() {
+        return score_;
+      }
+      /**
+       * <code>required int32 score = 2;</code>
+       *
+       * <pre>
+       * 豆子的分数
+       * </pre>
+       */
+      public Builder setScore(int value) {
+        bitField0_ |= 0x00000002;
+        score_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 score = 2;</code>
+       *
+       * <pre>
+       * 豆子的分数
+       * </pre>
+       */
+      public Builder clearScore() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        score_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PBBeanInfo)
+    }
+
+    static {
+      defaultInstance = new PBBeanInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PBBeanInfo)
   }
 
   public interface CSPassFinishOrBuilder
@@ -7625,31 +8467,50 @@ public final class MiGongPB {
      */
     int getEnd();
 
-    // repeated int32 beanPos = 6;
+    // repeated .PBBeanInfo beans = 6;
     /**
-     * <code>repeated int32 beanPos = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 6;</code>
      *
      * <pre>
      * 豆子的位置
      * </pre>
      */
-    java.util.List<java.lang.Integer> getBeanPosList();
+    java.util.List<com.protocol.MiGongPB.PBBeanInfo> 
+        getBeansList();
     /**
-     * <code>repeated int32 beanPos = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 6;</code>
      *
      * <pre>
      * 豆子的位置
      * </pre>
      */
-    int getBeanPosCount();
+    com.protocol.MiGongPB.PBBeanInfo getBeans(int index);
     /**
-     * <code>repeated int32 beanPos = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 6;</code>
      *
      * <pre>
      * 豆子的位置
      * </pre>
      */
-    int getBeanPos(int index);
+    int getBeansCount();
+    /**
+     * <code>repeated .PBBeanInfo beans = 6;</code>
+     *
+     * <pre>
+     * 豆子的位置
+     * </pre>
+     */
+    java.util.List<? extends com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
+        getBeansOrBuilderList();
+    /**
+     * <code>repeated .PBBeanInfo beans = 6;</code>
+     *
+     * <pre>
+     * 豆子的位置
+     * </pre>
+     */
+    com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code SCUnlimitedGo}
@@ -7743,25 +8604,12 @@ public final class MiGongPB {
               end_ = input.readInt32();
               break;
             }
-            case 48: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-                beanPos_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000020;
-              }
-              beanPos_.add(input.readInt32());
-              break;
-            }
             case 50: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
-                beanPos_ = new java.util.ArrayList<java.lang.Integer>();
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                beans_ = new java.util.ArrayList<com.protocol.MiGongPB.PBBeanInfo>();
                 mutable_bitField0_ |= 0x00000020;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                beanPos_.add(input.readInt32());
-              }
-              input.popLimit(limit);
+              beans_.add(input.readMessage(com.protocol.MiGongPB.PBBeanInfo.PARSER, extensionRegistry));
               break;
             }
           }
@@ -7776,7 +8624,7 @@ public final class MiGongPB {
           map_ = java.util.Collections.unmodifiableList(map_);
         }
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-          beanPos_ = java.util.Collections.unmodifiableList(beanPos_);
+          beans_ = java.util.Collections.unmodifiableList(beans_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -7938,39 +8786,60 @@ public final class MiGongPB {
       return end_;
     }
 
-    // repeated int32 beanPos = 6;
-    public static final int BEANPOS_FIELD_NUMBER = 6;
-    private java.util.List<java.lang.Integer> beanPos_;
+    // repeated .PBBeanInfo beans = 6;
+    public static final int BEANS_FIELD_NUMBER = 6;
+    private java.util.List<com.protocol.MiGongPB.PBBeanInfo> beans_;
     /**
-     * <code>repeated int32 beanPos = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 6;</code>
      *
      * <pre>
      * 豆子的位置
      * </pre>
      */
-    public java.util.List<java.lang.Integer>
-        getBeanPosList() {
-      return beanPos_;
+    public java.util.List<com.protocol.MiGongPB.PBBeanInfo> getBeansList() {
+      return beans_;
     }
     /**
-     * <code>repeated int32 beanPos = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 6;</code>
      *
      * <pre>
      * 豆子的位置
      * </pre>
      */
-    public int getBeanPosCount() {
-      return beanPos_.size();
+    public java.util.List<? extends com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
+        getBeansOrBuilderList() {
+      return beans_;
     }
     /**
-     * <code>repeated int32 beanPos = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 6;</code>
      *
      * <pre>
      * 豆子的位置
      * </pre>
      */
-    public int getBeanPos(int index) {
-      return beanPos_.get(index);
+    public int getBeansCount() {
+      return beans_.size();
+    }
+    /**
+     * <code>repeated .PBBeanInfo beans = 6;</code>
+     *
+     * <pre>
+     * 豆子的位置
+     * </pre>
+     */
+    public com.protocol.MiGongPB.PBBeanInfo getBeans(int index) {
+      return beans_.get(index);
+    }
+    /**
+     * <code>repeated .PBBeanInfo beans = 6;</code>
+     *
+     * <pre>
+     * 豆子的位置
+     * </pre>
+     */
+    public com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
+        int index) {
+      return beans_.get(index);
     }
 
     private void initFields() {
@@ -7979,7 +8848,7 @@ public final class MiGongPB {
       speed_ = 0;
       start_ = 0;
       end_ = 0;
-      beanPos_ = java.util.Collections.emptyList();
+      beans_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8001,6 +8870,12 @@ public final class MiGongPB {
       if (!hasEnd()) {
         memoizedIsInitialized = 0;
         return false;
+      }
+      for (int i = 0; i < getBeansCount(); i++) {
+        if (!getBeans(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
       memoizedIsInitialized = 1;
       return true;
@@ -8024,8 +8899,8 @@ public final class MiGongPB {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(5, end_);
       }
-      for (int i = 0; i < beanPos_.size(); i++) {
-        output.writeInt32(6, beanPos_.get(i));
+      for (int i = 0; i < beans_.size(); i++) {
+        output.writeMessage(6, beans_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -8061,14 +8936,9 @@ public final class MiGongPB {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, end_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < beanPos_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(beanPos_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getBeanPosList().size();
+      for (int i = 0; i < beans_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, beans_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8178,6 +9048,7 @@ public final class MiGongPB {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getBeansFieldBuilder();
         }
       }
       private static Builder create() {
@@ -8196,8 +9067,12 @@ public final class MiGongPB {
         bitField0_ = (bitField0_ & ~0x00000008);
         end_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        beanPos_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
+        if (beansBuilder_ == null) {
+          beans_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+        } else {
+          beansBuilder_.clear();
+        }
         return this;
       }
 
@@ -8247,11 +9122,15 @@ public final class MiGongPB {
           to_bitField0_ |= 0x00000008;
         }
         result.end_ = end_;
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          beanPos_ = java.util.Collections.unmodifiableList(beanPos_);
-          bitField0_ = (bitField0_ & ~0x00000020);
+        if (beansBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            beans_ = java.util.Collections.unmodifiableList(beans_);
+            bitField0_ = (bitField0_ & ~0x00000020);
+          }
+          result.beans_ = beans_;
+        } else {
+          result.beans_ = beansBuilder_.build();
         }
-        result.beanPos_ = beanPos_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8290,15 +9169,31 @@ public final class MiGongPB {
         if (other.hasEnd()) {
           setEnd(other.getEnd());
         }
-        if (!other.beanPos_.isEmpty()) {
-          if (beanPos_.isEmpty()) {
-            beanPos_ = other.beanPos_;
-            bitField0_ = (bitField0_ & ~0x00000020);
-          } else {
-            ensureBeanPosIsMutable();
-            beanPos_.addAll(other.beanPos_);
+        if (beansBuilder_ == null) {
+          if (!other.beans_.isEmpty()) {
+            if (beans_.isEmpty()) {
+              beans_ = other.beans_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+            } else {
+              ensureBeansIsMutable();
+              beans_.addAll(other.beans_);
+            }
+            onChanged();
           }
-          onChanged();
+        } else {
+          if (!other.beans_.isEmpty()) {
+            if (beansBuilder_.isEmpty()) {
+              beansBuilder_.dispose();
+              beansBuilder_ = null;
+              beans_ = other.beans_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+              beansBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getBeansFieldBuilder() : null;
+            } else {
+              beansBuilder_.addAllMessages(other.beans_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8320,6 +9215,12 @@ public final class MiGongPB {
         if (!hasEnd()) {
           
           return false;
+        }
+        for (int i = 0; i < getBeansCount(); i++) {
+          if (!getBeans(i).isInitialized()) {
+            
+            return false;
+          }
         }
         return true;
       }
@@ -8626,98 +9527,316 @@ public final class MiGongPB {
         return this;
       }
 
-      // repeated int32 beanPos = 6;
-      private java.util.List<java.lang.Integer> beanPos_ = java.util.Collections.emptyList();
-      private void ensureBeanPosIsMutable() {
+      // repeated .PBBeanInfo beans = 6;
+      private java.util.List<com.protocol.MiGongPB.PBBeanInfo> beans_ =
+        java.util.Collections.emptyList();
+      private void ensureBeansIsMutable() {
         if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          beanPos_ = new java.util.ArrayList<java.lang.Integer>(beanPos_);
+          beans_ = new java.util.ArrayList<com.protocol.MiGongPB.PBBeanInfo>(beans_);
           bitField0_ |= 0x00000020;
          }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder> beansBuilder_;
+
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getBeanPosList() {
-        return java.util.Collections.unmodifiableList(beanPos_);
+      public java.util.List<com.protocol.MiGongPB.PBBeanInfo> getBeansList() {
+        if (beansBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(beans_);
+        } else {
+          return beansBuilder_.getMessageList();
+        }
       }
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public int getBeanPosCount() {
-        return beanPos_.size();
+      public int getBeansCount() {
+        if (beansBuilder_ == null) {
+          return beans_.size();
+        } else {
+          return beansBuilder_.getCount();
+        }
       }
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public int getBeanPos(int index) {
-        return beanPos_.get(index);
+      public com.protocol.MiGongPB.PBBeanInfo getBeans(int index) {
+        if (beansBuilder_ == null) {
+          return beans_.get(index);
+        } else {
+          return beansBuilder_.getMessage(index);
+        }
       }
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public Builder setBeanPos(
-          int index, int value) {
-        ensureBeanPosIsMutable();
-        beanPos_.set(index, value);
-        onChanged();
+      public Builder setBeans(
+          int index, com.protocol.MiGongPB.PBBeanInfo value) {
+        if (beansBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBeansIsMutable();
+          beans_.set(index, value);
+          onChanged();
+        } else {
+          beansBuilder_.setMessage(index, value);
+        }
         return this;
       }
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public Builder addBeanPos(int value) {
-        ensureBeanPosIsMutable();
-        beanPos_.add(value);
-        onChanged();
+      public Builder setBeans(
+          int index, com.protocol.MiGongPB.PBBeanInfo.Builder builderForValue) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          beans_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          beansBuilder_.setMessage(index, builderForValue.build());
+        }
         return this;
       }
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public Builder addAllBeanPos(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureBeanPosIsMutable();
-        super.addAll(values, beanPos_);
-        onChanged();
+      public Builder addBeans(com.protocol.MiGongPB.PBBeanInfo value) {
+        if (beansBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBeansIsMutable();
+          beans_.add(value);
+          onChanged();
+        } else {
+          beansBuilder_.addMessage(value);
+        }
         return this;
       }
       /**
-       * <code>repeated int32 beanPos = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 6;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public Builder clearBeanPos() {
-        beanPos_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
-        onChanged();
+      public Builder addBeans(
+          int index, com.protocol.MiGongPB.PBBeanInfo value) {
+        if (beansBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBeansIsMutable();
+          beans_.add(index, value);
+          onChanged();
+        } else {
+          beansBuilder_.addMessage(index, value);
+        }
         return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public Builder addBeans(
+          com.protocol.MiGongPB.PBBeanInfo.Builder builderForValue) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          beans_.add(builderForValue.build());
+          onChanged();
+        } else {
+          beansBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public Builder addBeans(
+          int index, com.protocol.MiGongPB.PBBeanInfo.Builder builderForValue) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          beans_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          beansBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public Builder addAllBeans(
+          java.lang.Iterable<? extends com.protocol.MiGongPB.PBBeanInfo> values) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          super.addAll(values, beans_);
+          onChanged();
+        } else {
+          beansBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public Builder clearBeans() {
+        if (beansBuilder_ == null) {
+          beans_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+          onChanged();
+        } else {
+          beansBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public Builder removeBeans(int index) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          beans_.remove(index);
+          onChanged();
+        } else {
+          beansBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBBeanInfo.Builder getBeansBuilder(
+          int index) {
+        return getBeansFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
+          int index) {
+        if (beansBuilder_ == null) {
+          return beans_.get(index);  } else {
+          return beansBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public java.util.List<? extends com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
+           getBeansOrBuilderList() {
+        if (beansBuilder_ != null) {
+          return beansBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(beans_);
+        }
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBBeanInfo.Builder addBeansBuilder() {
+        return getBeansFieldBuilder().addBuilder(
+            com.protocol.MiGongPB.PBBeanInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBBeanInfo.Builder addBeansBuilder(
+          int index) {
+        return getBeansFieldBuilder().addBuilder(
+            index, com.protocol.MiGongPB.PBBeanInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 6;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public java.util.List<com.protocol.MiGongPB.PBBeanInfo.Builder> 
+           getBeansBuilderList() {
+        return getBeansFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
+          getBeansFieldBuilder() {
+        if (beansBuilder_ == null) {
+          beansBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder>(
+                  beans_,
+                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  getParentForChildren(),
+                  isClean());
+          beans_ = null;
+        }
+        return beansBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:SCUnlimitedGo)
@@ -10132,31 +11251,50 @@ public final class MiGongPB {
     com.protocol.MiGongPB.PBOtherInfoOrBuilder getOtherInfosOrBuilder(
         int index);
 
-    // repeated int32 beanPos = 7;
+    // repeated .PBBeanInfo beans = 7;
     /**
-     * <code>repeated int32 beanPos = 7;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
      * </pre>
      */
-    java.util.List<java.lang.Integer> getBeanPosList();
+    java.util.List<com.protocol.MiGongPB.PBBeanInfo> 
+        getBeansList();
     /**
-     * <code>repeated int32 beanPos = 7;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
      * </pre>
      */
-    int getBeanPosCount();
+    com.protocol.MiGongPB.PBBeanInfo getBeans(int index);
     /**
-     * <code>repeated int32 beanPos = 7;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
      * </pre>
      */
-    int getBeanPos(int index);
+    int getBeansCount();
+    /**
+     * <code>repeated .PBBeanInfo beans = 7;</code>
+     *
+     * <pre>
+     * 豆子的位置
+     * </pre>
+     */
+    java.util.List<? extends com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
+        getBeansOrBuilderList();
+    /**
+     * <code>repeated .PBBeanInfo beans = 7;</code>
+     *
+     * <pre>
+     * 豆子的位置
+     * </pre>
+     */
+    com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code SCMatchingSuccess}
@@ -10262,25 +11400,12 @@ public final class MiGongPB {
               otherInfos_.add(input.readMessage(com.protocol.MiGongPB.PBOtherInfo.PARSER, extensionRegistry));
               break;
             }
-            case 56: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-                beanPos_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000040;
-              }
-              beanPos_.add(input.readInt32());
-              break;
-            }
             case 58: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040) && input.getBytesUntilLimit() > 0) {
-                beanPos_ = new java.util.ArrayList<java.lang.Integer>();
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                beans_ = new java.util.ArrayList<com.protocol.MiGongPB.PBBeanInfo>();
                 mutable_bitField0_ |= 0x00000040;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                beanPos_.add(input.readInt32());
-              }
-              input.popLimit(limit);
+              beans_.add(input.readMessage(com.protocol.MiGongPB.PBBeanInfo.PARSER, extensionRegistry));
               break;
             }
           }
@@ -10298,7 +11423,7 @@ public final class MiGongPB {
           otherInfos_ = java.util.Collections.unmodifiableList(otherInfos_);
         }
         if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-          beanPos_ = java.util.Collections.unmodifiableList(beanPos_);
+          beans_ = java.util.Collections.unmodifiableList(beans_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -10516,39 +11641,60 @@ public final class MiGongPB {
       return otherInfos_.get(index);
     }
 
-    // repeated int32 beanPos = 7;
-    public static final int BEANPOS_FIELD_NUMBER = 7;
-    private java.util.List<java.lang.Integer> beanPos_;
+    // repeated .PBBeanInfo beans = 7;
+    public static final int BEANS_FIELD_NUMBER = 7;
+    private java.util.List<com.protocol.MiGongPB.PBBeanInfo> beans_;
     /**
-     * <code>repeated int32 beanPos = 7;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
      * </pre>
      */
-    public java.util.List<java.lang.Integer>
-        getBeanPosList() {
-      return beanPos_;
+    public java.util.List<com.protocol.MiGongPB.PBBeanInfo> getBeansList() {
+      return beans_;
     }
     /**
-     * <code>repeated int32 beanPos = 7;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
      * </pre>
      */
-    public int getBeanPosCount() {
-      return beanPos_.size();
+    public java.util.List<? extends com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
+        getBeansOrBuilderList() {
+      return beans_;
     }
     /**
-     * <code>repeated int32 beanPos = 7;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
      * </pre>
      */
-    public int getBeanPos(int index) {
-      return beanPos_.get(index);
+    public int getBeansCount() {
+      return beans_.size();
+    }
+    /**
+     * <code>repeated .PBBeanInfo beans = 7;</code>
+     *
+     * <pre>
+     * 豆子的位置
+     * </pre>
+     */
+    public com.protocol.MiGongPB.PBBeanInfo getBeans(int index) {
+      return beans_.get(index);
+    }
+    /**
+     * <code>repeated .PBBeanInfo beans = 7;</code>
+     *
+     * <pre>
+     * 豆子的位置
+     * </pre>
+     */
+    public com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
+        int index) {
+      return beans_.get(index);
     }
 
     private void initFields() {
@@ -10558,7 +11704,7 @@ public final class MiGongPB {
       start_ = 0;
       end_ = 0;
       otherInfos_ = java.util.Collections.emptyList();
-      beanPos_ = java.util.Collections.emptyList();
+      beans_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10583,6 +11729,12 @@ public final class MiGongPB {
       }
       for (int i = 0; i < getOtherInfosCount(); i++) {
         if (!getOtherInfos(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getBeansCount(); i++) {
+        if (!getBeans(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -10612,8 +11764,8 @@ public final class MiGongPB {
       for (int i = 0; i < otherInfos_.size(); i++) {
         output.writeMessage(6, otherInfos_.get(i));
       }
-      for (int i = 0; i < beanPos_.size(); i++) {
-        output.writeInt32(7, beanPos_.get(i));
+      for (int i = 0; i < beans_.size(); i++) {
+        output.writeMessage(7, beans_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -10653,14 +11805,9 @@ public final class MiGongPB {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, otherInfos_.get(i));
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < beanPos_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(beanPos_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getBeanPosList().size();
+      for (int i = 0; i < beans_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, beans_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10775,6 +11922,7 @@ public final class MiGongPB {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getOtherInfosFieldBuilder();
+          getBeansFieldBuilder();
         }
       }
       private static Builder create() {
@@ -10799,8 +11947,12 @@ public final class MiGongPB {
         } else {
           otherInfosBuilder_.clear();
         }
-        beanPos_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000040);
+        if (beansBuilder_ == null) {
+          beans_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
+        } else {
+          beansBuilder_.clear();
+        }
         return this;
       }
 
@@ -10859,11 +12011,15 @@ public final class MiGongPB {
         } else {
           result.otherInfos_ = otherInfosBuilder_.build();
         }
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          beanPos_ = java.util.Collections.unmodifiableList(beanPos_);
-          bitField0_ = (bitField0_ & ~0x00000040);
+        if (beansBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+            beans_ = java.util.Collections.unmodifiableList(beans_);
+            bitField0_ = (bitField0_ & ~0x00000040);
+          }
+          result.beans_ = beans_;
+        } else {
+          result.beans_ = beansBuilder_.build();
         }
-        result.beanPos_ = beanPos_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -10928,15 +12084,31 @@ public final class MiGongPB {
             }
           }
         }
-        if (!other.beanPos_.isEmpty()) {
-          if (beanPos_.isEmpty()) {
-            beanPos_ = other.beanPos_;
-            bitField0_ = (bitField0_ & ~0x00000040);
-          } else {
-            ensureBeanPosIsMutable();
-            beanPos_.addAll(other.beanPos_);
+        if (beansBuilder_ == null) {
+          if (!other.beans_.isEmpty()) {
+            if (beans_.isEmpty()) {
+              beans_ = other.beans_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+            } else {
+              ensureBeansIsMutable();
+              beans_.addAll(other.beans_);
+            }
+            onChanged();
           }
-          onChanged();
+        } else {
+          if (!other.beans_.isEmpty()) {
+            if (beansBuilder_.isEmpty()) {
+              beansBuilder_.dispose();
+              beansBuilder_ = null;
+              beans_ = other.beans_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+              beansBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getBeansFieldBuilder() : null;
+            } else {
+              beansBuilder_.addAllMessages(other.beans_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -10961,6 +12133,12 @@ public final class MiGongPB {
         }
         for (int i = 0; i < getOtherInfosCount(); i++) {
           if (!getOtherInfos(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        for (int i = 0; i < getBeansCount(); i++) {
+          if (!getBeans(i).isInitialized()) {
             
             return false;
           }
@@ -11582,98 +12760,316 @@ public final class MiGongPB {
         return otherInfosBuilder_;
       }
 
-      // repeated int32 beanPos = 7;
-      private java.util.List<java.lang.Integer> beanPos_ = java.util.Collections.emptyList();
-      private void ensureBeanPosIsMutable() {
+      // repeated .PBBeanInfo beans = 7;
+      private java.util.List<com.protocol.MiGongPB.PBBeanInfo> beans_ =
+        java.util.Collections.emptyList();
+      private void ensureBeansIsMutable() {
         if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          beanPos_ = new java.util.ArrayList<java.lang.Integer>(beanPos_);
+          beans_ = new java.util.ArrayList<com.protocol.MiGongPB.PBBeanInfo>(beans_);
           bitField0_ |= 0x00000040;
          }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder> beansBuilder_;
+
       /**
-       * <code>repeated int32 beanPos = 7;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getBeanPosList() {
-        return java.util.Collections.unmodifiableList(beanPos_);
+      public java.util.List<com.protocol.MiGongPB.PBBeanInfo> getBeansList() {
+        if (beansBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(beans_);
+        } else {
+          return beansBuilder_.getMessageList();
+        }
       }
       /**
-       * <code>repeated int32 beanPos = 7;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public int getBeanPosCount() {
-        return beanPos_.size();
+      public int getBeansCount() {
+        if (beansBuilder_ == null) {
+          return beans_.size();
+        } else {
+          return beansBuilder_.getCount();
+        }
       }
       /**
-       * <code>repeated int32 beanPos = 7;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public int getBeanPos(int index) {
-        return beanPos_.get(index);
+      public com.protocol.MiGongPB.PBBeanInfo getBeans(int index) {
+        if (beansBuilder_ == null) {
+          return beans_.get(index);
+        } else {
+          return beansBuilder_.getMessage(index);
+        }
       }
       /**
-       * <code>repeated int32 beanPos = 7;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public Builder setBeanPos(
-          int index, int value) {
-        ensureBeanPosIsMutable();
-        beanPos_.set(index, value);
-        onChanged();
+      public Builder setBeans(
+          int index, com.protocol.MiGongPB.PBBeanInfo value) {
+        if (beansBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBeansIsMutable();
+          beans_.set(index, value);
+          onChanged();
+        } else {
+          beansBuilder_.setMessage(index, value);
+        }
         return this;
       }
       /**
-       * <code>repeated int32 beanPos = 7;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public Builder addBeanPos(int value) {
-        ensureBeanPosIsMutable();
-        beanPos_.add(value);
-        onChanged();
+      public Builder setBeans(
+          int index, com.protocol.MiGongPB.PBBeanInfo.Builder builderForValue) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          beans_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          beansBuilder_.setMessage(index, builderForValue.build());
+        }
         return this;
       }
       /**
-       * <code>repeated int32 beanPos = 7;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public Builder addAllBeanPos(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureBeanPosIsMutable();
-        super.addAll(values, beanPos_);
-        onChanged();
+      public Builder addBeans(com.protocol.MiGongPB.PBBeanInfo value) {
+        if (beansBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBeansIsMutable();
+          beans_.add(value);
+          onChanged();
+        } else {
+          beansBuilder_.addMessage(value);
+        }
         return this;
       }
       /**
-       * <code>repeated int32 beanPos = 7;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
        * </pre>
        */
-      public Builder clearBeanPos() {
-        beanPos_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000040);
-        onChanged();
+      public Builder addBeans(
+          int index, com.protocol.MiGongPB.PBBeanInfo value) {
+        if (beansBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBeansIsMutable();
+          beans_.add(index, value);
+          onChanged();
+        } else {
+          beansBuilder_.addMessage(index, value);
+        }
         return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 7;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public Builder addBeans(
+          com.protocol.MiGongPB.PBBeanInfo.Builder builderForValue) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          beans_.add(builderForValue.build());
+          onChanged();
+        } else {
+          beansBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 7;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public Builder addBeans(
+          int index, com.protocol.MiGongPB.PBBeanInfo.Builder builderForValue) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          beans_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          beansBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 7;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public Builder addAllBeans(
+          java.lang.Iterable<? extends com.protocol.MiGongPB.PBBeanInfo> values) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          super.addAll(values, beans_);
+          onChanged();
+        } else {
+          beansBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 7;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public Builder clearBeans() {
+        if (beansBuilder_ == null) {
+          beans_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
+          onChanged();
+        } else {
+          beansBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 7;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public Builder removeBeans(int index) {
+        if (beansBuilder_ == null) {
+          ensureBeansIsMutable();
+          beans_.remove(index);
+          onChanged();
+        } else {
+          beansBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 7;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBBeanInfo.Builder getBeansBuilder(
+          int index) {
+        return getBeansFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 7;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
+          int index) {
+        if (beansBuilder_ == null) {
+          return beans_.get(index);  } else {
+          return beansBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 7;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public java.util.List<? extends com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
+           getBeansOrBuilderList() {
+        if (beansBuilder_ != null) {
+          return beansBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(beans_);
+        }
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 7;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBBeanInfo.Builder addBeansBuilder() {
+        return getBeansFieldBuilder().addBuilder(
+            com.protocol.MiGongPB.PBBeanInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 7;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBBeanInfo.Builder addBeansBuilder(
+          int index) {
+        return getBeansFieldBuilder().addBuilder(
+            index, com.protocol.MiGongPB.PBBeanInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PBBeanInfo beans = 7;</code>
+       *
+       * <pre>
+       * 豆子的位置
+       * </pre>
+       */
+      public java.util.List<com.protocol.MiGongPB.PBBeanInfo.Builder> 
+           getBeansBuilderList() {
+        return getBeansFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
+          getBeansFieldBuilder() {
+        if (beansBuilder_ == null) {
+          beansBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder>(
+                  beans_,
+                  ((bitField0_ & 0x00000040) == 0x00000040),
+                  getParentForChildren(),
+                  isClean());
+          beans_ = null;
+        }
+        return beansBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:SCMatchingSuccess)
@@ -23414,6 +24810,11 @@ public final class MiGongPB {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_SCGetMiGongMap_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PBBeanInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PBBeanInfo_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_CSPassFinish_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -23601,48 +25002,49 @@ public final class MiGongPB {
       "vel\"Q\n\020SCGetMiGongLevel\022\030\n\020passCountInLe" +
       "vel\030\001 \003(\005\022\021\n\topenLevel\030\002 \002(\005\022\020\n\010openPass" +
       "\030\003 \002(\005\"-\n\016CSGetMiGongMap\022\r\n\005level\030\001 \002(\005\022" +
-      "\014\n\004pass\030\002 \002(\005\"g\n\016SCGetMiGongMap\022\013\n\003map\030\001" +
+      "\014\n\004pass\030\002 \002(\005\"r\n\016SCGetMiGongMap\022\013\n\003map\030\001" +
       " \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005sta" +
-      "rt\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022\017\n\007beanPos\030\006 \003(\005\"K" +
-      "\n\014CSPassFinish\022\r\n\005level\030\001 \002(\005\022\014\n\004pass\030\002 " +
-      "\002(\005\022\017\n\007success\030\003 \002(\005\022\r\n\005route\030\004 \003(\005\"D\n\014S" +
-      "CPassFinish\022\021\n\topenLevel\030\001 \002(\005\022\020\n\010openPa",
-      "ss\030\002 \002(\005\022\017\n\007success\030\003 \002(\005\"\033\n\tCSUseItem\022\016" +
-      "\n\006itemId\030\001 \002(\005\"\013\n\tSCUseItem\"\021\n\017CSUnlimit" +
-      "edInfo\"^\n\017SCUnlimitedInfo\022/\n\021unlimitedRa" +
-      "nkInfo\030\001 \003(\0132\024.PBUnlimitedRankInfo\022\014\n\004pa" +
-      "ss\030\002 \002(\005\022\014\n\004rank\030\003 \002(\005\"S\n\023PBUnlimitedRan" +
-      "kInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022" +
-      "\014\n\004pass\030\003 \002(\005\022\014\n\004rank\030\004 \002(\005\"\017\n\rCSUnlimit" +
-      "edGo\"f\n\rSCUnlimitedGo\022\013\n\003map\030\001 \003(\005\022\014\n\004ti" +
-      "me\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005start\030\004 \002(\005\022\013" +
-      "\n\003end\030\005 \002(\005\022\017\n\007beanPos\030\006 \003(\005\"\014\n\nCSMatchi",
-      "ng\"\014\n\nSCMatching\"\022\n\020CSCancelMatching\"\022\n\020" +
-      "SCCancelMatching\"\214\001\n\021SCMatchingSuccess\022\013" +
-      "\n\003map\030\001 \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005" +
-      "\022\r\n\005start\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022 \n\notherInf" +
-      "os\030\006 \003(\0132\014.PBOtherInfo\022\017\n\007beanPos\030\007 \003(\005\"" +
-      "K\n\013PBOtherInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010userNa" +
-      "me\030\002 \002(\t\022\r\n\005start\030\003 \002(\005\022\013\n\003end\030\004 \002(\005\"\020\n\016" +
-      "SCMatchingFail\"\t\n\007SCBegin\"@\n\006CSMove\022\014\n\004p" +
-      "osX\030\001 \002(\002\022\014\n\004posY\030\002 \002(\002\022\013\n\003dir\030\003 \002(\005\022\r\n\005" +
-      "speed\030\004 \002(\005\"\010\n\006SCMove\"4\n\nSCUserMove\022&\n\ru",
-      "serMoveInfos\030\001 \003(\0132\017.PBUserMoveInfo\"g\n\016P" +
-      "BUserMoveInfo\022\016\n\006userId\030\001 \002(\t\022\014\n\004posX\030\002 " +
-      "\002(\002\022\014\n\004posY\030\003 \002(\002\022\013\n\003dir\030\004 \002(\005\022\r\n\005speed\030" +
-      "\005 \002(\005\022\r\n\005frame\030\006 \002(\005\"\034\n\tCSEatBean\022\017\n\007bea" +
-      "nPos\030\001 \002(\005\"\013\n\tSCEatBean\"0\n\rSCSendEatBean" +
-      "\022\016\n\006userId\030\001 \002(\t\022\017\n\007beanPos\030\002 \002(\005\"\030\n\tCSA" +
-      "rrived\022\013\n\003pos\030\001 \002(\005\"\013\n\tSCArrived\"\037\n\rSCUs" +
-      "erArrived\022\016\n\006userId\030\001 \002(\t\"4\n\nSCGameOver\022" +
-      "&\n\tuserInfos\030\001 \003(\0132\023.PBGameOverUserInfo\"" +
-      "S\n\022PBGameOverUserInfo\022\016\n\006userId\030\001 \002(\t\022\020\n",
-      "\010userName\030\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005score\030\004" +
-      " \002(\005\"\r\n\013CSRoomHeart\"\r\n\013SCRoomHeart\"#\n\022CS" +
-      "SendWalkingRoute\022\r\n\005route\030\001 \003(\005\"\024\n\022SCSen" +
-      "dWalkingRoute\"\031\n\010CSCommon\022\r\n\005route\030\001 \003(\t" +
-      "\"\031\n\010SCCommon\022\r\n\005route\030\001 \003(\tB\016\n\014com.proto" +
-      "col"
+      "rt\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022\032\n\005beans\030\006 \003(\0132\013.P" +
+      "BBeanInfo\"(\n\nPBBeanInfo\022\013\n\003pos\030\001 \002(\005\022\r\n\005" +
+      "score\030\002 \002(\005\"K\n\014CSPassFinish\022\r\n\005level\030\001 \002" +
+      "(\005\022\014\n\004pass\030\002 \002(\005\022\017\n\007success\030\003 \002(\005\022\r\n\005rou",
+      "te\030\004 \003(\005\"D\n\014SCPassFinish\022\021\n\topenLevel\030\001 " +
+      "\002(\005\022\020\n\010openPass\030\002 \002(\005\022\017\n\007success\030\003 \002(\005\"\033" +
+      "\n\tCSUseItem\022\016\n\006itemId\030\001 \002(\005\"\013\n\tSCUseItem" +
+      "\"\021\n\017CSUnlimitedInfo\"^\n\017SCUnlimitedInfo\022/" +
+      "\n\021unlimitedRankInfo\030\001 \003(\0132\024.PBUnlimitedR" +
+      "ankInfo\022\014\n\004pass\030\002 \002(\005\022\014\n\004rank\030\003 \002(\005\"S\n\023P" +
+      "BUnlimitedRankInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010us" +
+      "erName\030\002 \002(\t\022\014\n\004pass\030\003 \002(\005\022\014\n\004rank\030\004 \002(\005" +
+      "\"\017\n\rCSUnlimitedGo\"q\n\rSCUnlimitedGo\022\013\n\003ma" +
+      "p\030\001 \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005",
+      "start\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022\032\n\005beans\030\006 \003(\0132" +
+      "\013.PBBeanInfo\"\014\n\nCSMatching\"\014\n\nSCMatching" +
+      "\"\022\n\020CSCancelMatching\"\022\n\020SCCancelMatching" +
+      "\"\227\001\n\021SCMatchingSuccess\022\013\n\003map\030\001 \003(\005\022\014\n\004t" +
+      "ime\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005start\030\004 \002(\005\022" +
+      "\013\n\003end\030\005 \002(\005\022 \n\notherInfos\030\006 \003(\0132\014.PBOth" +
+      "erInfo\022\032\n\005beans\030\007 \003(\0132\013.PBBeanInfo\"K\n\013PB" +
+      "OtherInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010userName\030\002 " +
+      "\002(\t\022\r\n\005start\030\003 \002(\005\022\013\n\003end\030\004 \002(\005\"\020\n\016SCMat" +
+      "chingFail\"\t\n\007SCBegin\"@\n\006CSMove\022\014\n\004posX\030\001",
+      " \002(\002\022\014\n\004posY\030\002 \002(\002\022\013\n\003dir\030\003 \002(\005\022\r\n\005speed" +
+      "\030\004 \002(\005\"\010\n\006SCMove\"4\n\nSCUserMove\022&\n\ruserMo" +
+      "veInfos\030\001 \003(\0132\017.PBUserMoveInfo\"g\n\016PBUser" +
+      "MoveInfo\022\016\n\006userId\030\001 \002(\t\022\014\n\004posX\030\002 \002(\002\022\014" +
+      "\n\004posY\030\003 \002(\002\022\013\n\003dir\030\004 \002(\005\022\r\n\005speed\030\005 \002(\005" +
+      "\022\r\n\005frame\030\006 \002(\005\"\034\n\tCSEatBean\022\017\n\007beanPos\030" +
+      "\001 \002(\005\"\013\n\tSCEatBean\"0\n\rSCSendEatBean\022\016\n\006u" +
+      "serId\030\001 \002(\t\022\017\n\007beanPos\030\002 \002(\005\"\030\n\tCSArrive" +
+      "d\022\013\n\003pos\030\001 \002(\005\"\013\n\tSCArrived\"\037\n\rSCUserArr" +
+      "ived\022\016\n\006userId\030\001 \002(\t\"4\n\nSCGameOver\022&\n\tus",
+      "erInfos\030\001 \003(\0132\023.PBGameOverUserInfo\"S\n\022PB" +
+      "GameOverUserInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010user" +
+      "Name\030\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005score\030\004 \002(\005\"" +
+      "\r\n\013CSRoomHeart\"\r\n\013SCRoomHeart\"#\n\022CSSendW" +
+      "alkingRoute\022\r\n\005route\030\001 \003(\005\"\024\n\022SCSendWalk" +
+      "ingRoute\"\031\n\010CSCommon\022\r\n\005route\030\001 \003(\t\"\031\n\010S" +
+      "CCommon\022\r\n\005route\030\001 \003(\tB\016\n\014com.protocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -23672,213 +25074,219 @@ public final class MiGongPB {
           internal_static_SCGetMiGongMap_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCGetMiGongMap_descriptor,
-              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "BeanPos", });
-          internal_static_CSPassFinish_descriptor =
+              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "Beans", });
+          internal_static_PBBeanInfo_descriptor =
             getDescriptor().getMessageTypes().get(4);
+          internal_static_PBBeanInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PBBeanInfo_descriptor,
+              new java.lang.String[] { "Pos", "Score", });
+          internal_static_CSPassFinish_descriptor =
+            getDescriptor().getMessageTypes().get(5);
           internal_static_CSPassFinish_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSPassFinish_descriptor,
               new java.lang.String[] { "Level", "Pass", "Success", "Route", });
           internal_static_SCPassFinish_descriptor =
-            getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(6);
           internal_static_SCPassFinish_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCPassFinish_descriptor,
               new java.lang.String[] { "OpenLevel", "OpenPass", "Success", });
           internal_static_CSUseItem_descriptor =
-            getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(7);
           internal_static_CSUseItem_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSUseItem_descriptor,
               new java.lang.String[] { "ItemId", });
           internal_static_SCUseItem_descriptor =
-            getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(8);
           internal_static_SCUseItem_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUseItem_descriptor,
               new java.lang.String[] { });
           internal_static_CSUnlimitedInfo_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(9);
           internal_static_CSUnlimitedInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSUnlimitedInfo_descriptor,
               new java.lang.String[] { });
           internal_static_SCUnlimitedInfo_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_SCUnlimitedInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUnlimitedInfo_descriptor,
               new java.lang.String[] { "UnlimitedRankInfo", "Pass", "Rank", });
           internal_static_PBUnlimitedRankInfo_descriptor =
-            getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(11);
           internal_static_PBUnlimitedRankInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBUnlimitedRankInfo_descriptor,
               new java.lang.String[] { "UserId", "UserName", "Pass", "Rank", });
           internal_static_CSUnlimitedGo_descriptor =
-            getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(12);
           internal_static_CSUnlimitedGo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSUnlimitedGo_descriptor,
               new java.lang.String[] { });
           internal_static_SCUnlimitedGo_descriptor =
-            getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(13);
           internal_static_SCUnlimitedGo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUnlimitedGo_descriptor,
-              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "BeanPos", });
+              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "Beans", });
           internal_static_CSMatching_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(14);
           internal_static_CSMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSMatching_descriptor,
               new java.lang.String[] { });
           internal_static_SCMatching_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(15);
           internal_static_SCMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatching_descriptor,
               new java.lang.String[] { });
           internal_static_CSCancelMatching_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(16);
           internal_static_CSCancelMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSCancelMatching_descriptor,
               new java.lang.String[] { });
           internal_static_SCCancelMatching_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_SCCancelMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCCancelMatching_descriptor,
               new java.lang.String[] { });
           internal_static_SCMatchingSuccess_descriptor =
-            getDescriptor().getMessageTypes().get(17);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_SCMatchingSuccess_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatchingSuccess_descriptor,
-              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "OtherInfos", "BeanPos", });
+              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "OtherInfos", "Beans", });
           internal_static_PBOtherInfo_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(19);
           internal_static_PBOtherInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBOtherInfo_descriptor,
               new java.lang.String[] { "UserId", "UserName", "Start", "End", });
           internal_static_SCMatchingFail_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_SCMatchingFail_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatchingFail_descriptor,
               new java.lang.String[] { });
           internal_static_SCBegin_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_SCBegin_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCBegin_descriptor,
               new java.lang.String[] { });
           internal_static_CSMove_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(22);
           internal_static_CSMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSMove_descriptor,
               new java.lang.String[] { "PosX", "PosY", "Dir", "Speed", });
           internal_static_SCMove_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_SCMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMove_descriptor,
               new java.lang.String[] { });
           internal_static_SCUserMove_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_SCUserMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUserMove_descriptor,
               new java.lang.String[] { "UserMoveInfos", });
           internal_static_PBUserMoveInfo_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_PBUserMoveInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBUserMoveInfo_descriptor,
               new java.lang.String[] { "UserId", "PosX", "PosY", "Dir", "Speed", "Frame", });
           internal_static_CSEatBean_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_CSEatBean_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSEatBean_descriptor,
               new java.lang.String[] { "BeanPos", });
           internal_static_SCEatBean_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_SCEatBean_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCEatBean_descriptor,
               new java.lang.String[] { });
           internal_static_SCSendEatBean_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_SCSendEatBean_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCSendEatBean_descriptor,
               new java.lang.String[] { "UserId", "BeanPos", });
           internal_static_CSArrived_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(29);
           internal_static_CSArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSArrived_descriptor,
               new java.lang.String[] { "Pos", });
           internal_static_SCArrived_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(30);
           internal_static_SCArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCArrived_descriptor,
               new java.lang.String[] { });
           internal_static_SCUserArrived_descriptor =
-            getDescriptor().getMessageTypes().get(30);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_SCUserArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUserArrived_descriptor,
               new java.lang.String[] { "UserId", });
           internal_static_SCGameOver_descriptor =
-            getDescriptor().getMessageTypes().get(31);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_SCGameOver_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCGameOver_descriptor,
               new java.lang.String[] { "UserInfos", });
           internal_static_PBGameOverUserInfo_descriptor =
-            getDescriptor().getMessageTypes().get(32);
+            getDescriptor().getMessageTypes().get(33);
           internal_static_PBGameOverUserInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBGameOverUserInfo_descriptor,
               new java.lang.String[] { "UserId", "UserName", "Rank", "Score", });
           internal_static_CSRoomHeart_descriptor =
-            getDescriptor().getMessageTypes().get(33);
+            getDescriptor().getMessageTypes().get(34);
           internal_static_CSRoomHeart_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSRoomHeart_descriptor,
               new java.lang.String[] { });
           internal_static_SCRoomHeart_descriptor =
-            getDescriptor().getMessageTypes().get(34);
+            getDescriptor().getMessageTypes().get(35);
           internal_static_SCRoomHeart_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCRoomHeart_descriptor,
               new java.lang.String[] { });
           internal_static_CSSendWalkingRoute_descriptor =
-            getDescriptor().getMessageTypes().get(35);
+            getDescriptor().getMessageTypes().get(36);
           internal_static_CSSendWalkingRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSSendWalkingRoute_descriptor,
               new java.lang.String[] { "Route", });
           internal_static_SCSendWalkingRoute_descriptor =
-            getDescriptor().getMessageTypes().get(36);
+            getDescriptor().getMessageTypes().get(37);
           internal_static_SCSendWalkingRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCSendWalkingRoute_descriptor,
               new java.lang.String[] { });
           internal_static_CSCommon_descriptor =
-            getDescriptor().getMessageTypes().get(37);
+            getDescriptor().getMessageTypes().get(38);
           internal_static_CSCommon_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSCommon_descriptor,
               new java.lang.String[] { "Route", });
           internal_static_SCCommon_descriptor =
-            getDescriptor().getMessageTypes().get(38);
+            getDescriptor().getMessageTypes().get(39);
           internal_static_SCCommon_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCCommon_descriptor,
