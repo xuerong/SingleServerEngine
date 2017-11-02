@@ -162,6 +162,14 @@ public class MiGongService {
         builder.setTime(miGongPassInfo.getTime());
         builder.setSpeed(miGongPassInfo.getSpeed());
         builder.setStart(miGongPassInfo.getStart().toInt(miGongPassInfo.getSize()));
+        for(Bean bean : miGongPassInfo.getBeans()){
+            MiGongPB.PBBeanInfo.Builder beanBuilder = MiGongPB.PBBeanInfo.newBuilder();
+            beanBuilder.setPos(bean.toInt(miGongPassInfo.getSize()));
+            beanBuilder.setScore(bean.getScore());
+            builder.addBeans(beanBuilder);
+        }
+        builder.setTarget(miGongPassInfo.getTarget());
+
         System.out.println("miGongPassInfo.getEnd():"+miGongPassInfo.getEnd());
         builder.setEnd(miGongPassInfo.getEnd().toInt(miGongPassInfo.getSize()));
         miGongPassInfoMap.put(session.getAccountId(),miGongPassInfo);
@@ -223,7 +231,71 @@ public class MiGongService {
         info.setUserId("xiaoming123");
         info.setUserName("xiaoming");
         builder.addUnlimitedRankInfo(info);
+
         return new RetPacketImpl(MiGongOpcode.SCUnlimitedInfo, builder.build().toByteArray());
+    }
+    @Request(opcode = MiGongOpcode.CSUnlimitedGo)
+    public RetPacket unlimitedGo(Object clientData, Session session) throws Throwable{
+        // todo 判断无尽模式是否打开，
+        UserMiGong userMiGong = get(session.getAccountId());
+
+        MiGongPassInfo miGongPassInfo = new MiGongPassInfo();
+        miGongPassInfo.setDifficulty(1); // 无尽模式设置难度
+        miGongPassInfo.setStartTime(new Timestamp(System.currentTimeMillis()));
+        miGongPassInfo = miGongParamsByDifficulty(miGongPassInfo);
+        MiGongPB.SCUnlimitedGo.Builder builder = MiGongPB.SCUnlimitedGo.newBuilder();
+
+        CreateMap myMap=miGongPassInfo.getCreateMap();							//地图
+
+        List<Integer> integers = new ArrayList<>(miGongPassInfo.getSize()*miGongPassInfo.getSize());
+        for(byte[] aa : miGongPassInfo.getCreateMap().getMap()){
+            for(byte bb : aa){
+                integers.add((int)bb);
+            }
+        }
+        builder.addAllMap(integers);
+        builder.setTarget(miGongPassInfo.getTarget());
+        builder.setSpeed(miGongPassInfo.getSpeed());
+        builder.setEnd(miGongPassInfo.getEnd().toInt(miGongPassInfo.getSize()));
+        builder.setStart(miGongPassInfo.getStart().toInt(miGongPassInfo.getSize()));
+        builder.setTime(miGongPassInfo.getTime());
+        for(Bean bean : miGongPassInfo.getBeans()){
+            MiGongPB.PBBeanInfo.Builder beanBuilder = MiGongPB.PBBeanInfo.newBuilder();
+            beanBuilder.setScore(bean.getScore());
+            beanBuilder.setPos(bean.toInt(miGongPassInfo.getSize()));
+            builder.addBeans(beanBuilder);
+        }
+
+        miGongPassInfoMap.put(session.getAccountId(),miGongPassInfo);
+
+        return new RetPacketImpl(MiGongOpcode.SCUnlimitedGo, builder.build().toByteArray());
+    }
+
+    @Request(opcode = MiGongOpcode.CSUnlimitedFinish)
+    public RetPacket unlimitedFinish(Object clientData, Session session) throws Throwable{
+        MiGongPB.CSUnlimitedFinish unlimitedFinish = MiGongPB.CSUnlimitedFinish.parseFrom((byte[])clientData);
+        // 校验关卡
+        MiGongPassInfo miGongPassInfo = miGongPassInfoMap.remove(session.getAccountId());
+        if(miGongPassInfo == null){
+            throw new ToClientException("Invalid params");
+        }
+        UserMiGong userMiGong = get(session.getAccountId());
+
+        boolean isSuccess = false;
+        if(unlimitedFinish.getSuccess() > 0){
+            // 校验
+            List<Integer> routeList = unlimitedFinish.getRouteList();
+            isSuccess = miGongPassInfo.getCreateMap().checkRouteWithoutSkill(routeList);
+        }
+        //
+        if(isSuccess){
+            userMiGong.setPassUnlimited(userMiGong.getPassUnlimited()+1);
+            dataService.update(userMiGong);
+        }
+        MiGongPB.SCUnlimitedFinish.Builder builder = MiGongPB.SCUnlimitedFinish.newBuilder();
+        builder.setOpenPass(userMiGong.getPassUnlimited());
+        builder.setSuccess(isSuccess?1:0);
+        return new RetPacketImpl(MiGongOpcode.SCUnlimitedFinish, builder.build().toByteArray());
     }
 
     /**
@@ -238,6 +310,7 @@ public class MiGongService {
             MiGongPassInfo miGongPassInfo = entry.getValue();
             if((miGongPassInfo.getTime()+20)*1000 < currentTime - miGongPassInfo.getStartTime().getTime()){
                 miGongPassInfoMap.remove(entry.getKey());
+                log.warn("mi gong info remove by checkMiGongPassInfo,uid = {}",entry.getKey());
             }
         }
     }
@@ -296,9 +369,37 @@ public class MiGongService {
         miGongPassInfo.setTime(difficulty*300);
         miGongPassInfo.setSpeed(10);
 
-        //todo 生成豆子的位置
+        //生成豆子的位置
+        Bean[] beans = createBeans(size);
+        miGongPassInfo.setBeans(beans);
+        miGongPassInfo.setTarget(beans.length - 30 + difficulty); // todo 这个难度算法后面要改
 
         return miGongPassInfo;
+    }
+
+    /**
+     * 生成豆子的逻辑，目前定为，中间一个10分的，四边四个五分的，40个1分的
+     * @return
+     */
+    private Bean[] createBeans(int size){
+        //
+        int bean10Count = 1;
+        int bean5Count = 4;
+        int bean1Count = 40;
+        Bean[] ret = new Bean[bean10Count + bean5Count + bean1Count];
+        ret[0] = new Bean(size/2,size/2,10);
+
+        ret[1] = new Bean(size/2,1,10);
+        ret[2] = new Bean(size/2,size-1,10);
+        ret[3] = new Bean(1,size/2,10);
+        ret[4] = new Bean(size-1,size/2,10);
+
+        Random random = new Random(System.currentTimeMillis());
+        for(int i =0;i<bean1Count;i++){
+            int posInt = random.nextInt((size - 1)*(size-1));
+            ret[i+5] = new Bean(posInt/(size-1) + 1,posInt%(size-1)+1,1);
+        }
+        return ret;
     }
 
     @Request(opcode = MiGongOpcode.CSSendWalkingRoute)
@@ -462,6 +563,15 @@ public class MiGongService {
                 builder.addMap((int)b);
             }
         }
+        // 豆子
+        Bean[] beans = createBeans(size);
+        for(Bean bean : beans){
+            MiGongPB.PBBeanInfo.Builder beanBuilder = MiGongPB.PBBeanInfo.newBuilder();
+            beanBuilder.setPos(bean.toInt(size));
+            beanBuilder.setScore(bean.getScore());
+            builder.addBeans(beanBuilder);
+        }
+
         builder.setSpeed(10); // todo 速度
         int index = 0;
         for(RoomUser roomUser : roomUserList){

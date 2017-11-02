@@ -145,7 +145,7 @@ public class Pacman : MonoBehaviour {
 			return;
 		}
 //		Debug.Log (LastDir+","+dir);
-		if (mapCreate.Mode == 0) {
+		if (mapCreate.Mode == MapMode.Level || mapCreate.Mode == MapMode.Unlimited) {
 			this.Dir = dir;
 		} else {
 			this.Dir = dir;

@@ -21,6 +21,7 @@ public class MiGongPassInfo {
     private int level;
     private int pass;
     private Bean[] beans; // 豆子
+    private int target; // 吃豆子的目标
     private Timestamp startTime; // 开始时间
 
     public CreateMap getCreateMap() {
@@ -109,6 +110,14 @@ public class MiGongPassInfo {
 
     public void setBeans(Bean[] beans) {
         this.beans = beans;
+    }
+
+    public int getTarget() {
+        return target;
+    }
+
+    public void setTarget(int target) {
+        this.target = target;
     }
 
     public Timestamp getStartTime() {

@@ -5,6 +5,17 @@ public class Bean {
     private int y;
     private int score;
 
+    public Bean(){}
+    public Bean(int x,int y,int score){
+        this.x = x;
+        this.y = y;
+        this.score = score;
+    }
+
+    public int toInt(int size){
+        return x*size+y;
+    }
+
     public int getX() {
         return x;
     }

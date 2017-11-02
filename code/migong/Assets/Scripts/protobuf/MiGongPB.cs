@@ -64,6 +64,9 @@ namespace Example
         /// <summary> 终点</summary>
         public List<Example.PBBeanInfo> Beans { get; set; }
 
+        /// <summary> 豆子</summary>
+        public int Target { get; set; }
+
     }
 
     /// <summary> 豆子信息</summary>
@@ -164,6 +167,27 @@ namespace Example
 
         /// <summary> 终点</summary>
         public List<Example.PBBeanInfo> Beans { get; set; }
+
+        /// <summary> 豆子的位置</summary>
+        public int Target { get; set; }
+
+    }
+
+    /// <summary> 成功或失败 :</summary>
+    public partial class CSUnlimitedFinish
+    {
+        public int Success { get; set; }
+
+        public List<int> Route { get; set; }
+
+    }
+
+    public partial class SCUnlimitedFinish
+    {
+        public int OpenPass { get; set; }
+
+        /// <summary> 已经开启的关卡</summary>
+        public int Success { get; set; }
 
     }
 

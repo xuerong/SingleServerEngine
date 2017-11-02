@@ -1742,6 +1742,24 @@ public final class MiGongPB {
      */
     com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
         int index);
+
+    // required int32 target = 7;
+    /**
+     * <code>required int32 target = 7;</code>
+     *
+     * <pre>
+     * 目标分数
+     * </pre>
+     */
+    boolean hasTarget();
+    /**
+     * <code>required int32 target = 7;</code>
+     *
+     * <pre>
+     * 目标分数
+     * </pre>
+     */
+    int getTarget();
   }
   /**
    * Protobuf type {@code SCGetMiGongMap}
@@ -1841,6 +1859,11 @@ public final class MiGongPB {
                 mutable_bitField0_ |= 0x00000020;
               }
               beans_.add(input.readMessage(com.protocol.MiGongPB.PBBeanInfo.PARSER, extensionRegistry));
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000010;
+              target_ = input.readInt32();
               break;
             }
           }
@@ -2073,6 +2096,30 @@ public final class MiGongPB {
       return beans_.get(index);
     }
 
+    // required int32 target = 7;
+    public static final int TARGET_FIELD_NUMBER = 7;
+    private int target_;
+    /**
+     * <code>required int32 target = 7;</code>
+     *
+     * <pre>
+     * 目标分数
+     * </pre>
+     */
+    public boolean hasTarget() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 target = 7;</code>
+     *
+     * <pre>
+     * 目标分数
+     * </pre>
+     */
+    public int getTarget() {
+      return target_;
+    }
+
     private void initFields() {
       map_ = java.util.Collections.emptyList();
       time_ = 0;
@@ -2080,6 +2127,7 @@ public final class MiGongPB {
       start_ = 0;
       end_ = 0;
       beans_ = java.util.Collections.emptyList();
+      target_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2099,6 +2147,10 @@ public final class MiGongPB {
         return false;
       }
       if (!hasEnd()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTarget()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -2132,6 +2184,9 @@ public final class MiGongPB {
       }
       for (int i = 0; i < beans_.size(); i++) {
         output.writeMessage(6, beans_.get(i));
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(7, target_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2170,6 +2225,10 @@ public final class MiGongPB {
       for (int i = 0; i < beans_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, beans_.get(i));
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, target_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2304,6 +2363,8 @@ public final class MiGongPB {
         } else {
           beansBuilder_.clear();
         }
+        target_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -2362,6 +2423,10 @@ public final class MiGongPB {
         } else {
           result.beans_ = beansBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.target_ = target_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2426,6 +2491,9 @@ public final class MiGongPB {
             }
           }
         }
+        if (other.hasTarget()) {
+          setTarget(other.getTarget());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -2444,6 +2512,10 @@ public final class MiGongPB {
           return false;
         }
         if (!hasEnd()) {
+          
+          return false;
+        }
+        if (!hasTarget()) {
           
           return false;
         }
@@ -3068,6 +3140,55 @@ public final class MiGongPB {
           beans_ = null;
         }
         return beansBuilder_;
+      }
+
+      // required int32 target = 7;
+      private int target_ ;
+      /**
+       * <code>required int32 target = 7;</code>
+       *
+       * <pre>
+       * 目标分数
+       * </pre>
+       */
+      public boolean hasTarget() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required int32 target = 7;</code>
+       *
+       * <pre>
+       * 目标分数
+       * </pre>
+       */
+      public int getTarget() {
+        return target_;
+      }
+      /**
+       * <code>required int32 target = 7;</code>
+       *
+       * <pre>
+       * 目标分数
+       * </pre>
+       */
+      public Builder setTarget(int value) {
+        bitField0_ |= 0x00000040;
+        target_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 target = 7;</code>
+       *
+       * <pre>
+       * 目标分数
+       * </pre>
+       */
+      public Builder clearTarget() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        target_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:SCGetMiGongMap)
@@ -8511,6 +8632,24 @@ public final class MiGongPB {
      */
     com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
         int index);
+
+    // required int32 target = 7;
+    /**
+     * <code>required int32 target = 7;</code>
+     *
+     * <pre>
+     * 目标分数
+     * </pre>
+     */
+    boolean hasTarget();
+    /**
+     * <code>required int32 target = 7;</code>
+     *
+     * <pre>
+     * 目标分数
+     * </pre>
+     */
+    int getTarget();
   }
   /**
    * Protobuf type {@code SCUnlimitedGo}
@@ -8610,6 +8749,11 @@ public final class MiGongPB {
                 mutable_bitField0_ |= 0x00000020;
               }
               beans_.add(input.readMessage(com.protocol.MiGongPB.PBBeanInfo.PARSER, extensionRegistry));
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000010;
+              target_ = input.readInt32();
               break;
             }
           }
@@ -8842,6 +8986,30 @@ public final class MiGongPB {
       return beans_.get(index);
     }
 
+    // required int32 target = 7;
+    public static final int TARGET_FIELD_NUMBER = 7;
+    private int target_;
+    /**
+     * <code>required int32 target = 7;</code>
+     *
+     * <pre>
+     * 目标分数
+     * </pre>
+     */
+    public boolean hasTarget() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 target = 7;</code>
+     *
+     * <pre>
+     * 目标分数
+     * </pre>
+     */
+    public int getTarget() {
+      return target_;
+    }
+
     private void initFields() {
       map_ = java.util.Collections.emptyList();
       time_ = 0;
@@ -8849,6 +9017,7 @@ public final class MiGongPB {
       start_ = 0;
       end_ = 0;
       beans_ = java.util.Collections.emptyList();
+      target_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8868,6 +9037,10 @@ public final class MiGongPB {
         return false;
       }
       if (!hasEnd()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTarget()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -8901,6 +9074,9 @@ public final class MiGongPB {
       }
       for (int i = 0; i < beans_.size(); i++) {
         output.writeMessage(6, beans_.get(i));
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(7, target_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -8939,6 +9115,10 @@ public final class MiGongPB {
       for (int i = 0; i < beans_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, beans_.get(i));
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, target_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9073,6 +9253,8 @@ public final class MiGongPB {
         } else {
           beansBuilder_.clear();
         }
+        target_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -9131,6 +9313,10 @@ public final class MiGongPB {
         } else {
           result.beans_ = beansBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.target_ = target_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -9195,6 +9381,9 @@ public final class MiGongPB {
             }
           }
         }
+        if (other.hasTarget()) {
+          setTarget(other.getTarget());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -9213,6 +9402,10 @@ public final class MiGongPB {
           return false;
         }
         if (!hasEnd()) {
+          
+          return false;
+        }
+        if (!hasTarget()) {
           
           return false;
         }
@@ -9839,6 +10032,55 @@ public final class MiGongPB {
         return beansBuilder_;
       }
 
+      // required int32 target = 7;
+      private int target_ ;
+      /**
+       * <code>required int32 target = 7;</code>
+       *
+       * <pre>
+       * 目标分数
+       * </pre>
+       */
+      public boolean hasTarget() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required int32 target = 7;</code>
+       *
+       * <pre>
+       * 目标分数
+       * </pre>
+       */
+      public int getTarget() {
+        return target_;
+      }
+      /**
+       * <code>required int32 target = 7;</code>
+       *
+       * <pre>
+       * 目标分数
+       * </pre>
+       */
+      public Builder setTarget(int value) {
+        bitField0_ |= 0x00000040;
+        target_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 target = 7;</code>
+       *
+       * <pre>
+       * 目标分数
+       * </pre>
+       */
+      public Builder clearTarget() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        target_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:SCUnlimitedGo)
     }
 
@@ -9848,6 +10090,1171 @@ public final class MiGongPB {
     }
 
     // @@protoc_insertion_point(class_scope:SCUnlimitedGo)
+  }
+
+  public interface CSUnlimitedFinishOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int32 success = 1;
+    /**
+     * <code>required int32 success = 1;</code>
+     */
+    boolean hasSuccess();
+    /**
+     * <code>required int32 success = 1;</code>
+     */
+    int getSuccess();
+
+    // repeated int32 route = 2;
+    /**
+     * <code>repeated int32 route = 2;</code>
+     *
+     * <pre>
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getRouteList();
+    /**
+     * <code>repeated int32 route = 2;</code>
+     *
+     * <pre>
+     * </pre>
+     */
+    int getRouteCount();
+    /**
+     * <code>repeated int32 route = 2;</code>
+     *
+     * <pre>
+     * </pre>
+     */
+    int getRoute(int index);
+  }
+  /**
+   * Protobuf type {@code CSUnlimitedFinish}
+   *
+   * <pre>
+   * 成功或失败 :
+   * </pre>
+   */
+  public static final class CSUnlimitedFinish extends
+      com.google.protobuf.GeneratedMessage
+      implements CSUnlimitedFinishOrBuilder {
+    // Use CSUnlimitedFinish.newBuilder() to construct.
+    private CSUnlimitedFinish(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSUnlimitedFinish(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSUnlimitedFinish defaultInstance;
+    public static CSUnlimitedFinish getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSUnlimitedFinish getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSUnlimitedFinish(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              success_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                route_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              route_.add(input.readInt32());
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                route_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                route_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          route_ = java.util.Collections.unmodifiableList(route_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.protocol.MiGongPB.internal_static_CSUnlimitedFinish_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.protocol.MiGongPB.internal_static_CSUnlimitedFinish_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.protocol.MiGongPB.CSUnlimitedFinish.class, com.protocol.MiGongPB.CSUnlimitedFinish.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSUnlimitedFinish> PARSER =
+        new com.google.protobuf.AbstractParser<CSUnlimitedFinish>() {
+      public CSUnlimitedFinish parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSUnlimitedFinish(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSUnlimitedFinish> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int32 success = 1;
+    public static final int SUCCESS_FIELD_NUMBER = 1;
+    private int success_;
+    /**
+     * <code>required int32 success = 1;</code>
+     */
+    public boolean hasSuccess() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 success = 1;</code>
+     */
+    public int getSuccess() {
+      return success_;
+    }
+
+    // repeated int32 route = 2;
+    public static final int ROUTE_FIELD_NUMBER = 2;
+    private java.util.List<java.lang.Integer> route_;
+    /**
+     * <code>repeated int32 route = 2;</code>
+     *
+     * <pre>
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getRouteList() {
+      return route_;
+    }
+    /**
+     * <code>repeated int32 route = 2;</code>
+     *
+     * <pre>
+     * </pre>
+     */
+    public int getRouteCount() {
+      return route_.size();
+    }
+    /**
+     * <code>repeated int32 route = 2;</code>
+     *
+     * <pre>
+     * </pre>
+     */
+    public int getRoute(int index) {
+      return route_.get(index);
+    }
+
+    private void initFields() {
+      success_ = 0;
+      route_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasSuccess()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, success_);
+      }
+      for (int i = 0; i < route_.size(); i++) {
+        output.writeInt32(2, route_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, success_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < route_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(route_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getRouteList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.protocol.MiGongPB.CSUnlimitedFinish parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.CSUnlimitedFinish parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.CSUnlimitedFinish parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.CSUnlimitedFinish parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.CSUnlimitedFinish parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.CSUnlimitedFinish parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.CSUnlimitedFinish parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.protocol.MiGongPB.CSUnlimitedFinish parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.CSUnlimitedFinish parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.CSUnlimitedFinish parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.protocol.MiGongPB.CSUnlimitedFinish prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CSUnlimitedFinish}
+     *
+     * <pre>
+     * 成功或失败 :
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.protocol.MiGongPB.CSUnlimitedFinishOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.protocol.MiGongPB.internal_static_CSUnlimitedFinish_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.protocol.MiGongPB.internal_static_CSUnlimitedFinish_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.protocol.MiGongPB.CSUnlimitedFinish.class, com.protocol.MiGongPB.CSUnlimitedFinish.Builder.class);
+      }
+
+      // Construct using com.protocol.MiGongPB.CSUnlimitedFinish.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        success_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        route_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.protocol.MiGongPB.internal_static_CSUnlimitedFinish_descriptor;
+      }
+
+      public com.protocol.MiGongPB.CSUnlimitedFinish getDefaultInstanceForType() {
+        return com.protocol.MiGongPB.CSUnlimitedFinish.getDefaultInstance();
+      }
+
+      public com.protocol.MiGongPB.CSUnlimitedFinish build() {
+        com.protocol.MiGongPB.CSUnlimitedFinish result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.protocol.MiGongPB.CSUnlimitedFinish buildPartial() {
+        com.protocol.MiGongPB.CSUnlimitedFinish result = new com.protocol.MiGongPB.CSUnlimitedFinish(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.success_ = success_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          route_ = java.util.Collections.unmodifiableList(route_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.route_ = route_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.protocol.MiGongPB.CSUnlimitedFinish) {
+          return mergeFrom((com.protocol.MiGongPB.CSUnlimitedFinish)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.protocol.MiGongPB.CSUnlimitedFinish other) {
+        if (other == com.protocol.MiGongPB.CSUnlimitedFinish.getDefaultInstance()) return this;
+        if (other.hasSuccess()) {
+          setSuccess(other.getSuccess());
+        }
+        if (!other.route_.isEmpty()) {
+          if (route_.isEmpty()) {
+            route_ = other.route_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureRouteIsMutable();
+            route_.addAll(other.route_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasSuccess()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.protocol.MiGongPB.CSUnlimitedFinish parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.protocol.MiGongPB.CSUnlimitedFinish) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int32 success = 1;
+      private int success_ ;
+      /**
+       * <code>required int32 success = 1;</code>
+       */
+      public boolean hasSuccess() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 success = 1;</code>
+       */
+      public int getSuccess() {
+        return success_;
+      }
+      /**
+       * <code>required int32 success = 1;</code>
+       */
+      public Builder setSuccess(int value) {
+        bitField0_ |= 0x00000001;
+        success_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 success = 1;</code>
+       */
+      public Builder clearSuccess() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        success_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // repeated int32 route = 2;
+      private java.util.List<java.lang.Integer> route_ = java.util.Collections.emptyList();
+      private void ensureRouteIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          route_ = new java.util.ArrayList<java.lang.Integer>(route_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated int32 route = 2;</code>
+       *
+       * <pre>
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getRouteList() {
+        return java.util.Collections.unmodifiableList(route_);
+      }
+      /**
+       * <code>repeated int32 route = 2;</code>
+       *
+       * <pre>
+       * </pre>
+       */
+      public int getRouteCount() {
+        return route_.size();
+      }
+      /**
+       * <code>repeated int32 route = 2;</code>
+       *
+       * <pre>
+       * </pre>
+       */
+      public int getRoute(int index) {
+        return route_.get(index);
+      }
+      /**
+       * <code>repeated int32 route = 2;</code>
+       *
+       * <pre>
+       * </pre>
+       */
+      public Builder setRoute(
+          int index, int value) {
+        ensureRouteIsMutable();
+        route_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 route = 2;</code>
+       *
+       * <pre>
+       * </pre>
+       */
+      public Builder addRoute(int value) {
+        ensureRouteIsMutable();
+        route_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 route = 2;</code>
+       *
+       * <pre>
+       * </pre>
+       */
+      public Builder addAllRoute(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureRouteIsMutable();
+        super.addAll(values, route_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 route = 2;</code>
+       *
+       * <pre>
+       * </pre>
+       */
+      public Builder clearRoute() {
+        route_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:CSUnlimitedFinish)
+    }
+
+    static {
+      defaultInstance = new CSUnlimitedFinish(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:CSUnlimitedFinish)
+  }
+
+  public interface SCUnlimitedFinishOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int32 openPass = 1;
+    /**
+     * <code>required int32 openPass = 1;</code>
+     *
+     * <pre>
+     * 已经开启的关卡
+     * </pre>
+     */
+    boolean hasOpenPass();
+    /**
+     * <code>required int32 openPass = 1;</code>
+     *
+     * <pre>
+     * 已经开启的关卡
+     * </pre>
+     */
+    int getOpenPass();
+
+    // required int32 success = 2;
+    /**
+     * <code>required int32 success = 2;</code>
+     *
+     * <pre>
+     * 服务器判定是否过关
+     * </pre>
+     */
+    boolean hasSuccess();
+    /**
+     * <code>required int32 success = 2;</code>
+     *
+     * <pre>
+     * 服务器判定是否过关
+     * </pre>
+     */
+    int getSuccess();
+  }
+  /**
+   * Protobuf type {@code SCUnlimitedFinish}
+   */
+  public static final class SCUnlimitedFinish extends
+      com.google.protobuf.GeneratedMessage
+      implements SCUnlimitedFinishOrBuilder {
+    // Use SCUnlimitedFinish.newBuilder() to construct.
+    private SCUnlimitedFinish(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private SCUnlimitedFinish(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final SCUnlimitedFinish defaultInstance;
+    public static SCUnlimitedFinish getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public SCUnlimitedFinish getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SCUnlimitedFinish(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              openPass_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              success_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.protocol.MiGongPB.internal_static_SCUnlimitedFinish_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.protocol.MiGongPB.internal_static_SCUnlimitedFinish_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.protocol.MiGongPB.SCUnlimitedFinish.class, com.protocol.MiGongPB.SCUnlimitedFinish.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<SCUnlimitedFinish> PARSER =
+        new com.google.protobuf.AbstractParser<SCUnlimitedFinish>() {
+      public SCUnlimitedFinish parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SCUnlimitedFinish(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SCUnlimitedFinish> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int32 openPass = 1;
+    public static final int OPENPASS_FIELD_NUMBER = 1;
+    private int openPass_;
+    /**
+     * <code>required int32 openPass = 1;</code>
+     *
+     * <pre>
+     * 已经开启的关卡
+     * </pre>
+     */
+    public boolean hasOpenPass() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 openPass = 1;</code>
+     *
+     * <pre>
+     * 已经开启的关卡
+     * </pre>
+     */
+    public int getOpenPass() {
+      return openPass_;
+    }
+
+    // required int32 success = 2;
+    public static final int SUCCESS_FIELD_NUMBER = 2;
+    private int success_;
+    /**
+     * <code>required int32 success = 2;</code>
+     *
+     * <pre>
+     * 服务器判定是否过关
+     * </pre>
+     */
+    public boolean hasSuccess() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 success = 2;</code>
+     *
+     * <pre>
+     * 服务器判定是否过关
+     * </pre>
+     */
+    public int getSuccess() {
+      return success_;
+    }
+
+    private void initFields() {
+      openPass_ = 0;
+      success_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasOpenPass()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSuccess()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, openPass_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, success_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, openPass_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, success_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.protocol.MiGongPB.SCUnlimitedFinish parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.SCUnlimitedFinish parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.SCUnlimitedFinish parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.SCUnlimitedFinish parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.SCUnlimitedFinish parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.SCUnlimitedFinish parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.SCUnlimitedFinish parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.protocol.MiGongPB.SCUnlimitedFinish parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.SCUnlimitedFinish parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.SCUnlimitedFinish parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.protocol.MiGongPB.SCUnlimitedFinish prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code SCUnlimitedFinish}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.protocol.MiGongPB.SCUnlimitedFinishOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.protocol.MiGongPB.internal_static_SCUnlimitedFinish_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.protocol.MiGongPB.internal_static_SCUnlimitedFinish_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.protocol.MiGongPB.SCUnlimitedFinish.class, com.protocol.MiGongPB.SCUnlimitedFinish.Builder.class);
+      }
+
+      // Construct using com.protocol.MiGongPB.SCUnlimitedFinish.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        openPass_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        success_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.protocol.MiGongPB.internal_static_SCUnlimitedFinish_descriptor;
+      }
+
+      public com.protocol.MiGongPB.SCUnlimitedFinish getDefaultInstanceForType() {
+        return com.protocol.MiGongPB.SCUnlimitedFinish.getDefaultInstance();
+      }
+
+      public com.protocol.MiGongPB.SCUnlimitedFinish build() {
+        com.protocol.MiGongPB.SCUnlimitedFinish result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.protocol.MiGongPB.SCUnlimitedFinish buildPartial() {
+        com.protocol.MiGongPB.SCUnlimitedFinish result = new com.protocol.MiGongPB.SCUnlimitedFinish(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.openPass_ = openPass_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.success_ = success_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.protocol.MiGongPB.SCUnlimitedFinish) {
+          return mergeFrom((com.protocol.MiGongPB.SCUnlimitedFinish)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.protocol.MiGongPB.SCUnlimitedFinish other) {
+        if (other == com.protocol.MiGongPB.SCUnlimitedFinish.getDefaultInstance()) return this;
+        if (other.hasOpenPass()) {
+          setOpenPass(other.getOpenPass());
+        }
+        if (other.hasSuccess()) {
+          setSuccess(other.getSuccess());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasOpenPass()) {
+          
+          return false;
+        }
+        if (!hasSuccess()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.protocol.MiGongPB.SCUnlimitedFinish parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.protocol.MiGongPB.SCUnlimitedFinish) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int32 openPass = 1;
+      private int openPass_ ;
+      /**
+       * <code>required int32 openPass = 1;</code>
+       *
+       * <pre>
+       * 已经开启的关卡
+       * </pre>
+       */
+      public boolean hasOpenPass() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 openPass = 1;</code>
+       *
+       * <pre>
+       * 已经开启的关卡
+       * </pre>
+       */
+      public int getOpenPass() {
+        return openPass_;
+      }
+      /**
+       * <code>required int32 openPass = 1;</code>
+       *
+       * <pre>
+       * 已经开启的关卡
+       * </pre>
+       */
+      public Builder setOpenPass(int value) {
+        bitField0_ |= 0x00000001;
+        openPass_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 openPass = 1;</code>
+       *
+       * <pre>
+       * 已经开启的关卡
+       * </pre>
+       */
+      public Builder clearOpenPass() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        openPass_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 success = 2;
+      private int success_ ;
+      /**
+       * <code>required int32 success = 2;</code>
+       *
+       * <pre>
+       * 服务器判定是否过关
+       * </pre>
+       */
+      public boolean hasSuccess() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 success = 2;</code>
+       *
+       * <pre>
+       * 服务器判定是否过关
+       * </pre>
+       */
+      public int getSuccess() {
+        return success_;
+      }
+      /**
+       * <code>required int32 success = 2;</code>
+       *
+       * <pre>
+       * 服务器判定是否过关
+       * </pre>
+       */
+      public Builder setSuccess(int value) {
+        bitField0_ |= 0x00000002;
+        success_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 success = 2;</code>
+       *
+       * <pre>
+       * 服务器判定是否过关
+       * </pre>
+       */
+      public Builder clearSuccess() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        success_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:SCUnlimitedFinish)
+    }
+
+    static {
+      defaultInstance = new SCUnlimitedFinish(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:SCUnlimitedFinish)
   }
 
   public interface CSMatchingOrBuilder
@@ -24860,6 +26267,16 @@ public final class MiGongPB {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_SCUnlimitedGo_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_CSUnlimitedFinish_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_CSUnlimitedFinish_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_SCUnlimitedFinish_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_SCUnlimitedFinish_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_CSMatching_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -25002,49 +26419,53 @@ public final class MiGongPB {
       "vel\"Q\n\020SCGetMiGongLevel\022\030\n\020passCountInLe" +
       "vel\030\001 \003(\005\022\021\n\topenLevel\030\002 \002(\005\022\020\n\010openPass" +
       "\030\003 \002(\005\"-\n\016CSGetMiGongMap\022\r\n\005level\030\001 \002(\005\022" +
-      "\014\n\004pass\030\002 \002(\005\"r\n\016SCGetMiGongMap\022\013\n\003map\030\001" +
-      " \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005sta" +
-      "rt\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022\032\n\005beans\030\006 \003(\0132\013.P" +
-      "BBeanInfo\"(\n\nPBBeanInfo\022\013\n\003pos\030\001 \002(\005\022\r\n\005" +
-      "score\030\002 \002(\005\"K\n\014CSPassFinish\022\r\n\005level\030\001 \002" +
-      "(\005\022\014\n\004pass\030\002 \002(\005\022\017\n\007success\030\003 \002(\005\022\r\n\005rou",
-      "te\030\004 \003(\005\"D\n\014SCPassFinish\022\021\n\topenLevel\030\001 " +
-      "\002(\005\022\020\n\010openPass\030\002 \002(\005\022\017\n\007success\030\003 \002(\005\"\033" +
-      "\n\tCSUseItem\022\016\n\006itemId\030\001 \002(\005\"\013\n\tSCUseItem" +
-      "\"\021\n\017CSUnlimitedInfo\"^\n\017SCUnlimitedInfo\022/" +
-      "\n\021unlimitedRankInfo\030\001 \003(\0132\024.PBUnlimitedR" +
-      "ankInfo\022\014\n\004pass\030\002 \002(\005\022\014\n\004rank\030\003 \002(\005\"S\n\023P" +
-      "BUnlimitedRankInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010us" +
-      "erName\030\002 \002(\t\022\014\n\004pass\030\003 \002(\005\022\014\n\004rank\030\004 \002(\005" +
-      "\"\017\n\rCSUnlimitedGo\"q\n\rSCUnlimitedGo\022\013\n\003ma" +
-      "p\030\001 \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005",
-      "start\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022\032\n\005beans\030\006 \003(\0132" +
-      "\013.PBBeanInfo\"\014\n\nCSMatching\"\014\n\nSCMatching" +
-      "\"\022\n\020CSCancelMatching\"\022\n\020SCCancelMatching" +
-      "\"\227\001\n\021SCMatchingSuccess\022\013\n\003map\030\001 \003(\005\022\014\n\004t" +
-      "ime\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005start\030\004 \002(\005\022" +
-      "\013\n\003end\030\005 \002(\005\022 \n\notherInfos\030\006 \003(\0132\014.PBOth" +
-      "erInfo\022\032\n\005beans\030\007 \003(\0132\013.PBBeanInfo\"K\n\013PB" +
-      "OtherInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010userName\030\002 " +
-      "\002(\t\022\r\n\005start\030\003 \002(\005\022\013\n\003end\030\004 \002(\005\"\020\n\016SCMat" +
-      "chingFail\"\t\n\007SCBegin\"@\n\006CSMove\022\014\n\004posX\030\001",
-      " \002(\002\022\014\n\004posY\030\002 \002(\002\022\013\n\003dir\030\003 \002(\005\022\r\n\005speed" +
-      "\030\004 \002(\005\"\010\n\006SCMove\"4\n\nSCUserMove\022&\n\ruserMo" +
-      "veInfos\030\001 \003(\0132\017.PBUserMoveInfo\"g\n\016PBUser" +
-      "MoveInfo\022\016\n\006userId\030\001 \002(\t\022\014\n\004posX\030\002 \002(\002\022\014" +
-      "\n\004posY\030\003 \002(\002\022\013\n\003dir\030\004 \002(\005\022\r\n\005speed\030\005 \002(\005" +
-      "\022\r\n\005frame\030\006 \002(\005\"\034\n\tCSEatBean\022\017\n\007beanPos\030" +
-      "\001 \002(\005\"\013\n\tSCEatBean\"0\n\rSCSendEatBean\022\016\n\006u" +
-      "serId\030\001 \002(\t\022\017\n\007beanPos\030\002 \002(\005\"\030\n\tCSArrive" +
-      "d\022\013\n\003pos\030\001 \002(\005\"\013\n\tSCArrived\"\037\n\rSCUserArr" +
-      "ived\022\016\n\006userId\030\001 \002(\t\"4\n\nSCGameOver\022&\n\tus",
-      "erInfos\030\001 \003(\0132\023.PBGameOverUserInfo\"S\n\022PB" +
-      "GameOverUserInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010user" +
-      "Name\030\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005score\030\004 \002(\005\"" +
-      "\r\n\013CSRoomHeart\"\r\n\013SCRoomHeart\"#\n\022CSSendW" +
-      "alkingRoute\022\r\n\005route\030\001 \003(\005\"\024\n\022SCSendWalk" +
-      "ingRoute\"\031\n\010CSCommon\022\r\n\005route\030\001 \003(\t\"\031\n\010S" +
-      "CCommon\022\r\n\005route\030\001 \003(\tB\016\n\014com.protocol"
+      "\014\n\004pass\030\002 \002(\005\"\202\001\n\016SCGetMiGongMap\022\013\n\003map\030" +
+      "\001 \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005st" +
+      "art\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022\032\n\005beans\030\006 \003(\0132\013." +
+      "PBBeanInfo\022\016\n\006target\030\007 \002(\005\"(\n\nPBBeanInfo" +
+      "\022\013\n\003pos\030\001 \002(\005\022\r\n\005score\030\002 \002(\005\"K\n\014CSPassFi" +
+      "nish\022\r\n\005level\030\001 \002(\005\022\014\n\004pass\030\002 \002(\005\022\017\n\007suc",
+      "cess\030\003 \002(\005\022\r\n\005route\030\004 \003(\005\"D\n\014SCPassFinis" +
+      "h\022\021\n\topenLevel\030\001 \002(\005\022\020\n\010openPass\030\002 \002(\005\022\017" +
+      "\n\007success\030\003 \002(\005\"\033\n\tCSUseItem\022\016\n\006itemId\030\001" +
+      " \002(\005\"\013\n\tSCUseItem\"\021\n\017CSUnlimitedInfo\"^\n\017" +
+      "SCUnlimitedInfo\022/\n\021unlimitedRankInfo\030\001 \003" +
+      "(\0132\024.PBUnlimitedRankInfo\022\014\n\004pass\030\002 \002(\005\022\014" +
+      "\n\004rank\030\003 \002(\005\"S\n\023PBUnlimitedRankInfo\022\016\n\006u" +
+      "serId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\014\n\004pass\030\003 " +
+      "\002(\005\022\014\n\004rank\030\004 \002(\005\"\017\n\rCSUnlimitedGo\"\201\001\n\rS" +
+      "CUnlimitedGo\022\013\n\003map\030\001 \003(\005\022\014\n\004time\030\002 \002(\005\022",
+      "\r\n\005speed\030\003 \002(\005\022\r\n\005start\030\004 \002(\005\022\013\n\003end\030\005 \002" +
+      "(\005\022\032\n\005beans\030\006 \003(\0132\013.PBBeanInfo\022\016\n\006target" +
+      "\030\007 \002(\005\"3\n\021CSUnlimitedFinish\022\017\n\007success\030\001" +
+      " \002(\005\022\r\n\005route\030\002 \003(\005\"6\n\021SCUnlimitedFinish" +
+      "\022\020\n\010openPass\030\001 \002(\005\022\017\n\007success\030\002 \002(\005\"\014\n\nC" +
+      "SMatching\"\014\n\nSCMatching\"\022\n\020CSCancelMatch" +
+      "ing\"\022\n\020SCCancelMatching\"\227\001\n\021SCMatchingSu" +
+      "ccess\022\013\n\003map\030\001 \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005spee" +
+      "d\030\003 \002(\005\022\r\n\005start\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022 \n\no" +
+      "therInfos\030\006 \003(\0132\014.PBOtherInfo\022\032\n\005beans\030\007",
+      " \003(\0132\013.PBBeanInfo\"K\n\013PBOtherInfo\022\016\n\006user" +
+      "Id\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\r\n\005start\030\003 \002(" +
+      "\005\022\013\n\003end\030\004 \002(\005\"\020\n\016SCMatchingFail\"\t\n\007SCBe" +
+      "gin\"@\n\006CSMove\022\014\n\004posX\030\001 \002(\002\022\014\n\004posY\030\002 \002(" +
+      "\002\022\013\n\003dir\030\003 \002(\005\022\r\n\005speed\030\004 \002(\005\"\010\n\006SCMove\"" +
+      "4\n\nSCUserMove\022&\n\ruserMoveInfos\030\001 \003(\0132\017.P" +
+      "BUserMoveInfo\"g\n\016PBUserMoveInfo\022\016\n\006userI" +
+      "d\030\001 \002(\t\022\014\n\004posX\030\002 \002(\002\022\014\n\004posY\030\003 \002(\002\022\013\n\003d" +
+      "ir\030\004 \002(\005\022\r\n\005speed\030\005 \002(\005\022\r\n\005frame\030\006 \002(\005\"\034" +
+      "\n\tCSEatBean\022\017\n\007beanPos\030\001 \002(\005\"\013\n\tSCEatBea",
+      "n\"0\n\rSCSendEatBean\022\016\n\006userId\030\001 \002(\t\022\017\n\007be" +
+      "anPos\030\002 \002(\005\"\030\n\tCSArrived\022\013\n\003pos\030\001 \002(\005\"\013\n" +
+      "\tSCArrived\"\037\n\rSCUserArrived\022\016\n\006userId\030\001 " +
+      "\002(\t\"4\n\nSCGameOver\022&\n\tuserInfos\030\001 \003(\0132\023.P" +
+      "BGameOverUserInfo\"S\n\022PBGameOverUserInfo\022" +
+      "\016\n\006userId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\014\n\004ran" +
+      "k\030\003 \002(\005\022\r\n\005score\030\004 \002(\005\"\r\n\013CSRoomHeart\"\r\n" +
+      "\013SCRoomHeart\"#\n\022CSSendWalkingRoute\022\r\n\005ro" +
+      "ute\030\001 \003(\005\"\024\n\022SCSendWalkingRoute\"\031\n\010CSCom" +
+      "mon\022\r\n\005route\030\001 \003(\t\"\031\n\010SCCommon\022\r\n\005route\030",
+      "\001 \003(\tB\016\n\014com.protocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -25074,7 +26495,7 @@ public final class MiGongPB {
           internal_static_SCGetMiGongMap_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCGetMiGongMap_descriptor,
-              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "Beans", });
+              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "Beans", "Target", });
           internal_static_PBBeanInfo_descriptor =
             getDescriptor().getMessageTypes().get(4);
           internal_static_PBBeanInfo_fieldAccessorTable = new
@@ -25134,159 +26555,171 @@ public final class MiGongPB {
           internal_static_SCUnlimitedGo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUnlimitedGo_descriptor,
-              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "Beans", });
-          internal_static_CSMatching_descriptor =
+              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "Beans", "Target", });
+          internal_static_CSUnlimitedFinish_descriptor =
             getDescriptor().getMessageTypes().get(14);
+          internal_static_CSUnlimitedFinish_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_CSUnlimitedFinish_descriptor,
+              new java.lang.String[] { "Success", "Route", });
+          internal_static_SCUnlimitedFinish_descriptor =
+            getDescriptor().getMessageTypes().get(15);
+          internal_static_SCUnlimitedFinish_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_SCUnlimitedFinish_descriptor,
+              new java.lang.String[] { "OpenPass", "Success", });
+          internal_static_CSMatching_descriptor =
+            getDescriptor().getMessageTypes().get(16);
           internal_static_CSMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSMatching_descriptor,
               new java.lang.String[] { });
           internal_static_SCMatching_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_SCMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatching_descriptor,
               new java.lang.String[] { });
           internal_static_CSCancelMatching_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_CSCancelMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSCancelMatching_descriptor,
               new java.lang.String[] { });
           internal_static_SCCancelMatching_descriptor =
-            getDescriptor().getMessageTypes().get(17);
+            getDescriptor().getMessageTypes().get(19);
           internal_static_SCCancelMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCCancelMatching_descriptor,
               new java.lang.String[] { });
           internal_static_SCMatchingSuccess_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_SCMatchingSuccess_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatchingSuccess_descriptor,
               new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "OtherInfos", "Beans", });
           internal_static_PBOtherInfo_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_PBOtherInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBOtherInfo_descriptor,
               new java.lang.String[] { "UserId", "UserName", "Start", "End", });
           internal_static_SCMatchingFail_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(22);
           internal_static_SCMatchingFail_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatchingFail_descriptor,
               new java.lang.String[] { });
           internal_static_SCBegin_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_SCBegin_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCBegin_descriptor,
               new java.lang.String[] { });
           internal_static_CSMove_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_CSMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSMove_descriptor,
               new java.lang.String[] { "PosX", "PosY", "Dir", "Speed", });
           internal_static_SCMove_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_SCMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMove_descriptor,
               new java.lang.String[] { });
           internal_static_SCUserMove_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_SCUserMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUserMove_descriptor,
               new java.lang.String[] { "UserMoveInfos", });
           internal_static_PBUserMoveInfo_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_PBUserMoveInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBUserMoveInfo_descriptor,
               new java.lang.String[] { "UserId", "PosX", "PosY", "Dir", "Speed", "Frame", });
           internal_static_CSEatBean_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_CSEatBean_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSEatBean_descriptor,
               new java.lang.String[] { "BeanPos", });
           internal_static_SCEatBean_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(29);
           internal_static_SCEatBean_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCEatBean_descriptor,
               new java.lang.String[] { });
           internal_static_SCSendEatBean_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(30);
           internal_static_SCSendEatBean_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCSendEatBean_descriptor,
               new java.lang.String[] { "UserId", "BeanPos", });
           internal_static_CSArrived_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_CSArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSArrived_descriptor,
               new java.lang.String[] { "Pos", });
           internal_static_SCArrived_descriptor =
-            getDescriptor().getMessageTypes().get(30);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_SCArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCArrived_descriptor,
               new java.lang.String[] { });
           internal_static_SCUserArrived_descriptor =
-            getDescriptor().getMessageTypes().get(31);
+            getDescriptor().getMessageTypes().get(33);
           internal_static_SCUserArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUserArrived_descriptor,
               new java.lang.String[] { "UserId", });
           internal_static_SCGameOver_descriptor =
-            getDescriptor().getMessageTypes().get(32);
+            getDescriptor().getMessageTypes().get(34);
           internal_static_SCGameOver_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCGameOver_descriptor,
               new java.lang.String[] { "UserInfos", });
           internal_static_PBGameOverUserInfo_descriptor =
-            getDescriptor().getMessageTypes().get(33);
+            getDescriptor().getMessageTypes().get(35);
           internal_static_PBGameOverUserInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBGameOverUserInfo_descriptor,
               new java.lang.String[] { "UserId", "UserName", "Rank", "Score", });
           internal_static_CSRoomHeart_descriptor =
-            getDescriptor().getMessageTypes().get(34);
+            getDescriptor().getMessageTypes().get(36);
           internal_static_CSRoomHeart_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSRoomHeart_descriptor,
               new java.lang.String[] { });
           internal_static_SCRoomHeart_descriptor =
-            getDescriptor().getMessageTypes().get(35);
+            getDescriptor().getMessageTypes().get(37);
           internal_static_SCRoomHeart_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCRoomHeart_descriptor,
               new java.lang.String[] { });
           internal_static_CSSendWalkingRoute_descriptor =
-            getDescriptor().getMessageTypes().get(36);
+            getDescriptor().getMessageTypes().get(38);
           internal_static_CSSendWalkingRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSSendWalkingRoute_descriptor,
               new java.lang.String[] { "Route", });
           internal_static_SCSendWalkingRoute_descriptor =
-            getDescriptor().getMessageTypes().get(37);
+            getDescriptor().getMessageTypes().get(39);
           internal_static_SCSendWalkingRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCSendWalkingRoute_descriptor,
               new java.lang.String[] { });
           internal_static_CSCommon_descriptor =
-            getDescriptor().getMessageTypes().get(38);
+            getDescriptor().getMessageTypes().get(40);
           internal_static_CSCommon_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSCommon_descriptor,
               new java.lang.String[] { "Route", });
           internal_static_SCCommon_descriptor =
-            getDescriptor().getMessageTypes().get(39);
+            getDescriptor().getMessageTypes().get(41);
           internal_static_SCCommon_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCCommon_descriptor,

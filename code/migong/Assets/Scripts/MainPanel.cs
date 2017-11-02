@@ -48,8 +48,9 @@ public class MainPanel : MonoBehaviour {
 			CSUnlimitedGo unlimitedGo = new CSUnlimitedGo();
 			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSUnlimitedGo,CSUnlimitedGo.SerializeToBytes(unlimitedGo),delegate(int opcode, byte[] data) {
 				SCUnlimitedGo ret = SCUnlimitedGo.Deserialize(data);
-//				ret.
+				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans, ret.Start, ret.End, 0, 0,null);
 			});
+			ui.SetActive (false);
 		});
 		Button close = GameObject.Find ("main/ui/uiUnlimit/Canvas/close").GetComponent<Button>();
 		close.onClick.AddListener (delegate() {
@@ -183,7 +184,7 @@ public class MainPanel : MonoBehaviour {
 
 	public void matchSuccess(int opcode, byte[] data){
 		SCMatchingSuccess matchingSuccess = SCMatchingSuccess.Deserialize (data);
-		createMap(1,matchingSuccess.Map.ToArray(),matchingSuccess.Start,matchingSuccess.End,1,1,matchingSuccess.OtherInfos);
+		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Start,matchingSuccess.End,1,1,matchingSuccess.OtherInfos);
 	}
 
 	// Update is called once per frame
@@ -204,11 +205,11 @@ public class MainPanel : MonoBehaviour {
 		byte[] data = CSGetMiGongMap.SerializeToBytes (miGongMap);
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetMiGongMap, data,delegate(int opcode, byte[] ret) {
 			SCGetMiGongMap scmap = SCGetMiGongMap.Deserialize(ret);
-			createMap (0,scmap.Map.ToArray (), scmap.Start, scmap.End, buttonIndex.level, 1,null);
+			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans, scmap.Start, scmap.End, buttonIndex.level, 1,null);
 		});
 		ui.SetActive (false);
 	}
-	private void createMap(int mode,int[] mapInt,int start,int end,int level,int pass,List<PBOtherInfo> otherInfos){
+	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int start,int end,int level,int pass,List<PBOtherInfo> otherInfos){
 		Object gamePanel = Resources.Load ("GamePanel");
 		GameObject gamePanelGo = Instantiate(gamePanel) as GameObject;
 		GameObject mapGo = gamePanelGo.transform.Find ("map").gameObject;
@@ -226,6 +227,15 @@ public class MainPanel : MonoBehaviour {
 				mapCreate.map[i][j] = mapInt[i*size+j];
 			}
 		}
+
+		mapCreate.beanMap = new int[size][];
+		for (int i = 0; i < size; i++) {
+			mapCreate.beanMap[i] = new int[size];
+		}
+		foreach(PBBeanInfo info in beans){
+			mapCreate.beanMap [info.Pos / size] [info.Pos % size] = info.Score;
+		}
+
 		mapCreate.startPoint = new Vector2 (start%size,start/size);
 		mapCreate.endPoint = new Vector2 (end%size,end/size);
 		mapCreate.size = size;
@@ -235,7 +245,7 @@ public class MainPanel : MonoBehaviour {
 		gamePanelGo.transform.localPosition = new Vector3(0,0,0);
 
 		// 
-		if(mode == 1 && otherInfos != null){
+		if(mode == MapMode.Online && otherInfos != null){
 			Object pacmanIns = Resources.Load ("pacman");
 			foreach (PBOtherInfo otherInfo in otherInfos) {
 				GameObject pacmanGo = Instantiate(pacmanIns) as GameObject;

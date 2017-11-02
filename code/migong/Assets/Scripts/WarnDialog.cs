@@ -13,46 +13,56 @@ class WarnDialogInfo{
 
 public class WarnDialog : MonoBehaviour {
 	static WarnDialog instance;
-	static WarnDialogInfo otherThread;
+	static GameObject canvas;
+
+	static Queue<WarnDialogInfo> dialogQueue = new Queue<WarnDialogInfo>();
+
 	DialogOkAction okAction;
 	Text text;
 
 	void Awake(){
 		Button close = transform.Find ("Canvas/close").GetComponent<Button> ();
 		close.onClick.AddListener (delegate() {
-			gameObject.SetActive(false);
+			canvas.SetActive(false);
 		});
 		Button ok = transform.Find ("Canvas/ok").GetComponent<Button> ();
 		ok.onClick.AddListener (delegate() {
-			gameObject.SetActive(false);
+			canvas.SetActive(false);
 			if(okAction != null){
 				okAction.Invoke();
 			}
 		});
 		text = transform.Find ("Canvas/text").GetComponent<Text> ();
 		instance = this;
-		instance.gameObject.SetActive (false);
+		canvas = transform.Find ("Canvas").gameObject;
+		closeDialog ();
 	}
 
 	void Update(){
-		if (otherThread != null) {
-			WarnDialogInfo w = otherThread;
-			otherThread = null;
-			showWarnDialog (w.text,w.okAction);
+		if (dialogQueue.Count > 0 && !canvas.activeSelf) {
+			lock (dialogQueue) {
+				WarnDialogInfo w = dialogQueue.Dequeue ();
+				instance.text.text = w.text;
+				instance.okAction = w.okAction;
+				openDialog ();
+			}
 		}
 	}
 
 
 	public static void showWarnDialog(string text,DialogOkAction dialogOkAction){
-		instance.okAction = dialogOkAction;
-		instance.text.text = text;
-		instance.gameObject.SetActive (true);
-	}
-
-	public static void showWarnDialogOtherThread(string text,DialogOkAction dialogOkAction){
 		WarnDialogInfo w = new WarnDialogInfo ();
 		w.text = text;
 		w.okAction = dialogOkAction;
-		otherThread = w;
+		lock (dialogQueue) {
+			dialogQueue.Enqueue (w);
+		}
+	}
+
+	private static void closeDialog(){
+		canvas.SetActive (false);
+	}
+	private static void openDialog(){
+		canvas.SetActive (true);
 	}
 }

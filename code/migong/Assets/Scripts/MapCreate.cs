@@ -7,7 +7,14 @@ using System.Threading;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public enum MapMode{
+	Level,
+	Unlimited,
+	Online
+}
+
 public class MapCreate : MonoBehaviour{
+
 	public Button closeButton;
 	public Button okButton;
 
@@ -19,7 +26,15 @@ public class MapCreate : MonoBehaviour{
 		new int[]{1,3,	2,	3,		3}
 	};
 
-	public int Mode; // 0单机，2pvp
+	public int[][] beanMap = new int[][]{
+		new int[]{0,0	,0,	0,		0},
+		new int[]{0,1	,0,	0,		0},
+		new int[]{0,1,	0,	0	,	0},
+		new int[]{0,0,	1,	0,		1},
+		new int[]{0,0,	0,	0,		0}
+	};
+
+	public MapMode Mode; // 0单机，2pvp
 
 	public int Level;
 	public int Pass;
@@ -59,7 +74,7 @@ public class MapCreate : MonoBehaviour{
 			Destroy(transform.parent.gameObject);
 			GameObject mainGo = GameObject.Find ("main");
 			MainPanel mainPanel = mainGo.GetComponent<MainPanel>();
-			mainPanel.showMainPanel();;
+			mainPanel.showMainPanel();
 		});
 		// 0.21 碰撞体的宽，1.9碰撞体的长
 		float wallWidth = 0.21f * myScale;
@@ -83,6 +98,8 @@ public class MapCreate : MonoBehaviour{
 
 		Object down = Resources.Load ("down");
 		Object right = Resources.Load ("right");
+
+		Object bean = Resources.Load ("bean");
 		for (int i = 0; i < tr; i++) {										//绘制墙
 			for (int j = 0; j < td; j++) {
 				if ((map[i][j] & 2) == 2) {
@@ -99,11 +116,18 @@ public class MapCreate : MonoBehaviour{
 					up.transform.position = new Vector3 (x + j * nodeX, y + w * nodeY,0);
 					up.transform.localScale = new Vector3 (myScale,myScale,1);
 				}
+				if (beanMap [i] [j] > 0) {
+					int w = tr - i-1;
+					GameObject beanGo = Instantiate(bean) as GameObject;
+					beanGo.transform.parent = transform;
+					beanGo.transform.position = new Vector3 (x + j * nodeX, y + w * nodeY,0);
+					beanGo.transform.localScale = new Vector3 (myScale* 0.6f,myScale* 0.6f,1);
+				}
 			}
 		}
 		// 修改相机位置
 		GameObject camera = transform.parent.Find("mapCamera").gameObject;
-		camera.transform.position = new Vector3(nodeX*(tr-1)/2,nodeY * (td-1)/2,camera.transform.position.z);
+		camera.transform.position = new Vector3(nodeX*(tr)/2,nodeY * (td)/2,camera.transform.position.z);
 		// 修改相机大小
 		ca = camera.GetComponent<Camera>();
 		defaultOrthographicSize = ca.orthographicSize;
@@ -125,19 +149,30 @@ public class MapCreate : MonoBehaviour{
 	}
 
 	public void passFinish(bool success,List<int> route){
-		CSPassFinish pf = new CSPassFinish ();
-		pf.Success = success ? 1 : 0;
-		pf.Level = this.Level;
-		pf.Pass = this.Pass;
-		if (route == null) {
+		if (Mode == MapMode.Level) {
+			CSPassFinish pf = new CSPassFinish ();
+			pf.Success = success ? 1 : 0;
+			pf.Level = this.Level;
+			pf.Pass = this.Pass;
+			if (route == null) {
 //			route =
+			}
+			pf.Route = route;
+			SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSPassFinish, CSPassFinish.SerializeToBytes (pf), delegate(int opcode, byte[] data) {
+				SCPassFinish pas = SCPassFinish.Deserialize (data);
+				GameObject go = transform.parent.Find ("Canvas/settle").gameObject;
+				go.transform.Find ("Text").GetComponent<Text> ().text = pas.Success == 1 ? "SUCCESS" : "Fail";
+			});
+		}else if (Mode == MapMode.Unlimited) {
+			CSUnlimitedFinish uf = new CSUnlimitedFinish ();
+			uf.Success = success ? 1 : 0;
+			uf.Route = route;
+			SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSUnlimitedFinish, CSUnlimitedFinish.SerializeToBytes (uf), delegate(int opcode, byte[] data) {
+				SCUnlimitedFinish pas = SCUnlimitedFinish.Deserialize (data);
+				GameObject go = transform.parent.Find ("Canvas/settle").gameObject;
+				go.transform.Find ("Text").GetComponent<Text> ().text = pas.Success == 1 ? "SUCCESS" : "Fail";
+			});
 		}
-		pf.Route = route;
-		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSPassFinish, CSPassFinish.SerializeToBytes (pf), delegate(int opcode, byte[] data) {
-			SCPassFinish pas = SCPassFinish.Deserialize(data);
-			GameObject go = transform.parent.Find ("Canvas/settle").gameObject;
-			go.transform.Find("Text").GetComponent<Text>().text=pas.Success==1?"SUCCESS":"Fail";
-		});
 		GameObject settleGo = transform.parent.Find ("Canvas/settle").gameObject;
 		settleGo.SetActive (true);
 	}

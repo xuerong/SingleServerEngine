@@ -28,6 +28,7 @@ message SCGetMiGongMap
 	required int32 start 			= 4; // 起点
 	required int32 end 			= 5; // 终点
 	repeated PBBeanInfo beans 			= 6; // 豆子
+	required int32 target 			= 7; // 目标分数
 }
 // 豆子信息
 message PBBeanInfo
@@ -85,6 +86,18 @@ message SCUnlimitedGo
 	required int32 start 			= 4; // 起点
 	required int32 end 			= 5; // 终点
 	repeated PBBeanInfo beans 			= 6; // 豆子的位置
+	required int32 target 			= 7; // 目标分数
+}
+// 成功或失败 :
+message CSUnlimitedFinish
+{
+	required int32 success         = 1;
+	repeated int32 route 	     = 2; //
+}
+message SCUnlimitedFinish
+{
+	required int32 openPass            = 1; // 已经开启的关卡
+	required int32 success         = 2; // 服务器判定是否过关
 }
 /////////////////////////////////////////////////////////////////联机对战///////////////////////////////////////
 // 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳

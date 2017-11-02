@@ -144,7 +144,7 @@ public class SocketManager : MonoBehaviour {
 		} catch (Exception e){  
 			ret = false;  
 			Debug.Log ("连接服务器失败"+e);  
-			WarnDialog.showWarnDialogOtherThread ("连接服务器失败",delegate() {
+			WarnDialog.showWarnDialog ("连接服务器失败1",delegate() {
 //				ConnectServer();
 			});
 			return ret;  
