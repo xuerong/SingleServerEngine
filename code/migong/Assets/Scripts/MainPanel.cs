@@ -45,7 +45,11 @@ public class MainPanel : MonoBehaviour {
 		// uiUnlimit 关闭按钮和进入按钮
 		Button go = GameObject.Find ("main/ui/uiUnlimit/Canvas/go").GetComponent<Button>();
 		go.onClick.AddListener (delegate() {
-
+			CSUnlimitedGo unlimitedGo = new CSUnlimitedGo();
+			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSUnlimitedGo,CSUnlimitedGo.SerializeToBytes(unlimitedGo),delegate(int opcode, byte[] data) {
+				SCUnlimitedGo ret = SCUnlimitedGo.Deserialize(data);
+//				ret.
+			});
 		});
 		Button close = GameObject.Find ("main/ui/uiUnlimit/Canvas/close").GetComponent<Button>();
 		close.onClick.AddListener (delegate() {
@@ -133,10 +137,15 @@ public class MainPanel : MonoBehaviour {
 			Destroy (content.transform.GetChild(i).gameObject);		
 		}
 		// 获取当前关卡
-		CSGetMiGongLevel getMiGongLevel = new CSGetMiGongLevel();
-		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetMiGongLevel, CSGetMiGongLevel.SerializeToBytes (getMiGongLevel),delegate(int opcode, byte[] data) {
-			SCGetMiGongLevel level = SCGetMiGongLevel.Deserialize (data);
-			int count = level.PassCountInLevel.Count;
+		CSUnlimitedInfo unlimitedInfo = new CSUnlimitedInfo();
+		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSUnlimitedInfo, CSUnlimitedInfo.SerializeToBytes (unlimitedInfo),delegate(int opcode, byte[] data) {
+			SCUnlimitedInfo ret = SCUnlimitedInfo.Deserialize (data);
+
+			//
+			Text passText = GameObject.Find ("main/ui/uiUnlimit/Canvas/pass").GetComponent<Text>();
+			passText.text = "pass:"+ret.Pass;
+			// 列表
+			int count = ret.UnlimitedRankInfo.Count;
 			float dis = 20f;
 
 			GameObject up = Instantiate(button) as GameObject;
@@ -147,11 +156,15 @@ public class MainPanel : MonoBehaviour {
 			contentTrans.sizeDelta = new Vector2 (contentTrans.rect.width,(buRec.rect.height + dis) * count + dis);
 
 			for (int i = 0; i < count; i++) {
+				PBUnlimitedRankInfo info = ret.UnlimitedRankInfo[i];
 				up = Instantiate(button) as GameObject;
 				up.transform.parent = content.transform;
 				up.transform.localPosition = new Vector3 (0, -((buRec.rect.height+dis)*i+dis),0);
 				up.transform.localScale = new Vector3 (1,1,1);
 				// 生成各个玩家的排名item
+				GameObject textGo = up.transform.Find ("Text").gameObject;
+				Text text = textGo.GetComponent<Text> ();
+				text.text = info.Rank+","+info.UserName+","+info.Pass;
 			}
 		});
 	}

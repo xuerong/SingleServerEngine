@@ -209,6 +209,23 @@ public class MiGongService {
         return new RetPacketImpl(MiGongOpcode.SCGetMiGongLevel, builder.build().toByteArray());
     }
 
+    @Request(opcode = MiGongOpcode.CSUnlimitedInfo)
+    public RetPacket unlimitedInfo(Object clientData, Session session) throws Throwable{
+        // todo 判断无尽模式是否打开，
+        UserMiGong userMiGong = get(session.getAccountId());
+        MiGongPB.SCUnlimitedInfo.Builder builder = MiGongPB.SCUnlimitedInfo.newBuilder();
+        builder.setPass(userMiGong.getPassUnlimited());
+        builder.setRank(1);// todo 排行系统
+
+        MiGongPB.PBUnlimitedRankInfo.Builder info = MiGongPB.PBUnlimitedRankInfo.newBuilder();
+        info.setPass(0);
+        info.setRank(2);
+        info.setUserId("xiaoming123");
+        info.setUserName("xiaoming");
+        builder.addUnlimitedRankInfo(info);
+        return new RetPacketImpl(MiGongOpcode.SCUnlimitedInfo, builder.build().toByteArray());
+    }
+
     /**
      * 每分钟检查一次，去掉过期的MiGongPassInfo
      * 注意：要过期一段时间，否则，有些是延时20s
@@ -278,6 +295,9 @@ public class MiGongService {
         }
         miGongPassInfo.setTime(difficulty*300);
         miGongPassInfo.setSpeed(10);
+
+        //todo 生成豆子的位置
+
         return miGongPassInfo;
     }
 

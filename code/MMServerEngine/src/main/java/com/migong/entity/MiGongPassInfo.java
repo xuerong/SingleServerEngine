@@ -20,6 +20,7 @@ public class MiGongPassInfo {
     private int difficulty;
     private int level;
     private int pass;
+    private Bean[] beans; // 豆子
     private Timestamp startTime; // 开始时间
 
     public CreateMap getCreateMap() {
@@ -100,6 +101,14 @@ public class MiGongPassInfo {
 
     public void setPass(int pass) {
         this.pass = pass;
+    }
+
+    public Bean[] getBeans() {
+        return beans;
+    }
+
+    public void setBeans(Bean[] beans) {
+        this.beans = beans;
     }
 
     public Timestamp getStartTime() {
