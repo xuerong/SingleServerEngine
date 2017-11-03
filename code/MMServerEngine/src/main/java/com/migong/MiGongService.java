@@ -389,10 +389,10 @@ public class MiGongService {
         Bean[] ret = new Bean[bean10Count + bean5Count + bean1Count];
         ret[0] = new Bean(size/2,size/2,10);
 
-        ret[1] = new Bean(size/2,1,10);
-        ret[2] = new Bean(size/2,size-1,10);
-        ret[3] = new Bean(1,size/2,10);
-        ret[4] = new Bean(size-1,size/2,10);
+        ret[1] = new Bean(size/2,1,5);
+        ret[2] = new Bean(size/2,size-1,5);
+        ret[3] = new Bean(1,size/2,5);
+        ret[4] = new Bean(size-1,size/2,5);
 
         Random random = new Random(System.currentTimeMillis());
         for(int i =0;i<bean1Count;i++){
@@ -455,6 +455,27 @@ public class MiGongService {
 
         MiGongPB.SCMove.Builder builder = MiGongPB.SCMove.newBuilder();
         return new RetPacketImpl(MiGongOpcode.CSMove, builder.build().toByteArray());
+    }
+    /**
+     * 玩家吃豆
+     */
+    @Request(opcode = MiGongOpcode.CSEatBean)
+    public RetPacket eatBean(Object clientData, Session session) throws Throwable{
+
+        MiGongPB.CSEatBean eatBean = MiGongPB.CSEatBean.parseFrom((byte[])clientData);
+        int pos = eatBean.getBeanPos();
+
+        MultiMiGongRoom room = userRooms.get(session.getAccountId());
+        if(room == null){
+            throw new ToClientException("room is not exist");
+        }
+        room.eatBean(session.getAccountId(),pos);
+//        RoomUser roomUser = room.getRoomUser(session.getAccountId());
+        // todo 开启一个新线程进行校验操作正误
+//        roomUser.addBean(pos);
+
+        MiGongPB.SCEatBean.Builder builder = MiGongPB.SCEatBean.newBuilder();
+        return new RetPacketImpl(MiGongOpcode.SCEatBean, builder.build().toByteArray());
     }
     /**
      * 每秒执行一次匹配，如果小于匹配数量，检查等待时间
@@ -544,6 +565,7 @@ public class MiGongService {
         CreateMap createMap = new CreateMap(size-1,size-1,startElement,endElement);
 
         MultiMiGongRoom multiMiGongRoom = new MultiMiGongRoom(createMap, roomUserList);
+        multiMiGongRoom.setSize(size);
 
 //        List<MiGongPB.PBOtherInfo> otherInfoList = new ArrayList<>();
 //        for(RoomUser roomUser : roomUserList){
@@ -565,6 +587,11 @@ public class MiGongService {
         }
         // 豆子
         Bean[] beans = createBeans(size);
+        Map<Integer,Bean> beanMap = new HashMap<>();
+        for(Bean bean : beans){
+            beanMap.put(bean.toInt(size),bean);
+        }
+        multiMiGongRoom.setBeans(beanMap);
         for(Bean bean : beans){
             MiGongPB.PBBeanInfo.Builder beanBuilder = MiGongPB.PBBeanInfo.newBuilder();
             beanBuilder.setPos(bean.toInt(size));

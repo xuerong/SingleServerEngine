@@ -228,12 +228,12 @@ public class MainPanel : MonoBehaviour {
 			}
 		}
 
-		mapCreate.beanMap = new int[size][];
+		mapCreate.beanMap = new Bean[size][];
 		for (int i = 0; i < size; i++) {
-			mapCreate.beanMap[i] = new int[size];
+			mapCreate.beanMap[i] = new Bean[size];
 		}
 		foreach(PBBeanInfo info in beans){
-			mapCreate.beanMap [info.Pos / size] [info.Pos % size] = info.Score;
+			mapCreate.beanMap [info.Pos / size] [info.Pos % size] = new Bean(info.Score);
 		}
 
 		mapCreate.startPoint = new Vector2 (start%size,start/size);

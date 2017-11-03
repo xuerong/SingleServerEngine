@@ -1,6 +1,9 @@
 package com.migong;
 
+import com.migong.entity.Bean;
 import com.migong.map.CreateMap;
+
+import java.util.Map;
 
 public abstract class MiGongRoom {
 
@@ -8,10 +11,20 @@ public abstract class MiGongRoom {
     public static final long MAX_WAIT_TIME = 40 * 1000l; // 等待最多时间
     public static final long BEGIN_WAIT_TIME = 3; // 开始等待时间，s
 
-
-    private CreateMap createMap;
+    protected int size;
+    protected CreateMap createMap;
+    protected Map<Integer,Bean> beans;
     public MiGongRoom(CreateMap createMap){
         this.createMap = createMap;
+    }
+
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public CreateMap getCreateMap() {
@@ -20,5 +33,13 @@ public abstract class MiGongRoom {
 
     public void setCreateMap(CreateMap createMap) {
         this.createMap = createMap;
+    }
+
+    public Map<Integer, Bean> getBeans() {
+        return beans;
+    }
+
+    public void setBeans(Map<Integer, Bean> beans) {
+        this.beans = beans;
     }
 }

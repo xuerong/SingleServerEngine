@@ -13,6 +13,8 @@ public class Pacman : MonoBehaviour {
 	public MapCreate mapCreate;
 	public float speed = 0.04f;
 
+	public int score = 0; // 用于记录分数，及对应星级
+
 	public int Dir = 0;
 	public int LastDir = 0;
 
@@ -64,6 +66,7 @@ public class Pacman : MonoBehaviour {
 		pacmanColliders.Add (c);
 
 		pacmanMap.Add (userId,this);
+		mapCreate.addScoreShow (userId);
 	}
 
 	void FixedUpdate () {
@@ -98,6 +101,7 @@ public class Pacman : MonoBehaviour {
 			if (curPoint != lastPoint) {
 				route.Add (curPoint);
 				lastPoint = curPoint;
+				mapCreate.checkEatBean (curPoint);
 //				if (route.Count % 10 == 0) {
 //					StringBuilder sb = new StringBuilder ();
 //					foreach(int po in route){

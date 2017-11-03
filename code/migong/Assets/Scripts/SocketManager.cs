@@ -225,11 +225,13 @@ public class SocketManager : MonoBehaviour {
 							Debug.LogError("error:errorCode = "+exception.ErrCode+",errorMsg = "+exception.ErrMsg);
 						}else{
 							ActionForReceive action = dic[id];
-							AsyncObject o = new AsyncObject();
-							o.Opcode = opcode;
-							o.Data = data;
-							o.action = action;
-							invokeQueue.Enqueue(o);
+							if(action!=null){
+								AsyncObject o = new AsyncObject();
+								o.Opcode = opcode;
+								o.Data = data;
+								o.action = action;
+								invokeQueue.Enqueue(o);
+							}
 						}
 						dic.Remove(id);
 					}else if(syncObjects.ContainsKey(id)){
@@ -295,7 +297,7 @@ public class SocketManager : MonoBehaviour {
 		try  
 		{  	
 			int id = Interlocked.Increment(ref idIndex);
-			ByteBuffer buffer = ByteBuffer.Allocate(512);  
+			ByteBuffer buffer = ByteBuffer.Allocate(data.Length+12);  
 			buffer.WriteInt(data.Length);
 			buffer.WriteInt(opcode);
 			buffer.WriteInt(id);

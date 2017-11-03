@@ -2,11 +2,16 @@ package com.migong.entity;
 
 import com.mm.engine.framework.data.entity.session.Session;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RoomUser {
     private Session session;
     private long beginTime;
 
     private RoomUserState roomUserState = new RoomUserState();
+    private List<Bean> eatBeanNotSend = new ArrayList<>();
+    private List<Bean> eatBean = new ArrayList<>();
 
     private volatile boolean isChange;
 
@@ -46,5 +51,21 @@ public class RoomUser {
 
     public boolean isChange() {
         return isChange;
+    }
+
+    public List<Bean> getEatBeanNotSend() {
+        return eatBeanNotSend;
+    }
+
+    public void setEatBeanNotSend(List<Bean> eatBeanNotSend) {
+        this.eatBeanNotSend = eatBeanNotSend;
+    }
+
+    public List<Bean> getEatBean() {
+        return eatBean;
+    }
+
+    public void setEatBean(List<Bean> eatBean) {
+        this.eatBean = eatBean;
     }
 }

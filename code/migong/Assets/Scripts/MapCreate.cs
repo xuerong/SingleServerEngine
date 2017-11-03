@@ -13,6 +13,14 @@ public enum MapMode{
 	Online
 }
 
+public class Bean{
+	public int score;
+	public GameObject go;
+	public Bean(int score){
+		this.score = score;
+	}
+}
+
 public class MapCreate : MonoBehaviour{
 
 	public Button closeButton;
@@ -26,13 +34,7 @@ public class MapCreate : MonoBehaviour{
 		new int[]{1,3,	2,	3,		3}
 	};
 
-	public int[][] beanMap = new int[][]{
-		new int[]{0,0	,0,	0,		0},
-		new int[]{0,1	,0,	0,		0},
-		new int[]{0,1,	0,	0	,	0},
-		new int[]{0,0,	1,	0,		1},
-		new int[]{0,0,	0,	0,		0}
-	};
+	public Bean[][] beanMap;
 
 	public MapMode Mode; // 0单机，2pvp
 
@@ -57,6 +59,7 @@ public class MapCreate : MonoBehaviour{
 	int tr = 0,td = 0;
 
 	public Dictionary<string,Pacman> pacmanMap = new Dictionary<string, Pacman> ();
+	private Dictionary<string,Text> scoreText = new Dictionary<string, Text> ();
 	public List<CircleCollider2D> pacmanColliders = new List<CircleCollider2D> ();
 	// Use this for initialization
 	void Start () {
@@ -80,7 +83,36 @@ public class MapCreate : MonoBehaviour{
 		float wallWidth = 0.21f * myScale;
 		nodeX = 1.9f * myScale - wallWidth*2 ;nodeY = 1.9f * myScale - wallWidth*2;
 
+		//
+		if (Mode == MapMode.Online) {
+			SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCSendEatBean,delegate(int opcode, byte[] data) {
+				SCSendEatBean ret = SCSendEatBean.Deserialize(data);
+				_checkEatBean(ret.UserId,ret.BeanPos); // 谁吃的
+			});
+		}
+
+
+		Debug.Log (pacmanMap.Count);
+
 		createMap ();
+	}
+
+	public void addScoreShow(string userId){
+		// 添加计分板
+		Object scoreShow = Resources.Load("scoreShow");
+		if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {
+			GameObject scoreGo = Instantiate (scoreShow) as GameObject;
+			scoreGo.transform.localScale = new Vector3 (1,1,1);
+			scoreGo.transform.localPosition = new Vector3 (100, -20,0);
+			scoreGo.transform.SetParent(transform.parent.Find("Canvas"),false);
+			scoreText.Add (userId,scoreGo.transform.Find("Text").GetComponent<Text>());
+		} else {
+			GameObject scoreGo = Instantiate (scoreShow) as GameObject;
+			scoreGo.transform.localScale = new Vector3 (1,1,1);
+			scoreGo.transform.localPosition = new Vector3 (100, -20+(80*scoreText.Count),0);
+			scoreGo.transform.SetParent(transform.parent.Find("Canvas"),false);
+			scoreText.Add (userId,scoreGo.transform.Find("Text").GetComponent<Text>());
+		}
 	}
 	// 注意顺序，从上向下，从下向上
 	public int getPointByPosition(Vector2 pos){
@@ -88,6 +120,43 @@ public class MapCreate : MonoBehaviour{
 		int y = (int)((pos.y + nodeY / 2) / nodeY);
 		int i = (tr - y - 1);
 		return i * td + x;
+	}
+	// 检查吃豆子，如果有就吃掉---根据类型
+	public void checkEatBean(int pos){
+		if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {
+			_checkEatBean (pos);
+		} else if (Mode == MapMode.Online){
+			if (checkBean (pos)) {
+				// 发送服务器
+				CSEatBean eatBean = new CSEatBean ();
+				eatBean.BeanPos = pos;
+				SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSEatBean, CSEatBean.SerializeToBytes (eatBean), delegate(int opcode, byte[] data) {
+					SCEatBean ret = SCEatBean.Deserialize (data);
+					// 这里不需要处理，因为有统一推送
+				});
+			}
+		}
+	}
+	private void _checkEatBean(int pos){
+		_checkEatBean (SocketManager.ACCOUNT_ID, pos);
+	}
+	private void _checkEatBean(string userId,int pos){
+		int x = pos / size;
+		int y = pos % size;
+		if (beanMap [x] [y] != null) {
+			Destroy (beanMap [x] [y].go); // 计算在玩家身上，并做出相应的效果
+			scoreText [userId].text = int.Parse (scoreText [userId].text) + beanMap [x] [y].score + "";
+			pacmanMap [userId].score += beanMap [x] [y].score;
+			beanMap [x] [y] = null;
+		}
+	}
+	private bool checkBean(int pos){
+		int x = pos / size;
+		int y = pos % size;
+		if (beanMap [x] [y] != null) {
+			return true;
+		}
+		return false;
 	}
 
 	private void createMap(){
@@ -106,22 +175,23 @@ public class MapCreate : MonoBehaviour{
 					int w = tr - i-1;
 					GameObject up = Instantiate(down) as GameObject;
 					up.transform.parent = transform;
-					up.transform.position = new Vector3 (x + j * nodeX, y + w * nodeY,0);
+					up.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,0);
 					up.transform.localScale = new Vector3 (myScale,myScale,1);
 				}
 				if ((map[i][j] & 1) == 1) {
 					int w = tr - i-1;
 					GameObject up = Instantiate(right) as GameObject;
 					up.transform.parent = transform;
-					up.transform.position = new Vector3 (x + j * nodeX, y + w * nodeY,0);
+					up.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,0);
 					up.transform.localScale = new Vector3 (myScale,myScale,1);
 				}
-				if (beanMap [i] [j] > 0) {
+				if (beanMap!= null && beanMap [i] [j] != null) {
 					int w = tr - i-1;
 					GameObject beanGo = Instantiate(bean) as GameObject;
 					beanGo.transform.parent = transform;
-					beanGo.transform.position = new Vector3 (x + j * nodeX, y + w * nodeY,0);
+					beanGo.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,0);
 					beanGo.transform.localScale = new Vector3 (myScale* 0.6f,myScale* 0.6f,1);
+					beanMap [i] [j].go = beanGo;
 				}
 			}
 		}
