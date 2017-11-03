@@ -6,8 +6,8 @@ public class SingleMiGongRoom extends MiGongRoom {
 
     private int level;
 
-    public SingleMiGongRoom(CreateMap createMap) {
-        super(createMap);
+    public SingleMiGongRoom(CreateMap createMap,int size) {
+        super(createMap,size);
     }
 
     public int getLevel() {

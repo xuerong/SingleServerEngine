@@ -9,6 +9,7 @@ public class RoomUserState {
     private float posY;
     private int dir;
     private int speed;
+    private long time; // 成为这个状态的时间
 
     public float getPosY() {
         return posY;
@@ -42,12 +43,21 @@ public class RoomUserState {
         this.speed = speed;
     }
 
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
     public RoomUserState clone(){
         RoomUserState roomUserState = new RoomUserState();
         roomUserState.setPosX(this.posX);
         roomUserState.setPosY(this.posY);
         roomUserState.setSpeed(this.speed);
         roomUserState.setDir(this.dir);
+        roomUserState.setTime(this.time);
         return roomUserState;
     }
 }

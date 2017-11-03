@@ -178,6 +178,10 @@ message SCEatBean
 // 推送吃豆
 message SCSendEatBean
 {
+	repeated PBEatBeanInfo beans	=1;
+}
+message PBEatBeanInfo
+{
 	required string userId 			= 1; // 玩家id
 	required int32 beanPos 			= 2; // 豆的位置
 }
@@ -197,7 +201,8 @@ message SCUserArrived
 // 推送，游戏结束：排名
 message SCGameOver
 {
-	repeated PBGameOverUserInfo userInfos 	     = 1; // 玩家排名
+	required int32 overType 						=1; // 0其它，1都抵达终点，2时间到
+	repeated PBGameOverUserInfo userInfos 	     = 2; // 玩家排名
 }
 message PBGameOverUserInfo
 {
@@ -205,6 +210,7 @@ message PBGameOverUserInfo
 	required string userName 			= 2; // 玩家名称
 	required int32 rank 			= 3; // 排名
 	required int32 score 			= 4; // 分数
+	required int32 arrived 			= 5; // 是否抵达终点
 }
 // 房间心跳包
 message CSRoomHeart

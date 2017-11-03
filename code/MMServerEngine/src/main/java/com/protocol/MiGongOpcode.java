@@ -32,16 +32,17 @@ public class MiGongOpcode {
 	public static final int CSEatBean = 12029;
 	public static final int SCEatBean = 12030;
 	public static final int SCSendEatBean = 12031;
-	public static final int CSArrived = 12032;
-	public static final int SCArrived = 12033;
-	public static final int SCUserArrived = 12034;
-	public static final int SCGameOver = 12035;
-	public static final int PBGameOverUserInfo = 12036;
-	public static final int CSRoomHeart = 12037;
-	public static final int SCRoomHeart = 12038;
-	public static final int CSSendWalkingRoute = 12039;
-	public static final int SCSendWalkingRoute = 12040;
-	public static final int CSCommon = 12041;
-	public static final int SCCommon = 12042;
+	public static final int PBEatBeanInfo = 12032;
+	public static final int CSArrived = 12033;
+	public static final int SCArrived = 12034;
+	public static final int SCUserArrived = 12035;
+	public static final int SCGameOver = 12036;
+	public static final int PBGameOverUserInfo = 12037;
+	public static final int CSRoomHeart = 12038;
+	public static final int SCRoomHeart = 12039;
+	public static final int CSSendWalkingRoute = 12040;
+	public static final int SCSendWalkingRoute = 12041;
+	public static final int CSCommon = 12042;
+	public static final int SCCommon = 12043;
 
 }

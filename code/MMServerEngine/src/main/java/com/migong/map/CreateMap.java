@@ -71,11 +71,14 @@ public class CreateMap {
         map = newMap;
     }
 
+    public boolean checkRouteWithoutSkill(List<Integer> routes){
+        return checkRouteWithoutSkill(routes,in,out);
+    }
     /**
      * 给一个路径是否通
      * 如果后面有技能，这个判断就可能出问题，要添加
      */
-    public boolean checkRouteWithoutSkill(List<Integer> routes){
+    public boolean checkRouteWithoutSkill(List<Integer> routes,Element in,Element out){
         if(routes == null || routes.size() < 1){
             return false;
         }
