@@ -46,7 +46,7 @@ public class DragControl : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		if (mapCreate.mapRect.height < canvasHeight) {
 			deltaY = 0;
 		} else {
-			Debug.Log ("canvasHeight="+canvasHeight+",mapCreate.nodeY="+mapCreate.nodeY);
+//			Debug.Log ("canvasHeight="+canvasHeight+",mapCreate.nodeY="+mapCreate.nodeY);
 			if (caPos.y < canvasHeight / 2 - mapCreate.nodeY) {
 				deltaY = caTran.localPosition.y - (canvasHeight / 2-mapCreate.nodeY);
 			} else if (caPos.y > mapCreate.mapRect.height - canvasHeight / 2-mapCreate.nodeY) {

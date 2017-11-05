@@ -32,7 +32,12 @@ public class MultiMiGongRoom extends MiGongRoom {
     public MultiMiGongRoom(CreateMap createMap,int size, List<RoomUser> roomUsers,MiGongService miGongService) {
         super(createMap,size);
         this.miGongService = miGongService;
-        List<Integer> list = Arrays.asList(1,2,3,4); // (1,1)(1,size-1)(size-1,1)(size-1,size-1)
+        List<Integer> list = new ArrayList<>(); // (1,1)(1,size-1)(size-1,1)(size-1,size-1)
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+
         Random random = new Random(System.currentTimeMillis());
         for(RoomUser roomUser : roomUsers){
             // 为玩家分配入口和出口
@@ -136,6 +141,7 @@ public class MultiMiGongRoom extends MiGongRoom {
         }
         sendAllUsers(MiGongOpcode.SCGameOver,overBuilder.build().toByteArray());
         // todo 保存房间信息
+        System.out.println("shutdown");
         roomBeginExecutor.shutdownNow();
         // 通知miGongService清除该房间
         miGongService.multiRoomOver(this);

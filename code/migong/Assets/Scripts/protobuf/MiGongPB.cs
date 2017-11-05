@@ -325,6 +325,12 @@ namespace Example
     /// <summary> 推送吃豆</summary>
     public partial class SCSendEatBean
     {
+        public List<Example.PBEatBeanInfo> Beans { get; set; }
+
+    }
+
+    public partial class PBEatBeanInfo
+    {
         public string UserId { get; set; }
 
         /// <summary> 玩家id</summary>
@@ -353,6 +359,9 @@ namespace Example
     /// <summary> 推送，游戏结束：排名</summary>
     public partial class SCGameOver
     {
+        public int OverType { get; set; }
+
+        /// <summary> 0其它，1都抵达终点，2时间到</summary>
         public List<Example.PBGameOverUserInfo> UserInfos { get; set; }
 
     }
@@ -369,6 +378,9 @@ namespace Example
 
         /// <summary> 排名</summary>
         public int Score { get; set; }
+
+        /// <summary> 分数</summary>
+        public int Arrived { get; set; }
 
     }
 

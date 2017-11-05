@@ -17,6 +17,11 @@ public class Pacman : MonoBehaviour {
 
 	public int Dir = 0;
 	public int LastDir = 0;
+	// 起点和终点
+	public int inX;
+	public int inY;
+	public int outX;
+	public int outY;
 
 	public string userId = SocketManager.ACCOUNT_ID;
 
@@ -34,7 +39,7 @@ public class Pacman : MonoBehaviour {
 
 	List<int> route = new List<int>();
 
-	bool passFinish;
+	bool finish;
 	void Start () {
 		pacmanMap = mapCreate.pacmanMap;
 		pacmanColliders = mapCreate.pacmanColliders;
@@ -44,7 +49,7 @@ public class Pacman : MonoBehaviour {
 		}
 		speed = 0.2f;
 
-		transform.position = mapCreate.getStartPointWithScale ();
+		transform.position = mapCreate.getStartPointWithScale (inX,inY);
 
 		dest = transform.position;
 		transform.localScale = transform.localScale * 0.6f;
@@ -67,10 +72,14 @@ public class Pacman : MonoBehaviour {
 
 		pacmanMap.Add (userId,this);
 		mapCreate.addScoreShow (userId);
+
+		mapCreate.setEndEffect (outX, outY);
+
+		Debug.Log (inX+","+inY+","+outX+","+outY+ "  ");
 	}
 
 	void FixedUpdate () {
-		if (passFinish) {
+		if (finish) {
 			return;
 		}
 		isControl = false;
@@ -96,12 +105,13 @@ public class Pacman : MonoBehaviour {
 			animator.SetFloat("DirX", dirVec.x);
 			animator.SetFloat("DirY", dirVec.y);
 
-			// 记录行踪
-			int curPoint = mapCreate.getPointByPosition(new Vector2(transform.position.x,transform.position.y));
-			if (curPoint != lastPoint) {
-				route.Add (curPoint);
-				lastPoint = curPoint;
-				mapCreate.checkEatBean (curPoint);
+			// 记录行踪:自己的人才记录
+			if (userId == SocketManager.ACCOUNT_ID) {
+				int curPoint = mapCreate.getPointByPosition (new Vector2 (transform.position.x, transform.position.y));
+				if (curPoint != lastPoint) {
+					route.Add (curPoint);
+					lastPoint = curPoint;
+					mapCreate.checkEatBean (curPoint);
 //				if (route.Count % 10 == 0) {
 //					StringBuilder sb = new StringBuilder ();
 //					foreach(int po in route){
@@ -109,11 +119,13 @@ public class Pacman : MonoBehaviour {
 //					}
 //					Debug.Log (sb.ToString());
 //				}
-				if (curPoint == mapCreate.endPoint.x * mapCreate.size + mapCreate.endPoint.x) {
-					passFinish = true;
-					mapCreate.passFinish (passFinish, route);
-				}
+					if (curPoint == outX * mapCreate.size + outY) {
+						Debug.Log (inX + "," + inY + "," + outX + "," + outY + "  finish,666");
+						finish = true;
+						mapCreate.passFinish (finish, route);
+					}
 
+				}
 			}
 		}
 		if (dest != (Vector2)transform.position) {
@@ -142,7 +154,7 @@ public class Pacman : MonoBehaviour {
 	}
 
 	public void setDir(int dir,int mode){
-		if (mode == 1) {
+		if (mode == 0) {
 			return;
 		}
 		if (LastDir == dir) {

@@ -52,25 +52,29 @@ public class MainPanel : MonoBehaviour {
 			});
 			ui.SetActive (false);
 		});
-		Button close = GameObject.Find ("main/ui/uiUnlimit/Canvas/close").GetComponent<Button>();
-		close.onClick.AddListener (delegate() {
+		closeButton = GameObject.Find ("main/ui/uiUnlimit/Canvas/close").GetComponent<Button>();
+		closeButton.onClick.AddListener (delegate() {
+			show (uiMain);
+		});
+		// uiOnline 关闭按钮和进入按钮
+		go = GameObject.Find ("main/ui/uiOnline/Canvas/go").GetComponent<Button>();
+		go.onClick.AddListener (delegate() {
+			OnPvpClick();
+		});
+		closeButton = GameObject.Find ("main/ui/uiOnline/Canvas/close").GetComponent<Button>();
+		closeButton.onClick.AddListener (delegate() {
 			show (uiMain);
 		});
 
 		// 联网对战按钮
-//		GameObject pvpBattle = Instantiate(button) as GameObject;
-//		pvpBattle.transform.SetParent (canvasGo.transform);
-//		pvpBattle.transform.position = new Vector3 (width/2, height/8 * (count),0);
-//		Button bt = pvpBattle.GetComponent<Button> ();
-//		bt.onClick.AddListener (delegate() {OnPvpClick();});
-//		//
-//		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingSuccess, matchSuccess);
-//		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingFail, delegate(int opcode, byte[] receiveData) {
-//			Debug.Log("");
-//		});
-//		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCBegin, delegate(int opcode, byte[] receiveData) {
-//			Debug.Log("");
-//		});
+		//
+		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingSuccess, matchSuccess);
+		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingFail, delegate(int opcode, byte[] receiveData) {
+			Debug.Log("");
+		});
+		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCBegin, delegate(int opcode, byte[] receiveData) {
+			Debug.Log("");
+		});
 	}
 
 	private void openLevelWindow(){
@@ -185,6 +189,7 @@ public class MainPanel : MonoBehaviour {
 	public void matchSuccess(int opcode, byte[] data){
 		SCMatchingSuccess matchingSuccess = SCMatchingSuccess.Deserialize (data);
 		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Start,matchingSuccess.End,1,1,matchingSuccess.OtherInfos);
+		ui.SetActive (false);
 	}
 
 	// Update is called once per frame
@@ -236,13 +241,19 @@ public class MainPanel : MonoBehaviour {
 			mapCreate.beanMap [info.Pos / size] [info.Pos % size] = new Bean(info.Score);
 		}
 
-		mapCreate.startPoint = new Vector2 (start%size,start/size);
-		mapCreate.endPoint = new Vector2 (end%size,end/size);
+		Pacman pacman = gamePanelGo.transform.Find ("pacman").GetComponent<Pacman> ();
+
+		pacman.inX = start % size;
+		pacman.inY = start / size;
+		pacman.outX = end % size;
+		pacman.outY = end / size;
+
 		mapCreate.size = size;
 		Debug.Log("map size:"+size+",End:"+end);
 
 		gamePanelGo.transform.parent = transform;
 		gamePanelGo.transform.localPosition = new Vector3(0,0,0);
+
 
 		// 
 		if(mode == MapMode.Online && otherInfos != null){
@@ -250,12 +261,18 @@ public class MainPanel : MonoBehaviour {
 			foreach (PBOtherInfo otherInfo in otherInfos) {
 				GameObject pacmanGo = Instantiate(pacmanIns) as GameObject;
 
-				Pacman pacman = pacmanGo.GetComponent<Pacman> ();
+				pacman = pacmanGo.GetComponent<Pacman> ();
 				pacman.userId = otherInfo.UserId;
+
+				pacman.inX = otherInfo.Start % size;
+				pacman.inY = otherInfo.Start / size;
+				pacman.outX = otherInfo.End % size;
+				pacman.outY = otherInfo.End / size;
 
 				pacman.mapCreate = mapCreate;
 
 				pacmanGo.transform.parent = gamePanelGo.transform;
+
 			}
 		}
 	}

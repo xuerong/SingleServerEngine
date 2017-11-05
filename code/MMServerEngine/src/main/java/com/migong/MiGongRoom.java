@@ -9,7 +9,7 @@ public abstract class MiGongRoom {
 
     public static final int USER_COUNT = 2; // 每个房间的人数
     public static final long MAX_WAIT_TIME = 40 * 1000l; // 匹配等待最多时间
-    public static final long ROOM_MAX_TIME = 400 * 1000l; // todo 房间时间，要不要定死？还是根据情况设置?还是配置？
+    public static final int ROOM_MAX_TIME = 400; // todo 房间时间，要不要定死？还是根据情况设置?还是配置？
     public static final long BEGIN_WAIT_TIME = 3; // 开始等待时间，s
 
     protected int size;

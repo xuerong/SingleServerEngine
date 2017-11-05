@@ -426,7 +426,7 @@ public class MiGongService {
         // 清理缓存的miGongPassInfoMap   清理信息
         final LogoutEventData logoutEventData = (LogoutEventData)data.getData();
         miGongPassInfoMap.remove(logoutEventData.getSession().getAccountId());
-        // todo 从Matching的queue中移除
+        // todo 从Matching的queue中移除，如果是房间最后一个，移除房间
     }
     /////////////////////////////////////////////////////////////联网对战
 
@@ -590,8 +590,7 @@ public class MiGongService {
 //            otherInfoList.add(ob.build());
 //        }
         MiGongPB.SCMatchingSuccess.Builder builder = MiGongPB.SCMatchingSuccess.newBuilder();
-        builder.setStart(startElement.toInt(size));
-        builder.setEnd(endElement.toInt(size));
+
         for(byte[] aa : createMap.getMap()){
             for(byte b : aa){
                 builder.addMap((int)b);
@@ -610,7 +609,7 @@ public class MiGongService {
             beanBuilder.setScore(bean.getScore());
             builder.addBeans(beanBuilder);
         }
-
+        builder.setTime(MiGongRoom.ROOM_MAX_TIME);
         builder.setSpeed(SPEED_DEFAULT); // todo 速度
         int index = 0;
         for(RoomUser roomUser : roomUserList){
@@ -620,6 +619,8 @@ public class MiGongService {
             List<MiGongPB.PBOtherInfo> otherInfoList = new ArrayList<>();
             for(RoomUser roomUser2 : roomUserList){
                 if(roomUser2 == roomUser){
+                    builder.setStart(roomUser.getIn().toInt(size));
+                    builder.setEnd(roomUser.getOut().toInt(size));
                     continue;
                 }
                 MiGongPB.PBOtherInfo.Builder ob = MiGongPB.PBOtherInfo.newBuilder();
@@ -635,6 +636,7 @@ public class MiGongService {
             builder.clearOtherInfos();
             builder.addAllOtherInfos(otherInfoList);
 //            otherInfoList.add(otherInfo);
+            System.out.println("send matchingsuccess");
             roomUser.getSession().getMessageSender().sendMessage(MiGongOpcode.SCMatchingSuccess,builder.build().toByteArray());
         }
         multiMiGongRoom.start();
