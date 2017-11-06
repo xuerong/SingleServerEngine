@@ -45,7 +45,7 @@ public class Ui extends Frame implements ActionListener{
 //		System.out.println("width:"+width+",height:"+height);
 //		x=20;														//地图离窗口左边的距离
 //		y=60;														//地图离窗口上边的距离
-        nodeX=nodeY = (height-140)/tr;													//单个结点的长
+//        nodeX=nodeY = (height-140)/tr;													//单个结点的长
 //		nodeY=16;													//单个节点的宽
         setSize(td*nodeX+50,tr*nodeY+140);							//设置窗口的大小
         System.out.println("sizeHeight:"+(tr*nodeY+140)+",useHeight:"+(height-y-30)/tr*tr);
@@ -113,7 +113,7 @@ public class Ui extends Frame implements ActionListener{
     }
     /*主函数：测试函数（参数：地图的行和列，入口和出口）*/
     public static void main(String[] args) {
-        int size = 50;
+        int size = 10;
         new Ui(size,size,new Element(0,0),new Element(size-1,size-1));
     }
 }

@@ -154,7 +154,7 @@ public class Pacman : MonoBehaviour {
 	}
 
 	public void setDir(int dir,int mode){
-		if (mode == 0) {
+		if (mode == 1) {
 			return;
 		}
 		if (LastDir == dir) {

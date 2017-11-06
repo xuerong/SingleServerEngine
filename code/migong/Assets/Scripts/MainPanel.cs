@@ -100,12 +100,12 @@ public class MainPanel : MonoBehaviour {
 			Destroy(up);
 
 			RectTransform contentTrans = content.GetComponent<RectTransform> ();
-			contentTrans.sizeDelta = new Vector2 ((buRec.rect.width + dis) * count + dis,contentTrans.rect.height);
+			contentTrans.sizeDelta = new Vector2 (0,(buRec.rect.height + dis) * count + dis);
 
 			for (int i = 0; i < count; i++) {
 				up = Instantiate(button) as GameObject;
 				up.transform.parent = content.transform;
-				up.transform.localPosition = new Vector3 ((buRec.rect.width+dis)*i+dis, 0,0);
+				up.transform.localPosition = new Vector3 (0, -((buRec.rect.height+dis)*i+dis),0);
 				up.transform.localScale = new Vector3 (1,1,1);
 
 				Button b1 = up.GetComponent<Button> ();

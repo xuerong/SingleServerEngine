@@ -236,7 +236,7 @@ public class MiGongService {
             info.setPass(rankMiGong.getPassUnlimited());
             info.setRank(i++);
             info.setUserId(rankMiGong.getUserId());
-            info.setUserName(dataService.selectObject(Account.class,"id = ?",rankMiGong.getUserId()).getName());
+            info.setUserName(dataService.selectObject(Account.class,"id=?",rankMiGong.getUserId()).getName());
             builder.addUnlimitedRankInfo(info);
         }
         return new RetPacketImpl(MiGongOpcode.SCUnlimitedInfo, builder.build().toByteArray());

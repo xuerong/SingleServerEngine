@@ -79,7 +79,7 @@ public class MapCreate : MonoBehaviour{
 			mainPanel.showMainPanel();
 		});
 		// 0.21 碰撞体的宽，1.9碰撞体的长
-		float wallWidth = 0.21f * myScale;
+		float wallWidth = 0.13f * myScale;
 		nodeX = 1.9f * myScale - wallWidth*2 ;nodeY = 1.9f * myScale - wallWidth*2;
 
 		//
@@ -172,6 +172,9 @@ public class MapCreate : MonoBehaviour{
 		Object down = Resources.Load ("down");
 		Object right = Resources.Load ("right");
 
+		Object downShadow = Resources.Load ("downShadow");
+		Object rightShadow = Resources.Load ("rightShadow");
+
 		Object bean = Resources.Load ("bean");
 		for (int i = 0; i < tr; i++) {										//绘制墙
 			for (int j = 0; j < td; j++) {
@@ -181,6 +184,11 @@ public class MapCreate : MonoBehaviour{
 					up.transform.parent = transform;
 					up.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,0);
 					up.transform.localScale = new Vector3 (myScale,myScale,1);
+
+//					up = Instantiate(downShadow) as GameObject;
+//					up.transform.parent = transform;
+//					up.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,1);
+//					up.transform.localScale = new Vector3 (myScale,myScale,1);
 				}
 				if ((map[i][j] & 1) == 1) {
 					int w = tr - i-1;
@@ -188,6 +196,11 @@ public class MapCreate : MonoBehaviour{
 					up.transform.parent = transform;
 					up.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,0);
 					up.transform.localScale = new Vector3 (myScale,myScale,1);
+
+//					up = Instantiate(rightShadow) as GameObject;
+//					up.transform.parent = transform;
+//					up.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,1);
+//					up.transform.localScale = new Vector3 (myScale,myScale,1);
 				}
 				if (beanMap!= null && beanMap [i] [j] != null) {
 					int w = tr - i-1;
