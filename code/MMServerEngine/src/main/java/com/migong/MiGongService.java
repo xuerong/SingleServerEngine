@@ -403,9 +403,21 @@ public class MiGongService {
         ret[4] = new Bean(size-1,size/2,5);
 
         Random random = new Random(System.currentTimeMillis());
+        Set<Integer> hasCreatePos = new HashSet<>(ret.length);
+        hasCreatePos.add((ret[0].getX()-1)*(size - 1) + (ret[0].getY()-1));
+        hasCreatePos.add((ret[1].getX()-1)*(size - 1) + (ret[1].getY()-1));
+        hasCreatePos.add((ret[2].getX()-1)*(size - 1) + (ret[2].getY()-1));
+        hasCreatePos.add((ret[3].getX()-1)*(size - 1) + (ret[3].getY()-1));
+        hasCreatePos.add((ret[4].getX()-1)*(size - 1) + (ret[4].getY()-1));
+
         for(int i =0;i<bean1Count;i++){
             int posInt = random.nextInt((size - 1)*(size-1));
-            ret[i+5] = new Bean(posInt/(size-1) + 1,posInt%(size-1)+1,1);
+            if(hasCreatePos.contains(posInt)){
+                i--;
+            }else{
+                ret[i+5] = new Bean(posInt/(size-1) + 1,posInt%(size-1)+1,1);
+                hasCreatePos.add(posInt);
+            }
         }
         return ret;
     }

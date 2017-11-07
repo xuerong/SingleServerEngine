@@ -17,7 +17,7 @@ public class MainPanel : MonoBehaviour {
 	void Start () {
 		show (uiMain);
 		// 给主界面按钮加事件
-		string canvasPath = "main/ui/uiMain/Canvas/";
+		string canvasPath = "main/ui/uiMain/Canvas/buttons/";
 		Button levelButton = GameObject.Find (canvasPath+"level").GetComponent<Button>();
 		levelButton.onClick.AddListener (delegate() {
 			// 打开level 界面
@@ -92,6 +92,7 @@ public class MainPanel : MonoBehaviour {
 		CSGetMiGongLevel getMiGongLevel = new CSGetMiGongLevel();
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetMiGongLevel, CSGetMiGongLevel.SerializeToBytes (getMiGongLevel),delegate(int opcode, byte[] data) {
 			SCGetMiGongLevel level = SCGetMiGongLevel.Deserialize (data);
+			int openLevel = level.OpenLevel == 0? 1:level.OpenLevel;
 			int count = level.PassCountInLevel.Count;
 			float dis = 20f;
 
@@ -113,14 +114,15 @@ public class MainPanel : MonoBehaviour {
 				ButtonIndex buttonIndex = up.GetComponent<ButtonIndex> ();
 				buttonIndex.index = "level" + (i + 1);
 				buttonIndex.level = (i + 1);
+				buttonIndex.pass = level.OpenPass;
 				b1.onClick.AddListener (delegate() {OnClick(buttonIndex);});
 
 				GameObject textGo = up.transform.Find ("Text").gameObject;
 				Text text = textGo.GetComponent<Text> ();
 				int curPass;
-				if (i == level.OpenLevel) {
+				if (i+1 == openLevel) {
 					curPass = level.OpenPass;
-				} else if (i < level.OpenLevel) {
+				} else if (i < openLevel) {
 					curPass = level.PassCountInLevel [i];
 				} else {
 					curPass = 0;
@@ -158,14 +160,14 @@ public class MainPanel : MonoBehaviour {
 			Destroy(up);
 
 			RectTransform contentTrans = content.GetComponent<RectTransform> ();
-			contentTrans.sizeDelta = new Vector2 (contentTrans.rect.width,(buRec.rect.height + dis) * count + dis);
+			contentTrans.sizeDelta = new Vector2 (0,(buRec.rect.height + dis) * count + dis);
 
 			for (int i = 0; i < count; i++) {
 				PBUnlimitedRankInfo info = ret.UnlimitedRankInfo[i];
 				up = Instantiate(button) as GameObject;
-				up.transform.parent = content.transform;
 				up.transform.localPosition = new Vector3 (0, -((buRec.rect.height+dis)*i+dis),0);
 				up.transform.localScale = new Vector3 (1,1,1);
+				up.transform.SetParent(content.transform,false);
 				// 生成各个玩家的排名item
 				GameObject textGo = up.transform.Find ("Text").gameObject;
 				Text text = textGo.GetComponent<Text> ();
@@ -217,7 +219,7 @@ public class MainPanel : MonoBehaviour {
 	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int start,int end,int level,int pass,List<PBOtherInfo> otherInfos){
 		Object gamePanel = Resources.Load ("GamePanel");
 		GameObject gamePanelGo = Instantiate(gamePanel) as GameObject;
-		GameObject mapGo = gamePanelGo.transform.Find ("map").gameObject;
+		GameObject mapGo = gamePanelGo.transform.Find ("content/map").gameObject;
 		MapCreate mapCreate = mapGo.GetComponent<MapCreate> ();
 		mapCreate.Level = level;
 		mapCreate.Pass = pass;
@@ -241,7 +243,7 @@ public class MainPanel : MonoBehaviour {
 			mapCreate.beanMap [info.Pos / size] [info.Pos % size] = new Bean(info.Score);
 		}
 
-		Pacman pacman = gamePanelGo.transform.Find ("pacman").GetComponent<Pacman> ();
+		Pacman pacman = gamePanelGo.transform.Find ("content/pacman").GetComponent<Pacman> ();
 
 		pacman.inX = start % size;
 		pacman.inY = start / size;
@@ -271,7 +273,7 @@ public class MainPanel : MonoBehaviour {
 
 				pacman.mapCreate = mapCreate;
 
-				pacmanGo.transform.parent = gamePanelGo.transform;
+				pacmanGo.transform.parent = gamePanelGo.transform.Find("content");
 
 			}
 		}

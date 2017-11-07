@@ -25,6 +25,7 @@ public class MultiMiGongRoom extends MiGongRoom {
     private int arrivedCount = 0;
     private long beginTime;
     private volatile boolean isOver = false;
+    private Future future;
 
     private AtomicInteger frame = new AtomicInteger(0);
 
@@ -114,11 +115,11 @@ public class MultiMiGongRoom extends MiGongRoom {
     }
 
     public void start(){
-        roomBeginExecutor.schedule(()->{ // 3秒钟开始
+        future = roomBeginExecutor.schedule(()->{ // 3秒钟开始
             begin();
             MiGongPB.SCBegin.Builder builder = MiGongPB.SCBegin.newBuilder();
             sendAllUsers(MiGongOpcode.SCBegin,builder.build().toByteArray());
-            roomBeginExecutor.schedule(()->{ // 时间到了结束
+            future = roomBeginExecutor.schedule(()->{ // 时间到了结束
                 doOver(OverType.TimeOut);
 
             },MiGongRoom.ROOM_MAX_TIME,TimeUnit.SECONDS);
@@ -141,8 +142,9 @@ public class MultiMiGongRoom extends MiGongRoom {
         }
         sendAllUsers(MiGongOpcode.SCGameOver,overBuilder.build().toByteArray());
         // todo 保存房间信息
-        System.out.println("shutdown");
-        roomBeginExecutor.shutdownNow();
+        if(future != null){
+            future.cancel(true);
+        }
         // 通知miGongService清除该房间
         miGongService.multiRoomOver(this);
     }

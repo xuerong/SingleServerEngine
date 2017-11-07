@@ -23,7 +23,7 @@ public class AsyncObject{
 }
 
 public class SocketManager : MonoBehaviour {
-	public static string ACCOUNT_ID = "asdfadf66";
+	public static string ACCOUNT_ID = "asdfadf668";
 	public static int MAX_SEND_COUNT = 5; // 一次最大发送消息
 	/**
 	 * BlockingQueue 用来发包
@@ -223,6 +223,9 @@ public class SocketManager : MonoBehaviour {
 						if(opcode == (int)BaseOpcode.SCException){
 							SCException exception = SCException.Deserialize(data);
 							Debug.LogError("error:errorCode = "+exception.ErrCode+",errorMsg = "+exception.ErrMsg);
+							WarnDialog.showWarnDialog ("数据错误："+exception.ErrMsg,delegate() {
+								//				ConnectServer();
+							});
 						}else{
 							ActionForReceive action = dic[id];
 							if(action!=null){

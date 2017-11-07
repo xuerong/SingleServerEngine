@@ -63,7 +63,7 @@ public class JoystackCc : MonoBehaviour {
 
 		mTrans = transform;
 
-		pacman = transform.parent.parent.parent.Find("pacman").gameObject.GetComponent<Pacman>();;
+		pacman = transform.parent.parent.parent.Find("content/pacman").gameObject.GetComponent<Pacman>();;
 	}
 
 

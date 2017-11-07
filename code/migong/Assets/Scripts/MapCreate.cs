@@ -26,6 +26,7 @@ public class MapCreate : MonoBehaviour{
 
 	public Button closeButton;
 	public Button okButton;
+	public Slider starSlider;
 
 	public int[][] map = new int[][]{ 
 		new int[]{0,2	,2,	2,		2},
@@ -57,6 +58,7 @@ public class MapCreate : MonoBehaviour{
 
 	int tr = 0,td = 0;
 
+
 	public Dictionary<string,Pacman> pacmanMap = new Dictionary<string, Pacman> ();
 	private Dictionary<string,Text> scoreText = new Dictionary<string, Text> ();
 	public List<CircleCollider2D> pacmanColliders = new List<CircleCollider2D> ();
@@ -65,15 +67,15 @@ public class MapCreate : MonoBehaviour{
 		// 设置button
 		closeButton.onClick.AddListener(delegate {
 			WarnDialog.showWarnDialog("exit?",delegate {
-				passFinish(false,null);
-				Destroy(transform.parent.gameObject);
+				passFinish(false,null,false);
+				Destroy(transform.parent.parent.gameObject);
 				GameObject mainGo = GameObject.Find ("main");
 				MainPanel mainPanel = mainGo.GetComponent<MainPanel>();
 				mainPanel.showMainPanel();;
 			});
 		});
 		okButton.onClick.AddListener(delegate {
-			Destroy(transform.parent.gameObject);
+			Destroy(transform.parent.parent.gameObject);
 			GameObject mainGo = GameObject.Find ("main");
 			MainPanel mainPanel = mainGo.GetComponent<MainPanel>();
 			mainPanel.showMainPanel();
@@ -86,7 +88,6 @@ public class MapCreate : MonoBehaviour{
 		if (Mode == MapMode.Online) {
 			SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCSendEatBean,delegate(int opcode, byte[] data) {
 				SCSendEatBean ret = SCSendEatBean.Deserialize(data);
-				Debug.Log("eatbeantuisong:"+ret.Beans.Count);
 				foreach(PBEatBeanInfo bean in ret.Beans){
 					_checkEatBean(bean.UserId,bean.BeanPos); // 谁吃的
 				}
@@ -103,16 +104,17 @@ public class MapCreate : MonoBehaviour{
 		// 添加计分板
 		Object scoreShow = Resources.Load("scoreShow");
 		if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {
-			GameObject scoreGo = Instantiate (scoreShow) as GameObject;
-			scoreGo.transform.localScale = new Vector3 (1,1,1);
-			scoreGo.transform.localPosition = new Vector3 (100, -20,0);
-			scoreGo.transform.SetParent(transform.parent.Find("Canvas"),false);
-			scoreText.Add (userId,scoreGo.transform.Find("Text").GetComponent<Text>());
+//			GameObject scoreGo = Instantiate (scoreShow) as GameObject;
+//			scoreGo.transform.localScale = new Vector3 (1,1,1);
+//			scoreGo.transform.localPosition = new Vector3 (100, -20,0);
+//			scoreGo.transform.SetParent(transform.parent.Find("Canvas"),false);
+//			scoreText.Add (userId,scoreGo.transform.Find("Text").GetComponent<Text>());
 		} else {
+			starSlider.transform.parent.gameObject.SetActive (false);
 			GameObject scoreGo = Instantiate (scoreShow) as GameObject;
 			scoreGo.transform.localScale = new Vector3 (1,1,1);
 			scoreGo.transform.localPosition = new Vector3 (100, -(20+(80*scoreText.Count)),0);
-			scoreGo.transform.SetParent(transform.parent.Find("Canvas"),false);
+			scoreGo.transform.SetParent(transform.parent.parent.Find("Canvas"),false);
 			scoreText.Add (userId,scoreGo.transform.Find("Text").GetComponent<Text>());
 		}
 	}
@@ -136,6 +138,8 @@ public class MapCreate : MonoBehaviour{
 					SCEatBean ret = SCEatBean.Deserialize (data);
 					// 这里不需要处理，因为有统一推送
 				});
+				int x = pos / size;
+				int y = pos % size;
 				beanMap [x] [y].sendSelf = true;
 			}
 		}
@@ -149,7 +153,24 @@ public class MapCreate : MonoBehaviour{
 
 		if (beanMap [x] [y] != null) {
 			Destroy (beanMap [x] [y].go); // 计算在玩家身上，并做出相应的效果
-			scoreText [userId].text = int.Parse (scoreText [userId].text) + beanMap [x] [y].score + "";
+			if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {
+				float old = starSlider.value;
+				starSlider.value = starSlider.value + beanMap [x] [y].score;
+				Text scoreText = starSlider.transform.Find ("score").GetComponent<Text> ();
+				scoreText.text = starSlider.value + "";
+				// 点亮星星
+				for(int i=1;i<5;i++){
+					int score = i * 10;
+					if (score > old && score <= starSlider.value) {
+						// 点亮
+						Image image = starSlider.transform.parent.Find ("star" + i).GetComponent<Image>();
+						image.color = new Color (255,255,255);
+						break;
+					}
+				}
+			}else if(Mode == MapMode.Online){
+				scoreText [userId].text = int.Parse (scoreText [userId].text) + beanMap [x] [y].score + "";
+			}
 			pacmanMap [userId].score += beanMap [x] [y].score;
 			beanMap [x] [y] = null;
 		}
@@ -176,6 +197,7 @@ public class MapCreate : MonoBehaviour{
 		Object rightShadow = Resources.Load ("rightShadow");
 
 		Object bean = Resources.Load ("bean");
+		int maxScore = 0;
 		for (int i = 0; i < tr; i++) {										//绘制墙
 			for (int j = 0; j < td; j++) {
 				if ((map[i][j] & 2) == 2) {
@@ -209,11 +231,24 @@ public class MapCreate : MonoBehaviour{
 					beanGo.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,0);
 					beanGo.transform.localScale = new Vector3 (myScale* 0.6f,myScale* 0.6f,1);
 					beanMap [i] [j].go = beanGo;
+
+					maxScore += beanMap [i] [j].score;
 				}
 			}
 		}
+		// 设置单机版的最大值 和星星的位置
+		if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {
+			starSlider.maxValue = maxScore;
+			starSlider.transform.Find ("maxScore").GetComponent<Text> ().text = "/"+maxScore;
+			RectTransform buRec = starSlider.GetComponent<RectTransform> ();
+			float perStarDelta = buRec.rect.width * 10 / maxScore; // 每个星星的像素便宜
+			for (int i = 1; i < 5; i++) {
+				RectTransform starRec = starSlider.transform.parent.Find ("star" + i).GetComponent<RectTransform> ();
+				starRec.anchoredPosition = new Vector2 (i * perStarDelta, 0);
+			}
+		}
 		// 修改相机位置
-		GameObject camera = transform.parent.Find("mapCamera").gameObject;
+		GameObject camera = transform.parent.parent.Find("mapCamera").gameObject;
 		camera.transform.position = new Vector3(nodeX*(tr)/2,nodeY * (td)/2,camera.transform.position.z);
 		// 修改相机大小
 		ca = camera.GetComponent<Camera>();
@@ -242,7 +277,7 @@ public class MapCreate : MonoBehaviour{
 		return false;
 	}
 
-	public void passFinish(bool success,List<int> route){
+	public void passFinish(bool success,List<int> route,bool showSettle){
 		if (Mode == MapMode.Level) {
 			CSPassFinish pf = new CSPassFinish ();
 			pf.Success = success ? 1 : 0;
@@ -254,30 +289,39 @@ public class MapCreate : MonoBehaviour{
 			pf.Route = route;
 			SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSPassFinish, CSPassFinish.SerializeToBytes (pf), delegate(int opcode, byte[] data) {
 				SCPassFinish pas = SCPassFinish.Deserialize (data);
-				GameObject go = transform.parent.Find ("Canvas/settle").gameObject;
-				go.transform.Find ("Text").GetComponent<Text> ().text = pas.Success == 1 ? "SUCCESS" : "Fail";
+				if (showSettle) {
+					GameObject go = transform.parent.parent.Find ("Canvas/settle").gameObject;
+					go.transform.Find ("Text").GetComponent<Text> ().text = pas.Success == 1 ? "SUCCESS" : "Fail";
+				}
 			});
-			GameObject settleGo = transform.parent.Find ("Canvas/settle").gameObject;
-			settleGo.SetActive (true);
+			if (showSettle) {
+				GameObject settleGo = transform.parent.parent.Find ("Canvas/settle").gameObject;
+				settleGo.SetActive (true);
+			}
 		}else if (Mode == MapMode.Unlimited) {
 			CSUnlimitedFinish uf = new CSUnlimitedFinish ();
 			uf.Success = success ? 1 : 0;
 			uf.Route = route;
 			SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSUnlimitedFinish, CSUnlimitedFinish.SerializeToBytes (uf), delegate(int opcode, byte[] data) {
 				SCUnlimitedFinish pas = SCUnlimitedFinish.Deserialize (data);
-				GameObject go = transform.parent.Find ("Canvas/settle").gameObject;
-				go.transform.Find ("Text").GetComponent<Text> ().text = pas.Success == 1 ? "SUCCESS" : "Fail";
+				if (showSettle) {
+					GameObject go = transform.parent.parent.Find ("Canvas/settle").gameObject;
+					go.transform.Find ("Text").GetComponent<Text> ().text = pas.Success == 1 ? "SUCCESS" : "Fail";
+				}
 			});
-			GameObject settleGo = transform.parent.Find ("Canvas/settle").gameObject;
-			settleGo.SetActive (true);
+			if (showSettle) {
+				GameObject settleGo = transform.parent.parent.Find ("Canvas/settle").gameObject;
+				settleGo.SetActive (true);
+			}
 		}else if(Mode == MapMode.Online){
 			CSArrived arrived = new CSArrived ();
 			Pacman pacman = pacmanMap [SocketManager.ACCOUNT_ID];
 			arrived.Pos = pacman.outX * td + pacman.outY;
 			SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSArrived, CSArrived.SerializeToBytes (arrived), delegate(int opcode, byte[] data) {
 				SCArrived ret = SCArrived.Deserialize(data);
-
+				// TODO 结算
 			});
+			// TODO 结算
 		}
 	}
 	// 玩家到达的推送
@@ -291,7 +335,7 @@ public class MapCreate : MonoBehaviour{
 		foreach(PBGameOverUserInfo info in gameOver.UserInfos){
 //			info.
 		}
-		GameObject settleGo = transform.parent.Find ("Canvas/settle").gameObject;
+		GameObject settleGo = transform.parent.parent.Find ("Canvas/settle").gameObject;
 		settleGo.SetActive (true);
 	}
 

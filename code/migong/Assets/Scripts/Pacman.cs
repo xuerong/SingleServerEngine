@@ -49,9 +49,9 @@ public class Pacman : MonoBehaviour {
 		}
 		speed = 0.2f;
 
-		transform.position = mapCreate.getStartPointWithScale (inX,inY);
+		transform.localPosition = mapCreate.getStartPointWithScale (inX,inY);
 
-		dest = transform.position;
+		dest = transform.localPosition;
 		transform.localScale = transform.localScale * 0.6f;
 
 		c = GetComponent<CircleCollider2D> ();
@@ -107,7 +107,7 @@ public class Pacman : MonoBehaviour {
 
 			// 记录行踪:自己的人才记录
 			if (userId == SocketManager.ACCOUNT_ID) {
-				int curPoint = mapCreate.getPointByPosition (new Vector2 (transform.position.x, transform.position.y));
+				int curPoint = mapCreate.getPointByPosition (new Vector2 (transform.localPosition.x, transform.localPosition.y));
 				if (curPoint != lastPoint) {
 					route.Add (curPoint);
 					lastPoint = curPoint;
@@ -122,7 +122,7 @@ public class Pacman : MonoBehaviour {
 					if (curPoint == outX * mapCreate.size + outY) {
 						Debug.Log (inX + "," + inY + "," + outX + "," + outY + "  finish,666");
 						finish = true;
-						mapCreate.passFinish (finish, route);
+						mapCreate.passFinish (finish, route,true);
 					}
 
 				}
@@ -196,7 +196,7 @@ public class Pacman : MonoBehaviour {
 		}
 	}
 	void fixDest(){
-		Vector2 pos = transform.position;
+		Vector2 pos = transform.localPosition;
 		RaycastHit2D hit = Physics2D.Linecast(pos, dest*100);
 		float radius = c.radius * Mathf.Max (transform.localScale.x, transform.localScale.y);
 		if (dest.x - pos.x > 0) {
@@ -221,7 +221,7 @@ public class Pacman : MonoBehaviour {
 	}
 	bool valid(Vector2 dir) {
 		// Cast Line from 'next to Pac-Man' to 'Pac-Man'
-		Vector2 pos = transform.position;
+		Vector2 pos = transform.localPosition;
 		RaycastHit2D hit = Physics2D.Linecast(dir, pos);
 //		Physics2D.lin
 //		Collider2D c = GetComponent<Collider2D> ();

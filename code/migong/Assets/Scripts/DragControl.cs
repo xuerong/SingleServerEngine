@@ -10,7 +10,7 @@ public class DragControl : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	MapCreate mapCreate;
 	// Use this for initialization
 	void Start () {
-		mapCreate = transform.parent.parent.Find ("map").GetComponent<MapCreate>();
+		mapCreate = transform.parent.parent.Find ("content/map").GetComponent<MapCreate>();
 		ca = transform.parent.parent.Find ("mapCamera").GetComponent<Camera>();
 		caTran = ca.transform;
 		canvasTran = (RectTransform)(transform.parent);

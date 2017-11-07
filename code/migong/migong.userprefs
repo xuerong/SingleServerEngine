@@ -1,15 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MainPanel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MapCreate.cs">
     <Files>
-      <File FileName="Assets\Scripts\Pacman.cs" Line="157" Column="16" />
+      <File FileName="Assets\Scripts\Pacman.cs" Line="110" Column="41" />
       <File FileName="Assets\Scripts\protobuf\AccountOpcode.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\MiGongOpcode.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MainPanel.cs" Line="103" Column="43" />
-      <File FileName="Assets\Scripts\JoystackCc.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MapCreate.cs" Line="82" Column="25" />
-      <File FileName="Assets\Scripts\SocketManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DragControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MainPanel.cs" Line="277" Column="5" />
+      <File FileName="Assets\Scripts\JoystackCc.cs" Line="42" Column="2" />
+      <File FileName="Assets\Scripts\MapCreate.cs" Line="143" Column="5" />
+      <File FileName="Assets\Scripts\SocketManager.cs" Line="26" Column="47" />
+      <File FileName="Assets\Scripts\DragControl.cs" Line="13" Column="54" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
