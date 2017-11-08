@@ -14,6 +14,352 @@ using System.Collections.Generic;
 namespace Example
 {
     [System.Serializable()]
+    public partial class CSBaseInfo
+    {
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static CSBaseInfo Deserialize(Stream stream)
+        {
+            CSBaseInfo instance = new CSBaseInfo();
+            Deserialize(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static CSBaseInfo DeserializeLengthDelimited(Stream stream)
+        {
+            CSBaseInfo instance = new CSBaseInfo();
+            DeserializeLengthDelimited(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static CSBaseInfo DeserializeLength(Stream stream, int length)
+        {
+            CSBaseInfo instance = new CSBaseInfo();
+            DeserializeLength(stream, length, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
+        public static CSBaseInfo Deserialize(byte[] buffer)
+        {
+            CSBaseInfo instance = new CSBaseInfo();
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
+        public static Example.CSBaseInfo Deserialize(byte[] buffer, Example.CSBaseInfo instance)
+        {
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
+        public static Example.CSBaseInfo Deserialize(Stream stream, Example.CSBaseInfo instance)
+        {
+            while (true)
+            {
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    break;
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.CSBaseInfo DeserializeLengthDelimited(Stream stream, Example.CSBaseInfo instance)
+        {
+            long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
+            limit += stream.Position;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.CSBaseInfo DeserializeLength(Stream stream, int length, Example.CSBaseInfo instance)
+        {
+            long limit = stream.Position + length;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Serialize the instance into the stream</summary>
+        public static void Serialize(Stream stream, CSBaseInfo instance)
+        {
+            var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
+        }
+
+        /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
+        public static byte[] SerializeToBytes(CSBaseInfo instance)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Serialize(ms, instance);
+                return ms.ToArray();
+            }
+        }
+        /// <summary>Helper: Serialize with a varint length prefix</summary>
+        public static void SerializeLengthDelimited(Stream stream, CSBaseInfo instance)
+        {
+            var data = SerializeToBytes(instance);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
+            stream.Write(data, 0, data.Length);
+        }
+    }
+
+    [System.Serializable()]
+    public partial class SCBaseInfo
+    {
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static SCBaseInfo Deserialize(Stream stream)
+        {
+            SCBaseInfo instance = new SCBaseInfo();
+            Deserialize(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static SCBaseInfo DeserializeLengthDelimited(Stream stream)
+        {
+            SCBaseInfo instance = new SCBaseInfo();
+            DeserializeLengthDelimited(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static SCBaseInfo DeserializeLength(Stream stream, int length)
+        {
+            SCBaseInfo instance = new SCBaseInfo();
+            DeserializeLength(stream, length, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
+        public static SCBaseInfo Deserialize(byte[] buffer)
+        {
+            SCBaseInfo instance = new SCBaseInfo();
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
+        public static Example.SCBaseInfo Deserialize(byte[] buffer, Example.SCBaseInfo instance)
+        {
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
+        public static Example.SCBaseInfo Deserialize(Stream stream, Example.SCBaseInfo instance)
+        {
+            while (true)
+            {
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    break;
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.SCBaseInfo DeserializeLengthDelimited(Stream stream, Example.SCBaseInfo instance)
+        {
+            long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
+            limit += stream.Position;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.SCBaseInfo DeserializeLength(Stream stream, int length, Example.SCBaseInfo instance)
+        {
+            long limit = stream.Position + length;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Serialize the instance into the stream</summary>
+        public static void Serialize(Stream stream, SCBaseInfo instance)
+        {
+            var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
+            // Key for field: 1, Varint
+            stream.WriteByte(8);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Energy);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
+        }
+
+        /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
+        public static byte[] SerializeToBytes(SCBaseInfo instance)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Serialize(ms, instance);
+                return ms.ToArray();
+            }
+        }
+        /// <summary>Helper: Serialize with a varint length prefix</summary>
+        public static void SerializeLengthDelimited(Stream stream, SCBaseInfo instance)
+        {
+            var data = SerializeToBytes(instance);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
+            stream.Write(data, 0, data.Length);
+        }
+    }
+
+    [System.Serializable()]
     public partial class CSGetMiGongLevel
     {
         /// <summary>Helper: create a new instance to deserializing into</summary>
@@ -218,8 +564,8 @@ namespace Example
         /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
         public static Example.SCGetMiGongLevel Deserialize(Stream stream, Example.SCGetMiGongLevel instance)
         {
-            if (instance.PassCountInLevel == null)
-                instance.PassCountInLevel = new List<int>();
+            if (instance.StarInLevel == null)
+                instance.StarInLevel = new List<int>();
             while (true)
             {
                 int keyByte = stream.ReadByte();
@@ -231,15 +577,7 @@ namespace Example
                     // Field 1 Varint
                     case 8:
                         // repeated
-                        instance.PassCountInLevel.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
-                        continue;
-                    // Field 2 Varint
-                    case 16:
-                        instance.OpenLevel = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
-                        continue;
-                    // Field 3 Varint
-                    case 24:
-                        instance.OpenPass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.StarInLevel.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                 }
 
@@ -262,8 +600,8 @@ namespace Example
         /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
         public static Example.SCGetMiGongLevel DeserializeLengthDelimited(Stream stream, Example.SCGetMiGongLevel instance)
         {
-            if (instance.PassCountInLevel == null)
-                instance.PassCountInLevel = new List<int>();
+            if (instance.StarInLevel == null)
+                instance.StarInLevel = new List<int>();
             long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
             limit += stream.Position;
             while (true)
@@ -284,15 +622,7 @@ namespace Example
                     // Field 1 Varint
                     case 8:
                         // repeated
-                        instance.PassCountInLevel.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
-                        continue;
-                    // Field 2 Varint
-                    case 16:
-                        instance.OpenLevel = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
-                        continue;
-                    // Field 3 Varint
-                    case 24:
-                        instance.OpenPass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.StarInLevel.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                 }
 
@@ -315,8 +645,8 @@ namespace Example
         /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
         public static Example.SCGetMiGongLevel DeserializeLength(Stream stream, int length, Example.SCGetMiGongLevel instance)
         {
-            if (instance.PassCountInLevel == null)
-                instance.PassCountInLevel = new List<int>();
+            if (instance.StarInLevel == null)
+                instance.StarInLevel = new List<int>();
             long limit = stream.Position + length;
             while (true)
             {
@@ -336,15 +666,7 @@ namespace Example
                     // Field 1 Varint
                     case 8:
                         // repeated
-                        instance.PassCountInLevel.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
-                        continue;
-                    // Field 2 Varint
-                    case 16:
-                        instance.OpenLevel = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
-                        continue;
-                    // Field 3 Varint
-                    case 24:
-                        instance.OpenPass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.StarInLevel.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                 }
 
@@ -368,21 +690,15 @@ namespace Example
         public static void Serialize(Stream stream, SCGetMiGongLevel instance)
         {
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
-            if (instance.PassCountInLevel != null)
+            if (instance.StarInLevel != null)
             {
-                foreach (var i1 in instance.PassCountInLevel)
+                foreach (var i1 in instance.StarInLevel)
                 {
                     // Key for field: 1, Varint
                     stream.WriteByte(8);
                     global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i1);
                 }
             }
-            // Key for field: 2, Varint
-            stream.WriteByte(16);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.OpenLevel);
-            // Key for field: 3, Varint
-            stream.WriteByte(24);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.OpenPass);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
@@ -461,10 +777,6 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        instance.Level = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
-                        continue;
-                    // Field 2 Varint
-                    case 16:
                         instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -507,10 +819,6 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        instance.Level = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
-                        continue;
-                    // Field 2 Varint
-                    case 16:
                         instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -552,10 +860,6 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        instance.Level = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
-                        continue;
-                    // Field 2 Varint
-                    case 16:
                         instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -582,9 +886,6 @@ namespace Example
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
             // Key for field: 1, Varint
             stream.WriteByte(8);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Level);
-            // Key for field: 2, Varint
-            stream.WriteByte(16);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Pass);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
@@ -668,33 +969,53 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        // repeated
-                        instance.Map.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 2 Varint
                     case 16:
-                        instance.Time = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        // repeated
+                        instance.Map.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                     // Field 3 Varint
                     case 24:
-                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Time = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 4 Varint
                     case 32:
-                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 5 Varint
                     case 40:
+                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 6 Varint
+                    case 48:
                         instance.End = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 6 LengthDelimited
-                    case 50:
+                    // Field 7 LengthDelimited
+                    case 58:
                         // repeated
                         instance.Beans.Add(Example.PBBeanInfo.DeserializeLengthDelimited(stream));
                         continue;
-                    // Field 7 Varint
-                    case 56:
-                        instance.Target = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 8 Varint
+                    case 64:
+                        instance.Star1 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 9 Varint
+                    case 72:
+                        instance.Star2 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 10 Varint
+                    case 80:
+                        instance.Star3 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 11 Varint
+                    case 88:
+                        instance.Star4 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 12 Varint
+                    case 96:
+                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -740,33 +1061,53 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        // repeated
-                        instance.Map.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 2 Varint
                     case 16:
-                        instance.Time = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        // repeated
+                        instance.Map.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                     // Field 3 Varint
                     case 24:
-                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Time = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 4 Varint
                     case 32:
-                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 5 Varint
                     case 40:
+                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 6 Varint
+                    case 48:
                         instance.End = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 6 LengthDelimited
-                    case 50:
+                    // Field 7 LengthDelimited
+                    case 58:
                         // repeated
                         instance.Beans.Add(Example.PBBeanInfo.DeserializeLengthDelimited(stream));
                         continue;
-                    // Field 7 Varint
-                    case 56:
-                        instance.Target = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 8 Varint
+                    case 64:
+                        instance.Star1 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 9 Varint
+                    case 72:
+                        instance.Star2 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 10 Varint
+                    case 80:
+                        instance.Star3 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 11 Varint
+                    case 88:
+                        instance.Star4 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 12 Varint
+                    case 96:
+                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -811,33 +1152,53 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        // repeated
-                        instance.Map.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 2 Varint
                     case 16:
-                        instance.Time = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        // repeated
+                        instance.Map.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                     // Field 3 Varint
                     case 24:
-                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Time = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 4 Varint
                     case 32:
-                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 5 Varint
                     case 40:
+                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 6 Varint
+                    case 48:
                         instance.End = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 6 LengthDelimited
-                    case 50:
+                    // Field 7 LengthDelimited
+                    case 58:
                         // repeated
                         instance.Beans.Add(Example.PBBeanInfo.DeserializeLengthDelimited(stream));
                         continue;
-                    // Field 7 Varint
-                    case 56:
-                        instance.Target = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 8 Varint
+                    case 64:
+                        instance.Star1 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 9 Varint
+                    case 72:
+                        instance.Star2 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 10 Varint
+                    case 80:
+                        instance.Star3 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 11 Varint
+                    case 88:
+                        instance.Star4 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 12 Varint
+                    case 96:
+                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -861,45 +1222,60 @@ namespace Example
         public static void Serialize(Stream stream, SCGetMiGongMap instance)
         {
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
+            // Key for field: 1, Varint
+            stream.WriteByte(8);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Pass);
             if (instance.Map != null)
             {
-                foreach (var i1 in instance.Map)
+                foreach (var i2 in instance.Map)
                 {
-                    // Key for field: 1, Varint
-                    stream.WriteByte(8);
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i1);
+                    // Key for field: 2, Varint
+                    stream.WriteByte(16);
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i2);
                 }
             }
-            // Key for field: 2, Varint
-            stream.WriteByte(16);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Time);
             // Key for field: 3, Varint
             stream.WriteByte(24);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Speed);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Time);
             // Key for field: 4, Varint
             stream.WriteByte(32);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Start);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Speed);
             // Key for field: 5, Varint
             stream.WriteByte(40);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Start);
+            // Key for field: 6, Varint
+            stream.WriteByte(48);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.End);
             if (instance.Beans != null)
             {
-                foreach (var i6 in instance.Beans)
+                foreach (var i7 in instance.Beans)
                 {
-                    // Key for field: 6, LengthDelimited
-                    stream.WriteByte(50);
+                    // Key for field: 7, LengthDelimited
+                    stream.WriteByte(58);
                     ﻿msField.SetLength(0);
-                    Example.PBBeanInfo.Serialize(msField, i6);
+                    Example.PBBeanInfo.Serialize(msField, i7);
                     // Length delimited byte array
-                    uint length6 = (uint)msField.Length;
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length6);
-                    stream.Write(msField.GetBuffer(), 0, (int)length6);
+                    uint length7 = (uint)msField.Length;
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length7);
+                    stream.Write(msField.GetBuffer(), 0, (int)length7);
 
                 }
             }
-            // Key for field: 7, Varint
-            stream.WriteByte(56);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Target);
+            // Key for field: 8, Varint
+            stream.WriteByte(64);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star1);
+            // Key for field: 9, Varint
+            stream.WriteByte(72);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star2);
+            // Key for field: 10, Varint
+            stream.WriteByte(80);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star3);
+            // Key for field: 11, Varint
+            stream.WriteByte(88);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star4);
+            // Key for field: 12, Varint
+            stream.WriteByte(96);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Energy);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
@@ -1183,18 +1559,14 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        instance.Level = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 2 Varint
                     case 16:
-                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 3 Varint
                     case 24:
-                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
-                        continue;
-                    // Field 4 Varint
-                    case 32:
                         // repeated
                         instance.Route.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
@@ -1240,18 +1612,14 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        instance.Level = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 2 Varint
                     case 16:
-                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 3 Varint
                     case 24:
-                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
-                        continue;
-                    // Field 4 Varint
-                    case 32:
                         // repeated
                         instance.Route.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
@@ -1296,18 +1664,14 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        instance.Level = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 2 Varint
                     case 16:
-                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 3 Varint
                     case 24:
-                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
-                        continue;
-                    // Field 4 Varint
-                    case 32:
                         // repeated
                         instance.Route.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
@@ -1335,20 +1699,17 @@ namespace Example
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
             // Key for field: 1, Varint
             stream.WriteByte(8);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Level);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Pass);
             // Key for field: 2, Varint
             stream.WriteByte(16);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Pass);
-            // Key for field: 3, Varint
-            stream.WriteByte(24);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Success);
             if (instance.Route != null)
             {
-                foreach (var i4 in instance.Route)
+                foreach (var i3 in instance.Route)
                 {
-                    // Key for field: 4, Varint
-                    stream.WriteByte(32);
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i4);
+                    // Key for field: 3, Varint
+                    stream.WriteByte(24);
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i3);
                 }
             }
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
@@ -2162,6 +2523,10 @@ namespace Example
                         continue;
                     // Field 3 Varint
                     case 24:
+                        instance.Star = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 4 Varint
+                    case 32:
                         instance.Rank = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -2215,6 +2580,10 @@ namespace Example
                         continue;
                     // Field 3 Varint
                     case 24:
+                        instance.Star = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 4 Varint
+                    case 32:
                         instance.Rank = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -2267,6 +2636,10 @@ namespace Example
                         continue;
                     // Field 3 Varint
                     case 24:
+                        instance.Star = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 4 Varint
+                    case 32:
                         instance.Rank = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -2311,6 +2684,9 @@ namespace Example
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Pass);
             // Key for field: 3, Varint
             stream.WriteByte(24);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star);
+            // Key for field: 4, Varint
+            stream.WriteByte(32);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Rank);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
@@ -2402,6 +2778,10 @@ namespace Example
                         continue;
                     // Field 4 Varint
                     case 32:
+                        instance.Star = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 5 Varint
+                    case 40:
                         instance.Rank = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -2456,6 +2836,10 @@ namespace Example
                         continue;
                     // Field 4 Varint
                     case 32:
+                        instance.Star = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 5 Varint
+                    case 40:
                         instance.Rank = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -2509,6 +2893,10 @@ namespace Example
                         continue;
                     // Field 4 Varint
                     case 32:
+                        instance.Star = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 5 Varint
+                    case 40:
                         instance.Rank = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -2548,6 +2936,9 @@ namespace Example
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Pass);
             // Key for field: 4, Varint
             stream.WriteByte(32);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star);
+            // Key for field: 5, Varint
+            stream.WriteByte(40);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Rank);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
@@ -2789,33 +3180,53 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        // repeated
-                        instance.Map.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 2 Varint
                     case 16:
-                        instance.Time = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        // repeated
+                        instance.Map.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                     // Field 3 Varint
                     case 24:
-                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Time = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 4 Varint
                     case 32:
-                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 5 Varint
                     case 40:
+                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 6 Varint
+                    case 48:
                         instance.End = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 6 LengthDelimited
-                    case 50:
+                    // Field 7 LengthDelimited
+                    case 58:
                         // repeated
                         instance.Beans.Add(Example.PBBeanInfo.DeserializeLengthDelimited(stream));
                         continue;
-                    // Field 7 Varint
-                    case 56:
-                        instance.Target = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 8 Varint
+                    case 64:
+                        instance.Star1 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 9 Varint
+                    case 72:
+                        instance.Star2 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 10 Varint
+                    case 80:
+                        instance.Star3 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 11 Varint
+                    case 88:
+                        instance.Star4 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 12 Varint
+                    case 96:
+                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -2861,33 +3272,53 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        // repeated
-                        instance.Map.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 2 Varint
                     case 16:
-                        instance.Time = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        // repeated
+                        instance.Map.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                     // Field 3 Varint
                     case 24:
-                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Time = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 4 Varint
                     case 32:
-                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 5 Varint
                     case 40:
+                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 6 Varint
+                    case 48:
                         instance.End = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 6 LengthDelimited
-                    case 50:
+                    // Field 7 LengthDelimited
+                    case 58:
                         // repeated
                         instance.Beans.Add(Example.PBBeanInfo.DeserializeLengthDelimited(stream));
                         continue;
-                    // Field 7 Varint
-                    case 56:
-                        instance.Target = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 8 Varint
+                    case 64:
+                        instance.Star1 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 9 Varint
+                    case 72:
+                        instance.Star2 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 10 Varint
+                    case 80:
+                        instance.Star3 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 11 Varint
+                    case 88:
+                        instance.Star4 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 12 Varint
+                    case 96:
+                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -2932,33 +3363,53 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        // repeated
-                        instance.Map.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 2 Varint
                     case 16:
-                        instance.Time = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        // repeated
+                        instance.Map.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                     // Field 3 Varint
                     case 24:
-                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Time = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 4 Varint
                     case 32:
-                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 5 Varint
                     case 40:
+                        instance.Start = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 6 Varint
+                    case 48:
                         instance.End = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 6 LengthDelimited
-                    case 50:
+                    // Field 7 LengthDelimited
+                    case 58:
                         // repeated
                         instance.Beans.Add(Example.PBBeanInfo.DeserializeLengthDelimited(stream));
                         continue;
-                    // Field 7 Varint
-                    case 56:
-                        instance.Target = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 8 Varint
+                    case 64:
+                        instance.Star1 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 9 Varint
+                    case 72:
+                        instance.Star2 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 10 Varint
+                    case 80:
+                        instance.Star3 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 11 Varint
+                    case 88:
+                        instance.Star4 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 12 Varint
+                    case 96:
+                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -2982,45 +3433,60 @@ namespace Example
         public static void Serialize(Stream stream, SCUnlimitedGo instance)
         {
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
+            // Key for field: 1, Varint
+            stream.WriteByte(8);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Pass);
             if (instance.Map != null)
             {
-                foreach (var i1 in instance.Map)
+                foreach (var i2 in instance.Map)
                 {
-                    // Key for field: 1, Varint
-                    stream.WriteByte(8);
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i1);
+                    // Key for field: 2, Varint
+                    stream.WriteByte(16);
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i2);
                 }
             }
-            // Key for field: 2, Varint
-            stream.WriteByte(16);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Time);
             // Key for field: 3, Varint
             stream.WriteByte(24);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Speed);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Time);
             // Key for field: 4, Varint
             stream.WriteByte(32);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Start);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Speed);
             // Key for field: 5, Varint
             stream.WriteByte(40);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Start);
+            // Key for field: 6, Varint
+            stream.WriteByte(48);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.End);
             if (instance.Beans != null)
             {
-                foreach (var i6 in instance.Beans)
+                foreach (var i7 in instance.Beans)
                 {
-                    // Key for field: 6, LengthDelimited
-                    stream.WriteByte(50);
+                    // Key for field: 7, LengthDelimited
+                    stream.WriteByte(58);
                     ﻿msField.SetLength(0);
-                    Example.PBBeanInfo.Serialize(msField, i6);
+                    Example.PBBeanInfo.Serialize(msField, i7);
                     // Length delimited byte array
-                    uint length6 = (uint)msField.Length;
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length6);
-                    stream.Write(msField.GetBuffer(), 0, (int)length6);
+                    uint length7 = (uint)msField.Length;
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length7);
+                    stream.Write(msField.GetBuffer(), 0, (int)length7);
 
                 }
             }
-            // Key for field: 7, Varint
-            stream.WriteByte(56);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Target);
+            // Key for field: 8, Varint
+            stream.WriteByte(64);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star1);
+            // Key for field: 9, Varint
+            stream.WriteByte(72);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star2);
+            // Key for field: 10, Varint
+            stream.WriteByte(80);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star3);
+            // Key for field: 11, Varint
+            stream.WriteByte(88);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star4);
+            // Key for field: 12, Varint
+            stream.WriteByte(96);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Energy);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
@@ -3101,10 +3567,14 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 2 Varint
                     case 16:
+                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 3 Varint
+                    case 24:
                         // repeated
                         instance.Route.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
@@ -3150,10 +3620,14 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 2 Varint
                     case 16:
+                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 3 Varint
+                    case 24:
                         // repeated
                         instance.Route.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
@@ -3198,10 +3672,14 @@ namespace Example
                 {
                     // Field 1 Varint
                     case 8:
-                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        instance.Pass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                     // Field 2 Varint
                     case 16:
+                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 3 Varint
+                    case 24:
                         // repeated
                         instance.Route.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
@@ -3229,14 +3707,17 @@ namespace Example
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
             // Key for field: 1, Varint
             stream.WriteByte(8);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Pass);
+            // Key for field: 2, Varint
+            stream.WriteByte(16);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Success);
             if (instance.Route != null)
             {
-                foreach (var i2 in instance.Route)
+                foreach (var i3 in instance.Route)
                 {
-                    // Key for field: 2, Varint
-                    stream.WriteByte(16);
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i2);
+                    // Key for field: 3, Varint
+                    stream.WriteByte(24);
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i3);
                 }
             }
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);

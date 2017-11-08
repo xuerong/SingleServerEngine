@@ -8,11 +8,11 @@ public final class MiGongPB {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface CSGetMiGongLevelOrBuilder
+  public interface CSBaseInfoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code CSGetMiGongLevel}
+   * Protobuf type {@code CSBaseInfo}
    *
    * <pre>
    *option java_outer_classname = "LivePB";
@@ -21,6 +21,759 @@ public final class MiGongPB {
    * ////////////////////////////////////////////////////////推图/////////////////////////////////////
    * 进入游戏时，获取迷宫的配置，和当前所处于的关卡
    * </pre>
+   */
+  public static final class CSBaseInfo extends
+      com.google.protobuf.GeneratedMessage
+      implements CSBaseInfoOrBuilder {
+    // Use CSBaseInfo.newBuilder() to construct.
+    private CSBaseInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSBaseInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSBaseInfo defaultInstance;
+    public static CSBaseInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSBaseInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSBaseInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.protocol.MiGongPB.internal_static_CSBaseInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.protocol.MiGongPB.internal_static_CSBaseInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.protocol.MiGongPB.CSBaseInfo.class, com.protocol.MiGongPB.CSBaseInfo.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSBaseInfo> PARSER =
+        new com.google.protobuf.AbstractParser<CSBaseInfo>() {
+      public CSBaseInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSBaseInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSBaseInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.protocol.MiGongPB.CSBaseInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.CSBaseInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.CSBaseInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.CSBaseInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.CSBaseInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.CSBaseInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.CSBaseInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.protocol.MiGongPB.CSBaseInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.CSBaseInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.CSBaseInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.protocol.MiGongPB.CSBaseInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CSBaseInfo}
+     *
+     * <pre>
+     *option java_outer_classname = "LivePB";
+     * 12001
+     *
+     * ////////////////////////////////////////////////////////推图/////////////////////////////////////
+     * 进入游戏时，获取迷宫的配置，和当前所处于的关卡
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.protocol.MiGongPB.CSBaseInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.protocol.MiGongPB.internal_static_CSBaseInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.protocol.MiGongPB.internal_static_CSBaseInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.protocol.MiGongPB.CSBaseInfo.class, com.protocol.MiGongPB.CSBaseInfo.Builder.class);
+      }
+
+      // Construct using com.protocol.MiGongPB.CSBaseInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.protocol.MiGongPB.internal_static_CSBaseInfo_descriptor;
+      }
+
+      public com.protocol.MiGongPB.CSBaseInfo getDefaultInstanceForType() {
+        return com.protocol.MiGongPB.CSBaseInfo.getDefaultInstance();
+      }
+
+      public com.protocol.MiGongPB.CSBaseInfo build() {
+        com.protocol.MiGongPB.CSBaseInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.protocol.MiGongPB.CSBaseInfo buildPartial() {
+        com.protocol.MiGongPB.CSBaseInfo result = new com.protocol.MiGongPB.CSBaseInfo(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.protocol.MiGongPB.CSBaseInfo) {
+          return mergeFrom((com.protocol.MiGongPB.CSBaseInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.protocol.MiGongPB.CSBaseInfo other) {
+        if (other == com.protocol.MiGongPB.CSBaseInfo.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.protocol.MiGongPB.CSBaseInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.protocol.MiGongPB.CSBaseInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:CSBaseInfo)
+    }
+
+    static {
+      defaultInstance = new CSBaseInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:CSBaseInfo)
+  }
+
+  public interface SCBaseInfoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int32 energy = 1;
+    /**
+     * <code>required int32 energy = 1;</code>
+     *
+     * <pre>
+     * 已经过的关卡的星数
+     * </pre>
+     */
+    boolean hasEnergy();
+    /**
+     * <code>required int32 energy = 1;</code>
+     *
+     * <pre>
+     * 已经过的关卡的星数
+     * </pre>
+     */
+    int getEnergy();
+  }
+  /**
+   * Protobuf type {@code SCBaseInfo}
+   */
+  public static final class SCBaseInfo extends
+      com.google.protobuf.GeneratedMessage
+      implements SCBaseInfoOrBuilder {
+    // Use SCBaseInfo.newBuilder() to construct.
+    private SCBaseInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private SCBaseInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final SCBaseInfo defaultInstance;
+    public static SCBaseInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public SCBaseInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SCBaseInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              energy_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.protocol.MiGongPB.internal_static_SCBaseInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.protocol.MiGongPB.internal_static_SCBaseInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.protocol.MiGongPB.SCBaseInfo.class, com.protocol.MiGongPB.SCBaseInfo.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<SCBaseInfo> PARSER =
+        new com.google.protobuf.AbstractParser<SCBaseInfo>() {
+      public SCBaseInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SCBaseInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SCBaseInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int32 energy = 1;
+    public static final int ENERGY_FIELD_NUMBER = 1;
+    private int energy_;
+    /**
+     * <code>required int32 energy = 1;</code>
+     *
+     * <pre>
+     * 已经过的关卡的星数
+     * </pre>
+     */
+    public boolean hasEnergy() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 energy = 1;</code>
+     *
+     * <pre>
+     * 已经过的关卡的星数
+     * </pre>
+     */
+    public int getEnergy() {
+      return energy_;
+    }
+
+    private void initFields() {
+      energy_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasEnergy()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, energy_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, energy_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.protocol.MiGongPB.SCBaseInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.SCBaseInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.SCBaseInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.SCBaseInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.SCBaseInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.SCBaseInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.SCBaseInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.protocol.MiGongPB.SCBaseInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.SCBaseInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.SCBaseInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.protocol.MiGongPB.SCBaseInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code SCBaseInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.protocol.MiGongPB.SCBaseInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.protocol.MiGongPB.internal_static_SCBaseInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.protocol.MiGongPB.internal_static_SCBaseInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.protocol.MiGongPB.SCBaseInfo.class, com.protocol.MiGongPB.SCBaseInfo.Builder.class);
+      }
+
+      // Construct using com.protocol.MiGongPB.SCBaseInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        energy_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.protocol.MiGongPB.internal_static_SCBaseInfo_descriptor;
+      }
+
+      public com.protocol.MiGongPB.SCBaseInfo getDefaultInstanceForType() {
+        return com.protocol.MiGongPB.SCBaseInfo.getDefaultInstance();
+      }
+
+      public com.protocol.MiGongPB.SCBaseInfo build() {
+        com.protocol.MiGongPB.SCBaseInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.protocol.MiGongPB.SCBaseInfo buildPartial() {
+        com.protocol.MiGongPB.SCBaseInfo result = new com.protocol.MiGongPB.SCBaseInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.energy_ = energy_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.protocol.MiGongPB.SCBaseInfo) {
+          return mergeFrom((com.protocol.MiGongPB.SCBaseInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.protocol.MiGongPB.SCBaseInfo other) {
+        if (other == com.protocol.MiGongPB.SCBaseInfo.getDefaultInstance()) return this;
+        if (other.hasEnergy()) {
+          setEnergy(other.getEnergy());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasEnergy()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.protocol.MiGongPB.SCBaseInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.protocol.MiGongPB.SCBaseInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int32 energy = 1;
+      private int energy_ ;
+      /**
+       * <code>required int32 energy = 1;</code>
+       *
+       * <pre>
+       * 已经过的关卡的星数
+       * </pre>
+       */
+      public boolean hasEnergy() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 energy = 1;</code>
+       *
+       * <pre>
+       * 已经过的关卡的星数
+       * </pre>
+       */
+      public int getEnergy() {
+        return energy_;
+      }
+      /**
+       * <code>required int32 energy = 1;</code>
+       *
+       * <pre>
+       * 已经过的关卡的星数
+       * </pre>
+       */
+      public Builder setEnergy(int value) {
+        bitField0_ |= 0x00000001;
+        energy_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 energy = 1;</code>
+       *
+       * <pre>
+       * 已经过的关卡的星数
+       * </pre>
+       */
+      public Builder clearEnergy() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        energy_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:SCBaseInfo)
+    }
+
+    static {
+      defaultInstance = new SCBaseInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:SCBaseInfo)
+  }
+
+  public interface CSGetMiGongLevelOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code CSGetMiGongLevel}
    */
   public static final class CSGetMiGongLevel extends
       com.google.protobuf.GeneratedMessage
@@ -211,14 +964,6 @@ public final class MiGongPB {
     }
     /**
      * Protobuf type {@code CSGetMiGongLevel}
-     *
-     * <pre>
-     *option java_outer_classname = "LivePB";
-     * 12001
-     *
-     * ////////////////////////////////////////////////////////推图/////////////////////////////////////
-     * 进入游戏时，获取迷宫的配置，和当前所处于的关卡
-     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
@@ -336,67 +1081,31 @@ public final class MiGongPB {
   public interface SCGetMiGongLevelOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // repeated int32 passCountInLevel = 1;
+    // repeated int32 starInLevel = 1;
     /**
-     * <code>repeated int32 passCountInLevel = 1;</code>
+     * <code>repeated int32 starInLevel = 1;</code>
      *
      * <pre>
-     * 配置的，各个level对应的关卡数量
+     * 已经过的关卡的星数
      * </pre>
      */
-    java.util.List<java.lang.Integer> getPassCountInLevelList();
+    java.util.List<java.lang.Integer> getStarInLevelList();
     /**
-     * <code>repeated int32 passCountInLevel = 1;</code>
+     * <code>repeated int32 starInLevel = 1;</code>
      *
      * <pre>
-     * 配置的，各个level对应的关卡数量
+     * 已经过的关卡的星数
      * </pre>
      */
-    int getPassCountInLevelCount();
+    int getStarInLevelCount();
     /**
-     * <code>repeated int32 passCountInLevel = 1;</code>
+     * <code>repeated int32 starInLevel = 1;</code>
      *
      * <pre>
-     * 配置的，各个level对应的关卡数量
+     * 已经过的关卡的星数
      * </pre>
      */
-    int getPassCountInLevel(int index);
-
-    // required int32 openLevel = 2;
-    /**
-     * <code>required int32 openLevel = 2;</code>
-     *
-     * <pre>
-     * 已经开启的leve
-     * </pre>
-     */
-    boolean hasOpenLevel();
-    /**
-     * <code>required int32 openLevel = 2;</code>
-     *
-     * <pre>
-     * 已经开启的leve
-     * </pre>
-     */
-    int getOpenLevel();
-
-    // required int32 openPass = 3;
-    /**
-     * <code>required int32 openPass = 3;</code>
-     *
-     * <pre>
-     * 已经开启的关卡
-     * </pre>
-     */
-    boolean hasOpenPass();
-    /**
-     * <code>required int32 openPass = 3;</code>
-     *
-     * <pre>
-     * 已经开启的关卡
-     * </pre>
-     */
-    int getOpenPass();
+    int getStarInLevel(int index);
   }
   /**
    * Protobuf type {@code SCGetMiGongLevel}
@@ -451,33 +1160,23 @@ public final class MiGongPB {
             }
             case 8: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                passCountInLevel_ = new java.util.ArrayList<java.lang.Integer>();
+                starInLevel_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              passCountInLevel_.add(input.readInt32());
+              starInLevel_.add(input.readInt32());
               break;
             }
             case 10: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
-                passCountInLevel_ = new java.util.ArrayList<java.lang.Integer>();
+                starInLevel_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000001;
               }
               while (input.getBytesUntilLimit() > 0) {
-                passCountInLevel_.add(input.readInt32());
+                starInLevel_.add(input.readInt32());
               }
               input.popLimit(limit);
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000001;
-              openLevel_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000002;
-              openPass_ = input.readInt32();
               break;
             }
           }
@@ -489,7 +1188,7 @@ public final class MiGongPB {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          passCountInLevel_ = java.util.Collections.unmodifiableList(passCountInLevel_);
+          starInLevel_ = java.util.Collections.unmodifiableList(starInLevel_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -522,108 +1221,49 @@ public final class MiGongPB {
       return PARSER;
     }
 
-    private int bitField0_;
-    // repeated int32 passCountInLevel = 1;
-    public static final int PASSCOUNTINLEVEL_FIELD_NUMBER = 1;
-    private java.util.List<java.lang.Integer> passCountInLevel_;
+    // repeated int32 starInLevel = 1;
+    public static final int STARINLEVEL_FIELD_NUMBER = 1;
+    private java.util.List<java.lang.Integer> starInLevel_;
     /**
-     * <code>repeated int32 passCountInLevel = 1;</code>
+     * <code>repeated int32 starInLevel = 1;</code>
      *
      * <pre>
-     * 配置的，各个level对应的关卡数量
+     * 已经过的关卡的星数
      * </pre>
      */
     public java.util.List<java.lang.Integer>
-        getPassCountInLevelList() {
-      return passCountInLevel_;
+        getStarInLevelList() {
+      return starInLevel_;
     }
     /**
-     * <code>repeated int32 passCountInLevel = 1;</code>
+     * <code>repeated int32 starInLevel = 1;</code>
      *
      * <pre>
-     * 配置的，各个level对应的关卡数量
+     * 已经过的关卡的星数
      * </pre>
      */
-    public int getPassCountInLevelCount() {
-      return passCountInLevel_.size();
+    public int getStarInLevelCount() {
+      return starInLevel_.size();
     }
     /**
-     * <code>repeated int32 passCountInLevel = 1;</code>
+     * <code>repeated int32 starInLevel = 1;</code>
      *
      * <pre>
-     * 配置的，各个level对应的关卡数量
+     * 已经过的关卡的星数
      * </pre>
      */
-    public int getPassCountInLevel(int index) {
-      return passCountInLevel_.get(index);
-    }
-
-    // required int32 openLevel = 2;
-    public static final int OPENLEVEL_FIELD_NUMBER = 2;
-    private int openLevel_;
-    /**
-     * <code>required int32 openLevel = 2;</code>
-     *
-     * <pre>
-     * 已经开启的leve
-     * </pre>
-     */
-    public boolean hasOpenLevel() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required int32 openLevel = 2;</code>
-     *
-     * <pre>
-     * 已经开启的leve
-     * </pre>
-     */
-    public int getOpenLevel() {
-      return openLevel_;
-    }
-
-    // required int32 openPass = 3;
-    public static final int OPENPASS_FIELD_NUMBER = 3;
-    private int openPass_;
-    /**
-     * <code>required int32 openPass = 3;</code>
-     *
-     * <pre>
-     * 已经开启的关卡
-     * </pre>
-     */
-    public boolean hasOpenPass() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required int32 openPass = 3;</code>
-     *
-     * <pre>
-     * 已经开启的关卡
-     * </pre>
-     */
-    public int getOpenPass() {
-      return openPass_;
+    public int getStarInLevel(int index) {
+      return starInLevel_.get(index);
     }
 
     private void initFields() {
-      passCountInLevel_ = java.util.Collections.emptyList();
-      openLevel_ = 0;
-      openPass_ = 0;
+      starInLevel_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasOpenLevel()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasOpenPass()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -631,14 +1271,8 @@ public final class MiGongPB {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      for (int i = 0; i < passCountInLevel_.size(); i++) {
-        output.writeInt32(1, passCountInLevel_.get(i));
-      }
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(2, openLevel_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(3, openPass_);
+      for (int i = 0; i < starInLevel_.size(); i++) {
+        output.writeInt32(1, starInLevel_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -651,20 +1285,12 @@ public final class MiGongPB {
       size = 0;
       {
         int dataSize = 0;
-        for (int i = 0; i < passCountInLevel_.size(); i++) {
+        for (int i = 0; i < starInLevel_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(passCountInLevel_.get(i));
+            .computeInt32SizeNoTag(starInLevel_.get(i));
         }
         size += dataSize;
-        size += 1 * getPassCountInLevelList().size();
-      }
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, openLevel_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, openPass_);
+        size += 1 * getStarInLevelList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -782,12 +1408,8 @@ public final class MiGongPB {
 
       public Builder clear() {
         super.clear();
-        passCountInLevel_ = java.util.Collections.emptyList();
+        starInLevel_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
-        openLevel_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        openPass_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -815,21 +1437,11 @@ public final class MiGongPB {
       public com.protocol.MiGongPB.SCGetMiGongLevel buildPartial() {
         com.protocol.MiGongPB.SCGetMiGongLevel result = new com.protocol.MiGongPB.SCGetMiGongLevel(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          passCountInLevel_ = java.util.Collections.unmodifiableList(passCountInLevel_);
+          starInLevel_ = java.util.Collections.unmodifiableList(starInLevel_);
           bitField0_ = (bitField0_ & ~0x00000001);
         }
-        result.passCountInLevel_ = passCountInLevel_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.openLevel_ = openLevel_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.openPass_ = openPass_;
-        result.bitField0_ = to_bitField0_;
+        result.starInLevel_ = starInLevel_;
         onBuilt();
         return result;
       }
@@ -845,35 +1457,21 @@ public final class MiGongPB {
 
       public Builder mergeFrom(com.protocol.MiGongPB.SCGetMiGongLevel other) {
         if (other == com.protocol.MiGongPB.SCGetMiGongLevel.getDefaultInstance()) return this;
-        if (!other.passCountInLevel_.isEmpty()) {
-          if (passCountInLevel_.isEmpty()) {
-            passCountInLevel_ = other.passCountInLevel_;
+        if (!other.starInLevel_.isEmpty()) {
+          if (starInLevel_.isEmpty()) {
+            starInLevel_ = other.starInLevel_;
             bitField0_ = (bitField0_ & ~0x00000001);
           } else {
-            ensurePassCountInLevelIsMutable();
-            passCountInLevel_.addAll(other.passCountInLevel_);
+            ensureStarInLevelIsMutable();
+            starInLevel_.addAll(other.starInLevel_);
           }
           onChanged();
-        }
-        if (other.hasOpenLevel()) {
-          setOpenLevel(other.getOpenLevel());
-        }
-        if (other.hasOpenPass()) {
-          setOpenPass(other.getOpenPass());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasOpenLevel()) {
-          
-          return false;
-        }
-        if (!hasOpenPass()) {
-          
-          return false;
-        }
         return true;
       }
 
@@ -896,194 +1494,96 @@ public final class MiGongPB {
       }
       private int bitField0_;
 
-      // repeated int32 passCountInLevel = 1;
-      private java.util.List<java.lang.Integer> passCountInLevel_ = java.util.Collections.emptyList();
-      private void ensurePassCountInLevelIsMutable() {
+      // repeated int32 starInLevel = 1;
+      private java.util.List<java.lang.Integer> starInLevel_ = java.util.Collections.emptyList();
+      private void ensureStarInLevelIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          passCountInLevel_ = new java.util.ArrayList<java.lang.Integer>(passCountInLevel_);
+          starInLevel_ = new java.util.ArrayList<java.lang.Integer>(starInLevel_);
           bitField0_ |= 0x00000001;
          }
       }
       /**
-       * <code>repeated int32 passCountInLevel = 1;</code>
+       * <code>repeated int32 starInLevel = 1;</code>
        *
        * <pre>
-       * 配置的，各个level对应的关卡数量
+       * 已经过的关卡的星数
        * </pre>
        */
       public java.util.List<java.lang.Integer>
-          getPassCountInLevelList() {
-        return java.util.Collections.unmodifiableList(passCountInLevel_);
+          getStarInLevelList() {
+        return java.util.Collections.unmodifiableList(starInLevel_);
       }
       /**
-       * <code>repeated int32 passCountInLevel = 1;</code>
+       * <code>repeated int32 starInLevel = 1;</code>
        *
        * <pre>
-       * 配置的，各个level对应的关卡数量
+       * 已经过的关卡的星数
        * </pre>
        */
-      public int getPassCountInLevelCount() {
-        return passCountInLevel_.size();
+      public int getStarInLevelCount() {
+        return starInLevel_.size();
       }
       /**
-       * <code>repeated int32 passCountInLevel = 1;</code>
+       * <code>repeated int32 starInLevel = 1;</code>
        *
        * <pre>
-       * 配置的，各个level对应的关卡数量
+       * 已经过的关卡的星数
        * </pre>
        */
-      public int getPassCountInLevel(int index) {
-        return passCountInLevel_.get(index);
+      public int getStarInLevel(int index) {
+        return starInLevel_.get(index);
       }
       /**
-       * <code>repeated int32 passCountInLevel = 1;</code>
+       * <code>repeated int32 starInLevel = 1;</code>
        *
        * <pre>
-       * 配置的，各个level对应的关卡数量
+       * 已经过的关卡的星数
        * </pre>
        */
-      public Builder setPassCountInLevel(
+      public Builder setStarInLevel(
           int index, int value) {
-        ensurePassCountInLevelIsMutable();
-        passCountInLevel_.set(index, value);
+        ensureStarInLevelIsMutable();
+        starInLevel_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 passCountInLevel = 1;</code>
+       * <code>repeated int32 starInLevel = 1;</code>
        *
        * <pre>
-       * 配置的，各个level对应的关卡数量
+       * 已经过的关卡的星数
        * </pre>
        */
-      public Builder addPassCountInLevel(int value) {
-        ensurePassCountInLevelIsMutable();
-        passCountInLevel_.add(value);
+      public Builder addStarInLevel(int value) {
+        ensureStarInLevelIsMutable();
+        starInLevel_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 passCountInLevel = 1;</code>
+       * <code>repeated int32 starInLevel = 1;</code>
        *
        * <pre>
-       * 配置的，各个level对应的关卡数量
+       * 已经过的关卡的星数
        * </pre>
        */
-      public Builder addAllPassCountInLevel(
+      public Builder addAllStarInLevel(
           java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensurePassCountInLevelIsMutable();
-        super.addAll(values, passCountInLevel_);
+        ensureStarInLevelIsMutable();
+        super.addAll(values, starInLevel_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 passCountInLevel = 1;</code>
+       * <code>repeated int32 starInLevel = 1;</code>
        *
        * <pre>
-       * 配置的，各个level对应的关卡数量
+       * 已经过的关卡的星数
        * </pre>
        */
-      public Builder clearPassCountInLevel() {
-        passCountInLevel_ = java.util.Collections.emptyList();
+      public Builder clearStarInLevel() {
+        starInLevel_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-
-      // required int32 openLevel = 2;
-      private int openLevel_ ;
-      /**
-       * <code>required int32 openLevel = 2;</code>
-       *
-       * <pre>
-       * 已经开启的leve
-       * </pre>
-       */
-      public boolean hasOpenLevel() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required int32 openLevel = 2;</code>
-       *
-       * <pre>
-       * 已经开启的leve
-       * </pre>
-       */
-      public int getOpenLevel() {
-        return openLevel_;
-      }
-      /**
-       * <code>required int32 openLevel = 2;</code>
-       *
-       * <pre>
-       * 已经开启的leve
-       * </pre>
-       */
-      public Builder setOpenLevel(int value) {
-        bitField0_ |= 0x00000002;
-        openLevel_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int32 openLevel = 2;</code>
-       *
-       * <pre>
-       * 已经开启的leve
-       * </pre>
-       */
-      public Builder clearOpenLevel() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        openLevel_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // required int32 openPass = 3;
-      private int openPass_ ;
-      /**
-       * <code>required int32 openPass = 3;</code>
-       *
-       * <pre>
-       * 已经开启的关卡
-       * </pre>
-       */
-      public boolean hasOpenPass() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>required int32 openPass = 3;</code>
-       *
-       * <pre>
-       * 已经开启的关卡
-       * </pre>
-       */
-      public int getOpenPass() {
-        return openPass_;
-      }
-      /**
-       * <code>required int32 openPass = 3;</code>
-       *
-       * <pre>
-       * 已经开启的关卡
-       * </pre>
-       */
-      public Builder setOpenPass(int value) {
-        bitField0_ |= 0x00000004;
-        openPass_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int32 openPass = 3;</code>
-       *
-       * <pre>
-       * 已经开启的关卡
-       * </pre>
-       */
-      public Builder clearOpenPass() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        openPass_ = 0;
         onChanged();
         return this;
       }
@@ -1102,23 +1602,13 @@ public final class MiGongPB {
   public interface CSGetMiGongMapOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required int32 level = 1;
+    // required int32 pass = 1;
     /**
-     * <code>required int32 level = 1;</code>
-     */
-    boolean hasLevel();
-    /**
-     * <code>required int32 level = 1;</code>
-     */
-    int getLevel();
-
-    // required int32 pass = 2;
-    /**
-     * <code>required int32 pass = 2;</code>
+     * <code>required int32 pass = 1;</code>
      */
     boolean hasPass();
     /**
-     * <code>required int32 pass = 2;</code>
+     * <code>required int32 pass = 1;</code>
      */
     int getPass();
   }
@@ -1179,11 +1669,6 @@ public final class MiGongPB {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              level_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
               pass_ = input.readInt32();
               break;
             }
@@ -1227,40 +1712,23 @@ public final class MiGongPB {
     }
 
     private int bitField0_;
-    // required int32 level = 1;
-    public static final int LEVEL_FIELD_NUMBER = 1;
-    private int level_;
+    // required int32 pass = 1;
+    public static final int PASS_FIELD_NUMBER = 1;
+    private int pass_;
     /**
-     * <code>required int32 level = 1;</code>
+     * <code>required int32 pass = 1;</code>
      */
-    public boolean hasLevel() {
+    public boolean hasPass() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required int32 level = 1;</code>
-     */
-    public int getLevel() {
-      return level_;
-    }
-
-    // required int32 pass = 2;
-    public static final int PASS_FIELD_NUMBER = 2;
-    private int pass_;
-    /**
-     * <code>required int32 pass = 2;</code>
-     */
-    public boolean hasPass() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required int32 pass = 2;</code>
+     * <code>required int32 pass = 1;</code>
      */
     public int getPass() {
       return pass_;
     }
 
     private void initFields() {
-      level_ = 0;
       pass_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -1268,10 +1736,6 @@ public final class MiGongPB {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasLevel()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasPass()) {
         memoizedIsInitialized = 0;
         return false;
@@ -1284,10 +1748,7 @@ public final class MiGongPB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, level_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, pass_);
+        output.writeInt32(1, pass_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1300,11 +1761,7 @@ public final class MiGongPB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, level_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, pass_);
+          .computeInt32Size(1, pass_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1426,10 +1883,8 @@ public final class MiGongPB {
 
       public Builder clear() {
         super.clear();
-        level_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
         pass_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -1461,10 +1916,6 @@ public final class MiGongPB {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.level_ = level_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
         result.pass_ = pass_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1482,9 +1933,6 @@ public final class MiGongPB {
 
       public Builder mergeFrom(com.protocol.MiGongPB.CSGetMiGongMap other) {
         if (other == com.protocol.MiGongPB.CSGetMiGongMap.getDefaultInstance()) return this;
-        if (other.hasLevel()) {
-          setLevel(other.getLevel());
-        }
         if (other.hasPass()) {
           setPass(other.getPass());
         }
@@ -1493,10 +1941,6 @@ public final class MiGongPB {
       }
 
       public final boolean isInitialized() {
-        if (!hasLevel()) {
-          
-          return false;
-        }
         if (!hasPass()) {
           
           return false;
@@ -1523,67 +1967,34 @@ public final class MiGongPB {
       }
       private int bitField0_;
 
-      // required int32 level = 1;
-      private int level_ ;
+      // required int32 pass = 1;
+      private int pass_ ;
       /**
-       * <code>required int32 level = 1;</code>
+       * <code>required int32 pass = 1;</code>
        */
-      public boolean hasLevel() {
+      public boolean hasPass() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required int32 level = 1;</code>
-       */
-      public int getLevel() {
-        return level_;
-      }
-      /**
-       * <code>required int32 level = 1;</code>
-       */
-      public Builder setLevel(int value) {
-        bitField0_ |= 0x00000001;
-        level_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int32 level = 1;</code>
-       */
-      public Builder clearLevel() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        level_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // required int32 pass = 2;
-      private int pass_ ;
-      /**
-       * <code>required int32 pass = 2;</code>
-       */
-      public boolean hasPass() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required int32 pass = 2;</code>
+       * <code>required int32 pass = 1;</code>
        */
       public int getPass() {
         return pass_;
       }
       /**
-       * <code>required int32 pass = 2;</code>
+       * <code>required int32 pass = 1;</code>
        */
       public Builder setPass(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000001;
         pass_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 pass = 2;</code>
+       * <code>required int32 pass = 1;</code>
        */
       public Builder clearPass() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         pass_ = 0;
         onChanged();
         return this;
@@ -1603,32 +2014,42 @@ public final class MiGongPB {
   public interface SCGetMiGongMapOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // repeated int32 map = 1;
+    // required int32 pass = 1;
     /**
-     * <code>repeated int32 map = 1;</code>
+     * <code>required int32 pass = 1;</code>
+     */
+    boolean hasPass();
+    /**
+     * <code>required int32 pass = 1;</code>
+     */
+    int getPass();
+
+    // repeated int32 map = 2;
+    /**
+     * <code>repeated int32 map = 2;</code>
      *
      * <pre>
      * </pre>
      */
     java.util.List<java.lang.Integer> getMapList();
     /**
-     * <code>repeated int32 map = 1;</code>
+     * <code>repeated int32 map = 2;</code>
      *
      * <pre>
      * </pre>
      */
     int getMapCount();
     /**
-     * <code>repeated int32 map = 1;</code>
+     * <code>repeated int32 map = 2;</code>
      *
      * <pre>
      * </pre>
      */
     int getMap(int index);
 
-    // required int32 time = 2;
+    // required int32 time = 3;
     /**
-     * <code>required int32 time = 2;</code>
+     * <code>required int32 time = 3;</code>
      *
      * <pre>
      * 时间
@@ -1636,7 +2057,7 @@ public final class MiGongPB {
      */
     boolean hasTime();
     /**
-     * <code>required int32 time = 2;</code>
+     * <code>required int32 time = 3;</code>
      *
      * <pre>
      * 时间
@@ -1644,9 +2065,9 @@ public final class MiGongPB {
      */
     int getTime();
 
-    // required int32 speed = 3;
+    // required int32 speed = 4;
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>required int32 speed = 4;</code>
      *
      * <pre>
      * 速度
@@ -1654,7 +2075,7 @@ public final class MiGongPB {
      */
     boolean hasSpeed();
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>required int32 speed = 4;</code>
      *
      * <pre>
      * 速度
@@ -1662,9 +2083,9 @@ public final class MiGongPB {
      */
     int getSpeed();
 
-    // required int32 start = 4;
+    // required int32 start = 5;
     /**
-     * <code>required int32 start = 4;</code>
+     * <code>required int32 start = 5;</code>
      *
      * <pre>
      * 起点
@@ -1672,7 +2093,7 @@ public final class MiGongPB {
      */
     boolean hasStart();
     /**
-     * <code>required int32 start = 4;</code>
+     * <code>required int32 start = 5;</code>
      *
      * <pre>
      * 起点
@@ -1680,9 +2101,9 @@ public final class MiGongPB {
      */
     int getStart();
 
-    // required int32 end = 5;
+    // required int32 end = 6;
     /**
-     * <code>required int32 end = 5;</code>
+     * <code>required int32 end = 6;</code>
      *
      * <pre>
      * 终点
@@ -1690,7 +2111,7 @@ public final class MiGongPB {
      */
     boolean hasEnd();
     /**
-     * <code>required int32 end = 5;</code>
+     * <code>required int32 end = 6;</code>
      *
      * <pre>
      * 终点
@@ -1698,9 +2119,9 @@ public final class MiGongPB {
      */
     int getEnd();
 
-    // repeated .PBBeanInfo beans = 6;
+    // repeated .PBBeanInfo beans = 7;
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子
@@ -1709,7 +2130,7 @@ public final class MiGongPB {
     java.util.List<com.protocol.MiGongPB.PBBeanInfo> 
         getBeansList();
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子
@@ -1717,7 +2138,7 @@ public final class MiGongPB {
      */
     com.protocol.MiGongPB.PBBeanInfo getBeans(int index);
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子
@@ -1725,7 +2146,7 @@ public final class MiGongPB {
      */
     int getBeansCount();
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子
@@ -1734,7 +2155,7 @@ public final class MiGongPB {
     java.util.List<? extends com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
         getBeansOrBuilderList();
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子
@@ -1743,23 +2164,95 @@ public final class MiGongPB {
     com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
         int index);
 
-    // required int32 target = 7;
+    // required int32 star1 = 8;
     /**
-     * <code>required int32 target = 7;</code>
+     * <code>required int32 star1 = 8;</code>
      *
      * <pre>
-     * 目标分数
+     * 一星目标分数
      * </pre>
      */
-    boolean hasTarget();
+    boolean hasStar1();
     /**
-     * <code>required int32 target = 7;</code>
+     * <code>required int32 star1 = 8;</code>
      *
      * <pre>
-     * 目标分数
+     * 一星目标分数
      * </pre>
      */
-    int getTarget();
+    int getStar1();
+
+    // required int32 star2 = 9;
+    /**
+     * <code>required int32 star2 = 9;</code>
+     *
+     * <pre>
+     * 二星目标分数
+     * </pre>
+     */
+    boolean hasStar2();
+    /**
+     * <code>required int32 star2 = 9;</code>
+     *
+     * <pre>
+     * 二星目标分数
+     * </pre>
+     */
+    int getStar2();
+
+    // required int32 star3 = 10;
+    /**
+     * <code>required int32 star3 = 10;</code>
+     *
+     * <pre>
+     * 三星目标分数
+     * </pre>
+     */
+    boolean hasStar3();
+    /**
+     * <code>required int32 star3 = 10;</code>
+     *
+     * <pre>
+     * 三星目标分数
+     * </pre>
+     */
+    int getStar3();
+
+    // required int32 star4 = 11;
+    /**
+     * <code>required int32 star4 = 11;</code>
+     *
+     * <pre>
+     * 四星目标分数
+     * </pre>
+     */
+    boolean hasStar4();
+    /**
+     * <code>required int32 star4 = 11;</code>
+     *
+     * <pre>
+     * 四星目标分数
+     * </pre>
+     */
+    int getStar4();
+
+    // required int32 energy = 12;
+    /**
+     * <code>required int32 energy = 12;</code>
+     *
+     * <pre>
+     * 消耗体力
+     * </pre>
+     */
+    boolean hasEnergy();
+    /**
+     * <code>required int32 energy = 12;</code>
+     *
+     * <pre>
+     * 消耗体力
+     * </pre>
+     */
+    int getEnergy();
   }
   /**
    * Protobuf type {@code SCGetMiGongMap}
@@ -1813,19 +2306,24 @@ public final class MiGongPB {
               break;
             }
             case 8: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              bitField0_ |= 0x00000001;
+              pass_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 map_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000001;
+                mutable_bitField0_ |= 0x00000002;
               }
               map_.add(input.readInt32());
               break;
             }
-            case 10: {
+            case 18: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
                 map_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000001;
+                mutable_bitField0_ |= 0x00000002;
               }
               while (input.getBytesUntilLimit() > 0) {
                 map_.add(input.readInt32());
@@ -1833,37 +2331,57 @@ public final class MiGongPB {
               input.popLimit(limit);
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000001;
-              time_ = input.readInt32();
-              break;
-            }
             case 24: {
               bitField0_ |= 0x00000002;
-              speed_ = input.readInt32();
+              time_ = input.readInt32();
               break;
             }
             case 32: {
               bitField0_ |= 0x00000004;
-              start_ = input.readInt32();
+              speed_ = input.readInt32();
               break;
             }
             case 40: {
               bitField0_ |= 0x00000008;
+              start_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000010;
               end_ = input.readInt32();
               break;
             }
-            case 50: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+            case 58: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
                 beans_ = new java.util.ArrayList<com.protocol.MiGongPB.PBBeanInfo>();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000040;
               }
               beans_.add(input.readMessage(com.protocol.MiGongPB.PBBeanInfo.PARSER, extensionRegistry));
               break;
             }
-            case 56: {
-              bitField0_ |= 0x00000010;
-              target_ = input.readInt32();
+            case 64: {
+              bitField0_ |= 0x00000020;
+              star1_ = input.readInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000040;
+              star2_ = input.readInt32();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000080;
+              star3_ = input.readInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000100;
+              star4_ = input.readInt32();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000200;
+              energy_ = input.readInt32();
               break;
             }
           }
@@ -1874,10 +2392,10 @@ public final class MiGongPB {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           map_ = java.util.Collections.unmodifiableList(map_);
         }
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           beans_ = java.util.Collections.unmodifiableList(beans_);
         }
         this.unknownFields = unknownFields.build();
@@ -1912,11 +2430,27 @@ public final class MiGongPB {
     }
 
     private int bitField0_;
-    // repeated int32 map = 1;
-    public static final int MAP_FIELD_NUMBER = 1;
+    // required int32 pass = 1;
+    public static final int PASS_FIELD_NUMBER = 1;
+    private int pass_;
+    /**
+     * <code>required int32 pass = 1;</code>
+     */
+    public boolean hasPass() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 pass = 1;</code>
+     */
+    public int getPass() {
+      return pass_;
+    }
+
+    // repeated int32 map = 2;
+    public static final int MAP_FIELD_NUMBER = 2;
     private java.util.List<java.lang.Integer> map_;
     /**
-     * <code>repeated int32 map = 1;</code>
+     * <code>repeated int32 map = 2;</code>
      *
      * <pre>
      * </pre>
@@ -1926,7 +2460,7 @@ public final class MiGongPB {
       return map_;
     }
     /**
-     * <code>repeated int32 map = 1;</code>
+     * <code>repeated int32 map = 2;</code>
      *
      * <pre>
      * </pre>
@@ -1935,7 +2469,7 @@ public final class MiGongPB {
       return map_.size();
     }
     /**
-     * <code>repeated int32 map = 1;</code>
+     * <code>repeated int32 map = 2;</code>
      *
      * <pre>
      * </pre>
@@ -1944,21 +2478,21 @@ public final class MiGongPB {
       return map_.get(index);
     }
 
-    // required int32 time = 2;
-    public static final int TIME_FIELD_NUMBER = 2;
+    // required int32 time = 3;
+    public static final int TIME_FIELD_NUMBER = 3;
     private int time_;
     /**
-     * <code>required int32 time = 2;</code>
+     * <code>required int32 time = 3;</code>
      *
      * <pre>
      * 时间
      * </pre>
      */
     public boolean hasTime() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required int32 time = 2;</code>
+     * <code>required int32 time = 3;</code>
      *
      * <pre>
      * 时间
@@ -1968,21 +2502,21 @@ public final class MiGongPB {
       return time_;
     }
 
-    // required int32 speed = 3;
-    public static final int SPEED_FIELD_NUMBER = 3;
+    // required int32 speed = 4;
+    public static final int SPEED_FIELD_NUMBER = 4;
     private int speed_;
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>required int32 speed = 4;</code>
      *
      * <pre>
      * 速度
      * </pre>
      */
     public boolean hasSpeed() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>required int32 speed = 4;</code>
      *
      * <pre>
      * 速度
@@ -1992,21 +2526,21 @@ public final class MiGongPB {
       return speed_;
     }
 
-    // required int32 start = 4;
-    public static final int START_FIELD_NUMBER = 4;
+    // required int32 start = 5;
+    public static final int START_FIELD_NUMBER = 5;
     private int start_;
     /**
-     * <code>required int32 start = 4;</code>
+     * <code>required int32 start = 5;</code>
      *
      * <pre>
      * 起点
      * </pre>
      */
     public boolean hasStart() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required int32 start = 4;</code>
+     * <code>required int32 start = 5;</code>
      *
      * <pre>
      * 起点
@@ -2016,21 +2550,21 @@ public final class MiGongPB {
       return start_;
     }
 
-    // required int32 end = 5;
-    public static final int END_FIELD_NUMBER = 5;
+    // required int32 end = 6;
+    public static final int END_FIELD_NUMBER = 6;
     private int end_;
     /**
-     * <code>required int32 end = 5;</code>
+     * <code>required int32 end = 6;</code>
      *
      * <pre>
      * 终点
      * </pre>
      */
     public boolean hasEnd() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required int32 end = 5;</code>
+     * <code>required int32 end = 6;</code>
      *
      * <pre>
      * 终点
@@ -2040,11 +2574,11 @@ public final class MiGongPB {
       return end_;
     }
 
-    // repeated .PBBeanInfo beans = 6;
-    public static final int BEANS_FIELD_NUMBER = 6;
+    // repeated .PBBeanInfo beans = 7;
+    public static final int BEANS_FIELD_NUMBER = 7;
     private java.util.List<com.protocol.MiGongPB.PBBeanInfo> beans_;
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子
@@ -2054,7 +2588,7 @@ public final class MiGongPB {
       return beans_;
     }
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子
@@ -2065,7 +2599,7 @@ public final class MiGongPB {
       return beans_;
     }
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子
@@ -2075,7 +2609,7 @@ public final class MiGongPB {
       return beans_.size();
     }
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子
@@ -2085,7 +2619,7 @@ public final class MiGongPB {
       return beans_.get(index);
     }
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子
@@ -2096,44 +2630,149 @@ public final class MiGongPB {
       return beans_.get(index);
     }
 
-    // required int32 target = 7;
-    public static final int TARGET_FIELD_NUMBER = 7;
-    private int target_;
+    // required int32 star1 = 8;
+    public static final int STAR1_FIELD_NUMBER = 8;
+    private int star1_;
     /**
-     * <code>required int32 target = 7;</code>
+     * <code>required int32 star1 = 8;</code>
      *
      * <pre>
-     * 目标分数
+     * 一星目标分数
      * </pre>
      */
-    public boolean hasTarget() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+    public boolean hasStar1() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required int32 target = 7;</code>
+     * <code>required int32 star1 = 8;</code>
      *
      * <pre>
-     * 目标分数
+     * 一星目标分数
      * </pre>
      */
-    public int getTarget() {
-      return target_;
+    public int getStar1() {
+      return star1_;
+    }
+
+    // required int32 star2 = 9;
+    public static final int STAR2_FIELD_NUMBER = 9;
+    private int star2_;
+    /**
+     * <code>required int32 star2 = 9;</code>
+     *
+     * <pre>
+     * 二星目标分数
+     * </pre>
+     */
+    public boolean hasStar2() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required int32 star2 = 9;</code>
+     *
+     * <pre>
+     * 二星目标分数
+     * </pre>
+     */
+    public int getStar2() {
+      return star2_;
+    }
+
+    // required int32 star3 = 10;
+    public static final int STAR3_FIELD_NUMBER = 10;
+    private int star3_;
+    /**
+     * <code>required int32 star3 = 10;</code>
+     *
+     * <pre>
+     * 三星目标分数
+     * </pre>
+     */
+    public boolean hasStar3() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>required int32 star3 = 10;</code>
+     *
+     * <pre>
+     * 三星目标分数
+     * </pre>
+     */
+    public int getStar3() {
+      return star3_;
+    }
+
+    // required int32 star4 = 11;
+    public static final int STAR4_FIELD_NUMBER = 11;
+    private int star4_;
+    /**
+     * <code>required int32 star4 = 11;</code>
+     *
+     * <pre>
+     * 四星目标分数
+     * </pre>
+     */
+    public boolean hasStar4() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>required int32 star4 = 11;</code>
+     *
+     * <pre>
+     * 四星目标分数
+     * </pre>
+     */
+    public int getStar4() {
+      return star4_;
+    }
+
+    // required int32 energy = 12;
+    public static final int ENERGY_FIELD_NUMBER = 12;
+    private int energy_;
+    /**
+     * <code>required int32 energy = 12;</code>
+     *
+     * <pre>
+     * 消耗体力
+     * </pre>
+     */
+    public boolean hasEnergy() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>required int32 energy = 12;</code>
+     *
+     * <pre>
+     * 消耗体力
+     * </pre>
+     */
+    public int getEnergy() {
+      return energy_;
     }
 
     private void initFields() {
+      pass_ = 0;
       map_ = java.util.Collections.emptyList();
       time_ = 0;
       speed_ = 0;
       start_ = 0;
       end_ = 0;
       beans_ = java.util.Collections.emptyList();
-      target_ = 0;
+      star1_ = 0;
+      star2_ = 0;
+      star3_ = 0;
+      star4_ = 0;
+      energy_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!hasPass()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       if (!hasTime()) {
         memoizedIsInitialized = 0;
         return false;
@@ -2150,7 +2789,23 @@ public final class MiGongPB {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasTarget()) {
+      if (!hasStar1()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStar2()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStar3()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStar4()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasEnergy()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -2167,26 +2822,41 @@ public final class MiGongPB {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      for (int i = 0; i < map_.size(); i++) {
-        output.writeInt32(1, map_.get(i));
-      }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(2, time_);
+        output.writeInt32(1, pass_);
+      }
+      for (int i = 0; i < map_.size(); i++) {
+        output.writeInt32(2, map_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(3, speed_);
+        output.writeInt32(3, time_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(4, start_);
+        output.writeInt32(4, speed_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(5, end_);
-      }
-      for (int i = 0; i < beans_.size(); i++) {
-        output.writeMessage(6, beans_.get(i));
+        output.writeInt32(5, start_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(7, target_);
+        output.writeInt32(6, end_);
+      }
+      for (int i = 0; i < beans_.size(); i++) {
+        output.writeMessage(7, beans_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(8, star1_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(9, star2_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(10, star3_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(11, star4_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(12, energy_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2197,6 +2867,10 @@ public final class MiGongPB {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, pass_);
+      }
       {
         int dataSize = 0;
         for (int i = 0; i < map_.size(); i++) {
@@ -2206,29 +2880,45 @@ public final class MiGongPB {
         size += dataSize;
         size += 1 * getMapList().size();
       }
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, time_);
-      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, speed_);
+          .computeInt32Size(3, time_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, start_);
+          .computeInt32Size(4, speed_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, end_);
-      }
-      for (int i = 0; i < beans_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, beans_.get(i));
+          .computeInt32Size(5, start_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, target_);
+          .computeInt32Size(6, end_);
+      }
+      for (int i = 0; i < beans_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, beans_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, star1_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, star2_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, star3_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, star4_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, energy_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2347,24 +3037,34 @@ public final class MiGongPB {
 
       public Builder clear() {
         super.clear();
-        map_ = java.util.Collections.emptyList();
+        pass_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        time_ = 0;
+        map_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000002);
-        speed_ = 0;
+        time_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        start_ = 0;
+        speed_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        end_ = 0;
+        start_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
+        end_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
         if (beansBuilder_ == null) {
           beans_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
         } else {
           beansBuilder_.clear();
         }
-        target_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        star1_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        star2_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        star3_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        star4_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        energy_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -2393,40 +3093,60 @@ public final class MiGongPB {
         com.protocol.MiGongPB.SCGetMiGongMap result = new com.protocol.MiGongPB.SCGetMiGongMap(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          map_ = java.util.Collections.unmodifiableList(map_);
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.map_ = map_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.time_ = time_;
+        result.pass_ = pass_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          map_ = java.util.Collections.unmodifiableList(map_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.map_ = map_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.speed_ = speed_;
+        result.time_ = time_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.start_ = start_;
+        result.speed_ = speed_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000008;
         }
+        result.start_ = start_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
         result.end_ = end_;
         if (beansBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
             beans_ = java.util.Collections.unmodifiableList(beans_);
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000040);
           }
           result.beans_ = beans_;
         } else {
           result.beans_ = beansBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000010;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000020;
         }
-        result.target_ = target_;
+        result.star1_ = star1_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.star2_ = star2_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.star3_ = star3_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.star4_ = star4_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.energy_ = energy_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2443,10 +3163,13 @@ public final class MiGongPB {
 
       public Builder mergeFrom(com.protocol.MiGongPB.SCGetMiGongMap other) {
         if (other == com.protocol.MiGongPB.SCGetMiGongMap.getDefaultInstance()) return this;
+        if (other.hasPass()) {
+          setPass(other.getPass());
+        }
         if (!other.map_.isEmpty()) {
           if (map_.isEmpty()) {
             map_ = other.map_;
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           } else {
             ensureMapIsMutable();
             map_.addAll(other.map_);
@@ -2469,7 +3192,7 @@ public final class MiGongPB {
           if (!other.beans_.isEmpty()) {
             if (beans_.isEmpty()) {
               beans_ = other.beans_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
             } else {
               ensureBeansIsMutable();
               beans_.addAll(other.beans_);
@@ -2482,7 +3205,7 @@ public final class MiGongPB {
               beansBuilder_.dispose();
               beansBuilder_ = null;
               beans_ = other.beans_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
               beansBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getBeansFieldBuilder() : null;
@@ -2491,14 +3214,30 @@ public final class MiGongPB {
             }
           }
         }
-        if (other.hasTarget()) {
-          setTarget(other.getTarget());
+        if (other.hasStar1()) {
+          setStar1(other.getStar1());
+        }
+        if (other.hasStar2()) {
+          setStar2(other.getStar2());
+        }
+        if (other.hasStar3()) {
+          setStar3(other.getStar3());
+        }
+        if (other.hasStar4()) {
+          setStar4(other.getStar4());
+        }
+        if (other.hasEnergy()) {
+          setEnergy(other.getEnergy());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
+        if (!hasPass()) {
+          
+          return false;
+        }
         if (!hasTime()) {
           
           return false;
@@ -2515,7 +3254,23 @@ public final class MiGongPB {
           
           return false;
         }
-        if (!hasTarget()) {
+        if (!hasStar1()) {
+          
+          return false;
+        }
+        if (!hasStar2()) {
+          
+          return false;
+        }
+        if (!hasStar3()) {
+          
+          return false;
+        }
+        if (!hasStar4()) {
+          
+          return false;
+        }
+        if (!hasEnergy()) {
           
           return false;
         }
@@ -2547,16 +3302,49 @@ public final class MiGongPB {
       }
       private int bitField0_;
 
-      // repeated int32 map = 1;
+      // required int32 pass = 1;
+      private int pass_ ;
+      /**
+       * <code>required int32 pass = 1;</code>
+       */
+      public boolean hasPass() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 pass = 1;</code>
+       */
+      public int getPass() {
+        return pass_;
+      }
+      /**
+       * <code>required int32 pass = 1;</code>
+       */
+      public Builder setPass(int value) {
+        bitField0_ |= 0x00000001;
+        pass_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 pass = 1;</code>
+       */
+      public Builder clearPass() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        pass_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // repeated int32 map = 2;
       private java.util.List<java.lang.Integer> map_ = java.util.Collections.emptyList();
       private void ensureMapIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           map_ = new java.util.ArrayList<java.lang.Integer>(map_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000002;
          }
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
@@ -2566,7 +3354,7 @@ public final class MiGongPB {
         return java.util.Collections.unmodifiableList(map_);
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
@@ -2575,7 +3363,7 @@ public final class MiGongPB {
         return map_.size();
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
@@ -2584,7 +3372,7 @@ public final class MiGongPB {
         return map_.get(index);
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
@@ -2597,7 +3385,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
@@ -2609,7 +3397,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
@@ -2622,32 +3410,32 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
        */
       public Builder clearMap() {
         map_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
 
-      // required int32 time = 2;
+      // required int32 time = 3;
       private int time_ ;
       /**
-       * <code>required int32 time = 2;</code>
+       * <code>required int32 time = 3;</code>
        *
        * <pre>
        * 时间
        * </pre>
        */
       public boolean hasTime() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required int32 time = 2;</code>
+       * <code>required int32 time = 3;</code>
        *
        * <pre>
        * 时间
@@ -2657,46 +3445,46 @@ public final class MiGongPB {
         return time_;
       }
       /**
-       * <code>required int32 time = 2;</code>
+       * <code>required int32 time = 3;</code>
        *
        * <pre>
        * 时间
        * </pre>
        */
       public Builder setTime(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         time_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 time = 2;</code>
+       * <code>required int32 time = 3;</code>
        *
        * <pre>
        * 时间
        * </pre>
        */
       public Builder clearTime() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         time_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 speed = 3;
+      // required int32 speed = 4;
       private int speed_ ;
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>required int32 speed = 4;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public boolean hasSpeed() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>required int32 speed = 4;</code>
        *
        * <pre>
        * 速度
@@ -2706,46 +3494,46 @@ public final class MiGongPB {
         return speed_;
       }
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>required int32 speed = 4;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public Builder setSpeed(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         speed_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>required int32 speed = 4;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public Builder clearSpeed() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         speed_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 start = 4;
+      // required int32 start = 5;
       private int start_ ;
       /**
-       * <code>required int32 start = 4;</code>
+       * <code>required int32 start = 5;</code>
        *
        * <pre>
        * 起点
        * </pre>
        */
       public boolean hasStart() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required int32 start = 4;</code>
+       * <code>required int32 start = 5;</code>
        *
        * <pre>
        * 起点
@@ -2755,46 +3543,46 @@ public final class MiGongPB {
         return start_;
       }
       /**
-       * <code>required int32 start = 4;</code>
+       * <code>required int32 start = 5;</code>
        *
        * <pre>
        * 起点
        * </pre>
        */
       public Builder setStart(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         start_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 start = 4;</code>
+       * <code>required int32 start = 5;</code>
        *
        * <pre>
        * 起点
        * </pre>
        */
       public Builder clearStart() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         start_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 end = 5;
+      // required int32 end = 6;
       private int end_ ;
       /**
-       * <code>required int32 end = 5;</code>
+       * <code>required int32 end = 6;</code>
        *
        * <pre>
        * 终点
        * </pre>
        */
       public boolean hasEnd() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required int32 end = 5;</code>
+       * <code>required int32 end = 6;</code>
        *
        * <pre>
        * 终点
@@ -2804,39 +3592,39 @@ public final class MiGongPB {
         return end_;
       }
       /**
-       * <code>required int32 end = 5;</code>
+       * <code>required int32 end = 6;</code>
        *
        * <pre>
        * 终点
        * </pre>
        */
       public Builder setEnd(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         end_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 end = 5;</code>
+       * <code>required int32 end = 6;</code>
        *
        * <pre>
        * 终点
        * </pre>
        */
       public Builder clearEnd() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         end_ = 0;
         onChanged();
         return this;
       }
 
-      // repeated .PBBeanInfo beans = 6;
+      // repeated .PBBeanInfo beans = 7;
       private java.util.List<com.protocol.MiGongPB.PBBeanInfo> beans_ =
         java.util.Collections.emptyList();
       private void ensureBeansIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           beans_ = new java.util.ArrayList<com.protocol.MiGongPB.PBBeanInfo>(beans_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
          }
       }
 
@@ -2844,7 +3632,7 @@ public final class MiGongPB {
           com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder> beansBuilder_;
 
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -2858,7 +3646,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -2872,7 +3660,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -2886,7 +3674,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -2907,7 +3695,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -2925,7 +3713,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -2945,7 +3733,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -2966,7 +3754,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -2984,7 +3772,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -3002,7 +3790,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -3020,7 +3808,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -3029,7 +3817,7 @@ public final class MiGongPB {
       public Builder clearBeans() {
         if (beansBuilder_ == null) {
           beans_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
           beansBuilder_.clear();
@@ -3037,7 +3825,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -3054,7 +3842,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -3065,7 +3853,7 @@ public final class MiGongPB {
         return getBeansFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -3079,7 +3867,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -3094,7 +3882,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -3105,7 +3893,7 @@ public final class MiGongPB {
             com.protocol.MiGongPB.PBBeanInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -3117,7 +3905,7 @@ public final class MiGongPB {
             index, com.protocol.MiGongPB.PBBeanInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子
@@ -3134,7 +3922,7 @@ public final class MiGongPB {
           beansBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder>(
                   beans_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           beans_ = null;
@@ -3142,51 +3930,247 @@ public final class MiGongPB {
         return beansBuilder_;
       }
 
-      // required int32 target = 7;
-      private int target_ ;
+      // required int32 star1 = 8;
+      private int star1_ ;
       /**
-       * <code>required int32 target = 7;</code>
+       * <code>required int32 star1 = 8;</code>
        *
        * <pre>
-       * 目标分数
+       * 一星目标分数
        * </pre>
        */
-      public boolean hasTarget() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+      public boolean hasStar1() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>required int32 target = 7;</code>
+       * <code>required int32 star1 = 8;</code>
        *
        * <pre>
-       * 目标分数
+       * 一星目标分数
        * </pre>
        */
-      public int getTarget() {
-        return target_;
+      public int getStar1() {
+        return star1_;
       }
       /**
-       * <code>required int32 target = 7;</code>
+       * <code>required int32 star1 = 8;</code>
        *
        * <pre>
-       * 目标分数
+       * 一星目标分数
        * </pre>
        */
-      public Builder setTarget(int value) {
-        bitField0_ |= 0x00000040;
-        target_ = value;
+      public Builder setStar1(int value) {
+        bitField0_ |= 0x00000080;
+        star1_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 target = 7;</code>
+       * <code>required int32 star1 = 8;</code>
        *
        * <pre>
-       * 目标分数
+       * 一星目标分数
        * </pre>
        */
-      public Builder clearTarget() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        target_ = 0;
+      public Builder clearStar1() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        star1_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 star2 = 9;
+      private int star2_ ;
+      /**
+       * <code>required int32 star2 = 9;</code>
+       *
+       * <pre>
+       * 二星目标分数
+       * </pre>
+       */
+      public boolean hasStar2() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>required int32 star2 = 9;</code>
+       *
+       * <pre>
+       * 二星目标分数
+       * </pre>
+       */
+      public int getStar2() {
+        return star2_;
+      }
+      /**
+       * <code>required int32 star2 = 9;</code>
+       *
+       * <pre>
+       * 二星目标分数
+       * </pre>
+       */
+      public Builder setStar2(int value) {
+        bitField0_ |= 0x00000100;
+        star2_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 star2 = 9;</code>
+       *
+       * <pre>
+       * 二星目标分数
+       * </pre>
+       */
+      public Builder clearStar2() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        star2_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 star3 = 10;
+      private int star3_ ;
+      /**
+       * <code>required int32 star3 = 10;</code>
+       *
+       * <pre>
+       * 三星目标分数
+       * </pre>
+       */
+      public boolean hasStar3() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>required int32 star3 = 10;</code>
+       *
+       * <pre>
+       * 三星目标分数
+       * </pre>
+       */
+      public int getStar3() {
+        return star3_;
+      }
+      /**
+       * <code>required int32 star3 = 10;</code>
+       *
+       * <pre>
+       * 三星目标分数
+       * </pre>
+       */
+      public Builder setStar3(int value) {
+        bitField0_ |= 0x00000200;
+        star3_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 star3 = 10;</code>
+       *
+       * <pre>
+       * 三星目标分数
+       * </pre>
+       */
+      public Builder clearStar3() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        star3_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 star4 = 11;
+      private int star4_ ;
+      /**
+       * <code>required int32 star4 = 11;</code>
+       *
+       * <pre>
+       * 四星目标分数
+       * </pre>
+       */
+      public boolean hasStar4() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>required int32 star4 = 11;</code>
+       *
+       * <pre>
+       * 四星目标分数
+       * </pre>
+       */
+      public int getStar4() {
+        return star4_;
+      }
+      /**
+       * <code>required int32 star4 = 11;</code>
+       *
+       * <pre>
+       * 四星目标分数
+       * </pre>
+       */
+      public Builder setStar4(int value) {
+        bitField0_ |= 0x00000400;
+        star4_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 star4 = 11;</code>
+       *
+       * <pre>
+       * 四星目标分数
+       * </pre>
+       */
+      public Builder clearStar4() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        star4_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 energy = 12;
+      private int energy_ ;
+      /**
+       * <code>required int32 energy = 12;</code>
+       *
+       * <pre>
+       * 消耗体力
+       * </pre>
+       */
+      public boolean hasEnergy() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>required int32 energy = 12;</code>
+       *
+       * <pre>
+       * 消耗体力
+       * </pre>
+       */
+      public int getEnergy() {
+        return energy_;
+      }
+      /**
+       * <code>required int32 energy = 12;</code>
+       *
+       * <pre>
+       * 消耗体力
+       * </pre>
+       */
+      public Builder setEnergy(int value) {
+        bitField0_ |= 0x00000800;
+        energy_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 energy = 12;</code>
+       *
+       * <pre>
+       * 消耗体力
+       * </pre>
+       */
+      public Builder clearEnergy() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        energy_ = 0;
         onChanged();
         return this;
       }
@@ -3770,53 +4754,43 @@ public final class MiGongPB {
   public interface CSPassFinishOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required int32 level = 1;
+    // required int32 pass = 1;
     /**
-     * <code>required int32 level = 1;</code>
-     */
-    boolean hasLevel();
-    /**
-     * <code>required int32 level = 1;</code>
-     */
-    int getLevel();
-
-    // required int32 pass = 2;
-    /**
-     * <code>required int32 pass = 2;</code>
+     * <code>required int32 pass = 1;</code>
      */
     boolean hasPass();
     /**
-     * <code>required int32 pass = 2;</code>
+     * <code>required int32 pass = 1;</code>
      */
     int getPass();
 
-    // required int32 success = 3;
+    // required int32 success = 2;
     /**
-     * <code>required int32 success = 3;</code>
+     * <code>required int32 success = 2;</code>
      */
     boolean hasSuccess();
     /**
-     * <code>required int32 success = 3;</code>
+     * <code>required int32 success = 2;</code>
      */
     int getSuccess();
 
-    // repeated int32 route = 4;
+    // repeated int32 route = 3;
     /**
-     * <code>repeated int32 route = 4;</code>
+     * <code>repeated int32 route = 3;</code>
      *
      * <pre>
      * </pre>
      */
     java.util.List<java.lang.Integer> getRouteList();
     /**
-     * <code>repeated int32 route = 4;</code>
+     * <code>repeated int32 route = 3;</code>
      *
      * <pre>
      * </pre>
      */
     int getRouteCount();
     /**
-     * <code>repeated int32 route = 4;</code>
+     * <code>repeated int32 route = 3;</code>
      *
      * <pre>
      * </pre>
@@ -3880,33 +4854,28 @@ public final class MiGongPB {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              level_ = input.readInt32();
+              pass_ = input.readInt32();
               break;
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              pass_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
               success_ = input.readInt32();
               break;
             }
-            case 32: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+            case 24: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 route_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000004;
               }
               route_.add(input.readInt32());
               break;
             }
-            case 34: {
+            case 26: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
                 route_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000004;
               }
               while (input.getBytesUntilLimit() > 0) {
                 route_.add(input.readInt32());
@@ -3922,7 +4891,7 @@ public final class MiGongPB {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           route_ = java.util.Collections.unmodifiableList(route_);
         }
         this.unknownFields = unknownFields.build();
@@ -3957,59 +4926,43 @@ public final class MiGongPB {
     }
 
     private int bitField0_;
-    // required int32 level = 1;
-    public static final int LEVEL_FIELD_NUMBER = 1;
-    private int level_;
+    // required int32 pass = 1;
+    public static final int PASS_FIELD_NUMBER = 1;
+    private int pass_;
     /**
-     * <code>required int32 level = 1;</code>
+     * <code>required int32 pass = 1;</code>
      */
-    public boolean hasLevel() {
+    public boolean hasPass() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required int32 level = 1;</code>
-     */
-    public int getLevel() {
-      return level_;
-    }
-
-    // required int32 pass = 2;
-    public static final int PASS_FIELD_NUMBER = 2;
-    private int pass_;
-    /**
-     * <code>required int32 pass = 2;</code>
-     */
-    public boolean hasPass() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required int32 pass = 2;</code>
+     * <code>required int32 pass = 1;</code>
      */
     public int getPass() {
       return pass_;
     }
 
-    // required int32 success = 3;
-    public static final int SUCCESS_FIELD_NUMBER = 3;
+    // required int32 success = 2;
+    public static final int SUCCESS_FIELD_NUMBER = 2;
     private int success_;
     /**
-     * <code>required int32 success = 3;</code>
+     * <code>required int32 success = 2;</code>
      */
     public boolean hasSuccess() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required int32 success = 3;</code>
+     * <code>required int32 success = 2;</code>
      */
     public int getSuccess() {
       return success_;
     }
 
-    // repeated int32 route = 4;
-    public static final int ROUTE_FIELD_NUMBER = 4;
+    // repeated int32 route = 3;
+    public static final int ROUTE_FIELD_NUMBER = 3;
     private java.util.List<java.lang.Integer> route_;
     /**
-     * <code>repeated int32 route = 4;</code>
+     * <code>repeated int32 route = 3;</code>
      *
      * <pre>
      * </pre>
@@ -4019,7 +4972,7 @@ public final class MiGongPB {
       return route_;
     }
     /**
-     * <code>repeated int32 route = 4;</code>
+     * <code>repeated int32 route = 3;</code>
      *
      * <pre>
      * </pre>
@@ -4028,7 +4981,7 @@ public final class MiGongPB {
       return route_.size();
     }
     /**
-     * <code>repeated int32 route = 4;</code>
+     * <code>repeated int32 route = 3;</code>
      *
      * <pre>
      * </pre>
@@ -4038,7 +4991,6 @@ public final class MiGongPB {
     }
 
     private void initFields() {
-      level_ = 0;
       pass_ = 0;
       success_ = 0;
       route_ = java.util.Collections.emptyList();
@@ -4048,10 +5000,6 @@ public final class MiGongPB {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasLevel()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasPass()) {
         memoizedIsInitialized = 0;
         return false;
@@ -4068,16 +5016,13 @@ public final class MiGongPB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, level_);
+        output.writeInt32(1, pass_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, pass_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, success_);
+        output.writeInt32(2, success_);
       }
       for (int i = 0; i < route_.size(); i++) {
-        output.writeInt32(4, route_.get(i));
+        output.writeInt32(3, route_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -4090,15 +5035,11 @@ public final class MiGongPB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, level_);
+          .computeInt32Size(1, pass_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, pass_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, success_);
+          .computeInt32Size(2, success_);
       }
       {
         int dataSize = 0;
@@ -4229,14 +5170,12 @@ public final class MiGongPB {
 
       public Builder clear() {
         super.clear();
-        level_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
         pass_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         success_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         route_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -4268,18 +5207,14 @@ public final class MiGongPB {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.level_ = level_;
+        result.pass_ = pass_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.pass_ = pass_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
         result.success_ = success_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
           route_ = java.util.Collections.unmodifiableList(route_);
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.route_ = route_;
         result.bitField0_ = to_bitField0_;
@@ -4298,9 +5233,6 @@ public final class MiGongPB {
 
       public Builder mergeFrom(com.protocol.MiGongPB.CSPassFinish other) {
         if (other == com.protocol.MiGongPB.CSPassFinish.getDefaultInstance()) return this;
-        if (other.hasLevel()) {
-          setLevel(other.getLevel());
-        }
         if (other.hasPass()) {
           setPass(other.getPass());
         }
@@ -4310,7 +5242,7 @@ public final class MiGongPB {
         if (!other.route_.isEmpty()) {
           if (route_.isEmpty()) {
             route_ = other.route_;
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
             ensureRouteIsMutable();
             route_.addAll(other.route_);
@@ -4322,10 +5254,6 @@ public final class MiGongPB {
       }
 
       public final boolean isInitialized() {
-        if (!hasLevel()) {
-          
-          return false;
-        }
         if (!hasPass()) {
           
           return false;
@@ -4356,115 +5284,82 @@ public final class MiGongPB {
       }
       private int bitField0_;
 
-      // required int32 level = 1;
-      private int level_ ;
+      // required int32 pass = 1;
+      private int pass_ ;
       /**
-       * <code>required int32 level = 1;</code>
+       * <code>required int32 pass = 1;</code>
        */
-      public boolean hasLevel() {
+      public boolean hasPass() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required int32 level = 1;</code>
-       */
-      public int getLevel() {
-        return level_;
-      }
-      /**
-       * <code>required int32 level = 1;</code>
-       */
-      public Builder setLevel(int value) {
-        bitField0_ |= 0x00000001;
-        level_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int32 level = 1;</code>
-       */
-      public Builder clearLevel() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        level_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // required int32 pass = 2;
-      private int pass_ ;
-      /**
-       * <code>required int32 pass = 2;</code>
-       */
-      public boolean hasPass() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required int32 pass = 2;</code>
+       * <code>required int32 pass = 1;</code>
        */
       public int getPass() {
         return pass_;
       }
       /**
-       * <code>required int32 pass = 2;</code>
+       * <code>required int32 pass = 1;</code>
        */
       public Builder setPass(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000001;
         pass_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 pass = 2;</code>
+       * <code>required int32 pass = 1;</code>
        */
       public Builder clearPass() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         pass_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 success = 3;
+      // required int32 success = 2;
       private int success_ ;
       /**
-       * <code>required int32 success = 3;</code>
+       * <code>required int32 success = 2;</code>
        */
       public boolean hasSuccess() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required int32 success = 3;</code>
+       * <code>required int32 success = 2;</code>
        */
       public int getSuccess() {
         return success_;
       }
       /**
-       * <code>required int32 success = 3;</code>
+       * <code>required int32 success = 2;</code>
        */
       public Builder setSuccess(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         success_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 success = 3;</code>
+       * <code>required int32 success = 2;</code>
        */
       public Builder clearSuccess() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         success_ = 0;
         onChanged();
         return this;
       }
 
-      // repeated int32 route = 4;
+      // repeated int32 route = 3;
       private java.util.List<java.lang.Integer> route_ = java.util.Collections.emptyList();
       private void ensureRouteIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           route_ = new java.util.ArrayList<java.lang.Integer>(route_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000004;
          }
       }
       /**
-       * <code>repeated int32 route = 4;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
@@ -4474,7 +5369,7 @@ public final class MiGongPB {
         return java.util.Collections.unmodifiableList(route_);
       }
       /**
-       * <code>repeated int32 route = 4;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
@@ -4483,7 +5378,7 @@ public final class MiGongPB {
         return route_.size();
       }
       /**
-       * <code>repeated int32 route = 4;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
@@ -4492,7 +5387,7 @@ public final class MiGongPB {
         return route_.get(index);
       }
       /**
-       * <code>repeated int32 route = 4;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
@@ -4505,7 +5400,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated int32 route = 4;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
@@ -4517,7 +5412,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated int32 route = 4;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
@@ -4530,14 +5425,14 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated int32 route = 4;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
        */
       public Builder clearRoute() {
         route_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -6315,9 +7210,27 @@ public final class MiGongPB {
      */
     int getPass();
 
-    // required int32 rank = 3;
+    // required int32 star = 3;
     /**
-     * <code>required int32 rank = 3;</code>
+     * <code>required int32 star = 3;</code>
+     *
+     * <pre>
+     * 无线关卡已经有的星数
+     * </pre>
+     */
+    boolean hasStar();
+    /**
+     * <code>required int32 star = 3;</code>
+     *
+     * <pre>
+     * 无线关卡已经有的星数
+     * </pre>
+     */
+    int getStar();
+
+    // required int32 rank = 4;
+    /**
+     * <code>required int32 rank = 4;</code>
      *
      * <pre>
      * 排名
@@ -6325,7 +7238,7 @@ public final class MiGongPB {
      */
     boolean hasRank();
     /**
-     * <code>required int32 rank = 3;</code>
+     * <code>required int32 rank = 4;</code>
      *
      * <pre>
      * 排名
@@ -6399,6 +7312,11 @@ public final class MiGongPB {
             }
             case 24: {
               bitField0_ |= 0x00000002;
+              star_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
               rank_ = input.readInt32();
               break;
             }
@@ -6505,21 +7423,45 @@ public final class MiGongPB {
       return pass_;
     }
 
-    // required int32 rank = 3;
-    public static final int RANK_FIELD_NUMBER = 3;
+    // required int32 star = 3;
+    public static final int STAR_FIELD_NUMBER = 3;
+    private int star_;
+    /**
+     * <code>required int32 star = 3;</code>
+     *
+     * <pre>
+     * 无线关卡已经有的星数
+     * </pre>
+     */
+    public boolean hasStar() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 star = 3;</code>
+     *
+     * <pre>
+     * 无线关卡已经有的星数
+     * </pre>
+     */
+    public int getStar() {
+      return star_;
+    }
+
+    // required int32 rank = 4;
+    public static final int RANK_FIELD_NUMBER = 4;
     private int rank_;
     /**
-     * <code>required int32 rank = 3;</code>
+     * <code>required int32 rank = 4;</code>
      *
      * <pre>
      * 排名
      * </pre>
      */
     public boolean hasRank() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required int32 rank = 3;</code>
+     * <code>required int32 rank = 4;</code>
      *
      * <pre>
      * 排名
@@ -6532,6 +7474,7 @@ public final class MiGongPB {
     private void initFields() {
       unlimitedRankInfo_ = java.util.Collections.emptyList();
       pass_ = 0;
+      star_ = 0;
       rank_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -6540,6 +7483,10 @@ public final class MiGongPB {
       if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasPass()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStar()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -6567,7 +7514,10 @@ public final class MiGongPB {
         output.writeInt32(2, pass_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(3, rank_);
+        output.writeInt32(3, star_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(4, rank_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6588,7 +7538,11 @@ public final class MiGongPB {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, rank_);
+          .computeInt32Size(3, star_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, rank_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6715,8 +7669,10 @@ public final class MiGongPB {
         }
         pass_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        rank_ = 0;
+        star_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        rank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -6760,6 +7716,10 @@ public final class MiGongPB {
         result.pass_ = pass_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
+        }
+        result.star_ = star_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
         }
         result.rank_ = rank_;
         result.bitField0_ = to_bitField0_;
@@ -6807,6 +7767,9 @@ public final class MiGongPB {
         if (other.hasPass()) {
           setPass(other.getPass());
         }
+        if (other.hasStar()) {
+          setStar(other.getStar());
+        }
         if (other.hasRank()) {
           setRank(other.getRank());
         }
@@ -6816,6 +7779,10 @@ public final class MiGongPB {
 
       public final boolean isInitialized() {
         if (!hasPass()) {
+          
+          return false;
+        }
+        if (!hasStar()) {
           
           return false;
         }
@@ -7140,20 +8107,69 @@ public final class MiGongPB {
         return this;
       }
 
-      // required int32 rank = 3;
+      // required int32 star = 3;
+      private int star_ ;
+      /**
+       * <code>required int32 star = 3;</code>
+       *
+       * <pre>
+       * 无线关卡已经有的星数
+       * </pre>
+       */
+      public boolean hasStar() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 star = 3;</code>
+       *
+       * <pre>
+       * 无线关卡已经有的星数
+       * </pre>
+       */
+      public int getStar() {
+        return star_;
+      }
+      /**
+       * <code>required int32 star = 3;</code>
+       *
+       * <pre>
+       * 无线关卡已经有的星数
+       * </pre>
+       */
+      public Builder setStar(int value) {
+        bitField0_ |= 0x00000004;
+        star_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 star = 3;</code>
+       *
+       * <pre>
+       * 无线关卡已经有的星数
+       * </pre>
+       */
+      public Builder clearStar() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        star_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 rank = 4;
       private int rank_ ;
       /**
-       * <code>required int32 rank = 3;</code>
+       * <code>required int32 rank = 4;</code>
        *
        * <pre>
        * 排名
        * </pre>
        */
       public boolean hasRank() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required int32 rank = 3;</code>
+       * <code>required int32 rank = 4;</code>
        *
        * <pre>
        * 排名
@@ -7163,27 +8179,27 @@ public final class MiGongPB {
         return rank_;
       }
       /**
-       * <code>required int32 rank = 3;</code>
+       * <code>required int32 rank = 4;</code>
        *
        * <pre>
        * 排名
        * </pre>
        */
       public Builder setRank(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         rank_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 rank = 3;</code>
+       * <code>required int32 rank = 4;</code>
        *
        * <pre>
        * 排名
        * </pre>
        */
       public Builder clearRank() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         rank_ = 0;
         onChanged();
         return this;
@@ -7275,9 +8291,27 @@ public final class MiGongPB {
      */
     int getPass();
 
-    // required int32 rank = 4;
+    // required int32 star = 4;
     /**
-     * <code>required int32 rank = 4;</code>
+     * <code>required int32 star = 4;</code>
+     *
+     * <pre>
+     * 星数
+     * </pre>
+     */
+    boolean hasStar();
+    /**
+     * <code>required int32 star = 4;</code>
+     *
+     * <pre>
+     * 星数
+     * </pre>
+     */
+    int getStar();
+
+    // required int32 rank = 5;
+    /**
+     * <code>required int32 rank = 5;</code>
      *
      * <pre>
      * 排名
@@ -7285,7 +8319,7 @@ public final class MiGongPB {
      */
     boolean hasRank();
     /**
-     * <code>required int32 rank = 4;</code>
+     * <code>required int32 rank = 5;</code>
      *
      * <pre>
      * 排名
@@ -7361,6 +8395,11 @@ public final class MiGongPB {
             }
             case 32: {
               bitField0_ |= 0x00000008;
+              star_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
               rank_ = input.readInt32();
               break;
             }
@@ -7538,21 +8577,45 @@ public final class MiGongPB {
       return pass_;
     }
 
-    // required int32 rank = 4;
-    public static final int RANK_FIELD_NUMBER = 4;
+    // required int32 star = 4;
+    public static final int STAR_FIELD_NUMBER = 4;
+    private int star_;
+    /**
+     * <code>required int32 star = 4;</code>
+     *
+     * <pre>
+     * 星数
+     * </pre>
+     */
+    public boolean hasStar() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 star = 4;</code>
+     *
+     * <pre>
+     * 星数
+     * </pre>
+     */
+    public int getStar() {
+      return star_;
+    }
+
+    // required int32 rank = 5;
+    public static final int RANK_FIELD_NUMBER = 5;
     private int rank_;
     /**
-     * <code>required int32 rank = 4;</code>
+     * <code>required int32 rank = 5;</code>
      *
      * <pre>
      * 排名
      * </pre>
      */
     public boolean hasRank() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required int32 rank = 4;</code>
+     * <code>required int32 rank = 5;</code>
      *
      * <pre>
      * 排名
@@ -7566,6 +8629,7 @@ public final class MiGongPB {
       userId_ = "";
       userName_ = "";
       pass_ = 0;
+      star_ = 0;
       rank_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -7582,6 +8646,10 @@ public final class MiGongPB {
         return false;
       }
       if (!hasPass()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStar()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -7606,7 +8674,10 @@ public final class MiGongPB {
         output.writeInt32(3, pass_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, rank_);
+        output.writeInt32(4, star_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, rank_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7631,7 +8702,11 @@ public final class MiGongPB {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, rank_);
+          .computeInt32Size(4, star_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, rank_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7755,8 +8830,10 @@ public final class MiGongPB {
         bitField0_ = (bitField0_ & ~0x00000002);
         pass_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        rank_ = 0;
+        star_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        rank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -7800,6 +8877,10 @@ public final class MiGongPB {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
+        result.star_ = star_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
         result.rank_ = rank_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -7830,6 +8911,9 @@ public final class MiGongPB {
         if (other.hasPass()) {
           setPass(other.getPass());
         }
+        if (other.hasStar()) {
+          setStar(other.getStar());
+        }
         if (other.hasRank()) {
           setRank(other.getRank());
         }
@@ -7847,6 +8931,10 @@ public final class MiGongPB {
           return false;
         }
         if (!hasPass()) {
+          
+          return false;
+        }
+        if (!hasStar()) {
           
           return false;
         }
@@ -8121,20 +9209,69 @@ public final class MiGongPB {
         return this;
       }
 
-      // required int32 rank = 4;
+      // required int32 star = 4;
+      private int star_ ;
+      /**
+       * <code>required int32 star = 4;</code>
+       *
+       * <pre>
+       * 星数
+       * </pre>
+       */
+      public boolean hasStar() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int32 star = 4;</code>
+       *
+       * <pre>
+       * 星数
+       * </pre>
+       */
+      public int getStar() {
+        return star_;
+      }
+      /**
+       * <code>required int32 star = 4;</code>
+       *
+       * <pre>
+       * 星数
+       * </pre>
+       */
+      public Builder setStar(int value) {
+        bitField0_ |= 0x00000008;
+        star_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 star = 4;</code>
+       *
+       * <pre>
+       * 星数
+       * </pre>
+       */
+      public Builder clearStar() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        star_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 rank = 5;
       private int rank_ ;
       /**
-       * <code>required int32 rank = 4;</code>
+       * <code>required int32 rank = 5;</code>
        *
        * <pre>
        * 排名
        * </pre>
        */
       public boolean hasRank() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required int32 rank = 4;</code>
+       * <code>required int32 rank = 5;</code>
        *
        * <pre>
        * 排名
@@ -8144,27 +9281,27 @@ public final class MiGongPB {
         return rank_;
       }
       /**
-       * <code>required int32 rank = 4;</code>
+       * <code>required int32 rank = 5;</code>
        *
        * <pre>
        * 排名
        * </pre>
        */
       public Builder setRank(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         rank_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 rank = 4;</code>
+       * <code>required int32 rank = 5;</code>
        *
        * <pre>
        * 排名
        * </pre>
        */
       public Builder clearRank() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         rank_ = 0;
         onChanged();
         return this;
@@ -8493,32 +9630,50 @@ public final class MiGongPB {
   public interface SCUnlimitedGoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // repeated int32 map = 1;
+    // required int32 pass = 1;
     /**
-     * <code>repeated int32 map = 1;</code>
+     * <code>required int32 pass = 1;</code>
+     *
+     * <pre>
+     * 关卡数
+     * </pre>
+     */
+    boolean hasPass();
+    /**
+     * <code>required int32 pass = 1;</code>
+     *
+     * <pre>
+     * 关卡数
+     * </pre>
+     */
+    int getPass();
+
+    // repeated int32 map = 2;
+    /**
+     * <code>repeated int32 map = 2;</code>
      *
      * <pre>
      * </pre>
      */
     java.util.List<java.lang.Integer> getMapList();
     /**
-     * <code>repeated int32 map = 1;</code>
+     * <code>repeated int32 map = 2;</code>
      *
      * <pre>
      * </pre>
      */
     int getMapCount();
     /**
-     * <code>repeated int32 map = 1;</code>
+     * <code>repeated int32 map = 2;</code>
      *
      * <pre>
      * </pre>
      */
     int getMap(int index);
 
-    // required int32 time = 2;
+    // required int32 time = 3;
     /**
-     * <code>required int32 time = 2;</code>
+     * <code>required int32 time = 3;</code>
      *
      * <pre>
      * 时间
@@ -8526,7 +9681,7 @@ public final class MiGongPB {
      */
     boolean hasTime();
     /**
-     * <code>required int32 time = 2;</code>
+     * <code>required int32 time = 3;</code>
      *
      * <pre>
      * 时间
@@ -8534,9 +9689,9 @@ public final class MiGongPB {
      */
     int getTime();
 
-    // required int32 speed = 3;
+    // required int32 speed = 4;
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>required int32 speed = 4;</code>
      *
      * <pre>
      * 速度
@@ -8544,7 +9699,7 @@ public final class MiGongPB {
      */
     boolean hasSpeed();
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>required int32 speed = 4;</code>
      *
      * <pre>
      * 速度
@@ -8552,9 +9707,9 @@ public final class MiGongPB {
      */
     int getSpeed();
 
-    // required int32 start = 4;
+    // required int32 start = 5;
     /**
-     * <code>required int32 start = 4;</code>
+     * <code>required int32 start = 5;</code>
      *
      * <pre>
      * 起点
@@ -8562,7 +9717,7 @@ public final class MiGongPB {
      */
     boolean hasStart();
     /**
-     * <code>required int32 start = 4;</code>
+     * <code>required int32 start = 5;</code>
      *
      * <pre>
      * 起点
@@ -8570,9 +9725,9 @@ public final class MiGongPB {
      */
     int getStart();
 
-    // required int32 end = 5;
+    // required int32 end = 6;
     /**
-     * <code>required int32 end = 5;</code>
+     * <code>required int32 end = 6;</code>
      *
      * <pre>
      * 终点
@@ -8580,7 +9735,7 @@ public final class MiGongPB {
      */
     boolean hasEnd();
     /**
-     * <code>required int32 end = 5;</code>
+     * <code>required int32 end = 6;</code>
      *
      * <pre>
      * 终点
@@ -8588,9 +9743,9 @@ public final class MiGongPB {
      */
     int getEnd();
 
-    // repeated .PBBeanInfo beans = 6;
+    // repeated .PBBeanInfo beans = 7;
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
@@ -8599,7 +9754,7 @@ public final class MiGongPB {
     java.util.List<com.protocol.MiGongPB.PBBeanInfo> 
         getBeansList();
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
@@ -8607,7 +9762,7 @@ public final class MiGongPB {
      */
     com.protocol.MiGongPB.PBBeanInfo getBeans(int index);
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
@@ -8615,7 +9770,7 @@ public final class MiGongPB {
      */
     int getBeansCount();
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
@@ -8624,7 +9779,7 @@ public final class MiGongPB {
     java.util.List<? extends com.protocol.MiGongPB.PBBeanInfoOrBuilder> 
         getBeansOrBuilderList();
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
@@ -8633,23 +9788,95 @@ public final class MiGongPB {
     com.protocol.MiGongPB.PBBeanInfoOrBuilder getBeansOrBuilder(
         int index);
 
-    // required int32 target = 7;
+    // required int32 star1 = 8;
     /**
-     * <code>required int32 target = 7;</code>
+     * <code>required int32 star1 = 8;</code>
      *
      * <pre>
-     * 目标分数
+     * 一星目标分数
      * </pre>
      */
-    boolean hasTarget();
+    boolean hasStar1();
     /**
-     * <code>required int32 target = 7;</code>
+     * <code>required int32 star1 = 8;</code>
      *
      * <pre>
-     * 目标分数
+     * 一星目标分数
      * </pre>
      */
-    int getTarget();
+    int getStar1();
+
+    // required int32 star2 = 9;
+    /**
+     * <code>required int32 star2 = 9;</code>
+     *
+     * <pre>
+     * 二星目标分数
+     * </pre>
+     */
+    boolean hasStar2();
+    /**
+     * <code>required int32 star2 = 9;</code>
+     *
+     * <pre>
+     * 二星目标分数
+     * </pre>
+     */
+    int getStar2();
+
+    // required int32 star3 = 10;
+    /**
+     * <code>required int32 star3 = 10;</code>
+     *
+     * <pre>
+     * 三星目标分数
+     * </pre>
+     */
+    boolean hasStar3();
+    /**
+     * <code>required int32 star3 = 10;</code>
+     *
+     * <pre>
+     * 三星目标分数
+     * </pre>
+     */
+    int getStar3();
+
+    // required int32 star4 = 11;
+    /**
+     * <code>required int32 star4 = 11;</code>
+     *
+     * <pre>
+     * 四星目标分数
+     * </pre>
+     */
+    boolean hasStar4();
+    /**
+     * <code>required int32 star4 = 11;</code>
+     *
+     * <pre>
+     * 四星目标分数
+     * </pre>
+     */
+    int getStar4();
+
+    // required int32 energy = 12;
+    /**
+     * <code>required int32 energy = 12;</code>
+     *
+     * <pre>
+     * 消耗体力
+     * </pre>
+     */
+    boolean hasEnergy();
+    /**
+     * <code>required int32 energy = 12;</code>
+     *
+     * <pre>
+     * 消耗体力
+     * </pre>
+     */
+    int getEnergy();
   }
   /**
    * Protobuf type {@code SCUnlimitedGo}
@@ -8703,19 +9930,24 @@ public final class MiGongPB {
               break;
             }
             case 8: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              bitField0_ |= 0x00000001;
+              pass_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 map_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000001;
+                mutable_bitField0_ |= 0x00000002;
               }
               map_.add(input.readInt32());
               break;
             }
-            case 10: {
+            case 18: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
                 map_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000001;
+                mutable_bitField0_ |= 0x00000002;
               }
               while (input.getBytesUntilLimit() > 0) {
                 map_.add(input.readInt32());
@@ -8723,37 +9955,57 @@ public final class MiGongPB {
               input.popLimit(limit);
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000001;
-              time_ = input.readInt32();
-              break;
-            }
             case 24: {
               bitField0_ |= 0x00000002;
-              speed_ = input.readInt32();
+              time_ = input.readInt32();
               break;
             }
             case 32: {
               bitField0_ |= 0x00000004;
-              start_ = input.readInt32();
+              speed_ = input.readInt32();
               break;
             }
             case 40: {
               bitField0_ |= 0x00000008;
+              start_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000010;
               end_ = input.readInt32();
               break;
             }
-            case 50: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+            case 58: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
                 beans_ = new java.util.ArrayList<com.protocol.MiGongPB.PBBeanInfo>();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000040;
               }
               beans_.add(input.readMessage(com.protocol.MiGongPB.PBBeanInfo.PARSER, extensionRegistry));
               break;
             }
-            case 56: {
-              bitField0_ |= 0x00000010;
-              target_ = input.readInt32();
+            case 64: {
+              bitField0_ |= 0x00000020;
+              star1_ = input.readInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000040;
+              star2_ = input.readInt32();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000080;
+              star3_ = input.readInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000100;
+              star4_ = input.readInt32();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000200;
+              energy_ = input.readInt32();
               break;
             }
           }
@@ -8764,10 +10016,10 @@ public final class MiGongPB {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           map_ = java.util.Collections.unmodifiableList(map_);
         }
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           beans_ = java.util.Collections.unmodifiableList(beans_);
         }
         this.unknownFields = unknownFields.build();
@@ -8802,11 +10054,35 @@ public final class MiGongPB {
     }
 
     private int bitField0_;
-    // repeated int32 map = 1;
-    public static final int MAP_FIELD_NUMBER = 1;
+    // required int32 pass = 1;
+    public static final int PASS_FIELD_NUMBER = 1;
+    private int pass_;
+    /**
+     * <code>required int32 pass = 1;</code>
+     *
+     * <pre>
+     * 关卡数
+     * </pre>
+     */
+    public boolean hasPass() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 pass = 1;</code>
+     *
+     * <pre>
+     * 关卡数
+     * </pre>
+     */
+    public int getPass() {
+      return pass_;
+    }
+
+    // repeated int32 map = 2;
+    public static final int MAP_FIELD_NUMBER = 2;
     private java.util.List<java.lang.Integer> map_;
     /**
-     * <code>repeated int32 map = 1;</code>
+     * <code>repeated int32 map = 2;</code>
      *
      * <pre>
      * </pre>
@@ -8816,7 +10092,7 @@ public final class MiGongPB {
       return map_;
     }
     /**
-     * <code>repeated int32 map = 1;</code>
+     * <code>repeated int32 map = 2;</code>
      *
      * <pre>
      * </pre>
@@ -8825,7 +10101,7 @@ public final class MiGongPB {
       return map_.size();
     }
     /**
-     * <code>repeated int32 map = 1;</code>
+     * <code>repeated int32 map = 2;</code>
      *
      * <pre>
      * </pre>
@@ -8834,21 +10110,21 @@ public final class MiGongPB {
       return map_.get(index);
     }
 
-    // required int32 time = 2;
-    public static final int TIME_FIELD_NUMBER = 2;
+    // required int32 time = 3;
+    public static final int TIME_FIELD_NUMBER = 3;
     private int time_;
     /**
-     * <code>required int32 time = 2;</code>
+     * <code>required int32 time = 3;</code>
      *
      * <pre>
      * 时间
      * </pre>
      */
     public boolean hasTime() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required int32 time = 2;</code>
+     * <code>required int32 time = 3;</code>
      *
      * <pre>
      * 时间
@@ -8858,21 +10134,21 @@ public final class MiGongPB {
       return time_;
     }
 
-    // required int32 speed = 3;
-    public static final int SPEED_FIELD_NUMBER = 3;
+    // required int32 speed = 4;
+    public static final int SPEED_FIELD_NUMBER = 4;
     private int speed_;
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>required int32 speed = 4;</code>
      *
      * <pre>
      * 速度
      * </pre>
      */
     public boolean hasSpeed() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required int32 speed = 3;</code>
+     * <code>required int32 speed = 4;</code>
      *
      * <pre>
      * 速度
@@ -8882,21 +10158,21 @@ public final class MiGongPB {
       return speed_;
     }
 
-    // required int32 start = 4;
-    public static final int START_FIELD_NUMBER = 4;
+    // required int32 start = 5;
+    public static final int START_FIELD_NUMBER = 5;
     private int start_;
     /**
-     * <code>required int32 start = 4;</code>
+     * <code>required int32 start = 5;</code>
      *
      * <pre>
      * 起点
      * </pre>
      */
     public boolean hasStart() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required int32 start = 4;</code>
+     * <code>required int32 start = 5;</code>
      *
      * <pre>
      * 起点
@@ -8906,21 +10182,21 @@ public final class MiGongPB {
       return start_;
     }
 
-    // required int32 end = 5;
-    public static final int END_FIELD_NUMBER = 5;
+    // required int32 end = 6;
+    public static final int END_FIELD_NUMBER = 6;
     private int end_;
     /**
-     * <code>required int32 end = 5;</code>
+     * <code>required int32 end = 6;</code>
      *
      * <pre>
      * 终点
      * </pre>
      */
     public boolean hasEnd() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required int32 end = 5;</code>
+     * <code>required int32 end = 6;</code>
      *
      * <pre>
      * 终点
@@ -8930,11 +10206,11 @@ public final class MiGongPB {
       return end_;
     }
 
-    // repeated .PBBeanInfo beans = 6;
-    public static final int BEANS_FIELD_NUMBER = 6;
+    // repeated .PBBeanInfo beans = 7;
+    public static final int BEANS_FIELD_NUMBER = 7;
     private java.util.List<com.protocol.MiGongPB.PBBeanInfo> beans_;
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
@@ -8944,7 +10220,7 @@ public final class MiGongPB {
       return beans_;
     }
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
@@ -8955,7 +10231,7 @@ public final class MiGongPB {
       return beans_;
     }
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
@@ -8965,7 +10241,7 @@ public final class MiGongPB {
       return beans_.size();
     }
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
@@ -8975,7 +10251,7 @@ public final class MiGongPB {
       return beans_.get(index);
     }
     /**
-     * <code>repeated .PBBeanInfo beans = 6;</code>
+     * <code>repeated .PBBeanInfo beans = 7;</code>
      *
      * <pre>
      * 豆子的位置
@@ -8986,44 +10262,149 @@ public final class MiGongPB {
       return beans_.get(index);
     }
 
-    // required int32 target = 7;
-    public static final int TARGET_FIELD_NUMBER = 7;
-    private int target_;
+    // required int32 star1 = 8;
+    public static final int STAR1_FIELD_NUMBER = 8;
+    private int star1_;
     /**
-     * <code>required int32 target = 7;</code>
+     * <code>required int32 star1 = 8;</code>
      *
      * <pre>
-     * 目标分数
+     * 一星目标分数
      * </pre>
      */
-    public boolean hasTarget() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+    public boolean hasStar1() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required int32 target = 7;</code>
+     * <code>required int32 star1 = 8;</code>
      *
      * <pre>
-     * 目标分数
+     * 一星目标分数
      * </pre>
      */
-    public int getTarget() {
-      return target_;
+    public int getStar1() {
+      return star1_;
+    }
+
+    // required int32 star2 = 9;
+    public static final int STAR2_FIELD_NUMBER = 9;
+    private int star2_;
+    /**
+     * <code>required int32 star2 = 9;</code>
+     *
+     * <pre>
+     * 二星目标分数
+     * </pre>
+     */
+    public boolean hasStar2() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required int32 star2 = 9;</code>
+     *
+     * <pre>
+     * 二星目标分数
+     * </pre>
+     */
+    public int getStar2() {
+      return star2_;
+    }
+
+    // required int32 star3 = 10;
+    public static final int STAR3_FIELD_NUMBER = 10;
+    private int star3_;
+    /**
+     * <code>required int32 star3 = 10;</code>
+     *
+     * <pre>
+     * 三星目标分数
+     * </pre>
+     */
+    public boolean hasStar3() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>required int32 star3 = 10;</code>
+     *
+     * <pre>
+     * 三星目标分数
+     * </pre>
+     */
+    public int getStar3() {
+      return star3_;
+    }
+
+    // required int32 star4 = 11;
+    public static final int STAR4_FIELD_NUMBER = 11;
+    private int star4_;
+    /**
+     * <code>required int32 star4 = 11;</code>
+     *
+     * <pre>
+     * 四星目标分数
+     * </pre>
+     */
+    public boolean hasStar4() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>required int32 star4 = 11;</code>
+     *
+     * <pre>
+     * 四星目标分数
+     * </pre>
+     */
+    public int getStar4() {
+      return star4_;
+    }
+
+    // required int32 energy = 12;
+    public static final int ENERGY_FIELD_NUMBER = 12;
+    private int energy_;
+    /**
+     * <code>required int32 energy = 12;</code>
+     *
+     * <pre>
+     * 消耗体力
+     * </pre>
+     */
+    public boolean hasEnergy() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>required int32 energy = 12;</code>
+     *
+     * <pre>
+     * 消耗体力
+     * </pre>
+     */
+    public int getEnergy() {
+      return energy_;
     }
 
     private void initFields() {
+      pass_ = 0;
       map_ = java.util.Collections.emptyList();
       time_ = 0;
       speed_ = 0;
       start_ = 0;
       end_ = 0;
       beans_ = java.util.Collections.emptyList();
-      target_ = 0;
+      star1_ = 0;
+      star2_ = 0;
+      star3_ = 0;
+      star4_ = 0;
+      energy_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!hasPass()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       if (!hasTime()) {
         memoizedIsInitialized = 0;
         return false;
@@ -9040,7 +10421,23 @@ public final class MiGongPB {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasTarget()) {
+      if (!hasStar1()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStar2()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStar3()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStar4()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasEnergy()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -9057,26 +10454,41 @@ public final class MiGongPB {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      for (int i = 0; i < map_.size(); i++) {
-        output.writeInt32(1, map_.get(i));
-      }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(2, time_);
+        output.writeInt32(1, pass_);
+      }
+      for (int i = 0; i < map_.size(); i++) {
+        output.writeInt32(2, map_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(3, speed_);
+        output.writeInt32(3, time_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(4, start_);
+        output.writeInt32(4, speed_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(5, end_);
-      }
-      for (int i = 0; i < beans_.size(); i++) {
-        output.writeMessage(6, beans_.get(i));
+        output.writeInt32(5, start_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(7, target_);
+        output.writeInt32(6, end_);
+      }
+      for (int i = 0; i < beans_.size(); i++) {
+        output.writeMessage(7, beans_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(8, star1_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(9, star2_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(10, star3_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(11, star4_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(12, energy_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -9087,6 +10499,10 @@ public final class MiGongPB {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, pass_);
+      }
       {
         int dataSize = 0;
         for (int i = 0; i < map_.size(); i++) {
@@ -9096,29 +10512,45 @@ public final class MiGongPB {
         size += dataSize;
         size += 1 * getMapList().size();
       }
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, time_);
-      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, speed_);
+          .computeInt32Size(3, time_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, start_);
+          .computeInt32Size(4, speed_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, end_);
-      }
-      for (int i = 0; i < beans_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, beans_.get(i));
+          .computeInt32Size(5, start_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, target_);
+          .computeInt32Size(6, end_);
+      }
+      for (int i = 0; i < beans_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, beans_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, star1_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, star2_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, star3_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, star4_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, energy_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9237,24 +10669,34 @@ public final class MiGongPB {
 
       public Builder clear() {
         super.clear();
-        map_ = java.util.Collections.emptyList();
+        pass_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        time_ = 0;
+        map_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000002);
-        speed_ = 0;
+        time_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        start_ = 0;
+        speed_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        end_ = 0;
+        start_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
+        end_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
         if (beansBuilder_ == null) {
           beans_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
         } else {
           beansBuilder_.clear();
         }
-        target_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        star1_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        star2_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        star3_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        star4_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        energy_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -9283,40 +10725,60 @@ public final class MiGongPB {
         com.protocol.MiGongPB.SCUnlimitedGo result = new com.protocol.MiGongPB.SCUnlimitedGo(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          map_ = java.util.Collections.unmodifiableList(map_);
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.map_ = map_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.time_ = time_;
+        result.pass_ = pass_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          map_ = java.util.Collections.unmodifiableList(map_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.map_ = map_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.speed_ = speed_;
+        result.time_ = time_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.start_ = start_;
+        result.speed_ = speed_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000008;
         }
+        result.start_ = start_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
         result.end_ = end_;
         if (beansBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
             beans_ = java.util.Collections.unmodifiableList(beans_);
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000040);
           }
           result.beans_ = beans_;
         } else {
           result.beans_ = beansBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000010;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000020;
         }
-        result.target_ = target_;
+        result.star1_ = star1_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.star2_ = star2_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.star3_ = star3_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.star4_ = star4_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.energy_ = energy_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -9333,10 +10795,13 @@ public final class MiGongPB {
 
       public Builder mergeFrom(com.protocol.MiGongPB.SCUnlimitedGo other) {
         if (other == com.protocol.MiGongPB.SCUnlimitedGo.getDefaultInstance()) return this;
+        if (other.hasPass()) {
+          setPass(other.getPass());
+        }
         if (!other.map_.isEmpty()) {
           if (map_.isEmpty()) {
             map_ = other.map_;
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           } else {
             ensureMapIsMutable();
             map_.addAll(other.map_);
@@ -9359,7 +10824,7 @@ public final class MiGongPB {
           if (!other.beans_.isEmpty()) {
             if (beans_.isEmpty()) {
               beans_ = other.beans_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
             } else {
               ensureBeansIsMutable();
               beans_.addAll(other.beans_);
@@ -9372,7 +10837,7 @@ public final class MiGongPB {
               beansBuilder_.dispose();
               beansBuilder_ = null;
               beans_ = other.beans_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
               beansBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getBeansFieldBuilder() : null;
@@ -9381,14 +10846,30 @@ public final class MiGongPB {
             }
           }
         }
-        if (other.hasTarget()) {
-          setTarget(other.getTarget());
+        if (other.hasStar1()) {
+          setStar1(other.getStar1());
+        }
+        if (other.hasStar2()) {
+          setStar2(other.getStar2());
+        }
+        if (other.hasStar3()) {
+          setStar3(other.getStar3());
+        }
+        if (other.hasStar4()) {
+          setStar4(other.getStar4());
+        }
+        if (other.hasEnergy()) {
+          setEnergy(other.getEnergy());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
+        if (!hasPass()) {
+          
+          return false;
+        }
         if (!hasTime()) {
           
           return false;
@@ -9405,7 +10886,23 @@ public final class MiGongPB {
           
           return false;
         }
-        if (!hasTarget()) {
+        if (!hasStar1()) {
+          
+          return false;
+        }
+        if (!hasStar2()) {
+          
+          return false;
+        }
+        if (!hasStar3()) {
+          
+          return false;
+        }
+        if (!hasStar4()) {
+          
+          return false;
+        }
+        if (!hasEnergy()) {
           
           return false;
         }
@@ -9437,16 +10934,65 @@ public final class MiGongPB {
       }
       private int bitField0_;
 
-      // repeated int32 map = 1;
+      // required int32 pass = 1;
+      private int pass_ ;
+      /**
+       * <code>required int32 pass = 1;</code>
+       *
+       * <pre>
+       * 关卡数
+       * </pre>
+       */
+      public boolean hasPass() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 pass = 1;</code>
+       *
+       * <pre>
+       * 关卡数
+       * </pre>
+       */
+      public int getPass() {
+        return pass_;
+      }
+      /**
+       * <code>required int32 pass = 1;</code>
+       *
+       * <pre>
+       * 关卡数
+       * </pre>
+       */
+      public Builder setPass(int value) {
+        bitField0_ |= 0x00000001;
+        pass_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 pass = 1;</code>
+       *
+       * <pre>
+       * 关卡数
+       * </pre>
+       */
+      public Builder clearPass() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        pass_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // repeated int32 map = 2;
       private java.util.List<java.lang.Integer> map_ = java.util.Collections.emptyList();
       private void ensureMapIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           map_ = new java.util.ArrayList<java.lang.Integer>(map_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000002;
          }
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
@@ -9456,7 +11002,7 @@ public final class MiGongPB {
         return java.util.Collections.unmodifiableList(map_);
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
@@ -9465,7 +11011,7 @@ public final class MiGongPB {
         return map_.size();
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
@@ -9474,7 +11020,7 @@ public final class MiGongPB {
         return map_.get(index);
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
@@ -9487,7 +11033,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
@@ -9499,7 +11045,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
@@ -9512,32 +11058,32 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated int32 map = 1;</code>
+       * <code>repeated int32 map = 2;</code>
        *
        * <pre>
        * </pre>
        */
       public Builder clearMap() {
         map_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
 
-      // required int32 time = 2;
+      // required int32 time = 3;
       private int time_ ;
       /**
-       * <code>required int32 time = 2;</code>
+       * <code>required int32 time = 3;</code>
        *
        * <pre>
        * 时间
        * </pre>
        */
       public boolean hasTime() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required int32 time = 2;</code>
+       * <code>required int32 time = 3;</code>
        *
        * <pre>
        * 时间
@@ -9547,46 +11093,46 @@ public final class MiGongPB {
         return time_;
       }
       /**
-       * <code>required int32 time = 2;</code>
+       * <code>required int32 time = 3;</code>
        *
        * <pre>
        * 时间
        * </pre>
        */
       public Builder setTime(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         time_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 time = 2;</code>
+       * <code>required int32 time = 3;</code>
        *
        * <pre>
        * 时间
        * </pre>
        */
       public Builder clearTime() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         time_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 speed = 3;
+      // required int32 speed = 4;
       private int speed_ ;
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>required int32 speed = 4;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public boolean hasSpeed() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>required int32 speed = 4;</code>
        *
        * <pre>
        * 速度
@@ -9596,46 +11142,46 @@ public final class MiGongPB {
         return speed_;
       }
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>required int32 speed = 4;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public Builder setSpeed(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         speed_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 speed = 3;</code>
+       * <code>required int32 speed = 4;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public Builder clearSpeed() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         speed_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 start = 4;
+      // required int32 start = 5;
       private int start_ ;
       /**
-       * <code>required int32 start = 4;</code>
+       * <code>required int32 start = 5;</code>
        *
        * <pre>
        * 起点
        * </pre>
        */
       public boolean hasStart() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required int32 start = 4;</code>
+       * <code>required int32 start = 5;</code>
        *
        * <pre>
        * 起点
@@ -9645,46 +11191,46 @@ public final class MiGongPB {
         return start_;
       }
       /**
-       * <code>required int32 start = 4;</code>
+       * <code>required int32 start = 5;</code>
        *
        * <pre>
        * 起点
        * </pre>
        */
       public Builder setStart(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         start_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 start = 4;</code>
+       * <code>required int32 start = 5;</code>
        *
        * <pre>
        * 起点
        * </pre>
        */
       public Builder clearStart() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         start_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 end = 5;
+      // required int32 end = 6;
       private int end_ ;
       /**
-       * <code>required int32 end = 5;</code>
+       * <code>required int32 end = 6;</code>
        *
        * <pre>
        * 终点
        * </pre>
        */
       public boolean hasEnd() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required int32 end = 5;</code>
+       * <code>required int32 end = 6;</code>
        *
        * <pre>
        * 终点
@@ -9694,39 +11240,39 @@ public final class MiGongPB {
         return end_;
       }
       /**
-       * <code>required int32 end = 5;</code>
+       * <code>required int32 end = 6;</code>
        *
        * <pre>
        * 终点
        * </pre>
        */
       public Builder setEnd(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         end_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 end = 5;</code>
+       * <code>required int32 end = 6;</code>
        *
        * <pre>
        * 终点
        * </pre>
        */
       public Builder clearEnd() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         end_ = 0;
         onChanged();
         return this;
       }
 
-      // repeated .PBBeanInfo beans = 6;
+      // repeated .PBBeanInfo beans = 7;
       private java.util.List<com.protocol.MiGongPB.PBBeanInfo> beans_ =
         java.util.Collections.emptyList();
       private void ensureBeansIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           beans_ = new java.util.ArrayList<com.protocol.MiGongPB.PBBeanInfo>(beans_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
          }
       }
 
@@ -9734,7 +11280,7 @@ public final class MiGongPB {
           com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder> beansBuilder_;
 
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9748,7 +11294,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9762,7 +11308,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9776,7 +11322,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9797,7 +11343,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9815,7 +11361,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9835,7 +11381,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9856,7 +11402,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9874,7 +11420,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9892,7 +11438,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9910,7 +11456,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9919,7 +11465,7 @@ public final class MiGongPB {
       public Builder clearBeans() {
         if (beansBuilder_ == null) {
           beans_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
           beansBuilder_.clear();
@@ -9927,7 +11473,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9944,7 +11490,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9955,7 +11501,7 @@ public final class MiGongPB {
         return getBeansFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9969,7 +11515,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9984,7 +11530,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -9995,7 +11541,7 @@ public final class MiGongPB {
             com.protocol.MiGongPB.PBBeanInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -10007,7 +11553,7 @@ public final class MiGongPB {
             index, com.protocol.MiGongPB.PBBeanInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .PBBeanInfo beans = 6;</code>
+       * <code>repeated .PBBeanInfo beans = 7;</code>
        *
        * <pre>
        * 豆子的位置
@@ -10024,7 +11570,7 @@ public final class MiGongPB {
           beansBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.protocol.MiGongPB.PBBeanInfo, com.protocol.MiGongPB.PBBeanInfo.Builder, com.protocol.MiGongPB.PBBeanInfoOrBuilder>(
                   beans_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           beans_ = null;
@@ -10032,51 +11578,247 @@ public final class MiGongPB {
         return beansBuilder_;
       }
 
-      // required int32 target = 7;
-      private int target_ ;
+      // required int32 star1 = 8;
+      private int star1_ ;
       /**
-       * <code>required int32 target = 7;</code>
+       * <code>required int32 star1 = 8;</code>
        *
        * <pre>
-       * 目标分数
+       * 一星目标分数
        * </pre>
        */
-      public boolean hasTarget() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+      public boolean hasStar1() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>required int32 target = 7;</code>
+       * <code>required int32 star1 = 8;</code>
        *
        * <pre>
-       * 目标分数
+       * 一星目标分数
        * </pre>
        */
-      public int getTarget() {
-        return target_;
+      public int getStar1() {
+        return star1_;
       }
       /**
-       * <code>required int32 target = 7;</code>
+       * <code>required int32 star1 = 8;</code>
        *
        * <pre>
-       * 目标分数
+       * 一星目标分数
        * </pre>
        */
-      public Builder setTarget(int value) {
-        bitField0_ |= 0x00000040;
-        target_ = value;
+      public Builder setStar1(int value) {
+        bitField0_ |= 0x00000080;
+        star1_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 target = 7;</code>
+       * <code>required int32 star1 = 8;</code>
        *
        * <pre>
-       * 目标分数
+       * 一星目标分数
        * </pre>
        */
-      public Builder clearTarget() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        target_ = 0;
+      public Builder clearStar1() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        star1_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 star2 = 9;
+      private int star2_ ;
+      /**
+       * <code>required int32 star2 = 9;</code>
+       *
+       * <pre>
+       * 二星目标分数
+       * </pre>
+       */
+      public boolean hasStar2() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>required int32 star2 = 9;</code>
+       *
+       * <pre>
+       * 二星目标分数
+       * </pre>
+       */
+      public int getStar2() {
+        return star2_;
+      }
+      /**
+       * <code>required int32 star2 = 9;</code>
+       *
+       * <pre>
+       * 二星目标分数
+       * </pre>
+       */
+      public Builder setStar2(int value) {
+        bitField0_ |= 0x00000100;
+        star2_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 star2 = 9;</code>
+       *
+       * <pre>
+       * 二星目标分数
+       * </pre>
+       */
+      public Builder clearStar2() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        star2_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 star3 = 10;
+      private int star3_ ;
+      /**
+       * <code>required int32 star3 = 10;</code>
+       *
+       * <pre>
+       * 三星目标分数
+       * </pre>
+       */
+      public boolean hasStar3() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>required int32 star3 = 10;</code>
+       *
+       * <pre>
+       * 三星目标分数
+       * </pre>
+       */
+      public int getStar3() {
+        return star3_;
+      }
+      /**
+       * <code>required int32 star3 = 10;</code>
+       *
+       * <pre>
+       * 三星目标分数
+       * </pre>
+       */
+      public Builder setStar3(int value) {
+        bitField0_ |= 0x00000200;
+        star3_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 star3 = 10;</code>
+       *
+       * <pre>
+       * 三星目标分数
+       * </pre>
+       */
+      public Builder clearStar3() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        star3_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 star4 = 11;
+      private int star4_ ;
+      /**
+       * <code>required int32 star4 = 11;</code>
+       *
+       * <pre>
+       * 四星目标分数
+       * </pre>
+       */
+      public boolean hasStar4() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>required int32 star4 = 11;</code>
+       *
+       * <pre>
+       * 四星目标分数
+       * </pre>
+       */
+      public int getStar4() {
+        return star4_;
+      }
+      /**
+       * <code>required int32 star4 = 11;</code>
+       *
+       * <pre>
+       * 四星目标分数
+       * </pre>
+       */
+      public Builder setStar4(int value) {
+        bitField0_ |= 0x00000400;
+        star4_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 star4 = 11;</code>
+       *
+       * <pre>
+       * 四星目标分数
+       * </pre>
+       */
+      public Builder clearStar4() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        star4_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 energy = 12;
+      private int energy_ ;
+      /**
+       * <code>required int32 energy = 12;</code>
+       *
+       * <pre>
+       * 消耗体力
+       * </pre>
+       */
+      public boolean hasEnergy() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>required int32 energy = 12;</code>
+       *
+       * <pre>
+       * 消耗体力
+       * </pre>
+       */
+      public int getEnergy() {
+        return energy_;
+      }
+      /**
+       * <code>required int32 energy = 12;</code>
+       *
+       * <pre>
+       * 消耗体力
+       * </pre>
+       */
+      public Builder setEnergy(int value) {
+        bitField0_ |= 0x00000800;
+        energy_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 energy = 12;</code>
+       *
+       * <pre>
+       * 消耗体力
+       * </pre>
+       */
+      public Builder clearEnergy() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        energy_ = 0;
         onChanged();
         return this;
       }
@@ -10095,33 +11837,51 @@ public final class MiGongPB {
   public interface CSUnlimitedFinishOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required int32 success = 1;
+    // required int32 pass = 1;
     /**
-     * <code>required int32 success = 1;</code>
+     * <code>required int32 pass = 1;</code>
+     *
+     * <pre>
+     * 关卡数
+     * </pre>
+     */
+    boolean hasPass();
+    /**
+     * <code>required int32 pass = 1;</code>
+     *
+     * <pre>
+     * 关卡数
+     * </pre>
+     */
+    int getPass();
+
+    // required int32 success = 2;
+    /**
+     * <code>required int32 success = 2;</code>
      */
     boolean hasSuccess();
     /**
-     * <code>required int32 success = 1;</code>
+     * <code>required int32 success = 2;</code>
      */
     int getSuccess();
 
-    // repeated int32 route = 2;
+    // repeated int32 route = 3;
     /**
-     * <code>repeated int32 route = 2;</code>
+     * <code>repeated int32 route = 3;</code>
      *
      * <pre>
      * </pre>
      */
     java.util.List<java.lang.Integer> getRouteList();
     /**
-     * <code>repeated int32 route = 2;</code>
+     * <code>repeated int32 route = 3;</code>
      *
      * <pre>
      * </pre>
      */
     int getRouteCount();
     /**
-     * <code>repeated int32 route = 2;</code>
+     * <code>repeated int32 route = 3;</code>
      *
      * <pre>
      * </pre>
@@ -10185,23 +11945,28 @@ public final class MiGongPB {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              success_ = input.readInt32();
+              pass_ = input.readInt32();
               break;
             }
             case 16: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              bitField0_ |= 0x00000002;
+              success_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 route_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000004;
               }
               route_.add(input.readInt32());
               break;
             }
-            case 18: {
+            case 26: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
                 route_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000004;
               }
               while (input.getBytesUntilLimit() > 0) {
                 route_.add(input.readInt32());
@@ -10217,7 +11982,7 @@ public final class MiGongPB {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           route_ = java.util.Collections.unmodifiableList(route_);
         }
         this.unknownFields = unknownFields.build();
@@ -10252,27 +12017,51 @@ public final class MiGongPB {
     }
 
     private int bitField0_;
-    // required int32 success = 1;
-    public static final int SUCCESS_FIELD_NUMBER = 1;
-    private int success_;
+    // required int32 pass = 1;
+    public static final int PASS_FIELD_NUMBER = 1;
+    private int pass_;
     /**
-     * <code>required int32 success = 1;</code>
+     * <code>required int32 pass = 1;</code>
+     *
+     * <pre>
+     * 关卡数
+     * </pre>
      */
-    public boolean hasSuccess() {
+    public boolean hasPass() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required int32 success = 1;</code>
+     * <code>required int32 pass = 1;</code>
+     *
+     * <pre>
+     * 关卡数
+     * </pre>
+     */
+    public int getPass() {
+      return pass_;
+    }
+
+    // required int32 success = 2;
+    public static final int SUCCESS_FIELD_NUMBER = 2;
+    private int success_;
+    /**
+     * <code>required int32 success = 2;</code>
+     */
+    public boolean hasSuccess() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 success = 2;</code>
      */
     public int getSuccess() {
       return success_;
     }
 
-    // repeated int32 route = 2;
-    public static final int ROUTE_FIELD_NUMBER = 2;
+    // repeated int32 route = 3;
+    public static final int ROUTE_FIELD_NUMBER = 3;
     private java.util.List<java.lang.Integer> route_;
     /**
-     * <code>repeated int32 route = 2;</code>
+     * <code>repeated int32 route = 3;</code>
      *
      * <pre>
      * </pre>
@@ -10282,7 +12071,7 @@ public final class MiGongPB {
       return route_;
     }
     /**
-     * <code>repeated int32 route = 2;</code>
+     * <code>repeated int32 route = 3;</code>
      *
      * <pre>
      * </pre>
@@ -10291,7 +12080,7 @@ public final class MiGongPB {
       return route_.size();
     }
     /**
-     * <code>repeated int32 route = 2;</code>
+     * <code>repeated int32 route = 3;</code>
      *
      * <pre>
      * </pre>
@@ -10301,6 +12090,7 @@ public final class MiGongPB {
     }
 
     private void initFields() {
+      pass_ = 0;
       success_ = 0;
       route_ = java.util.Collections.emptyList();
     }
@@ -10309,6 +12099,10 @@ public final class MiGongPB {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!hasPass()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       if (!hasSuccess()) {
         memoizedIsInitialized = 0;
         return false;
@@ -10321,10 +12115,13 @@ public final class MiGongPB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, success_);
+        output.writeInt32(1, pass_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, success_);
       }
       for (int i = 0; i < route_.size(); i++) {
-        output.writeInt32(2, route_.get(i));
+        output.writeInt32(3, route_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -10337,7 +12134,11 @@ public final class MiGongPB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, success_);
+          .computeInt32Size(1, pass_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, success_);
       }
       {
         int dataSize = 0;
@@ -10468,10 +12269,12 @@ public final class MiGongPB {
 
       public Builder clear() {
         super.clear();
-        success_ = 0;
+        pass_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        route_ = java.util.Collections.emptyList();
+        success_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        route_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -10503,10 +12306,14 @@ public final class MiGongPB {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
+        result.pass_ = pass_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
         result.success_ = success_;
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
           route_ = java.util.Collections.unmodifiableList(route_);
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.route_ = route_;
         result.bitField0_ = to_bitField0_;
@@ -10525,13 +12332,16 @@ public final class MiGongPB {
 
       public Builder mergeFrom(com.protocol.MiGongPB.CSUnlimitedFinish other) {
         if (other == com.protocol.MiGongPB.CSUnlimitedFinish.getDefaultInstance()) return this;
+        if (other.hasPass()) {
+          setPass(other.getPass());
+        }
         if (other.hasSuccess()) {
           setSuccess(other.getSuccess());
         }
         if (!other.route_.isEmpty()) {
           if (route_.isEmpty()) {
             route_ = other.route_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
             ensureRouteIsMutable();
             route_.addAll(other.route_);
@@ -10543,6 +12353,10 @@ public final class MiGongPB {
       }
 
       public final boolean isInitialized() {
+        if (!hasPass()) {
+          
+          return false;
+        }
         if (!hasSuccess()) {
           
           return false;
@@ -10569,49 +12383,98 @@ public final class MiGongPB {
       }
       private int bitField0_;
 
-      // required int32 success = 1;
-      private int success_ ;
+      // required int32 pass = 1;
+      private int pass_ ;
       /**
-       * <code>required int32 success = 1;</code>
+       * <code>required int32 pass = 1;</code>
+       *
+       * <pre>
+       * 关卡数
+       * </pre>
        */
-      public boolean hasSuccess() {
+      public boolean hasPass() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required int32 success = 1;</code>
+       * <code>required int32 pass = 1;</code>
+       *
+       * <pre>
+       * 关卡数
+       * </pre>
+       */
+      public int getPass() {
+        return pass_;
+      }
+      /**
+       * <code>required int32 pass = 1;</code>
+       *
+       * <pre>
+       * 关卡数
+       * </pre>
+       */
+      public Builder setPass(int value) {
+        bitField0_ |= 0x00000001;
+        pass_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 pass = 1;</code>
+       *
+       * <pre>
+       * 关卡数
+       * </pre>
+       */
+      public Builder clearPass() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        pass_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 success = 2;
+      private int success_ ;
+      /**
+       * <code>required int32 success = 2;</code>
+       */
+      public boolean hasSuccess() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 success = 2;</code>
        */
       public int getSuccess() {
         return success_;
       }
       /**
-       * <code>required int32 success = 1;</code>
+       * <code>required int32 success = 2;</code>
        */
       public Builder setSuccess(int value) {
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         success_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 success = 1;</code>
+       * <code>required int32 success = 2;</code>
        */
       public Builder clearSuccess() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         success_ = 0;
         onChanged();
         return this;
       }
 
-      // repeated int32 route = 2;
+      // repeated int32 route = 3;
       private java.util.List<java.lang.Integer> route_ = java.util.Collections.emptyList();
       private void ensureRouteIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           route_ = new java.util.ArrayList<java.lang.Integer>(route_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
          }
       }
       /**
-       * <code>repeated int32 route = 2;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
@@ -10621,7 +12484,7 @@ public final class MiGongPB {
         return java.util.Collections.unmodifiableList(route_);
       }
       /**
-       * <code>repeated int32 route = 2;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
@@ -10630,7 +12493,7 @@ public final class MiGongPB {
         return route_.size();
       }
       /**
-       * <code>repeated int32 route = 2;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
@@ -10639,7 +12502,7 @@ public final class MiGongPB {
         return route_.get(index);
       }
       /**
-       * <code>repeated int32 route = 2;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
@@ -10652,7 +12515,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated int32 route = 2;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
@@ -10664,7 +12527,7 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated int32 route = 2;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
@@ -10677,14 +12540,14 @@ public final class MiGongPB {
         return this;
       }
       /**
-       * <code>repeated int32 route = 2;</code>
+       * <code>repeated int32 route = 3;</code>
        *
        * <pre>
        * </pre>
        */
       public Builder clearRoute() {
         route_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -22550,7 +24413,7 @@ public final class MiGongPB {
      * <code>required int32 overType = 1;</code>
      *
      * <pre>
-     * 1都抵达终点，2时间到，3其它
+     * 0其它，1都抵达终点，2时间到
      * </pre>
      */
     boolean hasOverType();
@@ -22558,7 +24421,7 @@ public final class MiGongPB {
      * <code>required int32 overType = 1;</code>
      *
      * <pre>
-     * 1都抵达终点，2时间到，3其它
+     * 0其它，1都抵达终点，2时间到
      * </pre>
      */
     int getOverType();
@@ -22726,7 +24589,7 @@ public final class MiGongPB {
      * <code>required int32 overType = 1;</code>
      *
      * <pre>
-     * 1都抵达终点，2时间到，3其它
+     * 0其它，1都抵达终点，2时间到
      * </pre>
      */
     public boolean hasOverType() {
@@ -22736,7 +24599,7 @@ public final class MiGongPB {
      * <code>required int32 overType = 1;</code>
      *
      * <pre>
-     * 1都抵达终点，2时间到，3其它
+     * 0其它，1都抵达终点，2时间到
      * </pre>
      */
     public int getOverType() {
@@ -23106,7 +24969,7 @@ public final class MiGongPB {
        * <code>required int32 overType = 1;</code>
        *
        * <pre>
-       * 1都抵达终点，2时间到，3其它
+       * 0其它，1都抵达终点，2时间到
        * </pre>
        */
       public boolean hasOverType() {
@@ -23116,7 +24979,7 @@ public final class MiGongPB {
        * <code>required int32 overType = 1;</code>
        *
        * <pre>
-       * 1都抵达终点，2时间到，3其它
+       * 0其它，1都抵达终点，2时间到
        * </pre>
        */
       public int getOverType() {
@@ -23126,7 +24989,7 @@ public final class MiGongPB {
        * <code>required int32 overType = 1;</code>
        *
        * <pre>
-       * 1都抵达终点，2时间到，3其它
+       * 0其它，1都抵达终点，2时间到
        * </pre>
        */
       public Builder setOverType(int value) {
@@ -23139,7 +25002,7 @@ public final class MiGongPB {
        * <code>required int32 overType = 1;</code>
        *
        * <pre>
-       * 1都抵达终点，2时间到，3其它
+       * 0其它，1都抵达终点，2时间到
        * </pre>
        */
       public Builder clearOverType() {
@@ -27128,6 +28991,16 @@ public final class MiGongPB {
   }
 
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_CSBaseInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_CSBaseInfo_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_SCBaseInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_SCBaseInfo_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_CSGetMiGongLevel_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -27351,319 +29224,335 @@ public final class MiGongPB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\025protos/MiGongPB.proto\"\022\n\020CSGetMiGongLe" +
-      "vel\"Q\n\020SCGetMiGongLevel\022\030\n\020passCountInLe" +
-      "vel\030\001 \003(\005\022\021\n\topenLevel\030\002 \002(\005\022\020\n\010openPass" +
-      "\030\003 \002(\005\"-\n\016CSGetMiGongMap\022\r\n\005level\030\001 \002(\005\022" +
-      "\014\n\004pass\030\002 \002(\005\"\202\001\n\016SCGetMiGongMap\022\013\n\003map\030" +
-      "\001 \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005st" +
-      "art\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022\032\n\005beans\030\006 \003(\0132\013." +
-      "PBBeanInfo\022\016\n\006target\030\007 \002(\005\"(\n\nPBBeanInfo" +
-      "\022\013\n\003pos\030\001 \002(\005\022\r\n\005score\030\002 \002(\005\"K\n\014CSPassFi" +
-      "nish\022\r\n\005level\030\001 \002(\005\022\014\n\004pass\030\002 \002(\005\022\017\n\007suc",
-      "cess\030\003 \002(\005\022\r\n\005route\030\004 \003(\005\"D\n\014SCPassFinis" +
-      "h\022\021\n\topenLevel\030\001 \002(\005\022\020\n\010openPass\030\002 \002(\005\022\017" +
-      "\n\007success\030\003 \002(\005\"\033\n\tCSUseItem\022\016\n\006itemId\030\001" +
-      " \002(\005\"\013\n\tSCUseItem\"\021\n\017CSUnlimitedInfo\"^\n\017" +
-      "SCUnlimitedInfo\022/\n\021unlimitedRankInfo\030\001 \003" +
-      "(\0132\024.PBUnlimitedRankInfo\022\014\n\004pass\030\002 \002(\005\022\014" +
-      "\n\004rank\030\003 \002(\005\"S\n\023PBUnlimitedRankInfo\022\016\n\006u" +
-      "serId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\014\n\004pass\030\003 " +
-      "\002(\005\022\014\n\004rank\030\004 \002(\005\"\017\n\rCSUnlimitedGo\"\201\001\n\rS" +
-      "CUnlimitedGo\022\013\n\003map\030\001 \003(\005\022\014\n\004time\030\002 \002(\005\022",
-      "\r\n\005speed\030\003 \002(\005\022\r\n\005start\030\004 \002(\005\022\013\n\003end\030\005 \002" +
-      "(\005\022\032\n\005beans\030\006 \003(\0132\013.PBBeanInfo\022\016\n\006target" +
-      "\030\007 \002(\005\"3\n\021CSUnlimitedFinish\022\017\n\007success\030\001" +
-      " \002(\005\022\r\n\005route\030\002 \003(\005\"6\n\021SCUnlimitedFinish" +
-      "\022\020\n\010openPass\030\001 \002(\005\022\017\n\007success\030\002 \002(\005\"\014\n\nC" +
-      "SMatching\"\014\n\nSCMatching\"\022\n\020CSCancelMatch" +
-      "ing\"\022\n\020SCCancelMatching\"\227\001\n\021SCMatchingSu" +
-      "ccess\022\013\n\003map\030\001 \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005spee" +
-      "d\030\003 \002(\005\022\r\n\005start\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022 \n\no" +
-      "therInfos\030\006 \003(\0132\014.PBOtherInfo\022\032\n\005beans\030\007",
-      " \003(\0132\013.PBBeanInfo\"K\n\013PBOtherInfo\022\016\n\006user" +
-      "Id\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\r\n\005start\030\003 \002(" +
-      "\005\022\013\n\003end\030\004 \002(\005\"\020\n\016SCMatchingFail\"\t\n\007SCBe" +
-      "gin\"@\n\006CSMove\022\014\n\004posX\030\001 \002(\002\022\014\n\004posY\030\002 \002(" +
-      "\002\022\013\n\003dir\030\003 \002(\005\022\r\n\005speed\030\004 \002(\005\"\010\n\006SCMove\"" +
-      "4\n\nSCUserMove\022&\n\ruserMoveInfos\030\001 \003(\0132\017.P" +
-      "BUserMoveInfo\"g\n\016PBUserMoveInfo\022\016\n\006userI" +
-      "d\030\001 \002(\t\022\014\n\004posX\030\002 \002(\002\022\014\n\004posY\030\003 \002(\002\022\013\n\003d" +
-      "ir\030\004 \002(\005\022\r\n\005speed\030\005 \002(\005\022\r\n\005frame\030\006 \002(\005\"\034" +
-      "\n\tCSEatBean\022\017\n\007beanPos\030\001 \002(\005\"\013\n\tSCEatBea",
-      "n\".\n\rSCSendEatBean\022\035\n\005beans\030\001 \003(\0132\016.PBEa" +
-      "tBeanInfo\"0\n\rPBEatBeanInfo\022\016\n\006userId\030\001 \002" +
-      "(\t\022\017\n\007beanPos\030\002 \002(\005\"\030\n\tCSArrived\022\013\n\003pos\030" +
-      "\001 \002(\005\"\013\n\tSCArrived\"\037\n\rSCUserArrived\022\016\n\006u" +
-      "serId\030\001 \002(\t\"F\n\nSCGameOver\022\020\n\010overType\030\001 " +
-      "\002(\005\022&\n\tuserInfos\030\002 \003(\0132\023.PBGameOverUserI" +
-      "nfo\"d\n\022PBGameOverUserInfo\022\016\n\006userId\030\001 \002(" +
-      "\t\022\020\n\010userName\030\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005sco" +
-      "re\030\004 \002(\005\022\017\n\007arrived\030\005 \002(\005\"\r\n\013CSRoomHeart" +
-      "\"\r\n\013SCRoomHeart\"#\n\022CSSendWalkingRoute\022\r\n",
-      "\005route\030\001 \003(\005\"\024\n\022SCSendWalkingRoute\"\031\n\010CS" +
-      "Common\022\r\n\005route\030\001 \003(\t\"\031\n\010SCCommon\022\r\n\005rou" +
-      "te\030\001 \003(\tB\016\n\014com.protocol"
+      "\n\025protos/MiGongPB.proto\"\014\n\nCSBaseInfo\"\034\n" +
+      "\nSCBaseInfo\022\016\n\006energy\030\001 \002(\005\"\022\n\020CSGetMiGo" +
+      "ngLevel\"\'\n\020SCGetMiGongLevel\022\023\n\013starInLev" +
+      "el\030\001 \003(\005\"\036\n\016CSGetMiGongMap\022\014\n\004pass\030\001 \002(\005" +
+      "\"\314\001\n\016SCGetMiGongMap\022\014\n\004pass\030\001 \002(\005\022\013\n\003map" +
+      "\030\002 \003(\005\022\014\n\004time\030\003 \002(\005\022\r\n\005speed\030\004 \002(\005\022\r\n\005s" +
+      "tart\030\005 \002(\005\022\013\n\003end\030\006 \002(\005\022\032\n\005beans\030\007 \003(\0132\013" +
+      ".PBBeanInfo\022\r\n\005star1\030\010 \002(\005\022\r\n\005star2\030\t \002(" +
+      "\005\022\r\n\005star3\030\n \002(\005\022\r\n\005star4\030\013 \002(\005\022\016\n\006energ" +
+      "y\030\014 \002(\005\"(\n\nPBBeanInfo\022\013\n\003pos\030\001 \002(\005\022\r\n\005sc",
+      "ore\030\002 \002(\005\"<\n\014CSPassFinish\022\014\n\004pass\030\001 \002(\005\022" +
+      "\017\n\007success\030\002 \002(\005\022\r\n\005route\030\003 \003(\005\"D\n\014SCPas" +
+      "sFinish\022\021\n\topenLevel\030\001 \002(\005\022\020\n\010openPass\030\002" +
+      " \002(\005\022\017\n\007success\030\003 \002(\005\"\033\n\tCSUseItem\022\016\n\006it" +
+      "emId\030\001 \002(\005\"\013\n\tSCUseItem\"\021\n\017CSUnlimitedIn" +
+      "fo\"l\n\017SCUnlimitedInfo\022/\n\021unlimitedRankIn" +
+      "fo\030\001 \003(\0132\024.PBUnlimitedRankInfo\022\014\n\004pass\030\002" +
+      " \002(\005\022\014\n\004star\030\003 \002(\005\022\014\n\004rank\030\004 \002(\005\"a\n\023PBUn" +
+      "limitedRankInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010userN" +
+      "ame\030\002 \002(\t\022\014\n\004pass\030\003 \002(\005\022\014\n\004star\030\004 \002(\005\022\014\n",
+      "\004rank\030\005 \002(\005\"\017\n\rCSUnlimitedGo\"\313\001\n\rSCUnlim" +
+      "itedGo\022\014\n\004pass\030\001 \002(\005\022\013\n\003map\030\002 \003(\005\022\014\n\004tim" +
+      "e\030\003 \002(\005\022\r\n\005speed\030\004 \002(\005\022\r\n\005start\030\005 \002(\005\022\013\n" +
+      "\003end\030\006 \002(\005\022\032\n\005beans\030\007 \003(\0132\013.PBBeanInfo\022\r" +
+      "\n\005star1\030\010 \002(\005\022\r\n\005star2\030\t \002(\005\022\r\n\005star3\030\n " +
+      "\002(\005\022\r\n\005star4\030\013 \002(\005\022\016\n\006energy\030\014 \002(\005\"A\n\021CS" +
+      "UnlimitedFinish\022\014\n\004pass\030\001 \002(\005\022\017\n\007success" +
+      "\030\002 \002(\005\022\r\n\005route\030\003 \003(\005\"6\n\021SCUnlimitedFini" +
+      "sh\022\020\n\010openPass\030\001 \002(\005\022\017\n\007success\030\002 \002(\005\"\014\n" +
+      "\nCSMatching\"\014\n\nSCMatching\"\022\n\020CSCancelMat",
+      "ching\"\022\n\020SCCancelMatching\"\227\001\n\021SCMatching" +
+      "Success\022\013\n\003map\030\001 \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005sp" +
+      "eed\030\003 \002(\005\022\r\n\005start\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022 \n" +
+      "\notherInfos\030\006 \003(\0132\014.PBOtherInfo\022\032\n\005beans" +
+      "\030\007 \003(\0132\013.PBBeanInfo\"K\n\013PBOtherInfo\022\016\n\006us" +
+      "erId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\r\n\005start\030\003 " +
+      "\002(\005\022\013\n\003end\030\004 \002(\005\"\020\n\016SCMatchingFail\"\t\n\007SC" +
+      "Begin\"@\n\006CSMove\022\014\n\004posX\030\001 \002(\002\022\014\n\004posY\030\002 " +
+      "\002(\002\022\013\n\003dir\030\003 \002(\005\022\r\n\005speed\030\004 \002(\005\"\010\n\006SCMov" +
+      "e\"4\n\nSCUserMove\022&\n\ruserMoveInfos\030\001 \003(\0132\017",
+      ".PBUserMoveInfo\"g\n\016PBUserMoveInfo\022\016\n\006use" +
+      "rId\030\001 \002(\t\022\014\n\004posX\030\002 \002(\002\022\014\n\004posY\030\003 \002(\002\022\013\n" +
+      "\003dir\030\004 \002(\005\022\r\n\005speed\030\005 \002(\005\022\r\n\005frame\030\006 \002(\005" +
+      "\"\034\n\tCSEatBean\022\017\n\007beanPos\030\001 \002(\005\"\013\n\tSCEatB" +
+      "ean\".\n\rSCSendEatBean\022\035\n\005beans\030\001 \003(\0132\016.PB" +
+      "EatBeanInfo\"0\n\rPBEatBeanInfo\022\016\n\006userId\030\001" +
+      " \002(\t\022\017\n\007beanPos\030\002 \002(\005\"\030\n\tCSArrived\022\013\n\003po" +
+      "s\030\001 \002(\005\"\013\n\tSCArrived\"\037\n\rSCUserArrived\022\016\n" +
+      "\006userId\030\001 \002(\t\"F\n\nSCGameOver\022\020\n\010overType\030" +
+      "\001 \002(\005\022&\n\tuserInfos\030\002 \003(\0132\023.PBGameOverUse",
+      "rInfo\"d\n\022PBGameOverUserInfo\022\016\n\006userId\030\001 " +
+      "\002(\t\022\020\n\010userName\030\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005s" +
+      "core\030\004 \002(\005\022\017\n\007arrived\030\005 \002(\005\"\r\n\013CSRoomHea" +
+      "rt\"\r\n\013SCRoomHeart\"#\n\022CSSendWalkingRoute\022" +
+      "\r\n\005route\030\001 \003(\005\"\024\n\022SCSendWalkingRoute\"\031\n\010" +
+      "CSCommon\022\r\n\005route\030\001 \003(\t\"\031\n\010SCCommon\022\r\n\005r" +
+      "oute\030\001 \003(\tB\016\n\014com.protocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
-          internal_static_CSGetMiGongLevel_descriptor =
+          internal_static_CSBaseInfo_descriptor =
             getDescriptor().getMessageTypes().get(0);
+          internal_static_CSBaseInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_CSBaseInfo_descriptor,
+              new java.lang.String[] { });
+          internal_static_SCBaseInfo_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_SCBaseInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_SCBaseInfo_descriptor,
+              new java.lang.String[] { "Energy", });
+          internal_static_CSGetMiGongLevel_descriptor =
+            getDescriptor().getMessageTypes().get(2);
           internal_static_CSGetMiGongLevel_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSGetMiGongLevel_descriptor,
               new java.lang.String[] { });
           internal_static_SCGetMiGongLevel_descriptor =
-            getDescriptor().getMessageTypes().get(1);
+            getDescriptor().getMessageTypes().get(3);
           internal_static_SCGetMiGongLevel_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCGetMiGongLevel_descriptor,
-              new java.lang.String[] { "PassCountInLevel", "OpenLevel", "OpenPass", });
+              new java.lang.String[] { "StarInLevel", });
           internal_static_CSGetMiGongMap_descriptor =
-            getDescriptor().getMessageTypes().get(2);
+            getDescriptor().getMessageTypes().get(4);
           internal_static_CSGetMiGongMap_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSGetMiGongMap_descriptor,
-              new java.lang.String[] { "Level", "Pass", });
+              new java.lang.String[] { "Pass", });
           internal_static_SCGetMiGongMap_descriptor =
-            getDescriptor().getMessageTypes().get(3);
+            getDescriptor().getMessageTypes().get(5);
           internal_static_SCGetMiGongMap_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCGetMiGongMap_descriptor,
-              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "Beans", "Target", });
+              new java.lang.String[] { "Pass", "Map", "Time", "Speed", "Start", "End", "Beans", "Star1", "Star2", "Star3", "Star4", "Energy", });
           internal_static_PBBeanInfo_descriptor =
-            getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(6);
           internal_static_PBBeanInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBBeanInfo_descriptor,
               new java.lang.String[] { "Pos", "Score", });
           internal_static_CSPassFinish_descriptor =
-            getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(7);
           internal_static_CSPassFinish_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSPassFinish_descriptor,
-              new java.lang.String[] { "Level", "Pass", "Success", "Route", });
+              new java.lang.String[] { "Pass", "Success", "Route", });
           internal_static_SCPassFinish_descriptor =
-            getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(8);
           internal_static_SCPassFinish_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCPassFinish_descriptor,
               new java.lang.String[] { "OpenLevel", "OpenPass", "Success", });
           internal_static_CSUseItem_descriptor =
-            getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(9);
           internal_static_CSUseItem_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSUseItem_descriptor,
               new java.lang.String[] { "ItemId", });
           internal_static_SCUseItem_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_SCUseItem_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUseItem_descriptor,
               new java.lang.String[] { });
           internal_static_CSUnlimitedInfo_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(11);
           internal_static_CSUnlimitedInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSUnlimitedInfo_descriptor,
               new java.lang.String[] { });
           internal_static_SCUnlimitedInfo_descriptor =
-            getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(12);
           internal_static_SCUnlimitedInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUnlimitedInfo_descriptor,
-              new java.lang.String[] { "UnlimitedRankInfo", "Pass", "Rank", });
+              new java.lang.String[] { "UnlimitedRankInfo", "Pass", "Star", "Rank", });
           internal_static_PBUnlimitedRankInfo_descriptor =
-            getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(13);
           internal_static_PBUnlimitedRankInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBUnlimitedRankInfo_descriptor,
-              new java.lang.String[] { "UserId", "UserName", "Pass", "Rank", });
+              new java.lang.String[] { "UserId", "UserName", "Pass", "Star", "Rank", });
           internal_static_CSUnlimitedGo_descriptor =
-            getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(14);
           internal_static_CSUnlimitedGo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSUnlimitedGo_descriptor,
               new java.lang.String[] { });
           internal_static_SCUnlimitedGo_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(15);
           internal_static_SCUnlimitedGo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUnlimitedGo_descriptor,
-              new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "Beans", "Target", });
+              new java.lang.String[] { "Pass", "Map", "Time", "Speed", "Start", "End", "Beans", "Star1", "Star2", "Star3", "Star4", "Energy", });
           internal_static_CSUnlimitedFinish_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(16);
           internal_static_CSUnlimitedFinish_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSUnlimitedFinish_descriptor,
-              new java.lang.String[] { "Success", "Route", });
+              new java.lang.String[] { "Pass", "Success", "Route", });
           internal_static_SCUnlimitedFinish_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_SCUnlimitedFinish_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUnlimitedFinish_descriptor,
               new java.lang.String[] { "OpenPass", "Success", });
           internal_static_CSMatching_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_CSMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSMatching_descriptor,
               new java.lang.String[] { });
           internal_static_SCMatching_descriptor =
-            getDescriptor().getMessageTypes().get(17);
+            getDescriptor().getMessageTypes().get(19);
           internal_static_SCMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatching_descriptor,
               new java.lang.String[] { });
           internal_static_CSCancelMatching_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_CSCancelMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSCancelMatching_descriptor,
               new java.lang.String[] { });
           internal_static_SCCancelMatching_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_SCCancelMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCCancelMatching_descriptor,
               new java.lang.String[] { });
           internal_static_SCMatchingSuccess_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(22);
           internal_static_SCMatchingSuccess_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatchingSuccess_descriptor,
               new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "OtherInfos", "Beans", });
           internal_static_PBOtherInfo_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_PBOtherInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBOtherInfo_descriptor,
               new java.lang.String[] { "UserId", "UserName", "Start", "End", });
           internal_static_SCMatchingFail_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_SCMatchingFail_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatchingFail_descriptor,
               new java.lang.String[] { });
           internal_static_SCBegin_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_SCBegin_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCBegin_descriptor,
               new java.lang.String[] { });
           internal_static_CSMove_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_CSMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSMove_descriptor,
               new java.lang.String[] { "PosX", "PosY", "Dir", "Speed", });
           internal_static_SCMove_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_SCMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMove_descriptor,
               new java.lang.String[] { });
           internal_static_SCUserMove_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_SCUserMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUserMove_descriptor,
               new java.lang.String[] { "UserMoveInfos", });
           internal_static_PBUserMoveInfo_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(29);
           internal_static_PBUserMoveInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBUserMoveInfo_descriptor,
               new java.lang.String[] { "UserId", "PosX", "PosY", "Dir", "Speed", "Frame", });
           internal_static_CSEatBean_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(30);
           internal_static_CSEatBean_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSEatBean_descriptor,
               new java.lang.String[] { "BeanPos", });
           internal_static_SCEatBean_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_SCEatBean_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCEatBean_descriptor,
               new java.lang.String[] { });
           internal_static_SCSendEatBean_descriptor =
-            getDescriptor().getMessageTypes().get(30);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_SCSendEatBean_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCSendEatBean_descriptor,
               new java.lang.String[] { "Beans", });
           internal_static_PBEatBeanInfo_descriptor =
-            getDescriptor().getMessageTypes().get(31);
+            getDescriptor().getMessageTypes().get(33);
           internal_static_PBEatBeanInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBEatBeanInfo_descriptor,
               new java.lang.String[] { "UserId", "BeanPos", });
           internal_static_CSArrived_descriptor =
-            getDescriptor().getMessageTypes().get(32);
+            getDescriptor().getMessageTypes().get(34);
           internal_static_CSArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSArrived_descriptor,
               new java.lang.String[] { "Pos", });
           internal_static_SCArrived_descriptor =
-            getDescriptor().getMessageTypes().get(33);
+            getDescriptor().getMessageTypes().get(35);
           internal_static_SCArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCArrived_descriptor,
               new java.lang.String[] { });
           internal_static_SCUserArrived_descriptor =
-            getDescriptor().getMessageTypes().get(34);
+            getDescriptor().getMessageTypes().get(36);
           internal_static_SCUserArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUserArrived_descriptor,
               new java.lang.String[] { "UserId", });
           internal_static_SCGameOver_descriptor =
-            getDescriptor().getMessageTypes().get(35);
+            getDescriptor().getMessageTypes().get(37);
           internal_static_SCGameOver_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCGameOver_descriptor,
               new java.lang.String[] { "OverType", "UserInfos", });
           internal_static_PBGameOverUserInfo_descriptor =
-            getDescriptor().getMessageTypes().get(36);
+            getDescriptor().getMessageTypes().get(38);
           internal_static_PBGameOverUserInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBGameOverUserInfo_descriptor,
               new java.lang.String[] { "UserId", "UserName", "Rank", "Score", "Arrived", });
           internal_static_CSRoomHeart_descriptor =
-            getDescriptor().getMessageTypes().get(37);
+            getDescriptor().getMessageTypes().get(39);
           internal_static_CSRoomHeart_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSRoomHeart_descriptor,
               new java.lang.String[] { });
           internal_static_SCRoomHeart_descriptor =
-            getDescriptor().getMessageTypes().get(38);
+            getDescriptor().getMessageTypes().get(40);
           internal_static_SCRoomHeart_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCRoomHeart_descriptor,
               new java.lang.String[] { });
           internal_static_CSSendWalkingRoute_descriptor =
-            getDescriptor().getMessageTypes().get(39);
+            getDescriptor().getMessageTypes().get(41);
           internal_static_CSSendWalkingRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSSendWalkingRoute_descriptor,
               new java.lang.String[] { "Route", });
           internal_static_SCSendWalkingRoute_descriptor =
-            getDescriptor().getMessageTypes().get(40);
+            getDescriptor().getMessageTypes().get(42);
           internal_static_SCSendWalkingRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCSendWalkingRoute_descriptor,
               new java.lang.String[] { });
           internal_static_CSCommon_descriptor =
-            getDescriptor().getMessageTypes().get(41);
+            getDescriptor().getMessageTypes().get(43);
           internal_static_CSCommon_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSCommon_descriptor,
               new java.lang.String[] { "Route", });
           internal_static_SCCommon_descriptor =
-            getDescriptor().getMessageTypes().get(42);
+            getDescriptor().getMessageTypes().get(44);
           internal_static_SCCommon_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCCommon_descriptor,

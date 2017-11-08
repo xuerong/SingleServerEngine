@@ -1,19 +1,28 @@
 package com.migong.entity;
 
+import com.mm.engine.framework.control.ServiceHelper;
 import com.mm.engine.framework.data.persistence.orm.annotation.DBEntity;
+import com.sys.SysPara;
+import org.apache.commons.lang.time.DateUtils;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * Created by Administrator on 2017/9/21.
+ * userId,unlimitedPass,unlimitedStar,starCount(启动的时候校验一下),vip,ladderScore
  */
 @DBEntity(tableName = "userMiGong",pks = {"userId"})
 public class UserMiGong implements Serializable {
     private String userId;
-    private int level; // 当前等级
-    private int pass; // 当前关卡
-    private int score;
-    private int passUnlimited; // 无线关卡关数
+    private int unlimitedPass; // 无线关卡关数
+    private int unlimitedStar; // 无线关卡星数
+    private int pass; // 推图关卡
+    private int starCount; // 推图星数
+    private int vip; // vip等级
+    private int ladderScore; // 天梯分数
+    private int energy; // 精力
+    private long energyUpdateTime; // 精力刷新时间
 
     public String getUserId() {
         return userId;
@@ -23,12 +32,20 @@ public class UserMiGong implements Serializable {
         this.userId = userId;
     }
 
-    public int getLevel() {
-        return level;
+    public int getUnlimitedPass() {
+        return unlimitedPass;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setUnlimitedPass(int unlimitedPass) {
+        this.unlimitedPass = unlimitedPass;
+    }
+
+    public int getUnlimitedStar() {
+        return unlimitedStar;
+    }
+
+    public void setUnlimitedStar(int unlimitedStar) {
+        this.unlimitedStar = unlimitedStar;
     }
 
     public int getPass() {
@@ -39,19 +56,43 @@ public class UserMiGong implements Serializable {
         this.pass = pass;
     }
 
-    public int getScore() {
-        return score;
+    public int getStarCount() {
+        return starCount;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setStarCount(int starCount) {
+        this.starCount = starCount;
     }
 
-    public int getPassUnlimited() {
-        return passUnlimited;
+    public int getVip() {
+        return vip;
     }
 
-    public void setPassUnlimited(int passUnlimited) {
-        this.passUnlimited = passUnlimited;
+    public void setVip(int vip) {
+        this.vip = vip;
+    }
+
+    public int getLadderScore() {
+        return ladderScore;
+    }
+
+    public void setLadderScore(int ladderScore) {
+        this.ladderScore = ladderScore;
+    }
+
+    public long getEnergyUpdateTime() {
+        return energyUpdateTime;
+    }
+
+    public void setEnergyUpdateTime(long energyUpdateTime) {
+        this.energyUpdateTime = energyUpdateTime;
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
     }
 }

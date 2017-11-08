@@ -132,6 +132,7 @@ public class MultiMiGongRoom extends MiGongRoom {
         MiGongPB.SCGameOver.Builder overBuilder = MiGongPB.SCGameOver.newBuilder();
         overBuilder.setOverType(overType.ordinal());
         for(RoomUser ru : roomUsers.values()){
+            // todo 调整天梯积分
             MiGongPB.PBGameOverUserInfo.Builder userBuilder = MiGongPB.PBGameOverUserInfo.newBuilder();
             userBuilder.setUserId(ru.getSession().getAccountId());
             userBuilder.setScore(ru.getScore());

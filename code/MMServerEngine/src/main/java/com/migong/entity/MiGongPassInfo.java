@@ -17,11 +17,8 @@ public class MiGongPassInfo {
     private int time;
     private int size;
     private int door;
-    private int difficulty;
-    private int level;
     private int pass;
     private Bean[] beans; // 豆子
-    private int target; // 吃豆子的目标
     private Timestamp startTime; // 开始时间
 
     public CreateMap getCreateMap() {
@@ -64,13 +61,6 @@ public class MiGongPassInfo {
         this.time = time;
     }
 
-    public int getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
 
     public int getSize() {
         return size;
@@ -88,13 +78,6 @@ public class MiGongPassInfo {
         this.door = door;
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
 
     public int getPass() {
         return pass;
@@ -112,13 +95,6 @@ public class MiGongPassInfo {
         this.beans = beans;
     }
 
-    public int getTarget() {
-        return target;
-    }
-
-    public void setTarget(int target) {
-        this.target = target;
-    }
 
     public Timestamp getStartTime() {
         return startTime;

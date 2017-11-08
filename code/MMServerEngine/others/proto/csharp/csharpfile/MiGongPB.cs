@@ -21,33 +21,37 @@ namespace Example
     /// <para>推图/////////////////////////////////////</para>
     /// <para> 进入游戏时，获取迷宫的配置，和当前所处于的关卡</para>
     /// </summary>
+    public partial class CSBaseInfo
+    {
+    }
+
+    public partial class SCBaseInfo
+    {
+        public int Energy { get; set; }
+
+    }
+
     public partial class CSGetMiGongLevel
     {
     }
 
     public partial class SCGetMiGongLevel
     {
-        public List<int> PassCountInLevel { get; set; }
-
-        /// <summary> 配置的，各个level对应的关卡数量</summary>
-        public int OpenLevel { get; set; }
-
-        /// <summary> 已经开启的leve</summary>
-        public int OpenPass { get; set; }
+        public List<int> StarInLevel { get; set; }
 
     }
 
     /// <summary> 获取迷宫</summary>
     public partial class CSGetMiGongMap
     {
-        public int Level { get; set; }
-
         public int Pass { get; set; }
 
     }
 
     public partial class SCGetMiGongMap
     {
+        public int Pass { get; set; }
+
         public List<int> Map { get; set; }
 
         public int Time { get; set; }
@@ -65,7 +69,19 @@ namespace Example
         public List<Example.PBBeanInfo> Beans { get; set; }
 
         /// <summary> 豆子</summary>
-        public int Target { get; set; }
+        public int Star1 { get; set; }
+
+        /// <summary> 一星目标分数</summary>
+        public int Star2 { get; set; }
+
+        /// <summary> 二星目标分数</summary>
+        public int Star3 { get; set; }
+
+        /// <summary> 三星目标分数</summary>
+        public int Star4 { get; set; }
+
+        /// <summary> 四星目标分数</summary>
+        public int Energy { get; set; }
 
     }
 
@@ -82,8 +98,6 @@ namespace Example
     /// <summary> 成功或失败 :</summary>
     public partial class CSPassFinish
     {
-        public int Level { get; set; }
-
         public int Pass { get; set; }
 
         public int Success { get; set; }
@@ -127,6 +141,9 @@ namespace Example
         public int Pass { get; set; }
 
         /// <summary> 关卡数</summary>
+        public int Star { get; set; }
+
+        /// <summary> 无线关卡已经有的星数</summary>
         public int Rank { get; set; }
 
     }
@@ -142,6 +159,9 @@ namespace Example
         public int Pass { get; set; }
 
         /// <summary> 关卡数</summary>
+        public int Star { get; set; }
+
+        /// <summary> 星数</summary>
         public int Rank { get; set; }
 
     }
@@ -152,6 +172,9 @@ namespace Example
 
     public partial class SCUnlimitedGo
     {
+        public int Pass { get; set; }
+
+        /// <summary> 关卡数</summary>
         public List<int> Map { get; set; }
 
         public int Time { get; set; }
@@ -169,13 +192,28 @@ namespace Example
         public List<Example.PBBeanInfo> Beans { get; set; }
 
         /// <summary> 豆子的位置</summary>
-        public int Target { get; set; }
+        public int Star1 { get; set; }
+
+        /// <summary> 一星目标分数</summary>
+        public int Star2 { get; set; }
+
+        /// <summary> 二星目标分数</summary>
+        public int Star3 { get; set; }
+
+        /// <summary> 三星目标分数</summary>
+        public int Star4 { get; set; }
+
+        /// <summary> 四星目标分数</summary>
+        public int Energy { get; set; }
 
     }
 
     /// <summary> 成功或失败 :</summary>
     public partial class CSUnlimitedFinish
     {
+        public int Pass { get; set; }
+
+        /// <summary> 关卡数</summary>
         public int Success { get; set; }
 
         public List<int> Route { get; set; }

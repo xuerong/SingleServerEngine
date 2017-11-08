@@ -35,7 +35,7 @@ public class MiGongRank {
     private Comparator<UserMiGong> unlimitedRankComparator  =new Comparator<UserMiGong>() {
         @Override
         public int compare(UserMiGong o1, UserMiGong o2) {
-            return o2.getPassUnlimited() - o1.getPassUnlimited();
+            return o2.getUnlimitedPass() - o1.getUnlimitedPass();
         }
     };
 
@@ -43,11 +43,11 @@ public class MiGongRank {
         rankService.createRank(UNLIMITED_RANK);
         List<UserMiGong> userMiGongs = dataService.selectList(UserMiGong.class,"");
         for(UserMiGong userMiGong : userMiGongs){
-            if(userMiGong.getPassUnlimited() > 0) {
+            if(userMiGong.getUnlimitedPass() > 0) {
                 int id = idCreator.getAndIncrement();
                 uidToId.put(userMiGong.getUserId(), id);
                 idToUid.put(id,userMiGong.getUserId());
-                rankService.put(UNLIMITED_RANK,id,userMiGong.getPassUnlimited());
+                rankService.put(UNLIMITED_RANK,id,userMiGong.getUnlimitedPass());
             }
         }
         frontCache = getFront(FRONT_CACHE_COUNT);
@@ -55,7 +55,7 @@ public class MiGongRank {
 
     public void putUnlimited(UserMiGong userMiGong){
         String userId = userMiGong.getUserId();
-        if(userMiGong.getPassUnlimited() <= 0){
+        if(userMiGong.getUnlimitedPass() <= 0){
             return;
         }
         Integer id = uidToId.get(userId);
@@ -68,12 +68,12 @@ public class MiGongRank {
                 id = old;
             }
         }
-        rankService.put(UNLIMITED_RANK,id,userMiGong.getPassUnlimited());
+        rankService.put(UNLIMITED_RANK,id,userMiGong.getUnlimitedPass());
         //
         if(frontCache.size() < FRONT_CACHE_COUNT && !uidToId.containsKey(userId)){
             frontCache.add(userMiGong);
             frontCache.sort(unlimitedRankComparator);
-        }else if(frontCache.get(frontCache.size()-1).getPassUnlimited() < userMiGong.getPassUnlimited()){
+        }else if(frontCache.get(frontCache.size()-1).getUnlimitedPass() < userMiGong.getUnlimitedPass()){
             frontCache.remove(frontCache.size()-1);
             frontCache.add(userMiGong);
             frontCache.sort(unlimitedRankComparator);

@@ -8,21 +8,21 @@ import com.mm.engine.framework.control.annotation.Request;
 import com.mm.engine.framework.control.annotation.Service;
 import com.mm.engine.framework.control.annotation.Updatable;
 import com.mm.engine.framework.control.event.EventData;
-import com.mm.engine.framework.control.room.Room;
 import com.mm.engine.framework.data.DataService;
 import com.mm.engine.framework.data.entity.account.Account;
 import com.mm.engine.framework.data.entity.account.LogoutEventData;
 import com.mm.engine.framework.data.entity.account.sendMessage.SendMessageService;
 import com.mm.engine.framework.data.entity.session.Session;
+import com.mm.engine.framework.data.sysPara.SysParaService;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.code.RetPacketImpl;
 import com.mm.engine.framework.security.exception.ToClientException;
 import com.mm.engine.framework.server.SysConstantDefine;
 import com.protocol.MiGongOpcode;
 import com.protocol.MiGongPB;
-import com.table.MiGongLevel;
-import org.hq.rank.service.IRankService;
-import org.hq.rank.service.RankService;
+import com.sys.SysPara;
+import com.table.MiGongPass;
+import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,34 +44,21 @@ import java.util.concurrent.*;
  *
  * 道具：加速，瞬移，提示一定路段，
  *
- * public static final int CSGetMiGongLevel = 12001;
- public static final int SCGetMiGongLevel = 12002;
- public static final int CSGetMiGongMap = 12003;
- public static final int SCGetMiGongMap = 12004;
- public static final int CSPassFinish = 12005;
- public static final int SCPassFinish = 12006;
- public static final int CSUseItem = 12007;
- public static final int SCUseItem = 12008;
- public static final int CSMatching = 12009;
- public static final int SCMatching = 12010;
- public static final int SCMatchingSuccess = 12011;
- public static final int PBOtherInfo = 12012;
- public static final int SCMatchingFail = 12013;
- public static final int SCBegin = 12014;
- public static final int CSMove = 12015;
- public static final int SCMove = 12016;
- public static final int SCUserMove = 12017;
- public static final int CSArrived = 12018;
- public static final int SCArrived = 12019;
- public static final int SCUserArrived = 12020;
- public static final int SCGameOver = 12021;
- public static final int PBGameOverUserInfo = 12022;
- public static final int CSRoomHeart = 12023;
- public static final int SCRoomHeart = 12024;
- public static final int CSSendWalkingRoute = 12025;
- public static final int SCSendWalkingRoute = 12026;
- public static final int CSCommon = 12027;
- public static final int SCCommon = 12028;
+ *
+ *
+ * 后续vip可以从如下几个点做：速度，体力，道具
+ * 数据设计：
+ * 系统配数：每日精力，四个星级的精力，无尽版速度，天梯速度
+ * 配数：
+ * 关卡：id,size,time,speed,bean1,bean5,bean10,star1,star2,star3,star4,energy,reward(预留奖励道具)
+ * 天梯：title,ladderScore
+ * vip：speed,energy,item,energyRecovery
+ *
+ * 数据库：
+ * 玩家：userId,unlimitedPass,unlimitedStar,starCount(启动的时候校验一下),vip,ladderScore,energy      ：无尽版排行按照unlimitedPass-unlimitedStar排行
+ * 推图（已经过的）：userId,passId,star,useTime,score：重新打的时候，存储条件：星级大，或者星级相等分数大
+ *
+ *
  */
 @Service(init = "init")
 public class MiGongService {
@@ -82,6 +69,7 @@ public class MiGongService {
     private MiGongRank miGongRank;
     private DataService dataService;
     private SendMessageService sendMessageService;
+    private SysParaService sysParaService;
     /**
      * 这个是玩家获取迷宫后缓存的该迷宫信息，在玩家过关的时候用来校验是否正常过关。同时在如下几种情况下要清除：
      * 1、玩家断开连接
@@ -111,13 +99,34 @@ public class MiGongService {
      */
 
 
-    private final Map<Integer,MiGongLevel> levelMap = new HashMap<>();
+    private final Map<Integer,MiGongPass> passMap = new HashMap<>();
     public void init(){
         System.out.println("MiGongService init");
-        for(MiGongLevel miGongLevel : MiGongLevel.datas){
-            levelMap.put(miGongLevel.getLevel(),miGongLevel);
+        for(MiGongPass miGongPass : MiGongPass.datas){
+            passMap.put(miGongPass.getId(), miGongPass);
         }
 
+    }
+    @Request(opcode = MiGongOpcode.CSBaseInfo)
+    public RetPacket getbaseInfo(Object clientData, Session session) throws Throwable{
+        UserMiGong userMiGong = get(session.getAccountId());
+        MiGongPB.SCBaseInfo.Builder builder = MiGongPB.SCBaseInfo.newBuilder();
+        builder.setEnergy(getEnergyByRefresh(userMiGong));
+        return new RetPacketImpl(MiGongOpcode.SCBaseInfo, builder.build().toByteArray());
+    }
+
+    /**
+     * 获取玩家精力
+     * @param userMiGong
+     * @return 玩家精力
+     */
+    public int getEnergyByRefresh(UserMiGong userMiGong){
+        if(!DateUtils.isSameDay(new Timestamp(userMiGong.getEnergyUpdateTime()),new Timestamp(System.currentTimeMillis()))){
+            userMiGong.setEnergy(sysParaService.getInt(SysPara.energyPerDay));
+            userMiGong.setEnergyUpdateTime(System.currentTimeMillis());
+            dataService.update(userMiGong);
+        }
+        return userMiGong.getEnergy();
     }
     @Request(opcode = MiGongOpcode.CSGetMiGongLevel)
     public RetPacket getMiGongLevel(Object clientData, Session session) throws Throwable{
@@ -125,10 +134,9 @@ public class MiGongService {
         UserMiGong userMiGong = get(session.getAccountId());
         //
         MiGongPB.SCGetMiGongLevel.Builder builder = MiGongPB.SCGetMiGongLevel.newBuilder();
-        builder.setOpenLevel(userMiGong.getLevel());
-        builder.setOpenPass(userMiGong.getPass());
-        for(MiGongLevel miGongLevel : MiGongLevel.datas){
-            builder.addPassCountInLevel(miGongLevel.getPass());
+        List<UserPass> userPasses =  dataService.selectList(UserPass.class,"userId=?",session.getAccountId());
+        for (UserPass userPass :userPasses) {
+            builder.addStarInLevel(userPass.getStar());
         }
         return new RetPacketImpl(MiGongOpcode.SCGetMiGongLevel, builder.build().toByteArray());
     }
@@ -138,19 +146,17 @@ public class MiGongService {
         MiGongPB.CSGetMiGongMap getMiGongMap = MiGongPB.CSGetMiGongMap.parseFrom((byte[])clientData);
         UserMiGong userMiGong = get(session.getAccountId());
         // 当前等级和关卡
-        checkLevelAndPass(getMiGongMap.getLevel(),getMiGongMap.getPass(),userMiGong);
+        checkLevelAndPass(getMiGongMap.getPass(),userMiGong);
         if(miGongPassInfoMap.containsKey(session.getAccountId())){
             miGongPassInfoMap.remove(session.getAccountId());
             log.error("do CSGetMiGongMap but miGongPassInfoMap has data,accountId = {}",session.getAccountId());
         }
         //
-        MiGongLevel miGongLevel = levelMap.get(getMiGongMap.getLevel());
+        MiGongPass miGongPass = passMap.get(getMiGongMap.getPass());
         MiGongPassInfo miGongPassInfo = new MiGongPassInfo();
-        miGongPassInfo.setLevel(getMiGongMap.getLevel());
         miGongPassInfo.setPass(getMiGongMap.getPass());
-        miGongPassInfo.setDifficulty(miGongLevel.getDifficulty());
         miGongPassInfo.setStartTime(new Timestamp(System.currentTimeMillis()));
-        miGongPassInfo = miGongParamsByDifficulty(miGongPassInfo);
+        miGongPassInfo = miGongParamsByDifficulty(miGongPassInfo,miGongPass.getSize(),miGongPass.getTime(),miGongPass.getSpeed()); // 这个方法后面直接去掉
         MiGongPB.SCGetMiGongMap.Builder builder = MiGongPB.SCGetMiGongMap.newBuilder();
 
         CreateMap myMap=miGongPassInfo.getCreateMap();							//地图
@@ -172,7 +178,12 @@ public class MiGongService {
             beanBuilder.setScore(bean.getScore());
             builder.addBeans(beanBuilder);
         }
-        builder.setTarget(miGongPassInfo.getTarget());
+        builder.setEnergy(miGongPass.getEnergy());
+        builder.setPass(miGongPass.getId());
+        builder.setStar1(miGongPass.getStar1());
+        builder.setStar2(miGongPass.getStar2());
+        builder.setStar3(miGongPass.getStar3());
+        builder.setStar4(miGongPass.getStar4());
 
         System.out.println("miGongPassInfo.getEnd():"+miGongPassInfo.getEnd());
         builder.setEnd(miGongPassInfo.getEnd().toInt(miGongPassInfo.getSize()));
@@ -195,11 +206,11 @@ public class MiGongService {
         MiGongPB.CSPassFinish passFinish = MiGongPB.CSPassFinish.parseFrom((byte[])clientData);
         // 校验关卡
         MiGongPassInfo miGongPassInfo = miGongPassInfoMap.remove(session.getAccountId());
-        if(miGongPassInfo == null || miGongPassInfo.getLevel() != passFinish.getLevel() || miGongPassInfo.getPass() != passFinish.getPass()){
+        if(miGongPassInfo == null || miGongPassInfo.getPass() != passFinish.getPass()){
             throw new ToClientException("Invalid params");
         }
         UserMiGong userMiGong = get(session.getAccountId());
-        checkLevelAndPass(passFinish.getLevel(),passFinish.getPass(),userMiGong);
+        checkLevelAndPass(passFinish.getPass(),userMiGong);
         boolean isSuccess = false;
         if(passFinish.getSuccess() > 0){
             // 校验
@@ -208,17 +219,72 @@ public class MiGongService {
         }
         //
         if(isSuccess){
-            if(passFinish.getLevel() > userMiGong.getLevel() || passFinish.getPass() > userMiGong.getPass()){
-                userMiGong.setLevel(passFinish.getLevel());
-                userMiGong.setPass(passFinish.getPass());
-                dataService.update(userMiGong);
+            // 根据路径和配置获取星级，，是否插入？是否更新？，更新userMiGong星级和关卡，
+            MiGongPass miGongPass = passMap.get(miGongPassInfo.getPass());
+            int allScore = calScore(passFinish.getRouteList(),miGongPassInfo);
+            int star = calStar(allScore,miGongPass);
+            if(star > 0){
+                if(miGongPassInfo.getPass() > userMiGong.getPass()){
+                    userMiGong.setPass(passFinish.getPass());
+                    userMiGong.setStarCount(userMiGong.getStarCount() + star);
+                    dataService.update(userMiGong);
+                    UserPass userPass = new UserPass();
+                    userPass.setUserId(session.getAccountId());
+                    userPass.setPassId(miGongPassInfo.getPass());
+                    userPass.setStar(star);
+                    userPass.setScore(allScore);
+                    userPass.setUseTime((int)(System.currentTimeMillis() - miGongPassInfo.getStartTime().getTime())/1000);
+                    dataService.insert(userPass);
+                }else{
+                    UserPass userPass = dataService.selectObject(UserPass.class,"userId=? and passId=?",session.getAccountId(),miGongPassInfo.getPass());
+                    if(star > userPass.getStar()){
+                        userMiGong.setStarCount(userMiGong.getStarCount() + (star - userPass.getStar()));
+                        dataService.update(userMiGong);
+                    }
+                    if(star > userPass.getStar() || (star == userPass.getStar() && allScore > userPass.getScore())){
+                        userPass.setScore(allScore);
+                        userPass.setStar(star);
+                        dataService.update(userPass);
+                    }
+                }
+            }else{
+                isSuccess = false;
             }
+
         }
         MiGongPB.SCPassFinish.Builder builder = MiGongPB.SCPassFinish.newBuilder();
-        builder.setOpenLevel(userMiGong.getLevel());
+        builder.setOpenLevel(1);
         builder.setOpenPass(userMiGong.getPass());
         builder.setSuccess(isSuccess?1:0);
         return new RetPacketImpl(MiGongOpcode.SCGetMiGongLevel, builder.build().toByteArray());
+    }
+    private int calScore(List<Integer> routes,MiGongPassInfo miGongPassInfo){
+        Set<Integer> posForBean = new HashSet<>();
+        for(Integer pos : routes){
+            posForBean.add(pos);
+        }
+        int size = miGongPassInfo.getSize();
+        int allScore = 0;
+        for(Bean bean : miGongPassInfo.getBeans()){
+            posForBean.contains(bean.getX() * size + bean.getY());
+            allScore += bean.getScore();
+        }
+        return allScore;
+    }
+    private int calStar(int score,MiGongPass miGongPass){
+        return calStar(score,miGongPass.getStar1(),miGongPass.getStar2(),miGongPass.getStar3(),miGongPass.getStar4());
+    }
+    private int calStar(int score,int star1,int star2,int star3,int star4){
+        if(score < star1){
+            return 0;
+        }else if(score < star2){
+            return 1;
+        }else if(score < star3){
+            return 2;
+        }else if(score < star4){
+            return 3;
+        }
+        return 4;
     }
 
     @Request(opcode = MiGongOpcode.CSUnlimitedInfo)
@@ -226,14 +292,16 @@ public class MiGongService {
         // todo 判断无尽模式是否打开，
         UserMiGong userMiGong = get(session.getAccountId());
         MiGongPB.SCUnlimitedInfo.Builder builder = MiGongPB.SCUnlimitedInfo.newBuilder();
-        builder.setPass(userMiGong.getPassUnlimited());
+        builder.setPass(userMiGong.getUnlimitedPass());
+        builder.setStar(userMiGong.getUnlimitedStar());
         builder.setRank(miGongRank.getRank(userMiGong.getUserId()));// 排行系统
 
         List<UserMiGong> rank = miGongRank.getFront();
         int i = 1;
         for(UserMiGong rankMiGong : rank){
             MiGongPB.PBUnlimitedRankInfo.Builder info = MiGongPB.PBUnlimitedRankInfo.newBuilder();
-            info.setPass(rankMiGong.getPassUnlimited());
+            info.setPass(rankMiGong.getUnlimitedPass());
+            info.setStar(rankMiGong.getUnlimitedStar());
             info.setRank(i++);
             info.setUserId(rankMiGong.getUserId());
             info.setUserName(dataService.selectObject(Account.class,"id=?",rankMiGong.getUserId()).getName());
@@ -247,9 +315,8 @@ public class MiGongService {
         UserMiGong userMiGong = get(session.getAccountId());
 
         MiGongPassInfo miGongPassInfo = new MiGongPassInfo();
-        miGongPassInfo.setDifficulty(1); // 无尽模式设置难度
         miGongPassInfo.setStartTime(new Timestamp(System.currentTimeMillis()));
-        miGongPassInfo = miGongParamsByDifficulty(miGongPassInfo);
+        miGongPassInfo = miGongParamsByDifficulty(miGongPassInfo,20,400,sysParaService.getInt(SysPara.unlimitedSpeed));
         MiGongPB.SCUnlimitedGo.Builder builder = MiGongPB.SCUnlimitedGo.newBuilder();
 
         CreateMap myMap=miGongPassInfo.getCreateMap();							//地图
@@ -261,7 +328,6 @@ public class MiGongService {
             }
         }
         builder.addAllMap(integers);
-        builder.setTarget(miGongPassInfo.getTarget());
         builder.setSpeed(miGongPassInfo.getSpeed());
         builder.setEnd(miGongPassInfo.getEnd().toInt(miGongPassInfo.getSize()));
         builder.setStart(miGongPassInfo.getStart().toInt(miGongPassInfo.getSize()));
@@ -272,6 +338,12 @@ public class MiGongService {
             beanBuilder.setPos(bean.toInt(miGongPassInfo.getSize()));
             builder.addBeans(beanBuilder);
         }
+        builder.setStar1(10);// todo 4Stars
+        builder.setStar2(20);
+        builder.setStar3(30);
+        builder.setStar4(40);
+        builder.setPass(userMiGong.getUnlimitedPass() + 1);
+        builder.setEnergy(5);// todo 精力，系统参数
 
         miGongPassInfoMap.put(session.getAccountId(),miGongPassInfo);
 
@@ -296,12 +368,19 @@ public class MiGongService {
         }
         //
         if(isSuccess){
-            userMiGong.setPassUnlimited(userMiGong.getPassUnlimited()+1);
-            dataService.update(userMiGong);
-            miGongRank.putUnlimited(userMiGong);
+            int allScore = calScore(unlimitedFinish.getRouteList(),miGongPassInfo);
+            int star = calStar(allScore,10,20,30,40);
+            if(star > 0){
+                userMiGong.setUnlimitedPass(userMiGong.getUnlimitedPass()+1);
+                userMiGong.setUnlimitedStar(userMiGong.getUnlimitedStar() + star);
+                dataService.update(userMiGong);
+                miGongRank.putUnlimited(userMiGong);
+            }else{
+                isSuccess = false;
+            }
         }
         MiGongPB.SCUnlimitedFinish.Builder builder = MiGongPB.SCUnlimitedFinish.newBuilder();
-        builder.setOpenPass(userMiGong.getPassUnlimited());
+        builder.setOpenPass(userMiGong.getUnlimitedPass());
         builder.setSuccess(isSuccess?1:0);
         return new RetPacketImpl(MiGongOpcode.SCUnlimitedFinish, builder.build().toByteArray());
     }
@@ -324,26 +403,17 @@ public class MiGongService {
     }
     /**
      * 检车对应关卡是否可以进入
-     * @param level
      * @param pass
      * @param userMiGong
      * @throws Throwable
      */
-    private void checkLevelAndPass(int level,int pass,UserMiGong userMiGong) throws Throwable{
-        MiGongLevel miGongLevel = levelMap.get(level);
-        if(miGongLevel == null || miGongLevel.getPass() < pass || pass < 1){
+    private void checkLevelAndPass(int pass,UserMiGong userMiGong) throws Throwable{
+        MiGongPass miGongPass = passMap.get(pass);
+        if(miGongPass == null || pass < 1){
             throw new ToClientException("Invalid params");
         }
-        if(level >= userMiGong.getLevel()){
-            if(level == userMiGong.getLevel() && pass > userMiGong.getPass()+1){
-                throw new ToClientException("Invalid params");
-            }
-            if(level > userMiGong.getLevel()){
-                if(level != userMiGong.getLevel() +1 || pass != 1 ||
-                        (userMiGong.getLevel() >0 && userMiGong.getPass() < levelMap.get(userMiGong.getLevel()).getPass())){
-                    throw new ToClientException("Invalid params");
-                }
-            }
+        if(pass - userMiGong.getPass() > 1){
+            throw new ToClientException("Invalid params");
         }
     }
     /**
@@ -355,13 +425,12 @@ public class MiGongService {
      * @param miGongPassInfo
      * @return size,door,time(s),speed
      */
-    private MiGongPassInfo miGongParamsByDifficulty(MiGongPassInfo miGongPassInfo){
-        int difficulty = miGongPassInfo.getDifficulty();
-        int size = difficulty*5+15+1;
+    private MiGongPassInfo miGongParamsByDifficulty(MiGongPassInfo miGongPassInfo,int size,int time,int speed){
+        size+=1;
         int door = 0;
         miGongPassInfo.setSize(size);
         miGongPassInfo.setDoor(door);
-        Element startElement = new Element(1,1);
+        Element startElement = new Element(1,1); // todo 开始和结束可以考虑改成随机
         miGongPassInfo.setStart(startElement);
         Element endElement = new Element(size-1,size-1);
         miGongPassInfo.setEnd(endElement);
@@ -374,13 +443,12 @@ public class MiGongService {
             int y=(int)(Math.random()*(size-2))+1;					//1---td-1
             map[x][y]=0;
         }
-        miGongPassInfo.setTime(difficulty*300);
-        miGongPassInfo.setSpeed(SPEED_DEFAULT);
+        miGongPassInfo.setTime(time);
+        miGongPassInfo.setSpeed(speed);
 
         //生成豆子的位置
-        Bean[] beans = createBeans(size);
+        Bean[] beans = createBeans(size); // todo 创建豆子pass和unlimited要根据配置
         miGongPassInfo.setBeans(beans);
-        miGongPassInfo.setTarget(beans.length - 30 + difficulty); // todo 这个难度算法后面要改
 
         return miGongPassInfo;
     }
@@ -449,7 +517,7 @@ public class MiGongService {
     public RetPacket matching(Object clientData, Session session) throws Throwable{
         UserMiGong userMiGong = get(session.getAccountId());
         // todo 该玩家没有在排队也没有在房间
-        ConcurrentLinkedQueue<RoomUser> queue = getMatchingQueue(scoreToGrade(userMiGong.getScore()));
+        ConcurrentLinkedQueue<RoomUser> queue = getMatchingQueue(scoreToGrade(userMiGong.getLadderScore()));
         queue.offer(new RoomUser(session,System.currentTimeMillis()));
         MiGongPB.SCMatching.Builder builder = MiGongPB.SCMatching.newBuilder();
         return new RetPacketImpl(MiGongOpcode.SCMatching, builder.build().toByteArray());

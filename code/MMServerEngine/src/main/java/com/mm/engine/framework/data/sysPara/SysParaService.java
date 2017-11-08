@@ -70,6 +70,9 @@ public class SysParaService {
     public String get(String key){
         return paraMap.get(key);
     }
+    public int getInt(String key){
+        return Integer.parseInt(paraMap.get(key));
+    }
 
     /**
      * 修改参数，返回put之前的参数，并异步更新其它服务器的对应参数

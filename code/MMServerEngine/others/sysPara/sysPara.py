@@ -30,7 +30,7 @@ class Properties(object):
                     strs = line.split('=')
                     strs[1]= line[len(strs[0])+1:]
                     self.__getDict(strs[0].strip(),self.properties,strs[1].strip())
-        except Exception, e:
+        except Exception(e) :
             raise e
         else:
             pro_file.close()
@@ -42,12 +42,12 @@ def createJavaFile(name,content):
     #删除旧文件
     if os.path.exists(java_class_path):
     	os.remove(java_class_path)
-    newJavaFile = open(java_class_path,"wb")
+    newJavaFile = open(java_class_path,"w")
     newJavaFile.write(content)
     newJavaFile.close()
 
 dictProperties=Properties("sysPara.properties").getProperties()
-print dictProperties
+print (dictProperties)
 sb = "package com.sys;\n//Auto Generate File, Do NOT Modify!!!!!!!!!!!!!!!\npublic final class SysPara{"
 map = "\n\tpublic static java.util.Map<String,String> paras = new java.util.HashMap<String,String>(){\n\t\t{\n"
 key = "\n"
