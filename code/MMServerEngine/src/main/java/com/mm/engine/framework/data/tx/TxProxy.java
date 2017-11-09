@@ -2,6 +2,7 @@ package com.mm.engine.framework.data.tx;
 
 import com.mm.engine.framework.control.aop.AspectProxy;
 import com.mm.engine.framework.control.aop.annotation.Aspect;
+import com.mm.engine.framework.security.exception.ToClientException;
 import com.mm.engine.framework.tool.helper.BeanHelper;
 
 import java.lang.reflect.Method;
@@ -34,9 +35,13 @@ public class TxProxy extends AspectProxy {
     @Override
     public void after(Object object,Class<?> cls, Method method, Object[] params, Object result) {
         boolean success = txCacheService.after();
+
         //
         if(success){ // 没有事务或事务提交成功
 
+        }else{
+            // TODO 事务提交失败，要重新执行该事务
+//            throw new ToClientException("op fail , "+success);
         }
     }
 }

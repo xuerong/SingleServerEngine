@@ -65,12 +65,12 @@ public class RequestNettyPBEntrance extends Entrance {
         @Override
         public void channelInactive(ChannelHandlerContext ctx) throws Exception {
             super.channelInactive(ctx);
-            System.out.println("disConnect"+ctx.channel().remoteAddress().toString());
             String sessionId = ctx.channel().attr(sessionKey).get();
             if(sessionId != null) {
-                accountSysService.netDisconnect(sessionId);
+                Session session = accountSysService.netDisconnect(sessionId);
+                log.info("disConnect,ip = {},sessionId = {},userId = {}",ctx.channel().remoteAddress().toString(),sessionId,session==null?null:session.getAccountId());
             }else{
-                log.error("channelInactive , but session = "+sessionId);
+                log.error("disConnect , but session = {},ip = {}",sessionId,ctx.channel().remoteAddress().toString());
             }
         }
 
@@ -78,9 +78,9 @@ public class RequestNettyPBEntrance extends Entrance {
         public void channelRead(ChannelHandlerContext ctx, Object msg) { // (2)
             NettyPBPacket nettyPBPacket = (NettyPBPacket) msg;
 //            log.info("nettyPBPacket.getOpcode() = "+nettyPBPacket.getOpcode());
+            RetPacket retPacket = null;
             try {
                 String sessionId = ctx.channel().attr(sessionKey).get();
-                RetPacket retPacket = null;
                 if (nettyPBPacket.getOpcode() == AccountOpcode.CSLogin) { // 登陆消息
                     retPacket = accountService.login(nettyPBPacket.getOpcode(),nettyPBPacket.getData(),ctx,sessionKey);
                 }else{
@@ -109,6 +109,8 @@ public class RequestNettyPBEntrance extends Entrance {
                     log.error("",e);
                 }
                 BasePB.SCException.Builder scException = BasePB.SCException.newBuilder();
+                scException.setCsOpcode(nettyPBPacket.getOpcode());
+                scException.setScOpcode(retPacket!=null?retPacket.getOpcode():-1);
                 scException.setErrCode(errCode);
                 scException.setErrMsg(errMsg);
                 nettyPBPacket.setOpcode(BaseOpcode.SCException);
@@ -132,7 +134,8 @@ public class RequestNettyPBEntrance extends Entrance {
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) { // (4)
             // Close the connection when an exception is raised.
-            cause.printStackTrace();
+            log.warn(cause.getMessage());
+//            cause.printStackTrace();
             ctx.close();
         }
     }

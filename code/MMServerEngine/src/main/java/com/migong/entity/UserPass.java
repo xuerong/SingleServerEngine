@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by Administrator on 2017/9/21.
  * userId,passId,star,useTime,score：重新打的时候，存储条件：星级大，或者星级相等分数大
  */
-@DBEntity(tableName = "userPass",pks = {"userId,passId"})
+@DBEntity(tableName = "userPass",pks = {"userId","passId"})
 public class UserPass implements Serializable {
     private String userId;
     private int passId; // 关卡id

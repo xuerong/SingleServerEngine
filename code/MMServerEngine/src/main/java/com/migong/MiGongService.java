@@ -14,6 +14,7 @@ import com.mm.engine.framework.data.entity.account.LogoutEventData;
 import com.mm.engine.framework.data.entity.account.sendMessage.SendMessageService;
 import com.mm.engine.framework.data.entity.session.Session;
 import com.mm.engine.framework.data.sysPara.SysParaService;
+import com.mm.engine.framework.data.tx.Tx;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.code.RetPacketImpl;
 import com.mm.engine.framework.security.exception.ToClientException;
@@ -48,7 +49,7 @@ import java.util.concurrent.*;
  *
  * 后续vip可以从如下几个点做：速度，体力，道具
  * 数据设计：
- * 系统配数：每日精力，四个星级的精力，无尽版速度，天梯速度
+ * 系统配数：每日精力，四个星级的精力，无尽版速度，天梯速度，匹配等待时长，无尽版和匹配版的时长
  * 配数：
  * 关卡：id,size,time,speed,bean1,bean5,bean10,star1,star2,star3,star4,energy,reward(预留奖励道具)
  * 天梯：title,ladderScore
@@ -95,8 +96,10 @@ public class MiGongService {
      */
     ConcurrentHashMap<String,MultiMiGongRoom> userRooms = new ConcurrentHashMap<>();
     /**
-     * 房间id，房间对象
+     * 玩家状态：有状态的时候放入，无状态的时候移除（掉线，退出房间等）
+     * 这里只针对匹配，放置多个匹配
      */
+    ConcurrentHashMap<String,UserState> userStates = new ConcurrentHashMap<>();
 
 
     private final Map<Integer,MiGongPass> passMap = new HashMap<>();
@@ -112,6 +115,12 @@ public class MiGongService {
         UserMiGong userMiGong = get(session.getAccountId());
         MiGongPB.SCBaseInfo.Builder builder = MiGongPB.SCBaseInfo.newBuilder();
         builder.setEnergy(getEnergyByRefresh(userMiGong));
+        for(Map.Entry<String,String> sysPara : SysPara.paras.entrySet()){
+            MiGongPB.PBSysPara.Builder sysParaBuilder = MiGongPB.PBSysPara.newBuilder();
+            sysParaBuilder.setKey(sysPara.getKey());
+            sysParaBuilder.setValue(sysPara.getValue());
+            builder.addSysParas(sysParaBuilder);
+        }
         return new RetPacketImpl(MiGongOpcode.SCBaseInfo, builder.build().toByteArray());
     }
 
@@ -135,9 +144,12 @@ public class MiGongService {
         //
         MiGongPB.SCGetMiGongLevel.Builder builder = MiGongPB.SCGetMiGongLevel.newBuilder();
         List<UserPass> userPasses =  dataService.selectList(UserPass.class,"userId=?",session.getAccountId());
-        for (UserPass userPass :userPasses) {
-            builder.addStarInLevel(userPass.getStar());
+        if(userPasses != null) {
+            for (UserPass userPass : userPasses) {
+                builder.addStarInLevel(userPass.getStar());
+            }
         }
+        builder.setPassCount(MiGongPass.datas.length);
         return new RetPacketImpl(MiGongOpcode.SCGetMiGongLevel, builder.build().toByteArray());
     }
     @Request(opcode = MiGongOpcode.CSGetMiGongMap)
@@ -151,6 +163,7 @@ public class MiGongService {
             miGongPassInfoMap.remove(session.getAccountId());
             log.error("do CSGetMiGongMap but miGongPassInfoMap has data,accountId = {}",session.getAccountId());
         }
+        // todo 消耗精力，还有无线模式
         //
         MiGongPass miGongPass = passMap.get(getMiGongMap.getPass());
         MiGongPassInfo miGongPassInfo = new MiGongPassInfo();
@@ -178,7 +191,7 @@ public class MiGongService {
             beanBuilder.setScore(bean.getScore());
             builder.addBeans(beanBuilder);
         }
-        builder.setEnergy(miGongPass.getEnergy());
+        builder.setEnergy(getEnergyByRefresh(userMiGong)); // todo 这个是剩余精力
         builder.setPass(miGongPass.getId());
         builder.setStar1(miGongPass.getStar1());
         builder.setStar2(miGongPass.getStar2());
@@ -200,7 +213,7 @@ public class MiGongService {
         }
         return userMiGong;
     }
-
+    @Tx()
     @Request(opcode = MiGongOpcode.CSPassFinish)
     public RetPacket passFinish(Object clientData, Session session) throws Throwable{
         MiGongPB.CSPassFinish passFinish = MiGongPB.CSPassFinish.parseFrom((byte[])clientData);
@@ -225,9 +238,6 @@ public class MiGongService {
             int star = calStar(allScore,miGongPass);
             if(star > 0){
                 if(miGongPassInfo.getPass() > userMiGong.getPass()){
-                    userMiGong.setPass(passFinish.getPass());
-                    userMiGong.setStarCount(userMiGong.getStarCount() + star);
-                    dataService.update(userMiGong);
                     UserPass userPass = new UserPass();
                     userPass.setUserId(session.getAccountId());
                     userPass.setPassId(miGongPassInfo.getPass());
@@ -235,6 +245,9 @@ public class MiGongService {
                     userPass.setScore(allScore);
                     userPass.setUseTime((int)(System.currentTimeMillis() - miGongPassInfo.getStartTime().getTime())/1000);
                     dataService.insert(userPass);
+                    userMiGong.setPass(passFinish.getPass());
+                    userMiGong.setStarCount(userMiGong.getStarCount() + star);
+                    dataService.update(userMiGong);
                 }else{
                     UserPass userPass = dataService.selectObject(UserPass.class,"userId=? and passId=?",session.getAccountId(),miGongPassInfo.getPass());
                     if(star > userPass.getStar()){
@@ -266,8 +279,9 @@ public class MiGongService {
         int size = miGongPassInfo.getSize();
         int allScore = 0;
         for(Bean bean : miGongPassInfo.getBeans()){
-            posForBean.contains(bean.getX() * size + bean.getY());
-            allScore += bean.getScore();
+            if(posForBean.contains(bean.getX() * size + bean.getY())) {
+                allScore += bean.getScore();
+            }
         }
         return allScore;
     }
@@ -313,10 +327,10 @@ public class MiGongService {
     public RetPacket unlimitedGo(Object clientData, Session session) throws Throwable{
         // todo 判断无尽模式是否打开，
         UserMiGong userMiGong = get(session.getAccountId());
-
+        // todo 消耗精力
         MiGongPassInfo miGongPassInfo = new MiGongPassInfo();
         miGongPassInfo.setStartTime(new Timestamp(System.currentTimeMillis()));
-        miGongPassInfo = miGongParamsByDifficulty(miGongPassInfo,20,400,sysParaService.getInt(SysPara.unlimitedSpeed));
+        miGongPassInfo = miGongParamsByDifficulty(miGongPassInfo,10,400,sysParaService.getInt(SysPara.unlimitedSpeed));
         MiGongPB.SCUnlimitedGo.Builder builder = MiGongPB.SCUnlimitedGo.newBuilder();
 
         CreateMap myMap=miGongPassInfo.getCreateMap();							//地图
@@ -343,7 +357,7 @@ public class MiGongService {
         builder.setStar3(30);
         builder.setStar4(40);
         builder.setPass(userMiGong.getUnlimitedPass() + 1);
-        builder.setEnergy(5);// todo 精力，系统参数
+        builder.setEnergy(getEnergyByRefresh(userMiGong));// todo 精力，系统参数
 
         miGongPassInfoMap.put(session.getAccountId(),miGongPassInfo);
 
@@ -507,6 +521,10 @@ public class MiGongService {
         final LogoutEventData logoutEventData = (LogoutEventData)data.getData();
         miGongPassInfoMap.remove(logoutEventData.getSession().getAccountId());
         // todo 从Matching的queue中移除，如果是房间最后一个，移除房间
+        UserState userState = userStates.remove(logoutEventData.getSession().getAccountId());
+        if(userState != null){
+            // 不用移除queue，那个session已经失效了
+        }
     }
     /////////////////////////////////////////////////////////////联网对战
 
@@ -517,6 +535,12 @@ public class MiGongService {
     public RetPacket matching(Object clientData, Session session) throws Throwable{
         UserMiGong userMiGong = get(session.getAccountId());
         // todo 该玩家没有在排队也没有在房间
+        UserState userState = userStates.get(session.getAccountId());
+        if(userState == null || userState == UserState.None){
+            userStates.put(session.getAccountId(),UserState.Matching);
+        }else{
+            throw new ToClientException("your state is "+userState.getDescribe()+",can not march");
+        }
         ConcurrentLinkedQueue<RoomUser> queue = getMatchingQueue(scoreToGrade(userMiGong.getLadderScore()));
         queue.offer(new RoomUser(session,System.currentTimeMillis()));
         MiGongPB.SCMatching.Builder builder = MiGongPB.SCMatching.newBuilder();
@@ -576,9 +600,6 @@ public class MiGongService {
             throw new ToClientException("room is not exist");
         }
         room.userArrived(session.getAccountId());
-        if(room.isOver()){
-            userRooms.remove(room);
-        }
 
         MiGongPB.SCArrived.Builder builder = MiGongPB.SCArrived.newBuilder();
         return new RetPacketImpl(MiGongOpcode.SCEatBean, builder.build().toByteArray());
@@ -694,6 +715,8 @@ public class MiGongService {
         int index = 0;
         for(RoomUser roomUser : roomUserList){
             userRooms.put(roomUser.getSession().getAccountId(),multiMiGongRoom);
+            //
+            userStates.put(roomUser.getSession().getAccountId(),UserState.Playing);
             // 推送
 
             List<MiGongPB.PBOtherInfo> otherInfoList = new ArrayList<>();
@@ -726,6 +749,7 @@ public class MiGongService {
     public void multiRoomOver(MultiMiGongRoom room){
         for(RoomUser roomUser : room.getRoomUsers().values()){
             userRooms.remove(roomUser.getSession().getAccountId());
+            userStates.remove(roomUser.getSession().getAccountId());
         }
     }
 
@@ -741,6 +765,20 @@ public class MiGongService {
     // 分数转段位，首先段位不能太多
     private int scoreToGrade(int score){
         return score/10;
+    }
+
+    enum UserState{
+        None("idle"),
+        Matching("matching"),
+        Playing("in room");
+
+        private final String describe;
+        UserState(String describe){
+            this.describe = describe;
+        }
+        public String getDescribe(){
+            return describe;
+        }
     }
 }
 

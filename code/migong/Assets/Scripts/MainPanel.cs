@@ -13,6 +13,11 @@ public class MainPanel : MonoBehaviour {
 	public GameObject uiOnline;
 
 	public GameObject ui;
+	// 系统参数
+	private Dictionary<string,string> sysParas = new Dictionary<string, string> ();
+
+	private int energy;
+
 	// Use this for initialization
 	void Start () {
 		show (uiMain);
@@ -48,7 +53,10 @@ public class MainPanel : MonoBehaviour {
 			CSUnlimitedGo unlimitedGo = new CSUnlimitedGo();
 			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSUnlimitedGo,CSUnlimitedGo.SerializeToBytes(unlimitedGo),delegate(int opcode, byte[] data) {
 				SCUnlimitedGo ret = SCUnlimitedGo.Deserialize(data);
-				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans, ret.Start, ret.End, 0, 0,null);
+				// 消耗精力
+				energy = ret.Energy;
+				int[] stars= {ret.Star1,ret.Star2,ret.Star3,ret.Star4};
+				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans, ret.Start, ret.End, ret.Pass,null,stars);
 			});
 			ui.SetActive (false);
 		});
@@ -64,6 +72,17 @@ public class MainPanel : MonoBehaviour {
 		closeButton = GameObject.Find ("main/ui/uiOnline/Canvas/close").GetComponent<Button>();
 		closeButton.onClick.AddListener (delegate() {
 			show (uiMain);
+		});
+		// 获取登陆基本信息
+		CSBaseInfo baseInfo = new CSBaseInfo();
+		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSBaseInfo, CSBaseInfo.SerializeToBytes (baseInfo), delegate(int opcode, byte[] data) {
+			SCBaseInfo ret = SCBaseInfo.Deserialize(data);
+			this.energy = ret.Energy;
+			// TODO 显示精力
+			// 系统参数
+			foreach(PBSysPara sp in ret.SysParas){
+				sysParas.Add(sp.Key,sp.Value);
+			}
 		});
 
 		// 联网对战按钮
@@ -92,8 +111,7 @@ public class MainPanel : MonoBehaviour {
 		CSGetMiGongLevel getMiGongLevel = new CSGetMiGongLevel();
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetMiGongLevel, CSGetMiGongLevel.SerializeToBytes (getMiGongLevel),delegate(int opcode, byte[] data) {
 			SCGetMiGongLevel level = SCGetMiGongLevel.Deserialize (data);
-			int openLevel = level.OpenLevel == 0? 1:level.OpenLevel;
-			int count = level.PassCountInLevel.Count;
+			int count = level.PassCount;
 			float dis = 20f;
 
 			GameObject up = Instantiate(button) as GameObject;
@@ -105,29 +123,23 @@ public class MainPanel : MonoBehaviour {
 
 			for (int i = 0; i < count; i++) {
 				up = Instantiate(button) as GameObject;
-				up.transform.parent = content.transform;
+				up.transform.SetParent(content.transform);
 				up.transform.localPosition = new Vector3 (0, -((buRec.rect.height+dis)*i+dis),0);
 				up.transform.localScale = new Vector3 (1,1,1);
 
 				Button b1 = up.GetComponent<Button> ();
 
 				ButtonIndex buttonIndex = up.GetComponent<ButtonIndex> ();
-				buttonIndex.index = "level" + (i + 1);
-				buttonIndex.level = (i + 1);
-				buttonIndex.pass = level.OpenPass;
+				buttonIndex.pass = i+1;
+				buttonIndex.star = 0;
+				if(level.StarInLevel.Count>i){
+					buttonIndex.star = level.StarInLevel[i];
+				}
 				b1.onClick.AddListener (delegate() {OnClick(buttonIndex);});
 
 				GameObject textGo = up.transform.Find ("Text").gameObject;
 				Text text = textGo.GetComponent<Text> ();
-				int curPass;
-				if (i+1 == openLevel) {
-					curPass = level.OpenPass;
-				} else if (i < openLevel) {
-					curPass = level.PassCountInLevel [i];
-				} else {
-					curPass = 0;
-				}
-				text.text = "level"+i+"("+curPass+"/"+level.PassCountInLevel[i]+")";
+				text.text = "pass"+buttonIndex.pass+",star"+buttonIndex.star+")";
 			}
 		});
 	}
@@ -150,7 +162,7 @@ public class MainPanel : MonoBehaviour {
 
 			//
 			Text passText = GameObject.Find ("main/ui/uiUnlimit/Canvas/pass").GetComponent<Text>();
-			passText.text = "pass:"+ret.Pass;
+			passText.text = "pass:"+ret.Pass+",star:"+ret.Star+",rank:"+ret.Rank;
 			// 列表
 			int count = ret.UnlimitedRankInfo.Count;
 			float dis = 20f;
@@ -171,7 +183,7 @@ public class MainPanel : MonoBehaviour {
 				// 生成各个玩家的排名item
 				GameObject textGo = up.transform.Find ("Text").gameObject;
 				Text text = textGo.GetComponent<Text> ();
-				text.text = info.Rank+","+info.UserName+","+info.Pass;
+				text.text = info.Rank+","+info.UserName+","+info.Pass+","+info.Star;
 			}
 		});
 	}
@@ -190,7 +202,7 @@ public class MainPanel : MonoBehaviour {
 
 	public void matchSuccess(int opcode, byte[] data){
 		SCMatchingSuccess matchingSuccess = SCMatchingSuccess.Deserialize (data);
-		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Start,matchingSuccess.End,1,1,matchingSuccess.OtherInfos);
+		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Start,matchingSuccess.End,1,matchingSuccess.OtherInfos,null);
 		ui.SetActive (false);
 	}
 
@@ -203,28 +215,34 @@ public class MainPanel : MonoBehaviour {
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSMatching, CSMatching.SerializeToBytes(matching),delegate(int opcode, byte[] data) {
 			Debug.Log("send matching success,opcode = "+opcode);
 		});
+		//matchWaitTime
+		WarnDialog.showWaitDialog ("matching...", int.Parse (sysParas ["matchWaitTime"]), delegate() {
+			WarnDialog.showWarnDialog("match fail , please try again later.",null);	
+		});
 	}
 
 	public void OnClick(ButtonIndex buttonIndex){
 		CSGetMiGongMap miGongMap = new CSGetMiGongMap ();
-		miGongMap.Level = buttonIndex.level;
-		miGongMap.Pass = 1;
+		miGongMap.Pass = buttonIndex.pass;
 		byte[] data = CSGetMiGongMap.SerializeToBytes (miGongMap);
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetMiGongMap, data,delegate(int opcode, byte[] ret) {
 			SCGetMiGongMap scmap = SCGetMiGongMap.Deserialize(ret);
-			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans, scmap.Start, scmap.End, buttonIndex.level, 1,null);
+			// 消耗精力
+			energy = scmap.Energy;
+			int[] stars= {scmap.Star1,scmap.Star2,scmap.Star3,scmap.Star4};
+			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans, scmap.Start, scmap.End, scmap.Pass,null,stars);
 		});
 		ui.SetActive (false);
 	}
-	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int start,int end,int level,int pass,List<PBOtherInfo> otherInfos){
+	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int start,int end,int pass,List<PBOtherInfo> otherInfos,int[] stars){
 		Object gamePanel = Resources.Load ("GamePanel");
 		GameObject gamePanelGo = Instantiate(gamePanel) as GameObject;
 		GameObject mapGo = gamePanelGo.transform.Find ("content/map").gameObject;
 		MapCreate mapCreate = mapGo.GetComponent<MapCreate> ();
-		mapCreate.Level = level;
 		mapCreate.Pass = pass;
 
 		mapCreate.Mode = mode;
+		mapCreate.stars = stars;
 
 		int size = (int)Mathf.Sqrt(mapInt.Length);
 		mapCreate.map = new int[size][];

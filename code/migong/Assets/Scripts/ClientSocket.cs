@@ -90,6 +90,7 @@ public class ClientSocket
 		}
 		catch (Exception _e)
 		{
+			Debug.Log (_e.Message);
 //			Close();
 		}
 	}

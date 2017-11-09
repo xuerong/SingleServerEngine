@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\ClientSocket.cs" />
      <Compile Include="Assets\Scripts\DragControl.cs" />
      <Compile Include="Assets\Scripts\EventTriggerListener.cs" />
+     <Compile Include="Assets\Scripts\Job.cs" />
      <Compile Include="Assets\Scripts\JoystackCc.cs" />
      <Compile Include="Assets\Scripts\MainPanel.cs" />
      <Compile Include="Assets\Scripts\MapCreate.cs" />

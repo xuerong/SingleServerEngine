@@ -28,7 +28,6 @@ public class Pacman : MonoBehaviour {
 	Vector2 dest = Vector2.zero;
 
 	CircleCollider2D c;
-	float radius = 0;
 
 	bool isControl = false;
 
@@ -55,7 +54,6 @@ public class Pacman : MonoBehaviour {
 		transform.localScale = transform.localScale * 0.6f;
 
 		c = GetComponent<CircleCollider2D> ();
-		radius = c.radius * Mathf.Max (transform.localScale.x, transform.localScale.y);
 
 		animator = GetComponent<Animator> ();
 		digidbody = GetComponent<Rigidbody2D> ();

@@ -222,10 +222,7 @@ public class SocketManager : MonoBehaviour {
 					if(dic.ContainsKey(id)){
 						if(opcode == (int)BaseOpcode.SCException){
 							SCException exception = SCException.Deserialize(data);
-							Debug.LogError("error:errorCode = "+exception.ErrCode+",errorMsg = "+exception.ErrMsg);
-							WarnDialog.showWarnDialog ("数据错误："+exception.ErrMsg,delegate() {
-								//				ConnectServer();
-							});
+							resoveSCException(exception);
 						}else{
 							ActionForReceive action = dic[id];
 							if(action!=null){
@@ -240,7 +237,7 @@ public class SocketManager : MonoBehaviour {
 					}else if(syncObjects.ContainsKey(id)){
 						if(opcode == (int)BaseOpcode.SCException){
 							SCException exception = SCException.Deserialize(data);
-//							Debug.LogError("error:errorCode = "+exception.ErrCode+",errorMsg = "+exception.ErrMsg);
+							resoveSCException(exception);
 						}else{
 							
 						}
@@ -255,7 +252,7 @@ public class SocketManager : MonoBehaviour {
 						// 推送消息
 						if(opcode == (int)BaseOpcode.SCException){
 							SCException exception = SCException.Deserialize(data);
-							Debug.LogError("error:errorCode = "+exception.ErrCode+",errorMsg = "+exception.ErrMsg);
+							resoveSCException(exception);
 						}else{
 							if(serverSendData.ContainsKey(opcode)){
 								ActionForReceive action = serverSendData[opcode];
@@ -272,6 +269,9 @@ public class SocketManager : MonoBehaviour {
 			}
 			catch (System.Exception e)
 			{
+				WarnDialog.showWarnDialog ("无法连接到服务器",delegate() {
+//									ConnectServer();
+				});
 				Debug.Log("e:"+e);
 				clientSocket.Disconnect(true);
 				clientSocket.Shutdown(SocketShutdown.Both);
@@ -279,6 +279,13 @@ public class SocketManager : MonoBehaviour {
 				break;
 			}
 		}
+	}
+
+	private static void resoveSCException(SCException exception){
+		Debug.LogError("error:errorCode = "+exception.ErrCode+",errorMsg = "+exception.ErrMsg+",csOpcode:"+exception.CsOpcode+",scOpcode:"+exception.ScOpcode);
+		WarnDialog.showWarnDialog ("数据错误："+exception.ErrMsg,delegate() {
+			//				ConnectServer();
+		});
 	}
 
 	public static void SendMessageAsyc(int opcode ,byte[] data,ActionForReceive action){
@@ -368,7 +375,6 @@ public class SocketManager : MonoBehaviour {
 			Debug.Log("send fail:"+e);
 			throw new Exception(e.Message);
 		}  
-		return null;
 	}
 
 	void OnDestroy () {

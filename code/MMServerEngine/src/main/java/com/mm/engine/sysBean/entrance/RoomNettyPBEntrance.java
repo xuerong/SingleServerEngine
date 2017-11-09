@@ -73,6 +73,7 @@ public class RoomNettyPBEntrance  extends Entrance {
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) { // (2)
             RoomNetData roomNetData = (RoomNetData) msg;
+            int reOpcode = -1;
             try {
                 Room room = roomService.getRoom(roomNetData.getRoomId());
                 if(room == null){
@@ -97,6 +98,7 @@ public class RoomNettyPBEntrance  extends Entrance {
                     }
                     roomService.enterRoom(roomNetData.getRoomId(),session);
                     RoomPB.SCEnterRoom.Builder builder = RoomPB.SCEnterRoom.newBuilder();
+                    reOpcode = RoomOpcode.SCEnterRoom;
                     roomNetData.setOpcode(RoomOpcode.SCEnterRoom);
                     roomNetData.setData(builder.build().toByteArray());
                     ctx.writeAndFlush(roomNetData);
@@ -104,6 +106,7 @@ public class RoomNettyPBEntrance  extends Entrance {
                     Session session =checkAndGetSession(sessionId);
                     roomService.outRoom(roomNetData.getRoomId(),session);
                     RoomPB.SCOutRoom.Builder builder = RoomPB.SCOutRoom.newBuilder();
+                    reOpcode = RoomOpcode.SCOutRoom;
                     roomNetData.setOpcode(RoomOpcode.SCOutRoom);
                     roomNetData.setData(builder.build().toByteArray());
                     ctx.writeAndFlush(roomNetData);
@@ -113,6 +116,7 @@ public class RoomNettyPBEntrance  extends Entrance {
                     if(retPacket == null){
                         throw new MMException("server error!");
                     }
+                    reOpcode = retPacket.getOpcode();
                     roomNetData.setOpcode(retPacket.getOpcode());
                     roomNetData.setData((byte[])retPacket.getRetData());
                     ctx.writeAndFlush(roomNetData);
@@ -133,6 +137,8 @@ public class RoomNettyPBEntrance  extends Entrance {
                     e.printStackTrace();
                 }
                 BasePB.SCException.Builder scException = BasePB.SCException.newBuilder();
+                scException.setCsOpcode(roomNetData.getOpcode());
+                scException.setCsOpcode(reOpcode);
                 scException.setErrCode(errCode);
                 scException.setErrMsg(errMsg);
                 roomNetData.setOpcode(BaseOpcode.SCException);

@@ -10,7 +10,13 @@ message CSBaseInfo
 }
 message SCBaseInfo
 {
-	required int32 energy 			= 1; // 已经过的关卡的星数
+	required int32 energy 			= 1; // 玩家精力
+	repeated PBSysPara sysParas 			= 2; // 系统参数
+}
+message PBSysPara
+{
+	required string key				= 1;
+	required string value				= 2;
 }
 message CSGetMiGongLevel
 {
@@ -18,6 +24,7 @@ message CSGetMiGongLevel
 message SCGetMiGongLevel
 {
     repeated int32 starInLevel 			= 1; // 已经过的关卡的星数
+	required int32 passCount            = 2; // 总共多少关卡
 }
 // 获取迷宫
 message CSGetMiGongMap

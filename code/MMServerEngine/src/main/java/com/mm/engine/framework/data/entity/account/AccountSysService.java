@@ -145,13 +145,14 @@ public class AccountSysService {
     /**
      * 由于网络断线而导致的登出，要通知mainServer
      */
-    public void netDisconnect(String sessionId){
+    public Session netDisconnect(String sessionId){
         Session session = sessionService.get(sessionId);
         if(session == null){
             // 说明：1还没有登录nodeServer，2正常的登出，该清理的已经清理完成
-            return;
+            return null;
         }
         doLogout(session.getAccountId(),sessionId,LogoutReason.netDisconnect);
+        return session;
     }
 
     /**

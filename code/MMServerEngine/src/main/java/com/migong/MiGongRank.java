@@ -60,10 +60,10 @@ public class MiGongRank {
         }
         Integer id = uidToId.get(userId);
         if(id == null){
-            int _id = idCreator.getAndIncrement();
+            id = idCreator.getAndIncrement();
             Integer old = uidToId.putIfAbsent(userId,id);
             if(old == null){
-                idToUid.put(_id,userId);
+                idToUid.put(id,userId);
             }else{
                 id = old;
             }

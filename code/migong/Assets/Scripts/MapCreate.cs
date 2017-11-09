@@ -40,12 +40,13 @@ public class MapCreate : MonoBehaviour{
 
 	public MapMode Mode; // 0单机，2pvp
 
-	public int Level;
 	public int Pass;
 
 	public Rect mapRect;
 
 	public int size;
+
+	public int[] stars;
 
 
 	int x = 0,y = 0;
@@ -135,7 +136,7 @@ public class MapCreate : MonoBehaviour{
 				CSEatBean eatBean = new CSEatBean ();
 				eatBean.BeanPos = pos;
 				SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSEatBean, CSEatBean.SerializeToBytes (eatBean), delegate(int opcode, byte[] data) {
-					SCEatBean ret = SCEatBean.Deserialize (data);
+//					SCEatBean ret = SCEatBean.Deserialize (data);
 					// 这里不需要处理，因为有统一推送
 				});
 				int x = pos / size;
@@ -161,7 +162,7 @@ public class MapCreate : MonoBehaviour{
 				// 点亮星星
 				for(int i=1;i<5;i++){
 					int score = i * 10;
-					if (score > old && score <= starSlider.value) {
+					if (score > old && score <= starSlider.value) { // 0的自然就不会点亮
 						// 点亮
 						Image image = starSlider.transform.parent.Find ("star" + i).GetComponent<Image>();
 						image.color = new Color (255,255,255);
@@ -193,8 +194,8 @@ public class MapCreate : MonoBehaviour{
 		Object down = Resources.Load ("down");
 		Object right = Resources.Load ("right");
 
-		Object downShadow = Resources.Load ("downShadow");
-		Object rightShadow = Resources.Load ("rightShadow");
+//		Object downShadow = Resources.Load ("downShadow");
+//		Object rightShadow = Resources.Load ("rightShadow");
 
 		Object bean = Resources.Load ("bean");
 		int maxScore = 0;
@@ -242,9 +243,13 @@ public class MapCreate : MonoBehaviour{
 			starSlider.transform.Find ("maxScore").GetComponent<Text> ().text = "/"+maxScore;
 			RectTransform buRec = starSlider.GetComponent<RectTransform> ();
 			float perStarDelta = buRec.rect.width * 10 / maxScore; // 每个星星的像素便宜
-			for (int i = 1; i < 5; i++) {
+			for (int i = 1; i < stars.Length+1; i++) {
 				RectTransform starRec = starSlider.transform.parent.Find ("star" + i).GetComponent<RectTransform> ();
-				starRec.anchoredPosition = new Vector2 (i * perStarDelta, 0);
+				if (stars [i-1] <= 0) {
+					starRec.gameObject.SetActive (false);
+				} else {
+					starRec.anchoredPosition = new Vector2 (i * perStarDelta, 0);
+				}
 			}
 		}
 		// 修改相机位置
@@ -281,7 +286,6 @@ public class MapCreate : MonoBehaviour{
 		if (Mode == MapMode.Level) {
 			CSPassFinish pf = new CSPassFinish ();
 			pf.Success = success ? 1 : 0;
-			pf.Level = this.Level;
 			pf.Pass = this.Pass;
 			if (route == null) {
 //			route =
@@ -302,6 +306,7 @@ public class MapCreate : MonoBehaviour{
 			CSUnlimitedFinish uf = new CSUnlimitedFinish ();
 			uf.Success = success ? 1 : 0;
 			uf.Route = route;
+			uf.Pass = this.Pass;
 			SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSUnlimitedFinish, CSUnlimitedFinish.SerializeToBytes (uf), delegate(int opcode, byte[] data) {
 				SCUnlimitedFinish pas = SCUnlimitedFinish.Deserialize (data);
 				if (showSettle) {
@@ -318,7 +323,7 @@ public class MapCreate : MonoBehaviour{
 			Pacman pacman = pacmanMap [SocketManager.ACCOUNT_ID];
 			arrived.Pos = pacman.outX * td + pacman.outY;
 			SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSArrived, CSArrived.SerializeToBytes (arrived), delegate(int opcode, byte[] data) {
-				SCArrived ret = SCArrived.Deserialize(data);
+//				SCArrived ret = SCArrived.Deserialize(data);
 				// TODO 结算
 			});
 			// TODO 结算

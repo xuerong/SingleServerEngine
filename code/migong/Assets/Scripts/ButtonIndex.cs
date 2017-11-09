@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ButtonIndex : MonoBehaviour {
 
-	public string index;
-	public int level;
 	public int pass;
+	public int star;
 }

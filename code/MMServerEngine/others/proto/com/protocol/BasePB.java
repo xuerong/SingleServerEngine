@@ -21,17 +21,53 @@ public final class BasePB {
      */
     int getErrCode();
 
-    // required string errMsg = 2;
+    // required int32 csOpcode = 2;
     /**
-     * <code>required string errMsg = 2;</code>
+     * <code>required int32 csOpcode = 2;</code>
+     *
+     * <pre>
+     * 客户端发过来的消息
+     * </pre>
+     */
+    boolean hasCsOpcode();
+    /**
+     * <code>required int32 csOpcode = 2;</code>
+     *
+     * <pre>
+     * 客户端发过来的消息
+     * </pre>
+     */
+    int getCsOpcode();
+
+    // required int32 scOpcode = 3;
+    /**
+     * <code>required int32 scOpcode = 3;</code>
+     *
+     * <pre>
+     * 服务端发给客户端的消息
+     * </pre>
+     */
+    boolean hasScOpcode();
+    /**
+     * <code>required int32 scOpcode = 3;</code>
+     *
+     * <pre>
+     * 服务端发给客户端的消息
+     * </pre>
+     */
+    int getScOpcode();
+
+    // required string errMsg = 4;
+    /**
+     * <code>required string errMsg = 4;</code>
      */
     boolean hasErrMsg();
     /**
-     * <code>required string errMsg = 2;</code>
+     * <code>required string errMsg = 4;</code>
      */
     java.lang.String getErrMsg();
     /**
-     * <code>required string errMsg = 2;</code>
+     * <code>required string errMsg = 4;</code>
      */
     com.google.protobuf.ByteString
         getErrMsgBytes();
@@ -41,6 +77,7 @@ public final class BasePB {
    *
    * <pre>
    *option java_outer_classname = "BasePB";
+   * opcode_start=10101
    * </pre>
    */
   public static final class SCException extends
@@ -96,8 +133,18 @@ public final class BasePB {
               errCode_ = input.readInt32();
               break;
             }
-            case 18: {
+            case 16: {
               bitField0_ |= 0x00000002;
+              csOpcode_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              scOpcode_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
               errMsg_ = input.readBytes();
               break;
             }
@@ -157,17 +204,65 @@ public final class BasePB {
       return errCode_;
     }
 
-    // required string errMsg = 2;
-    public static final int ERRMSG_FIELD_NUMBER = 2;
-    private java.lang.Object errMsg_;
+    // required int32 csOpcode = 2;
+    public static final int CSOPCODE_FIELD_NUMBER = 2;
+    private int csOpcode_;
     /**
-     * <code>required string errMsg = 2;</code>
+     * <code>required int32 csOpcode = 2;</code>
+     *
+     * <pre>
+     * 客户端发过来的消息
+     * </pre>
      */
-    public boolean hasErrMsg() {
+    public boolean hasCsOpcode() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required string errMsg = 2;</code>
+     * <code>required int32 csOpcode = 2;</code>
+     *
+     * <pre>
+     * 客户端发过来的消息
+     * </pre>
+     */
+    public int getCsOpcode() {
+      return csOpcode_;
+    }
+
+    // required int32 scOpcode = 3;
+    public static final int SCOPCODE_FIELD_NUMBER = 3;
+    private int scOpcode_;
+    /**
+     * <code>required int32 scOpcode = 3;</code>
+     *
+     * <pre>
+     * 服务端发给客户端的消息
+     * </pre>
+     */
+    public boolean hasScOpcode() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 scOpcode = 3;</code>
+     *
+     * <pre>
+     * 服务端发给客户端的消息
+     * </pre>
+     */
+    public int getScOpcode() {
+      return scOpcode_;
+    }
+
+    // required string errMsg = 4;
+    public static final int ERRMSG_FIELD_NUMBER = 4;
+    private java.lang.Object errMsg_;
+    /**
+     * <code>required string errMsg = 4;</code>
+     */
+    public boolean hasErrMsg() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required string errMsg = 4;</code>
      */
     public java.lang.String getErrMsg() {
       java.lang.Object ref = errMsg_;
@@ -184,7 +279,7 @@ public final class BasePB {
       }
     }
     /**
-     * <code>required string errMsg = 2;</code>
+     * <code>required string errMsg = 4;</code>
      */
     public com.google.protobuf.ByteString
         getErrMsgBytes() {
@@ -202,6 +297,8 @@ public final class BasePB {
 
     private void initFields() {
       errCode_ = 0;
+      csOpcode_ = 0;
+      scOpcode_ = 0;
       errMsg_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -210,6 +307,14 @@ public final class BasePB {
       if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasErrCode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCsOpcode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasScOpcode()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -228,7 +333,13 @@ public final class BasePB {
         output.writeInt32(1, errCode_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getErrMsgBytes());
+        output.writeInt32(2, csOpcode_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, scOpcode_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getErrMsgBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -245,7 +356,15 @@ public final class BasePB {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getErrMsgBytes());
+          .computeInt32Size(2, csOpcode_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, scOpcode_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getErrMsgBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -330,6 +449,7 @@ public final class BasePB {
      *
      * <pre>
      *option java_outer_classname = "BasePB";
+     * opcode_start=10101
      * </pre>
      */
     public static final class Builder extends
@@ -369,8 +489,12 @@ public final class BasePB {
         super.clear();
         errCode_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        errMsg_ = "";
+        csOpcode_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        scOpcode_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        errMsg_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -406,6 +530,14 @@ public final class BasePB {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
+        result.csOpcode_ = csOpcode_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.scOpcode_ = scOpcode_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
         result.errMsg_ = errMsg_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -426,8 +558,14 @@ public final class BasePB {
         if (other.hasErrCode()) {
           setErrCode(other.getErrCode());
         }
+        if (other.hasCsOpcode()) {
+          setCsOpcode(other.getCsOpcode());
+        }
+        if (other.hasScOpcode()) {
+          setScOpcode(other.getScOpcode());
+        }
         if (other.hasErrMsg()) {
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000008;
           errMsg_ = other.errMsg_;
           onChanged();
         }
@@ -437,6 +575,14 @@ public final class BasePB {
 
       public final boolean isInitialized() {
         if (!hasErrCode()) {
+          
+          return false;
+        }
+        if (!hasCsOpcode()) {
+          
+          return false;
+        }
+        if (!hasScOpcode()) {
           
           return false;
         }
@@ -499,16 +645,114 @@ public final class BasePB {
         return this;
       }
 
-      // required string errMsg = 2;
-      private java.lang.Object errMsg_ = "";
+      // required int32 csOpcode = 2;
+      private int csOpcode_ ;
       /**
-       * <code>required string errMsg = 2;</code>
+       * <code>required int32 csOpcode = 2;</code>
+       *
+       * <pre>
+       * 客户端发过来的消息
+       * </pre>
        */
-      public boolean hasErrMsg() {
+      public boolean hasCsOpcode() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required string errMsg = 2;</code>
+       * <code>required int32 csOpcode = 2;</code>
+       *
+       * <pre>
+       * 客户端发过来的消息
+       * </pre>
+       */
+      public int getCsOpcode() {
+        return csOpcode_;
+      }
+      /**
+       * <code>required int32 csOpcode = 2;</code>
+       *
+       * <pre>
+       * 客户端发过来的消息
+       * </pre>
+       */
+      public Builder setCsOpcode(int value) {
+        bitField0_ |= 0x00000002;
+        csOpcode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 csOpcode = 2;</code>
+       *
+       * <pre>
+       * 客户端发过来的消息
+       * </pre>
+       */
+      public Builder clearCsOpcode() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        csOpcode_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 scOpcode = 3;
+      private int scOpcode_ ;
+      /**
+       * <code>required int32 scOpcode = 3;</code>
+       *
+       * <pre>
+       * 服务端发给客户端的消息
+       * </pre>
+       */
+      public boolean hasScOpcode() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 scOpcode = 3;</code>
+       *
+       * <pre>
+       * 服务端发给客户端的消息
+       * </pre>
+       */
+      public int getScOpcode() {
+        return scOpcode_;
+      }
+      /**
+       * <code>required int32 scOpcode = 3;</code>
+       *
+       * <pre>
+       * 服务端发给客户端的消息
+       * </pre>
+       */
+      public Builder setScOpcode(int value) {
+        bitField0_ |= 0x00000004;
+        scOpcode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 scOpcode = 3;</code>
+       *
+       * <pre>
+       * 服务端发给客户端的消息
+       * </pre>
+       */
+      public Builder clearScOpcode() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        scOpcode_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required string errMsg = 4;
+      private java.lang.Object errMsg_ = "";
+      /**
+       * <code>required string errMsg = 4;</code>
+       */
+      public boolean hasErrMsg() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required string errMsg = 4;</code>
        */
       public java.lang.String getErrMsg() {
         java.lang.Object ref = errMsg_;
@@ -522,7 +766,7 @@ public final class BasePB {
         }
       }
       /**
-       * <code>required string errMsg = 2;</code>
+       * <code>required string errMsg = 4;</code>
        */
       public com.google.protobuf.ByteString
           getErrMsgBytes() {
@@ -538,36 +782,36 @@ public final class BasePB {
         }
       }
       /**
-       * <code>required string errMsg = 2;</code>
+       * <code>required string errMsg = 4;</code>
        */
       public Builder setErrMsg(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000008;
         errMsg_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string errMsg = 2;</code>
+       * <code>required string errMsg = 4;</code>
        */
       public Builder clearErrMsg() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000008);
         errMsg_ = getDefaultInstance().getErrMsg();
         onChanged();
         return this;
       }
       /**
-       * <code>required string errMsg = 2;</code>
+       * <code>required string errMsg = 4;</code>
        */
       public Builder setErrMsgBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000008;
         errMsg_ = value;
         onChanged();
         return this;
@@ -598,9 +842,10 @@ public final class BasePB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023protos/BasePB.proto\".\n\013SCException\022\017\n\007" +
-      "errCode\030\001 \002(\005\022\016\n\006errMsg\030\002 \002(\tB\016\n\014com.pro" +
-      "tocol"
+      "\n\023protos/BasePB.proto\"R\n\013SCException\022\017\n\007" +
+      "errCode\030\001 \002(\005\022\020\n\010csOpcode\030\002 \002(\005\022\020\n\010scOpc" +
+      "ode\030\003 \002(\005\022\016\n\006errMsg\030\004 \002(\tB\016\n\014com.protoco" +
+      "l"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -612,7 +857,7 @@ public final class BasePB {
           internal_static_SCException_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCException_descriptor,
-              new java.lang.String[] { "ErrCode", "ErrMsg", });
+              new java.lang.String[] { "ErrCode", "CsOpcode", "ScOpcode", "ErrMsg", });
           return null;
         }
       };

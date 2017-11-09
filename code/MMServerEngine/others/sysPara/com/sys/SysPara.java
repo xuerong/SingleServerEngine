@@ -13,6 +13,8 @@ public final class SysPara{
 			put("defaultSpeed","10");
 			put("unlimitedSpeed","10");
 			put("ladder","10;");
+			put("matchWaitTime","30");
+			put("addEnergyInterval","360");
 		}
 	};
 	public static final String aaa = "aaa";
@@ -25,5 +27,7 @@ public final class SysPara{
 	public static final String defaultSpeed = "defaultSpeed";
 	public static final String unlimitedSpeed = "unlimitedSpeed";
 	public static final String ladder = "ladder";
+	public static final String matchWaitTime = "matchWaitTime";
+	public static final String addEnergyInterval = "addEnergyInterval";
 
 }

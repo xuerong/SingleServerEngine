@@ -278,6 +278,9 @@ public class DataService {
         }
         if(cacheEntity == null){ // 说明本对象不需要版本校验
             cacheEntity = new CacheEntity(object);
+        }else{
+            // 版本+1
+            cacheEntity.setCasUnique(cacheEntity.getCasUnique()+1);
         }
         cacheEntity.setEntity(object);
         cacheEntity.setState(CacheEntity.CacheEntityState.Normal);

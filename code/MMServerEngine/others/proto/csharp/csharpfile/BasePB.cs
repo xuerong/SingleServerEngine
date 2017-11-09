@@ -21,6 +21,12 @@ namespace Example
     {
         public int ErrCode { get; set; }
 
+        public int CsOpcode { get; set; }
+
+        /// <summary> 客户端发过来的消息</summary>
+        public int ScOpcode { get; set; }
+
+        /// <summary> 服务端发给客户端的消息</summary>
         public string ErrMsg { get; set; }
 
     }

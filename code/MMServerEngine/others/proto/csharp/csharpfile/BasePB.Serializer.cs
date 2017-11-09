@@ -72,8 +72,16 @@ namespace Example
                     case 8:
                         instance.ErrCode = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 2 LengthDelimited
-                    case 18:
+                    // Field 2 Varint
+                    case 16:
+                        instance.CsOpcode = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 3 Varint
+                    case 24:
+                        instance.ScOpcode = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 4 LengthDelimited
+                    case 34:
                         instance.ErrMsg = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                 }
@@ -118,8 +126,16 @@ namespace Example
                     case 8:
                         instance.ErrCode = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 2 LengthDelimited
-                    case 18:
+                    // Field 2 Varint
+                    case 16:
+                        instance.CsOpcode = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 3 Varint
+                    case 24:
+                        instance.ScOpcode = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 4 LengthDelimited
+                    case 34:
                         instance.ErrMsg = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                 }
@@ -163,8 +179,16 @@ namespace Example
                     case 8:
                         instance.ErrCode = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 2 LengthDelimited
-                    case 18:
+                    // Field 2 Varint
+                    case 16:
+                        instance.CsOpcode = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 3 Varint
+                    case 24:
+                        instance.ScOpcode = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 4 LengthDelimited
+                    case 34:
                         instance.ErrMsg = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                 }
@@ -192,10 +216,16 @@ namespace Example
             // Key for field: 1, Varint
             stream.WriteByte(8);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.ErrCode);
+            // Key for field: 2, Varint
+            stream.WriteByte(16);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.CsOpcode);
+            // Key for field: 3, Varint
+            stream.WriteByte(24);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.ScOpcode);
             if (instance.ErrMsg == null)
                 throw new ArgumentNullException("ErrMsg", "Required by proto specification.");
-            // Key for field: 2, LengthDelimited
-            stream.WriteByte(18);
+            // Key for field: 4, LengthDelimited
+            stream.WriteByte(34);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.ErrMsg));
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }

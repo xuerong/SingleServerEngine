@@ -218,6 +218,8 @@ namespace Example
         /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
         public static Example.SCBaseInfo Deserialize(Stream stream, Example.SCBaseInfo instance)
         {
+            if (instance.SysParas == null)
+                instance.SysParas = new List<Example.PBSysPara>();
             while (true)
             {
                 int keyByte = stream.ReadByte();
@@ -229,6 +231,11 @@ namespace Example
                     // Field 1 Varint
                     case 8:
                         instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 2 LengthDelimited
+                    case 18:
+                        // repeated
+                        instance.SysParas.Add(Example.PBSysPara.DeserializeLengthDelimited(stream));
                         continue;
                 }
 
@@ -251,6 +258,8 @@ namespace Example
         /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
         public static Example.SCBaseInfo DeserializeLengthDelimited(Stream stream, Example.SCBaseInfo instance)
         {
+            if (instance.SysParas == null)
+                instance.SysParas = new List<Example.PBSysPara>();
             long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
             limit += stream.Position;
             while (true)
@@ -271,6 +280,11 @@ namespace Example
                     // Field 1 Varint
                     case 8:
                         instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 2 LengthDelimited
+                    case 18:
+                        // repeated
+                        instance.SysParas.Add(Example.PBSysPara.DeserializeLengthDelimited(stream));
                         continue;
                 }
 
@@ -293,6 +307,8 @@ namespace Example
         /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
         public static Example.SCBaseInfo DeserializeLength(Stream stream, int length, Example.SCBaseInfo instance)
         {
+            if (instance.SysParas == null)
+                instance.SysParas = new List<Example.PBSysPara>();
             long limit = stream.Position + length;
             while (true)
             {
@@ -312,6 +328,11 @@ namespace Example
                     // Field 1 Varint
                     case 8:
                         instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 2 LengthDelimited
+                    case 18:
+                        // repeated
+                        instance.SysParas.Add(Example.PBSysPara.DeserializeLengthDelimited(stream));
                         continue;
                 }
 
@@ -338,6 +359,21 @@ namespace Example
             // Key for field: 1, Varint
             stream.WriteByte(8);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Energy);
+            if (instance.SysParas != null)
+            {
+                foreach (var i2 in instance.SysParas)
+                {
+                    // Key for field: 2, LengthDelimited
+                    stream.WriteByte(18);
+                    ﻿msField.SetLength(0);
+                    Example.PBSysPara.Serialize(msField, i2);
+                    // Length delimited byte array
+                    uint length2 = (uint)msField.Length;
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length2);
+                    stream.Write(msField.GetBuffer(), 0, (int)length2);
+
+                }
+            }
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
@@ -352,6 +388,213 @@ namespace Example
         }
         /// <summary>Helper: Serialize with a varint length prefix</summary>
         public static void SerializeLengthDelimited(Stream stream, SCBaseInfo instance)
+        {
+            var data = SerializeToBytes(instance);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
+            stream.Write(data, 0, data.Length);
+        }
+    }
+
+    [System.Serializable()]
+    public partial class PBSysPara
+    {
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static PBSysPara Deserialize(Stream stream)
+        {
+            PBSysPara instance = new PBSysPara();
+            Deserialize(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static PBSysPara DeserializeLengthDelimited(Stream stream)
+        {
+            PBSysPara instance = new PBSysPara();
+            DeserializeLengthDelimited(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static PBSysPara DeserializeLength(Stream stream, int length)
+        {
+            PBSysPara instance = new PBSysPara();
+            DeserializeLength(stream, length, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
+        public static PBSysPara Deserialize(byte[] buffer)
+        {
+            PBSysPara instance = new PBSysPara();
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
+        public static Example.PBSysPara Deserialize(byte[] buffer, Example.PBSysPara instance)
+        {
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
+        public static Example.PBSysPara Deserialize(Stream stream, Example.PBSysPara instance)
+        {
+            while (true)
+            {
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    break;
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 LengthDelimited
+                    case 10:
+                        instance.Key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                    // Field 2 LengthDelimited
+                    case 18:
+                        instance.Value = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.PBSysPara DeserializeLengthDelimited(Stream stream, Example.PBSysPara instance)
+        {
+            long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
+            limit += stream.Position;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 LengthDelimited
+                    case 10:
+                        instance.Key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                    // Field 2 LengthDelimited
+                    case 18:
+                        instance.Value = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.PBSysPara DeserializeLength(Stream stream, int length, Example.PBSysPara instance)
+        {
+            long limit = stream.Position + length;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 LengthDelimited
+                    case 10:
+                        instance.Key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                    // Field 2 LengthDelimited
+                    case 18:
+                        instance.Value = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Serialize the instance into the stream</summary>
+        public static void Serialize(Stream stream, PBSysPara instance)
+        {
+            var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
+            if (instance.Key == null)
+                throw new ArgumentNullException("Key", "Required by proto specification.");
+            // Key for field: 1, LengthDelimited
+            stream.WriteByte(10);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Key));
+            if (instance.Value == null)
+                throw new ArgumentNullException("Value", "Required by proto specification.");
+            // Key for field: 2, LengthDelimited
+            stream.WriteByte(18);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Value));
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
+        }
+
+        /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
+        public static byte[] SerializeToBytes(PBSysPara instance)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Serialize(ms, instance);
+                return ms.ToArray();
+            }
+        }
+        /// <summary>Helper: Serialize with a varint length prefix</summary>
+        public static void SerializeLengthDelimited(Stream stream, PBSysPara instance)
         {
             var data = SerializeToBytes(instance);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
@@ -579,6 +822,10 @@ namespace Example
                         // repeated
                         instance.StarInLevel.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
+                    // Field 2 Varint
+                    case 16:
+                        instance.PassCount = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -624,6 +871,10 @@ namespace Example
                         // repeated
                         instance.StarInLevel.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
+                    // Field 2 Varint
+                    case 16:
+                        instance.PassCount = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -668,6 +919,10 @@ namespace Example
                         // repeated
                         instance.StarInLevel.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
+                    // Field 2 Varint
+                    case 16:
+                        instance.PassCount = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -699,6 +954,9 @@ namespace Example
                     global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i1);
                 }
             }
+            // Key for field: 2, Varint
+            stream.WriteByte(16);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.PassCount);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 

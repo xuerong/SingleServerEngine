@@ -169,6 +169,7 @@ public class TxCacheService {
                 asyncService.asyncData(asyncDataList);
             }
         }finally {
+            map.clear(); // 清空上次提交的东西，否则
             // -- 解锁
             if(lockerDataList!=null){
                 int size = lockerDataList.size();

@@ -4,8 +4,9 @@ option java_package = "com.protocol";
 message SCException
 {
 	required int32 errCode			=1;
-	required int32 opcode			=2;
-	required string errMsg			=3;
+	required int32 csOpcode			=2; // 客户端发过来的消息
+	required int32 scOpcode			=3; // 服务端发给客户端的消息
+	required string errMsg			=4;
 }
 
 

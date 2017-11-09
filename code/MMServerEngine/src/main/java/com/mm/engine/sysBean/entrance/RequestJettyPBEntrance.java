@@ -56,6 +56,8 @@ public class RequestJettyPBEntrance extends Entrance {
     }
 
     private void fire(HttpServletRequest request, HttpServletResponse response,String entranceName){
+        int opcode=-1;
+        RetPacket rePacket = null;
         try {
             byte[] data = HttpDecoder.decode(request);
             // 获取controller，并根据controller获取相应的编解码器
@@ -63,10 +65,10 @@ public class RequestJettyPBEntrance extends Entrance {
             if(StringUtils.isEmpty(opcodeStr) || !StringUtils.isNumeric(opcodeStr)){
                 throw new MMException("opcode error");
             }
-            int opcode=Integer.parseInt(opcodeStr);
+            opcode=Integer.parseInt(opcodeStr);
             
             Session session = sessionService.create(request.getRequestURL().toString(), Util.getIp(request));
-            RetPacket rePacket = requestService.handle(opcode, data, session);
+            rePacket = requestService.handle(opcode, data, session);
             if(rePacket==null){
                 // 处理包失败
                 throw new MMException("处理消息错误,opcode:"+opcode);
@@ -99,6 +101,8 @@ public class RequestJettyPBEntrance extends Entrance {
                 throw new RuntimeException(e);
             }
             BasePB.SCException.Builder scException = BasePB.SCException.newBuilder();
+            scException.setCsOpcode(opcode);
+            scException.setCsOpcode(rePacket != null?rePacket.getOpcode():-1);
             scException.setErrCode(errCode);
             scException.setErrMsg(errMsg);
             byte[] reData = scException.build().toByteArray();

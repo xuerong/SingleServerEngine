@@ -29,6 +29,17 @@ namespace Example
     {
         public int Energy { get; set; }
 
+        /// <summary> 玩家精力</summary>
+        public List<Example.PBSysPara> SysParas { get; set; }
+
+    }
+
+    public partial class PBSysPara
+    {
+        public string Key { get; set; }
+
+        public string Value { get; set; }
+
     }
 
     public partial class CSGetMiGongLevel
@@ -38,6 +49,9 @@ namespace Example
     public partial class SCGetMiGongLevel
     {
         public List<int> StarInLevel { get; set; }
+
+        /// <summary> 已经过的关卡的星数</summary>
+        public int PassCount { get; set; }
 
     }
 
