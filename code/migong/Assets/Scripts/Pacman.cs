@@ -46,12 +46,12 @@ public class Pacman : MonoBehaviour {
 		if (userId == null || userId.Length == 0) {
 			this.userId = SocketManager.ACCOUNT_ID;
 		}
-		speed = 0.2f;
+		speed /= 100f;
 
 		transform.localPosition = mapCreate.getStartPointWithScale (inX,inY);
 
 		dest = transform.localPosition;
-		transform.localScale = transform.localScale * 0.6f;
+		transform.localScale = transform.localScale * 1f;
 
 		c = GetComponent<CircleCollider2D> ();
 
@@ -121,6 +121,11 @@ public class Pacman : MonoBehaviour {
 						Debug.Log (inX + "," + inY + "," + outX + "," + outY + "  finish,666");
 						finish = true;
 						mapCreate.passFinish (finish, route,true);
+						StringBuilder sb = new StringBuilder ();
+						foreach(int po in route){
+							sb.Append (po+",");
+						}
+						Debug.Log (sb.ToString());
 					}
 
 				}

@@ -20,6 +20,10 @@ public class MiGongPassInfo {
     private int pass;
     private Bean[] beans; // 豆子
     private Timestamp startTime; // 开始时间
+    private int bean1;
+    private int bean5;
+    private int bean10;
+
 
     public CreateMap getCreateMap() {
         return createMap;
@@ -102,5 +106,35 @@ public class MiGongPassInfo {
 
     public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
+    }
+
+    public int getBean1() {
+        return bean1;
+    }
+
+    public void setBean1(int bean1) {
+        this.bean1 = bean1;
+    }
+
+    public int getBean5() {
+        return bean5;
+    }
+
+    public void setBean5(int bean5) {
+        this.bean5 = bean5;
+    }
+
+    public int getBean10() {
+        return bean10;
+    }
+
+    public void setBean10(int bean10) {
+        this.bean10 = bean10;
+    }
+
+    public void setBeanCount(int bean1,int bean5,int bean10){
+        this.bean1 = bean1;
+        this.bean5 = bean5;
+        this.bean10 = bean10;
     }
 }

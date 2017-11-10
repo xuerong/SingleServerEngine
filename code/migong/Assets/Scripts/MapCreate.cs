@@ -114,7 +114,7 @@ public class MapCreate : MonoBehaviour{
 			starSlider.transform.parent.gameObject.SetActive (false);
 			GameObject scoreGo = Instantiate (scoreShow) as GameObject;
 			scoreGo.transform.localScale = new Vector3 (1,1,1);
-			scoreGo.transform.localPosition = new Vector3 (100, -(20+(80*scoreText.Count)),0);
+			scoreGo.transform.localPosition = new Vector3 (20+(85*scoreText.Count),-20,0);
 			scoreGo.transform.SetParent(transform.parent.parent.Find("Canvas"),false);
 			scoreText.Add (userId,scoreGo.transform.Find("Text").GetComponent<Text>());
 		}
@@ -248,7 +248,7 @@ public class MapCreate : MonoBehaviour{
 				if (stars [i-1] <= 0) {
 					starRec.gameObject.SetActive (false);
 				} else {
-					starRec.anchoredPosition = new Vector2 (i * perStarDelta, 0);
+					starRec.anchoredPosition = new Vector2 (i * perStarDelta, -40);
 				}
 			}
 		}

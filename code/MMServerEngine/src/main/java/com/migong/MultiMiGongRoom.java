@@ -30,8 +30,8 @@ public class MultiMiGongRoom extends MiGongRoom {
     private AtomicInteger frame = new AtomicInteger(0);
 
 
-    public MultiMiGongRoom(CreateMap createMap,int size, List<RoomUser> roomUsers,MiGongService miGongService) {
-        super(createMap,size);
+    public MultiMiGongRoom(CreateMap createMap,int size,int time,int speed, List<RoomUser> roomUsers,MiGongService miGongService) {
+        super(createMap,size,time,speed);
         this.miGongService = miGongService;
         List<Integer> list = new ArrayList<>(); // (1,1)(1,size-1)(size-1,1)(size-1,size-1)
         list.add(1);
@@ -122,7 +122,7 @@ public class MultiMiGongRoom extends MiGongRoom {
             future = roomBeginExecutor.schedule(()->{ // 时间到了结束
                 doOver(OverType.TimeOut);
 
-            },MiGongRoom.ROOM_MAX_TIME,TimeUnit.SECONDS);
+            },time,TimeUnit.SECONDS);
 
         },MiGongRoom.BEGIN_WAIT_TIME,TimeUnit.SECONDS);
     }

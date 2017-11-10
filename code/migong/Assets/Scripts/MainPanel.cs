@@ -18,6 +18,8 @@ public class MainPanel : MonoBehaviour {
 
 	private int energy;
 
+	private int matchingDialogId; // 匹配阶段弹窗的id
+
 	// Use this for initialization
 	void Start () {
 		show (uiMain);
@@ -56,7 +58,7 @@ public class MainPanel : MonoBehaviour {
 				// 消耗精力
 				energy = ret.Energy;
 				int[] stars= {ret.Star1,ret.Star2,ret.Star3,ret.Star4};
-				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans, ret.Start, ret.End, ret.Pass,null,stars);
+				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans, ret.Speed,ret.Start, ret.End, ret.Pass,null,stars);
 			});
 			ui.SetActive (false);
 		});
@@ -202,8 +204,12 @@ public class MainPanel : MonoBehaviour {
 
 	public void matchSuccess(int opcode, byte[] data){
 		SCMatchingSuccess matchingSuccess = SCMatchingSuccess.Deserialize (data);
-		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Start,matchingSuccess.End,1,matchingSuccess.OtherInfos,null);
+		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Speed,matchingSuccess.Start,matchingSuccess.End,1,matchingSuccess.OtherInfos,null);
 		ui.SetActive (false);
+		if (matchingDialogId > 0) {
+			WarnDialog.closeWaitDialog (matchingDialogId);
+			matchingDialogId = 0;
+		}
 	}
 
 	// Update is called once per frame
@@ -216,7 +222,7 @@ public class MainPanel : MonoBehaviour {
 			Debug.Log("send matching success,opcode = "+opcode);
 		});
 		//matchWaitTime
-		WarnDialog.showWaitDialog ("matching...", int.Parse (sysParas ["matchWaitTime"]), delegate() {
+		matchingDialogId = WarnDialog.showWaitDialog ("matching...", int.Parse (sysParas ["matchWaitTime"]), delegate() {
 			WarnDialog.showWarnDialog("match fail , please try again later.",null);	
 		});
 	}
@@ -230,11 +236,11 @@ public class MainPanel : MonoBehaviour {
 			// 消耗精力
 			energy = scmap.Energy;
 			int[] stars= {scmap.Star1,scmap.Star2,scmap.Star3,scmap.Star4};
-			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans, scmap.Start, scmap.End, scmap.Pass,null,stars);
+			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans, scmap.Speed,scmap.Start, scmap.End, scmap.Pass,null,stars);
 		});
 		ui.SetActive (false);
 	}
-	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int start,int end,int pass,List<PBOtherInfo> otherInfos,int[] stars){
+	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int speed,int start,int end,int pass,List<PBOtherInfo> otherInfos,int[] stars){
 		Object gamePanel = Resources.Load ("GamePanel");
 		GameObject gamePanelGo = Instantiate(gamePanel) as GameObject;
 		GameObject mapGo = gamePanelGo.transform.Find ("content/map").gameObject;
@@ -267,6 +273,7 @@ public class MainPanel : MonoBehaviour {
 		pacman.inY = start / size;
 		pacman.outX = end % size;
 		pacman.outY = end / size;
+		pacman.speed = speed;
 
 		mapCreate.size = size;
 		Debug.Log("map size:"+size+",End:"+end);
@@ -288,6 +295,7 @@ public class MainPanel : MonoBehaviour {
 				pacman.inY = otherInfo.Start / size;
 				pacman.outX = otherInfo.End % size;
 				pacman.outY = otherInfo.End / size;
+				pacman.speed = speed;
 
 				pacman.mapCreate = mapCreate;
 

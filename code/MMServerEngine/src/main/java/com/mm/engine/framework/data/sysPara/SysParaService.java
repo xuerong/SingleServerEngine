@@ -75,6 +75,17 @@ public class SysParaService {
     }
 
     /**
+     * 根据范围，获取随机的int值
+     * TODO 后面要缓存这种类型转换，并且系统更新配数的时候要重新加载
+     */
+    public int getRandomInt(String key){
+        String[] strs = paraMap.get(key).split("-");
+        int min = Integer.parseInt(strs[0]);
+        int max = Integer.parseInt(strs[1]);
+        return (int)(Math.random()*(max-min+1))+min;
+    }
+
+    /**
      * 修改参数，返回put之前的参数，并异步更新其它服务器的对应参数
      * @param key
      * @param value

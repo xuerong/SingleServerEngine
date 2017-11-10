@@ -5,37 +5,51 @@ using UnityEngine.UI;
 using System.Threading;
 
 // wait转定时器的代理
-public delegate void MyDelegate(AfterWaitAction afterWaitAction);
+delegate void MyDelegate(WaitDialogInfo waitDialogInfo);
 //
-public delegate void DialogOkAction();
-public delegate void AfterWaitAction();
+delegate void DialogOkAction();
+delegate void AfterWaitAction();
 
 
-
-class WarnDialogInfo{
+enum DialogState{
+	Before,
+	Showing,
+	Cancel
+}
+abstract class DialogInfo{
+	public int id;
+	public DialogState state = DialogState.Before;
+}
+class WarnDialogInfo : DialogInfo{
 	public string text;
 	public DialogOkAction okAction;
 }
 
-class WaitDialogInfo{
+class WaitDialogInfo : DialogInfo{
 	public string text;
 	public int time;
 	public AfterWaitAction afterWaitAction;
 }
 
-public class WarnDialog : MonoBehaviour {
+
+
+class WarnDialog : MonoBehaviour {
 	static WarnDialog instance;
 	static GameObject canvas;
 
 	static Queue<WarnDialogInfo> dialogQueue = new Queue<WarnDialogInfo>();
 	static Queue<WaitDialogInfo> waitDialogQueue = new Queue<WaitDialogInfo>();
 
+	static Dictionary<int,DialogInfo> dialogInfos = new Dictionary<int, DialogInfo> ();
+
 	DialogOkAction okAction;
 	Text text;
 
 	private static Button close;
 	private static Button ok;
-	void Awake(){
+
+	private static int id = 1; // from 1
+	void Awake(){ 
 		close = transform.Find ("Canvas/close").GetComponent<Button> ();
 		close.onClick.AddListener (delegate() {
 			canvas.SetActive(false);
@@ -50,7 +64,7 @@ public class WarnDialog : MonoBehaviour {
 		text = transform.Find ("Canvas/text").GetComponent<Text> ();
 		instance = this;
 		canvas = transform.Find ("Canvas").gameObject;
-		closeDialog ();
+		closeDialog (0);
 	}
 
 	void Update(){
@@ -61,32 +75,57 @@ public class WarnDialog : MonoBehaviour {
 				instance.text.text = w.text;
 				instance.okAction = w.okAction;
 				openDialog ();
+				w.state = DialogState.Showing;
 			}
 		}
 		if (waitDialogQueue.Count > 0 && !canvas.activeSelf) {
 			lock (waitDialogQueue) {
 				showButton (false,false);
 				WaitDialogInfo w = waitDialogQueue.Dequeue ();
+				if (w.state == DialogState.Cancel) {
+					return;
+				}
 				instance.text.text = w.text;
 				openDialog ();
-				Job.startJob (new MyDelegate(afterWait),w.time,w.afterWaitAction);
+				w.state = DialogState.Showing;
+				Job.startJob (new MyDelegate(afterWait),w.time,w);
 			}
 		}
 	}
-	public void afterWait(AfterWaitAction afterWaitAction){
-		closeDialog ();
-		if (afterWaitAction != null) {
-			afterWaitAction.Invoke ();
+	public void afterWait(WaitDialogInfo waitDialogInfo){
+		if (waitDialogInfo.state == DialogState.Cancel) {
+			return;
+		}
+		closeDialog (waitDialogInfo.id);
+		if (waitDialogInfo.afterWaitAction != null) {
+			waitDialogInfo.afterWaitAction.Invoke ();
 		}
 	}
 
-	public static void showWaitDialog(string text,int time,AfterWaitAction afterWaitAction){
+	public static int showWaitDialog(string text,int time,AfterWaitAction afterWaitAction){
 		WaitDialogInfo w = new WaitDialogInfo ();
 		w.text = text;
 		w.time = time;
 		w.afterWaitAction = afterWaitAction;
+		w.id = Interlocked.Increment (ref id);
 		lock (waitDialogQueue) {
 			waitDialogQueue.Enqueue (w);
+			dialogInfos.Add (w.id,w);
+		}
+		return w.id;
+	}
+	public static void closeWaitDialog(int id){
+		// 拿到，如果是未显示状态（变为取消），显示状态（关闭，），
+		lock (waitDialogQueue) {
+			if (dialogInfos.ContainsKey (id)) {
+				DialogInfo dialogInfo = dialogInfos [id];
+				if (dialogInfo.state == DialogState.Showing) {
+					closeDialog (id);
+				}
+				dialogInfo.state = DialogState.Cancel;
+			} else {
+				Debug.Log ("id = " + id + " is not exist");
+			}
 		}
 	}
 
@@ -104,9 +143,11 @@ public class WarnDialog : MonoBehaviour {
 		ok.gameObject.SetActive (okButton?true:false);
 		close.gameObject.SetActive (closeButton?true:false);
 	}
-
-	private static void closeDialog(){
+	private static void closeDialog(int id){
 		canvas.SetActive (false);
+		if (dialogInfos.ContainsKey (id)) {
+			dialogInfos.Remove (id);
+		}
 	}
 	private static void openDialog(){
 		canvas.SetActive (true);

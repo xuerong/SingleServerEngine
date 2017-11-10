@@ -71,7 +71,7 @@ public class SocketManager : MonoBehaviour {
 			}
 		} else {
 			if (sendQueue.Count > 0) { // 除了启动时的连接，有发送消息的时候再连
-				ConnectServerAndLogin ();
+//				ConnectServerAndLogin ();
 			}
 		}
 		// 接收的处理
@@ -102,7 +102,8 @@ public class SocketManager : MonoBehaviour {
 						CSLogin node = new CSLogin ();
 						node.AccountId = ACCOUNT_ID;
 						node.Url = "sdf";
-						node.Ip = "127.0.0.1";
+						node.Ip = "10.1.6.254";
+//						node.Ip = "10.0.2.2";
 						byte[] data = CSLogin.SerializeToBytes (node);
 						byte[] loginData = SocketManager.SendMessageSync ((int)AccountOpcode.CSLogin, data);
 						SCLogin scLogin = SCLogin.Deserialize (loginData);
@@ -125,7 +126,7 @@ public class SocketManager : MonoBehaviour {
 	private static bool ConnectServer()  
 	{  
 		bool ret = false;
-		string ip = "127.0.0.1";
+		string ip = "10.1.6.254";
 		int port = 8003;
 		if (clientSocket == null) {
 			clientSocket = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);  
@@ -144,7 +145,7 @@ public class SocketManager : MonoBehaviour {
 		} catch (Exception e){  
 			ret = false;  
 			Debug.Log ("连接服务器失败"+e);  
-			WarnDialog.showWarnDialog ("连接服务器失败1",delegate() {
+			WarnDialog.showWarnDialog ("连接服务器失败:"+e,delegate() {
 //				ConnectServer();
 			});
 			return ret;  
@@ -380,5 +381,37 @@ public class SocketManager : MonoBehaviour {
 	void OnDestroy () {
 		SocketManager.CloseConnect ();
 		Debug.Log("close connect");  
+	}
+
+
+	/**
+	 * 
+	 * 正常进:
+OnApplicationFocus, isFocus=True
+正常退:
+OnApplicationQuit
+
+Home出：
+OnApplicationPause, isPause=True
+OnApplicationFocus, isFocus=False
+
+Home进：
+OnApplicationPause, isPause=False
+OnApplicationFocus, _isFocus=True
+
+Kill进程：
+当前应用双击Home，然后Kill：
+OnApplicationQuit  (IOS 有回调，android 没回调)
+
+跳出当前应用，然后Kill：
+OnApplicationQuit  (IOS和Android都没回调)
+	 */
+	void OnApplicationPause(){
+		IsConnected = false;
+	}
+	void OnApplicationFocus(){
+		if (clientSocket.Connected) {
+			
+		}
 	}
 }

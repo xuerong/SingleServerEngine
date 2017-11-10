@@ -90,7 +90,7 @@ public class EntityHelper {
         int i=0;
         try {
             for(Map.Entry<String,Method> entry : map.entrySet()){
-                sb.append(entry.getKey()+"=? and");
+                sb.append(entry.getKey()+"=? and ");
                 params[i++] = entry.getValue().invoke(object);
             }
         }catch (IllegalAccessException |InvocationTargetException e){
