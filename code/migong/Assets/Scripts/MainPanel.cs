@@ -25,19 +25,19 @@ public class MainPanel : MonoBehaviour {
 		show (uiMain);
 		// 给主界面按钮加事件
 		string canvasPath = "main/ui/uiMain/Canvas/buttons/";
-		Button levelButton = GameObject.Find (canvasPath+"level").GetComponent<Button>();
+		Button levelButton = GameObject.Find (canvasPath+"level2").GetComponent<Button>();
 		levelButton.onClick.AddListener (delegate() {
 			// 打开level 界面
 			Debug.Log("open level window");
 			openLevelWindow();
 		});
-		Button unlimitButton = GameObject.Find (canvasPath+"unlimit").GetComponent<Button>();
+		Button unlimitButton = GameObject.Find (canvasPath+"unlimit2").GetComponent<Button>();
 		unlimitButton.onClick.AddListener (delegate() {
 			// 打开unlimit 界面
 			Debug.Log("open unlimit window");
 			openUnlimitWindow();
 		});
-		Button onlineButton = GameObject.Find (canvasPath+"online").GetComponent<Button>();
+		Button onlineButton = GameObject.Find (canvasPath+"online2").GetComponent<Button>();
 		onlineButton.onClick.AddListener (delegate() {
 			// 打开online 界面
 			Debug.Log("open online window");
@@ -111,7 +111,9 @@ public class MainPanel : MonoBehaviour {
 		}
 		// 获取当前关卡
 		CSGetMiGongLevel getMiGongLevel = new CSGetMiGongLevel();
+		Debug.Log("send getMiGongLevel:");
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetMiGongLevel, CSGetMiGongLevel.SerializeToBytes (getMiGongLevel),delegate(int opcode, byte[] data) {
+			Debug.Log("receive SCGetMiGongLevel:");
 			SCGetMiGongLevel level = SCGetMiGongLevel.Deserialize (data);
 			int count = level.PassCount;
 			float dis = 20f;
@@ -122,6 +124,8 @@ public class MainPanel : MonoBehaviour {
 
 			RectTransform contentTrans = content.GetComponent<RectTransform> ();
 			contentTrans.sizeDelta = new Vector2 (0,(buRec.rect.height + dis) * count + dis);
+
+			Debug.Log("count:"+count);
 
 			for (int i = 0; i < count; i++) {
 				up = Instantiate(button) as GameObject;

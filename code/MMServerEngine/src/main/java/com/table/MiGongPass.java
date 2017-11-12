@@ -3,12 +3,12 @@ package com.table;
 public final class MiGongPass{
 	public static final MiGongPass[] datas={
 		new MiGongPass((int)1.0,(int)5.0,(int)40.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)2.0,(int)6.0,(int)45.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)3.0,(int)7.0,(int)50.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)4.0,(int)8.0,(int)55.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)5.0,(int)9.0,(int)60.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)6.0,(int)10.0,(int)65.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)7.0,(int)11.0,(int)70.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
+		new MiGongPass((int)2.0,(int)10.0,(int)45.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
+		new MiGongPass((int)3.0,(int)15.0,(int)50.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
+		new MiGongPass((int)4.0,(int)20.0,(int)55.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
+		new MiGongPass((int)5.0,(int)25.0,(int)60.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
+		new MiGongPass((int)6.0,(int)40.0,(int)65.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
+		new MiGongPass((int)7.0,(int)110.0,(int)70.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
 		new MiGongPass((int)8.0,(int)12.0,(int)75.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
 		new MiGongPass((int)9.0,(int)13.0,(int)80.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
 		new MiGongPass((int)10.0,(int)14.0,(int)85.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,"")

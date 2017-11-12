@@ -197,8 +197,11 @@ public class MapCreate : MonoBehaviour{
 //		Object downShadow = Resources.Load ("downShadow");
 //		Object rightShadow = Resources.Load ("rightShadow");
 
-		Object bean = Resources.Load ("bean");
+		Object bean1 = Resources.Load ("bean1");
+		Object bean5 = Resources.Load ("bean5");
+		Object bean10 = Resources.Load ("bean10");
 		int maxScore = 0;
+		float mapWidth = td * nodeX;
 		for (int i = 0; i < tr; i++) {										//绘制墙
 			for (int j = 0; j < td; j++) {
 				if ((map[i][j] & 2) == 2) {
@@ -227,7 +230,7 @@ public class MapCreate : MonoBehaviour{
 				}
 				if (beanMap!= null && beanMap [i] [j] != null) {
 					int w = tr - i-1;
-					GameObject beanGo = Instantiate(bean) as GameObject;
+					GameObject beanGo = Instantiate(beanMap [i] [j].score == 10?bean10:(beanMap [i] [j].score == 5?bean5:bean1)) as GameObject;
 					beanGo.transform.parent = transform;
 					beanGo.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,0);
 					beanGo.transform.localScale = new Vector3 (myScale* 0.6f,myScale* 0.6f,1);
@@ -258,7 +261,17 @@ public class MapCreate : MonoBehaviour{
 		// 修改相机大小
 		ca = camera.GetComponent<Camera>();
 		defaultOrthographicSize = ca.orthographicSize;
-		ca.orthographicSize = defaultOrthographicSize * Mathf.Max (tr, td) / 20;
+//		ca.orthographicSize = defaultOrthographicSize * Mathf.Max (tr, td) / mapWidth;
+		float hwRate = (float)Screen.height/Screen.width;
+		ca.orthographicSize = defaultOrthographicSize * Mathf.Max (tr, td) /1.2f * hwRate;
+
+		//
+//		float defaultRate = 
+//		float hwRate = (float)Screen.height/Screen.width;
+
+
+
+		Debug.Log("width:"+Screen.width+",height:"+Screen.height);
 	}
 
 	public void setEndEffect(int x,int y){

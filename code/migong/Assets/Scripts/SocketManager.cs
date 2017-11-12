@@ -62,6 +62,7 @@ public class SocketManager : MonoBehaviour {
 	void Update(){
 		// 发送
 		if (IsConnected && IsLogin) {
+			
 			if (sendQueue.Count > 0) {
 				int count = 0;
 				while (sendQueue.Count > 0 && count++ < MAX_SEND_COUNT) {
@@ -102,7 +103,7 @@ public class SocketManager : MonoBehaviour {
 						CSLogin node = new CSLogin ();
 						node.AccountId = ACCOUNT_ID;
 						node.Url = "sdf";
-						node.Ip = "10.1.6.254";
+						node.Ip = "127.0.0.1";
 //						node.Ip = "10.0.2.2";
 						byte[] data = CSLogin.SerializeToBytes (node);
 						byte[] loginData = SocketManager.SendMessageSync ((int)AccountOpcode.CSLogin, data);
@@ -126,7 +127,7 @@ public class SocketManager : MonoBehaviour {
 	private static bool ConnectServer()  
 	{  
 		bool ret = false;
-		string ip = "10.1.6.254";
+		string ip = "127.0.0.1";
 		int port = 8003;
 		if (clientSocket == null) {
 			clientSocket = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);  
@@ -407,7 +408,7 @@ OnApplicationQuit  (IOS 有回调，android 没回调)
 OnApplicationQuit  (IOS和Android都没回调)
 	 */
 	void OnApplicationPause(){
-		IsConnected = false;
+//		IsConnected = false;
 	}
 	void OnApplicationFocus(){
 		if (clientSocket.Connected) {
