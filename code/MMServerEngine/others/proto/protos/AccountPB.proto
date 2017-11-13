@@ -19,3 +19,17 @@ message SCLogout
 {
 
 }
+// 获取登陆信息，
+// 1、当第一次登陆的时候，获取自己要在哪里注册
+// 2、前端清理了缓存，需要重新获取自己账号所在服务器
+message CSGetLoginInfo
+{
+	required string deviceId 			= 1;
+}
+message SCGetLoginInfo
+{
+	required int32 serverId		= 1;
+	required string ip		= 2;
+	required int32 port		= 3;
+	required string accountId		= 4;
+}

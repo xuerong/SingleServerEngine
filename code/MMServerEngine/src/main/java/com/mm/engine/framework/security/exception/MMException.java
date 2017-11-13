@@ -17,6 +17,11 @@ public class MMException extends RuntimeException {
         printStackTrace();
     }
 
+    public MMException(String msg,Throwable cause) {
+        super(msg, cause);
+        cause.printStackTrace();
+    }
+
     public MMException(Throwable cause) {
         super(null, cause);
         cause.printStackTrace();

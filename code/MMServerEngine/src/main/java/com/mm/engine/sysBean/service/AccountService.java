@@ -2,37 +2,75 @@ package com.mm.engine.sysBean.service;
 
 import com.mm.engine.framework.control.annotation.Request;
 import com.mm.engine.framework.control.annotation.Service;
-import com.mm.engine.framework.data.entity.account.Account;
-import com.mm.engine.framework.data.entity.account.AccountSysService;
-import com.mm.engine.framework.data.entity.account.LoginSegment;
-import com.mm.engine.framework.data.entity.account.MessageSender;
+import com.mm.engine.framework.data.DataService;
+import com.mm.engine.framework.data.entity.ServerInfo;
+import com.mm.engine.framework.data.entity.account.*;
 import com.mm.engine.framework.data.entity.session.ConnectionClose;
 import com.mm.engine.framework.data.entity.session.Session;
 import com.mm.engine.framework.data.entity.session.SessionService;
+import com.mm.engine.framework.data.tx.Tx;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.code.RetPacketImpl;
 import com.mm.engine.framework.security.exception.MMException;
+import com.mm.engine.framework.security.exception.ToClientException;
+import com.mm.engine.framework.server.IdService;
+import com.mm.engine.framework.server.Server;
 import com.mm.engine.framework.server.ServerType;
 import com.mm.engine.framework.tool.helper.BeanHelper;
 import com.protocol.AccountOpcode;
 import com.protocol.AccountPB;
+import com.sys.SysPara;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.sql.Timestamp;
+import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by a on 2016/9/20.
  */
 @Service(init = "init")
 public class AccountService {
+    private static final Logger log = LoggerFactory.getLogger(AccountService.class);
     // account-session
     private ConcurrentHashMap<String,Session> sessionMap;
+    // 系统启动的时候把所有的服务器加载到内存，然后，定期更新服务器列表，这样，新加的服务器就进来了
+    private List<ServerInfo> serverInfos;
+    private ServerInfo currentServer; // 当前需要分配的server,一直分配到该服务器，直到不行的再重新设置当前服务器
 
     public AccountSysService accountSysService;
+    private DataService dataService;
+    private IdService idService;
 
     public void init(){
         sessionMap = new ConcurrentHashMap<>();
+        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                List<ServerInfo> serverInfos = dataService.selectList(ServerInfo.class,null);
+                if(serverInfos == null || serverInfos.size() == 0){
+                    throw new MMException("server info is empty");
+                }
+                serverInfos.sort(new Comparator<ServerInfo>() {
+                    @Override
+                    public int compare(ServerInfo o1, ServerInfo o2) {
+                        return o2.getAccountCount() - o1.getAccountCount();
+                    }
+                });
+                AccountService.this.serverInfos = serverInfos;
+
+                if(!refreshCurrentServer()){
+                    throw new MMException("server is too full to add people!!!");
+                }
+            }
+        },0,5, TimeUnit.MINUTES);
     }
 
     public RetPacket login(int opcode, Object data, ChannelHandlerContext ctx,AttributeKey<String> sessionKey) throws Throwable{
@@ -80,6 +118,67 @@ public class AccountService {
         builder.setSessionId(loginSegment.getSession().getSessionId());
         RetPacket retPacket = new RetPacketImpl(AccountOpcode.SCLogin,false,builder.build().toByteArray());
         return retPacket;
+    }
+    @Tx
+    @Request(opcode = AccountOpcode.CSGetLoginInfo)
+    public RetPacket getLoginInfo(Object data, Session session) throws Throwable{
+        AccountPB.CSGetLoginInfo loginInfo = AccountPB.CSGetLoginInfo.parseFrom((byte[])data);
+        if(StringUtils.isEmpty(loginInfo.getDeviceId())){
+            throw new ToClientException("deviceId is empty,deviceId = "+loginInfo.getDeviceId());
+        }
+        DeviceAccount deviceAccount = dataService.selectObject(DeviceAccount.class,"deviceId=?",loginInfo.getDeviceId());
+        if(deviceAccount == null){ // 创建新的账号
+            deviceAccount = new DeviceAccount();
+            deviceAccount.setDeviceId(loginInfo.getDeviceId());
+            deviceAccount.setAccountId(String.valueOf(idService.acquireLong(AccountService.class)));
+            deviceAccount.setCreateTime(new Timestamp(System.currentTimeMillis()));
+            ServerInfo serverInfo = serverForNewUser();
+            deviceAccount.setIp(serverInfo.getIp());
+            deviceAccount.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
+            deviceAccount.setPort(serverInfo.getPort());
+            deviceAccount.setServerId(serverInfo.getId());
+            dataService.insert(deviceAccount);
+            serverInfo.setAccountCount(serverInfo.getAccountCount() + 1);
+            dataService.update(serverInfo);
+            log.info("new user register,device id = {},ip = {}",loginInfo.getDeviceId(),session.getIp());
+        }
+        AccountPB.SCGetLoginInfo.Builder builder = AccountPB.SCGetLoginInfo.newBuilder();
+        builder.setServerId(deviceAccount.getServerId());
+        builder.setPort(deviceAccount.getPort());
+        builder.setIp(deviceAccount.getIp());
+        builder.setAccountId(deviceAccount.getAccountId());
+        log.info("new user login,device id = {},ip = {}",loginInfo.getDeviceId(),session.getIp());
+        RetPacket retPacket = new RetPacketImpl(AccountOpcode.SCGetLoginInfo,false,builder.build().toByteArray());
+        return retPacket;
+    }
+    // 为新玩家分配服务器，规则
+    private ServerInfo serverForNewUser(){
+        if(!refreshCurrentServer()){
+            throw new ToClientException("server is full,please register after a while!");
+        }
+        return currentServer;
+    }
+    private synchronized boolean refreshCurrentServer(){ // 刷新当前分配server
+        if(currentServer == null || currentServer.isFull()){
+            ServerInfo leastServerInfo = serverInfos.get(0);
+            for(ServerInfo serverInfo : serverInfos){
+                if(!serverInfo.isFull()){
+                    currentServer = serverInfo;
+                    return true;
+                }
+                if(serverInfo.getAccountCount() < leastServerInfo.getAccountCount()){
+                    leastServerInfo = serverInfo;
+                }
+            }
+            // 能走到这里，说明服务器都满了
+            currentServer = leastServerInfo;
+            if(currentServer.isMax()){
+                log.error("all server is too full!!!!!!!! can not register new user");
+                return false;
+            }
+            log.error("all server is full!!!!!!!! must add new Server");
+        }
+        return true;
     }
     @Request(opcode = AccountOpcode.CSLogout)
     public RetPacket logout(Object data,Session session) throws Throwable{

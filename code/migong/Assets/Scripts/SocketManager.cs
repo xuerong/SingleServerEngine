@@ -8,6 +8,7 @@ using System;
 using System.Threading;
 using Example;
 using com.protocol;
+using System.Net.NetworkInformation;
 
 public delegate void ActionForReceive(int opcode,byte[] data);
 
@@ -23,8 +24,18 @@ public class AsyncObject{
 }
 
 public class SocketManager : MonoBehaviour {
-	public static string ACCOUNT_ID = "asdfadf668";
+	public static string ACCOUNT_KEY = "account";
+	public static string SERVER_ID_KEY = "server_id";
+	public static string SERVER_IP_KEY = "server_ip";
+	public static string SERVER_PORT_KEY = "server_port";
+
+
 	public static int MAX_SEND_COUNT = 5; // 一次最大发送消息
+
+	public static string accountId;
+	public static int port;
+	public static string ip;
+	public static int serverId;
 	/**
 	 * BlockingQueue 用来发包
 	 * Queue queue = Queue.Synchronized (new Queue ());
@@ -54,9 +65,62 @@ public class SocketManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		if (!IsConnected) {
-			ConnectServerAndLogin ();
+		PlayerPrefs.DeleteAll ();
+
+		serverId = PlayerPrefs.GetInt (SERVER_ID_KEY);
+		ip = PlayerPrefs.GetString (SERVER_IP_KEY);
+		port = PlayerPrefs.GetInt (SERVER_PORT_KEY);
+		accountId = PlayerPrefs.GetString (ACCOUNT_KEY);
+		Debug.Log ((ip=="")+","+port+","+accountId);
+		if (ip == "" || accountId == "") {
+			StartCoroutine (PostReq());
+		} else {
+			if (!IsConnected) {
+				ConnectServerAndLogin ();
+			}
 		}
+	}
+
+	IEnumerator PostReq () {
+		Dictionary<string,string> headers = new Dictionary<string, string> ();
+		headers.Add("opcode",(int)AccountOpcode.CSGetLoginInfo+"");
+		CSGetLoginInfo loginInfo = new CSGetLoginInfo ();
+		NetworkInterface[] nis = NetworkInterface.GetAllNetworkInterfaces ();
+		foreach (NetworkInterface ni in nis) {  
+			Debug.Log ("Name = " + ni.Name );  
+			Debug.Log ("Description = " + ni.Description );  
+			Debug.Log ("NetworkInterfaceType = " + ni.NetworkInterfaceType.ToString() );  
+			Debug.Log ("Mac地址 = " + ni.GetPhysicalAddress().ToString() );  /// Ethernet 6C0B8490F3B5
+			if ("Ethernet".Equals (ni.NetworkInterfaceType.ToString ())) {
+				loginInfo.DeviceId = ni.GetPhysicalAddress ().ToString ();
+			}
+		}  
+//		loginInfo.DeviceId = "shdfhkshfk";
+		WWW getData = new WWW("http://10.1.6.254:8083",CSGetLoginInfo.SerializeToBytes(loginInfo),headers);
+		yield return getData;
+		if(getData.error!= null){  
+			Debug.Log (getData.error);
+			WarnDialog.showWarnDialog ("get server info fail !",null);
+		}else{ 
+			SCGetLoginInfo ret = SCGetLoginInfo.Deserialize (getData.bytes);
+			serverId = ret.ServerId;
+			accountId = ret.AccountId;
+			ip = ret.Ip;
+			port = ret.Port;
+
+			PlayerPrefs.SetInt (SERVER_ID_KEY,serverId);
+			PlayerPrefs.SetString (SERVER_IP_KEY,ip);
+			PlayerPrefs.SetInt (SERVER_PORT_KEY,port);
+			PlayerPrefs.SetString (ACCOUNT_KEY,accountId);
+			PlayerPrefs.Save ();
+
+			ConnectServerAndLogin ();
+
+			Debug.Log ("accountId = " + ret.AccountId);  
+			Debug.Log ("serverId = " + ret.ServerId);  
+			Debug.Log ("ip = " + ret.Ip);  
+			Debug.Log ("port = " + ret.Port);  
+		}         
 	}
 
 	void Update(){
@@ -101,9 +165,9 @@ public class SocketManager : MonoBehaviour {
 					if (ConnectServer ()) {
 						IsConnected = true;
 						CSLogin node = new CSLogin ();
-						node.AccountId = ACCOUNT_ID;
+						node.AccountId = accountId;
 						node.Url = "sdf";
-						node.Ip = "127.0.0.1";
+						node.Ip = ip;
 //						node.Ip = "10.0.2.2";
 						byte[] data = CSLogin.SerializeToBytes (node);
 						byte[] loginData = SocketManager.SendMessageSync ((int)AccountOpcode.CSLogin, data);
@@ -127,8 +191,8 @@ public class SocketManager : MonoBehaviour {
 	private static bool ConnectServer()  
 	{  
 		bool ret = false;
-		string ip = "127.0.0.1";
-		int port = 8003;
+		string ip = SocketManager.ip;
+		int port = SocketManager.port;
 		if (clientSocket == null) {
 			clientSocket = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);  
 		}
@@ -411,8 +475,8 @@ OnApplicationQuit  (IOS和Android都没回调)
 //		IsConnected = false;
 	}
 	void OnApplicationFocus(){
-		if (clientSocket.Connected) {
-			
-		}
+//		if (clientSocket.Connected) {
+//			
+//		}
 	}
 }

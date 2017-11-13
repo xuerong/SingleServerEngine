@@ -2092,6 +2092,1318 @@ public final class AccountPB {
     // @@protoc_insertion_point(class_scope:SCLogout)
   }
 
+  public interface CSGetLoginInfoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required string deviceId = 1;
+    /**
+     * <code>required string deviceId = 1;</code>
+     */
+    boolean hasDeviceId();
+    /**
+     * <code>required string deviceId = 1;</code>
+     */
+    java.lang.String getDeviceId();
+    /**
+     * <code>required string deviceId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getDeviceIdBytes();
+  }
+  /**
+   * Protobuf type {@code CSGetLoginInfo}
+   *
+   * <pre>
+   * 获取登陆信息，
+   * 1、当第一次登陆的时候，获取自己要在哪里注册
+   * 2、前端清理了缓存，需要重新获取自己账号所在服务器
+   * </pre>
+   */
+  public static final class CSGetLoginInfo extends
+      com.google.protobuf.GeneratedMessage
+      implements CSGetLoginInfoOrBuilder {
+    // Use CSGetLoginInfo.newBuilder() to construct.
+    private CSGetLoginInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSGetLoginInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSGetLoginInfo defaultInstance;
+    public static CSGetLoginInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSGetLoginInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSGetLoginInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              deviceId_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.protocol.AccountPB.internal_static_CSGetLoginInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.protocol.AccountPB.internal_static_CSGetLoginInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.protocol.AccountPB.CSGetLoginInfo.class, com.protocol.AccountPB.CSGetLoginInfo.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSGetLoginInfo> PARSER =
+        new com.google.protobuf.AbstractParser<CSGetLoginInfo>() {
+      public CSGetLoginInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSGetLoginInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSGetLoginInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required string deviceId = 1;
+    public static final int DEVICEID_FIELD_NUMBER = 1;
+    private java.lang.Object deviceId_;
+    /**
+     * <code>required string deviceId = 1;</code>
+     */
+    public boolean hasDeviceId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string deviceId = 1;</code>
+     */
+    public java.lang.String getDeviceId() {
+      java.lang.Object ref = deviceId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          deviceId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string deviceId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDeviceIdBytes() {
+      java.lang.Object ref = deviceId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        deviceId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      deviceId_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasDeviceId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getDeviceIdBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getDeviceIdBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.protocol.AccountPB.CSGetLoginInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.AccountPB.CSGetLoginInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.AccountPB.CSGetLoginInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.AccountPB.CSGetLoginInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.AccountPB.CSGetLoginInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.AccountPB.CSGetLoginInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.protocol.AccountPB.CSGetLoginInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.protocol.AccountPB.CSGetLoginInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.protocol.AccountPB.CSGetLoginInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.AccountPB.CSGetLoginInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.protocol.AccountPB.CSGetLoginInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CSGetLoginInfo}
+     *
+     * <pre>
+     * 获取登陆信息，
+     * 1、当第一次登陆的时候，获取自己要在哪里注册
+     * 2、前端清理了缓存，需要重新获取自己账号所在服务器
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.protocol.AccountPB.CSGetLoginInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.protocol.AccountPB.internal_static_CSGetLoginInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.protocol.AccountPB.internal_static_CSGetLoginInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.protocol.AccountPB.CSGetLoginInfo.class, com.protocol.AccountPB.CSGetLoginInfo.Builder.class);
+      }
+
+      // Construct using com.protocol.AccountPB.CSGetLoginInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        deviceId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.protocol.AccountPB.internal_static_CSGetLoginInfo_descriptor;
+      }
+
+      public com.protocol.AccountPB.CSGetLoginInfo getDefaultInstanceForType() {
+        return com.protocol.AccountPB.CSGetLoginInfo.getDefaultInstance();
+      }
+
+      public com.protocol.AccountPB.CSGetLoginInfo build() {
+        com.protocol.AccountPB.CSGetLoginInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.protocol.AccountPB.CSGetLoginInfo buildPartial() {
+        com.protocol.AccountPB.CSGetLoginInfo result = new com.protocol.AccountPB.CSGetLoginInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.deviceId_ = deviceId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.protocol.AccountPB.CSGetLoginInfo) {
+          return mergeFrom((com.protocol.AccountPB.CSGetLoginInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.protocol.AccountPB.CSGetLoginInfo other) {
+        if (other == com.protocol.AccountPB.CSGetLoginInfo.getDefaultInstance()) return this;
+        if (other.hasDeviceId()) {
+          bitField0_ |= 0x00000001;
+          deviceId_ = other.deviceId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasDeviceId()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.protocol.AccountPB.CSGetLoginInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.protocol.AccountPB.CSGetLoginInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required string deviceId = 1;
+      private java.lang.Object deviceId_ = "";
+      /**
+       * <code>required string deviceId = 1;</code>
+       */
+      public boolean hasDeviceId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string deviceId = 1;</code>
+       */
+      public java.lang.String getDeviceId() {
+        java.lang.Object ref = deviceId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          deviceId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string deviceId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDeviceIdBytes() {
+        java.lang.Object ref = deviceId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          deviceId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string deviceId = 1;</code>
+       */
+      public Builder setDeviceId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        deviceId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string deviceId = 1;</code>
+       */
+      public Builder clearDeviceId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        deviceId_ = getDefaultInstance().getDeviceId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string deviceId = 1;</code>
+       */
+      public Builder setDeviceIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        deviceId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:CSGetLoginInfo)
+    }
+
+    static {
+      defaultInstance = new CSGetLoginInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:CSGetLoginInfo)
+  }
+
+  public interface SCGetLoginInfoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int32 serverId = 1;
+    /**
+     * <code>required int32 serverId = 1;</code>
+     */
+    boolean hasServerId();
+    /**
+     * <code>required int32 serverId = 1;</code>
+     */
+    int getServerId();
+
+    // required string ip = 2;
+    /**
+     * <code>required string ip = 2;</code>
+     */
+    boolean hasIp();
+    /**
+     * <code>required string ip = 2;</code>
+     */
+    java.lang.String getIp();
+    /**
+     * <code>required string ip = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getIpBytes();
+
+    // required int32 port = 3;
+    /**
+     * <code>required int32 port = 3;</code>
+     */
+    boolean hasPort();
+    /**
+     * <code>required int32 port = 3;</code>
+     */
+    int getPort();
+
+    // required string accountId = 4;
+    /**
+     * <code>required string accountId = 4;</code>
+     */
+    boolean hasAccountId();
+    /**
+     * <code>required string accountId = 4;</code>
+     */
+    java.lang.String getAccountId();
+    /**
+     * <code>required string accountId = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getAccountIdBytes();
+  }
+  /**
+   * Protobuf type {@code SCGetLoginInfo}
+   */
+  public static final class SCGetLoginInfo extends
+      com.google.protobuf.GeneratedMessage
+      implements SCGetLoginInfoOrBuilder {
+    // Use SCGetLoginInfo.newBuilder() to construct.
+    private SCGetLoginInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private SCGetLoginInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final SCGetLoginInfo defaultInstance;
+    public static SCGetLoginInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public SCGetLoginInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SCGetLoginInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              serverId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              ip_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              port_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              accountId_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.protocol.AccountPB.internal_static_SCGetLoginInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.protocol.AccountPB.internal_static_SCGetLoginInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.protocol.AccountPB.SCGetLoginInfo.class, com.protocol.AccountPB.SCGetLoginInfo.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<SCGetLoginInfo> PARSER =
+        new com.google.protobuf.AbstractParser<SCGetLoginInfo>() {
+      public SCGetLoginInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SCGetLoginInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SCGetLoginInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int32 serverId = 1;
+    public static final int SERVERID_FIELD_NUMBER = 1;
+    private int serverId_;
+    /**
+     * <code>required int32 serverId = 1;</code>
+     */
+    public boolean hasServerId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 serverId = 1;</code>
+     */
+    public int getServerId() {
+      return serverId_;
+    }
+
+    // required string ip = 2;
+    public static final int IP_FIELD_NUMBER = 2;
+    private java.lang.Object ip_;
+    /**
+     * <code>required string ip = 2;</code>
+     */
+    public boolean hasIp() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string ip = 2;</code>
+     */
+    public java.lang.String getIp() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          ip_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string ip = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIpBytes() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ip_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // required int32 port = 3;
+    public static final int PORT_FIELD_NUMBER = 3;
+    private int port_;
+    /**
+     * <code>required int32 port = 3;</code>
+     */
+    public boolean hasPort() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 port = 3;</code>
+     */
+    public int getPort() {
+      return port_;
+    }
+
+    // required string accountId = 4;
+    public static final int ACCOUNTID_FIELD_NUMBER = 4;
+    private java.lang.Object accountId_;
+    /**
+     * <code>required string accountId = 4;</code>
+     */
+    public boolean hasAccountId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required string accountId = 4;</code>
+     */
+    public java.lang.String getAccountId() {
+      java.lang.Object ref = accountId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          accountId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string accountId = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAccountIdBytes() {
+      java.lang.Object ref = accountId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        accountId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      serverId_ = 0;
+      ip_ = "";
+      port_ = 0;
+      accountId_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasServerId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasIp()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPort()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasAccountId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, serverId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getIpBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, port_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getAccountIdBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, serverId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getIpBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, port_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getAccountIdBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.protocol.AccountPB.SCGetLoginInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.AccountPB.SCGetLoginInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.AccountPB.SCGetLoginInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.AccountPB.SCGetLoginInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.AccountPB.SCGetLoginInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.AccountPB.SCGetLoginInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.protocol.AccountPB.SCGetLoginInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.protocol.AccountPB.SCGetLoginInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.protocol.AccountPB.SCGetLoginInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.AccountPB.SCGetLoginInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.protocol.AccountPB.SCGetLoginInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code SCGetLoginInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.protocol.AccountPB.SCGetLoginInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.protocol.AccountPB.internal_static_SCGetLoginInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.protocol.AccountPB.internal_static_SCGetLoginInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.protocol.AccountPB.SCGetLoginInfo.class, com.protocol.AccountPB.SCGetLoginInfo.Builder.class);
+      }
+
+      // Construct using com.protocol.AccountPB.SCGetLoginInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        serverId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        ip_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        port_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        accountId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.protocol.AccountPB.internal_static_SCGetLoginInfo_descriptor;
+      }
+
+      public com.protocol.AccountPB.SCGetLoginInfo getDefaultInstanceForType() {
+        return com.protocol.AccountPB.SCGetLoginInfo.getDefaultInstance();
+      }
+
+      public com.protocol.AccountPB.SCGetLoginInfo build() {
+        com.protocol.AccountPB.SCGetLoginInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.protocol.AccountPB.SCGetLoginInfo buildPartial() {
+        com.protocol.AccountPB.SCGetLoginInfo result = new com.protocol.AccountPB.SCGetLoginInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.serverId_ = serverId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.ip_ = ip_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.port_ = port_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.accountId_ = accountId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.protocol.AccountPB.SCGetLoginInfo) {
+          return mergeFrom((com.protocol.AccountPB.SCGetLoginInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.protocol.AccountPB.SCGetLoginInfo other) {
+        if (other == com.protocol.AccountPB.SCGetLoginInfo.getDefaultInstance()) return this;
+        if (other.hasServerId()) {
+          setServerId(other.getServerId());
+        }
+        if (other.hasIp()) {
+          bitField0_ |= 0x00000002;
+          ip_ = other.ip_;
+          onChanged();
+        }
+        if (other.hasPort()) {
+          setPort(other.getPort());
+        }
+        if (other.hasAccountId()) {
+          bitField0_ |= 0x00000008;
+          accountId_ = other.accountId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasServerId()) {
+          
+          return false;
+        }
+        if (!hasIp()) {
+          
+          return false;
+        }
+        if (!hasPort()) {
+          
+          return false;
+        }
+        if (!hasAccountId()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.protocol.AccountPB.SCGetLoginInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.protocol.AccountPB.SCGetLoginInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int32 serverId = 1;
+      private int serverId_ ;
+      /**
+       * <code>required int32 serverId = 1;</code>
+       */
+      public boolean hasServerId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 serverId = 1;</code>
+       */
+      public int getServerId() {
+        return serverId_;
+      }
+      /**
+       * <code>required int32 serverId = 1;</code>
+       */
+      public Builder setServerId(int value) {
+        bitField0_ |= 0x00000001;
+        serverId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 serverId = 1;</code>
+       */
+      public Builder clearServerId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        serverId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required string ip = 2;
+      private java.lang.Object ip_ = "";
+      /**
+       * <code>required string ip = 2;</code>
+       */
+      public boolean hasIp() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string ip = 2;</code>
+       */
+      public java.lang.String getIp() {
+        java.lang.Object ref = ip_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          ip_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string ip = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIpBytes() {
+        java.lang.Object ref = ip_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ip_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string ip = 2;</code>
+       */
+      public Builder setIp(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        ip_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string ip = 2;</code>
+       */
+      public Builder clearIp() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        ip_ = getDefaultInstance().getIp();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string ip = 2;</code>
+       */
+      public Builder setIpBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        ip_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required int32 port = 3;
+      private int port_ ;
+      /**
+       * <code>required int32 port = 3;</code>
+       */
+      public boolean hasPort() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 port = 3;</code>
+       */
+      public int getPort() {
+        return port_;
+      }
+      /**
+       * <code>required int32 port = 3;</code>
+       */
+      public Builder setPort(int value) {
+        bitField0_ |= 0x00000004;
+        port_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 port = 3;</code>
+       */
+      public Builder clearPort() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        port_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required string accountId = 4;
+      private java.lang.Object accountId_ = "";
+      /**
+       * <code>required string accountId = 4;</code>
+       */
+      public boolean hasAccountId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required string accountId = 4;</code>
+       */
+      public java.lang.String getAccountId() {
+        java.lang.Object ref = accountId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          accountId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string accountId = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAccountIdBytes() {
+        java.lang.Object ref = accountId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          accountId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string accountId = 4;</code>
+       */
+      public Builder setAccountId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        accountId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string accountId = 4;</code>
+       */
+      public Builder clearAccountId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        accountId_ = getDefaultInstance().getAccountId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string accountId = 4;</code>
+       */
+      public Builder setAccountIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        accountId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:SCGetLoginInfo)
+    }
+
+    static {
+      defaultInstance = new SCGetLoginInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:SCGetLoginInfo)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_CSLogin_descriptor;
   private static
@@ -2112,6 +3424,16 @@ public final class AccountPB {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_SCLogout_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_CSGetLoginInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_CSGetLoginInfo_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_SCGetLoginInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_SCGetLoginInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2124,8 +3446,11 @@ public final class AccountPB {
       "\n\026protos/AccountPB.proto\"5\n\007CSLogin\022\021\n\ta" +
       "ccountId\030\001 \002(\t\022\013\n\003url\030\002 \002(\t\022\n\n\002ip\030\003 \002(\t\"" +
       "\034\n\007SCLogin\022\021\n\tsessionId\030\001 \002(\t\"\035\n\010CSLogou" +
-      "t\022\021\n\taccountId\030\001 \002(\t\"\n\n\010SCLogoutB\016\n\014com." +
-      "protocol"
+      "t\022\021\n\taccountId\030\001 \002(\t\"\n\n\010SCLogout\"\"\n\016CSGe" +
+      "tLoginInfo\022\020\n\010deviceId\030\001 \002(\t\"O\n\016SCGetLog" +
+      "inInfo\022\020\n\010serverId\030\001 \002(\005\022\n\n\002ip\030\002 \002(\t\022\014\n\004" +
+      "port\030\003 \002(\005\022\021\n\taccountId\030\004 \002(\tB\016\n\014com.pro" +
+      "tocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2156,6 +3481,18 @@ public final class AccountPB {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCLogout_descriptor,
               new java.lang.String[] { });
+          internal_static_CSGetLoginInfo_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_CSGetLoginInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_CSGetLoginInfo_descriptor,
+              new java.lang.String[] { "DeviceId", });
+          internal_static_SCGetLoginInfo_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_SCGetLoginInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_SCGetLoginInfo_descriptor,
+              new java.lang.String[] { "ServerId", "Ip", "Port", "AccountId", });
           return null;
         }
       };

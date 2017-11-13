@@ -2,15 +2,21 @@ package com.mm.engine.framework.server;
 
 import com.mm.engine.framework.control.annotation.Service;
 import com.mm.engine.framework.control.netEvent.remote.RemoteCallService;
+import com.mm.engine.framework.data.DataService;
+import com.mm.engine.framework.data.tx.LockerService;
 import com.mm.engine.framework.security.exception.MMException;
 import com.mm.engine.framework.tool.helper.BeanHelper;
 import org.eclipse.jetty.util.ConcurrentHashSet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by a on 2016/9/14.
@@ -20,21 +26,67 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 
  * ,runOnEveryServer = false
  */
-@Service(init = "init",runOnEveryServer = false)
+@Service(init = "init",destroy = "destroy",runOnEveryServer = false)
 public class IdService {
+    private static final Logger log = LoggerFactory.getLogger(IdService.class);
 
     private RemoteCallService remoteCallService;
+    private DataService dataService;
+    private LockerService lockerService;
 
     private ConcurrentHashMap<Class,IdSegment> intIdSegmentMap;
-    private ConcurrentHashMap<Class,IdSegment> longIdSegmentMap;
+    private ConcurrentHashMap<Class,IdSegmentLong> longIdSegmentMap;
 
     public void init(){
         remoteCallService = BeanHelper.getServiceBean(RemoteCallService.class);
-        //TODO 从数据库中载入当前各个id状态
         intIdSegmentMap = new ConcurrentHashMap<>();
         longIdSegmentMap = new ConcurrentHashMap<>();
+        //TODO 从数据库中载入当前各个id状态
+        List<IdGenerator> idGenerators = dataService.selectList(IdGenerator.class,null);
+        if(idGenerators != null){
+            for(IdGenerator idGenerator : idGenerators){
+                try {
+                    Class cls = Class.forName(idGenerator.getClassName());
+                    IdSegmentLong idSegment = new IdSegmentLong(cls,idGenerator.getId());
+                    longIdSegmentMap.put(cls, idSegment);
+                }catch (Throwable e){
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
+    public long acquireLong(Class<?> cls){
+        if(lockerService.lockKeys(cls.getName())) {
+            try {
+                IdSegmentLong idSegmentLong = longIdSegmentMap.get(cls);
+                if (idSegmentLong == null) {
+                    idSegmentLong = new IdSegmentLong(cls);
+                    IdSegmentLong old = longIdSegmentMap.putIfAbsent(cls, idSegmentLong);
+                    if (old != null) {
+                        idSegmentLong = old;
+                    } else {
+                        IdGenerator idGenerator = new IdGenerator();
+                        idGenerator.setClassName(cls.getName());
+                        idGenerator.setId(idSegmentLong.getIdMark().get());
+                        dataService.insert(idGenerator);
+                    }
+                }
+                long result = idSegmentLong.acquire();
+                IdGenerator idGenerator = new IdGenerator();
+                idGenerator.setClassName(cls.getName());
+                idGenerator.setId(idSegmentLong.getIdMark().get());
+                dataService.update(idGenerator);
+                return result;
+            }catch (Throwable e){
+                throw new MMException("acquireLong error",e);
+            }finally {
+                lockerService.unlockKeys(cls.getName());
+            }
+        }else{
+            throw new MMException("acquireLong error,lock fail");
+        }
+    }
     public int acquireInt(Class<?> cls){
         IdSegment IdSegment = intIdSegmentMap.get(cls);
         if(IdSegment == null){
@@ -53,6 +105,49 @@ public class IdService {
         IdSegment.release(id);
     }
 
+    public void destroy(){
+        log.info("id service destroy");
+        for(IdSegmentLong idSegmentLong : longIdSegmentMap.values()){
+            IdGenerator idGenerator = new IdGenerator();
+            idGenerator.setClassName(idSegmentLong.getCls().getName());
+            idGenerator.setId(idSegmentLong.getIdMark().get());
+            dataService.update(idGenerator);
+        }
+    }
+
+    class IdSegmentLong{
+        private Class cls;
+        private AtomicLong idMark;
+        public IdSegmentLong(Class cls){
+            this.cls = cls;
+            this.idMark = new AtomicLong(100000);
+        }
+        public IdSegmentLong(Class cls,long id){
+            this.cls = cls;
+            this.idMark = new AtomicLong(id);
+        }
+        public long acquire(){
+            long id = idMark.getAndIncrement();
+            return id;
+        }
+
+        public Class getCls() {
+            return cls;
+        }
+
+        public void setCls(Class cls) {
+            this.cls = cls;
+        }
+
+        public AtomicLong getIdMark() {
+            return idMark;
+        }
+
+        public void setIdMark(AtomicLong idMark) {
+            this.idMark = idMark;
+        }
+    }
+
     class IdSegment{
         private Class cls;
         private Set<Integer> usingIds;
@@ -64,7 +159,6 @@ public class IdService {
             this.usingIds = new ConcurrentHashSet<>();
             this.canUseIds = new ConcurrentLinkedDeque<>();
             this.idMark = new AtomicInteger();
-
         }
 
         public int acquire(){

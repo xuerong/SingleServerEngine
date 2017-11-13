@@ -37,6 +37,6 @@ public class EntranceServlet extends HttpServlet {
     public void destroy() {
         System.out.println("stop-------------------");
         super.destroy();
-        Server.stop();
+//        Server.stop();
     }
 }

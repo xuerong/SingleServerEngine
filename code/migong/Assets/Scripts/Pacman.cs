@@ -23,7 +23,7 @@ public class Pacman : MonoBehaviour {
 	public int outX;
 	public int outY;
 
-	public string userId = SocketManager.ACCOUNT_ID;
+	public string userId ;
 
 	Vector2 dest = Vector2.zero;
 
@@ -44,7 +44,7 @@ public class Pacman : MonoBehaviour {
 		pacmanColliders = mapCreate.pacmanColliders;
 
 		if (userId == null || userId.Length == 0) {
-			this.userId = SocketManager.ACCOUNT_ID;
+			this.userId = SocketManager.accountId;
 		}
 		speed /= 100f;
 
@@ -81,7 +81,7 @@ public class Pacman : MonoBehaviour {
 			return;
 		}
 		isControl = false;
-		if (userId == SocketManager.ACCOUNT_ID) {
+		if (userId == SocketManager.accountId) {
 			keyboardDir ();
 		}
 		int dir = getDir ();
@@ -104,7 +104,7 @@ public class Pacman : MonoBehaviour {
 			animator.SetFloat("DirY", dirVec.y);
 
 			// 记录行踪:自己的人才记录
-			if (userId == SocketManager.ACCOUNT_ID) {
+			if (userId == SocketManager.accountId) {
 				int curPoint = mapCreate.getPointByPosition (new Vector2 (transform.localPosition.x, transform.localPosition.y));
 				if (curPoint != lastPoint) {
 					route.Add (curPoint);
@@ -187,7 +187,7 @@ public class Pacman : MonoBehaviour {
 		SCUserMove userMove = SCUserMove.Deserialize (data);
 		foreach(PBUserMoveInfo userMoveInfo in userMove.UserMoveInfos){
 //			userMoveInfo.Frame
-			if(userMoveInfo.UserId.Equals(SocketManager.ACCOUNT_ID)){
+			if(userMoveInfo.UserId.Equals(SocketManager.accountId)){
 //				this.Dir = userMoveInfo.Dir;
 //				transform.localPosition = new Vector3 (userMoveInfo.PosX,userMoveInfo.PosY,transform.localPosition.z);
 			}else{

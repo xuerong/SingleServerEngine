@@ -146,7 +146,7 @@ public class MapCreate : MonoBehaviour{
 		}
 	}
 	private void _checkEatBean(int pos){
-		_checkEatBean (SocketManager.ACCOUNT_ID, pos);
+		_checkEatBean (SocketManager.accountId, pos);
 	}
 	private void _checkEatBean(string userId,int pos){
 		int x = pos / size;
@@ -333,7 +333,7 @@ public class MapCreate : MonoBehaviour{
 			}
 		}else if(Mode == MapMode.Online){
 			CSArrived arrived = new CSArrived ();
-			Pacman pacman = pacmanMap [SocketManager.ACCOUNT_ID];
+			Pacman pacman = pacmanMap [SocketManager.accountId];
 			arrived.Pos = pacman.outX * td + pacman.outY;
 			SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSArrived, CSArrived.SerializeToBytes (arrived), delegate(int opcode, byte[] data) {
 //				SCArrived ret = SCArrived.Deserialize(data);

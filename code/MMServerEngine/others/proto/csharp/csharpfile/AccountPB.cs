@@ -43,4 +43,27 @@ namespace Example
     {
     }
 
+    /// <summary>
+    /// <para> 获取登陆信息，</para>
+    /// <para> 1、当第一次登陆的时候，获取自己要在哪里注册</para>
+    /// <para> 2、前端清理了缓存，需要重新获取自己账号所在服务器</para>
+    /// </summary>
+    public partial class CSGetLoginInfo
+    {
+        public string DeviceId { get; set; }
+
+    }
+
+    public partial class SCGetLoginInfo
+    {
+        public int ServerId { get; set; }
+
+        public string Ip { get; set; }
+
+        public int Port { get; set; }
+
+        public string AccountId { get; set; }
+
+    }
+
 }

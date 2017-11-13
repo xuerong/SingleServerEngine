@@ -261,7 +261,6 @@ public class TxCacheService {
         if(older != null && older.getOperType() != OperType.Delete){
             throw new MMException("object is exist while insert object key = "+key);
         }
-
         PrepareCachedData prepareCachedData = new PrepareCachedData();
         prepareCachedData.setData(entity);
         prepareCachedData.setKey(key);
@@ -282,7 +281,11 @@ public class TxCacheService {
         prepareCachedData.setData(entity);
         prepareCachedData.setKey(key);
         prepareCachedData.setOperType(OperType.Update);
-        map.put(key,prepareCachedData);
+        PrepareCachedData old = map.put(key,prepareCachedData);
+        if(old != null && old.getOperType() == OperType.Insert){
+            // 插入的，则更新变成插入
+            prepareCachedData.setOperType(OperType.Insert);
+        }
         return true;
     }
     /**

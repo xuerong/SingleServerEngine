@@ -70,6 +70,7 @@ import java.util.concurrent.*;
  * 5、排行都包括：无尽版，天梯排行
  * 6、新手引导
  * 7、无尽版规则，天梯积分规则
+ * 8、所有文字用汉语：后端弹框！
  * 以后要做的：
  * 1、支付与货币、礼包
  * 2、道具与背包
@@ -225,7 +226,7 @@ public class MiGongService {
             beanBuilder.setScore(bean.getScore());
             builder.addBeans(beanBuilder);
         }
-        builder.setEnergy(getEnergyByRefresh(userMiGong)); // todo 这个是剩余精力
+        builder.setEnergy(getEnergyByRefresh(userMiGong)); // 这个是剩余精力
         builder.setPass(miGongPass.getId());
         builder.setStar1(miGongPass.getStar1());
         builder.setStar2(miGongPass.getStar2());
@@ -428,7 +429,7 @@ public class MiGongService {
         builder.setStar3(30);
         builder.setStar4(40);
         builder.setPass(userMiGong.getUnlimitedPass() + 1);
-        builder.setEnergy(getEnergyByRefresh(userMiGong));// todo 精力，系统参数
+        builder.setEnergy(getEnergyByRefresh(userMiGong));// 精力，系统参数
 
         miGongPassInfoMap.put(session.getAccountId(),miGongPassInfo);
 

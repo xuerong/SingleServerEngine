@@ -82,7 +82,14 @@ public final class Server {
         // 服务器启动完成
         EventService eventService = BeanHelper.getServiceBean(EventService.class);
         eventService.fireEventSyn(new EventData(SysConstantDefine.Event_ServerStart));
-        //
+        // 关闭钩子
+        Runtime.getRuntime().addShutdownHook(new Thread(){
+            @Override
+            public void run(){
+                System.out.println("server stop");
+                Server.stop();
+            }
+        });
 
         log.info("服务器启动完成!");
     }

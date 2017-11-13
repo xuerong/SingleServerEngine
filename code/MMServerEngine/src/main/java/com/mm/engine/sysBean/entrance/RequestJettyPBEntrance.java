@@ -102,7 +102,7 @@ public class RequestJettyPBEntrance extends Entrance {
             }
             BasePB.SCException.Builder scException = BasePB.SCException.newBuilder();
             scException.setCsOpcode(opcode);
-            scException.setCsOpcode(rePacket != null?rePacket.getOpcode():-1);
+            scException.setScOpcode(rePacket != null?rePacket.getOpcode():-1);
             scException.setErrCode(errCode);
             scException.setErrMsg(errMsg);
             byte[] reData = scException.build().toByteArray();

@@ -129,7 +129,9 @@ class WarnDialog : MonoBehaviour {
 		}
 	}
 
-
+	public static void showWarnDialog(string text){
+		showWarnDialog (text,null);
+	}
 	public static void showWarnDialog(string text,DialogOkAction dialogOkAction){
 		WarnDialogInfo w = new WarnDialogInfo ();
 		w.text = text;
