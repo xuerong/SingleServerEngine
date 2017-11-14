@@ -1,11 +1,10 @@
 package com.migong;
 
-import com.migong.entity.Bean;
-import com.migong.entity.MiGongThreadFactory;
-import com.migong.entity.RoomUser;
-import com.migong.entity.RoomUserState;
+import com.migong.entity.*;
 import com.migong.map.CreateMap;
 import com.migong.map.Element;
+import com.mm.engine.framework.control.room.Room;
+import com.mm.engine.framework.data.DataService;
 import com.protocol.MiGongOpcode;
 import com.protocol.MiGongPB;
 import org.slf4j.Logger;
@@ -22,16 +21,18 @@ public class MultiMiGongRoom extends MiGongRoom {
 
     private MiGongService miGongService;
     private Map<String,RoomUser> roomUsers = new HashMap<>();
-    private int arrivedCount = 0;
     private long beginTime;
     private volatile boolean isOver = false;
     private Future future;
 
+    private int grade; // 段位
+
     private AtomicInteger frame = new AtomicInteger(0);
 
 
-    public MultiMiGongRoom(CreateMap createMap,int size,int time,int speed, List<RoomUser> roomUsers,MiGongService miGongService) {
+    public MultiMiGongRoom(int grade,CreateMap createMap,int size,int time,int speed, List<RoomUser> roomUsers,MiGongService miGongService) {
         super(createMap,size,time,speed);
+        this.grade = grade;
         this.miGongService = miGongService;
         List<Integer> list = new ArrayList<>(); // (1,1)(1,size-1)(size-1,1)(size-1,size-1)
         list.add(1);
@@ -95,7 +96,7 @@ public class MultiMiGongRoom extends MiGongRoom {
 
     public synchronized void userArrived(String accountId){
         RoomUser roomUser = roomUsers.get(accountId);
-        roomUser.setRoomRank(arrivedCount++);
+        roomUser.setSuccess(true);
         // 直接推送应该也可以
         MiGongPB.SCUserArrived.Builder builder = MiGongPB.SCUserArrived.newBuilder();
         builder.setUserId(accountId);
@@ -103,7 +104,7 @@ public class MultiMiGongRoom extends MiGongRoom {
         // 如果游戏结束了，推送结束信息
         boolean over = true;
         for(Map.Entry<String,RoomUser> entry : roomUsers.entrySet()){
-            if(entry.getValue().getRoomRank()<0){
+            if(!entry.getValue().isSuccess()){
                 over = false;
                 break;
             }
@@ -129,20 +130,35 @@ public class MultiMiGongRoom extends MiGongRoom {
 
     public void doOver(OverType overType){
         this.isOver = true;
+
+        List<RoomUser> roomUserList = Arrays.asList(roomUsers.values().toArray(new RoomUser[roomUsers.values().size()]));
+        roomUserList.sort(new Comparator<RoomUser>() {
+            @Override
+            public int compare(RoomUser o1, RoomUser o2) {
+                if(!o1.isSuccess() && o2.isSuccess()){
+                    return 1;
+                }else if(o1.isSuccess() && !o2.isSuccess()){
+                    return -1;
+                }
+                return o2.getScore() - o1.getScore();
+            }
+        });
+
+
         MiGongPB.SCGameOver.Builder overBuilder = MiGongPB.SCGameOver.newBuilder();
         overBuilder.setOverType(overType.ordinal());
-        for(RoomUser ru : roomUsers.values()){
-            // todo 调整天梯积分
+        int rank=1;
+        for(RoomUser ru : roomUserList){
+            //
             MiGongPB.PBGameOverUserInfo.Builder userBuilder = MiGongPB.PBGameOverUserInfo.newBuilder();
             userBuilder.setUserId(ru.getSession().getAccountId());
             userBuilder.setScore(ru.getScore());
-            userBuilder.setRank(ru.getRoomRank());
+            userBuilder.setRank(rank++);
             userBuilder.setUserName(ru.getSession().getAccountId());
-            userBuilder.setArrived(ru.getRoomRank() >= 0?1:0);
+            userBuilder.setArrived(ru.isSuccess()?1:0);
             overBuilder.addUserInfos(userBuilder);
         }
         sendAllUsers(MiGongOpcode.SCGameOver,overBuilder.build().toByteArray());
-        // todo 保存房间信息
         if(future != null){
             future.cancel(true);
         }
@@ -214,6 +230,87 @@ public class MultiMiGongRoom extends MiGongRoom {
         return isOver;
     }
 
+    public int getGrade() {
+        return grade;
+    }
+
+    /**
+     * 保存历史记录的String
+     * 四个玩家的信息：accountId，操作记录（方向，位置，速度，时间），吃的豆子数量，排名
+     * 房间的信息：时间，地图，豆子的位置，
+     * @return
+     */
+    public String toInfoString(){
+        char sp1='|',sp2=';',sp3=',';
+        StringBuilder sb = new StringBuilder();
+        sb.append(beginTime).append(sp1)
+                .append(size).append(sp1)
+                .append(time).append(sp1)
+                .append(speed).append(sp1)
+                .append(grade).append(sp1)
+                .append(mapToString()).append(sp1)
+                .append(beansToString()).append(sp1)
+                .append(allRoomUserToString(roomUsers.values()));
+        return sb.toString();
+    }
+    private String allRoomUserToString(Collection<RoomUser> roomUsers){
+        StringBuilder sb = new StringBuilder();
+        for(RoomUser roomUser :roomUsers){
+            sb.append(roomUserToString(roomUser)).append("|");
+        }
+        return sb.toString();
+    }
+    private String roomUserToString(RoomUser roomUser){
+        StringBuilder sb = new StringBuilder();
+        sb.append(roomUser.getSession().getAccountId()).append("|")
+                .append(getBeanScore(roomUser.getEatBean())).append("|")
+                .append(roomUser.getRoomRank()).append("|")
+                .append(operListToString(roomUser.getHistory()));
+        return sb.toString();
+    }
+    private int getBeanScore(List<Bean> beans){
+        int result = 0;
+        for(Bean bean : beans){
+            result += bean.getScore();
+        }
+        return result;
+    }
+    private String operListToString(List<RoomUserState> roomUserStates){
+        StringBuilder sb = new StringBuilder();
+        for(RoomUserState roomUserState : roomUserStates){
+            sb.append(roomUserState.getPosX()).append(",").append(roomUserState.getPosY()).append(",").append(roomUserState.getDir()).append(",")
+                    .append(roomUserState.getSpeed()).append(",").append(roomUserState.getTime()).append(";");
+        }
+        if(sb.length() > 0) {
+            return sb.substring(0, sb.length() - 1);
+        }
+        return "";
+    }
+    private String mapToString(){
+        StringBuilder sb = new StringBuilder();
+        int i=0,j=0;
+        for(byte[] bs : createMap.getMap()){
+            for(byte b : bs){
+                sb.append(i).append(",").append(j).append(";");
+                j++;
+            }
+            i++;
+        }
+        if(sb.length() > 0) {
+            return sb.substring(0, sb.length() - 1);
+        }
+        return "";
+    }
+    private String beansToString(){
+        StringBuilder sb = new StringBuilder();
+        for(Bean bean : beans.values()){
+            sb.append(bean.getX()).append(",").append(bean.getY()).append(",").append(bean.getScore()).append(";");
+        }
+        if(sb.length() > 0) {
+            return sb.substring(0, sb.length() - 1);
+        }
+        return "";
+    }
 
 
     enum OverType{

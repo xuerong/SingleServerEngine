@@ -43,6 +43,11 @@ namespace Example
     {
     }
 
+    /// <summary> 被顶下</summary>
+    public partial class SCBeTakePlace
+    {
+    }
+
     /// <summary>
     /// <para> 获取登陆信息，</para>
     /// <para> 1、当第一次登陆的时候，获取自己要在哪里注册</para>

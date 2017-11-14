@@ -23,6 +23,7 @@ abstract class DialogInfo{
 class WarnDialogInfo : DialogInfo{
 	public string text;
 	public DialogOkAction okAction;
+	public bool hideClose;
 }
 
 class WaitDialogInfo : DialogInfo{
@@ -70,8 +71,8 @@ class WarnDialog : MonoBehaviour {
 	void Update(){
 		if (dialogQueue.Count > 0 && !canvas.activeSelf) {
 			lock (dialogQueue) {
-				showButton (true,true);
 				WarnDialogInfo w = dialogQueue.Dequeue ();
+				showButton (true,w.hideClose?false:true);
 				instance.text.text = w.text;
 				instance.okAction = w.okAction;
 				openDialog ();
@@ -136,6 +137,16 @@ class WarnDialog : MonoBehaviour {
 		WarnDialogInfo w = new WarnDialogInfo ();
 		w.text = text;
 		w.okAction = dialogOkAction;
+		lock (dialogQueue) {
+			dialogQueue.Enqueue (w);
+		}
+	}
+
+	public static void showWarnDialog(string text,DialogOkAction dialogOkAction,bool hideClose){
+		WarnDialogInfo w = new WarnDialogInfo ();
+		w.text = text;
+		w.okAction = dialogOkAction;
+		w.hideClose = hideClose;
 		lock (dialogQueue) {
 			dialogQueue.Enqueue (w);
 		}

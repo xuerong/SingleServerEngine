@@ -23,7 +23,7 @@ public class Pacman : MonoBehaviour {
 	public int outX;
 	public int outY;
 
-	public string userId ;
+	public string userId;
 
 	Vector2 dest = Vector2.zero;
 
@@ -42,7 +42,6 @@ public class Pacman : MonoBehaviour {
 	void Start () {
 		pacmanMap = mapCreate.pacmanMap;
 		pacmanColliders = mapCreate.pacmanColliders;
-
 		if (userId == null || userId.Length == 0) {
 			this.userId = SocketManager.accountId;
 		}
@@ -59,7 +58,7 @@ public class Pacman : MonoBehaviour {
 		digidbody = GetComponent<Rigidbody2D> ();
 
 		// 联网模式
-		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCUserMove, userMoveAction);
+//		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCUserMove, userMoveAction);
 		//
 		if(pacmanColliders.Count > 0 ){
 			foreach(CircleCollider2D cc in pacmanColliders){
@@ -182,22 +181,7 @@ public class Pacman : MonoBehaviour {
 		}
 		LastDir = dir;
 	}
-
-	public void userMoveAction(int opcode, byte[] data){
-		SCUserMove userMove = SCUserMove.Deserialize (data);
-		foreach(PBUserMoveInfo userMoveInfo in userMove.UserMoveInfos){
-//			userMoveInfo.Frame
-			if(userMoveInfo.UserId.Equals(SocketManager.accountId)){
-//				this.Dir = userMoveInfo.Dir;
-//				transform.localPosition = new Vector3 (userMoveInfo.PosX,userMoveInfo.PosY,transform.localPosition.z);
-			}else{
-				Pacman pacman = pacmanMap [userMoveInfo.UserId];
-				pacman.Dir = userMoveInfo.Dir;
-				Debug.Log ("receive:"+userMoveInfo.PosX+","+userMoveInfo.PosY);
-				pacman.transform.localPosition = new Vector3 (userMoveInfo.PosX,userMoveInfo.PosY,pacman.transform.localPosition.z);
-			}
-		}
-	}
+		
 	void fixDest(){
 		Vector2 pos = transform.localPosition;
 		RaycastHit2D hit = Physics2D.Linecast(pos, dest*100);

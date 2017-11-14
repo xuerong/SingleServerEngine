@@ -93,9 +93,10 @@ public class SocketManager : MonoBehaviour {
 			Debug.Log ("Mac地址 = " + ni.GetPhysicalAddress().ToString() );  /// Ethernet 6C0B8490F3B5
 			if ("Ethernet".Equals (ni.NetworkInterfaceType.ToString ())) {
 				loginInfo.DeviceId = ni.GetPhysicalAddress ().ToString ();
+				break;
 			}
 		}  
-//		loginInfo.DeviceId = "shdfhkshfk";
+		loginInfo.DeviceId = "shdfshksshfkk";
 		WWW getData = new WWW("http://10.1.6.254:8083",CSGetLoginInfo.SerializeToBytes(loginInfo),headers);
 		yield return getData;
 		if(getData.error!= null){  
@@ -151,9 +152,10 @@ public class SocketManager : MonoBehaviour {
 	}
 
 	public static void AddServerSendReceive(int opcode,ActionForReceive actionFroReceive){
-		if (!serverSendData.ContainsKey (opcode)) {
-			serverSendData.Add (opcode, actionFroReceive);
+		if (serverSendData.ContainsKey (opcode)) { // 可以被覆盖
+			serverSendData.Remove (opcode);
 		}
+		serverSendData.Add (opcode, actionFroReceive); 
 	}
 
 	public static void ConnectServerAndLogin(){

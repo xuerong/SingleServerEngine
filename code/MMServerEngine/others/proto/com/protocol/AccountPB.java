@@ -2092,6 +2092,323 @@ public final class AccountPB {
     // @@protoc_insertion_point(class_scope:SCLogout)
   }
 
+  public interface SCBeTakePlaceOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code SCBeTakePlace}
+   *
+   * <pre>
+   * 被顶下
+   * </pre>
+   */
+  public static final class SCBeTakePlace extends
+      com.google.protobuf.GeneratedMessage
+      implements SCBeTakePlaceOrBuilder {
+    // Use SCBeTakePlace.newBuilder() to construct.
+    private SCBeTakePlace(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private SCBeTakePlace(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final SCBeTakePlace defaultInstance;
+    public static SCBeTakePlace getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public SCBeTakePlace getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SCBeTakePlace(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.protocol.AccountPB.internal_static_SCBeTakePlace_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.protocol.AccountPB.internal_static_SCBeTakePlace_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.protocol.AccountPB.SCBeTakePlace.class, com.protocol.AccountPB.SCBeTakePlace.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<SCBeTakePlace> PARSER =
+        new com.google.protobuf.AbstractParser<SCBeTakePlace>() {
+      public SCBeTakePlace parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SCBeTakePlace(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SCBeTakePlace> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.protocol.AccountPB.SCBeTakePlace parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.AccountPB.SCBeTakePlace parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.AccountPB.SCBeTakePlace parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.AccountPB.SCBeTakePlace parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.AccountPB.SCBeTakePlace parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.AccountPB.SCBeTakePlace parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.protocol.AccountPB.SCBeTakePlace parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.protocol.AccountPB.SCBeTakePlace parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.protocol.AccountPB.SCBeTakePlace parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.AccountPB.SCBeTakePlace parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.protocol.AccountPB.SCBeTakePlace prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code SCBeTakePlace}
+     *
+     * <pre>
+     * 被顶下
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.protocol.AccountPB.SCBeTakePlaceOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.protocol.AccountPB.internal_static_SCBeTakePlace_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.protocol.AccountPB.internal_static_SCBeTakePlace_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.protocol.AccountPB.SCBeTakePlace.class, com.protocol.AccountPB.SCBeTakePlace.Builder.class);
+      }
+
+      // Construct using com.protocol.AccountPB.SCBeTakePlace.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.protocol.AccountPB.internal_static_SCBeTakePlace_descriptor;
+      }
+
+      public com.protocol.AccountPB.SCBeTakePlace getDefaultInstanceForType() {
+        return com.protocol.AccountPB.SCBeTakePlace.getDefaultInstance();
+      }
+
+      public com.protocol.AccountPB.SCBeTakePlace build() {
+        com.protocol.AccountPB.SCBeTakePlace result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.protocol.AccountPB.SCBeTakePlace buildPartial() {
+        com.protocol.AccountPB.SCBeTakePlace result = new com.protocol.AccountPB.SCBeTakePlace(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.protocol.AccountPB.SCBeTakePlace) {
+          return mergeFrom((com.protocol.AccountPB.SCBeTakePlace)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.protocol.AccountPB.SCBeTakePlace other) {
+        if (other == com.protocol.AccountPB.SCBeTakePlace.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.protocol.AccountPB.SCBeTakePlace parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.protocol.AccountPB.SCBeTakePlace) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:SCBeTakePlace)
+    }
+
+    static {
+      defaultInstance = new SCBeTakePlace(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:SCBeTakePlace)
+  }
+
   public interface CSGetLoginInfoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -3425,6 +3742,11 @@ public final class AccountPB {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_SCLogout_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_SCBeTakePlace_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_SCBeTakePlace_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_CSGetLoginInfo_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3446,11 +3768,11 @@ public final class AccountPB {
       "\n\026protos/AccountPB.proto\"5\n\007CSLogin\022\021\n\ta" +
       "ccountId\030\001 \002(\t\022\013\n\003url\030\002 \002(\t\022\n\n\002ip\030\003 \002(\t\"" +
       "\034\n\007SCLogin\022\021\n\tsessionId\030\001 \002(\t\"\035\n\010CSLogou" +
-      "t\022\021\n\taccountId\030\001 \002(\t\"\n\n\010SCLogout\"\"\n\016CSGe" +
-      "tLoginInfo\022\020\n\010deviceId\030\001 \002(\t\"O\n\016SCGetLog" +
-      "inInfo\022\020\n\010serverId\030\001 \002(\005\022\n\n\002ip\030\002 \002(\t\022\014\n\004" +
-      "port\030\003 \002(\005\022\021\n\taccountId\030\004 \002(\tB\016\n\014com.pro" +
-      "tocol"
+      "t\022\021\n\taccountId\030\001 \002(\t\"\n\n\010SCLogout\"\017\n\rSCBe" +
+      "TakePlace\"\"\n\016CSGetLoginInfo\022\020\n\010deviceId\030" +
+      "\001 \002(\t\"O\n\016SCGetLoginInfo\022\020\n\010serverId\030\001 \002(" +
+      "\005\022\n\n\002ip\030\002 \002(\t\022\014\n\004port\030\003 \002(\005\022\021\n\taccountId" +
+      "\030\004 \002(\tB\016\n\014com.protocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3481,14 +3803,20 @@ public final class AccountPB {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCLogout_descriptor,
               new java.lang.String[] { });
-          internal_static_CSGetLoginInfo_descriptor =
+          internal_static_SCBeTakePlace_descriptor =
             getDescriptor().getMessageTypes().get(4);
+          internal_static_SCBeTakePlace_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_SCBeTakePlace_descriptor,
+              new java.lang.String[] { });
+          internal_static_CSGetLoginInfo_descriptor =
+            getDescriptor().getMessageTypes().get(5);
           internal_static_CSGetLoginInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSGetLoginInfo_descriptor,
               new java.lang.String[] { "DeviceId", });
           internal_static_SCGetLoginInfo_descriptor =
-            getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(6);
           internal_static_SCGetLoginInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCGetLoginInfo_descriptor,

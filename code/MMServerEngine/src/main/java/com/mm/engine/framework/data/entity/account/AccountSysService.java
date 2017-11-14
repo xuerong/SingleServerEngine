@@ -110,10 +110,11 @@ public class AccountSysService {
      **/
     public Session applyForLogin(String id,String url,String ip){
         Session session = sessionService.create(url,ip);
-        String olderSessionId = nodeServerLoginMark.put(id,session.getSessionId());
-        if(olderSessionId != null){
+        String olderSessionId = nodeServerLoginMark.putIfAbsent(id,session.getSessionId());
+        if (olderSessionId != null){
             // 通知下线
             doLogout(id,olderSessionId,LogoutReason.replaceLogout);
+            nodeServerLoginMark.put(id,session.getSessionId());
         }
         session.setAccountId(id);
         eventService.fireEventSyn(session,SysConstantDefine.Event_AccountLogin);

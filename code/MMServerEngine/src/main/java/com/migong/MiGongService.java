@@ -18,6 +18,7 @@ import com.mm.engine.framework.data.tx.Tx;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.code.RetPacketImpl;
 import com.mm.engine.framework.security.exception.ToClientException;
+import com.mm.engine.framework.server.IdService;
 import com.mm.engine.framework.server.SysConstantDefine;
 import com.protocol.MiGongOpcode;
 import com.protocol.MiGongPB;
@@ -104,6 +105,7 @@ public class MiGongService {
     private DataService dataService;
     private SendMessageService sendMessageService;
     private SysParaService sysParaService;
+    private IdService idService;
     /**
      * 这个是玩家获取迷宫后缓存的该迷宫信息，在玩家过关的时候用来校验是否正常过关。同时在如下几种情况下要清除：
      * 1、玩家断开连接
@@ -756,7 +758,7 @@ public class MiGongService {
         //
         CreateMap createMap = new CreateMap(size-1,size-1,startElement,endElement);
 
-        MultiMiGongRoom multiMiGongRoom = new MultiMiGongRoom(createMap, size,
+        MultiMiGongRoom multiMiGongRoom = new MultiMiGongRoom(grade,createMap, size,
                 sysParaService.getRandomInt(SysPara.ladderTime),sysParaService.getRandomInt(SysPara.ladderSpeed),roomUserList,this);
 
 //        List<MiGongPB.PBOtherInfo> otherInfoList = new ArrayList<>();
@@ -818,7 +820,7 @@ public class MiGongService {
             builder.clearOtherInfos();
             builder.addAllOtherInfos(otherInfoList);
 //            otherInfoList.add(otherInfo);
-            System.out.println("send matchingsuccess");
+//            System.out.println("send matchingsuccess");
             roomUser.getSession().getMessageSender().sendMessage(MiGongOpcode.SCMatchingSuccess,builder.build().toByteArray());
         }
         multiMiGongRoom.start();
@@ -827,8 +829,22 @@ public class MiGongService {
     // 房间结束的时候回回调这个函数，来清除房间信息
     public void multiRoomOver(MultiMiGongRoom room){
         for(RoomUser roomUser : room.getRoomUsers().values()){
+            // todo 调整天梯积分:还要更改积分规则
+            if(roomUser.isSuccess()){
+                UserMiGong userMiGong = dataService.selectObject(UserMiGong.class,"userId=?",roomUser.getSession().getAccountId());
+                userMiGong.setLadderScore(userMiGong.getLadderScore() + MultiMiGongRoom.USER_COUNT - roomUser.getRoomRank());
+            }
+            // 移除玩家
             userRooms.remove(roomUser.getSession().getAccountId());
             userStates.remove(roomUser.getSession().getAccountId());
+
+            // 保存对战记录
+            PvpRecord pvpRecord = new PvpRecord();
+            pvpRecord.setId(idService.acquireLong(PvpRecord.class));
+            pvpRecord.setGrade(room.getGrade());
+            pvpRecord.setTime(new Timestamp(System.currentTimeMillis()));
+            pvpRecord.setRecord(room.toInfoString());
+            dataService.insert(pvpRecord);
         }
     }
 

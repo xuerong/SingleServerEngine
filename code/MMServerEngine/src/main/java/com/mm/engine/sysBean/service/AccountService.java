@@ -90,6 +90,8 @@ public class AccountService {
         session.setConnectionClose(new ConnectionClose() {
             @Override
             public void close() {
+                AccountPB.SCBeTakePlace.Builder builder = AccountPB.SCBeTakePlace.newBuilder();
+                messageSender.sendMessageSync(AccountOpcode.SCBeTakePlace,builder.build().toByteArray());
                 _ctx.close();
             }
         });

@@ -96,6 +96,11 @@ public class MainPanel : MonoBehaviour {
 		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCBegin, delegate(int opcode, byte[] receiveData) {
 			Debug.Log("");
 		});
+		SocketManager.AddServerSendReceive ((int)AccountOpcode.SCBeTakePlace, delegate(int opcode, byte[] receiveData) {
+			WarnDialog.showWarnDialog("你的账号在其它地方登录！",delegate() {
+				Application.Quit();
+			},true);
+		});
 	}
 
 	private void openLevelWindow(){
@@ -300,6 +305,7 @@ public class MainPanel : MonoBehaviour {
 				pacman.outX = otherInfo.End % size;
 				pacman.outY = otherInfo.End / size;
 				pacman.speed = speed;
+//				pacman.transform.localScale = new Vector3 (0.6f,0.6f,0.6f);
 
 				pacman.mapCreate = mapCreate;
 

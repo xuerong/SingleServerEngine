@@ -8,7 +8,7 @@ import java.util.List;
 
 public class RoomUser {
     private Session session;
-    private long beginTime;
+    private long beginTime; // 开始匹配的时间
 
     // 入口和出口
     private Element in;
@@ -21,6 +21,7 @@ public class RoomUser {
 
     private volatile boolean isChange;
 
+    private boolean isSuccess;
     private int roomRank = -1;
 
     public RoomUser(Session session, long beginTime){
@@ -114,5 +115,17 @@ public class RoomUser {
 
     public void setIn(Element in) {
         this.in = in;
+    }
+
+    public List<RoomUserState> getHistory() {
+        return history;
+    }
+
+    public boolean isSuccess() {
+        return isSuccess;
+    }
+
+    public void setSuccess(boolean success) {
+        isSuccess = success;
     }
 }

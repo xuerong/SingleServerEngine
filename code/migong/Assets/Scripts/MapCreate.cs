@@ -98,7 +98,26 @@ public class MapCreate : MonoBehaviour{
 		SocketManager.AddServerSendReceive((int)MiGongOpcode.SCUserArrived,userArrived);
 		SocketManager.AddServerSendReceive((int)MiGongOpcode.SCGameOver,gameOver);
 
+		// 联网模式
+		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCUserMove, userMoveAction);
+
 		createMap ();
+	}
+
+	public void userMoveAction(int opcode, byte[] data){
+		SCUserMove userMove = SCUserMove.Deserialize (data);
+		foreach(PBUserMoveInfo userMoveInfo in userMove.UserMoveInfos){
+			//			userMoveInfo.Frame
+			if(userMoveInfo.UserId.Equals(SocketManager.accountId)){
+				//				this.Dir = userMoveInfo.Dir;
+				//				transform.localPosition = new Vector3 (userMoveInfo.PosX,userMoveInfo.PosY,transform.localPosition.z);
+			}else{
+				Pacman pacman = pacmanMap [userMoveInfo.UserId];
+				pacman.Dir = userMoveInfo.Dir;
+				Debug.Log ("receive:"+userMoveInfo.PosX+","+userMoveInfo.PosY);
+				pacman.transform.localPosition = new Vector3 (userMoveInfo.PosX,userMoveInfo.PosY,pacman.transform.localPosition.z);
+			}
+		}
 	}
 
 	public void addScoreShow(string userId){
