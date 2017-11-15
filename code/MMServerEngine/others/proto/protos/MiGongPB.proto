@@ -126,6 +126,27 @@ message SCUnlimitedFinish
 // 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳
 // 请求匹配，返回房间及信息，开始游戏，发送操作（移动，道具），接收操作，发送到达终点，接收到达终点，接收游戏结束，房间心跳
 // 请求匹配 TODO 取消匹配
+
+// 获取在线信息
+message CSGetOnlineInfo
+{
+}
+message SCGetOnlineInfo
+{
+	required int32 score	= 1;// 天梯积分
+	required string title	= 2;// 称谓
+	required int32 rank	= 3; // 排名
+	repeated PBOnlineRankInfo rankInfos	= 4;// 排行信息
+}
+message PBOnlineRankInfo
+{
+	required string userId	= 1;// 玩家账号
+	required string name	= 2;// 玩家名
+	required int32 score	= 3;// 天梯积分
+	required string title	= 4;// 称谓
+	required int32 rank	= 5; // 排名
+}
+// 匹配
 message CSMatching
 {
 }

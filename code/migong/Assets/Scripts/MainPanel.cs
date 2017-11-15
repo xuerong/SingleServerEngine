@@ -41,7 +41,7 @@ public class MainPanel : MonoBehaviour {
 		onlineButton.onClick.AddListener (delegate() {
 			// 打开online 界面
 			Debug.Log("open online window");
-			show (uiOnline);
+			openOnlineWindow();
 		});
 		// uiLevel 关闭按钮
 		GameObject closeGo = GameObject.Find ("main/ui/uiLevel/Canvas/close");
@@ -197,6 +197,12 @@ public class MainPanel : MonoBehaviour {
 				text.text = info.Rank+","+info.UserName+","+info.Pass+","+info.Star;
 			}
 		});
+	}
+
+	private void openOnlineWindow(){
+		show (uiOnline);
+
+
 	}
 		
 	public void showMainPanel(){

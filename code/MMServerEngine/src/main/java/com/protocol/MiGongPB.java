@@ -14373,6 +14373,2771 @@ public final class MiGongPB {
     // @@protoc_insertion_point(class_scope:SCUnlimitedFinish)
   }
 
+  public interface CSGetOnlineInfoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code CSGetOnlineInfo}
+   *
+   * <pre>
+   * 获取在线信息
+   * </pre>
+   */
+  public static final class CSGetOnlineInfo extends
+      com.google.protobuf.GeneratedMessage
+      implements CSGetOnlineInfoOrBuilder {
+    // Use CSGetOnlineInfo.newBuilder() to construct.
+    private CSGetOnlineInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSGetOnlineInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSGetOnlineInfo defaultInstance;
+    public static CSGetOnlineInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSGetOnlineInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSGetOnlineInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.protocol.MiGongPB.internal_static_CSGetOnlineInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.protocol.MiGongPB.internal_static_CSGetOnlineInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.protocol.MiGongPB.CSGetOnlineInfo.class, com.protocol.MiGongPB.CSGetOnlineInfo.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSGetOnlineInfo> PARSER =
+        new com.google.protobuf.AbstractParser<CSGetOnlineInfo>() {
+      public CSGetOnlineInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSGetOnlineInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSGetOnlineInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.protocol.MiGongPB.CSGetOnlineInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.CSGetOnlineInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.CSGetOnlineInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.CSGetOnlineInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.CSGetOnlineInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.CSGetOnlineInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.CSGetOnlineInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.protocol.MiGongPB.CSGetOnlineInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.CSGetOnlineInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.CSGetOnlineInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.protocol.MiGongPB.CSGetOnlineInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CSGetOnlineInfo}
+     *
+     * <pre>
+     * 获取在线信息
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.protocol.MiGongPB.CSGetOnlineInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.protocol.MiGongPB.internal_static_CSGetOnlineInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.protocol.MiGongPB.internal_static_CSGetOnlineInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.protocol.MiGongPB.CSGetOnlineInfo.class, com.protocol.MiGongPB.CSGetOnlineInfo.Builder.class);
+      }
+
+      // Construct using com.protocol.MiGongPB.CSGetOnlineInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.protocol.MiGongPB.internal_static_CSGetOnlineInfo_descriptor;
+      }
+
+      public com.protocol.MiGongPB.CSGetOnlineInfo getDefaultInstanceForType() {
+        return com.protocol.MiGongPB.CSGetOnlineInfo.getDefaultInstance();
+      }
+
+      public com.protocol.MiGongPB.CSGetOnlineInfo build() {
+        com.protocol.MiGongPB.CSGetOnlineInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.protocol.MiGongPB.CSGetOnlineInfo buildPartial() {
+        com.protocol.MiGongPB.CSGetOnlineInfo result = new com.protocol.MiGongPB.CSGetOnlineInfo(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.protocol.MiGongPB.CSGetOnlineInfo) {
+          return mergeFrom((com.protocol.MiGongPB.CSGetOnlineInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.protocol.MiGongPB.CSGetOnlineInfo other) {
+        if (other == com.protocol.MiGongPB.CSGetOnlineInfo.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.protocol.MiGongPB.CSGetOnlineInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.protocol.MiGongPB.CSGetOnlineInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:CSGetOnlineInfo)
+    }
+
+    static {
+      defaultInstance = new CSGetOnlineInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:CSGetOnlineInfo)
+  }
+
+  public interface SCGetOnlineInfoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int32 score = 1;
+    /**
+     * <code>required int32 score = 1;</code>
+     *
+     * <pre>
+     * 天梯积分
+     * </pre>
+     */
+    boolean hasScore();
+    /**
+     * <code>required int32 score = 1;</code>
+     *
+     * <pre>
+     * 天梯积分
+     * </pre>
+     */
+    int getScore();
+
+    // required string title = 2;
+    /**
+     * <code>required string title = 2;</code>
+     *
+     * <pre>
+     * 称谓
+     * </pre>
+     */
+    boolean hasTitle();
+    /**
+     * <code>required string title = 2;</code>
+     *
+     * <pre>
+     * 称谓
+     * </pre>
+     */
+    java.lang.String getTitle();
+    /**
+     * <code>required string title = 2;</code>
+     *
+     * <pre>
+     * 称谓
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getTitleBytes();
+
+    // required int32 rank = 3;
+    /**
+     * <code>required int32 rank = 3;</code>
+     *
+     * <pre>
+     * 排名
+     * </pre>
+     */
+    boolean hasRank();
+    /**
+     * <code>required int32 rank = 3;</code>
+     *
+     * <pre>
+     * 排名
+     * </pre>
+     */
+    int getRank();
+
+    // repeated .PBOnlineRankInfo rankInfos = 4;
+    /**
+     * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+     *
+     * <pre>
+     * 排行信息
+     * </pre>
+     */
+    java.util.List<com.protocol.MiGongPB.PBOnlineRankInfo> 
+        getRankInfosList();
+    /**
+     * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+     *
+     * <pre>
+     * 排行信息
+     * </pre>
+     */
+    com.protocol.MiGongPB.PBOnlineRankInfo getRankInfos(int index);
+    /**
+     * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+     *
+     * <pre>
+     * 排行信息
+     * </pre>
+     */
+    int getRankInfosCount();
+    /**
+     * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+     *
+     * <pre>
+     * 排行信息
+     * </pre>
+     */
+    java.util.List<? extends com.protocol.MiGongPB.PBOnlineRankInfoOrBuilder> 
+        getRankInfosOrBuilderList();
+    /**
+     * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+     *
+     * <pre>
+     * 排行信息
+     * </pre>
+     */
+    com.protocol.MiGongPB.PBOnlineRankInfoOrBuilder getRankInfosOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code SCGetOnlineInfo}
+   */
+  public static final class SCGetOnlineInfo extends
+      com.google.protobuf.GeneratedMessage
+      implements SCGetOnlineInfoOrBuilder {
+    // Use SCGetOnlineInfo.newBuilder() to construct.
+    private SCGetOnlineInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private SCGetOnlineInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final SCGetOnlineInfo defaultInstance;
+    public static SCGetOnlineInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public SCGetOnlineInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SCGetOnlineInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              score_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              title_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              rank_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                rankInfos_ = new java.util.ArrayList<com.protocol.MiGongPB.PBOnlineRankInfo>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              rankInfos_.add(input.readMessage(com.protocol.MiGongPB.PBOnlineRankInfo.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          rankInfos_ = java.util.Collections.unmodifiableList(rankInfos_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.protocol.MiGongPB.internal_static_SCGetOnlineInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.protocol.MiGongPB.internal_static_SCGetOnlineInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.protocol.MiGongPB.SCGetOnlineInfo.class, com.protocol.MiGongPB.SCGetOnlineInfo.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<SCGetOnlineInfo> PARSER =
+        new com.google.protobuf.AbstractParser<SCGetOnlineInfo>() {
+      public SCGetOnlineInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SCGetOnlineInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SCGetOnlineInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int32 score = 1;
+    public static final int SCORE_FIELD_NUMBER = 1;
+    private int score_;
+    /**
+     * <code>required int32 score = 1;</code>
+     *
+     * <pre>
+     * 天梯积分
+     * </pre>
+     */
+    public boolean hasScore() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 score = 1;</code>
+     *
+     * <pre>
+     * 天梯积分
+     * </pre>
+     */
+    public int getScore() {
+      return score_;
+    }
+
+    // required string title = 2;
+    public static final int TITLE_FIELD_NUMBER = 2;
+    private java.lang.Object title_;
+    /**
+     * <code>required string title = 2;</code>
+     *
+     * <pre>
+     * 称谓
+     * </pre>
+     */
+    public boolean hasTitle() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string title = 2;</code>
+     *
+     * <pre>
+     * 称谓
+     * </pre>
+     */
+    public java.lang.String getTitle() {
+      java.lang.Object ref = title_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          title_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string title = 2;</code>
+     *
+     * <pre>
+     * 称谓
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getTitleBytes() {
+      java.lang.Object ref = title_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        title_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // required int32 rank = 3;
+    public static final int RANK_FIELD_NUMBER = 3;
+    private int rank_;
+    /**
+     * <code>required int32 rank = 3;</code>
+     *
+     * <pre>
+     * 排名
+     * </pre>
+     */
+    public boolean hasRank() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 rank = 3;</code>
+     *
+     * <pre>
+     * 排名
+     * </pre>
+     */
+    public int getRank() {
+      return rank_;
+    }
+
+    // repeated .PBOnlineRankInfo rankInfos = 4;
+    public static final int RANKINFOS_FIELD_NUMBER = 4;
+    private java.util.List<com.protocol.MiGongPB.PBOnlineRankInfo> rankInfos_;
+    /**
+     * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+     *
+     * <pre>
+     * 排行信息
+     * </pre>
+     */
+    public java.util.List<com.protocol.MiGongPB.PBOnlineRankInfo> getRankInfosList() {
+      return rankInfos_;
+    }
+    /**
+     * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+     *
+     * <pre>
+     * 排行信息
+     * </pre>
+     */
+    public java.util.List<? extends com.protocol.MiGongPB.PBOnlineRankInfoOrBuilder> 
+        getRankInfosOrBuilderList() {
+      return rankInfos_;
+    }
+    /**
+     * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+     *
+     * <pre>
+     * 排行信息
+     * </pre>
+     */
+    public int getRankInfosCount() {
+      return rankInfos_.size();
+    }
+    /**
+     * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+     *
+     * <pre>
+     * 排行信息
+     * </pre>
+     */
+    public com.protocol.MiGongPB.PBOnlineRankInfo getRankInfos(int index) {
+      return rankInfos_.get(index);
+    }
+    /**
+     * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+     *
+     * <pre>
+     * 排行信息
+     * </pre>
+     */
+    public com.protocol.MiGongPB.PBOnlineRankInfoOrBuilder getRankInfosOrBuilder(
+        int index) {
+      return rankInfos_.get(index);
+    }
+
+    private void initFields() {
+      score_ = 0;
+      title_ = "";
+      rank_ = 0;
+      rankInfos_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasScore()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTitle()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRank()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getRankInfosCount(); i++) {
+        if (!getRankInfos(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, score_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getTitleBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, rank_);
+      }
+      for (int i = 0; i < rankInfos_.size(); i++) {
+        output.writeMessage(4, rankInfos_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, score_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getTitleBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, rank_);
+      }
+      for (int i = 0; i < rankInfos_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, rankInfos_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.protocol.MiGongPB.SCGetOnlineInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.SCGetOnlineInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.SCGetOnlineInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.SCGetOnlineInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.SCGetOnlineInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.SCGetOnlineInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.SCGetOnlineInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.protocol.MiGongPB.SCGetOnlineInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.SCGetOnlineInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.SCGetOnlineInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.protocol.MiGongPB.SCGetOnlineInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code SCGetOnlineInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.protocol.MiGongPB.SCGetOnlineInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.protocol.MiGongPB.internal_static_SCGetOnlineInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.protocol.MiGongPB.internal_static_SCGetOnlineInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.protocol.MiGongPB.SCGetOnlineInfo.class, com.protocol.MiGongPB.SCGetOnlineInfo.Builder.class);
+      }
+
+      // Construct using com.protocol.MiGongPB.SCGetOnlineInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRankInfosFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        score_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        title_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        rank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        if (rankInfosBuilder_ == null) {
+          rankInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          rankInfosBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.protocol.MiGongPB.internal_static_SCGetOnlineInfo_descriptor;
+      }
+
+      public com.protocol.MiGongPB.SCGetOnlineInfo getDefaultInstanceForType() {
+        return com.protocol.MiGongPB.SCGetOnlineInfo.getDefaultInstance();
+      }
+
+      public com.protocol.MiGongPB.SCGetOnlineInfo build() {
+        com.protocol.MiGongPB.SCGetOnlineInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.protocol.MiGongPB.SCGetOnlineInfo buildPartial() {
+        com.protocol.MiGongPB.SCGetOnlineInfo result = new com.protocol.MiGongPB.SCGetOnlineInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.score_ = score_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.title_ = title_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.rank_ = rank_;
+        if (rankInfosBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            rankInfos_ = java.util.Collections.unmodifiableList(rankInfos_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.rankInfos_ = rankInfos_;
+        } else {
+          result.rankInfos_ = rankInfosBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.protocol.MiGongPB.SCGetOnlineInfo) {
+          return mergeFrom((com.protocol.MiGongPB.SCGetOnlineInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.protocol.MiGongPB.SCGetOnlineInfo other) {
+        if (other == com.protocol.MiGongPB.SCGetOnlineInfo.getDefaultInstance()) return this;
+        if (other.hasScore()) {
+          setScore(other.getScore());
+        }
+        if (other.hasTitle()) {
+          bitField0_ |= 0x00000002;
+          title_ = other.title_;
+          onChanged();
+        }
+        if (other.hasRank()) {
+          setRank(other.getRank());
+        }
+        if (rankInfosBuilder_ == null) {
+          if (!other.rankInfos_.isEmpty()) {
+            if (rankInfos_.isEmpty()) {
+              rankInfos_ = other.rankInfos_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureRankInfosIsMutable();
+              rankInfos_.addAll(other.rankInfos_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.rankInfos_.isEmpty()) {
+            if (rankInfosBuilder_.isEmpty()) {
+              rankInfosBuilder_.dispose();
+              rankInfosBuilder_ = null;
+              rankInfos_ = other.rankInfos_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              rankInfosBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getRankInfosFieldBuilder() : null;
+            } else {
+              rankInfosBuilder_.addAllMessages(other.rankInfos_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasScore()) {
+          
+          return false;
+        }
+        if (!hasTitle()) {
+          
+          return false;
+        }
+        if (!hasRank()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getRankInfosCount(); i++) {
+          if (!getRankInfos(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.protocol.MiGongPB.SCGetOnlineInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.protocol.MiGongPB.SCGetOnlineInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int32 score = 1;
+      private int score_ ;
+      /**
+       * <code>required int32 score = 1;</code>
+       *
+       * <pre>
+       * 天梯积分
+       * </pre>
+       */
+      public boolean hasScore() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 score = 1;</code>
+       *
+       * <pre>
+       * 天梯积分
+       * </pre>
+       */
+      public int getScore() {
+        return score_;
+      }
+      /**
+       * <code>required int32 score = 1;</code>
+       *
+       * <pre>
+       * 天梯积分
+       * </pre>
+       */
+      public Builder setScore(int value) {
+        bitField0_ |= 0x00000001;
+        score_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 score = 1;</code>
+       *
+       * <pre>
+       * 天梯积分
+       * </pre>
+       */
+      public Builder clearScore() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        score_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required string title = 2;
+      private java.lang.Object title_ = "";
+      /**
+       * <code>required string title = 2;</code>
+       *
+       * <pre>
+       * 称谓
+       * </pre>
+       */
+      public boolean hasTitle() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string title = 2;</code>
+       *
+       * <pre>
+       * 称谓
+       * </pre>
+       */
+      public java.lang.String getTitle() {
+        java.lang.Object ref = title_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          title_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string title = 2;</code>
+       *
+       * <pre>
+       * 称谓
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getTitleBytes() {
+        java.lang.Object ref = title_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          title_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string title = 2;</code>
+       *
+       * <pre>
+       * 称谓
+       * </pre>
+       */
+      public Builder setTitle(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        title_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string title = 2;</code>
+       *
+       * <pre>
+       * 称谓
+       * </pre>
+       */
+      public Builder clearTitle() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        title_ = getDefaultInstance().getTitle();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string title = 2;</code>
+       *
+       * <pre>
+       * 称谓
+       * </pre>
+       */
+      public Builder setTitleBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        title_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required int32 rank = 3;
+      private int rank_ ;
+      /**
+       * <code>required int32 rank = 3;</code>
+       *
+       * <pre>
+       * 排名
+       * </pre>
+       */
+      public boolean hasRank() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 rank = 3;</code>
+       *
+       * <pre>
+       * 排名
+       * </pre>
+       */
+      public int getRank() {
+        return rank_;
+      }
+      /**
+       * <code>required int32 rank = 3;</code>
+       *
+       * <pre>
+       * 排名
+       * </pre>
+       */
+      public Builder setRank(int value) {
+        bitField0_ |= 0x00000004;
+        rank_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 rank = 3;</code>
+       *
+       * <pre>
+       * 排名
+       * </pre>
+       */
+      public Builder clearRank() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        rank_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // repeated .PBOnlineRankInfo rankInfos = 4;
+      private java.util.List<com.protocol.MiGongPB.PBOnlineRankInfo> rankInfos_ =
+        java.util.Collections.emptyList();
+      private void ensureRankInfosIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          rankInfos_ = new java.util.ArrayList<com.protocol.MiGongPB.PBOnlineRankInfo>(rankInfos_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.protocol.MiGongPB.PBOnlineRankInfo, com.protocol.MiGongPB.PBOnlineRankInfo.Builder, com.protocol.MiGongPB.PBOnlineRankInfoOrBuilder> rankInfosBuilder_;
+
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public java.util.List<com.protocol.MiGongPB.PBOnlineRankInfo> getRankInfosList() {
+        if (rankInfosBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(rankInfos_);
+        } else {
+          return rankInfosBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public int getRankInfosCount() {
+        if (rankInfosBuilder_ == null) {
+          return rankInfos_.size();
+        } else {
+          return rankInfosBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBOnlineRankInfo getRankInfos(int index) {
+        if (rankInfosBuilder_ == null) {
+          return rankInfos_.get(index);
+        } else {
+          return rankInfosBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public Builder setRankInfos(
+          int index, com.protocol.MiGongPB.PBOnlineRankInfo value) {
+        if (rankInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRankInfosIsMutable();
+          rankInfos_.set(index, value);
+          onChanged();
+        } else {
+          rankInfosBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public Builder setRankInfos(
+          int index, com.protocol.MiGongPB.PBOnlineRankInfo.Builder builderForValue) {
+        if (rankInfosBuilder_ == null) {
+          ensureRankInfosIsMutable();
+          rankInfos_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          rankInfosBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public Builder addRankInfos(com.protocol.MiGongPB.PBOnlineRankInfo value) {
+        if (rankInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRankInfosIsMutable();
+          rankInfos_.add(value);
+          onChanged();
+        } else {
+          rankInfosBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public Builder addRankInfos(
+          int index, com.protocol.MiGongPB.PBOnlineRankInfo value) {
+        if (rankInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRankInfosIsMutable();
+          rankInfos_.add(index, value);
+          onChanged();
+        } else {
+          rankInfosBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public Builder addRankInfos(
+          com.protocol.MiGongPB.PBOnlineRankInfo.Builder builderForValue) {
+        if (rankInfosBuilder_ == null) {
+          ensureRankInfosIsMutable();
+          rankInfos_.add(builderForValue.build());
+          onChanged();
+        } else {
+          rankInfosBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public Builder addRankInfos(
+          int index, com.protocol.MiGongPB.PBOnlineRankInfo.Builder builderForValue) {
+        if (rankInfosBuilder_ == null) {
+          ensureRankInfosIsMutable();
+          rankInfos_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          rankInfosBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public Builder addAllRankInfos(
+          java.lang.Iterable<? extends com.protocol.MiGongPB.PBOnlineRankInfo> values) {
+        if (rankInfosBuilder_ == null) {
+          ensureRankInfosIsMutable();
+          super.addAll(values, rankInfos_);
+          onChanged();
+        } else {
+          rankInfosBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public Builder clearRankInfos() {
+        if (rankInfosBuilder_ == null) {
+          rankInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          rankInfosBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public Builder removeRankInfos(int index) {
+        if (rankInfosBuilder_ == null) {
+          ensureRankInfosIsMutable();
+          rankInfos_.remove(index);
+          onChanged();
+        } else {
+          rankInfosBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBOnlineRankInfo.Builder getRankInfosBuilder(
+          int index) {
+        return getRankInfosFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBOnlineRankInfoOrBuilder getRankInfosOrBuilder(
+          int index) {
+        if (rankInfosBuilder_ == null) {
+          return rankInfos_.get(index);  } else {
+          return rankInfosBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public java.util.List<? extends com.protocol.MiGongPB.PBOnlineRankInfoOrBuilder> 
+           getRankInfosOrBuilderList() {
+        if (rankInfosBuilder_ != null) {
+          return rankInfosBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(rankInfos_);
+        }
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBOnlineRankInfo.Builder addRankInfosBuilder() {
+        return getRankInfosFieldBuilder().addBuilder(
+            com.protocol.MiGongPB.PBOnlineRankInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public com.protocol.MiGongPB.PBOnlineRankInfo.Builder addRankInfosBuilder(
+          int index) {
+        return getRankInfosFieldBuilder().addBuilder(
+            index, com.protocol.MiGongPB.PBOnlineRankInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PBOnlineRankInfo rankInfos = 4;</code>
+       *
+       * <pre>
+       * 排行信息
+       * </pre>
+       */
+      public java.util.List<com.protocol.MiGongPB.PBOnlineRankInfo.Builder> 
+           getRankInfosBuilderList() {
+        return getRankInfosFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.protocol.MiGongPB.PBOnlineRankInfo, com.protocol.MiGongPB.PBOnlineRankInfo.Builder, com.protocol.MiGongPB.PBOnlineRankInfoOrBuilder> 
+          getRankInfosFieldBuilder() {
+        if (rankInfosBuilder_ == null) {
+          rankInfosBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.protocol.MiGongPB.PBOnlineRankInfo, com.protocol.MiGongPB.PBOnlineRankInfo.Builder, com.protocol.MiGongPB.PBOnlineRankInfoOrBuilder>(
+                  rankInfos_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          rankInfos_ = null;
+        }
+        return rankInfosBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:SCGetOnlineInfo)
+    }
+
+    static {
+      defaultInstance = new SCGetOnlineInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:SCGetOnlineInfo)
+  }
+
+  public interface PBOnlineRankInfoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required string userId = 1;
+    /**
+     * <code>required string userId = 1;</code>
+     *
+     * <pre>
+     * 玩家账号
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required string userId = 1;</code>
+     *
+     * <pre>
+     * 玩家账号
+     * </pre>
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>required string userId = 1;</code>
+     *
+     * <pre>
+     * 玩家账号
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    // required string name = 2;
+    /**
+     * <code>required string name = 2;</code>
+     *
+     * <pre>
+     * 玩家名
+     * </pre>
+     */
+    boolean hasName();
+    /**
+     * <code>required string name = 2;</code>
+     *
+     * <pre>
+     * 玩家名
+     * </pre>
+     */
+    java.lang.String getName();
+    /**
+     * <code>required string name = 2;</code>
+     *
+     * <pre>
+     * 玩家名
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    // required int32 score = 3;
+    /**
+     * <code>required int32 score = 3;</code>
+     *
+     * <pre>
+     * 天梯积分
+     * </pre>
+     */
+    boolean hasScore();
+    /**
+     * <code>required int32 score = 3;</code>
+     *
+     * <pre>
+     * 天梯积分
+     * </pre>
+     */
+    int getScore();
+
+    // required string title = 4;
+    /**
+     * <code>required string title = 4;</code>
+     *
+     * <pre>
+     * 称谓
+     * </pre>
+     */
+    boolean hasTitle();
+    /**
+     * <code>required string title = 4;</code>
+     *
+     * <pre>
+     * 称谓
+     * </pre>
+     */
+    java.lang.String getTitle();
+    /**
+     * <code>required string title = 4;</code>
+     *
+     * <pre>
+     * 称谓
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getTitleBytes();
+
+    // required int32 rank = 5;
+    /**
+     * <code>required int32 rank = 5;</code>
+     *
+     * <pre>
+     * 排名
+     * </pre>
+     */
+    boolean hasRank();
+    /**
+     * <code>required int32 rank = 5;</code>
+     *
+     * <pre>
+     * 排名
+     * </pre>
+     */
+    int getRank();
+  }
+  /**
+   * Protobuf type {@code PBOnlineRankInfo}
+   */
+  public static final class PBOnlineRankInfo extends
+      com.google.protobuf.GeneratedMessage
+      implements PBOnlineRankInfoOrBuilder {
+    // Use PBOnlineRankInfo.newBuilder() to construct.
+    private PBOnlineRankInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PBOnlineRankInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PBOnlineRankInfo defaultInstance;
+    public static PBOnlineRankInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PBOnlineRankInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PBOnlineRankInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              name_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              score_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              title_ = input.readBytes();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              rank_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.protocol.MiGongPB.internal_static_PBOnlineRankInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.protocol.MiGongPB.internal_static_PBOnlineRankInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.protocol.MiGongPB.PBOnlineRankInfo.class, com.protocol.MiGongPB.PBOnlineRankInfo.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PBOnlineRankInfo> PARSER =
+        new com.google.protobuf.AbstractParser<PBOnlineRankInfo>() {
+      public PBOnlineRankInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PBOnlineRankInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PBOnlineRankInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required string userId = 1;
+    public static final int USERID_FIELD_NUMBER = 1;
+    private java.lang.Object userId_;
+    /**
+     * <code>required string userId = 1;</code>
+     *
+     * <pre>
+     * 玩家账号
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string userId = 1;</code>
+     *
+     * <pre>
+     * 玩家账号
+     * </pre>
+     */
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string userId = 1;</code>
+     *
+     * <pre>
+     * 玩家账号
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // required string name = 2;
+    public static final int NAME_FIELD_NUMBER = 2;
+    private java.lang.Object name_;
+    /**
+     * <code>required string name = 2;</code>
+     *
+     * <pre>
+     * 玩家名
+     * </pre>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string name = 2;</code>
+     *
+     * <pre>
+     * 玩家名
+     * </pre>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string name = 2;</code>
+     *
+     * <pre>
+     * 玩家名
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // required int32 score = 3;
+    public static final int SCORE_FIELD_NUMBER = 3;
+    private int score_;
+    /**
+     * <code>required int32 score = 3;</code>
+     *
+     * <pre>
+     * 天梯积分
+     * </pre>
+     */
+    public boolean hasScore() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 score = 3;</code>
+     *
+     * <pre>
+     * 天梯积分
+     * </pre>
+     */
+    public int getScore() {
+      return score_;
+    }
+
+    // required string title = 4;
+    public static final int TITLE_FIELD_NUMBER = 4;
+    private java.lang.Object title_;
+    /**
+     * <code>required string title = 4;</code>
+     *
+     * <pre>
+     * 称谓
+     * </pre>
+     */
+    public boolean hasTitle() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required string title = 4;</code>
+     *
+     * <pre>
+     * 称谓
+     * </pre>
+     */
+    public java.lang.String getTitle() {
+      java.lang.Object ref = title_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          title_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string title = 4;</code>
+     *
+     * <pre>
+     * 称谓
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getTitleBytes() {
+      java.lang.Object ref = title_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        title_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // required int32 rank = 5;
+    public static final int RANK_FIELD_NUMBER = 5;
+    private int rank_;
+    /**
+     * <code>required int32 rank = 5;</code>
+     *
+     * <pre>
+     * 排名
+     * </pre>
+     */
+    public boolean hasRank() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 rank = 5;</code>
+     *
+     * <pre>
+     * 排名
+     * </pre>
+     */
+    public int getRank() {
+      return rank_;
+    }
+
+    private void initFields() {
+      userId_ = "";
+      name_ = "";
+      score_ = 0;
+      title_ = "";
+      rank_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasScore()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTitle()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRank()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, score_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getTitleBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, rank_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, score_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getTitleBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, rank_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.protocol.MiGongPB.PBOnlineRankInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.PBOnlineRankInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.PBOnlineRankInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.protocol.MiGongPB.PBOnlineRankInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.PBOnlineRankInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.PBOnlineRankInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.PBOnlineRankInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.protocol.MiGongPB.PBOnlineRankInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.protocol.MiGongPB.PBOnlineRankInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.protocol.MiGongPB.PBOnlineRankInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.protocol.MiGongPB.PBOnlineRankInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code PBOnlineRankInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.protocol.MiGongPB.PBOnlineRankInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.protocol.MiGongPB.internal_static_PBOnlineRankInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.protocol.MiGongPB.internal_static_PBOnlineRankInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.protocol.MiGongPB.PBOnlineRankInfo.class, com.protocol.MiGongPB.PBOnlineRankInfo.Builder.class);
+      }
+
+      // Construct using com.protocol.MiGongPB.PBOnlineRankInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        score_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        title_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        rank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.protocol.MiGongPB.internal_static_PBOnlineRankInfo_descriptor;
+      }
+
+      public com.protocol.MiGongPB.PBOnlineRankInfo getDefaultInstanceForType() {
+        return com.protocol.MiGongPB.PBOnlineRankInfo.getDefaultInstance();
+      }
+
+      public com.protocol.MiGongPB.PBOnlineRankInfo build() {
+        com.protocol.MiGongPB.PBOnlineRankInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.protocol.MiGongPB.PBOnlineRankInfo buildPartial() {
+        com.protocol.MiGongPB.PBOnlineRankInfo result = new com.protocol.MiGongPB.PBOnlineRankInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.score_ = score_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.title_ = title_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.rank_ = rank_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.protocol.MiGongPB.PBOnlineRankInfo) {
+          return mergeFrom((com.protocol.MiGongPB.PBOnlineRankInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.protocol.MiGongPB.PBOnlineRankInfo other) {
+        if (other == com.protocol.MiGongPB.PBOnlineRankInfo.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          bitField0_ |= 0x00000001;
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (other.hasName()) {
+          bitField0_ |= 0x00000002;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasScore()) {
+          setScore(other.getScore());
+        }
+        if (other.hasTitle()) {
+          bitField0_ |= 0x00000008;
+          title_ = other.title_;
+          onChanged();
+        }
+        if (other.hasRank()) {
+          setRank(other.getRank());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasName()) {
+          
+          return false;
+        }
+        if (!hasScore()) {
+          
+          return false;
+        }
+        if (!hasTitle()) {
+          
+          return false;
+        }
+        if (!hasRank()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.protocol.MiGongPB.PBOnlineRankInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.protocol.MiGongPB.PBOnlineRankInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required string userId = 1;
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>required string userId = 1;</code>
+       *
+       * <pre>
+       * 玩家账号
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string userId = 1;</code>
+       *
+       * <pre>
+       * 玩家账号
+       * </pre>
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string userId = 1;</code>
+       *
+       * <pre>
+       * 玩家账号
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string userId = 1;</code>
+       *
+       * <pre>
+       * 玩家账号
+       * </pre>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string userId = 1;</code>
+       *
+       * <pre>
+       * 玩家账号
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string userId = 1;</code>
+       *
+       * <pre>
+       * 玩家账号
+       * </pre>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string name = 2;
+      private java.lang.Object name_ = "";
+      /**
+       * <code>required string name = 2;</code>
+       *
+       * <pre>
+       * 玩家名
+       * </pre>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string name = 2;</code>
+       *
+       * <pre>
+       * 玩家名
+       * </pre>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string name = 2;</code>
+       *
+       * <pre>
+       * 玩家名
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string name = 2;</code>
+       *
+       * <pre>
+       * 玩家名
+       * </pre>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string name = 2;</code>
+       *
+       * <pre>
+       * 玩家名
+       * </pre>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string name = 2;</code>
+       *
+       * <pre>
+       * 玩家名
+       * </pre>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required int32 score = 3;
+      private int score_ ;
+      /**
+       * <code>required int32 score = 3;</code>
+       *
+       * <pre>
+       * 天梯积分
+       * </pre>
+       */
+      public boolean hasScore() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 score = 3;</code>
+       *
+       * <pre>
+       * 天梯积分
+       * </pre>
+       */
+      public int getScore() {
+        return score_;
+      }
+      /**
+       * <code>required int32 score = 3;</code>
+       *
+       * <pre>
+       * 天梯积分
+       * </pre>
+       */
+      public Builder setScore(int value) {
+        bitField0_ |= 0x00000004;
+        score_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 score = 3;</code>
+       *
+       * <pre>
+       * 天梯积分
+       * </pre>
+       */
+      public Builder clearScore() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        score_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required string title = 4;
+      private java.lang.Object title_ = "";
+      /**
+       * <code>required string title = 4;</code>
+       *
+       * <pre>
+       * 称谓
+       * </pre>
+       */
+      public boolean hasTitle() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required string title = 4;</code>
+       *
+       * <pre>
+       * 称谓
+       * </pre>
+       */
+      public java.lang.String getTitle() {
+        java.lang.Object ref = title_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          title_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string title = 4;</code>
+       *
+       * <pre>
+       * 称谓
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getTitleBytes() {
+        java.lang.Object ref = title_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          title_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string title = 4;</code>
+       *
+       * <pre>
+       * 称谓
+       * </pre>
+       */
+      public Builder setTitle(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        title_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string title = 4;</code>
+       *
+       * <pre>
+       * 称谓
+       * </pre>
+       */
+      public Builder clearTitle() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        title_ = getDefaultInstance().getTitle();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string title = 4;</code>
+       *
+       * <pre>
+       * 称谓
+       * </pre>
+       */
+      public Builder setTitleBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        title_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required int32 rank = 5;
+      private int rank_ ;
+      /**
+       * <code>required int32 rank = 5;</code>
+       *
+       * <pre>
+       * 排名
+       * </pre>
+       */
+      public boolean hasRank() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required int32 rank = 5;</code>
+       *
+       * <pre>
+       * 排名
+       * </pre>
+       */
+      public int getRank() {
+        return rank_;
+      }
+      /**
+       * <code>required int32 rank = 5;</code>
+       *
+       * <pre>
+       * 排名
+       * </pre>
+       */
+      public Builder setRank(int value) {
+        bitField0_ |= 0x00000010;
+        rank_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 rank = 5;</code>
+       *
+       * <pre>
+       * 排名
+       * </pre>
+       */
+      public Builder clearRank() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        rank_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:PBOnlineRankInfo)
+    }
+
+    static {
+      defaultInstance = new PBOnlineRankInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:PBOnlineRankInfo)
+  }
+
   public interface CSMatchingOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
   }
@@ -14380,10 +17145,7 @@ public final class MiGongPB {
    * Protobuf type {@code CSMatching}
    *
    * <pre>
-   *&#47;//////////////////////////////////////////////////////////////联机对战///////////////////////////////////////
-   * 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳
-   * 请求匹配，返回房间及信息，开始游戏，发送操作（移动，道具），接收操作，发送到达终点，接收到达终点，接收游戏结束，房间心跳
-   * 请求匹配 TODO 取消匹配
+   * 匹配
    * </pre>
    */
   public static final class CSMatching extends
@@ -14577,10 +17339,7 @@ public final class MiGongPB {
      * Protobuf type {@code CSMatching}
      *
      * <pre>
-     *&#47;//////////////////////////////////////////////////////////////联机对战///////////////////////////////////////
-     * 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳
-     * 请求匹配，返回房间及信息，开始游戏，发送操作（移动，道具），接收操作，发送到达终点，接收到达终点，接收游戏结束，房间心跳
-     * 请求匹配 TODO 取消匹配
+     * 匹配
      * </pre>
      */
     public static final class Builder extends
@@ -30339,6 +33098,21 @@ public final class MiGongPB {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_SCUnlimitedFinish_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_CSGetOnlineInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_CSGetOnlineInfo_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_SCGetOnlineInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_SCGetOnlineInfo_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PBOnlineRankInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PBOnlineRankInfo_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_CSMatching_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -30513,34 +33287,40 @@ public final class MiGongPB {
       " \002(\005\"A\n\021CSUnlimitedFinish\022\014\n\004pass\030\001 \002(\005\022" +
       "\017\n\007success\030\002 \002(\005\022\r\n\005route\030\003 \003(\005\"6\n\021SCUnl",
       "imitedFinish\022\020\n\010openPass\030\001 \002(\005\022\017\n\007succes" +
-      "s\030\002 \002(\005\"\014\n\nCSMatching\"\014\n\nSCMatching\"\022\n\020C" +
-      "SCancelMatching\"\022\n\020SCCancelMatching\"\227\001\n\021" +
-      "SCMatchingSuccess\022\013\n\003map\030\001 \003(\005\022\014\n\004time\030\002" +
-      " \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005start\030\004 \002(\005\022\013\n\003en" +
-      "d\030\005 \002(\005\022 \n\notherInfos\030\006 \003(\0132\014.PBOtherInf" +
-      "o\022\032\n\005beans\030\007 \003(\0132\013.PBBeanInfo\"K\n\013PBOther" +
-      "Info\022\016\n\006userId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\r" +
-      "\n\005start\030\003 \002(\005\022\013\n\003end\030\004 \002(\005\"\020\n\016SCMatching" +
-      "Fail\"\t\n\007SCBegin\"@\n\006CSMove\022\014\n\004posX\030\001 \002(\002\022",
-      "\014\n\004posY\030\002 \002(\002\022\013\n\003dir\030\003 \002(\005\022\r\n\005speed\030\004 \002(" +
-      "\005\"\010\n\006SCMove\"4\n\nSCUserMove\022&\n\ruserMoveInf" +
-      "os\030\001 \003(\0132\017.PBUserMoveInfo\"g\n\016PBUserMoveI" +
-      "nfo\022\016\n\006userId\030\001 \002(\t\022\014\n\004posX\030\002 \002(\002\022\014\n\004pos" +
-      "Y\030\003 \002(\002\022\013\n\003dir\030\004 \002(\005\022\r\n\005speed\030\005 \002(\005\022\r\n\005f" +
-      "rame\030\006 \002(\005\"\034\n\tCSEatBean\022\017\n\007beanPos\030\001 \002(\005" +
-      "\"\013\n\tSCEatBean\".\n\rSCSendEatBean\022\035\n\005beans\030" +
-      "\001 \003(\0132\016.PBEatBeanInfo\"0\n\rPBEatBeanInfo\022\016" +
-      "\n\006userId\030\001 \002(\t\022\017\n\007beanPos\030\002 \002(\005\"\030\n\tCSArr" +
-      "ived\022\013\n\003pos\030\001 \002(\005\"\013\n\tSCArrived\"\037\n\rSCUser",
-      "Arrived\022\016\n\006userId\030\001 \002(\t\"F\n\nSCGameOver\022\020\n" +
-      "\010overType\030\001 \002(\005\022&\n\tuserInfos\030\002 \003(\0132\023.PBG" +
-      "ameOverUserInfo\"d\n\022PBGameOverUserInfo\022\016\n" +
-      "\006userId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\014\n\004rank\030" +
-      "\003 \002(\005\022\r\n\005score\030\004 \002(\005\022\017\n\007arrived\030\005 \002(\005\"\r\n" +
-      "\013CSRoomHeart\"\r\n\013SCRoomHeart\"#\n\022CSSendWal" +
-      "kingRoute\022\r\n\005route\030\001 \003(\005\"\024\n\022SCSendWalkin" +
-      "gRoute\"\031\n\010CSCommon\022\r\n\005route\030\001 \003(\t\"\031\n\010SCC" +
-      "ommon\022\r\n\005route\030\001 \003(\tB\016\n\014com.protocol"
+      "s\030\002 \002(\005\"\021\n\017CSGetOnlineInfo\"c\n\017SCGetOnlin" +
+      "eInfo\022\r\n\005score\030\001 \002(\005\022\r\n\005title\030\002 \002(\t\022\014\n\004r" +
+      "ank\030\003 \002(\005\022$\n\trankInfos\030\004 \003(\0132\021.PBOnlineR" +
+      "ankInfo\"\\\n\020PBOnlineRankInfo\022\016\n\006userId\030\001 " +
+      "\002(\t\022\014\n\004name\030\002 \002(\t\022\r\n\005score\030\003 \002(\005\022\r\n\005titl" +
+      "e\030\004 \002(\t\022\014\n\004rank\030\005 \002(\005\"\014\n\nCSMatching\"\014\n\nS" +
+      "CMatching\"\022\n\020CSCancelMatching\"\022\n\020SCCance" +
+      "lMatching\"\227\001\n\021SCMatchingSuccess\022\013\n\003map\030\001" +
+      " \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005sta",
+      "rt\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022 \n\notherInfos\030\006 \003(" +
+      "\0132\014.PBOtherInfo\022\032\n\005beans\030\007 \003(\0132\013.PBBeanI" +
+      "nfo\"K\n\013PBOtherInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010us" +
+      "erName\030\002 \002(\t\022\r\n\005start\030\003 \002(\005\022\013\n\003end\030\004 \002(\005" +
+      "\"\020\n\016SCMatchingFail\"\t\n\007SCBegin\"@\n\006CSMove\022" +
+      "\014\n\004posX\030\001 \002(\002\022\014\n\004posY\030\002 \002(\002\022\013\n\003dir\030\003 \002(\005" +
+      "\022\r\n\005speed\030\004 \002(\005\"\010\n\006SCMove\"4\n\nSCUserMove\022" +
+      "&\n\ruserMoveInfos\030\001 \003(\0132\017.PBUserMoveInfo\"" +
+      "g\n\016PBUserMoveInfo\022\016\n\006userId\030\001 \002(\t\022\014\n\004pos" +
+      "X\030\002 \002(\002\022\014\n\004posY\030\003 \002(\002\022\013\n\003dir\030\004 \002(\005\022\r\n\005sp",
+      "eed\030\005 \002(\005\022\r\n\005frame\030\006 \002(\005\"\034\n\tCSEatBean\022\017\n" +
+      "\007beanPos\030\001 \002(\005\"\013\n\tSCEatBean\".\n\rSCSendEat" +
+      "Bean\022\035\n\005beans\030\001 \003(\0132\016.PBEatBeanInfo\"0\n\rP" +
+      "BEatBeanInfo\022\016\n\006userId\030\001 \002(\t\022\017\n\007beanPos\030" +
+      "\002 \002(\005\"\030\n\tCSArrived\022\013\n\003pos\030\001 \002(\005\"\013\n\tSCArr" +
+      "ived\"\037\n\rSCUserArrived\022\016\n\006userId\030\001 \002(\t\"F\n" +
+      "\nSCGameOver\022\020\n\010overType\030\001 \002(\005\022&\n\tuserInf" +
+      "os\030\002 \003(\0132\023.PBGameOverUserInfo\"d\n\022PBGameO" +
+      "verUserInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010userName\030" +
+      "\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005score\030\004 \002(\005\022\017\n\007ar",
+      "rived\030\005 \002(\005\"\r\n\013CSRoomHeart\"\r\n\013SCRoomHear" +
+      "t\"#\n\022CSSendWalkingRoute\022\r\n\005route\030\001 \003(\005\"\024" +
+      "\n\022SCSendWalkingRoute\"\031\n\010CSCommon\022\r\n\005rout" +
+      "e\030\001 \003(\t\"\031\n\010SCCommon\022\r\n\005route\030\001 \003(\tB\016\n\014co" +
+      "m.protocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -30661,164 +33441,182 @@ public final class MiGongPB {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUnlimitedFinish_descriptor,
               new java.lang.String[] { "OpenPass", "Success", });
-          internal_static_CSMatching_descriptor =
+          internal_static_CSGetOnlineInfo_descriptor =
             getDescriptor().getMessageTypes().get(19);
+          internal_static_CSGetOnlineInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_CSGetOnlineInfo_descriptor,
+              new java.lang.String[] { });
+          internal_static_SCGetOnlineInfo_descriptor =
+            getDescriptor().getMessageTypes().get(20);
+          internal_static_SCGetOnlineInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_SCGetOnlineInfo_descriptor,
+              new java.lang.String[] { "Score", "Title", "Rank", "RankInfos", });
+          internal_static_PBOnlineRankInfo_descriptor =
+            getDescriptor().getMessageTypes().get(21);
+          internal_static_PBOnlineRankInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PBOnlineRankInfo_descriptor,
+              new java.lang.String[] { "UserId", "Name", "Score", "Title", "Rank", });
+          internal_static_CSMatching_descriptor =
+            getDescriptor().getMessageTypes().get(22);
           internal_static_CSMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSMatching_descriptor,
               new java.lang.String[] { });
           internal_static_SCMatching_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_SCMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatching_descriptor,
               new java.lang.String[] { });
           internal_static_CSCancelMatching_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_CSCancelMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSCancelMatching_descriptor,
               new java.lang.String[] { });
           internal_static_SCCancelMatching_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_SCCancelMatching_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCCancelMatching_descriptor,
               new java.lang.String[] { });
           internal_static_SCMatchingSuccess_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_SCMatchingSuccess_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatchingSuccess_descriptor,
               new java.lang.String[] { "Map", "Time", "Speed", "Start", "End", "OtherInfos", "Beans", });
           internal_static_PBOtherInfo_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_PBOtherInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBOtherInfo_descriptor,
               new java.lang.String[] { "UserId", "UserName", "Start", "End", });
           internal_static_SCMatchingFail_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_SCMatchingFail_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMatchingFail_descriptor,
               new java.lang.String[] { });
           internal_static_SCBegin_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(29);
           internal_static_SCBegin_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCBegin_descriptor,
               new java.lang.String[] { });
           internal_static_CSMove_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(30);
           internal_static_CSMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSMove_descriptor,
               new java.lang.String[] { "PosX", "PosY", "Dir", "Speed", });
           internal_static_SCMove_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_SCMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCMove_descriptor,
               new java.lang.String[] { });
           internal_static_SCUserMove_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_SCUserMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUserMove_descriptor,
               new java.lang.String[] { "UserMoveInfos", });
           internal_static_PBUserMoveInfo_descriptor =
-            getDescriptor().getMessageTypes().get(30);
+            getDescriptor().getMessageTypes().get(33);
           internal_static_PBUserMoveInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBUserMoveInfo_descriptor,
               new java.lang.String[] { "UserId", "PosX", "PosY", "Dir", "Speed", "Frame", });
           internal_static_CSEatBean_descriptor =
-            getDescriptor().getMessageTypes().get(31);
+            getDescriptor().getMessageTypes().get(34);
           internal_static_CSEatBean_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSEatBean_descriptor,
               new java.lang.String[] { "BeanPos", });
           internal_static_SCEatBean_descriptor =
-            getDescriptor().getMessageTypes().get(32);
+            getDescriptor().getMessageTypes().get(35);
           internal_static_SCEatBean_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCEatBean_descriptor,
               new java.lang.String[] { });
           internal_static_SCSendEatBean_descriptor =
-            getDescriptor().getMessageTypes().get(33);
+            getDescriptor().getMessageTypes().get(36);
           internal_static_SCSendEatBean_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCSendEatBean_descriptor,
               new java.lang.String[] { "Beans", });
           internal_static_PBEatBeanInfo_descriptor =
-            getDescriptor().getMessageTypes().get(34);
+            getDescriptor().getMessageTypes().get(37);
           internal_static_PBEatBeanInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBEatBeanInfo_descriptor,
               new java.lang.String[] { "UserId", "BeanPos", });
           internal_static_CSArrived_descriptor =
-            getDescriptor().getMessageTypes().get(35);
+            getDescriptor().getMessageTypes().get(38);
           internal_static_CSArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSArrived_descriptor,
               new java.lang.String[] { "Pos", });
           internal_static_SCArrived_descriptor =
-            getDescriptor().getMessageTypes().get(36);
+            getDescriptor().getMessageTypes().get(39);
           internal_static_SCArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCArrived_descriptor,
               new java.lang.String[] { });
           internal_static_SCUserArrived_descriptor =
-            getDescriptor().getMessageTypes().get(37);
+            getDescriptor().getMessageTypes().get(40);
           internal_static_SCUserArrived_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCUserArrived_descriptor,
               new java.lang.String[] { "UserId", });
           internal_static_SCGameOver_descriptor =
-            getDescriptor().getMessageTypes().get(38);
+            getDescriptor().getMessageTypes().get(41);
           internal_static_SCGameOver_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCGameOver_descriptor,
               new java.lang.String[] { "OverType", "UserInfos", });
           internal_static_PBGameOverUserInfo_descriptor =
-            getDescriptor().getMessageTypes().get(39);
+            getDescriptor().getMessageTypes().get(42);
           internal_static_PBGameOverUserInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBGameOverUserInfo_descriptor,
               new java.lang.String[] { "UserId", "UserName", "Rank", "Score", "Arrived", });
           internal_static_CSRoomHeart_descriptor =
-            getDescriptor().getMessageTypes().get(40);
+            getDescriptor().getMessageTypes().get(43);
           internal_static_CSRoomHeart_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSRoomHeart_descriptor,
               new java.lang.String[] { });
           internal_static_SCRoomHeart_descriptor =
-            getDescriptor().getMessageTypes().get(41);
+            getDescriptor().getMessageTypes().get(44);
           internal_static_SCRoomHeart_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCRoomHeart_descriptor,
               new java.lang.String[] { });
           internal_static_CSSendWalkingRoute_descriptor =
-            getDescriptor().getMessageTypes().get(42);
+            getDescriptor().getMessageTypes().get(45);
           internal_static_CSSendWalkingRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSSendWalkingRoute_descriptor,
               new java.lang.String[] { "Route", });
           internal_static_SCSendWalkingRoute_descriptor =
-            getDescriptor().getMessageTypes().get(43);
+            getDescriptor().getMessageTypes().get(46);
           internal_static_SCSendWalkingRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCSendWalkingRoute_descriptor,
               new java.lang.String[] { });
           internal_static_CSCommon_descriptor =
-            getDescriptor().getMessageTypes().get(44);
+            getDescriptor().getMessageTypes().get(47);
           internal_static_CSCommon_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSCommon_descriptor,
               new java.lang.String[] { "Route", });
           internal_static_SCCommon_descriptor =
-            getDescriptor().getMessageTypes().get(45);
+            getDescriptor().getMessageTypes().get(48);
           internal_static_SCCommon_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCCommon_descriptor,

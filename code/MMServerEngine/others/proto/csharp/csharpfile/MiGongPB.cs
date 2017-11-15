@@ -248,7 +248,46 @@ namespace Example
     /// <para> 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳</para>
     /// <para> 请求匹配，返回房间及信息，开始游戏，发送操作（移动，道具），接收操作，发送到达终点，接收到达终点，接收游戏结束，房间心跳</para>
     /// <para> 请求匹配 TODO 取消匹配</para>
+    /// <para> 获取在线信息</para>
     /// </summary>
+    public partial class CSGetOnlineInfo
+    {
+    }
+
+    public partial class SCGetOnlineInfo
+    {
+        public int Score { get; set; }
+
+        /// <summary> 天梯积分</summary>
+        public string Title { get; set; }
+
+        /// <summary> 称谓</summary>
+        public int Rank { get; set; }
+
+        /// <summary> 排名</summary>
+        public List<Example.PBOnlineRankInfo> RankInfos { get; set; }
+
+    }
+
+    public partial class PBOnlineRankInfo
+    {
+        public string UserId { get; set; }
+
+        /// <summary> 玩家账号</summary>
+        public string Name { get; set; }
+
+        /// <summary> 玩家名</summary>
+        public int Score { get; set; }
+
+        /// <summary> 天梯积分</summary>
+        public string Title { get; set; }
+
+        /// <summary> 称谓</summary>
+        public int Rank { get; set; }
+
+    }
+
+    /// <summary> 匹配</summary>
     public partial class CSMatching
     {
     }

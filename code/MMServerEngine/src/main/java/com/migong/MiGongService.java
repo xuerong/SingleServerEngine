@@ -377,9 +377,9 @@ public class MiGongService {
         MiGongPB.SCUnlimitedInfo.Builder builder = MiGongPB.SCUnlimitedInfo.newBuilder();
         builder.setPass(userMiGong.getUnlimitedPass());
         builder.setStar(userMiGong.getUnlimitedStar());
-        builder.setRank(miGongRank.getRank(userMiGong.getUserId()));// 排行系统
+        builder.setRank(miGongRank.getUnlimitedRank(userMiGong.getUserId()));// 排行系统
 
-        List<UserMiGong> rank = miGongRank.getFront();
+        List<UserMiGong> rank = miGongRank.getUnlimitedFront();
         int i = 1;
         for(UserMiGong rankMiGong : rank){
             MiGongPB.PBUnlimitedRankInfo.Builder info = MiGongPB.PBUnlimitedRankInfo.newBuilder();
@@ -566,10 +566,17 @@ public class MiGongService {
 
         for(int i =0;i<bean1Count;i++){
             int posInt = random.nextInt((size - 1)*(size-1));
-            if(hasCreatePos.contains(posInt)){
+
+            if(hasCreatePos.contains(posInt)){ // 已经生成过的
                 i--;
-            }else{
-                ret[i+5] = new Bean(posInt/(size-1) + 1,posInt%(size-1)+1,1);
+            }else {
+                int x = posInt/(size - 1);
+                int y = posInt%(size - 1);
+                if((x == 0 && (y == 0 || y == (size - 1))) || (x == (size - 1) && (y == 0 || y == (size - 1)))){ // 不能在四个角上，因为角上会是出口和入口
+                    i--;
+                    continue;
+                }
+                ret[i+5] = new Bean(x + 1,y+1,1);
                 hasCreatePos.add(posInt);
             }
         }
@@ -599,6 +606,33 @@ public class MiGongService {
         }
     }
     /////////////////////////////////////////////////////////////联网对战
+    /**
+     * 获取天梯信息
+     */
+    @Request(opcode = MiGongOpcode.CSGetOnlineInfo)
+    public RetPacket getOnlineInfo(Object clientData, Session session) throws Throwable{
+        UserMiGong userMiGong = get(session.getAccountId());
+        LadderTitle ladderTitle = LadderTitle.getLadderByScore(userMiGong.getLadderScore());
+
+        MiGongPB.SCGetOnlineInfo.Builder builder = MiGongPB.SCGetOnlineInfo.newBuilder();
+        builder.setScore(userMiGong.getLadderScore());
+        builder.setRank(miGongRank.getLadderRank(session.getAccountId()));
+        builder.setTitle(ladderTitle.getTitle());
+
+        List<UserMiGong> userMiGongs = miGongRank.getLadderFront();
+        int rank = 1;
+        for(UserMiGong um : userMiGongs){
+            MiGongPB.PBOnlineRankInfo.Builder rankInfo = MiGongPB.PBOnlineRankInfo.newBuilder();
+            LadderTitle lt = LadderTitle.getLadderByScore(um.getLadderScore());
+            rankInfo.setTitle(lt.getTitle());
+            rankInfo.setRank(rank++);
+            rankInfo.setScore(um.getLadderScore());
+            rankInfo.setName(dataService.selectObject(Account.class,"id=?",um.getUserId()).getName()); // // TODO:  后面要把玩家名字也存储在UserMiGong中，修改通过事件
+            rankInfo.setUserId(um.getUserId());
+            builder.addRankInfos(rankInfo);
+        }
+        return new RetPacketImpl(MiGongOpcode.SCGetOnlineInfo, builder.build().toByteArray());
+    }
 
     /**
      *匹配对战 ：把玩家放入匹配队列，查看队列大小，大于匹配数则开新线程开房间，
@@ -833,19 +867,21 @@ public class MiGongService {
             if(roomUser.isSuccess()){
                 UserMiGong userMiGong = dataService.selectObject(UserMiGong.class,"userId=?",roomUser.getSession().getAccountId());
                 userMiGong.setLadderScore(userMiGong.getLadderScore() + MultiMiGongRoom.USER_COUNT - roomUser.getRoomRank());
+                dataService.update(userMiGong);
+                // 修改排名
+                miGongRank.putLadder(userMiGong);
             }
             // 移除玩家
             userRooms.remove(roomUser.getSession().getAccountId());
             userStates.remove(roomUser.getSession().getAccountId());
-
-            // 保存对战记录
-            PvpRecord pvpRecord = new PvpRecord();
-            pvpRecord.setId(idService.acquireLong(PvpRecord.class));
-            pvpRecord.setGrade(room.getGrade());
-            pvpRecord.setTime(new Timestamp(System.currentTimeMillis()));
-            pvpRecord.setRecord(room.toInfoString());
-            dataService.insert(pvpRecord);
         }
+        // 保存对战记录
+        PvpRecord pvpRecord = new PvpRecord();
+        pvpRecord.setId(idService.acquireLong(PvpRecord.class));
+        pvpRecord.setGrade(room.getGrade());
+        pvpRecord.setTime(new Timestamp(System.currentTimeMillis()));
+        pvpRecord.setRecord(room.toInfoString());
+        dataService.insert(pvpRecord);
     }
 
     private ConcurrentLinkedQueue<RoomUser> getMatchingQueue(int grade){
