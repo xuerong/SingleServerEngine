@@ -165,6 +165,14 @@ public class MultiMiGongRoom extends MiGongRoom {
         // 通知miGongService清除该房间
         miGongService.multiRoomOver(this);
     }
+    // todo 玩家掉线:玩家掉线可以不做任何处理，外部已经移除了玩家的所有信息，所以，不影响玩家再次玩，
+    // 而这次结束之后，自动清理外部的数据
+    public void userLogout(String userId){
+        RoomUser roomUser = roomUsers.get(userId);
+        if(roomUser != null){
+            roomUser.setUserState(RoomUser.UserState.Offline);
+        }
+    }
 
     public void begin() {
         this.beginTime = System.currentTimeMillis();
@@ -222,7 +230,9 @@ public class MultiMiGongRoom extends MiGongRoom {
     }
     public void sendAllUsers(int opcode,byte[] data){
         for(Map.Entry<String,RoomUser> entry : roomUsers.entrySet()){
-            entry.getValue().getSession().getMessageSender().sendMessage(opcode,data);
+            if(entry.getValue().getUserState() != RoomUser.UserState.Offline) {
+                entry.getValue().getSession().getMessageSender().sendMessage(opcode, data);
+            }
         }
     }
 

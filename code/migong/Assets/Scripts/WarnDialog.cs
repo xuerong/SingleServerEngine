@@ -30,6 +30,7 @@ class WaitDialogInfo : DialogInfo{
 	public string text;
 	public int time;
 	public AfterWaitAction afterWaitAction;
+	public DialogOkAction cancelAction;
 }
 
 
@@ -56,12 +57,12 @@ class WarnDialog : MonoBehaviour {
 			canvas.SetActive(false);
 		});
 		ok = transform.Find ("Canvas/ok").GetComponent<Button> ();
-		ok.onClick.AddListener (delegate() {
-			canvas.SetActive(false);
-			if(okAction != null){
-				okAction.Invoke();
-			}
-		});
+//		ok.onClick.AddListener (delegate() {
+//			canvas.SetActive(false);
+//			if(okAction != null){
+//				okAction.Invoke();
+//			}
+//		});
 		text = transform.Find ("Canvas/text").GetComponent<Text> ();
 		instance = this;
 		canvas = transform.Find ("Canvas").gameObject;
@@ -70,23 +71,44 @@ class WarnDialog : MonoBehaviour {
 
 	void Update(){
 		if (dialogQueue.Count > 0 && !canvas.activeSelf) {
+			ok.onClick.RemoveAllListeners ();
 			lock (dialogQueue) {
+				ok.transform.Find("Text").GetComponent<Text>().text = "OK";
 				WarnDialogInfo w = dialogQueue.Dequeue ();
 				showButton (true,w.hideClose?false:true);
 				instance.text.text = w.text;
-				instance.okAction = w.okAction;
+//				instance.okAction = w.okAction;
+
+				ok.onClick.AddListener (delegate() {
+					canvas.SetActive(false);
+					if(w.okAction != null){
+						w.okAction.Invoke();
+					}
+				});
+
 				openDialog ();
 				w.state = DialogState.Showing;
 			}
 		}
 		if (waitDialogQueue.Count > 0 && !canvas.activeSelf) {
+			ok.onClick.RemoveAllListeners ();
 			lock (waitDialogQueue) {
-				showButton (false,false);
+				ok.transform.Find("Text").GetComponent<Text>().text = "Cancel";
+				showButton (true,false);
 				WaitDialogInfo w = waitDialogQueue.Dequeue ();
 				if (w.state == DialogState.Cancel) {
 					return;
 				}
 				instance.text.text = w.text;
+//				instance.okAction = w.afterWaitAction;
+
+				ok.onClick.AddListener (delegate() {
+					WarnDialog.closeWaitDialog(w.id);
+					if (w.cancelAction != null) {
+						w.cancelAction.Invoke ();
+					}
+				});
+
 				openDialog ();
 				w.state = DialogState.Showing;
 				Job.startJob (new MyDelegate(afterWait),w.time,w);
@@ -103,12 +125,13 @@ class WarnDialog : MonoBehaviour {
 		}
 	}
 
-	public static int showWaitDialog(string text,int time,AfterWaitAction afterWaitAction){
+	public static int showWaitDialog(string text,int time,AfterWaitAction afterWaitAction,DialogOkAction cancelAction){
 		WaitDialogInfo w = new WaitDialogInfo ();
 		w.text = text;
 		w.time = time;
 		w.afterWaitAction = afterWaitAction;
 		w.id = Interlocked.Increment (ref id);
+		w.cancelAction = cancelAction;
 		lock (waitDialogQueue) {
 			waitDialogQueue.Enqueue (w);
 			dialogInfos.Add (w.id,w);

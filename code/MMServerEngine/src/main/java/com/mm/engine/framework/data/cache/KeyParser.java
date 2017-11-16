@@ -97,6 +97,9 @@ public class KeyParser {
             return false;
         }
         String[] listKeyStrs = listKey.split(LISTSEPARATOR);
+        if(listKeyStrs.length == 2){ // 说明是整个表的list
+            return true;
+        }
         if(listKeyStrs.length<4){
             log.warn("listKey is Illegal : listKey = "+listKey);
             return false;

@@ -16,7 +16,7 @@ public final class SysPara{
 			put("addEnergyInterval","360");
 			put("unlimitedSpeed","10");
 			put("unlimitedEnergy","5");
-			put("ladderSize","7-8");
+			put("ladderSize","10-11");
 			put("ladderSpeed","8-15");
 			put("ladderTime","120-400");
 			put("ladderStar1","20-40");

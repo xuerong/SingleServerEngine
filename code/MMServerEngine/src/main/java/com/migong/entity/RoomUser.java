@@ -24,6 +24,8 @@ public class RoomUser {
     private boolean isSuccess;
     private int roomRank = -1;
 
+    private UserState userState;
+
     public RoomUser(Session session, long beginTime){
         this.session = session;
         this.beginTime = beginTime;
@@ -127,5 +129,29 @@ public class RoomUser {
 
     public void setSuccess(boolean success) {
         isSuccess = success;
+    }
+
+    public UserState getUserState() {
+        return userState;
+    }
+
+    public void setUserState(UserState userState) {
+        this.userState = userState;
+    }
+
+    public static enum UserState{
+        None("idle"),
+        Cancel("cancel"),
+        Matching("matching"),
+        Playing("in room"),
+        Offline("offline"); // 掉线
+
+        private final String describe;
+        UserState(String describe){
+            this.describe = describe;
+        }
+        public String getDescribe(){
+            return describe;
+        }
     }
 }

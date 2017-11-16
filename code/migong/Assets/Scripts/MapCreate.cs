@@ -133,7 +133,7 @@ public class MapCreate : MonoBehaviour{
 			starSlider.transform.parent.gameObject.SetActive (false);
 			GameObject scoreGo = Instantiate (scoreShow) as GameObject;
 			scoreGo.transform.localScale = new Vector3 (1,1,1);
-			scoreGo.transform.localPosition = new Vector3 (20+(85*scoreText.Count),-20,0);
+			scoreGo.transform.localPosition = new Vector3 (20+(180*scoreText.Count),-40,0);
 			scoreGo.transform.SetParent(transform.parent.parent.Find("Canvas"),false);
 			scoreText.Add (userId,scoreGo.transform.Find("Text").GetComponent<Text>());
 		}
@@ -369,9 +369,36 @@ public class MapCreate : MonoBehaviour{
 	public void gameOver(int opcode,byte[] data){
 		SCGameOver gameOver = SCGameOver.Deserialize (data);
 		//gameOver.OverType // 0其它，1都抵达终点，2时间到
-		foreach(PBGameOverUserInfo info in gameOver.UserInfos){
-//			info.
+
+		GameObject content = transform.parent.parent.Find ("Canvas/settle/bg/scrollView/Viewport/Content").gameObject;
+
+		//获取按钮游戏对象
+		Object button = Resources.Load ("onlineSettleItem");
+
+		// 列表
+		int count = gameOver.UserInfos.Count;
+		float dis = 0f;
+
+		GameObject up = Instantiate(button) as GameObject;
+		RectTransform buRec = up.GetComponent<RectTransform> ();
+		Destroy(up);
+
+		RectTransform contentTrans = content.GetComponent<RectTransform> ();
+		contentTrans.sizeDelta = new Vector2 (0,(buRec.rect.height + dis) * count + dis);
+
+		for (int i = 0; i < count; i++) {
+			PBGameOverUserInfo info = gameOver.UserInfos[i];
+			up = Instantiate(button) as GameObject;
+			up.transform.localPosition = new Vector3 (0, -((buRec.rect.height+dis)*i+dis),0);
+			up.transform.localScale = new Vector3 (1,1,1);
+			up.transform.SetParent(content.transform,false);
+			// 生成各个玩家的排名item
+			GameObject textGo = up.transform.Find ("Text").gameObject;
+			Text text = textGo.GetComponent<Text> ();
+			text.text = info.Rank+","+info.UserName+","+info.Score+","+info.Arrived;
 		}
+
+
 		GameObject settleGo = transform.parent.parent.Find ("Canvas/settle").gameObject;
 		settleGo.SetActive (true);
 	}

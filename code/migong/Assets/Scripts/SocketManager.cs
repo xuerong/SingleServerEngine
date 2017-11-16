@@ -63,8 +63,14 @@ public class SocketManager : MonoBehaviour {
 	//
 	private static System.Object locker = new System.Object ();
 
+	private static bool needConnectOnce = false;
+
 	// Use this for initialization
 	void Awake () {
+		getServerListAndConnectServerAndLogin ();
+	}
+
+	private void getServerListAndConnectServerAndLogin(){
 		PlayerPrefs.DeleteAll ();
 
 		serverId = PlayerPrefs.GetInt (SERVER_ID_KEY);
@@ -96,7 +102,8 @@ public class SocketManager : MonoBehaviour {
 				break;
 			}
 		}  
-		loginInfo.DeviceId = "shdfshksshfkk";
+//		loginInfo.DeviceId = "shdfshksshfkk";
+		Debug.Log("sdfsdfsdfsdfsdfsdfsfsdf");
 		WWW getData = new WWW("http://10.1.6.254:8083",CSGetLoginInfo.SerializeToBytes(loginInfo),headers);
 		yield return getData;
 		if(getData.error!= null){  
@@ -127,7 +134,6 @@ public class SocketManager : MonoBehaviour {
 	void Update(){
 		// 发送
 		if (IsConnected && IsLogin) {
-			
 			if (sendQueue.Count > 0) {
 				int count = 0;
 				while (sendQueue.Count > 0 && count++ < MAX_SEND_COUNT) {
@@ -136,8 +142,9 @@ public class SocketManager : MonoBehaviour {
 				}
 			}
 		} else {
-			if (sendQueue.Count > 0) { // 除了启动时的连接，有发送消息的时候再连
-//				ConnectServerAndLogin ();
+			if (needConnectOnce) {
+				needConnectOnce = false;
+//				getServerListAndConnectServerAndLogin (); TODO 这个地方会导致连发两次，要改改
 			}
 		}
 		// 接收的处理
@@ -165,6 +172,7 @@ public class SocketManager : MonoBehaviour {
 
 				Thread connectThread = new Thread (new ThreadStart (delegate() {
 					if (ConnectServer ()) {
+						Debug.Log("IsConnected = true;");
 						IsConnected = true;
 						CSLogin node = new CSLogin ();
 						node.AccountId = accountId;
@@ -197,12 +205,15 @@ public class SocketManager : MonoBehaviour {
 		int port = SocketManager.port;
 		if (clientSocket == null) {
 			clientSocket = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);  
+		} else {
+			clientSocket.Close ();
+			clientSocket = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);  
 		}
 		IPAddress mIp = IPAddress.Parse (ip);  
 		IPEndPoint ip_end_point = new IPEndPoint (mIp, port);  
 
 		clientSocket.SendTimeout = 2000;
-//		clientSocket.ReceiveTimeout = 2000;
+//		clientSocket.ReceiveTimeout = 10000; // TODO 加上这个会有问题，是谁没有正确放回呀？难道是因为网络线程是阻塞的，这个阻塞最多等待 ReceiveTimeout秒？
 		clientSocket.SendBufferSize = 81920;
 		clientSocket.ReceiveBufferSize = 81920;
 		try {
@@ -341,6 +352,8 @@ public class SocketManager : MonoBehaviour {
 //									ConnectServer();
 				});
 				Debug.Log("e:"+e);
+				IsConnected = false;
+				IsConnecting = false;
 				clientSocket.Disconnect(true);
 				clientSocket.Shutdown(SocketShutdown.Both);
 				clientSocket.Close();
@@ -357,6 +370,9 @@ public class SocketManager : MonoBehaviour {
 	}
 
 	public static void SendMessageAsyc(int opcode ,byte[] data,ActionForReceive action){
+		if (!IsConnected && !IsConnecting) {
+			needConnectOnce = true;
+		}
 		AsyncObject asyncObject = new AsyncObject ();
 		asyncObject.action = action;
 		asyncObject.Data = data;
@@ -385,8 +401,6 @@ public class SocketManager : MonoBehaviour {
 			clientSocket.Send(sendData);  
 
 			dic.Add(id,action);
-
-//			Debug.Log("send success,size = "+data.Length+",id:"+id);
 		}  
 		catch(Exception e)
 		{  
@@ -402,11 +416,8 @@ public class SocketManager : MonoBehaviour {
 	 * 如果需要可以在主线程调用的同步网络io，可以考虑用协程做
 	 **/
 	public static byte[] SendMessageSync(int opcode ,byte[] data){
-		if (IsConnected == false)  {
-			ConnectServerAndLogin ();
-			if (!IsConnected) {
-				throw new Exception("server is not connect");
-			}
+		if (!IsConnected && !IsConnecting)  {
+			needConnectOnce = true;
 		}
 		try  
 		{  

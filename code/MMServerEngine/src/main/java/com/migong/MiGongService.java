@@ -94,7 +94,7 @@ import java.util.concurrent.*;
  * 3、数据监控：友盟？还是自己来？
  * 4、异常监控
  *
- *
+ *todo  listKey is Illegal : listKey = com.migong.entity.UserMiGong#list
  */
 @Service(init = "init")
 public class MiGongService {
@@ -134,7 +134,7 @@ public class MiGongService {
      * 玩家状态：有状态的时候放入，无状态的时候移除（掉线，退出房间等）
      * 这里只针对匹配，放置多个匹配
      */
-    ConcurrentHashMap<String,UserState> userStates = new ConcurrentHashMap<>();
+    ConcurrentHashMap<String,RoomUser> roomUsers = new ConcurrentHashMap<>();
 
 
     private final Map<Integer,MiGongPass> passMap = new HashMap<>();
@@ -304,26 +304,28 @@ public class MiGongService {
             int star = calStar(allScore,miGongPass);
             if(star > 0){
                 if(miGongPassInfo.getPass() > userMiGong.getPass()){
-                    UserPass userPass = new UserPass();
-                    userPass.setUserId(session.getAccountId());
-                    userPass.setPassId(miGongPassInfo.getPass());
-                    userPass.setStar(star);
-                    userPass.setScore(allScore);
-                    userPass.setUseTime((int)(System.currentTimeMillis() - miGongPassInfo.getStartTime().getTime())/1000);
-                    dataService.insert(userPass);
+                    createAndInsertUserPass(session.getAccountId(),miGongPassInfo.getPass(),star,allScore,
+                            (int)(System.currentTimeMillis() - miGongPassInfo.getStartTime().getTime())/1000);
                     userMiGong.setPass(passFinish.getPass());
                     userMiGong.setStarCount(userMiGong.getStarCount() + star);
                     dataService.update(userMiGong);
                 }else{
                     UserPass userPass = dataService.selectObject(UserPass.class,"userId=? and passId=?",session.getAccountId(),miGongPassInfo.getPass());
-                    if(star > userPass.getStar()){
-                        userMiGong.setStarCount(userMiGong.getStarCount() + (star - userPass.getStar()));
-                        dataService.update(userMiGong);
-                    }
-                    if(star > userPass.getStar() || (star == userPass.getStar() && allScore > userPass.getScore())){
-                        userPass.setScore(allScore);
-                        userPass.setStar(star);
-                        dataService.update(userPass);
+                    if(userPass == null){
+                        log.error("user pass is not exit ,userId  ={},passId = {}",session.getAccountId(),miGongPassInfo.getPass());
+                        userPass = createAndInsertUserPass(session.getAccountId(),miGongPassInfo.getPass(),star,allScore,
+                                (int)(System.currentTimeMillis() - miGongPassInfo.getStartTime().getTime())/1000);
+                        // 查出所有的userpass，把所有的star加起来，加入玩家
+                    }else {
+                        if (star > userPass.getStar()) {
+                            userMiGong.setStarCount(userMiGong.getStarCount() + (star - userPass.getStar()));
+                            dataService.update(userMiGong);
+                        }
+                        if (star > userPass.getStar() || (star == userPass.getStar() && allScore > userPass.getScore())) {
+                            userPass.setScore(allScore);
+                            userPass.setStar(star);
+                            dataService.update(userPass);
+                        }
                     }
                 }
             }else{
@@ -336,6 +338,16 @@ public class MiGongService {
         builder.setOpenPass(userMiGong.getPass());
         builder.setSuccess(isSuccess?1:0);
         return new RetPacketImpl(MiGongOpcode.SCGetMiGongLevel, builder.build().toByteArray());
+    }
+    private UserPass createAndInsertUserPass(String userId,int passId,int star,int allScore,int useTime){
+        UserPass userPass = new UserPass();
+        userPass.setUserId(userId);
+        userPass.setPassId(passId);
+        userPass.setStar(star);
+        userPass.setScore(allScore);
+        userPass.setUseTime(useTime);
+        dataService.insert(userPass);
+        return userPass;
     }
     private int calScore(List<Integer> routes,MiGongPassInfo miGongPassInfo){
         Set<Integer> posForBean = new HashSet<>();
@@ -564,6 +576,11 @@ public class MiGongService {
         hasCreatePos.add((ret[3].getX()-1)*(size - 1) + (ret[3].getY()-1));
         hasCreatePos.add((ret[4].getX()-1)*(size - 1) + (ret[4].getY()-1));
 
+        if(bean1Count >= (size-1)*(size-1) - 9){ // bean1数量太多
+            log.error("bean1 is too much , bean1 count = {},size = {},use bean1 = {}",bean1Count,size,(size-1)*(size-1)-10);
+            bean1Count = (size-1)*(size-1)-10;
+        }
+
         for(int i =0;i<bean1Count;i++){
             int posInt = random.nextInt((size - 1)*(size-1));
 
@@ -572,7 +589,7 @@ public class MiGongService {
             }else {
                 int x = posInt/(size - 1);
                 int y = posInt%(size - 1);
-                if((x == 0 && (y == 0 || y == (size - 1))) || (x == (size - 1) && (y == 0 || y == (size - 1)))){ // 不能在四个角上，因为角上会是出口和入口
+                if((x == 0 && (y == 0 || y == (size - 2))) || (x == (size - 2) && (y == 0 || y == (size - 2)))){ // 不能在四个角上，因为角上会是出口和入口
                     i--;
                     continue;
                 }
@@ -600,9 +617,13 @@ public class MiGongService {
         final LogoutEventData logoutEventData = (LogoutEventData)data.getData();
         miGongPassInfoMap.remove(logoutEventData.getSession().getAccountId());
         // todo 从Matching的queue中移除，如果是房间最后一个，移除房间
-        UserState userState = userStates.remove(logoutEventData.getSession().getAccountId());
-        if(userState != null){
+        RoomUser roomUser = roomUsers.remove(logoutEventData.getSession().getAccountId());
+        if(roomUser != null){
             // 不用移除queue，那个session已经失效了
+        }
+        MultiMiGongRoom room = userRooms.remove(logoutEventData.getSession().getAccountId());
+        if(room != null) {
+            room.userLogout(logoutEventData.getSession().getAccountId());
         }
     }
     /////////////////////////////////////////////////////////////联网对战
@@ -642,16 +663,33 @@ public class MiGongService {
         UserMiGong userMiGong = get(session.getAccountId());
         // todo 该玩家是否开启匹配模式
         // todo 该玩家没有在排队也没有在房间
-        UserState userState = userStates.get(session.getAccountId());
-        if(userState == null || userState == UserState.None){
-            userStates.put(session.getAccountId(),UserState.Matching);
+        RoomUser roomUser = roomUsers.get(session.getAccountId());
+        if(roomUser == null){
+            roomUser = new RoomUser(session,System.currentTimeMillis());
+            roomUser.setUserState(RoomUser.UserState.Matching);
+            roomUsers.put(session.getAccountId(), roomUser);
+            ConcurrentLinkedQueue<RoomUser> queue = getMatchingQueue(scoreToGrade(userMiGong.getLadderScore()));
+            queue.offer(roomUser);
+        }else if(roomUser.getUserState() == RoomUser.UserState.Cancel || roomUser.getUserState() == RoomUser.UserState.None){
+            roomUser.setUserState(RoomUser.UserState.Matching);
         }else{
-            throw new ToClientException("your state is "+userState.getDescribe()+",can not march");
+            throw new ToClientException("your state is "+roomUser.getUserState().getDescribe()+",can not march");
         }
-        ConcurrentLinkedQueue<RoomUser> queue = getMatchingQueue(scoreToGrade(userMiGong.getLadderScore()));
-        queue.offer(new RoomUser(session,System.currentTimeMillis()));
         MiGongPB.SCMatching.Builder builder = MiGongPB.SCMatching.newBuilder();
         return new RetPacketImpl(MiGongOpcode.SCMatching, builder.build().toByteArray());
+    }
+    /**
+     *匹配对战 ：把玩家放入匹配队列，查看队列大小，大于匹配数则开新线程开房间，
+     */
+    @Request(opcode = MiGongOpcode.CSCancelMatching)
+    public RetPacket cancelMatching(Object clientData, Session session) throws Throwable{
+        RoomUser roomUser = roomUsers.get(session.getAccountId());
+        if(roomUser != null){
+            roomUser.setUserState(RoomUser.UserState.Cancel);
+        }
+        MiGongPB.SCCancelMatching.Builder builder = MiGongPB.SCCancelMatching.newBuilder();
+
+        return new RetPacketImpl(MiGongOpcode.SCCancelMatching, builder.build().toByteArray());
     }
 
     /**
@@ -728,13 +766,14 @@ public class MiGongService {
             while (!queue.isEmpty()){
                 RoomUser roomUser = queue.poll();
                 if((currentTime - roomUser.getBeginTime())/1000 > sysParaService.getInt(SysPara.matchWaitTime)){
-                    userStates.remove(roomUser.getSession().getAccountId());
+                    roomUsers.remove(roomUser.getSession().getAccountId());
                     matchOutTimeExecutor.execute(new SendMatchFailRunnable(roomUser));
                 }else if(!roomUser.getSession().isAvailable()){
-                    log.info("session is not available , user maybe logout");
+                    log.warn("session is not available , user maybe logout");
+                    roomUsers.remove(roomUser.getSession().getAccountId());
                 }else{
-                    UserState userState = userStates.get(roomUser.getSession().getAccountId());
-                    if(userState == UserState.Matching) {
+                    RoomUser.UserState userState = roomUsers.get(roomUser.getSession().getAccountId()).getUserState();
+                    if(userState == RoomUser.UserState.Matching) {
                         // 加入匹配
                         roomUserList.add(roomUser);
                         if (roomUserList.size() >= MiGongRoom.USER_COUNT) {
@@ -744,8 +783,8 @@ public class MiGongService {
                             roomUserList = new ArrayList<>();
                         }
                     }else{
-                        log.error("user state is not matching,user state = "+userState);
-
+                        roomUsers.remove(roomUser.getSession().getAccountId());
+//                        log.error("user state is not matching,user state = "+userState);
                     }
                 }
             }
@@ -831,7 +870,7 @@ public class MiGongService {
         for(RoomUser roomUser : roomUserList){
             userRooms.put(roomUser.getSession().getAccountId(),multiMiGongRoom);
             //
-            userStates.put(roomUser.getSession().getAccountId(),UserState.Playing);
+            roomUser.setUserState(RoomUser.UserState.Playing);
             // 推送
 
             List<MiGongPB.PBOtherInfo> otherInfoList = new ArrayList<>();
@@ -872,8 +911,13 @@ public class MiGongService {
                 miGongRank.putLadder(userMiGong);
             }
             // 移除玩家
-            userRooms.remove(roomUser.getSession().getAccountId());
-            userStates.remove(roomUser.getSession().getAccountId());
+            if(roomUser.getUserState() != RoomUser.UserState.Offline) {
+                userRooms.remove(roomUser.getSession().getAccountId());
+                roomUsers.remove(roomUser.getSession().getAccountId());
+            }else{
+                // 断线的时候已经移除了，这样确保可以断线的人断线期间再开
+                // 也可以做断线重连，但是RoomUser中用的session，这个要注意
+            }
         }
         // 保存对战记录
         PvpRecord pvpRecord = new PvpRecord();
@@ -893,24 +937,12 @@ public class MiGongService {
         }
         return queue;
     }
-    // 分数转段位，首先段位不能太多
+    // todo 分数转段位，首先段位不能太多
     private int scoreToGrade(int score){
-        return score/10;
+        return 1;
     }
 
-    enum UserState{
-        None("idle"),
-        Matching("matching"),
-        Playing("in room");
 
-        private final String describe;
-        UserState(String describe){
-            this.describe = describe;
-        }
-        public String getDescribe(){
-            return describe;
-        }
-    }
 }
 
 

@@ -201,8 +201,50 @@ public class MainPanel : MonoBehaviour {
 
 	private void openOnlineWindow(){
 		show (uiOnline);
+		CSGetOnlineInfo getOnlineInfo = new CSGetOnlineInfo ();
+		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetOnlineInfo, CSGetOnlineInfo.SerializeToBytes (getOnlineInfo), delegate(int opcode, byte[] data) {
+			SCGetOnlineInfo ret = SCGetOnlineInfo.Deserialize(data);
+			Text scoreText = GameObject.Find ("main/ui/uiOnline/Canvas/score").GetComponent<Text>();
+			Text titleText = GameObject.Find ("main/ui/uiOnline/Canvas/title").GetComponent<Text>();
+			Text rankText = GameObject.Find ("main/ui/uiOnline/Canvas/rank").GetComponent<Text>();
 
+			scoreText.text = "score:"+ret.Score;
+			titleText.text = "score:"+ret.Title;
+			rankText.text = "score:"+ret.Rank;
+//			onlineInfo.
 
+			GameObject content = GameObject.Find ("main/ui/uiOnline/Canvas/scrollView/Viewport/Content");
+			for (int i = 0; i < content.transform.childCount; i++) {
+				Destroy (content.transform.GetChild(i).gameObject);		
+			}
+
+			//获取按钮游戏对象
+			Object button = Resources.Load ("UnlimitItem");
+
+			// 列表
+			int count = ret.RankInfos.Count;
+			float dis = 20f;
+
+			GameObject up = Instantiate(button) as GameObject;
+			RectTransform buRec = up.GetComponent<RectTransform> ();
+			Destroy(up);
+
+			RectTransform contentTrans = content.GetComponent<RectTransform> ();
+			contentTrans.sizeDelta = new Vector2 (0,(buRec.rect.height + dis) * count + dis);
+
+			for (int i = 0; i < count; i++) {
+				PBOnlineRankInfo info = ret.RankInfos[i];
+				up = Instantiate(button) as GameObject;
+				up.transform.localPosition = new Vector3 (0, -((buRec.rect.height+dis)*i+dis),0);
+				up.transform.localScale = new Vector3 (1,1,1);
+				up.transform.SetParent(content.transform,false);
+				// 生成各个玩家的排名item
+				GameObject textGo = up.transform.Find ("Text").gameObject;
+				Text text = textGo.GetComponent<Text> ();
+				text.text = info.Rank+","+info.Name+","+info.Score+","+info.Title;
+			}
+
+		});
 	}
 		
 	public void showMainPanel(){
@@ -239,6 +281,17 @@ public class MainPanel : MonoBehaviour {
 		//matchWaitTime
 		matchingDialogId = WarnDialog.showWaitDialog ("matching...", int.Parse (sysParas ["matchWaitTime"]), delegate() {
 			WarnDialog.showWarnDialog("match fail , please try again later.",null);	
+			//
+			CSCancelMatching cancelMatching = new CSCancelMatching();
+			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSCancelMatching,CSCancelMatching.SerializeToBytes(cancelMatching),delegate(int opcode, byte[] data) {
+
+			});
+		},delegate() {
+			//
+			CSCancelMatching cancelMatching = new CSCancelMatching();
+			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSCancelMatching,CSCancelMatching.SerializeToBytes(cancelMatching),delegate(int opcode, byte[] data) {
+				
+			});
 		});
 	}
 
