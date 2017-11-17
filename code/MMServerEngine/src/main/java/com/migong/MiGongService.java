@@ -408,7 +408,7 @@ public class MiGongService {
     public RetPacket unlimitedGo(Object clientData, Session session) throws Throwable{
         // 判断无尽模式是否打开，
         UserMiGong userMiGong = get(session.getAccountId());
-        if(userMiGong.getPass() < sysParaService.getInt(SysPara.openPvp)){
+        if(userMiGong.getPass() < sysParaService.getInt(SysPara.openUnlimited)){
             throw new ToClientException("has not open unlimited mode , need pass mode "+sysParaService.getInt(SysPara.openUnlimited)+" pass");
         }
         // 消耗精力
@@ -633,6 +633,11 @@ public class MiGongService {
     @Request(opcode = MiGongOpcode.CSGetOnlineInfo)
     public RetPacket getOnlineInfo(Object clientData, Session session) throws Throwable{
         UserMiGong userMiGong = get(session.getAccountId());
+
+        if(userMiGong.getPass() < sysParaService.getInt(SysPara.openPvp)){
+            throw new ToClientException("has not open unlimited mode , need pass mode "+sysParaService.getInt(SysPara.openPvp)+" pass");
+        }
+
         LadderTitle ladderTitle = LadderTitle.getLadderByScore(userMiGong.getLadderScore());
 
         MiGongPB.SCGetOnlineInfo.Builder builder = MiGongPB.SCGetOnlineInfo.newBuilder();
@@ -662,6 +667,9 @@ public class MiGongService {
     public RetPacket matching(Object clientData, Session session) throws Throwable{
         UserMiGong userMiGong = get(session.getAccountId());
         // todo 该玩家是否开启匹配模式
+        if(userMiGong.getPass() < sysParaService.getInt(SysPara.openPvp)){
+            throw new ToClientException("has not open unlimited mode , need pass mode "+sysParaService.getInt(SysPara.openPvp)+" pass");
+        }
         // todo 该玩家没有在排队也没有在房间
         RoomUser roomUser = roomUsers.get(session.getAccountId());
         if(roomUser == null){

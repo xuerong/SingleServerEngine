@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using com.protocol;
 using Example;
+using cn.sharesdk.unity3d;
 
 public class MainPanel : MonoBehaviour {
 	public GameObject uiMain;
@@ -20,6 +21,7 @@ public class MainPanel : MonoBehaviour {
 
 	private int matchingDialogId; // 匹配阶段弹窗的id
 
+	private ShareSDK ssdk;
 	// Use this for initialization
 	void Start () {
 		show (uiMain);
@@ -54,13 +56,13 @@ public class MainPanel : MonoBehaviour {
 		go.onClick.AddListener (delegate() {
 			CSUnlimitedGo unlimitedGo = new CSUnlimitedGo();
 			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSUnlimitedGo,CSUnlimitedGo.SerializeToBytes(unlimitedGo),delegate(int opcode, byte[] data) {
+				ui.SetActive (false);
 				SCUnlimitedGo ret = SCUnlimitedGo.Deserialize(data);
 				// 消耗精力
 				energy = ret.Energy;
 				int[] stars= {ret.Star1,ret.Star2,ret.Star3,ret.Star4};
 				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans, ret.Speed,ret.Start, ret.End, ret.Pass,null,stars);
 			});
-			ui.SetActive (false);
 		});
 		closeButton = GameObject.Find ("main/ui/uiUnlimit/Canvas/close").GetComponent<Button>();
 		closeButton.onClick.AddListener (delegate() {
@@ -87,6 +89,23 @@ public class MainPanel : MonoBehaviour {
 			}
 		});
 
+
+		// 账号，分享，帮助
+		ssdk = new ShareSDK();
+
+		Button accountButton = GameObject.Find (canvasPath+"account").GetComponent<Button>();
+		accountButton.onClick.AddListener (delegate() {
+			Debug.Log("account");
+			doAccount();
+		});
+		ssdk.showUserHandler = GetUserInfoResultHandler;
+		Button shareButton = GameObject.Find (canvasPath+"share").GetComponent<Button>();
+		shareButton.onClick.AddListener (delegate() {
+			Debug.Log("share");
+			doShare();
+		});
+		ssdk.shareHandler = ShareResultHandler;
+
 		// 联网对战按钮
 		//
 		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingSuccess, matchSuccess);
@@ -101,6 +120,69 @@ public class MainPanel : MonoBehaviour {
 				Application.Quit();
 			},true);
 		});
+	}
+
+	void doAccount(){
+		ssdk.Authorize(PlatformType.WeChat);
+	}
+	// 账号回调
+	void GetUserInfoResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
+	{
+		if (state == ResponseState.Success)
+		{
+			print ("get user info result :");
+			print (MiniJSON.jsonEncode(result));
+			ssdk.GetUserInfo(PlatformType.WeChat);
+		}
+		else if (state == ResponseState.Fail)
+		{
+			print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
+		}
+		else if (state == ResponseState.Cancel) 
+		{
+			print ("cancel !");
+		}
+	}
+
+	void doShare(){
+		ShareContent content = new ShareContent();
+		content.SetText("this is a test string.");
+		content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+		content.SetTitle("test title");
+		content.SetTitleUrl("http://www.mob.com");
+		content.SetSite("Mob-ShareSDK");
+		content.SetSiteUrl("http://www.mob.com");
+		content.SetUrl("http://www.mob.com");
+		content.SetComment("test description");
+		content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
+		content.SetShareType(ContentType.Webpage);
+
+
+		//通过分享菜单分享
+		ssdk.ShowPlatformList (null, content, 100, 100);
+
+		//直接通过编辑界面分享
+		ssdk.ShowShareContentEditor (PlatformType.SinaWeibo, content);
+
+		//直接分享
+		ssdk.ShareContent (PlatformType.SinaWeibo, content);
+	}
+	// 分享回调
+	void ShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
+	{
+		if (state == ResponseState.Success)
+		{
+			print ("share result :");
+			print (MiniJSON.jsonEncode(result));
+		}
+		else if (state == ResponseState.Fail)
+		{
+			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+		}
+		else if (state == ResponseState.Cancel) 
+		{
+			print ("cancel !");
+		}
 	}
 
 	private void openLevelWindow(){
@@ -156,7 +238,6 @@ public class MainPanel : MonoBehaviour {
 	}
 
 	private void openUnlimitWindow(){
-		show (uiUnlimit);
 		//
 
 		//获取按钮游戏对象
@@ -169,6 +250,7 @@ public class MainPanel : MonoBehaviour {
 		// 获取当前关卡
 		CSUnlimitedInfo unlimitedInfo = new CSUnlimitedInfo();
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSUnlimitedInfo, CSUnlimitedInfo.SerializeToBytes (unlimitedInfo),delegate(int opcode, byte[] data) {
+			show (uiUnlimit);
 			SCUnlimitedInfo ret = SCUnlimitedInfo.Deserialize (data);
 
 			//
@@ -200,9 +282,9 @@ public class MainPanel : MonoBehaviour {
 	}
 
 	private void openOnlineWindow(){
-		show (uiOnline);
 		CSGetOnlineInfo getOnlineInfo = new CSGetOnlineInfo ();
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetOnlineInfo, CSGetOnlineInfo.SerializeToBytes (getOnlineInfo), delegate(int opcode, byte[] data) {
+			show (uiOnline);
 			SCGetOnlineInfo ret = SCGetOnlineInfo.Deserialize(data);
 			Text scoreText = GameObject.Find ("main/ui/uiOnline/Canvas/score").GetComponent<Text>();
 			Text titleText = GameObject.Find ("main/ui/uiOnline/Canvas/title").GetComponent<Text>();
@@ -277,20 +359,20 @@ public class MainPanel : MonoBehaviour {
 		CSMatching matching = new CSMatching ();
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSMatching, CSMatching.SerializeToBytes(matching),delegate(int opcode, byte[] data) {
 			Debug.Log("send matching success,opcode = "+opcode);
-		});
-		//matchWaitTime
-		matchingDialogId = WarnDialog.showWaitDialog ("matching...", int.Parse (sysParas ["matchWaitTime"]), delegate() {
-			WarnDialog.showWarnDialog("match fail , please try again later.",null);	
-			//
-			CSCancelMatching cancelMatching = new CSCancelMatching();
-			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSCancelMatching,CSCancelMatching.SerializeToBytes(cancelMatching),delegate(int opcode, byte[] data) {
+			//matchWaitTime
+			matchingDialogId = WarnDialog.showWaitDialog ("matching...", int.Parse (sysParas ["matchWaitTime"]), delegate() {
+				WarnDialog.showWarnDialog("match fail , please try again later.",null);	
+				//
+				CSCancelMatching cancelMatching = new CSCancelMatching();
+				SocketManager.SendMessageAsyc((int)MiGongOpcode.CSCancelMatching,CSCancelMatching.SerializeToBytes(cancelMatching),delegate(int retOpcode, byte[] retData) {
 
-			});
-		},delegate() {
-			//
-			CSCancelMatching cancelMatching = new CSCancelMatching();
-			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSCancelMatching,CSCancelMatching.SerializeToBytes(cancelMatching),delegate(int opcode, byte[] data) {
-				
+				});
+			},delegate() {
+				//
+				CSCancelMatching cancelMatching = new CSCancelMatching();
+				SocketManager.SendMessageAsyc((int)MiGongOpcode.CSCancelMatching,CSCancelMatching.SerializeToBytes(cancelMatching),delegate(int retOpcode, byte[] retData) {
+
+				});
 			});
 		});
 	}
@@ -300,13 +382,13 @@ public class MainPanel : MonoBehaviour {
 		miGongMap.Pass = buttonIndex.pass;
 		byte[] data = CSGetMiGongMap.SerializeToBytes (miGongMap);
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetMiGongMap, data,delegate(int opcode, byte[] ret) {
+			ui.SetActive (false);
 			SCGetMiGongMap scmap = SCGetMiGongMap.Deserialize(ret);
 			// 消耗精力
 			energy = scmap.Energy;
 			int[] stars= {scmap.Star1,scmap.Star2,scmap.Star3,scmap.Star4};
 			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans, scmap.Speed,scmap.Start, scmap.End, scmap.Pass,null,stars);
 		});
-		ui.SetActive (false);
 	}
 	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int speed,int start,int end,int pass,List<PBOtherInfo> otherInfos,int[] stars){
 		Object gamePanel = Resources.Load ("GamePanel");

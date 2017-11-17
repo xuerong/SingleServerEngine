@@ -9,6 +9,7 @@ using System.Threading;
 using Example;
 using com.protocol;
 using System.Net.NetworkInformation;
+using UnityEngine.Networking;
 
 public delegate void ActionForReceive(int opcode,byte[] data);
 
@@ -32,10 +33,10 @@ public class SocketManager : MonoBehaviour {
 
 	public static int MAX_SEND_COUNT = 5; // 一次最大发送消息
 
-	public static string accountId;
-	public static int port;
-	public static string ip;
-	public static int serverId;
+	public static string accountId = "gaorui";
+	public static int port=8003;
+	public static string ip="10.1.6.254";
+	public static int serverId = 1;
 	/**
 	 * BlockingQueue 用来发包
 	 * Queue queue = Queue.Synchronized (new Queue ());
@@ -65,10 +66,20 @@ public class SocketManager : MonoBehaviour {
 
 	private static bool needConnectOnce = false;
 
+	static Dictionary<int,long> lastSendTime = new Dictionary<int, long>();
+	static Dictionary<int,int> needCheckOpcode = new Dictionary<int, int>(){ // 
+		{(int)MiGongOpcode.CSGetMiGongMap,(int)MiGongOpcode.CSGetMiGongMap},
+		{(int)MiGongOpcode.CSUnlimitedGo,(int)MiGongOpcode.CSUnlimitedGo},
+		{(int)MiGongOpcode.CSMatching,(int)MiGongOpcode.CSMatching},
+		{(int)MiGongOpcode.CSUnlimitedInfo,(int)MiGongOpcode.CSUnlimitedInfo},
+		{(int)MiGongOpcode.CSGetOnlineInfo,(int)MiGongOpcode.CSGetOnlineInfo}
+	};
 	// Use this for initialization
 	void Awake () {
 		getServerListAndConnectServerAndLogin ();
+//		ConnectServerAndLogin ();
 	}
+
 
 	private void getServerListAndConnectServerAndLogin(){
 		PlayerPrefs.DeleteAll ();
@@ -77,11 +88,11 @@ public class SocketManager : MonoBehaviour {
 		ip = PlayerPrefs.GetString (SERVER_IP_KEY);
 		port = PlayerPrefs.GetInt (SERVER_PORT_KEY);
 		accountId = PlayerPrefs.GetString (ACCOUNT_KEY);
-		Debug.Log ((ip=="")+","+port+","+accountId);
+
 		if (ip == "" || accountId == "") {
 			StartCoroutine (PostReq());
 		} else {
-			if (!IsConnected) {
+			if (!IsConnected && !IsConnecting) {
 				ConnectServerAndLogin ();
 			}
 		}
@@ -93,42 +104,83 @@ public class SocketManager : MonoBehaviour {
 		CSGetLoginInfo loginInfo = new CSGetLoginInfo ();
 		NetworkInterface[] nis = NetworkInterface.GetAllNetworkInterfaces ();
 		foreach (NetworkInterface ni in nis) {  
-			Debug.Log ("Name = " + ni.Name );  
-			Debug.Log ("Description = " + ni.Description );  
-			Debug.Log ("NetworkInterfaceType = " + ni.NetworkInterfaceType.ToString() );  
-			Debug.Log ("Mac地址 = " + ni.GetPhysicalAddress().ToString() );  /// Ethernet 6C0B8490F3B5
+//			Debug.Log ("Name = " + ni.Name );  
+//			Debug.Log ("Description = " + ni.Description );  
+//			Debug.Log ("NetworkInterfaceType = " + ni.NetworkInterfaceType.ToString() );  
+//			Debug.Log ("Mac地址 = " + ni.GetPhysicalAddress().ToString() );  /// Ethernet 6C0B8490F3B5
 			if ("Ethernet".Equals (ni.NetworkInterfaceType.ToString ())) {
-				loginInfo.DeviceId = ni.GetPhysicalAddress ().ToString ();
+				loginInfo.DeviceId = "mac-"+ni.GetPhysicalAddress ().ToString ();
 				break;
 			}
 		}  
+		if (loginInfo.DeviceId == null || loginInfo.DeviceId == "") {
+			loginInfo.DeviceId = SystemInfo.deviceUniqueIdentifier;
+		}
+		if (loginInfo.DeviceId == null || loginInfo.DeviceId == "") {
+			WarnDialog.showWarnDialog ("can not get device id");
+			yield return 0.1f;
+		}
+		Debug.Log ("loginInfo.DeviceId = "+loginInfo.DeviceId);
 //		loginInfo.DeviceId = "shdfshksshfkk";
-		Debug.Log("sdfsdfsdfsdfsdfsdfsfsdf");
-		WWW getData = new WWW("http://10.1.6.254:8083",CSGetLoginInfo.SerializeToBytes(loginInfo),headers);
-		yield return getData;
-		if(getData.error!= null){  
-			Debug.Log (getData.error);
-			WarnDialog.showWarnDialog ("get server info fail !",null);
-		}else{ 
-			SCGetLoginInfo ret = SCGetLoginInfo.Deserialize (getData.bytes);
+//		WWW getData = new WWW("http://10.1.6.254:8083",CSGetLoginInfo.SerializeToBytes(loginInfo),headers);
+//		yield return getData;
+
+//		if(getData.error!= null){  
+//			Debug.Log (getData.error);
+//			WarnDialog.showWarnDialog ("get server info fail !",null);
+//		}else{ 
+//			SCGetLoginInfo ret = SCGetLoginInfo.Deserialize (getData.bytes);
+//			serverId = ret.ServerId;
+//			accountId = ret.AccountId;
+//			ip = ret.Ip;
+//			port = ret.Port;
+//
+//			PlayerPrefs.SetInt (SERVER_ID_KEY,serverId);
+//			PlayerPrefs.SetString (SERVER_IP_KEY,ip);
+//			PlayerPrefs.SetInt (SERVER_PORT_KEY,port);
+//			PlayerPrefs.SetString (ACCOUNT_KEY,accountId);
+//			PlayerPrefs.Save ();
+//
+//			ConnectServerAndLogin ();
+//
+//			Debug.Log ("accountId = " + ret.AccountId);  
+//			Debug.Log ("serverId = " + ret.ServerId);  
+//			Debug.Log ("ip = " + ret.Ip);  
+//			Debug.Log ("port = " + ret.Port);  
+//		}      
+//
+
+		string url = "http://10.1.6.254:8083";  
+		UnityWebRequest request = new UnityWebRequest(url, "POST");  
+		byte[] postBytes = CSGetLoginInfo.SerializeToBytes(loginInfo);  
+		request.uploadHandler = (UploadHandler)new UploadHandlerRaw(postBytes);
+		request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();  
+
+		request.SetRequestHeader ("opcode",(int)AccountOpcode.CSGetLoginInfo+"");
+		yield return request.Send();  
+		if (request.responseCode == 200) {
+			SCGetLoginInfo ret = SCGetLoginInfo.Deserialize (request.downloadHandler.data);
 			serverId = ret.ServerId;
 			accountId = ret.AccountId;
 			ip = ret.Ip;
 			port = ret.Port;
 
-			PlayerPrefs.SetInt (SERVER_ID_KEY,serverId);
-			PlayerPrefs.SetString (SERVER_IP_KEY,ip);
-			PlayerPrefs.SetInt (SERVER_PORT_KEY,port);
-			PlayerPrefs.SetString (ACCOUNT_KEY,accountId);
+			PlayerPrefs.SetInt (SERVER_ID_KEY, serverId);
+			PlayerPrefs.SetString (SERVER_IP_KEY, ip);
+			PlayerPrefs.SetInt (SERVER_PORT_KEY, port);
+			PlayerPrefs.SetString (ACCOUNT_KEY, accountId);
 			PlayerPrefs.Save ();
 
 			ConnectServerAndLogin ();
 
-			Debug.Log ("accountId = " + ret.AccountId);  
-			Debug.Log ("serverId = " + ret.ServerId);  
-			Debug.Log ("ip = " + ret.Ip);  
-			Debug.Log ("port = " + ret.Port);  
-		}         
+//			Debug.Log ("accountId = " + ret.AccountId);  
+//			Debug.Log ("serverId = " + ret.ServerId);  
+//			Debug.Log ("ip = " + ret.Ip);  
+//			Debug.Log ("port = " + ret.Port);  
+		} else {
+			Debug.Log ("request.responseCode = "+request.responseCode);
+			WarnDialog.showWarnDialog ("get server info fail !",null);
+		}
 	}
 
 	void Update(){
@@ -172,7 +224,6 @@ public class SocketManager : MonoBehaviour {
 
 				Thread connectThread = new Thread (new ThreadStart (delegate() {
 					if (ConnectServer ()) {
-						Debug.Log("IsConnected = true;");
 						IsConnected = true;
 						CSLogin node = new CSLogin ();
 						node.AccountId = accountId;
@@ -370,6 +421,10 @@ public class SocketManager : MonoBehaviour {
 	}
 
 	public static void SendMessageAsyc(int opcode ,byte[] data,ActionForReceive action){
+		if (checkRepeatSend (opcode)) {
+			Debug.LogWarning ("repead send "+opcode);
+			return;
+		}
 		if (!IsConnected && !IsConnecting) {
 			needConnectOnce = true;
 		}
@@ -378,6 +433,20 @@ public class SocketManager : MonoBehaviour {
 		asyncObject.Data = data;
 		asyncObject.Opcode = opcode;
 		sendQueue.Enqueue (asyncObject);
+	}
+
+	// 检测重复发送，需要检测重复发送的要记录过来
+	private static bool checkRepeatSend(int opcode){
+		if (lastSendTime.ContainsKey (opcode)) {
+			long lastTime = lastSendTime [opcode];
+			if (DateTime.Now.Ticks - lastTime < 1500) {
+				return true;
+			}
+		}
+		if (needCheckOpcode.ContainsKey (opcode)) {
+			lastSendTime [opcode] = DateTime.Now.Ticks;
+		}
+		return false;
 	}
 
 	private static void _SendMessageAsyc(int opcode ,byte[] data,ActionForReceive action){
@@ -431,7 +500,7 @@ public class SocketManager : MonoBehaviour {
 			clientSocket.Send(sendData);  
 			SyncObject syncObject = new SyncObject();
 			syncObjects.Add(id,syncObject);
-			Debug.Log("send success,size = "+data.Length);
+//			Debug.Log("send success,size = "+data.Length);
 			Monitor.Enter(syncObject);
 			if(!Monitor.Wait(syncObject,1000)){
 				syncObjects.Remove(id);
