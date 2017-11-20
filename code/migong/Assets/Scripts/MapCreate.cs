@@ -37,6 +37,8 @@ public class MapCreate : MonoBehaviour{
 	};
 
 	public Bean[][] beanMap;
+	public int[] route;
+	public bool needGuide = false;
 
 	public MapMode Mode; // 0单机，2pvp
 
@@ -229,11 +231,6 @@ public class MapCreate : MonoBehaviour{
 					up.transform.parent = transform;
 					up.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,0);
 					up.transform.localScale = new Vector3 (myScale,myScale,1);
-
-//					up = Instantiate(downShadow) as GameObject;
-//					up.transform.parent = transform;
-//					up.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,1);
-//					up.transform.localScale = new Vector3 (myScale,myScale,1);
 				}
 				if ((map[i][j] & 1) == 1) {
 					int w = tr - i-1;
@@ -241,11 +238,6 @@ public class MapCreate : MonoBehaviour{
 					up.transform.parent = transform;
 					up.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,0);
 					up.transform.localScale = new Vector3 (myScale,myScale,1);
-
-//					up = Instantiate(rightShadow) as GameObject;
-//					up.transform.parent = transform;
-//					up.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,1);
-//					up.transform.localScale = new Vector3 (myScale,myScale,1);
 				}
 				if (beanMap!= null && beanMap [i] [j] != null) {
 					int w = tr - i-1;
@@ -273,6 +265,10 @@ public class MapCreate : MonoBehaviour{
 					starRec.anchoredPosition = new Vector2 (i * perStarDelta, -40);
 				}
 			}
+		}
+		// 设置引导
+		if(needGuide){
+			initGuide ();
 		}
 		// 修改相机位置
 		GameObject camera = transform.parent.parent.Find("mapCamera").gameObject;
@@ -401,6 +397,19 @@ public class MapCreate : MonoBehaviour{
 
 		GameObject settleGo = transform.parent.parent.Find ("Canvas/settle").gameObject;
 		settleGo.SetActive (true);
+	}
+
+
+	private void initGuide(){
+		Object guideMask = Resources.Load ("bean10");
+		GameObject guideGo = Instantiate(guideMask) as GameObject;
+		Pacman pacman = pacmanMap [SocketManager.accountId];
+
+		guideGo.transform.parent = transform;
+		guideGo.transform.localPosition = getStartPointWithScale (pacman.inX,pacman.inY);
+		guideGo.transform.localScale = new Vector3 (myScale,myScale,1);
+
+
 	}
 
 }

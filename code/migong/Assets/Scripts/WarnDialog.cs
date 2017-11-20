@@ -24,6 +24,8 @@ class WarnDialogInfo : DialogInfo{
 	public string text;
 	public DialogOkAction okAction;
 	public bool hideClose;
+	public float deltaX;
+	public float deltaY;
 }
 
 class WaitDialogInfo : DialogInfo{
@@ -47,25 +49,27 @@ class WarnDialog : MonoBehaviour {
 	DialogOkAction okAction;
 	Text text;
 
+	private static RectTransform panelTras;
 	private static Button close;
 	private static Button ok;
 
 	private static int id = 1; // from 1
 	void Awake(){ 
-		close = transform.Find ("Canvas/close").GetComponent<Button> ();
+		close = transform.Find ("Canvas/Panel/close").GetComponent<Button> ();
 		close.onClick.AddListener (delegate() {
 			canvas.SetActive(false);
 		});
-		ok = transform.Find ("Canvas/ok").GetComponent<Button> ();
+		ok = transform.Find ("Canvas/Panel/ok").GetComponent<Button> ();
 //		ok.onClick.AddListener (delegate() {
 //			canvas.SetActive(false);
 //			if(okAction != null){
 //				okAction.Invoke();
 //			}
 //		});
-		text = transform.Find ("Canvas/text").GetComponent<Text> ();
+		text = transform.Find ("Canvas/Panel/text").GetComponent<Text> ();
 		instance = this;
 		canvas = transform.Find ("Canvas").gameObject;
+		panelTras = transform.Find ("Canvas/Panel").GetComponent<RectTransform>();
 		closeDialog (0);
 	}
 
@@ -85,7 +89,7 @@ class WarnDialog : MonoBehaviour {
 						w.okAction.Invoke();
 					}
 				});
-
+				panelTras.localPosition = new Vector3 (w.deltaX,w.deltaY,0);
 				openDialog ();
 				w.state = DialogState.Showing;
 			}
@@ -157,19 +161,19 @@ class WarnDialog : MonoBehaviour {
 		showWarnDialog (text,null);
 	}
 	public static void showWarnDialog(string text,DialogOkAction dialogOkAction){
-		WarnDialogInfo w = new WarnDialogInfo ();
-		w.text = text;
-		w.okAction = dialogOkAction;
-		lock (dialogQueue) {
-			dialogQueue.Enqueue (w);
-		}
+		showWarnDialog (text,dialogOkAction,false,0,0);
 	}
 
 	public static void showWarnDialog(string text,DialogOkAction dialogOkAction,bool hideClose){
+		showWarnDialog (text,dialogOkAction,hideClose,0,0);
+	}
+	public static void showWarnDialog(string text,DialogOkAction dialogOkAction,bool hideClose,float deltaX,float deltaY){
 		WarnDialogInfo w = new WarnDialogInfo ();
 		w.text = text;
 		w.okAction = dialogOkAction;
 		w.hideClose = hideClose;
+		w.deltaX = deltaX;
+		w.deltaY = deltaY;
 		lock (dialogQueue) {
 			dialogQueue.Enqueue (w);
 		}

@@ -3,6 +3,7 @@ package com.migong;
 import com.migong.entity.*;
 import com.migong.map.CreateMap;
 import com.migong.map.Element;
+import com.migong.map.GetShortRoad;
 import com.mm.engine.framework.control.annotation.EventListener;
 import com.mm.engine.framework.control.annotation.Request;
 import com.mm.engine.framework.control.annotation.Service;
@@ -20,6 +21,7 @@ import com.mm.engine.framework.net.code.RetPacketImpl;
 import com.mm.engine.framework.security.exception.ToClientException;
 import com.mm.engine.framework.server.IdService;
 import com.mm.engine.framework.server.SysConstantDefine;
+import com.mm.engine.framework.tool.util.Util;
 import com.protocol.MiGongOpcode;
 import com.protocol.MiGongPB;
 import com.sys.SysPara;
@@ -33,6 +35,9 @@ import java.util.*;
 import java.util.concurrent.*;
 
 /**
+ *
+ * 0fa7ef61f78d1ba3be659bd746e4aea8
+ *
  * 功能：
  * 单人的：根据等级等获取地图，时间到的失败推送，结束的时候发送走过的路径校验，并记录
  * 多人的：请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳
@@ -156,7 +161,23 @@ public class MiGongService {
             sysParaBuilder.setValue(sysPara.getValue());
             builder.addSysParas(sysParaBuilder);
         }
+        Map<Integer,Integer> guideMap = Util.split2Map(userMiGong.getNewUserGuide(),Integer.class,Integer.class);
+        for(NewGuideType guideType : NewGuideType.values()){
+            MiGongPB.PBNewGuide.Builder guideBuilder = MiGongPB.PBNewGuide.newBuilder();
+            guideBuilder.setId(guideType.getId());
+            Integer step = guideMap.get(guideBuilder.getId());
+            guideBuilder.setStep(step == null?0:step);
+            builder.addNewGuide(guideBuilder);
+        }
         return new RetPacketImpl(MiGongOpcode.SCBaseInfo, builder.build().toByteArray());
+    }
+    @Request(opcode = MiGongOpcode.CSNewGuideFinish)
+    public RetPacket newGuideFinish(Object clientData, Session session) throws Throwable{
+        MiGongPB.CSNewGuideFinish finish = MiGongPB.CSNewGuideFinish.parseFrom((byte[])clientData);
+        UserMiGong userMiGong = get(session.getAccountId());
+        NewGuideType.setNewGuide(userMiGong,finish.getId(),finish.getStep());
+        MiGongPB.SCNewGuideFinish.Builder builder = MiGongPB.SCNewGuideFinish.newBuilder();
+        return new RetPacketImpl(MiGongOpcode.SCNewGuideFinish, builder.build().toByteArray());
     }
 
     /**
@@ -211,6 +232,17 @@ public class MiGongService {
 
         CreateMap myMap=miGongPassInfo.getCreateMap();							//地图
 
+        Map<Integer,Integer> guideMap = Util.split2Map(userMiGong.getNewUserGuide(),Integer.class,Integer.class);
+        if(guideMap == null || !guideMap.containsKey(NewGuideType.Pass)) {
+            Element[] road = new GetShortRoad(myMap, false).getRoad();
+            StringBuilder sb = new StringBuilder();
+            String sp = "";
+            for(Element element : road){
+                sb.append(sp).append(element.toInt(miGongPassInfo.getSize()));
+                sp=";";
+            }
+            builder.setRoute(sb.toString());
+        }
 
         List<Integer> integers = new ArrayList<>(miGongPassInfo.getSize()*miGongPassInfo.getSize());
         for(byte[] aa : miGongPassInfo.getCreateMap().getMap()){

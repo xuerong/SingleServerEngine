@@ -2,6 +2,7 @@ package com.mm.engine.framework.tool.util;
 
 import com.mm.engine.framework.security.exception.MMException;
 import com.mm.engine.framework.server.Server;
+import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.RemoteEndpoint;
@@ -9,9 +10,7 @@ import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
-import java.util.Calendar;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -130,6 +129,84 @@ public final class Util {
         boolean ipAddress = mat.find();
 
         return ipAddress;
+    }
+
+
+    public static <K> List<K> split2List(String content,Class<K> cls){
+        List<K> ret = new LinkedList<>();
+        if (StringUtils.isBlank(content)) {
+            return ret;
+        }
+        String[] entryArray = StringUtils.splitByWholeSeparator(content, ";");
+        for (String entry : entryArray) {
+            ret.add(convert(cls, entry));
+        }
+        return ret;
+    }
+
+    public static <K,V> Map<K,V> split2Map(String content,Class<K> kCls,Class<V> vCls){
+        Map<K, V> ret = new HashMap<>();
+        if (StringUtils.isBlank(content)) {
+            return ret;
+        }
+        String[] entryArray = StringUtils.splitByWholeSeparator(content, "|");
+        if (entryArray != null && entryArray.length != 0) {
+            for (String entry : entryArray) {
+                String[] keyValueArray = StringUtils.splitByWholeSeparator(entry, ";");
+                if (keyValueArray.length == 2) {
+                    ret.put(convert(kCls, keyValueArray[0]), convert(vCls, keyValueArray[1]));
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static <K,V> String map2String(Map<K,V> map){
+        if(map == null){
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        String seperator = "";
+        for(Map.Entry entry : map.entrySet()){
+            sb.append(seperator).append(entry.getKey().toString()).append(";").append(entry.getValue().toString());
+            seperator = "|";
+        }
+        return sb.toString();
+    }
+
+    public static <K> String list2String(List<K> list) {
+        if (list == null) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder("");
+        String seperator = "";
+        for (K entry : list) {
+            sb.append(seperator).append(entry.toString());
+            seperator = ";";
+        }
+        return sb.toString();
+    }
+
+    public static <T> T convert(Class<T> clazz, String content) {
+        if (clazz.isAssignableFrom(Integer.class)) {
+            return clazz.cast(Integer.parseInt(content));
+        } else if (clazz.isAssignableFrom(Long.class)) {
+            return clazz.cast(Long.parseLong(content));
+        } else if (clazz.isAssignableFrom(Short.class)) {
+            return clazz.cast(Short.parseShort(content));
+        } else if (clazz.isAssignableFrom(Byte.class)) {
+            return clazz.cast(Byte.parseByte(content));
+        } else if (clazz.isAssignableFrom(Boolean.class)) {
+            return clazz.cast(Boolean.parseBoolean(content));
+        } else if (clazz.isAssignableFrom(Double.class)) {
+            return clazz.cast(Double.parseDouble(content));
+        } else if (clazz.isAssignableFrom(Float.class)) {
+            return clazz.cast(Float.parseFloat(content));
+        } else if (clazz.isAssignableFrom(String.class)) {
+            return clazz.cast(content);
+        } else {
+            throw new RuntimeException("不支持的类型");
+        }
     }
 
     /** 获取服务器的utc时间的long值  单位ms**/

@@ -23,6 +23,7 @@ public class UserMiGong implements Serializable {
     private int ladderScore; // 天梯分数
     private int energy; // 精力
     private long energyUpdateTime; // 精力刷新时间
+    private String newUserGuide; // 新手引导相关，结构：id;step;id;step
 
     public String getUserId() {
         return userId;
@@ -94,5 +95,13 @@ public class UserMiGong implements Serializable {
 
     public void setEnergy(int energy) {
         this.energy = energy;
+    }
+
+    public String getNewUserGuide() {
+        return newUserGuide;
+    }
+
+    public void setNewUserGuide(String newUserGuide) {
+        this.newUserGuide = newUserGuide;
     }
 }

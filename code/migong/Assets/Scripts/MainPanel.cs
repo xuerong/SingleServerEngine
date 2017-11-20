@@ -16,12 +16,14 @@ public class MainPanel : MonoBehaviour {
 	public GameObject ui;
 	// 系统参数
 	private Dictionary<string,string> sysParas = new Dictionary<string, string> ();
+	private Dictionary<int,int> guideStep = new Dictionary<int, int> ();
 
 	private int energy;
 
 	private int matchingDialogId; // 匹配阶段弹窗的id
 
 	private ShareSDK ssdk;
+
 	// Use this for initialization
 	void Start () {
 		show (uiMain);
@@ -61,7 +63,7 @@ public class MainPanel : MonoBehaviour {
 				// 消耗精力
 				energy = ret.Energy;
 				int[] stars= {ret.Star1,ret.Star2,ret.Star3,ret.Star4};
-				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans, ret.Speed,ret.Start, ret.End, ret.Pass,null,stars);
+				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans, ret.Speed,ret.Start, ret.End, ret.Pass,null,stars,null);
 			});
 		});
 		closeButton = GameObject.Find ("main/ui/uiUnlimit/Canvas/close").GetComponent<Button>();
@@ -87,6 +89,10 @@ public class MainPanel : MonoBehaviour {
 			foreach(PBSysPara sp in ret.SysParas){
 				sysParas.Add(sp.Key,sp.Value);
 			}
+
+			foreach(PBNewGuide newGuide in ret.NewGuide ){
+				guideStep.Add(newGuide.Id,newGuide.Step);
+			}
 		});
 
 
@@ -105,6 +111,12 @@ public class MainPanel : MonoBehaviour {
 			doShare();
 		});
 		ssdk.shareHandler = ShareResultHandler;
+		//
+		Button helpButton = GameObject.Find (canvasPath+"help").GetComponent<Button>();
+		helpButton.onClick.AddListener (delegate() {
+			Debug.Log("help");
+			WarnDialog.showWarnDialog("test",null,false,10,20);
+		});
 
 		// 联网对战按钮
 		//
@@ -343,7 +355,7 @@ public class MainPanel : MonoBehaviour {
 
 	public void matchSuccess(int opcode, byte[] data){
 		SCMatchingSuccess matchingSuccess = SCMatchingSuccess.Deserialize (data);
-		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Speed,matchingSuccess.Start,matchingSuccess.End,1,matchingSuccess.OtherInfos,null);
+		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Speed,matchingSuccess.Start,matchingSuccess.End,1,matchingSuccess.OtherInfos,null,null);
 		ui.SetActive (false);
 		if (matchingDialogId > 0) {
 			WarnDialog.closeWaitDialog (matchingDialogId);
@@ -387,14 +399,27 @@ public class MainPanel : MonoBehaviour {
 			// 消耗精力
 			energy = scmap.Energy;
 			int[] stars= {scmap.Star1,scmap.Star2,scmap.Star3,scmap.Star4};
-			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans, scmap.Speed,scmap.Start, scmap.End, scmap.Pass,null,stars);
+			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans, scmap.Speed,scmap.Start, scmap.End, scmap.Pass,null,stars,scmap.Route);
 		});
 	}
-	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int speed,int start,int end,int pass,List<PBOtherInfo> otherInfos,int[] stars){
+	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int speed,int start,int end,int pass,List<PBOtherInfo> otherInfos,int[] stars,string guideRoute){
 		Object gamePanel = Resources.Load ("GamePanel");
 		GameObject gamePanelGo = Instantiate(gamePanel) as GameObject;
 		GameObject mapGo = gamePanelGo.transform.Find ("content/map").gameObject;
 		MapCreate mapCreate = mapGo.GetComponent<MapCreate> ();
+
+		// 创建引导
+		if (guideRoute != null && mode == MapMode.Level && guideStep[(int)GuideType.Pass] == 0) {
+			string[] routes = guideRoute.Split (';');
+			int[] routeInt = new int[routes.Length];
+			for (int i = 0, len = routes.Length; i < len; i++) {
+				routeInt [i] = int.Parse (routes [i]);
+			}
+			mapCreate.route = routeInt;
+			mapCreate.needGuide = true;
+		}
+
+
 		mapCreate.Pass = pass;
 
 		mapCreate.Mode = mode;
@@ -419,11 +444,14 @@ public class MainPanel : MonoBehaviour {
 
 		Pacman pacman = gamePanelGo.transform.Find ("content/pacman").GetComponent<Pacman> ();
 
+		mapCreate.pacmanMap.Add (SocketManager.accountId,pacman);
+
 		pacman.inX = start % size;
 		pacman.inY = start / size;
 		pacman.outX = end % size;
 		pacman.outY = end / size;
 		pacman.speed = speed;
+
 
 		mapCreate.size = size;
 		Debug.Log("map size:"+size+",End:"+end);
@@ -448,11 +476,17 @@ public class MainPanel : MonoBehaviour {
 				pacman.speed = speed;
 //				pacman.transform.localScale = new Vector3 (0.6f,0.6f,0.6f);
 
+				mapCreate.pacmanMap.Add (otherInfo.UserId,pacman);
+
 				pacman.mapCreate = mapCreate;
 
 				pacmanGo.transform.parent = gamePanelGo.transform.Find("content");
 
 			}
 		}
+	}
+	enum GuideType{
+		Pass = 1,
+		Pvp = 2
 	}
 }

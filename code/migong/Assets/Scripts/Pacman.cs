@@ -7,7 +7,6 @@ using com.protocol;
 
 public class Pacman : MonoBehaviour {
 
-	Dictionary<string,Pacman> pacmanMap ;
 	List<CircleCollider2D> pacmanColliders ;
 
 	public MapCreate mapCreate;
@@ -40,7 +39,6 @@ public class Pacman : MonoBehaviour {
 
 	bool finish;
 	void Start () {
-		pacmanMap = mapCreate.pacmanMap;
 		pacmanColliders = mapCreate.pacmanColliders;
 		if (userId == null || userId.Length == 0) {
 			this.userId = SocketManager.accountId;
@@ -67,7 +65,6 @@ public class Pacman : MonoBehaviour {
 		}
 		pacmanColliders.Add (c);
 
-		pacmanMap.Add (userId,this);
 		mapCreate.addScoreShow (userId);
 
 		mapCreate.setEndEffect (outX, outY);

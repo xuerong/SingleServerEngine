@@ -12,12 +12,28 @@ message SCBaseInfo
 {
 	required int32 energy 			= 1; // 玩家精力
 	repeated PBSysPara sysParas 			= 2; // 系统参数
+	repeated PBNewGuide newGuide			= 3;  // 新手引导信息
+}
+message PBNewGuide
+{
+	required int32 id				= 1;
+	required int32 step				= 2;
 }
 message PBSysPara
 {
 	required string key				= 1;
 	required string value				= 2;
 }
+// 完成新手引导
+message CSNewGuideFinish
+{
+	required int32 id				= 1;
+	required int32 step				= 2;
+}
+message SCNewGuideFinish
+{
+}
+
 message CSGetMiGongLevel
 {
 }
@@ -45,6 +61,7 @@ message SCGetMiGongMap
 	required int32 star3 			= 10; // 三星目标分数
 	required int32 star4 			= 11; // 四星目标分数
 	required int32 energy 			= 12; // 消耗体力
+	optional string route			= 13; // 路线
 }
 // 豆子信息
 message PBBeanInfo

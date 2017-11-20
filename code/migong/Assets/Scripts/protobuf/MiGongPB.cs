@@ -32,6 +32,17 @@ namespace Example
         /// <summary> 玩家精力</summary>
         public List<Example.PBSysPara> SysParas { get; set; }
 
+        /// <summary> 系统参数</summary>
+        public List<Example.PBNewGuide> NewGuide { get; set; }
+
+    }
+
+    public partial class PBNewGuide
+    {
+        public int Id { get; set; }
+
+        public int Step { get; set; }
+
     }
 
     public partial class PBSysPara
@@ -40,6 +51,19 @@ namespace Example
 
         public string Value { get; set; }
 
+    }
+
+    /// <summary> 完成新手引导</summary>
+    public partial class CSNewGuideFinish
+    {
+        public int Id { get; set; }
+
+        public int Step { get; set; }
+
+    }
+
+    public partial class SCNewGuideFinish
+    {
     }
 
     public partial class CSGetMiGongLevel
@@ -96,6 +120,9 @@ namespace Example
 
         /// <summary> 四星目标分数</summary>
         public int Energy { get; set; }
+
+        /// <summary> 消耗体力</summary>
+        public string Route { get; set; }
 
     }
 

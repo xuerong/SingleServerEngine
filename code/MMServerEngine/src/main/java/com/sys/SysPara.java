@@ -16,12 +16,12 @@ public final class SysPara{
 			put("addEnergyInterval","360");
 			put("unlimitedSpeed","10");
 			put("unlimitedEnergy","5");
-			put("ladderSize","10-11");
+			put("ladderSize","15-25");
 			put("ladderSpeed","8-15");
 			put("ladderTime","120-400");
-			put("ladderStar1","20-40");
-			put("openUnlimited","10");
-			put("openPvp","20");
+			put("ladderStar1","40-80");
+			put("openUnlimited","0");
+			put("openPvp","0");
 		}
 	};
 	public static final String aaa = "aaa";
