@@ -1,17 +1,25 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MapCreate.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Plugins\ShareSDK\ShareSDKDevInfo.cs">
     <Files>
-      <File FileName="Assets\Scripts\MainPanel.cs" Line="479" Column="46" />
-      <File FileName="Assets\Scripts\SocketManager.cs" Line="51" Column="32" />
-      <File FileName="Assets\Scripts\MapCreate.cs" Line="409" Column="84" />
+      <File FileName="Assets\Scripts\MainPanel.cs" Line="173" Column="39" />
+      <File FileName="Assets\Scripts\SocketManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MapCreate.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\MiGongOpcode.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\util\Sound.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\AccountPB.Serializer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Pacman.cs" Line="31" Column="25" />
-      <File FileName="Assets\Scripts\WarnDialog.cs" Line="72" Column="76" />
-      <File FileName="Assets\Plugins\ShareSDK\ShareSDKDevInfo.cs" Line="147" Column="30" />
-      <File FileName="Assets\Plugins\ShareSDK\ShareSDK.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Pacman.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\WarnDialog.cs" Line="1" Column="1" />
+      <File FileName="Assets\Plugins\ShareSDK\ShareSDKDevInfo.cs" Line="8" Column="2" />
+      <File FileName="Assets\Plugins\ShareSDK\ShareSDK.cs" Line="27" Column="11" />
+      <File FileName="Assets\Scripts\DragControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Test.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GuideControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Plugins\ShareSDK\ShareSDKConfig.cs" Line="1" Column="1" />
+      <File FileName="Assets\Plugins\ShareSDK\Android\AndroidImpl.cs" Line="8" Column="29" />
+      <File FileName="Assets\Plugins\ShareSDK\PlatformType.cs" Line="38" Column="3" />
+      <File FileName="Assets\Plugins\ShareSDK\ShareSDKImpl.cs" Line="65" Column="3" />
+      <File FileName="Assets\Plugins\ShareSDK\ContentType.cs" Line="21" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

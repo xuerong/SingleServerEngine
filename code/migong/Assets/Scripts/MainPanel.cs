@@ -13,6 +13,8 @@ public class MainPanel : MonoBehaviour {
 	public GameObject uiUnlimit;
 	public GameObject uiOnline;
 
+	public GameObject uiHelp;
+
 	public GameObject ui;
 	// 系统参数
 	private Dictionary<string,string> sysParas = new Dictionary<string, string> ();
@@ -22,7 +24,7 @@ public class MainPanel : MonoBehaviour {
 
 	private int matchingDialogId; // 匹配阶段弹窗的id
 
-	private ShareSDK ssdk;
+	public ShareSDK ssdk;
 
 	// Use this for initialization
 	void Start () {
@@ -63,7 +65,7 @@ public class MainPanel : MonoBehaviour {
 				// 消耗精力
 				energy = ret.Energy;
 				int[] stars= {ret.Star1,ret.Star2,ret.Star3,ret.Star4};
-				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans, ret.Speed,ret.Start, ret.End, ret.Pass,null,stars,null);
+				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans,ret.Time, ret.Speed,ret.Start, ret.End, ret.Pass,null,stars,null);
 			});
 		});
 		closeButton = GameObject.Find ("main/ui/uiUnlimit/Canvas/close").GetComponent<Button>();
@@ -97,7 +99,6 @@ public class MainPanel : MonoBehaviour {
 
 
 		// 账号，分享，帮助
-		ssdk = new ShareSDK();
 
 		Button accountButton = GameObject.Find (canvasPath+"account").GetComponent<Button>();
 		accountButton.onClick.AddListener (delegate() {
@@ -115,7 +116,9 @@ public class MainPanel : MonoBehaviour {
 		Button helpButton = GameObject.Find (canvasPath+"help").GetComponent<Button>();
 		helpButton.onClick.AddListener (delegate() {
 			Debug.Log("help");
-			WarnDialog.showWarnDialog("test",null,false,10,20);
+//			WarnDialog.showWarnDialog("test",null,false,10,20);
+			GuideControl guideControl = uiHelp.GetComponent<GuideControl>();
+			guideControl.showHelp(false);
 		});
 
 		// 联网对战按钮
@@ -158,14 +161,14 @@ public class MainPanel : MonoBehaviour {
 
 	void doShare(){
 		ShareContent content = new ShareContent();
-		content.SetText("this is a test string.");
-		content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
-		content.SetTitle("test title");
-		content.SetTitleUrl("http://www.mob.com");
-		content.SetSite("Mob-ShareSDK");
-		content.SetSiteUrl("http://www.mob.com");
-		content.SetUrl("http://www.mob.com");
-		content.SetComment("test description");
+		content.SetText("迷宫与吃豆人");
+		content.SetImageUrl("https://xuerong.github.io/mazeAndPacman/resource/icon.png");
+		content.SetTitle("迷宫与吃豆人");
+		content.SetTitleUrl("https://xuerong.github.io/mazeAndPacman/");
+		content.SetSite("迷宫与吃豆人");
+		content.SetSiteUrl("https://xuerong.github.io/mazeAndPacman/");
+		content.SetUrl("https://xuerong.github.io/mazeAndPacman/");
+		content.SetComment("迷宫与吃豆人");
 		content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
 		content.SetShareType(ContentType.Webpage);
 
@@ -174,10 +177,10 @@ public class MainPanel : MonoBehaviour {
 		ssdk.ShowPlatformList (null, content, 100, 100);
 
 		//直接通过编辑界面分享
-		ssdk.ShowShareContentEditor (PlatformType.SinaWeibo, content);
-
-		//直接分享
-		ssdk.ShareContent (PlatformType.SinaWeibo, content);
+//		ssdk.ShowShareContentEditor (PlatformType.WeChat, content);
+//
+//		//直接分享
+//		ssdk.ShareContent (PlatformType.WeChat, content);
 	}
 	// 分享回调
 	void ShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
@@ -355,7 +358,7 @@ public class MainPanel : MonoBehaviour {
 
 	public void matchSuccess(int opcode, byte[] data){
 		SCMatchingSuccess matchingSuccess = SCMatchingSuccess.Deserialize (data);
-		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Speed,matchingSuccess.Start,matchingSuccess.End,1,matchingSuccess.OtherInfos,null,null);
+		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Time,matchingSuccess.Speed,matchingSuccess.Start,matchingSuccess.End,1,matchingSuccess.OtherInfos,null,null);
 		ui.SetActive (false);
 		if (matchingDialogId > 0) {
 			WarnDialog.closeWaitDialog (matchingDialogId);
@@ -399,10 +402,10 @@ public class MainPanel : MonoBehaviour {
 			// 消耗精力
 			energy = scmap.Energy;
 			int[] stars= {scmap.Star1,scmap.Star2,scmap.Star3,scmap.Star4};
-			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans, scmap.Speed,scmap.Start, scmap.End, scmap.Pass,null,stars,scmap.Route);
+			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans,scmap.Time, scmap.Speed,scmap.Start, scmap.End, scmap.Pass,null,stars,scmap.Route);
 		});
 	}
-	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int speed,int start,int end,int pass,List<PBOtherInfo> otherInfos,int[] stars,string guideRoute){
+	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int time,int speed,int start,int end,int pass,List<PBOtherInfo> otherInfos,int[] stars,string guideRoute){
 		Object gamePanel = Resources.Load ("GamePanel");
 		GameObject gamePanelGo = Instantiate(gamePanel) as GameObject;
 		GameObject mapGo = gamePanelGo.transform.Find ("content/map").gameObject;
@@ -424,6 +427,7 @@ public class MainPanel : MonoBehaviour {
 
 		mapCreate.Mode = mode;
 		mapCreate.stars = stars;
+		mapCreate.totalTime = time;
 
 		int size = (int)Mathf.Sqrt(mapInt.Length);
 		mapCreate.map = new int[size][];
@@ -485,8 +489,13 @@ public class MainPanel : MonoBehaviour {
 			}
 		}
 	}
-	enum GuideType{
-		Pass = 1,
-		Pvp = 2
+
+	public void setGuideState(GuideType type,int step){
+		guideStep [(int)type] = step;
 	}
+
+}
+public enum GuideType{
+	Pass = 1,
+	Pvp = 2
 }

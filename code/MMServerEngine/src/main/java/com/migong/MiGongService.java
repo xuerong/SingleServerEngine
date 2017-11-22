@@ -99,6 +99,12 @@ import java.util.concurrent.*;
  * 3、数据监控：友盟？还是自己来？
  * 4、异常监控
  *
+ *
+ *
+ * 微信：
+ * AppID：wx4441fcf39f0e24e0
+ * AppSecret：ce51278665d747db197044ea5482d888
+ *
  *todo  listKey is Illegal : listKey = com.migong.entity.UserMiGong#list
  */
 @Service(init = "init")

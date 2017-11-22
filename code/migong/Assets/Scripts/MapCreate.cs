@@ -50,6 +50,8 @@ public class MapCreate : MonoBehaviour{
 
 	public int[] stars;
 
+	public float totalTime;
+
 
 	int x = 0,y = 0;
 	static float myScale = 1f;
@@ -62,6 +64,12 @@ public class MapCreate : MonoBehaviour{
 	int tr = 0,td = 0;
 
 
+	float currentTime;
+	public Text showTime;
+
+	private bool gameOver = false;
+
+
 	public Dictionary<string,Pacman> pacmanMap = new Dictionary<string, Pacman> ();
 	private Dictionary<string,Text> scoreText = new Dictionary<string, Text> ();
 	public List<CircleCollider2D> pacmanColliders = new List<CircleCollider2D> ();
@@ -70,7 +78,7 @@ public class MapCreate : MonoBehaviour{
 		// 设置button
 		closeButton.onClick.AddListener(delegate {
 			WarnDialog.showWarnDialog("exit?",delegate {
-				passFinish(false,null,false);
+				selfArrive(false,null,false);
 				Destroy(transform.parent.parent.gameObject);
 				GameObject mainGo = GameObject.Find ("main");
 				MainPanel mainPanel = mainGo.GetComponent<MainPanel>();
@@ -98,12 +106,35 @@ public class MapCreate : MonoBehaviour{
 		}
 		// 注册玩家到达的信息
 		SocketManager.AddServerSendReceive((int)MiGongOpcode.SCUserArrived,userArrived);
-		SocketManager.AddServerSendReceive((int)MiGongOpcode.SCGameOver,gameOver);
+		SocketManager.AddServerSendReceive((int)MiGongOpcode.SCGameOver,doGameOver);
 
 		// 联网模式
 		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCUserMove, userMoveAction);
 
+
+		currentTime = totalTime;
+
 		createMap ();
+	}
+
+	public void Update(){
+		if (currentTime == 0 || gameOver) {
+			return;
+		}
+		int oldInt = (int)currentTime;
+		currentTime -= Time.deltaTime;
+		if (currentTime < 0) {
+			currentTime = 0;
+		}
+		if (oldInt != (int)currentTime) {
+			showTime.text = ((int)currentTime).ToString ()+" s";
+		}
+		if (currentTime == 0) {
+			if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {// pvp由服务器结束时间
+				//弹出结算界面，发送结束消息
+				selfArrive (false, null, true);
+			} 
+		}
 	}
 
 	public void userMoveAction(int opcode, byte[] data){
@@ -310,8 +341,9 @@ public class MapCreate : MonoBehaviour{
 		return false;
 	}
 
-	public void passFinish(bool success,List<int> route,bool showSettle){
+	public void selfArrive(bool success,List<int> route,bool showSettle){
 		if (Mode == MapMode.Level) {
+			this.gameOver = true;
 			CSPassFinish pf = new CSPassFinish ();
 			pf.Success = success ? 1 : 0;
 			pf.Pass = this.Pass;
@@ -331,6 +363,7 @@ public class MapCreate : MonoBehaviour{
 				settleGo.SetActive (true);
 			}
 		}else if (Mode == MapMode.Unlimited) {
+			this.gameOver = true;
 			CSUnlimitedFinish uf = new CSUnlimitedFinish ();
 			uf.Success = success ? 1 : 0;
 			uf.Route = route;
@@ -360,11 +393,20 @@ public class MapCreate : MonoBehaviour{
 	// 玩家到达的推送
 	public void userArrived(int opcode,byte[] data){
 		// 标识玩家到达，比如在分数上打个对号或者变个颜色，玩家消失
+		SCUserArrived userArrived = SCUserArrived.Deserialize(data);
+		Pacman pacman = pacmanMap[userArrived.UserId];
+		if (pacman == null) {
+			Debug.LogError ("pacman is not exist while user arrived ,userId = " + userArrived.UserId);
+		} else {
+			pacman.finish = true;
+		}
 	}
 
-	public void gameOver(int opcode,byte[] data){
+	public void doGameOver(int opcode,byte[] data){
 		SCGameOver gameOver = SCGameOver.Deserialize (data);
 		//gameOver.OverType // 0其它，1都抵达终点，2时间到
+
+		this.gameOver = true;
 
 		GameObject content = transform.parent.parent.Find ("Canvas/settle/bg/scrollView/Viewport/Content").gameObject;
 
@@ -397,19 +439,17 @@ public class MapCreate : MonoBehaviour{
 
 		GameObject settleGo = transform.parent.parent.Find ("Canvas/settle").gameObject;
 		settleGo.SetActive (true);
+
+//		Renderer render;
+//		Texture texture = new Texture ();
+//		texture.
 	}
 
 
 	private void initGuide(){
-		Object guideMask = Resources.Load ("bean10");
-		GameObject guideGo = Instantiate(guideMask) as GameObject;
-		Pacman pacman = pacmanMap [SocketManager.accountId];
-
-		guideGo.transform.parent = transform;
-		guideGo.transform.localPosition = getStartPointWithScale (pacman.inX,pacman.inY);
-		guideGo.transform.localScale = new Vector3 (myScale,myScale,1);
-
-
+		GameObject main = GameObject.Find ("main");
+		GuideControl guideControl = main.transform.Find("uiHelp").GetComponent<GuideControl> ();
+		guideControl.showHelp (true);
 	}
 
 }

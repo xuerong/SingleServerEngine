@@ -32,7 +32,7 @@ namespace cn.sharesdk.unity3d
 //		public Mingdao mingdao;
 //		public KakaoTalk kakaoTalk;
 //		public KakaoStory kakaoStory;
-		public QQ qq;
+//		public QQ qq;
 //		public QZone qzone;
 		public WeChat wechat;
 //		public WeChatMoments wechatMoments; 
@@ -144,10 +144,10 @@ namespace cn.sharesdk.unity3d
 	public class WeChat : DevInfo 
 	{	
 		#if UNITY_ANDROID
-		public string SortId = "5";
+		public string SortId = "1";
 		public const int type = (int) PlatformType.WeChat;
-		public string AppId = "227122230524c";
-		public string AppSecret = "7afce47f981d98a0b09bdf4109347a0a";
+		public string AppId = "wx4441fcf39f0e24e0";
+		public string AppSecret = "ce51278665d747db197044ea5482d888";
 		public string userName = "gh_afb25ac019c9@app";
 		public string path = "/page/API/pages/share/share";
 		public bool BypassApproval = true;

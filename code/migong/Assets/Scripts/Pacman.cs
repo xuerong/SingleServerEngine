@@ -37,7 +37,7 @@ public class Pacman : MonoBehaviour {
 
 	List<int> route = new List<int>();
 
-	bool finish;
+	public bool finish;
 	void Start () {
 		pacmanColliders = mapCreate.pacmanColliders;
 		if (userId == null || userId.Length == 0) {
@@ -116,7 +116,7 @@ public class Pacman : MonoBehaviour {
 					if (curPoint == outX * mapCreate.size + outY) {
 						Debug.Log (inX + "," + inY + "," + outX + "," + outY + "  finish,666");
 						finish = true;
-						mapCreate.passFinish (finish, route,true);
+						mapCreate.selfArrive (finish, route,true);
 						StringBuilder sb = new StringBuilder ();
 						foreach(int po in route){
 							sb.Append (po+",");

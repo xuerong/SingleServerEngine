@@ -56,7 +56,6 @@ namespace cn.sharesdk.unity3d
 				}
 				platformConfigs.Add(platformId, table);
 			}
-
 			#if UNITY_ANDROID
 			shareSDKUtils = new AndroidImpl(gameObject);
 			shareSDKUtils.InitSDK(appKey,appSecret);

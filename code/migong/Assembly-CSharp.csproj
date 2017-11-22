@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\ClientSocket.cs" />
      <Compile Include="Assets\Scripts\DragControl.cs" />
      <Compile Include="Assets\Scripts\EventTriggerListener.cs" />
+     <Compile Include="Assets\Scripts\GuideControl.cs" />
      <Compile Include="Assets\Scripts\Job.cs" />
      <Compile Include="Assets\Scripts\JoystackCc.cs" />
      <Compile Include="Assets\Scripts\MainPanel.cs" />
@@ -161,6 +162,7 @@
      <Compile Include="Assets\Scripts\protobuf\RoomPB.Serializer.cs" />
      <Compile Include="Assets\Scripts\protobuf\RoomPB.cs" />
      <Compile Include="Assets\Scripts\util\Sound.cs" />
+     <Compile Include="Assets\Test.cs" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_strings.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_oks_classic_progressbar.xml" />
