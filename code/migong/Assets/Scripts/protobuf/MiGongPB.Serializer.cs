@@ -244,6 +244,10 @@ namespace Example
                         // repeated
                         instance.NewGuide.Add(Example.PBNewGuide.DeserializeLengthDelimited(stream));
                         continue;
+                    // Field 4 Varint
+                    case 32:
+                        instance.OpenPass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -300,6 +304,10 @@ namespace Example
                         // repeated
                         instance.NewGuide.Add(Example.PBNewGuide.DeserializeLengthDelimited(stream));
                         continue;
+                    // Field 4 Varint
+                    case 32:
+                        instance.OpenPass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -354,6 +362,10 @@ namespace Example
                     case 26:
                         // repeated
                         instance.NewGuide.Add(Example.PBNewGuide.DeserializeLengthDelimited(stream));
+                        continue;
+                    // Field 4 Varint
+                    case 32:
+                        instance.OpenPass = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -410,6 +422,9 @@ namespace Example
 
                 }
             }
+            // Key for field: 4, Varint
+            stream.WriteByte(32);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.OpenPass);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 

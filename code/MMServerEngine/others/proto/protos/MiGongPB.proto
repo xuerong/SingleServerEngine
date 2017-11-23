@@ -13,6 +13,7 @@ message SCBaseInfo
 	required int32 energy 			= 1; // 玩家精力
 	repeated PBSysPara sysParas 			= 2; // 系统参数
 	repeated PBNewGuide newGuide			= 3;  // 新手引导信息
+	required int32 openPass				= 4; // 推图过了多少关
 }
 message PBNewGuide
 {

@@ -443,6 +443,24 @@ public final class MiGongPB {
      */
     com.protocol.MiGongPB.PBNewGuideOrBuilder getNewGuideOrBuilder(
         int index);
+
+    // required int32 openPass = 4;
+    /**
+     * <code>required int32 openPass = 4;</code>
+     *
+     * <pre>
+     * 推图过了多少关
+     * </pre>
+     */
+    boolean hasOpenPass();
+    /**
+     * <code>required int32 openPass = 4;</code>
+     *
+     * <pre>
+     * 推图过了多少关
+     * </pre>
+     */
+    int getOpenPass();
   }
   /**
    * Protobuf type {@code SCBaseInfo}
@@ -514,6 +532,11 @@ public final class MiGongPB {
                 mutable_bitField0_ |= 0x00000004;
               }
               newGuide_.add(input.readMessage(com.protocol.MiGongPB.PBNewGuide.PARSER, extensionRegistry));
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000002;
+              openPass_ = input.readInt32();
               break;
             }
           }
@@ -698,10 +721,35 @@ public final class MiGongPB {
       return newGuide_.get(index);
     }
 
+    // required int32 openPass = 4;
+    public static final int OPENPASS_FIELD_NUMBER = 4;
+    private int openPass_;
+    /**
+     * <code>required int32 openPass = 4;</code>
+     *
+     * <pre>
+     * 推图过了多少关
+     * </pre>
+     */
+    public boolean hasOpenPass() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 openPass = 4;</code>
+     *
+     * <pre>
+     * 推图过了多少关
+     * </pre>
+     */
+    public int getOpenPass() {
+      return openPass_;
+    }
+
     private void initFields() {
       energy_ = 0;
       sysParas_ = java.util.Collections.emptyList();
       newGuide_ = java.util.Collections.emptyList();
+      openPass_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -709,6 +757,10 @@ public final class MiGongPB {
       if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasEnergy()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOpenPass()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -740,6 +792,9 @@ public final class MiGongPB {
       for (int i = 0; i < newGuide_.size(); i++) {
         output.writeMessage(3, newGuide_.get(i));
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(4, openPass_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -760,6 +815,10 @@ public final class MiGongPB {
       for (int i = 0; i < newGuide_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, newGuide_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, openPass_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -893,6 +952,8 @@ public final class MiGongPB {
         } else {
           newGuideBuilder_.clear();
         }
+        openPass_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -943,6 +1004,10 @@ public final class MiGongPB {
         } else {
           result.newGuide_ = newGuideBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.openPass_ = openPass_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1014,12 +1079,19 @@ public final class MiGongPB {
             }
           }
         }
+        if (other.hasOpenPass()) {
+          setOpenPass(other.getOpenPass());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasEnergy()) {
+          
+          return false;
+        }
+        if (!hasOpenPass()) {
           
           return false;
         }
@@ -1728,6 +1800,55 @@ public final class MiGongPB {
           newGuide_ = null;
         }
         return newGuideBuilder_;
+      }
+
+      // required int32 openPass = 4;
+      private int openPass_ ;
+      /**
+       * <code>required int32 openPass = 4;</code>
+       *
+       * <pre>
+       * 推图过了多少关
+       * </pre>
+       */
+      public boolean hasOpenPass() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int32 openPass = 4;</code>
+       *
+       * <pre>
+       * 推图过了多少关
+       * </pre>
+       */
+      public int getOpenPass() {
+        return openPass_;
+      }
+      /**
+       * <code>required int32 openPass = 4;</code>
+       *
+       * <pre>
+       * 推图过了多少关
+       * </pre>
+       */
+      public Builder setOpenPass(int value) {
+        bitField0_ |= 0x00000008;
+        openPass_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 openPass = 4;</code>
+       *
+       * <pre>
+       * 推图过了多少关
+       * </pre>
+       */
+      public Builder clearOpenPass() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        openPass_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:SCBaseInfo)
@@ -35264,75 +35385,75 @@ public final class MiGongPB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\025protos/MiGongPB.proto\"\014\n\nCSBaseInfo\"Y\n" +
+      "\n\025protos/MiGongPB.proto\"\014\n\nCSBaseInfo\"k\n" +
       "\nSCBaseInfo\022\016\n\006energy\030\001 \002(\005\022\034\n\010sysParas\030" +
       "\002 \003(\0132\n.PBSysPara\022\035\n\010newGuide\030\003 \003(\0132\013.PB" +
-      "NewGuide\"&\n\nPBNewGuide\022\n\n\002id\030\001 \002(\005\022\014\n\004st" +
-      "ep\030\002 \002(\005\"\'\n\tPBSysPara\022\013\n\003key\030\001 \002(\t\022\r\n\005va" +
-      "lue\030\002 \002(\t\",\n\020CSNewGuideFinish\022\n\n\002id\030\001 \002(" +
-      "\005\022\014\n\004step\030\002 \002(\005\"\022\n\020SCNewGuideFinish\"\022\n\020C" +
-      "SGetMiGongLevel\":\n\020SCGetMiGongLevel\022\023\n\013s" +
-      "tarInLevel\030\001 \003(\005\022\021\n\tpassCount\030\002 \002(\005\"\036\n\016C" +
-      "SGetMiGongMap\022\014\n\004pass\030\001 \002(\005\"\333\001\n\016SCGetMiG",
-      "ongMap\022\014\n\004pass\030\001 \002(\005\022\013\n\003map\030\002 \003(\005\022\014\n\004tim" +
-      "e\030\003 \002(\005\022\r\n\005speed\030\004 \002(\005\022\r\n\005start\030\005 \002(\005\022\013\n" +
-      "\003end\030\006 \002(\005\022\032\n\005beans\030\007 \003(\0132\013.PBBeanInfo\022\r" +
-      "\n\005star1\030\010 \002(\005\022\r\n\005star2\030\t \002(\005\022\r\n\005star3\030\n " +
-      "\002(\005\022\r\n\005star4\030\013 \002(\005\022\016\n\006energy\030\014 \002(\005\022\r\n\005ro" +
-      "ute\030\r \001(\t\"(\n\nPBBeanInfo\022\013\n\003pos\030\001 \002(\005\022\r\n\005" +
-      "score\030\002 \002(\005\"<\n\014CSPassFinish\022\014\n\004pass\030\001 \002(" +
-      "\005\022\017\n\007success\030\002 \002(\005\022\r\n\005route\030\003 \003(\005\"D\n\014SCP" +
-      "assFinish\022\021\n\topenLevel\030\001 \002(\005\022\020\n\010openPass" +
-      "\030\002 \002(\005\022\017\n\007success\030\003 \002(\005\"\033\n\tCSUseItem\022\016\n\006",
-      "itemId\030\001 \002(\005\"\013\n\tSCUseItem\"\021\n\017CSUnlimited" +
-      "Info\"l\n\017SCUnlimitedInfo\022/\n\021unlimitedRank" +
-      "Info\030\001 \003(\0132\024.PBUnlimitedRankInfo\022\014\n\004pass" +
-      "\030\002 \002(\005\022\014\n\004star\030\003 \002(\005\022\014\n\004rank\030\004 \002(\005\"a\n\023PB" +
-      "UnlimitedRankInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010use" +
-      "rName\030\002 \002(\t\022\014\n\004pass\030\003 \002(\005\022\014\n\004star\030\004 \002(\005\022" +
-      "\014\n\004rank\030\005 \002(\005\"\017\n\rCSUnlimitedGo\"\313\001\n\rSCUnl" +
-      "imitedGo\022\014\n\004pass\030\001 \002(\005\022\013\n\003map\030\002 \003(\005\022\014\n\004t" +
-      "ime\030\003 \002(\005\022\r\n\005speed\030\004 \002(\005\022\r\n\005start\030\005 \002(\005\022" +
-      "\013\n\003end\030\006 \002(\005\022\032\n\005beans\030\007 \003(\0132\013.PBBeanInfo",
-      "\022\r\n\005star1\030\010 \002(\005\022\r\n\005star2\030\t \002(\005\022\r\n\005star3\030" +
-      "\n \002(\005\022\r\n\005star4\030\013 \002(\005\022\016\n\006energy\030\014 \002(\005\"A\n\021" +
-      "CSUnlimitedFinish\022\014\n\004pass\030\001 \002(\005\022\017\n\007succe" +
-      "ss\030\002 \002(\005\022\r\n\005route\030\003 \003(\005\"6\n\021SCUnlimitedFi" +
-      "nish\022\020\n\010openPass\030\001 \002(\005\022\017\n\007success\030\002 \002(\005\"" +
-      "\021\n\017CSGetOnlineInfo\"c\n\017SCGetOnlineInfo\022\r\n" +
-      "\005score\030\001 \002(\005\022\r\n\005title\030\002 \002(\t\022\014\n\004rank\030\003 \002(" +
-      "\005\022$\n\trankInfos\030\004 \003(\0132\021.PBOnlineRankInfo\"" +
-      "\\\n\020PBOnlineRankInfo\022\016\n\006userId\030\001 \002(\t\022\014\n\004n" +
-      "ame\030\002 \002(\t\022\r\n\005score\030\003 \002(\005\022\r\n\005title\030\004 \002(\t\022",
-      "\014\n\004rank\030\005 \002(\005\"\014\n\nCSMatching\"\014\n\nSCMatchin" +
-      "g\"\022\n\020CSCancelMatching\"\022\n\020SCCancelMatchin" +
-      "g\"\227\001\n\021SCMatchingSuccess\022\013\n\003map\030\001 \003(\005\022\014\n\004" +
-      "time\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005start\030\004 \002(\005" +
-      "\022\013\n\003end\030\005 \002(\005\022 \n\notherInfos\030\006 \003(\0132\014.PBOt" +
-      "herInfo\022\032\n\005beans\030\007 \003(\0132\013.PBBeanInfo\"K\n\013P" +
-      "BOtherInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010userName\030\002" +
-      " \002(\t\022\r\n\005start\030\003 \002(\005\022\013\n\003end\030\004 \002(\005\"\020\n\016SCMa" +
-      "tchingFail\"\t\n\007SCBegin\"@\n\006CSMove\022\014\n\004posX\030" +
-      "\001 \002(\002\022\014\n\004posY\030\002 \002(\002\022\013\n\003dir\030\003 \002(\005\022\r\n\005spee",
-      "d\030\004 \002(\005\"\010\n\006SCMove\"4\n\nSCUserMove\022&\n\ruserM" +
-      "oveInfos\030\001 \003(\0132\017.PBUserMoveInfo\"g\n\016PBUse" +
-      "rMoveInfo\022\016\n\006userId\030\001 \002(\t\022\014\n\004posX\030\002 \002(\002\022" +
-      "\014\n\004posY\030\003 \002(\002\022\013\n\003dir\030\004 \002(\005\022\r\n\005speed\030\005 \002(" +
-      "\005\022\r\n\005frame\030\006 \002(\005\"\034\n\tCSEatBean\022\017\n\007beanPos" +
-      "\030\001 \002(\005\"\013\n\tSCEatBean\".\n\rSCSendEatBean\022\035\n\005" +
-      "beans\030\001 \003(\0132\016.PBEatBeanInfo\"0\n\rPBEatBean" +
-      "Info\022\016\n\006userId\030\001 \002(\t\022\017\n\007beanPos\030\002 \002(\005\"\030\n" +
-      "\tCSArrived\022\013\n\003pos\030\001 \002(\005\"\013\n\tSCArrived\"\037\n\r" +
-      "SCUserArrived\022\016\n\006userId\030\001 \002(\t\"F\n\nSCGameO",
-      "ver\022\020\n\010overType\030\001 \002(\005\022&\n\tuserInfos\030\002 \003(\013" +
-      "2\023.PBGameOverUserInfo\"d\n\022PBGameOverUserI" +
-      "nfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\014\n" +
-      "\004rank\030\003 \002(\005\022\r\n\005score\030\004 \002(\005\022\017\n\007arrived\030\005 " +
-      "\002(\005\"\r\n\013CSRoomHeart\"\r\n\013SCRoomHeart\"#\n\022CSS" +
-      "endWalkingRoute\022\r\n\005route\030\001 \003(\005\"\024\n\022SCSend" +
-      "WalkingRoute\"\031\n\010CSCommon\022\r\n\005route\030\001 \003(\t\"" +
-      "\031\n\010SCCommon\022\r\n\005route\030\001 \003(\tB\016\n\014com.protoc" +
-      "ol"
+      "NewGuide\022\020\n\010openPass\030\004 \002(\005\"&\n\nPBNewGuide" +
+      "\022\n\n\002id\030\001 \002(\005\022\014\n\004step\030\002 \002(\005\"\'\n\tPBSysPara\022" +
+      "\013\n\003key\030\001 \002(\t\022\r\n\005value\030\002 \002(\t\",\n\020CSNewGuid" +
+      "eFinish\022\n\n\002id\030\001 \002(\005\022\014\n\004step\030\002 \002(\005\"\022\n\020SCN" +
+      "ewGuideFinish\"\022\n\020CSGetMiGongLevel\":\n\020SCG" +
+      "etMiGongLevel\022\023\n\013starInLevel\030\001 \003(\005\022\021\n\tpa" +
+      "ssCount\030\002 \002(\005\"\036\n\016CSGetMiGongMap\022\014\n\004pass\030",
+      "\001 \002(\005\"\333\001\n\016SCGetMiGongMap\022\014\n\004pass\030\001 \002(\005\022\013" +
+      "\n\003map\030\002 \003(\005\022\014\n\004time\030\003 \002(\005\022\r\n\005speed\030\004 \002(\005" +
+      "\022\r\n\005start\030\005 \002(\005\022\013\n\003end\030\006 \002(\005\022\032\n\005beans\030\007 " +
+      "\003(\0132\013.PBBeanInfo\022\r\n\005star1\030\010 \002(\005\022\r\n\005star2" +
+      "\030\t \002(\005\022\r\n\005star3\030\n \002(\005\022\r\n\005star4\030\013 \002(\005\022\016\n\006" +
+      "energy\030\014 \002(\005\022\r\n\005route\030\r \001(\t\"(\n\nPBBeanInf" +
+      "o\022\013\n\003pos\030\001 \002(\005\022\r\n\005score\030\002 \002(\005\"<\n\014CSPassF" +
+      "inish\022\014\n\004pass\030\001 \002(\005\022\017\n\007success\030\002 \002(\005\022\r\n\005" +
+      "route\030\003 \003(\005\"D\n\014SCPassFinish\022\021\n\topenLevel" +
+      "\030\001 \002(\005\022\020\n\010openPass\030\002 \002(\005\022\017\n\007success\030\003 \002(",
+      "\005\"\033\n\tCSUseItem\022\016\n\006itemId\030\001 \002(\005\"\013\n\tSCUseI" +
+      "tem\"\021\n\017CSUnlimitedInfo\"l\n\017SCUnlimitedInf" +
+      "o\022/\n\021unlimitedRankInfo\030\001 \003(\0132\024.PBUnlimit" +
+      "edRankInfo\022\014\n\004pass\030\002 \002(\005\022\014\n\004star\030\003 \002(\005\022\014" +
+      "\n\004rank\030\004 \002(\005\"a\n\023PBUnlimitedRankInfo\022\016\n\006u" +
+      "serId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\014\n\004pass\030\003 " +
+      "\002(\005\022\014\n\004star\030\004 \002(\005\022\014\n\004rank\030\005 \002(\005\"\017\n\rCSUnl" +
+      "imitedGo\"\313\001\n\rSCUnlimitedGo\022\014\n\004pass\030\001 \002(\005" +
+      "\022\013\n\003map\030\002 \003(\005\022\014\n\004time\030\003 \002(\005\022\r\n\005speed\030\004 \002" +
+      "(\005\022\r\n\005start\030\005 \002(\005\022\013\n\003end\030\006 \002(\005\022\032\n\005beans\030",
+      "\007 \003(\0132\013.PBBeanInfo\022\r\n\005star1\030\010 \002(\005\022\r\n\005sta" +
+      "r2\030\t \002(\005\022\r\n\005star3\030\n \002(\005\022\r\n\005star4\030\013 \002(\005\022\016" +
+      "\n\006energy\030\014 \002(\005\"A\n\021CSUnlimitedFinish\022\014\n\004p" +
+      "ass\030\001 \002(\005\022\017\n\007success\030\002 \002(\005\022\r\n\005route\030\003 \003(" +
+      "\005\"6\n\021SCUnlimitedFinish\022\020\n\010openPass\030\001 \002(\005" +
+      "\022\017\n\007success\030\002 \002(\005\"\021\n\017CSGetOnlineInfo\"c\n\017" +
+      "SCGetOnlineInfo\022\r\n\005score\030\001 \002(\005\022\r\n\005title\030" +
+      "\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022$\n\trankInfos\030\004 \003(\0132\021" +
+      ".PBOnlineRankInfo\"\\\n\020PBOnlineRankInfo\022\016\n" +
+      "\006userId\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\022\r\n\005score\030\003 \002",
+      "(\005\022\r\n\005title\030\004 \002(\t\022\014\n\004rank\030\005 \002(\005\"\014\n\nCSMat" +
+      "ching\"\014\n\nSCMatching\"\022\n\020CSCancelMatching\"" +
+      "\022\n\020SCCancelMatching\"\227\001\n\021SCMatchingSucces" +
+      "s\022\013\n\003map\030\001 \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005speed\030\003 " +
+      "\002(\005\022\r\n\005start\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022 \n\nother" +
+      "Infos\030\006 \003(\0132\014.PBOtherInfo\022\032\n\005beans\030\007 \003(\013" +
+      "2\013.PBBeanInfo\"K\n\013PBOtherInfo\022\016\n\006userId\030\001" +
+      " \002(\t\022\020\n\010userName\030\002 \002(\t\022\r\n\005start\030\003 \002(\005\022\013\n" +
+      "\003end\030\004 \002(\005\"\020\n\016SCMatchingFail\"\t\n\007SCBegin\"" +
+      "@\n\006CSMove\022\014\n\004posX\030\001 \002(\002\022\014\n\004posY\030\002 \002(\002\022\013\n",
+      "\003dir\030\003 \002(\005\022\r\n\005speed\030\004 \002(\005\"\010\n\006SCMove\"4\n\nS" +
+      "CUserMove\022&\n\ruserMoveInfos\030\001 \003(\0132\017.PBUse" +
+      "rMoveInfo\"g\n\016PBUserMoveInfo\022\016\n\006userId\030\001 " +
+      "\002(\t\022\014\n\004posX\030\002 \002(\002\022\014\n\004posY\030\003 \002(\002\022\013\n\003dir\030\004" +
+      " \002(\005\022\r\n\005speed\030\005 \002(\005\022\r\n\005frame\030\006 \002(\005\"\034\n\tCS" +
+      "EatBean\022\017\n\007beanPos\030\001 \002(\005\"\013\n\tSCEatBean\".\n" +
+      "\rSCSendEatBean\022\035\n\005beans\030\001 \003(\0132\016.PBEatBea" +
+      "nInfo\"0\n\rPBEatBeanInfo\022\016\n\006userId\030\001 \002(\t\022\017" +
+      "\n\007beanPos\030\002 \002(\005\"\030\n\tCSArrived\022\013\n\003pos\030\001 \002(" +
+      "\005\"\013\n\tSCArrived\"\037\n\rSCUserArrived\022\016\n\006userI",
+      "d\030\001 \002(\t\"F\n\nSCGameOver\022\020\n\010overType\030\001 \002(\005\022" +
+      "&\n\tuserInfos\030\002 \003(\0132\023.PBGameOverUserInfo\"" +
+      "d\n\022PBGameOverUserInfo\022\016\n\006userId\030\001 \002(\t\022\020\n" +
+      "\010userName\030\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005score\030\004" +
+      " \002(\005\022\017\n\007arrived\030\005 \002(\005\"\r\n\013CSRoomHeart\"\r\n\013" +
+      "SCRoomHeart\"#\n\022CSSendWalkingRoute\022\r\n\005rou" +
+      "te\030\001 \003(\005\"\024\n\022SCSendWalkingRoute\"\031\n\010CSComm" +
+      "on\022\r\n\005route\030\001 \003(\t\"\031\n\010SCCommon\022\r\n\005route\030\001" +
+      " \003(\tB\016\n\014com.protocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -35350,7 +35471,7 @@ public final class MiGongPB {
           internal_static_SCBaseInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCBaseInfo_descriptor,
-              new java.lang.String[] { "Energy", "SysParas", "NewGuide", });
+              new java.lang.String[] { "Energy", "SysParas", "NewGuide", "OpenPass", });
           internal_static_PBNewGuide_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_PBNewGuide_fieldAccessorTable = new

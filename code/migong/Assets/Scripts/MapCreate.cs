@@ -357,6 +357,12 @@ public class MapCreate : MonoBehaviour{
 					GameObject go = transform.parent.parent.Find ("Canvas/settle").gameObject;
 					go.transform.Find ("Text").GetComponent<Text> ().text = pas.Success == 1 ? "SUCCESS" : "Fail";
 				}
+				if(pas.Success == 1){ // 修改关卡并解锁
+					GameObject mainGo = GameObject.Find ("main");
+					MainPanel mainPanel = mainGo.GetComponent<MainPanel>();
+					mainPanel.openPass = pas.OpenPass;
+					mainPanel.doShowLock();
+				}
 			});
 			if (showSettle) {
 				GameObject settleGo = transform.parent.parent.Find ("Canvas/settle").gameObject;

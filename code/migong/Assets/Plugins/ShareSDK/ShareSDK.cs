@@ -17,8 +17,8 @@ namespace cn.sharesdk.unity3d
 		//配置ShareSDK AppKey
 		//注:此处区分仅为demo测试而区分，实际使用时可以不区分安卓或iOS
 		 #if UNITY_ANDROID
-		public string appKey = "moba6b6c6d6";
-		public string appSecret = "b89d2427a3bc7ad1aea1e1e8c1d36bf3";
+		public string appKey = "227122230524c";
+		public string appSecret = "7afce47f981d98a0b09bdf4109347a0a";
 		 #elif UNITY_IPHONE
 		public string appKey = "iosv1101";
 		public string appSecret = "";
@@ -34,7 +34,7 @@ namespace cn.sharesdk.unity3d
 		public EventHandler followFriendHandler;
 
 		void Awake()
-		{				
+		{
 			Type type = devInfo.GetType();
 			Hashtable platformConfigs = new Hashtable();
 			FieldInfo[] devInfoFields = type.GetFields();

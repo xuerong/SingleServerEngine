@@ -20,8 +20,8 @@ public final class SysPara{
 			put("ladderSpeed","8-15");
 			put("ladderTime","120-400");
 			put("ladderStar1","40-80");
-			put("openUnlimited","0");
-			put("openPvp","0");
+			put("openUnlimited","2");
+			put("openPvp","2");
 		}
 	};
 	public static final String aaa = "aaa";

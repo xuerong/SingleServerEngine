@@ -105,6 +105,8 @@ import java.util.concurrent.*;
  * AppID：wx4441fcf39f0e24e0
  * AppSecret：ce51278665d747db197044ea5482d888
  *
+ * 3344c1180ab5eed4f6aed6f2a002008b
+ *
  *todo  listKey is Illegal : listKey = com.migong.entity.UserMiGong#list
  */
 @Service(init = "init")
@@ -175,6 +177,7 @@ public class MiGongService {
             guideBuilder.setStep(step == null?0:step);
             builder.addNewGuide(guideBuilder);
         }
+        builder.setOpenPass(userMiGong.getPass());
         return new RetPacketImpl(MiGongOpcode.SCBaseInfo, builder.build().toByteArray());
     }
     @Request(opcode = MiGongOpcode.CSNewGuideFinish)

@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using com.protocol;
 using Example;
 using cn.sharesdk.unity3d;
+using System.Text;
 
 public class MainPanel : MonoBehaviour {
 	public GameObject uiMain;
@@ -26,24 +27,37 @@ public class MainPanel : MonoBehaviour {
 
 	public ShareSDK ssdk;
 
+	public Button shareWeChat1;
+	public Button shareWeChat2;
+	public Button closeShare;
+
+	public Button exit;
+
+
+	private Button levelButton;
+	private Button unlimitButton;
+	private Button onlineButton;
 	// Use this for initialization
+
+	public int openPass;
+
 	void Start () {
 		show (uiMain);
 		// 给主界面按钮加事件
 		string canvasPath = "main/ui/uiMain/Canvas/buttons/";
-		Button levelButton = GameObject.Find (canvasPath+"level2").GetComponent<Button>();
+		levelButton = GameObject.Find (canvasPath+"level2").GetComponent<Button>();
 		levelButton.onClick.AddListener (delegate() {
 			// 打开level 界面
 			Debug.Log("open level window");
 			openLevelWindow();
 		});
-		Button unlimitButton = GameObject.Find (canvasPath+"unlimit2").GetComponent<Button>();
+		unlimitButton = GameObject.Find (canvasPath+"unlimit2").GetComponent<Button>();
 		unlimitButton.onClick.AddListener (delegate() {
 			// 打开unlimit 界面
 			Debug.Log("open unlimit window");
 			openUnlimitWindow();
 		});
-		Button onlineButton = GameObject.Find (canvasPath+"online2").GetComponent<Button>();
+		onlineButton = GameObject.Find (canvasPath+"online2").GetComponent<Button>();
 		onlineButton.onClick.AddListener (delegate() {
 			// 打开online 界面
 			Debug.Log("open online window");
@@ -95,6 +109,10 @@ public class MainPanel : MonoBehaviour {
 			foreach(PBNewGuide newGuide in ret.NewGuide ){
 				guideStep.Add(newGuide.Id,newGuide.Step);
 			}
+			this.openPass = ret.OpenPass;
+			// 无尽版和pvp是否开启
+
+			doShowLock();
 		});
 
 
@@ -109,9 +127,27 @@ public class MainPanel : MonoBehaviour {
 		Button shareButton = GameObject.Find (canvasPath+"share").GetComponent<Button>();
 		shareButton.onClick.AddListener (delegate() {
 			Debug.Log("share");
-			doShare();
+//			doShare();
+			shareWeChat1.transform.parent.gameObject.SetActive(true);
 		});
 		ssdk.shareHandler = ShareResultHandler;
+		// 分享的三个按钮就
+		shareWeChat1.onClick.AddListener (delegate() {
+			Debug.Log("share WeChat");
+			doShare(PlatformType.WeChat);
+		});
+		shareWeChat2.onClick.AddListener (delegate() {
+			Debug.Log("share WeChatMoments");
+			doShare(PlatformType.WeChatMoments);
+		});
+		closeShare.onClick.AddListener (delegate() {
+			shareWeChat1.transform.parent.gameObject.SetActive(false);
+		});
+
+		exit.onClick.AddListener (delegate() {
+			Application.Quit();
+		});
+
 		//
 		Button helpButton = GameObject.Find (canvasPath+"help").GetComponent<Button>();
 		helpButton.onClick.AddListener (delegate() {
@@ -137,8 +173,28 @@ public class MainPanel : MonoBehaviour {
 		});
 	}
 
+	public void doShowLock(){
+		showLock(MapMode.Unlimited,int.Parse(sysParas["openUnlimited"]) >= openPass);
+		showLock(MapMode.Online,int.Parse(sysParas["openPvp"]) >= openPass);
+	}
+	private void showLock(MapMode mode,bool _lock){
+		Button bu = unlimitButton;
+		if (mode == MapMode.Online) {
+			bu = onlineButton;
+		}
+
+		if (_lock) {
+			bu.transform.Find ("lock").gameObject.SetActive (true);
+			bu.interactable = false;
+		} else {
+			bu.transform.Find ("lock").gameObject.SetActive (false);
+			bu.interactable = true;
+		}
+	}
+
 	void doAccount(){
-		ssdk.Authorize(PlatformType.WeChat);
+		// TODO 账号要开发者认证 300块/年
+//		ssdk.Authorize(PlatformType.WeChat);
 	}
 	// 账号回调
 	void GetUserInfoResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
@@ -159,44 +215,54 @@ public class MainPanel : MonoBehaviour {
 		}
 	}
 
-	void doShare(){
+	void doShare(PlatformType type){
+		// 显示分享菜单
+
+
 		ShareContent content = new ShareContent();
 		content.SetText("迷宫与吃豆人");
 		content.SetImageUrl("https://xuerong.github.io/mazeAndPacman/resource/icon.png");
 		content.SetTitle("迷宫与吃豆人");
 		content.SetTitleUrl("https://xuerong.github.io/mazeAndPacman/");
-		content.SetSite("迷宫与吃豆人");
-		content.SetSiteUrl("https://xuerong.github.io/mazeAndPacman/");
+//		content.SetSite("迷宫与吃豆人");
+//		content.SetSiteUrl("https://xuerong.github.io/mazeAndPacman/");
 		content.SetUrl("https://xuerong.github.io/mazeAndPacman/");
-		content.SetComment("迷宫与吃豆人");
-		content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
+//		content.SetComment("迷宫与吃豆人");
+//		content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
+		content.SetFilePath("https://xuerong.github.io/mazeAndPacman/resource/mi.apk");
 		content.SetShareType(ContentType.Webpage);
 
-
 		//通过分享菜单分享
-		ssdk.ShowPlatformList (null, content, 100, 100);
+//		ssdk.ShowPlatformList (null, content, 100, 100);
 
 		//直接通过编辑界面分享
 //		ssdk.ShowShareContentEditor (PlatformType.WeChat, content);
 //
 //		//直接分享
-//		ssdk.ShareContent (PlatformType.WeChat, content);
+		ssdk.ShareContent (type, content);
+
+		shareWeChat1.transform.parent.gameObject.SetActive(false);
 	}
 	// 分享回调
 	void ShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
 	{
-		if (state == ResponseState.Success)
-		{
+		if (state == ResponseState.Success) {
+			WarnDialog.showWarnDialog ("share result :" + MiniJSON.jsonEncode (result));
 			print ("share result :");
-			print (MiniJSON.jsonEncode(result));
-		}
-		else if (state == ResponseState.Fail)
-		{
-			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
-		}
-		else if (state == ResponseState.Cancel) 
-		{
+			print (MiniJSON.jsonEncode (result));
+		} else if (state == ResponseState.Fail) {
+			StringBuilder sb = new StringBuilder ();
+			foreach(DictionaryEntry de in result)
+			{
+				sb.Append(string.Format("{0}-{1}", de.Key, de.Value));
+			}
+			WarnDialog.showWarnDialog ("fail! error code = " + sb.ToString());
+			print ("fail! error code = " + result ["error_code"] + "; error msg = " + result ["error_msg"]);
+		} else if (state == ResponseState.Cancel) {
+			WarnDialog.showWarnDialog ("cancel !");
 			print ("cancel !");
+		} else {
+			WarnDialog.showWarnDialog ("state:"+state);
 		}
 	}
 

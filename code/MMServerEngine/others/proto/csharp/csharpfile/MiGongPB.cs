@@ -35,6 +35,9 @@ namespace Example
         /// <summary> 系统参数</summary>
         public List<Example.PBNewGuide> NewGuide { get; set; }
 
+        /// <summary> 新手引导信息</summary>
+        public int OpenPass { get; set; }
+
     }
 
     public partial class PBNewGuide
