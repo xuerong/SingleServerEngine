@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by Administrator on 2017/11/13.
  */
-@DBEntity(tableName = "idgenerator",pks = {"className"})
+@DBEntity(tableName = "idGenerator",pks = {"className"})
 public class IdGenerator implements Serializable {
     private String className;
     private long id;

@@ -63,7 +63,7 @@ public class RequestJettyPBEntrance extends Entrance {
             // 获取controller，并根据controller获取相应的编解码器
             String opcodeStr = request.getHeader(SysConstantDefine.opcodeKey);
             if(StringUtils.isEmpty(opcodeStr) || !StringUtils.isNumeric(opcodeStr)){
-                throw new MMException("opcode error");
+                throw new MMException("opcode error,opcode = "+opcodeStr);
             }
             opcode=Integer.parseInt(opcodeStr);
             

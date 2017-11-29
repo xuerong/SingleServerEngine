@@ -16,10 +16,10 @@ Date: 2017-11-20 14:10:13
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for serverinfo
+-- Table structure for serverInfo
 -- ----------------------------
-DROP TABLE IF EXISTS `serverinfo`;
-CREATE TABLE `serverinfo` (
+DROP TABLE IF EXISTS `serverInfo`;
+CREATE TABLE `serverInfo` (
   `id` int(11) NOT NULL,
   `ip` varchar(255) NOT NULL,
   `port` int(11) NOT NULL,

@@ -7,6 +7,8 @@ public class Sound : MonoBehaviour {
 	public static bool on = true;
 
 	public GameObject off;
+
+	private static Dictionary<SoundType,AudioSource> soundDic = new Dictionary<SoundType, AudioSource> ();
 	// Use this for initialization
 	void Start () {
 		string canvasPath = "main/ui/uiMain/Canvas/sound";
@@ -15,6 +17,12 @@ public class Sound : MonoBehaviour {
 			// 打开level 界面
 			clickSound();
 		});
+
+		//
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+		for (int i = 0; i < audioSources.Length; i++) {
+			soundDic [(SoundType)i] = audioSources [i];
+		}
 	}
 
 	public void clickSound(){
@@ -26,4 +34,17 @@ public class Sound : MonoBehaviour {
 			off.SetActive (false);
 		}
 	}
+
+	public static void playSound(SoundType soundType){
+		soundDic [soundType].Play ();
+	}
+}
+
+public enum SoundType{
+	Click=0,
+	Move,
+	EatBean,
+	StarAdd,
+	Arrive,
+	Over
 }

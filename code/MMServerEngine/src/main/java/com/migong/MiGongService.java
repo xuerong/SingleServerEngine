@@ -69,14 +69,11 @@ import java.util.concurrent.*;
  * 后面要做的（本着简单快速上线的原则）：
  * 一、游戏逻辑：
  * 要完成的：
- * 1、注册与登录：设备ID
- * 2、分享游戏
- * 3、音乐、声音
+ * 3、音乐、声音：（按钮，走动，吃豆，加星，结束）（到达终点，）
  * 4、帮助
  * 5、排行都包括：无尽版，天梯排行
- * 6、新手引导
- * 7、无尽版规则，天梯积分规则
- * 8、所有文字用汉语：后端弹框！
+ * 6、无尽版规则，天梯积分规则
+ * 7、所有文字用汉语：后端弹框！
  * 以后要做的：
  * 1、支付与货币、礼包
  * 2、道具与背包
@@ -152,7 +149,6 @@ public class MiGongService {
 
     private final Map<Integer,MiGongPass> passMap = new HashMap<>();
     public void init(){
-        System.out.println("MiGongService init");
         for(MiGongPass miGongPass : MiGongPass.datas){
             passMap.put(miGongPass.getId(), miGongPass);
         }
@@ -276,7 +272,7 @@ public class MiGongService {
         builder.setStar3(miGongPass.getStar3());
         builder.setStar4(miGongPass.getStar4());
 
-        System.out.println("miGongPassInfo.getEnd():"+miGongPassInfo.getEnd());
+//        System.out.println("miGongPassInfo.getEnd():"+miGongPassInfo.getEnd());
         builder.setEnd(miGongPassInfo.getEnd().toInt(miGongPassInfo.getSize()));
         miGongPassInfoMap.put(session.getAccountId(),miGongPassInfo);
         byte[] sendData = builder.build().toByteArray();

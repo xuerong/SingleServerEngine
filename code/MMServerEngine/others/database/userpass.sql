@@ -16,10 +16,10 @@ Date: 2017-11-20 14:10:48
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for userpass
+-- Table structure for userPass
 -- ----------------------------
-DROP TABLE IF EXISTS `userpass`;
-CREATE TABLE `userpass` (
+DROP TABLE IF EXISTS `userPass`;
+CREATE TABLE `userPass` (
   `userId` varchar(255) NOT NULL,
   `passId` int(11) NOT NULL,
   `star` int(11) NOT NULL DEFAULT '0',

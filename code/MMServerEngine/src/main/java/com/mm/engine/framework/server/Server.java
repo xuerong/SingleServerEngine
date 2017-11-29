@@ -39,6 +39,7 @@ public final class Server {
     }
 
     public static void start(){
+        log.info("服务器启动开始!");
         // Service的初始化
         Map<Class<?>, Object> serviceBeanMap = BeanHelper.getServiceBeans();
         Map<Integer,Map<Class<?>,Method>> initMethodMap = ServiceHelper.getInitMethodMap();
@@ -51,8 +52,9 @@ public final class Server {
                 }
                 try {
                     methodEntry.getValue().invoke(object);
+                    log.info("init service {} finish",methodEntry.getKey());
                 } catch (IllegalAccessException|InvocationTargetException e) {
-                    e.printStackTrace();
+                    log.error("init service "+methodEntry.getKey()+" fail ",e);
                 }finally { // 报异常，这里是停服务器还是继续？
                     continue;
                 }
@@ -86,7 +88,7 @@ public final class Server {
         Runtime.getRuntime().addShutdownHook(new Thread(){
             @Override
             public void run(){
-                System.out.println("server stop");
+                log.info("服务器关闭开始");
                 Server.stop();
             }
         });
@@ -106,16 +108,25 @@ public final class Server {
         }
         // 关闭所有的Service
         Map<Class<?>, Object> serviceBeanMap = BeanHelper.getServiceBeans();
-        Map<Class<?>, Method> destroyMethodMap = ServiceHelper.getDestroyMethodMap();
-        for(Map.Entry<Class<?>, Object> entry : serviceBeanMap.entrySet()){
-            Method method = destroyMethodMap.get(entry.getKey());
-            if(method != null){
-                try {
-                    method.invoke(entry.getValue());
-                } catch (IllegalAccessException|InvocationTargetException e) {
-                    e.printStackTrace();
-                }finally { // 报异常，这里是停服务器还是继续？
-                    continue;
+        Map<Integer,Map<Class<?>,Method>> destroyMethodMap = ServiceHelper.getDestroyMethodMap();
+        for(Map.Entry<Integer,Map<Class<?>,Method>> f : destroyMethodMap.entrySet()) {
+            for (Map.Entry<Class<?>, Method> entry : f.getValue().entrySet()) {
+                Object object = serviceBeanMap.get(entry.getKey());
+                if(object == null){
+                    throw new MMException("find not service object , service class = "+entry.getKey());
+                }
+                Method method = entry.getValue();
+                if (method != null) {
+                    try {
+                        method.invoke(object);
+                        log.info("destroy service {} finish",entry.getKey());
+                    } catch (IllegalAccessException | InvocationTargetException e) {
+                        log.error("destroy service "+entry.getKey()+" fail ",e);
+                    } catch(Throwable e){
+                        log.error("destroy service "+entry.getKey()+" fail ",e);
+                    }finally { // 报异常，这里是停服务器还是继续？
+                        continue;
+                    }
                 }
             }
         }

@@ -2,7 +2,7 @@
 
 using System.Collections;
 
-
+// EasyTouch
 public class JoystackCc : MonoBehaviour {
 
 	private Vector3 Origin;

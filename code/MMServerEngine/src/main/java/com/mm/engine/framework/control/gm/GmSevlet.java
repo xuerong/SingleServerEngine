@@ -6,6 +6,8 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.util.JSONStringer;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +20,7 @@ import java.util.*;
  * Created by a on 2016/9/29.
  */
 public class GmSevlet extends HttpServlet {
+    private static final Logger log = LoggerFactory.getLogger(GmSevlet.class);
     private GmService gmService;
     private String gmJsonStr;
     public void init() throws ServletException{
@@ -52,7 +55,7 @@ public class GmSevlet extends HttpServlet {
             jsonObject.put(gmSegment.getId(),item);
         }
         gmJsonStr = jsonObject.toString();
-        System.out.println("init gmServlet");
+        log.info("init gmServlet finish");
     }
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp)

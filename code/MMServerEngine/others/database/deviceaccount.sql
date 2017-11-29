@@ -16,10 +16,10 @@ Date: 2017-11-20 14:09:39
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for deviceaccount
+-- Table structure for deviceAccount
 -- ----------------------------
-DROP TABLE IF EXISTS `deviceaccount`;
-CREATE TABLE `deviceaccount` (
+DROP TABLE IF EXISTS `deviceAccount`;
+CREATE TABLE `deviceAccount` (
   `deviceId` varchar(255) NOT NULL,
   `serverId` int(11) NOT NULL,
   `ip` varchar(255) NOT NULL,

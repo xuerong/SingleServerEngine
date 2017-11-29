@@ -16,10 +16,10 @@ Date: 2016-11-01 11:11:06
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for sendmessagegroup
+-- Table structure for sendMessageGroup
 -- ----------------------------
-DROP TABLE IF EXISTS `sendmessagegroup`;
-CREATE TABLE `sendmessagegroup` (
+DROP TABLE IF EXISTS `sendMessageGroup`;
+CREATE TABLE `sendMessageGroup` (
   `groupId` varchar(255) NOT NULL,
   `accountIds` text,
   PRIMARY KEY (`groupId`)

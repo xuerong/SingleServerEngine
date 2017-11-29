@@ -16,10 +16,10 @@ Date: 2017-11-20 14:09:58
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for pvprecord
+-- Table structure for pvpRecord
 -- ----------------------------
-DROP TABLE IF EXISTS `pvprecord`;
-CREATE TABLE `pvprecord` (
+DROP TABLE IF EXISTS `pvpRecord`;
+CREATE TABLE `pvpRecord` (
   `id` bigint(20) NOT NULL,
   `time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `grade` int(11) DEFAULT NULL,

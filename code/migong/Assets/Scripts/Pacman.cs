@@ -16,6 +16,8 @@ public class Pacman : MonoBehaviour {
 
 	public int Dir = 0;
 	public int LastDir = 0;
+
+	public int JocDir = 0;
 	// 起点和终点
 	public int inX;
 	public int inY;
@@ -154,7 +156,10 @@ public class Pacman : MonoBehaviour {
 
 	public void setDir(int dir,int mode){
 		if (mode == 1) {
-			return;
+			this.JocDir = dir;
+		}
+		if (dir == 0) {
+			dir = this.JocDir;
 		}
 		if (LastDir == dir) {
 			return;

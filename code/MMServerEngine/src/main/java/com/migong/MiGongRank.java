@@ -43,14 +43,16 @@ public class MiGongRank {
         rankService.createRank(UNLIMITED_RANK);
         rankService.createRank(LADDER_RANK);
         List<UserMiGong> userMiGongs = dataService.selectList(UserMiGong.class,"");
-        for(UserMiGong userMiGong : userMiGongs){
-            if(userMiGong.getUnlimitedPass() > 0) {
-                int id = getIdByUserId(userMiGong.getUserId());
-                rankService.put(UNLIMITED_RANK,id,userMiGong.getUnlimitedPass());
-            }
-            if(userMiGong.getLadderScore() > 0){
-                int id = getIdByUserId(userMiGong.getUserId());
-                rankService.put(LADDER_RANK,id,userMiGong.getLadderScore());
+        if(userMiGongs != null) {
+            for (UserMiGong userMiGong : userMiGongs) {
+                if (userMiGong.getUnlimitedPass() > 0) {
+                    int id = getIdByUserId(userMiGong.getUserId());
+                    rankService.put(UNLIMITED_RANK, id, userMiGong.getUnlimitedPass());
+                }
+                if (userMiGong.getLadderScore() > 0) {
+                    int id = getIdByUserId(userMiGong.getUserId());
+                    rankService.put(LADDER_RANK, id, userMiGong.getLadderScore());
+                }
             }
         }
         unlimitedFrontCache = getFront(FRONT_CACHE_COUNT,UNLIMITED_RANK);

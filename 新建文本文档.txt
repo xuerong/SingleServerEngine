@@ -1,0 +1,36 @@
+//--------------------------------------------------------配置安装相关
+腾讯开放平台：
+APP ID:1106478351
+APP KEY:kb41UWHaAJ3YTGcW
+
+微信社会化：
+AppID：wx4441fcf39f0e24e0
+AppSecret：ce51278665d747db197044ea5482d888
+
+app：3344c1180ab5eed4f6aed6f2a002008b
+
+腾讯云CentOS 7.3 64
+root ppdDg7WacPxDb6H
+服务器名称	云主机ID	所在网络ID	内网IP	公网IP
+u672au547du540d	ins-6u87cn62	vpc-0j72voq7	172.16.0.4	111.230.144.111
+
+
+安装mariaDB(myslq)：http://blog.csdn.net/eclothy/article/details/52733891
+安装cronolog:http://blog.51cto.com/freeloda/1346076
+
+
+
+///-------------------------------------------------------------------- 运营维护相关
+more -1000 /usr/local/migong/logs/dynasty2.out.$(date "+%Y%m%d%H")
+查看当前日志输出：tail -f /usr/local/migong/logs/dynasty2.out.$(date "+%Y%m%d%H")
+
+
+
+
+
+//--------------------------------------------------------------------其它
+mysql相关:
+设置密码：set password for root@localhost = password('123'); 
+
+解决执行sh:Permission denied
+chmod 777 xxx.sh

@@ -51,7 +51,7 @@ public final class ServiceHelper {
 
     // 各个service的初始化方法和销毁方法,threeMap默认是根据键之排序的
     private static Map<Integer,Map<Class<?>,Method>> initMethodMap = new TreeMap<>();
-    private static Map<Class<?>,Method> destroyMethodMap = new HashMap<>();
+    private static Map<Integer,Map<Class<?>,Method>> destroyMethodMap = new TreeMap<>();
     private static Map<String,Method> gmMethod = new HashMap<>();
 
     static{
@@ -82,6 +82,7 @@ public final class ServiceHelper {
                 String init = service.init();
                 int initPriority = service.initPriority();
                 String destroy = service.destroy();
+                int destroyPriority = service.destroyPriority();
                 Method[] methods=serviceClass.getMethods();
                 for (Method method : methods){
                     // 判断是否存在Request
@@ -111,7 +112,12 @@ public final class ServiceHelper {
                         methodMap.put(serviceClass,method);
                     }
                     if(method.getName().equals(destroy)){
-                        destroyMethodMap.put(serviceClass,method);
+                        Map<Class<?>,Method> methodMap = destroyMethodMap.get(destroyPriority);
+                        if(methodMap == null){
+                            methodMap = new HashMap<>();
+                            destroyMethodMap.put(destroyPriority,methodMap);
+                        }
+                        methodMap.put(serviceClass,method);
                     }
                     Gm gm = method.getAnnotation(Gm.class);
                     if(gm != null){
@@ -344,7 +350,7 @@ public final class ServiceHelper {
         return initMethodMap;
     }
 
-    public static Map<Class<?>, Method> getDestroyMethodMap() {
+    public static Map<Integer,Map<Class<?>,Method>> getDestroyMethodMap() {
         return destroyMethodMap;
     }
 

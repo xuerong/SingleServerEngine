@@ -48,7 +48,7 @@ public class MainPanel : MonoBehaviour {
 		levelButton = GameObject.Find (canvasPath+"level2").GetComponent<Button>();
 		levelButton.onClick.AddListener (delegate() {
 			// 打开level 界面
-			Debug.Log("open level window");
+//			Debug.Log("open level window");
 			openLevelWindow();
 		});
 		unlimitButton = GameObject.Find (canvasPath+"unlimit2").GetComponent<Button>();

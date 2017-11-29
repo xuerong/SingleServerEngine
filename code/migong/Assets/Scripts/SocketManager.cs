@@ -76,12 +76,14 @@ public class SocketManager : MonoBehaviour {
 	};
 	// Use this for initialization
 	void Awake () {
-		getServerListAndConnectServerAndLogin ();
+//		getServerListAndConnectServerAndLogin ();
+		needConnectOnce = true;
 //		ConnectServerAndLogin ();
 	}
 
 
 	private void getServerListAndConnectServerAndLogin(){
+		Debug.Log ("sdfsdfsdfsdf----------------------------------------------");
 		PlayerPrefs.DeleteAll ();
 
 		serverId = PlayerPrefs.GetInt (SERVER_ID_KEY);
@@ -150,7 +152,8 @@ public class SocketManager : MonoBehaviour {
 //		}      
 //
 
-		string url = "http://10.1.6.254:8083";  
+//		string url = "http://10.1.6.254:8083";  
+		string url = "http://111.230.144.111:8083";  // 腾讯云
 		UnityWebRequest request = new UnityWebRequest(url, "POST");  
 		byte[] postBytes = CSGetLoginInfo.SerializeToBytes(loginInfo);  
 		request.uploadHandler = (UploadHandler)new UploadHandlerRaw(postBytes);
@@ -196,7 +199,7 @@ public class SocketManager : MonoBehaviour {
 		} else {
 			if (needConnectOnce) {
 				needConnectOnce = false;
-//				getServerListAndConnectServerAndLogin (); TODO 这个地方会导致连发两次，要改改
+				getServerListAndConnectServerAndLogin (); //
 			}
 		}
 		// 接收的处理

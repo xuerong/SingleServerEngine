@@ -26,7 +26,7 @@ import java.util.concurrent.*;
  * 更新数据库检测用一个线程，然后分配给其它线程去处理
  * 注意：原来同一个服务线程传过来的更新需求，要在同一个更新线程中按顺序处理
  */
-@Service(init = "init",destroy = "destroy")
+@Service(init = "init",destroy = "destroy",destroyPriority = 5)
 public class AsyncService {
     private static final Logger log = LoggerFactory.getLogger(AsyncService.class);
     // 异步更新队列
@@ -58,7 +58,6 @@ public class AsyncService {
 
     public void destroy(){
         stop();
-        log.info("异步服务器关闭完成!");
     }
 
     private void startAsyncService(){
@@ -82,7 +81,7 @@ public class AsyncService {
             worker.stop(latch);
         }
         try {
-            latch.wait();
+            latch.await();
         } catch (InterruptedException e) {
             throw new MMException(e);
         }
@@ -309,7 +308,7 @@ public class AsyncService {
             if(running){
                 return asyncDataQueue.offer(asyncData);
             }else{
-                throw new MMException("异步服务器已经停止运行，或还没有运行");
+                throw new MMException("异步服务器已经停止运行，或还没有运行,asyncData:"+asyncData.toString());
             }
         }
 

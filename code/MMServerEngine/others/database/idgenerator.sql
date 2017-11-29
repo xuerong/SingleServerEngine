@@ -16,10 +16,10 @@ Date: 2017-11-20 14:09:48
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for idgenerator
+-- Table structure for idGenerator
 -- ----------------------------
-DROP TABLE IF EXISTS `idgenerator`;
-CREATE TABLE `idgenerator` (
+DROP TABLE IF EXISTS `idGenerator`;
+CREATE TABLE `idGenerator` (
   `className` varchar(255) NOT NULL,
   `id` bigint(20) NOT NULL,
   PRIMARY KEY (`className`)

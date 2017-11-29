@@ -16,10 +16,10 @@ Date: 2016-11-01 11:11:16
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for syspara
+-- Table structure for sysPara
 -- ----------------------------
-DROP TABLE IF EXISTS `syspara`;
-CREATE TABLE `syspara` (
+DROP TABLE IF EXISTS `sysPara`;
+CREATE TABLE `sysPara` (
   `id` varchar(255) NOT NULL,
   `value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)

@@ -161,6 +161,7 @@ public class DataSet {
             }
             return result;
         }catch (Throwable e){
+            e.printStackTrace();
             if(e.getMessage().contains("doesn't exist Query: desc")){
                 return null;
             }else{

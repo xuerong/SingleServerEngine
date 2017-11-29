@@ -106,7 +106,6 @@ public class IdService {
     }
 
     public void destroy(){
-        log.info("id service destroy");
         for(IdSegmentLong idSegmentLong : longIdSegmentMap.values()){
             IdGenerator idGenerator = new IdGenerator();
             idGenerator.setClassName(idSegmentLong.getCls().getName());

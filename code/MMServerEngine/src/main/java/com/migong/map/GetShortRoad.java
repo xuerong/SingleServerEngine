@@ -65,7 +65,7 @@ public class GetShortRoad {
             s1.push(out);												//压栈终点，这样栈s1中即为完整的路径
             road=s1.getStack();											//获取最新路径
             s1.pop();													//终点处出栈
-            writeRode(out);												//打印路径
+//            writeRode(out);												//打印路径
             node=s1.pop();												//将终点之前的第一个点设置为当前结点，进行新的路径的探索
         }
         Element now = node.clone();

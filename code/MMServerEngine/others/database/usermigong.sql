@@ -16,10 +16,10 @@ Date: 2017-11-20 14:10:38
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for usermigong
+-- Table structure for userMiGong
 -- ----------------------------
-DROP TABLE IF EXISTS `usermigong`;
-CREATE TABLE `usermigong` (
+DROP TABLE IF EXISTS `userMiGong`;
+CREATE TABLE `userMiGong` (
   `userId` varchar(255) NOT NULL,
   `unlimitedPass` int(11) NOT NULL DEFAULT '0',
   `unlimitedStar` int(11) NOT NULL DEFAULT '0',
