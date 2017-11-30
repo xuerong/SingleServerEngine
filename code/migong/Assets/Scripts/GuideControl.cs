@@ -87,17 +87,17 @@ public class GuideControl : MonoBehaviour {
 			case PassGuideType.First:
 				// 出发点
 
-				text = "First";
+				text = Message.getText ("guideContent1");
 				break;
 			case PassGuideType.Second:
 
-				text = "Second";
+				text = Message.getText ("guideContent2");
 				break;
 			case PassGuideType.Third:
-				text = "Third";
+				text = Message.getText ("guideContent3");
 				break;
 			case PassGuideType.Forth:
-				text = "Forth";
+				text = Message.getText ("guideContent4");
 				break;
 			}
 

@@ -5,12 +5,14 @@ import com.mm.engine.framework.control.room.RoomAccount;
 import com.mm.engine.framework.data.entity.session.Session;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.code.RetPacketImpl;
+import com.mm.engine.framework.security.LocalizationMessage;
 import com.mm.engine.framework.security.exception.ToClientException;
 import com.mm.engine.framework.server.Server;
 import com.mm.engine.framework.tool.helper.BeanHelper;
 import com.mm.engine.framework.tool.util.Util;
 import com.protocol.LiveOpcode;
 import com.protocol.LivePB;
+import com.sys.SysPara;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,11 +68,11 @@ public class BattleRoom extends Room {
     private RetPacket doCsStart(BattleUser battleUser,byte[] data) throws Throwable{
         System.out.println("doCsStart--"+battleUser.getAccountId());
         if(battleUser.getAccountId() != host.getAccountId()){
-            throw new ToClientException("you are not host");
+            throw new ToClientException(LocalizationMessage.getText("youAreNotHost"));
         }
         int count = battleUserMap.size();
         if(count <= 1){
-            throw new ToClientException("user count is not enough,count = "+count);
+            throw new ToClientException(LocalizationMessage.getText("countNotEnough",count));
         }
         long time = System.currentTimeMillis();
         // 计算并分配位置
@@ -155,10 +157,10 @@ public class BattleRoom extends Room {
 
     private RetPacket doCsSetRobot(BattleUser battleUser,byte[] data) throws Throwable{
         if(roomStatus != 0){
-            throw new ToClientException("游戏已经刚开始，不能进入房间");
+            throw new ToClientException(LocalizationMessage.getText("pvpHasBegin"));
         }
         if(battleUser.getAccountId() != host.getAccountId()){
-            throw new ToClientException("you are not host");
+            throw new ToClientException(LocalizationMessage.getText("youAreNotHost"));
         }
         LivePB.CSSetRobot csSetRobot = LivePB.CSSetRobot.parseFrom(data);
         int count = csSetRobot.getCount();
@@ -305,7 +307,7 @@ public class BattleRoom extends Room {
     @Override
     public void beforePeopleEnterRoom(RoomAccount roomAccount) {
         if(host == null && roomAccount.getAccountId()!= creatorAccountId){
-            throw new ToClientException("host has not into room");
+            throw new ToClientException(LocalizationMessage.getText("hostNotIntoRoom"));
         }
     }
 
@@ -328,10 +330,10 @@ public class BattleRoom extends Room {
 
     private void addBattleUser(BattleUser battleUser){
         if(roomStatus != 0){
-            throw new ToClientException("游戏已经刚开始，不能进入房间");
+            throw new ToClientException(LocalizationMessage.getText("pvpHasBegin"));
         }
         if(battleUserMap.containsKey(battleUser.getAccountId())) {
-            throw new ToClientException("你已经在房间中");
+            throw new ToClientException(LocalizationMessage.getText("inRoomNow"));
         }
         battleUserMap.put(battleUser.getAccountId(),battleUser);
         userCount.getAndIncrement();
@@ -361,7 +363,7 @@ public class BattleRoom extends Room {
         System.out.println(roomAccount.getAccountId()+" outRoom");
         BattleUser battleUser = battleUserMap.remove(roomAccount.getAccountId());
         if(battleUser == null){
-            throw new ToClientException("you are not in the room ,roomId = "+id);
+            throw new ToClientException(LocalizationMessage.getText("notInRoom"));
         }
         // 如果房间里面没有别人，直接关闭房间，否则，如果是房主，关闭房间(或者更换房主)，否则，直接离开
         if(battleUserMap.size() == 0){ // 如果是最后一个人往往也是房主
@@ -431,7 +433,7 @@ public class BattleRoom extends Room {
     private BattleUser getBattleBySession(Session session){
         BattleUser battleUser = battleUserMap.get(session.getAccountId());
         if(battleUser == null){
-            throw new ToClientException("you are not in room");
+            throw new ToClientException(LocalizationMessage.getText("youNotInRoom"));
         }
         return battleUser;
     }

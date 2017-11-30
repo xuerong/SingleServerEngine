@@ -25,6 +25,8 @@ namespace Example
 
         public string Ip { get; set; }
 
+        public string Localization { get; set; }
+
     }
 
     public partial class SCLogin

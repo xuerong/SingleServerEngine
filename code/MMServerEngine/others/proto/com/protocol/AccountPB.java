@@ -55,6 +55,33 @@ public final class AccountPB {
      */
     com.google.protobuf.ByteString
         getIpBytes();
+
+    // required string localization = 4;
+    /**
+     * <code>required string localization = 4;</code>
+     *
+     * <pre>
+     * 本地化，语言
+     * </pre>
+     */
+    boolean hasLocalization();
+    /**
+     * <code>required string localization = 4;</code>
+     *
+     * <pre>
+     * 本地化，语言
+     * </pre>
+     */
+    java.lang.String getLocalization();
+    /**
+     * <code>required string localization = 4;</code>
+     *
+     * <pre>
+     * 本地化，语言
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getLocalizationBytes();
   }
   /**
    * Protobuf type {@code CSLogin}
@@ -125,6 +152,11 @@ public final class AccountPB {
             case 26: {
               bitField0_ |= 0x00000004;
               ip_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              localization_ = input.readBytes();
               break;
             }
           }
@@ -296,10 +328,66 @@ public final class AccountPB {
       }
     }
 
+    // required string localization = 4;
+    public static final int LOCALIZATION_FIELD_NUMBER = 4;
+    private java.lang.Object localization_;
+    /**
+     * <code>required string localization = 4;</code>
+     *
+     * <pre>
+     * 本地化，语言
+     * </pre>
+     */
+    public boolean hasLocalization() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required string localization = 4;</code>
+     *
+     * <pre>
+     * 本地化，语言
+     * </pre>
+     */
+    public java.lang.String getLocalization() {
+      java.lang.Object ref = localization_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          localization_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string localization = 4;</code>
+     *
+     * <pre>
+     * 本地化，语言
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getLocalizationBytes() {
+      java.lang.Object ref = localization_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        localization_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       accountId_ = "";
       url_ = "";
       ip_ = "";
+      localization_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -318,6 +406,10 @@ public final class AccountPB {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasLocalization()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -333,6 +425,9 @@ public final class AccountPB {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, getIpBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getLocalizationBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -354,6 +449,10 @@ public final class AccountPB {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, getIpBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getLocalizationBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -482,6 +581,8 @@ public final class AccountPB {
         bitField0_ = (bitField0_ & ~0x00000002);
         ip_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        localization_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -522,6 +623,10 @@ public final class AccountPB {
           to_bitField0_ |= 0x00000004;
         }
         result.ip_ = ip_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.localization_ = localization_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -553,6 +658,11 @@ public final class AccountPB {
           ip_ = other.ip_;
           onChanged();
         }
+        if (other.hasLocalization()) {
+          bitField0_ |= 0x00000008;
+          localization_ = other.localization_;
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -567,6 +677,10 @@ public final class AccountPB {
           return false;
         }
         if (!hasIp()) {
+          
+          return false;
+        }
+        if (!hasLocalization()) {
           
           return false;
         }
@@ -810,6 +924,104 @@ public final class AccountPB {
   }
   bitField0_ |= 0x00000004;
         ip_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string localization = 4;
+      private java.lang.Object localization_ = "";
+      /**
+       * <code>required string localization = 4;</code>
+       *
+       * <pre>
+       * 本地化，语言
+       * </pre>
+       */
+      public boolean hasLocalization() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required string localization = 4;</code>
+       *
+       * <pre>
+       * 本地化，语言
+       * </pre>
+       */
+      public java.lang.String getLocalization() {
+        java.lang.Object ref = localization_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          localization_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string localization = 4;</code>
+       *
+       * <pre>
+       * 本地化，语言
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getLocalizationBytes() {
+        java.lang.Object ref = localization_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          localization_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string localization = 4;</code>
+       *
+       * <pre>
+       * 本地化，语言
+       * </pre>
+       */
+      public Builder setLocalization(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        localization_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string localization = 4;</code>
+       *
+       * <pre>
+       * 本地化，语言
+       * </pre>
+       */
+      public Builder clearLocalization() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        localization_ = getDefaultInstance().getLocalization();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string localization = 4;</code>
+       *
+       * <pre>
+       * 本地化，语言
+       * </pre>
+       */
+      public Builder setLocalizationBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        localization_ = value;
         onChanged();
         return this;
       }
@@ -3765,14 +3977,15 @@ public final class AccountPB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\026protos/AccountPB.proto\"5\n\007CSLogin\022\021\n\ta" +
-      "ccountId\030\001 \002(\t\022\013\n\003url\030\002 \002(\t\022\n\n\002ip\030\003 \002(\t\"" +
-      "\034\n\007SCLogin\022\021\n\tsessionId\030\001 \002(\t\"\035\n\010CSLogou" +
-      "t\022\021\n\taccountId\030\001 \002(\t\"\n\n\010SCLogout\"\017\n\rSCBe" +
-      "TakePlace\"\"\n\016CSGetLoginInfo\022\020\n\010deviceId\030" +
-      "\001 \002(\t\"O\n\016SCGetLoginInfo\022\020\n\010serverId\030\001 \002(" +
-      "\005\022\n\n\002ip\030\002 \002(\t\022\014\n\004port\030\003 \002(\005\022\021\n\taccountId" +
-      "\030\004 \002(\tB\016\n\014com.protocol"
+      "\n\026protos/AccountPB.proto\"K\n\007CSLogin\022\021\n\ta" +
+      "ccountId\030\001 \002(\t\022\013\n\003url\030\002 \002(\t\022\n\n\002ip\030\003 \002(\t\022" +
+      "\024\n\014localization\030\004 \002(\t\"\034\n\007SCLogin\022\021\n\tsess" +
+      "ionId\030\001 \002(\t\"\035\n\010CSLogout\022\021\n\taccountId\030\001 \002" +
+      "(\t\"\n\n\010SCLogout\"\017\n\rSCBeTakePlace\"\"\n\016CSGet" +
+      "LoginInfo\022\020\n\010deviceId\030\001 \002(\t\"O\n\016SCGetLogi" +
+      "nInfo\022\020\n\010serverId\030\001 \002(\005\022\n\n\002ip\030\002 \002(\t\022\014\n\004p" +
+      "ort\030\003 \002(\005\022\021\n\taccountId\030\004 \002(\tB\016\n\014com.prot" +
+      "ocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3784,7 +3997,7 @@ public final class AccountPB {
           internal_static_CSLogin_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSLogin_descriptor,
-              new java.lang.String[] { "AccountId", "Url", "Ip", });
+              new java.lang.String[] { "AccountId", "Url", "Ip", "Localization", });
           internal_static_SCLogin_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_SCLogin_fieldAccessorTable = new

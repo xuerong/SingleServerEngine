@@ -10,6 +10,7 @@ import com.mm.engine.framework.data.entity.session.SessionService;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.entrance.Entrance;
 import com.mm.engine.framework.net.entrance.socket.NettyHelper;
+import com.mm.engine.framework.security.LocalizationMessage;
 import com.mm.engine.framework.security.exception.MMException;
 import com.mm.engine.framework.security.exception.ToClientException;
 import com.mm.engine.framework.tool.helper.BeanHelper;
@@ -144,6 +145,8 @@ public class RoomNettyPBEntrance  extends Entrance {
                 roomNetData.setOpcode(BaseOpcode.SCException);
                 roomNetData.setData(scException.build().toByteArray());
                 ctx.writeAndFlush(roomNetData);
+            }finally {
+//                LocalizationMessage.removeThreadLocalization(); TODO 要用这个还需要这里
             }
         }
         private Session checkAndGetSession(String sessionId){

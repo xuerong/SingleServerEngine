@@ -7,6 +7,7 @@ import com.mm.engine.framework.data.entity.session.SessionService;
 import com.mm.engine.framework.net.code.HttpDecoder;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.entrance.Entrance;
+import com.mm.engine.framework.security.LocalizationMessage;
 import com.mm.engine.framework.security.exception.MMException;
 import com.mm.engine.framework.security.exception.ToClientException;
 import com.mm.engine.framework.server.SysConstantDefine;
@@ -68,6 +69,10 @@ public class RequestJettyPBEntrance extends Entrance {
             opcode=Integer.parseInt(opcodeStr);
             
             Session session = sessionService.create(request.getRequestURL().toString(), Util.getIp(request));
+            session.setLocalization(request.getHeader(SysConstantDefine.localizationKey));
+
+            LocalizationMessage.setThreadLocalization(session.getLocalization());
+
             rePacket = requestService.handle(opcode, data, session);
             if(rePacket==null){
                 // 处理包失败
@@ -116,6 +121,8 @@ public class RequestJettyPBEntrance extends Entrance {
             }catch (IOException e1){
                 e1.printStackTrace();
             }
+        }finally {
+            LocalizationMessage.removeThreadLocalization();
         }
     }
 

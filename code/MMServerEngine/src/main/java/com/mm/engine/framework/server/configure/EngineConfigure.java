@@ -44,12 +44,12 @@ public final class EngineConfigure {
             // 从配置文件中取server类型，如果没有，就是默认类型nodeServer
         }
         // 初始化配置：从配置文件中读取
-        configureBeans.put(DataSourceFactory.class,getBeanFromConfigure("dataSourceFactory"));
-        configureBeans.put(DataAccessor.class,getBeanFromConfigure("dataAccessor"));
-        configureBeans.put(CacheCenter.class,getBeanFromConfigure("cacheCenter"));
-        configureBeans.put(JobStorage.class,getBeanFromConfigure("jobStorage"));
-        configureBeans.put(SysParaStorage.class,getBeanFromConfigure("sysParaStorage"));
-        configureBeans.put(SendMessageGroupStorage.class,getBeanFromConfigure("sendMessageGroupStorage"));
+        configureBeans.put(DataSourceFactory.class,getBeanFromConfigure("frameBean.dataSourceFactory"));
+        configureBeans.put(DataAccessor.class,getBeanFromConfigure("frameBean.dataAccessor"));
+        configureBeans.put(CacheCenter.class,getBeanFromConfigure("frameBean.cacheCenter"));
+        configureBeans.put(JobStorage.class,getBeanFromConfigure("frameBean.jobStorage"));
+        configureBeans.put(SysParaStorage.class,getBeanFromConfigure("frameBean.sysParaStorage"));
+        configureBeans.put(SendMessageGroupStorage.class,getBeanFromConfigure("frameBean.sendMessageGroupStorage"));
 
         defaultRequestController="DefaultRequestController";
         // 初始化入口

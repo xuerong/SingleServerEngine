@@ -80,6 +80,10 @@ namespace Example
                     case 26:
                         instance.Ip = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
+                    // Field 4 LengthDelimited
+                    case 34:
+                        instance.Localization = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -130,6 +134,10 @@ namespace Example
                     case 26:
                         instance.Ip = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
+                    // Field 4 LengthDelimited
+                    case 34:
+                        instance.Localization = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -179,6 +187,10 @@ namespace Example
                     case 26:
                         instance.Ip = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
+                    // Field 4 LengthDelimited
+                    case 34:
+                        instance.Localization = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -216,6 +228,11 @@ namespace Example
             // Key for field: 3, LengthDelimited
             stream.WriteByte(26);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Ip));
+            if (instance.Localization == null)
+                throw new ArgumentNullException("Localization", "Required by proto specification.");
+            // Key for field: 4, LengthDelimited
+            stream.WriteByte(34);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Localization));
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 

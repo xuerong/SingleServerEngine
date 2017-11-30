@@ -115,7 +115,6 @@ public class MainPanel : MonoBehaviour {
 			doShowLock();
 		});
 
-
 		// 账号，分享，帮助
 
 		Button accountButton = GameObject.Find (canvasPath+"account").GetComponent<Button>();
@@ -220,16 +219,16 @@ public class MainPanel : MonoBehaviour {
 
 
 		ShareContent content = new ShareContent();
-		content.SetText("迷宫与吃豆人");
+		content.SetText(Message.getText("gameTitle"));
 		content.SetImageUrl("https://xuerong.github.io/mazeAndPacman/resource/icon.png");
-		content.SetTitle("迷宫与吃豆人");
+		content.SetTitle(Message.getText("gameTitle"));
 		content.SetTitleUrl("https://xuerong.github.io/mazeAndPacman/");
 //		content.SetSite("迷宫与吃豆人");
 //		content.SetSiteUrl("https://xuerong.github.io/mazeAndPacman/");
 		content.SetUrl("https://xuerong.github.io/mazeAndPacman/");
 //		content.SetComment("迷宫与吃豆人");
 //		content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
-		content.SetFilePath("https://xuerong.github.io/mazeAndPacman/resource/mi.apk");
+//		content.SetFilePath("https://xuerong.github.io/mazeAndPacman/resource/mi.apk");
 		content.SetShareType(ContentType.Webpage);
 
 		//通过分享菜单分享
@@ -313,7 +312,7 @@ public class MainPanel : MonoBehaviour {
 
 				GameObject textGo = up.transform.Find ("Text").gameObject;
 				Text text = textGo.GetComponent<Text> ();
-				text.text = "pass"+buttonIndex.pass+",star"+buttonIndex.star+")";
+				text.text = Message.getText("levelItem",buttonIndex.pass,buttonIndex.star);
 			}
 		});
 	}
@@ -336,7 +335,8 @@ public class MainPanel : MonoBehaviour {
 
 			//
 			Text passText = GameObject.Find ("main/ui/uiUnlimit/Canvas/pass").GetComponent<Text>();
-			passText.text = "pass:"+ret.Pass+",star:"+ret.Star+",rank:"+ret.Rank;
+			passText.text = Message.getText("unlimitRankSelf",ret.Pass,ret.Star,ret.Rank);
+
 			// 列表
 			int count = ret.UnlimitedRankInfo.Count;
 			float dis = 20f;
@@ -357,7 +357,7 @@ public class MainPanel : MonoBehaviour {
 				// 生成各个玩家的排名item
 				GameObject textGo = up.transform.Find ("Text").gameObject;
 				Text text = textGo.GetComponent<Text> ();
-				text.text = info.Rank+","+info.UserName+","+info.Pass+","+info.Star;
+				text.text = Message.getText("unlimitRankItem",info.Rank,info.UserName,info.Star);
 			}
 		});
 	}
@@ -371,10 +371,10 @@ public class MainPanel : MonoBehaviour {
 			Text titleText = GameObject.Find ("main/ui/uiOnline/Canvas/title").GetComponent<Text>();
 			Text rankText = GameObject.Find ("main/ui/uiOnline/Canvas/rank").GetComponent<Text>();
 
-			scoreText.text = "score:"+ret.Score;
-			titleText.text = "score:"+ret.Title;
-			rankText.text = "score:"+ret.Rank;
-//			onlineInfo.
+			scoreText.text = Message.getText("onlineScorev",ret.Score);
+			titleText.text = Message.getText("onlineTitle",ret.Title);
+			rankText.text = Message.getText("onlineRank",ret.Rank);
+
 
 			GameObject content = GameObject.Find ("main/ui/uiOnline/Canvas/scrollView/Viewport/Content");
 			for (int i = 0; i < content.transform.childCount; i++) {
@@ -404,7 +404,7 @@ public class MainPanel : MonoBehaviour {
 				// 生成各个玩家的排名item
 				GameObject textGo = up.transform.Find ("Text").gameObject;
 				Text text = textGo.GetComponent<Text> ();
-				text.text = info.Rank+","+info.Name+","+info.Score+","+info.Title;
+				text.text = Message.getText("onlineRankItem",info.Rank,info.Name,info.Score,info.Title);
 			}
 
 		});
@@ -441,7 +441,7 @@ public class MainPanel : MonoBehaviour {
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSMatching, CSMatching.SerializeToBytes(matching),delegate(int opcode, byte[] data) {
 			Debug.Log("send matching success,opcode = "+opcode);
 			//matchWaitTime
-			matchingDialogId = WarnDialog.showWaitDialog ("matching...", int.Parse (sysParas ["matchWaitTime"]), delegate() {
+			matchingDialogId = WarnDialog.showWaitDialog (Message.getText("matching"), int.Parse (sysParas ["matchWaitTime"]), delegate() {
 				WarnDialog.showWarnDialog("match fail , please try again later.",null);	
 				//
 				CSCancelMatching cancelMatching = new CSCancelMatching();

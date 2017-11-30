@@ -48,7 +48,9 @@
   <ItemGroup>
      <Compile Include="Assets\Plugins\ShareSDK\Editor\ShareSDKConfigEditor.cs" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_strings.xml" />
+     <None Include="Assets\resources\Message\chinese.txt" />
      <None Include="Assets\Plugins\Android\ShareSDK\AndroidManifest.xml" />
+     <None Include="Assets\resources\Image\English.txt" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_oks_classic_progressbar.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_oks_classic_platform_cell_back.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_color_drawables.xml" />
@@ -56,8 +58,10 @@
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_weibo_retry_btn_selector.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_instapaper_strings.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_strings.xml" />
+     <None Include="Assets\resources\Image\Chinese.txt" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_weibo_retry_btn_default.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_weibo_retry_btn_press.xml" />
+     <None Include="Assets\resources\Message\english.txt" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\ssdk_oks_strings.xml" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>

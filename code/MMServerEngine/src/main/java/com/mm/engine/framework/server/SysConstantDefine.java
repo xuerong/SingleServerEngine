@@ -11,6 +11,7 @@ public final class SysConstantDefine {
     public static final String serverHost = "serverHost";
     public static final String serverPort = "serverPort";
     public static final String sessionId = "sessionId";
+    public static final String localizationKey = "localization";
     // -------------------------------------------------------------------------------------------------NetEvent------------------------
     public static final int NETEVENTEXCEPTION = -1000; // netEvent异常返回
     public static final int CACHEUPDATE = 1000; // 缓存更新

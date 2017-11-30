@@ -6,6 +6,7 @@ message CSLogin
 	required string accountId 			= 1;
 	required string url      			= 2;
 	required string ip       			= 3;
+	required string localization       			= 4; // 本地化，语言
 }
 message SCLogin
 {

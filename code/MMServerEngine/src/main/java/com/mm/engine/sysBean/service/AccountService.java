@@ -11,6 +11,7 @@ import com.mm.engine.framework.data.entity.session.SessionService;
 import com.mm.engine.framework.data.tx.Tx;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.code.RetPacketImpl;
+import com.mm.engine.framework.security.LocalizationMessage;
 import com.mm.engine.framework.security.exception.MMException;
 import com.mm.engine.framework.security.exception.ToClientException;
 import com.mm.engine.framework.server.IdService;
@@ -84,6 +85,8 @@ public class AccountService {
             // 一些对account的设置，并保存
         }
         Session session = loginSegment.getSession();
+        session.setLocalization(csLoginMain.getLocalization());
+        LocalizationMessage.setThreadLocalization(session.getLocalization());
         MessageSender messageSender = new NettyPBMessageSender(ctx.channel());
         session.setMessageSender(messageSender);
         final ChannelHandlerContext _ctx = ctx;
@@ -126,7 +129,7 @@ public class AccountService {
     public RetPacket getLoginInfo(Object data, Session session) throws Throwable{
         AccountPB.CSGetLoginInfo loginInfo = AccountPB.CSGetLoginInfo.parseFrom((byte[])data);
         if(StringUtils.isEmpty(loginInfo.getDeviceId())){
-            throw new ToClientException("deviceId is empty,deviceId = "+loginInfo.getDeviceId());
+            throw new ToClientException(LocalizationMessage.getText("deviceIdIsEmpty",loginInfo.getDeviceId()));
         }
         DeviceAccount deviceAccount = dataService.selectObject(DeviceAccount.class,"deviceId=?",loginInfo.getDeviceId());
         if(deviceAccount == null){ // 创建新的账号
@@ -156,7 +159,7 @@ public class AccountService {
     // 为新玩家分配服务器，规则
     private ServerInfo serverForNewUser(){
         if(!refreshCurrentServer()){
-            throw new ToClientException("server is full,please register after a while!");
+            throw new ToClientException(LocalizationMessage.getText("severFull"));
         }
         return currentServer;
     }

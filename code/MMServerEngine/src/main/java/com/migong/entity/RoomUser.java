@@ -2,6 +2,7 @@ package com.migong.entity;
 
 import com.migong.map.Element;
 import com.mm.engine.framework.data.entity.session.Session;
+import com.mm.engine.framework.security.LocalizationMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,11 +140,19 @@ public class RoomUser {
         this.userState = userState;
     }
 
+    /**
+     * idle=idle
+     cancel=cancel
+     matching=matching
+     inRoom=in room
+     offline=offline
+     */
+
     public static enum UserState{
         None("idle"),
         Cancel("cancel"),
         Matching("matching"),
-        Playing("in room"),
+        Playing("inRoom"),
         Offline("offline"); // 掉线
 
         private final String describe;
@@ -151,7 +160,7 @@ public class RoomUser {
             this.describe = describe;
         }
         public String getDescribe(){
-            return describe;
+            return LocalizationMessage.getText(describe);
         }
     }
 }

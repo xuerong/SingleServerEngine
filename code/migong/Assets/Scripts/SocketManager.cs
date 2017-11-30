@@ -66,6 +66,8 @@ public class SocketManager : MonoBehaviour {
 
 	private static bool needConnectOnce = false;
 
+	private static string localization;
+
 	static Dictionary<int,long> lastSendTime = new Dictionary<int, long>();
 	static Dictionary<int,int> needCheckOpcode = new Dictionary<int, int>(){ // 
 		{(int)MiGongOpcode.CSGetMiGongMap,(int)MiGongOpcode.CSGetMiGongMap},
@@ -76,6 +78,7 @@ public class SocketManager : MonoBehaviour {
 	};
 	// Use this for initialization
 	void Awake () {
+		localization = Application.systemLanguage.ToString();
 //		getServerListAndConnectServerAndLogin ();
 		needConnectOnce = true;
 //		ConnectServerAndLogin ();
@@ -83,7 +86,6 @@ public class SocketManager : MonoBehaviour {
 
 
 	private void getServerListAndConnectServerAndLogin(){
-		Debug.Log ("sdfsdfsdfsdf----------------------------------------------");
 		PlayerPrefs.DeleteAll ();
 
 		serverId = PlayerPrefs.GetInt (SERVER_ID_KEY);
@@ -103,6 +105,7 @@ public class SocketManager : MonoBehaviour {
 	IEnumerator PostReq () {
 		Dictionary<string,string> headers = new Dictionary<string, string> ();
 		headers.Add("opcode",(int)AccountOpcode.CSGetLoginInfo+"");
+		headers.Add("localization",localization);
 		CSGetLoginInfo loginInfo = new CSGetLoginInfo ();
 		NetworkInterface[] nis = NetworkInterface.GetAllNetworkInterfaces ();
 		foreach (NetworkInterface ni in nis) {  
@@ -182,7 +185,7 @@ public class SocketManager : MonoBehaviour {
 //			Debug.Log ("port = " + ret.Port);  
 		} else {
 			Debug.Log ("request.responseCode = "+request.responseCode);
-			WarnDialog.showWarnDialog ("get server info fail !",null);
+			WarnDialog.showWarnDialog (Message.getText("getServerInfoFail"),null);
 		}
 	}
 
@@ -232,6 +235,7 @@ public class SocketManager : MonoBehaviour {
 						node.AccountId = accountId;
 						node.Url = "sdf";
 						node.Ip = ip;
+						node.Localization = localization;
 //						node.Ip = "10.0.2.2";
 						byte[] data = CSLogin.SerializeToBytes (node);
 						byte[] loginData = SocketManager.SendMessageSync ((int)AccountOpcode.CSLogin, data);
@@ -277,7 +281,7 @@ public class SocketManager : MonoBehaviour {
 		} catch (Exception e){  
 			ret = false;  
 			Debug.Log ("连接服务器失败"+e);  
-			WarnDialog.showWarnDialog ("连接服务器失败:"+e,delegate() {
+			WarnDialog.showWarnDialog (Message.getText("connectServerFail"),delegate() {
 //				ConnectServer();
 			});
 			return ret;  
@@ -402,7 +406,7 @@ public class SocketManager : MonoBehaviour {
 			}
 			catch (System.Exception e)
 			{
-				WarnDialog.showWarnDialog ("无法连接到服务器",delegate() {
+				WarnDialog.showWarnDialog (Message.getText("connectServerFail"),delegate() {
 //									ConnectServer();
 				});
 				Debug.Log("e:"+e);
@@ -418,7 +422,7 @@ public class SocketManager : MonoBehaviour {
 
 	private static void resoveSCException(SCException exception){
 		Debug.LogError("error:errorCode = "+exception.ErrCode+",errorMsg = "+exception.ErrMsg+",csOpcode:"+exception.CsOpcode+",scOpcode:"+exception.ScOpcode);
-		WarnDialog.showWarnDialog ("数据错误："+exception.ErrMsg,delegate() {
+		WarnDialog.showWarnDialog (Message.getText("dataError")+exception.ErrMsg,delegate() {
 			//				ConnectServer();
 		});
 	}

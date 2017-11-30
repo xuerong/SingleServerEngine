@@ -1,0 +1,43 @@
+gameTitle=maze and pacman
+
+level=Pass Mode
+unlimit=Unlimit Mode
+online=Online PvP
+account=Account
+share=Share
+help=Help
+healthyWarn=enjoy it!
+unlimitGo=GO
+onlineGo=GO
+showScore=score
+showTitle=title
+showRnak=rank
+helpTip=click to continue
+ok=ok
+cancel=cancel
+exit?=exit?
+timeTip=time:
+
+levelItem=pass{0},star{1}
+unlimitRankSelf=pass:{0},star:{1},rank:{2}
+unlimitRankItem=rank:{0},name:{1},star:{2}
+onlineScore=score:{0}
+onlineTitle=title:{0}
+onlineRank=rank:{0}
+onlineRankItem=rank:{0},name:{1},score:{2},title:{3}
+
+matching=matching...
+getServerInfoFail=get server info fail !
+connectServerFail=connect server fial！
+
+success=SUCCESS
+fail=FAIL
+
+onlineSettleItem=rank:{0},name:{1},score:{2},title:{3}
+
+dataError=data error:
+
+guideContent1=guideContent1
+guideContent2=guideContent2
+guideContent3=guideContent3
+guideContent4=guideContent4

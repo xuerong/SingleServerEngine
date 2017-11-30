@@ -77,7 +77,7 @@ public class MapCreate : MonoBehaviour{
 	void Start () {
 		// 设置button
 		closeButton.onClick.AddListener(delegate {
-			WarnDialog.showWarnDialog("exit?",delegate {
+			WarnDialog.showWarnDialog(Message.getText("exit?"),delegate {
 				selfArrive(false,null,false);
 				Destroy(transform.parent.parent.gameObject);
 				GameObject mainGo = GameObject.Find ("main");
@@ -355,7 +355,7 @@ public class MapCreate : MonoBehaviour{
 				SCPassFinish pas = SCPassFinish.Deserialize (data);
 				if (showSettle) {
 					GameObject go = transform.parent.parent.Find ("Canvas/settle").gameObject;
-					go.transform.Find ("Text").GetComponent<Text> ().text = pas.Success == 1 ? "SUCCESS" : "Fail";
+					go.transform.Find ("Text").GetComponent<Text> ().text = pas.Success == 1 ? Message.getText("success") : Message.getText("fail");
 				}
 				if(pas.Success == 1){ // 修改关卡并解锁
 					GameObject mainGo = GameObject.Find ("main");
@@ -378,7 +378,7 @@ public class MapCreate : MonoBehaviour{
 				SCUnlimitedFinish pas = SCUnlimitedFinish.Deserialize (data);
 				if (showSettle) {
 					GameObject go = transform.parent.parent.Find ("Canvas/settle").gameObject;
-					go.transform.Find ("Text").GetComponent<Text> ().text = pas.Success == 1 ? "SUCCESS" : "Fail";
+					go.transform.Find ("Text").GetComponent<Text> ().text = pas.Success == 1 ? Message.getText("success") : Message.getText("fail");
 				}
 			});
 			if (showSettle) {
@@ -439,7 +439,7 @@ public class MapCreate : MonoBehaviour{
 			// 生成各个玩家的排名item
 			GameObject textGo = up.transform.Find ("Text").gameObject;
 			Text text = textGo.GetComponent<Text> ();
-			text.text = info.Rank+","+info.UserName+","+info.Score+","+info.Arrived;
+			text.text = Message.getText ("onlineSettleItem",info.Rank,info.UserName,info.Score,info.Arrived);
 		}
 
 

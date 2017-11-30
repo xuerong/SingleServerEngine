@@ -10,6 +10,7 @@ import com.mm.engine.framework.data.entity.session.SessionService;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.entrance.Entrance;
 import com.mm.engine.framework.net.entrance.socket.NettyHelper;
+import com.mm.engine.framework.security.LocalizationMessage;
 import com.mm.engine.framework.security.exception.MMException;
 import com.mm.engine.framework.security.exception.ToClientException;
 import com.mm.engine.framework.server.SysConstantDefine;
@@ -85,6 +86,7 @@ public class RequestNettyPBEntrance extends Entrance {
                     retPacket = accountService.login(nettyPBPacket.getOpcode(),nettyPBPacket.getData(),ctx,sessionKey);
                 }else{
                     Session session = checkAndGetSession(sessionId);
+                    LocalizationMessage.setThreadLocalization(session.getLocalization());
                     retPacket = requestService.handle(nettyPBPacket.getOpcode(),nettyPBPacket.getData(),session);
                 }
                 if(retPacket == null){
@@ -116,6 +118,8 @@ public class RequestNettyPBEntrance extends Entrance {
                 nettyPBPacket.setOpcode(BaseOpcode.SCException);
                 nettyPBPacket.setData(scException.build().toByteArray());
                 ctx.writeAndFlush(nettyPBPacket);
+            }finally {
+                LocalizationMessage.removeThreadLocalization();
             }
         }
         private Session checkAndGetSession(String sessionId){

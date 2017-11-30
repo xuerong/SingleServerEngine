@@ -77,7 +77,7 @@ class WarnDialog : MonoBehaviour {
 		if (dialogQueue.Count > 0 && !canvas.activeSelf) {
 			ok.onClick.RemoveAllListeners ();
 			lock (dialogQueue) {
-				ok.transform.Find("Text").GetComponent<Text>().text = "OK";
+				ok.transform.Find("Text").GetComponent<Text>().text = Message.getText("ok");
 				WarnDialogInfo w = dialogQueue.Dequeue ();
 				showButton (true,w.hideClose?false:true);
 				instance.text.text = w.text;
@@ -97,7 +97,7 @@ class WarnDialog : MonoBehaviour {
 		if (waitDialogQueue.Count > 0 && !canvas.activeSelf) {
 			ok.onClick.RemoveAllListeners ();
 			lock (waitDialogQueue) {
-				ok.transform.Find("Text").GetComponent<Text>().text = "Cancel";
+				ok.transform.Find("Text").GetComponent<Text>().text = Message.getText("cancel");
 				showButton (true,false);
 				WaitDialogInfo w = waitDialogQueue.Dequeue ();
 				if (w.state == DialogState.Cancel) {

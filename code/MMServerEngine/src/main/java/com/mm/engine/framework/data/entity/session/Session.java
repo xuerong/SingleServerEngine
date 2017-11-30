@@ -37,6 +37,8 @@ public class Session extends CacheEntity{
     private Map<String,Object> attrs;
     // 是否可用，当登出的时候，设置成false，应为有可能被其它功能引用
     private boolean available;
+    //
+    private String localization; // 语言，本地化用
 
     public Session(String url, String sessionIdPrefix, String ip, Date createTime){
         this.url=url;
@@ -132,5 +134,13 @@ public class Session extends CacheEntity{
         if(this.connectionClose != null){
             this.connectionClose.close();
         }
+    }
+
+    public String getLocalization() {
+        return localization;
+    }
+
+    public void setLocalization(String localization) {
+        this.localization = localization;
     }
 }

@@ -5,8 +5,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.*;
 
 /**
@@ -24,7 +27,7 @@ public class PropsUtil {
      */
     public static Properties loadProps(String propsPath) {
         Properties props = new Properties();
-        InputStream is = null;
+        InputStreamReader is = null;
         try {
             if (StringUtils.isEmpty(propsPath)) {
                 throw new IllegalArgumentException();
@@ -33,7 +36,7 @@ public class PropsUtil {
             if (propsPath.lastIndexOf(suffix) == -1) {
                 propsPath += suffix;
             }
-            is = ClassUtil.getClassLoader().getResourceAsStream(propsPath);
+            is = new InputStreamReader(ClassUtil.getClassLoader().getResourceAsStream(propsPath), "UTF-8");
             if (is != null) {
                 props.load(is);
             }
@@ -50,6 +53,27 @@ public class PropsUtil {
             }
         }
         return props;
+    }
+
+    /**
+     * 加载一个目录下的属性文件
+     */
+    public static Map<String,Properties> loadDirProps(String dirPath) {
+        Map<String,Properties> result = new HashMap<>();
+        try {
+            URL url = ClassUtil.getClassLoader().getResource(dirPath);
+            File file = new File(url.toURI());
+            String[] fileList = file.list();
+            for (String fileName : fileList) {
+                if(fileName.endsWith("properties")){
+                    result.put(fileName.replace(".properties",""),loadProps(dirPath+"\\"+fileName));
+                }
+            }
+        }catch (Throwable e){
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     /**

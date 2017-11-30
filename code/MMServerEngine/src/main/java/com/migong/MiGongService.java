@@ -18,6 +18,7 @@ import com.mm.engine.framework.data.sysPara.SysParaService;
 import com.mm.engine.framework.data.tx.Tx;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.code.RetPacketImpl;
+import com.mm.engine.framework.security.LocalizationMessage;
 import com.mm.engine.framework.security.exception.ToClientException;
 import com.mm.engine.framework.server.IdService;
 import com.mm.engine.framework.server.SysConstantDefine;
@@ -29,6 +30,8 @@ import com.table.MiGongPass;
 import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.MessageFormatter;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -152,7 +155,6 @@ public class MiGongService {
         for(MiGongPass miGongPass : MiGongPass.datas){
             passMap.put(miGongPass.getId(), miGongPass);
         }
-
     }
     @Request(opcode = MiGongOpcode.CSBaseInfo)
     public RetPacket getbaseInfo(Object clientData, Session session) throws Throwable{
@@ -283,7 +285,7 @@ public class MiGongService {
             int energy = getEnergyByRefresh(userMiGong);
             int after = energy - delta;
             if (after < 0) {
-                throw new ToClientException("energy is not enough!");
+                throw new ToClientException(LocalizationMessage.getText("energyNotEnough"));
             }
             userMiGong.setEnergy(after);
             dataService.update(userMiGong);
@@ -305,7 +307,7 @@ public class MiGongService {
         // 校验关卡
         MiGongPassInfo miGongPassInfo = miGongPassInfoMap.remove(session.getAccountId());
         if(miGongPassInfo == null || miGongPassInfo.getPass() != passFinish.getPass()){
-            throw new ToClientException("Invalid params");
+            throw new ToClientException(LocalizationMessage.getText("InvalidParams"));
         }
         UserMiGong userMiGong = get(session.getAccountId());
         MiGongPass miGongPass = passMap.get(miGongPassInfo.getPass());
@@ -421,7 +423,7 @@ public class MiGongService {
         // 判断无尽模式是否打开，
         UserMiGong userMiGong = get(session.getAccountId());
         if(userMiGong.getPass() < sysParaService.getInt(SysPara.openUnlimited)){
-            throw new ToClientException("has not open unlimited mode , need pass mode "+sysParaService.getInt(SysPara.openUnlimited)+" pass");
+            throw new ToClientException(LocalizationMessage.getText("unlimitedNotOpen",sysParaService.getInt(SysPara.openUnlimited)));
         }
         MiGongPB.SCUnlimitedInfo.Builder builder = MiGongPB.SCUnlimitedInfo.newBuilder();
         builder.setPass(userMiGong.getUnlimitedPass());
@@ -446,7 +448,7 @@ public class MiGongService {
         // 判断无尽模式是否打开，
         UserMiGong userMiGong = get(session.getAccountId());
         if(userMiGong.getPass() < sysParaService.getInt(SysPara.openUnlimited)){
-            throw new ToClientException("has not open unlimited mode , need pass mode "+sysParaService.getInt(SysPara.openUnlimited)+" pass");
+            throw new ToClientException(LocalizationMessage.getText("unlimitedNotOpen",sysParaService.getInt(SysPara.openUnlimited)));
         }
         // 消耗精力
         checkAndDecrEnergy(userMiGong,sysParaService.getInt(SysPara.unlimitedEnergy));
@@ -493,7 +495,7 @@ public class MiGongService {
         // 校验关卡
         MiGongPassInfo miGongPassInfo = miGongPassInfoMap.remove(session.getAccountId());
         if(miGongPassInfo == null){
-            throw new ToClientException("Invalid params");
+            throw new ToClientException(LocalizationMessage.getText("InvalidParams"));
         }
         UserMiGong userMiGong = get(session.getAccountId());
 
@@ -545,10 +547,10 @@ public class MiGongService {
      */
     private void checkLevelAndPass(MiGongPass miGongPass,UserMiGong userMiGong) throws Throwable{
         if(miGongPass == null || miGongPass.getId() < 1){
-            throw new ToClientException("Invalid params");
+            throw new ToClientException(LocalizationMessage.getText("InvalidParams"));
         }
         if(miGongPass.getId() - userMiGong.getPass() > 1){
-            throw new ToClientException("Invalid params");
+            throw new ToClientException(LocalizationMessage.getText("InvalidParams"));
         }
     }
     /**
@@ -672,7 +674,7 @@ public class MiGongService {
         UserMiGong userMiGong = get(session.getAccountId());
 
         if(userMiGong.getPass() < sysParaService.getInt(SysPara.openPvp)){
-            throw new ToClientException("has not open unlimited mode , need pass mode "+sysParaService.getInt(SysPara.openPvp)+" pass");
+            throw new ToClientException(LocalizationMessage.getText("onlineNotOpen",sysParaService.getInt(SysPara.openPvp)));
         }
 
         LadderTitle ladderTitle = LadderTitle.getLadderByScore(userMiGong.getLadderScore());
@@ -705,7 +707,7 @@ public class MiGongService {
         UserMiGong userMiGong = get(session.getAccountId());
         // todo 该玩家是否开启匹配模式
         if(userMiGong.getPass() < sysParaService.getInt(SysPara.openPvp)){
-            throw new ToClientException("has not open unlimited mode , need pass mode "+sysParaService.getInt(SysPara.openPvp)+" pass");
+            throw new ToClientException(LocalizationMessage.getText("onlineNotOpen",sysParaService.getInt(SysPara.openPvp)));
         }
         // todo 该玩家没有在排队也没有在房间
         RoomUser roomUser = roomUsers.get(session.getAccountId());
@@ -718,7 +720,7 @@ public class MiGongService {
         }else if(roomUser.getUserState() == RoomUser.UserState.Cancel || roomUser.getUserState() == RoomUser.UserState.None){
             roomUser.setUserState(RoomUser.UserState.Matching);
         }else{
-            throw new ToClientException("your state is "+roomUser.getUserState().getDescribe()+",can not march");
+            throw new ToClientException(LocalizationMessage.getText("canNotMatch",roomUser.getUserState().getDescribe()));
         }
         MiGongPB.SCMatching.Builder builder = MiGongPB.SCMatching.newBuilder();
         return new RetPacketImpl(MiGongOpcode.SCMatching, builder.build().toByteArray());
@@ -748,7 +750,7 @@ public class MiGongService {
         // 操作
         MultiMiGongRoom room = userRooms.get(session.getAccountId());
         if(room == null){
-            throw new ToClientException("room is not exist");
+            throw new ToClientException(LocalizationMessage.getText("roomNotExist"));
         }
         room.userMove(session.getAccountId(),move.getPosX(),move.getPosY(),dir,speed);
 
@@ -766,7 +768,7 @@ public class MiGongService {
 
         MultiMiGongRoom room = userRooms.get(session.getAccountId());
         if(room == null){
-            throw new ToClientException("room is not exist");
+            throw new ToClientException(LocalizationMessage.getText("roomNotExist"));
         }
         room.eatBean(session.getAccountId(),pos);
 //        RoomUser roomUser = room.getRoomUser(session.getAccountId());
@@ -787,7 +789,7 @@ public class MiGongService {
         // todo 校验pos是否正确，并校验玩家情况
         MultiMiGongRoom room = userRooms.get(session.getAccountId());
         if(room == null){
-            throw new ToClientException("room is not exist");
+            throw new ToClientException(LocalizationMessage.getText("roomNotExist"));
         }
         room.userArrived(session.getAccountId());
 
