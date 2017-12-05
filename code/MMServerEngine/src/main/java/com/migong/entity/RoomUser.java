@@ -32,8 +32,9 @@ public class RoomUser {
         this.beginTime = beginTime;
     }
 
-    public synchronized void setState(float posX,float posY,int dir,int speed){
-        roomUserState.setDir(dir);
+    public synchronized void setState(float posX,float posY,float dirX,float dirY,int speed){
+        roomUserState.setDirX(dirX);
+        roomUserState.setDirY(dirY);
         roomUserState.setPosX(posX);
         roomUserState.setPosY(posY);
         roomUserState.setSpeed(speed);
@@ -55,7 +56,7 @@ public class RoomUser {
         return ret;
     }
 
-    public boolean checkState(float x,float y,int dir,int speed){
+    public boolean checkState(float x,float y,float dirX,float dirY,int speed){
         // todo 检验位置
         return true;
     }

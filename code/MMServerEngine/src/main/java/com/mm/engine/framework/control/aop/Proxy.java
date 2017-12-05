@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 public interface Proxy {
     public void before(Object object,Class<?> cls, Method method, Object[] params);
     public void after(Object object,Class<?> cls, Method method, Object[] params, Object result);
+    public void exceptionCatch(Throwable e);
     public boolean executeMethod(Method method);
     public void setTargetClass(Class<?> targetClass);
 }

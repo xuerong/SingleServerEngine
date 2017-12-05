@@ -7,7 +7,8 @@ package com.migong.entity;
 public class RoomUserState {
     private float posX;
     private float posY;
-    private int dir;
+    private float dirX;
+    private float dirY;
     private int speed;
     private long time; // 成为这个状态的时间
 
@@ -27,12 +28,20 @@ public class RoomUserState {
         this.posX = posX;
     }
 
-    public int getDir() {
-        return dir;
+    public float getDirX() {
+        return dirX;
     }
 
-    public void setDir(int dir) {
-        this.dir = dir;
+    public void setDirX(float dirX) {
+        this.dirX = dirX;
+    }
+
+    public float getDirY() {
+        return dirY;
+    }
+
+    public void setDirY(float dirY) {
+        this.dirY = dirY;
     }
 
     public int getSpeed() {
@@ -56,7 +65,8 @@ public class RoomUserState {
         roomUserState.setPosX(this.posX);
         roomUserState.setPosY(this.posY);
         roomUserState.setSpeed(this.speed);
-        roomUserState.setDir(this.dir);
+        roomUserState.setDirX(this.dirX);
+        roomUserState.setDirY(this.dirY);
         roomUserState.setTime(this.time);
         return roomUserState;
     }

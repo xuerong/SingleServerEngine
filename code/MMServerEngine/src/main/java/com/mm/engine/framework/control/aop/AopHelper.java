@@ -5,6 +5,7 @@ import com.mm.engine.framework.control.aop.annotation.AspectOrder;
 import com.mm.engine.framework.control.aop.annotation.AspectMark;
 import com.mm.engine.framework.control.netEvent.remote.RemoteCallService;
 import com.mm.engine.framework.data.sysPara.SysPara;
+import com.mm.engine.framework.security.exception.MMException;
 import com.mm.engine.framework.security.exception.ToClientException;
 import com.mm.engine.framework.tool.helper.ClassHelper;
 import com.mm.engine.framework.tool.util.ReflectionUtil;
@@ -70,16 +71,46 @@ public final class AopHelper {
             public Object intercept(Object targetObject, Method method, Object[] methodParams, MethodProxy methodProxy) throws Throwable {
                 for (Proxy proxy :proxyList) {
                     if(proxy.executeMethod(method)){
-                        proxy.before(targetObject,target,method,methodParams);
+                        try {
+                            proxy.before(targetObject, target, method, methodParams);
+                        }catch (Throwable e){
+                            e.printStackTrace();
+                        }
                     }
                 }
                 int size=proxyList.size();
-                Object result = methodProxy.invokeSuper(targetObject, methodParams);
+
+                Object result = null;
+                try {
+                    result = methodProxy.invokeSuper(targetObject, methodParams);
+                } catch (Throwable e) {
+                    // 执行exception方法
+                    for (int i = size - 1; i >= 0; i--) {
+                        Proxy proxy = proxyList.get(i);
+                        if (proxy.executeMethod(method)) {
+                            try {
+                                proxy.exceptionCatch(e);
+                            } catch (Throwable e2) {
+                                e2.printStackTrace();
+                            }
+                        }
+                    }
+                    throw e;
+                }
                 // 执行after方法
-                for(int i=size-1;i>=0;i--){
-                    Proxy proxy=proxyList.get(i);
-                    if(proxy.executeMethod(method)){
-                        proxy.after(targetObject,target,method,methodParams,result);
+                for (int i = size - 1; i >= 0; i--) {
+                    Proxy proxy = proxyList.get(i);
+                    if (proxy.executeMethod(method)) {
+                        try {
+                            proxy.after(targetObject, target, method, methodParams, result);
+                        } catch (Throwable e) {
+                            if(e instanceof MMException){
+                                MMException exception = (MMException)e;
+                                if(exception.getExceptionType() == MMException.ExceptionType.TxCommitFail){
+                                    throw e;
+                                }
+                            }
+                        }
                     }
                 }
                 return result;
@@ -87,6 +118,7 @@ public final class AopHelper {
         });//NoOp.INSTANCE
         return (T)enhancer.create();
     }
+
     private static Map<Class<?>, List<Class<?>>> createProxyMap() throws Exception {
         Map<Class<?>, List<Class<?>>> proxyMap = new LinkedHashMap<Class<?>, List<Class<?>>>();
         // 获取切面类（所有继承于 BaseAspect 的类）

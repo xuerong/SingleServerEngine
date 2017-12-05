@@ -66,11 +66,11 @@ public class MultiMiGongRoom extends MiGongRoom {
         }
     }
 
-    public void userMove(String accountId,float x,float y,int dir,int speed){
+    public void userMove(String accountId,float x,float y,float dirX,float dirY,int speed){
         RoomUser roomUser = roomUsers.get(accountId);
-        if(roomUser != null && roomUser.checkState(x,y,dir,speed)){
+        if(roomUser != null && roomUser.checkState(x,y,dirX,dirY,speed)){
             // 设置
-            roomUser.setState(x,y,dir,speed);
+            roomUser.setState(x,y,dirX,dirY,speed);
         }
     }
 
@@ -190,7 +190,8 @@ public class MultiMiGongRoom extends MiGongRoom {
                         RoomUserState roomUserState = entry.getValue().clearAndGetRoomUserState();
                         builder.setPosX(roomUserState.getPosX());
                         builder.setPosY(roomUserState.getPosY());
-                        builder.setDir(roomUserState.getDir());
+                        builder.setDirX(roomUserState.getDirX());
+                        builder.setDirY(roomUserState.getDirY());
                         builder.setSpeed(roomUserState.getSpeed());
                         builder.setFrame(frame.get());
                         builder.setUserId(entry.getKey());
@@ -288,7 +289,7 @@ public class MultiMiGongRoom extends MiGongRoom {
     private String operListToString(List<RoomUserState> roomUserStates){
         StringBuilder sb = new StringBuilder();
         for(RoomUserState roomUserState : roomUserStates){
-            sb.append(roomUserState.getPosX()).append(",").append(roomUserState.getPosY()).append(",").append(roomUserState.getDir()).append(",")
+            sb.append(roomUserState.getPosX()).append(",").append(roomUserState.getPosY()).append(",").append(roomUserState.getDirX()).append(",").append(roomUserState.getDirY()).append(",")
                     .append(roomUserState.getSpeed()).append(",").append(roomUserState.getTime()).append(";");
         }
         if(sb.length() > 0) {

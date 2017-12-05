@@ -77,6 +77,7 @@ import java.util.concurrent.*;
  * 5、排行都包括：无尽版，天梯排行
  * 6、无尽版规则，天梯积分规则
  * 7、所有文字用汉语：后端弹框！
+ * 8、打点：友盟or其它
  * 以后要做的：
  * 1、支付与货币、礼包
  * 2、道具与背包
@@ -98,6 +99,17 @@ import java.util.concurrent.*;
  * 2、游戏更新：后端热更，前段热更
  * 3、数据监控：友盟？还是自己来？
  * 4、异常监控
+ *
+ *
+ * 需要打点的数据：
+ * 1玩家注册（新注册）
+ * 2玩家登陆（日活跃，留存(1,3,7,14,30)）
+ * 3玩家过的关卡，耗时，及其星数
+ * 4无尽版，耗时，及其星数
+ * 5点击参加匹配
+ * 6进入对战
+ *
+ * 付费总值，金币获取和消费，付费用户，付费次数，付费率，ARPU，ARPPU，
  *
  *
  *
@@ -215,9 +227,9 @@ public class MiGongService {
         builder.setPassCount(MiGongPass.datas.length);
         return new RetPacketImpl(MiGongOpcode.SCGetMiGongLevel, builder.build().toByteArray());
     }
+    @Tx()
     @Request(opcode = MiGongOpcode.CSGetMiGongMap)
     public RetPacket getMap(Object clientData, Session session) throws Throwable{
-        System.out.println("do request getMap");
         MiGongPB.CSGetMiGongMap getMiGongMap = MiGongPB.CSGetMiGongMap.parseFrom((byte[])clientData);
         UserMiGong userMiGong = get(session.getAccountId());
         // 当前等级和关卡
@@ -745,14 +757,14 @@ public class MiGongService {
     @Request(opcode = MiGongOpcode.CSMove)
     public RetPacket move(Object clientData, Session session) throws Throwable{
         MiGongPB.CSMove move = MiGongPB.CSMove.parseFrom((byte[])clientData);
-        int dir = move.getDir();
+//        int dir = move.getDir();
         int speed = move.getSpeed();
         // 操作
         MultiMiGongRoom room = userRooms.get(session.getAccountId());
         if(room == null){
             throw new ToClientException(LocalizationMessage.getText("roomNotExist"));
         }
-        room.userMove(session.getAccountId(),move.getPosX(),move.getPosY(),dir,speed);
+        room.userMove(session.getAccountId(),move.getPosX(),move.getPosY(),move.getDirX(),move.getDirY(),speed);
 
         MiGongPB.SCMove.Builder builder = MiGongPB.SCMove.newBuilder();
         return new RetPacketImpl(MiGongOpcode.CSMove, builder.build().toByteArray());

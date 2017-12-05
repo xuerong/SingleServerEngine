@@ -24133,27 +24133,45 @@ public final class MiGongPB {
      */
     float getPosY();
 
-    // required int32 dir = 3;
+    // required float dirX = 3;
     /**
-     * <code>required int32 dir = 3;</code>
+     * <code>required float dirX = 3;</code>
      *
      * <pre>
      * 方向
      * </pre>
      */
-    boolean hasDir();
+    boolean hasDirX();
     /**
-     * <code>required int32 dir = 3;</code>
+     * <code>required float dirX = 3;</code>
      *
      * <pre>
      * 方向
      * </pre>
      */
-    int getDir();
+    float getDirX();
 
-    // required int32 speed = 4;
+    // required float dirY = 4;
     /**
-     * <code>required int32 speed = 4;</code>
+     * <code>required float dirY = 4;</code>
+     *
+     * <pre>
+     * 方向
+     * </pre>
+     */
+    boolean hasDirY();
+    /**
+     * <code>required float dirY = 4;</code>
+     *
+     * <pre>
+     * 方向
+     * </pre>
+     */
+    float getDirY();
+
+    // required int32 speed = 5;
+    /**
+     * <code>required int32 speed = 5;</code>
      *
      * <pre>
      * 速度
@@ -24161,7 +24179,7 @@ public final class MiGongPB {
      */
     boolean hasSpeed();
     /**
-     * <code>required int32 speed = 4;</code>
+     * <code>required int32 speed = 5;</code>
      *
      * <pre>
      * 速度
@@ -24234,13 +24252,18 @@ public final class MiGongPB {
               posY_ = input.readFloat();
               break;
             }
-            case 24: {
+            case 29: {
               bitField0_ |= 0x00000004;
-              dir_ = input.readInt32();
+              dirX_ = input.readFloat();
               break;
             }
-            case 32: {
+            case 37: {
               bitField0_ |= 0x00000008;
+              dirY_ = input.readFloat();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
               speed_ = input.readInt32();
               break;
             }
@@ -24332,45 +24355,69 @@ public final class MiGongPB {
       return posY_;
     }
 
-    // required int32 dir = 3;
-    public static final int DIR_FIELD_NUMBER = 3;
-    private int dir_;
+    // required float dirX = 3;
+    public static final int DIRX_FIELD_NUMBER = 3;
+    private float dirX_;
     /**
-     * <code>required int32 dir = 3;</code>
+     * <code>required float dirX = 3;</code>
      *
      * <pre>
      * 方向
      * </pre>
      */
-    public boolean hasDir() {
+    public boolean hasDirX() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required int32 dir = 3;</code>
+     * <code>required float dirX = 3;</code>
      *
      * <pre>
      * 方向
      * </pre>
      */
-    public int getDir() {
-      return dir_;
+    public float getDirX() {
+      return dirX_;
     }
 
-    // required int32 speed = 4;
-    public static final int SPEED_FIELD_NUMBER = 4;
+    // required float dirY = 4;
+    public static final int DIRY_FIELD_NUMBER = 4;
+    private float dirY_;
+    /**
+     * <code>required float dirY = 4;</code>
+     *
+     * <pre>
+     * 方向
+     * </pre>
+     */
+    public boolean hasDirY() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required float dirY = 4;</code>
+     *
+     * <pre>
+     * 方向
+     * </pre>
+     */
+    public float getDirY() {
+      return dirY_;
+    }
+
+    // required int32 speed = 5;
+    public static final int SPEED_FIELD_NUMBER = 5;
     private int speed_;
     /**
-     * <code>required int32 speed = 4;</code>
+     * <code>required int32 speed = 5;</code>
      *
      * <pre>
      * 速度
      * </pre>
      */
     public boolean hasSpeed() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required int32 speed = 4;</code>
+     * <code>required int32 speed = 5;</code>
      *
      * <pre>
      * 速度
@@ -24383,7 +24430,8 @@ public final class MiGongPB {
     private void initFields() {
       posX_ = 0F;
       posY_ = 0F;
-      dir_ = 0;
+      dirX_ = 0F;
+      dirY_ = 0F;
       speed_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -24399,7 +24447,11 @@ public final class MiGongPB {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasDir()) {
+      if (!hasDirX()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDirY()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -24421,10 +24473,13 @@ public final class MiGongPB {
         output.writeFloat(2, posY_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, dir_);
+        output.writeFloat(3, dirX_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, speed_);
+        output.writeFloat(4, dirY_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, speed_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -24445,11 +24500,15 @@ public final class MiGongPB {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, dir_);
+          .computeFloatSize(3, dirX_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, speed_);
+          .computeFloatSize(4, dirY_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, speed_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -24575,10 +24634,12 @@ public final class MiGongPB {
         bitField0_ = (bitField0_ & ~0x00000001);
         posY_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000002);
-        dir_ = 0;
+        dirX_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000004);
-        speed_ = 0;
+        dirY_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000008);
+        speed_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -24618,9 +24679,13 @@ public final class MiGongPB {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.dir_ = dir_;
+        result.dirX_ = dirX_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
+        }
+        result.dirY_ = dirY_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
         }
         result.speed_ = speed_;
         result.bitField0_ = to_bitField0_;
@@ -24645,8 +24710,11 @@ public final class MiGongPB {
         if (other.hasPosY()) {
           setPosY(other.getPosY());
         }
-        if (other.hasDir()) {
-          setDir(other.getDir());
+        if (other.hasDirX()) {
+          setDirX(other.getDirX());
+        }
+        if (other.hasDirY()) {
+          setDirY(other.getDirY());
         }
         if (other.hasSpeed()) {
           setSpeed(other.getSpeed());
@@ -24664,7 +24732,11 @@ public final class MiGongPB {
           
           return false;
         }
-        if (!hasDir()) {
+        if (!hasDirX()) {
+          
+          return false;
+        }
+        if (!hasDirY()) {
           
           return false;
         }
@@ -24792,69 +24864,118 @@ public final class MiGongPB {
         return this;
       }
 
-      // required int32 dir = 3;
-      private int dir_ ;
+      // required float dirX = 3;
+      private float dirX_ ;
       /**
-       * <code>required int32 dir = 3;</code>
+       * <code>required float dirX = 3;</code>
        *
        * <pre>
        * 方向
        * </pre>
        */
-      public boolean hasDir() {
+      public boolean hasDirX() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required int32 dir = 3;</code>
+       * <code>required float dirX = 3;</code>
        *
        * <pre>
        * 方向
        * </pre>
        */
-      public int getDir() {
-        return dir_;
+      public float getDirX() {
+        return dirX_;
       }
       /**
-       * <code>required int32 dir = 3;</code>
+       * <code>required float dirX = 3;</code>
        *
        * <pre>
        * 方向
        * </pre>
        */
-      public Builder setDir(int value) {
+      public Builder setDirX(float value) {
         bitField0_ |= 0x00000004;
-        dir_ = value;
+        dirX_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 dir = 3;</code>
+       * <code>required float dirX = 3;</code>
        *
        * <pre>
        * 方向
        * </pre>
        */
-      public Builder clearDir() {
+      public Builder clearDirX() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        dir_ = 0;
+        dirX_ = 0F;
         onChanged();
         return this;
       }
 
-      // required int32 speed = 4;
+      // required float dirY = 4;
+      private float dirY_ ;
+      /**
+       * <code>required float dirY = 4;</code>
+       *
+       * <pre>
+       * 方向
+       * </pre>
+       */
+      public boolean hasDirY() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required float dirY = 4;</code>
+       *
+       * <pre>
+       * 方向
+       * </pre>
+       */
+      public float getDirY() {
+        return dirY_;
+      }
+      /**
+       * <code>required float dirY = 4;</code>
+       *
+       * <pre>
+       * 方向
+       * </pre>
+       */
+      public Builder setDirY(float value) {
+        bitField0_ |= 0x00000008;
+        dirY_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required float dirY = 4;</code>
+       *
+       * <pre>
+       * 方向
+       * </pre>
+       */
+      public Builder clearDirY() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        dirY_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      // required int32 speed = 5;
       private int speed_ ;
       /**
-       * <code>required int32 speed = 4;</code>
+       * <code>required int32 speed = 5;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public boolean hasSpeed() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required int32 speed = 4;</code>
+       * <code>required int32 speed = 5;</code>
        *
        * <pre>
        * 速度
@@ -24864,27 +24985,27 @@ public final class MiGongPB {
         return speed_;
       }
       /**
-       * <code>required int32 speed = 4;</code>
+       * <code>required int32 speed = 5;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public Builder setSpeed(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         speed_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 speed = 4;</code>
+       * <code>required int32 speed = 5;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public Builder clearSpeed() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         speed_ = 0;
         onChanged();
         return this;
@@ -26082,27 +26203,45 @@ public final class MiGongPB {
      */
     float getPosY();
 
-    // required int32 dir = 4;
+    // required float dirX = 4;
     /**
-     * <code>required int32 dir = 4;</code>
+     * <code>required float dirX = 4;</code>
      *
      * <pre>
      * 方向
      * </pre>
      */
-    boolean hasDir();
+    boolean hasDirX();
     /**
-     * <code>required int32 dir = 4;</code>
+     * <code>required float dirX = 4;</code>
      *
      * <pre>
      * 方向
      * </pre>
      */
-    int getDir();
+    float getDirX();
 
-    // required int32 speed = 5;
+    // required float dirY = 5;
     /**
-     * <code>required int32 speed = 5;</code>
+     * <code>required float dirY = 5;</code>
+     *
+     * <pre>
+     * 方向
+     * </pre>
+     */
+    boolean hasDirY();
+    /**
+     * <code>required float dirY = 5;</code>
+     *
+     * <pre>
+     * 方向
+     * </pre>
+     */
+    float getDirY();
+
+    // required int32 speed = 6;
+    /**
+     * <code>required int32 speed = 6;</code>
      *
      * <pre>
      * 速度
@@ -26110,7 +26249,7 @@ public final class MiGongPB {
      */
     boolean hasSpeed();
     /**
-     * <code>required int32 speed = 5;</code>
+     * <code>required int32 speed = 6;</code>
      *
      * <pre>
      * 速度
@@ -26118,9 +26257,9 @@ public final class MiGongPB {
      */
     int getSpeed();
 
-    // required int32 frame = 6;
+    // required int32 frame = 7;
     /**
-     * <code>required int32 frame = 6;</code>
+     * <code>required int32 frame = 7;</code>
      *
      * <pre>
      * 帧数
@@ -26128,7 +26267,7 @@ public final class MiGongPB {
      */
     boolean hasFrame();
     /**
-     * <code>required int32 frame = 6;</code>
+     * <code>required int32 frame = 7;</code>
      *
      * <pre>
      * 帧数
@@ -26202,18 +26341,23 @@ public final class MiGongPB {
               posY_ = input.readFloat();
               break;
             }
-            case 32: {
+            case 37: {
               bitField0_ |= 0x00000008;
-              dir_ = input.readInt32();
+              dirX_ = input.readFloat();
               break;
             }
-            case 40: {
+            case 45: {
               bitField0_ |= 0x00000010;
-              speed_ = input.readInt32();
+              dirY_ = input.readFloat();
               break;
             }
             case 48: {
               bitField0_ |= 0x00000020;
+              speed_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
               frame_ = input.readInt32();
               break;
             }
@@ -26360,45 +26504,69 @@ public final class MiGongPB {
       return posY_;
     }
 
-    // required int32 dir = 4;
-    public static final int DIR_FIELD_NUMBER = 4;
-    private int dir_;
+    // required float dirX = 4;
+    public static final int DIRX_FIELD_NUMBER = 4;
+    private float dirX_;
     /**
-     * <code>required int32 dir = 4;</code>
+     * <code>required float dirX = 4;</code>
      *
      * <pre>
      * 方向
      * </pre>
      */
-    public boolean hasDir() {
+    public boolean hasDirX() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required int32 dir = 4;</code>
+     * <code>required float dirX = 4;</code>
      *
      * <pre>
      * 方向
      * </pre>
      */
-    public int getDir() {
-      return dir_;
+    public float getDirX() {
+      return dirX_;
     }
 
-    // required int32 speed = 5;
-    public static final int SPEED_FIELD_NUMBER = 5;
+    // required float dirY = 5;
+    public static final int DIRY_FIELD_NUMBER = 5;
+    private float dirY_;
+    /**
+     * <code>required float dirY = 5;</code>
+     *
+     * <pre>
+     * 方向
+     * </pre>
+     */
+    public boolean hasDirY() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required float dirY = 5;</code>
+     *
+     * <pre>
+     * 方向
+     * </pre>
+     */
+    public float getDirY() {
+      return dirY_;
+    }
+
+    // required int32 speed = 6;
+    public static final int SPEED_FIELD_NUMBER = 6;
     private int speed_;
     /**
-     * <code>required int32 speed = 5;</code>
+     * <code>required int32 speed = 6;</code>
      *
      * <pre>
      * 速度
      * </pre>
      */
     public boolean hasSpeed() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required int32 speed = 5;</code>
+     * <code>required int32 speed = 6;</code>
      *
      * <pre>
      * 速度
@@ -26408,21 +26576,21 @@ public final class MiGongPB {
       return speed_;
     }
 
-    // required int32 frame = 6;
-    public static final int FRAME_FIELD_NUMBER = 6;
+    // required int32 frame = 7;
+    public static final int FRAME_FIELD_NUMBER = 7;
     private int frame_;
     /**
-     * <code>required int32 frame = 6;</code>
+     * <code>required int32 frame = 7;</code>
      *
      * <pre>
      * 帧数
      * </pre>
      */
     public boolean hasFrame() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>required int32 frame = 6;</code>
+     * <code>required int32 frame = 7;</code>
      *
      * <pre>
      * 帧数
@@ -26436,7 +26604,8 @@ public final class MiGongPB {
       userId_ = "";
       posX_ = 0F;
       posY_ = 0F;
-      dir_ = 0;
+      dirX_ = 0F;
+      dirY_ = 0F;
       speed_ = 0;
       frame_ = 0;
     }
@@ -26457,7 +26626,11 @@ public final class MiGongPB {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasDir()) {
+      if (!hasDirX()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDirY()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -26486,13 +26659,16 @@ public final class MiGongPB {
         output.writeFloat(3, posY_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, dir_);
+        output.writeFloat(4, dirX_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, speed_);
+        output.writeFloat(5, dirY_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, frame_);
+        output.writeInt32(6, speed_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, frame_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -26517,15 +26693,19 @@ public final class MiGongPB {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, dir_);
+          .computeFloatSize(4, dirX_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, speed_);
+          .computeFloatSize(5, dirY_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, frame_);
+          .computeInt32Size(6, speed_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, frame_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -26649,12 +26829,14 @@ public final class MiGongPB {
         bitField0_ = (bitField0_ & ~0x00000002);
         posY_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000004);
-        dir_ = 0;
+        dirX_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000008);
-        speed_ = 0;
+        dirY_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000010);
-        frame_ = 0;
+        speed_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
+        frame_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -26698,13 +26880,17 @@ public final class MiGongPB {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.dir_ = dir_;
+        result.dirX_ = dirX_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.speed_ = speed_;
+        result.dirY_ = dirY_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
+        }
+        result.speed_ = speed_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
         }
         result.frame_ = frame_;
         result.bitField0_ = to_bitField0_;
@@ -26734,8 +26920,11 @@ public final class MiGongPB {
         if (other.hasPosY()) {
           setPosY(other.getPosY());
         }
-        if (other.hasDir()) {
-          setDir(other.getDir());
+        if (other.hasDirX()) {
+          setDirX(other.getDirX());
+        }
+        if (other.hasDirY()) {
+          setDirY(other.getDirY());
         }
         if (other.hasSpeed()) {
           setSpeed(other.getSpeed());
@@ -26760,7 +26949,11 @@ public final class MiGongPB {
           
           return false;
         }
-        if (!hasDir()) {
+        if (!hasDirX()) {
+          
+          return false;
+        }
+        if (!hasDirY()) {
           
           return false;
         }
@@ -26990,69 +27183,118 @@ public final class MiGongPB {
         return this;
       }
 
-      // required int32 dir = 4;
-      private int dir_ ;
+      // required float dirX = 4;
+      private float dirX_ ;
       /**
-       * <code>required int32 dir = 4;</code>
+       * <code>required float dirX = 4;</code>
        *
        * <pre>
        * 方向
        * </pre>
        */
-      public boolean hasDir() {
+      public boolean hasDirX() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required int32 dir = 4;</code>
+       * <code>required float dirX = 4;</code>
        *
        * <pre>
        * 方向
        * </pre>
        */
-      public int getDir() {
-        return dir_;
+      public float getDirX() {
+        return dirX_;
       }
       /**
-       * <code>required int32 dir = 4;</code>
+       * <code>required float dirX = 4;</code>
        *
        * <pre>
        * 方向
        * </pre>
        */
-      public Builder setDir(int value) {
+      public Builder setDirX(float value) {
         bitField0_ |= 0x00000008;
-        dir_ = value;
+        dirX_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 dir = 4;</code>
+       * <code>required float dirX = 4;</code>
        *
        * <pre>
        * 方向
        * </pre>
        */
-      public Builder clearDir() {
+      public Builder clearDirX() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        dir_ = 0;
+        dirX_ = 0F;
         onChanged();
         return this;
       }
 
-      // required int32 speed = 5;
+      // required float dirY = 5;
+      private float dirY_ ;
+      /**
+       * <code>required float dirY = 5;</code>
+       *
+       * <pre>
+       * 方向
+       * </pre>
+       */
+      public boolean hasDirY() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required float dirY = 5;</code>
+       *
+       * <pre>
+       * 方向
+       * </pre>
+       */
+      public float getDirY() {
+        return dirY_;
+      }
+      /**
+       * <code>required float dirY = 5;</code>
+       *
+       * <pre>
+       * 方向
+       * </pre>
+       */
+      public Builder setDirY(float value) {
+        bitField0_ |= 0x00000010;
+        dirY_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required float dirY = 5;</code>
+       *
+       * <pre>
+       * 方向
+       * </pre>
+       */
+      public Builder clearDirY() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        dirY_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      // required int32 speed = 6;
       private int speed_ ;
       /**
-       * <code>required int32 speed = 5;</code>
+       * <code>required int32 speed = 6;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public boolean hasSpeed() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required int32 speed = 5;</code>
+       * <code>required int32 speed = 6;</code>
        *
        * <pre>
        * 速度
@@ -27062,46 +27304,46 @@ public final class MiGongPB {
         return speed_;
       }
       /**
-       * <code>required int32 speed = 5;</code>
+       * <code>required int32 speed = 6;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public Builder setSpeed(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         speed_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 speed = 5;</code>
+       * <code>required int32 speed = 6;</code>
        *
        * <pre>
        * 速度
        * </pre>
        */
       public Builder clearSpeed() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         speed_ = 0;
         onChanged();
         return this;
       }
 
-      // required int32 frame = 6;
+      // required int32 frame = 7;
       private int frame_ ;
       /**
-       * <code>required int32 frame = 6;</code>
+       * <code>required int32 frame = 7;</code>
        *
        * <pre>
        * 帧数
        * </pre>
        */
       public boolean hasFrame() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>required int32 frame = 6;</code>
+       * <code>required int32 frame = 7;</code>
        *
        * <pre>
        * 帧数
@@ -27111,27 +27353,27 @@ public final class MiGongPB {
         return frame_;
       }
       /**
-       * <code>required int32 frame = 6;</code>
+       * <code>required int32 frame = 7;</code>
        *
        * <pre>
        * 帧数
        * </pre>
        */
       public Builder setFrame(int value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         frame_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 frame = 6;</code>
+       * <code>required int32 frame = 7;</code>
        *
        * <pre>
        * 帧数
        * </pre>
        */
       public Builder clearFrame() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         frame_ = 0;
         onChanged();
         return this;
@@ -35434,26 +35676,27 @@ public final class MiGongPB {
       "2\013.PBBeanInfo\"K\n\013PBOtherInfo\022\016\n\006userId\030\001" +
       " \002(\t\022\020\n\010userName\030\002 \002(\t\022\r\n\005start\030\003 \002(\005\022\013\n" +
       "\003end\030\004 \002(\005\"\020\n\016SCMatchingFail\"\t\n\007SCBegin\"" +
-      "@\n\006CSMove\022\014\n\004posX\030\001 \002(\002\022\014\n\004posY\030\002 \002(\002\022\013\n",
-      "\003dir\030\003 \002(\005\022\r\n\005speed\030\004 \002(\005\"\010\n\006SCMove\"4\n\nS" +
-      "CUserMove\022&\n\ruserMoveInfos\030\001 \003(\0132\017.PBUse" +
-      "rMoveInfo\"g\n\016PBUserMoveInfo\022\016\n\006userId\030\001 " +
-      "\002(\t\022\014\n\004posX\030\002 \002(\002\022\014\n\004posY\030\003 \002(\002\022\013\n\003dir\030\004" +
-      " \002(\005\022\r\n\005speed\030\005 \002(\005\022\r\n\005frame\030\006 \002(\005\"\034\n\tCS" +
-      "EatBean\022\017\n\007beanPos\030\001 \002(\005\"\013\n\tSCEatBean\".\n" +
-      "\rSCSendEatBean\022\035\n\005beans\030\001 \003(\0132\016.PBEatBea" +
-      "nInfo\"0\n\rPBEatBeanInfo\022\016\n\006userId\030\001 \002(\t\022\017" +
-      "\n\007beanPos\030\002 \002(\005\"\030\n\tCSArrived\022\013\n\003pos\030\001 \002(" +
-      "\005\"\013\n\tSCArrived\"\037\n\rSCUserArrived\022\016\n\006userI",
-      "d\030\001 \002(\t\"F\n\nSCGameOver\022\020\n\010overType\030\001 \002(\005\022" +
-      "&\n\tuserInfos\030\002 \003(\0132\023.PBGameOverUserInfo\"" +
-      "d\n\022PBGameOverUserInfo\022\016\n\006userId\030\001 \002(\t\022\020\n" +
-      "\010userName\030\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005score\030\004" +
-      " \002(\005\022\017\n\007arrived\030\005 \002(\005\"\r\n\013CSRoomHeart\"\r\n\013" +
-      "SCRoomHeart\"#\n\022CSSendWalkingRoute\022\r\n\005rou" +
-      "te\030\001 \003(\005\"\024\n\022SCSendWalkingRoute\"\031\n\010CSComm" +
-      "on\022\r\n\005route\030\001 \003(\t\"\031\n\010SCCommon\022\r\n\005route\030\001" +
-      " \003(\tB\016\n\014com.protocol"
+      "O\n\006CSMove\022\014\n\004posX\030\001 \002(\002\022\014\n\004posY\030\002 \002(\002\022\014\n",
+      "\004dirX\030\003 \002(\002\022\014\n\004dirY\030\004 \002(\002\022\r\n\005speed\030\005 \002(\005" +
+      "\"\010\n\006SCMove\"4\n\nSCUserMove\022&\n\ruserMoveInfo" +
+      "s\030\001 \003(\0132\017.PBUserMoveInfo\"v\n\016PBUserMoveIn" +
+      "fo\022\016\n\006userId\030\001 \002(\t\022\014\n\004posX\030\002 \002(\002\022\014\n\004posY" +
+      "\030\003 \002(\002\022\014\n\004dirX\030\004 \002(\002\022\014\n\004dirY\030\005 \002(\002\022\r\n\005sp" +
+      "eed\030\006 \002(\005\022\r\n\005frame\030\007 \002(\005\"\034\n\tCSEatBean\022\017\n" +
+      "\007beanPos\030\001 \002(\005\"\013\n\tSCEatBean\".\n\rSCSendEat" +
+      "Bean\022\035\n\005beans\030\001 \003(\0132\016.PBEatBeanInfo\"0\n\rP" +
+      "BEatBeanInfo\022\016\n\006userId\030\001 \002(\t\022\017\n\007beanPos\030" +
+      "\002 \002(\005\"\030\n\tCSArrived\022\013\n\003pos\030\001 \002(\005\"\013\n\tSCArr",
+      "ived\"\037\n\rSCUserArrived\022\016\n\006userId\030\001 \002(\t\"F\n" +
+      "\nSCGameOver\022\020\n\010overType\030\001 \002(\005\022&\n\tuserInf" +
+      "os\030\002 \003(\0132\023.PBGameOverUserInfo\"d\n\022PBGameO" +
+      "verUserInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010userName\030" +
+      "\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005score\030\004 \002(\005\022\017\n\007ar" +
+      "rived\030\005 \002(\005\"\r\n\013CSRoomHeart\"\r\n\013SCRoomHear" +
+      "t\"#\n\022CSSendWalkingRoute\022\r\n\005route\030\001 \003(\005\"\024" +
+      "\n\022SCSendWalkingRoute\"\031\n\010CSCommon\022\r\n\005rout" +
+      "e\030\001 \003(\t\"\031\n\010SCCommon\022\r\n\005route\030\001 \003(\tB\016\n\014co" +
+      "m.protocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -35663,7 +35906,7 @@ public final class MiGongPB {
           internal_static_CSMove_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CSMove_descriptor,
-              new java.lang.String[] { "PosX", "PosY", "Dir", "Speed", });
+              new java.lang.String[] { "PosX", "PosY", "DirX", "DirY", "Speed", });
           internal_static_SCMove_descriptor =
             getDescriptor().getMessageTypes().get(34);
           internal_static_SCMove_fieldAccessorTable = new
@@ -35681,7 +35924,7 @@ public final class MiGongPB {
           internal_static_PBUserMoveInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBUserMoveInfo_descriptor,
-              new java.lang.String[] { "UserId", "PosX", "PosY", "Dir", "Speed", "Frame", });
+              new java.lang.String[] { "UserId", "PosX", "PosY", "DirX", "DirY", "Speed", "Frame", });
           internal_static_CSEatBean_descriptor =
             getDescriptor().getMessageTypes().get(37);
           internal_static_CSEatBean_fieldAccessorTable = new

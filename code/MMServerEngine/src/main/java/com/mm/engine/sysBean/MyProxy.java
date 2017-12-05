@@ -26,4 +26,9 @@ public class MyProxy extends AspectProxy {
     public void after(Object object,Class<?> cls, Method method, Object[] params, Object result) {
         System.out.println("after");
     }
+
+    @Override
+    public void exceptionCatch(Throwable e) {
+
+    }
 }

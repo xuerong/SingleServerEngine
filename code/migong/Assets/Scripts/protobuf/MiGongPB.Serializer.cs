@@ -7087,12 +7087,16 @@ namespace Example
                     case 21:
                         instance.PosY = br.ReadSingle();
                         continue;
-                    // Field 3 Varint
-                    case 24:
-                        instance.Dir = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 3 Fixed32
+                    case 29:
+                        instance.DirX = br.ReadSingle();
                         continue;
-                    // Field 4 Varint
-                    case 32:
+                    // Field 4 Fixed32
+                    case 37:
+                        instance.DirY = br.ReadSingle();
+                        continue;
+                    // Field 5 Varint
+                    case 40:
                         instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -7142,12 +7146,16 @@ namespace Example
                     case 21:
                         instance.PosY = br.ReadSingle();
                         continue;
-                    // Field 3 Varint
-                    case 24:
-                        instance.Dir = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 3 Fixed32
+                    case 29:
+                        instance.DirX = br.ReadSingle();
                         continue;
-                    // Field 4 Varint
-                    case 32:
+                    // Field 4 Fixed32
+                    case 37:
+                        instance.DirY = br.ReadSingle();
+                        continue;
+                    // Field 5 Varint
+                    case 40:
                         instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -7196,12 +7204,16 @@ namespace Example
                     case 21:
                         instance.PosY = br.ReadSingle();
                         continue;
-                    // Field 3 Varint
-                    case 24:
-                        instance.Dir = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 3 Fixed32
+                    case 29:
+                        instance.DirX = br.ReadSingle();
                         continue;
-                    // Field 4 Varint
-                    case 32:
+                    // Field 4 Fixed32
+                    case 37:
+                        instance.DirY = br.ReadSingle();
+                        continue;
+                    // Field 5 Varint
+                    case 40:
                         instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -7233,11 +7245,14 @@ namespace Example
             // Key for field: 2, Fixed32
             stream.WriteByte(21);
             bw.Write(instance.PosY);
-            // Key for field: 3, Varint
-            stream.WriteByte(24);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Dir);
-            // Key for field: 4, Varint
-            stream.WriteByte(32);
+            // Key for field: 3, Fixed32
+            stream.WriteByte(29);
+            bw.Write(instance.DirX);
+            // Key for field: 4, Fixed32
+            stream.WriteByte(37);
+            bw.Write(instance.DirY);
+            // Key for field: 5, Varint
+            stream.WriteByte(40);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Speed);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
@@ -7695,16 +7710,20 @@ namespace Example
                     case 29:
                         instance.PosY = br.ReadSingle();
                         continue;
-                    // Field 4 Varint
-                    case 32:
-                        instance.Dir = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 4 Fixed32
+                    case 37:
+                        instance.DirX = br.ReadSingle();
                         continue;
-                    // Field 5 Varint
-                    case 40:
-                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 5 Fixed32
+                    case 45:
+                        instance.DirY = br.ReadSingle();
                         continue;
                     // Field 6 Varint
                     case 48:
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 7 Varint
+                    case 56:
                         instance.Frame = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -7758,16 +7777,20 @@ namespace Example
                     case 29:
                         instance.PosY = br.ReadSingle();
                         continue;
-                    // Field 4 Varint
-                    case 32:
-                        instance.Dir = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 4 Fixed32
+                    case 37:
+                        instance.DirX = br.ReadSingle();
                         continue;
-                    // Field 5 Varint
-                    case 40:
-                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 5 Fixed32
+                    case 45:
+                        instance.DirY = br.ReadSingle();
                         continue;
                     // Field 6 Varint
                     case 48:
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 7 Varint
+                    case 56:
                         instance.Frame = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -7820,16 +7843,20 @@ namespace Example
                     case 29:
                         instance.PosY = br.ReadSingle();
                         continue;
-                    // Field 4 Varint
-                    case 32:
-                        instance.Dir = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 4 Fixed32
+                    case 37:
+                        instance.DirX = br.ReadSingle();
                         continue;
-                    // Field 5 Varint
-                    case 40:
-                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 5 Fixed32
+                    case 45:
+                        instance.DirY = br.ReadSingle();
                         continue;
                     // Field 6 Varint
                     case 48:
+                        instance.Speed = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 7 Varint
+                    case 56:
                         instance.Frame = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -7866,14 +7893,17 @@ namespace Example
             // Key for field: 3, Fixed32
             stream.WriteByte(29);
             bw.Write(instance.PosY);
-            // Key for field: 4, Varint
-            stream.WriteByte(32);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Dir);
-            // Key for field: 5, Varint
-            stream.WriteByte(40);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Speed);
+            // Key for field: 4, Fixed32
+            stream.WriteByte(37);
+            bw.Write(instance.DirX);
+            // Key for field: 5, Fixed32
+            stream.WriteByte(45);
+            bw.Write(instance.DirY);
             // Key for field: 6, Varint
             stream.WriteByte(48);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Speed);
+            // Key for field: 7, Varint
+            stream.WriteByte(56);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Frame);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }

@@ -393,7 +393,10 @@ namespace Example
         public float PosY { get; set; }
 
         /// <summary> 当前位置</summary>
-        public int Dir { get; set; }
+        public float DirX { get; set; }
+
+        /// <summary> 方向</summary>
+        public float DirY { get; set; }
 
         /// <summary> 方向</summary>
         public int Speed { get; set; }
@@ -422,7 +425,10 @@ namespace Example
         public float PosY { get; set; }
 
         /// <summary> 当前位置</summary>
-        public int Dir { get; set; }
+        public float DirX { get; set; }
+
+        /// <summary> 方向</summary>
+        public float DirY { get; set; }
 
         /// <summary> 方向</summary>
         public int Speed { get; set; }

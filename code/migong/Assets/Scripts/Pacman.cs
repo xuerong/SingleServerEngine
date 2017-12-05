@@ -18,6 +18,10 @@ public class Pacman : MonoBehaviour {
 	public int LastDir = 0;
 
 	public int JocDir = 0;
+
+
+	public Vector3 MovePosiNorm = Vector3.zero;
+	private Vector3 lastMovePosiNorm = Vector3.zero;
 	// 起点和终点
 	public int inX;
 	public int inY;
@@ -82,19 +86,61 @@ public class Pacman : MonoBehaviour {
 		if (userId == SocketManager.accountId) {
 			keyboardDir ();
 		}
-		int dir = getDir ();
-		if (dir > 0) {
+//		int dir = getDir ();
+//		if (dir > 0) {
+//			isControl = true;
+//			switch (dir) {
+//			case 1:dest = (Vector2)transform.position + Vector2.up*speed;
+//				break;
+//			case 2:dest = (Vector2)transform.position + Vector2.right*speed;
+//				break;
+//			case 3:dest = (Vector2)transform.position - Vector2.up*speed;
+//				break;
+//			case 4:dest = (Vector2)transform.position - Vector2.right*speed;
+//				break;
+//			}
+//
+//			// Animation Parameters
+//			Vector2 dirVec = dest - (Vector2)transform.position;
+//			animator.SetFloat("DirX", dirVec.x);
+//			animator.SetFloat("DirY", dirVec.y);
+//
+//			// 记录行踪:自己的人才记录
+//			if (userId == SocketManager.accountId) {
+//				int curPoint = mapCreate.getPointByPosition (new Vector2 (transform.localPosition.x, transform.localPosition.y));
+//				if (curPoint != lastPoint) {
+//					route.Add (curPoint);
+//					lastPoint = curPoint;
+//					mapCreate.checkEatBean (curPoint);
+////				if (route.Count % 10 == 0) {
+////					StringBuilder sb = new StringBuilder ();
+////					foreach(int po in route){
+////						sb.Append (po+",");
+////					}
+////					Debug.Log (sb.ToString());
+////				}
+//					if (curPoint == outX * mapCreate.size + outY) {
+//						Debug.Log (inX + "," + inY + "," + outX + "," + outY + "  finish,666");
+//						finish = true;
+//						mapCreate.selfArrive (finish, route,true);
+//						StringBuilder sb = new StringBuilder ();
+//						foreach(int po in route){
+//							sb.Append (po+",");
+//						}
+//						Debug.Log (sb.ToString());
+//					}
+//
+//				}
+//			}
+//		}
+
+
+
+
+		if (MovePosiNorm != Vector3.zero) {
 			isControl = true;
-			switch (dir) {
-			case 1:dest = (Vector2)transform.position + Vector2.up*speed;
-				break;
-			case 2:dest = (Vector2)transform.position + Vector2.right*speed;
-				break;
-			case 3:dest = (Vector2)transform.position - Vector2.up*speed;
-				break;
-			case 4:dest = (Vector2)transform.position - Vector2.right*speed;
-				break;
-			}
+
+			dest = (Vector2)transform.position + new Vector2(speed*MovePosiNorm.x,speed*MovePosiNorm.y);
 
 			// Animation Parameters
 			Vector2 dirVec = dest - (Vector2)transform.position;
@@ -108,13 +154,13 @@ public class Pacman : MonoBehaviour {
 					route.Add (curPoint);
 					lastPoint = curPoint;
 					mapCreate.checkEatBean (curPoint);
-//				if (route.Count % 10 == 0) {
-//					StringBuilder sb = new StringBuilder ();
-//					foreach(int po in route){
-//						sb.Append (po+",");
-//					}
-//					Debug.Log (sb.ToString());
-//				}
+					//				if (route.Count % 10 == 0) {
+					//					StringBuilder sb = new StringBuilder ();
+					//					foreach(int po in route){
+					//						sb.Append (po+",");
+					//					}
+					//					Debug.Log (sb.ToString());
+					//				}
 					if (curPoint == outX * mapCreate.size + outY) {
 						Debug.Log (inX + "," + inY + "," + outX + "," + outY + "  finish,666");
 						finish = true;
@@ -129,6 +175,9 @@ public class Pacman : MonoBehaviour {
 				}
 			}
 		}
+
+
+
 		if (dest != (Vector2)transform.position) {
 			if (isControl && valid (dest)) {
 				digidbody.MovePosition (dest);
@@ -137,6 +186,7 @@ public class Pacman : MonoBehaviour {
 			}
 		}
 	}
+
 	void keyboardDir(){
 		if (Input.GetKey (KeyCode.UpArrow)) {
 			setDir (1,0);
@@ -153,7 +203,30 @@ public class Pacman : MonoBehaviour {
 	int getDir(){
 		return Dir;
 	}
+	public void setMovePosiNorm(Vector3 movePosiNorm){
+		if (lastMovePosiNorm == movePosiNorm) {
+			return;
+		}
+		if (mapCreate.Mode == MapMode.Level || mapCreate.Mode == MapMode.Unlimited) {
+			this.MovePosiNorm = movePosiNorm;
+		} else {
+			this.MovePosiNorm = movePosiNorm;
+			// 发送
+			CSMove move = new CSMove();
+			move.DirX= movePosiNorm.x;
+			move.DirY= movePosiNorm.y;
+			move.PosX = transform.localPosition.x;
+			move.PosY = transform.localPosition.y;
+			Debug.Log ("send:"+move.PosX+","+move.PosY);
+			move.Speed = 10;
+			byte[] data = CSMove.SerializeToBytes (move);
+			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSMove,data,delegate(int opcode, byte[] reData) {
 
+			});
+		}
+		lastMovePosiNorm = movePosiNorm;
+	}
+	// 暫時不用
 	public void setDir(int dir,int mode){
 		if (mode == 1) {
 			this.JocDir = dir;
@@ -171,7 +244,7 @@ public class Pacman : MonoBehaviour {
 			this.Dir = dir;
 			// 发送
 			CSMove move = new CSMove();
-			move.Dir = dir;
+//			move.Dir = dir;
 			move.PosX = transform.localPosition.x;
 			move.PosY = transform.localPosition.y;
 			Debug.Log ("send:"+move.PosX+","+move.PosY);

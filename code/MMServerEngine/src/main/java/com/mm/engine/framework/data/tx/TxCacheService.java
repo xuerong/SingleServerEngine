@@ -93,7 +93,9 @@ public class TxCacheService {
             return true;
         }
         setTXState(TxState.Committing);
-        return commit();
+        boolean result = commit();
+        setTXState(TxState.None);
+        return result;
     }
 
     /**

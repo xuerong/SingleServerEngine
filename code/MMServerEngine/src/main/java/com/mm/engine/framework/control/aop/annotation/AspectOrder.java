@@ -15,5 +15,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AspectOrder {
 
-    int value();
+    int value() default 3;
 }

@@ -142,72 +142,78 @@ public class DataService {
         CacheEntity entity = (CacheEntity)cacheService.get(listKey);
         List<T> objectList = null;
         if(entity == null){
-            // TODO 加锁listKey
-            if(!lockerService.lockKeys(listKey)){
+            // TODO 加锁listKey:这里为什么要加锁？
+            boolean lock = lockerService.lockKeys(listKey);
+            if(!lock){
 //                ExceptionHelper.handle();
             }
-            // TODO 这里从异步数据获取满足条件(listKey)的数据，并在查询数据库之后放进对应的list中
-            List<AsyncService.AsyncData> asyncDataList = asyncService.getAsyncDataBelongListKey(listKey);
-            objectList = DataSet.selectListWithCondition(entityClass,condition,params);
-            if(objectList != null || (asyncDataList != null && asyncDataList.size()>0)){ // 0个也缓存
-                if(objectList == null){
-                    objectList = new ArrayList<>();
-                }
-                if(asyncDataList != null && asyncDataList.size()>0){
-                    // 放入objcetList
-                    Set<String> deleteObjecKeys = null;
-                    Set<String> objectListKeys = null;
-                    for(AsyncService.AsyncData asyncData : asyncDataList){
-                        if(asyncData.getOperType() == OperType.Insert){
-                            // TODO 为了防止重复数据，这样去除效率有点低，能通过其它方法提高吗，尽管发生的概率比较小，下面删除能否利用上?
-                            if(objectListKeys == null){
-                                objectListKeys = new HashSet<>(objectList.size());
-                                for (Object object : objectList) {
-                                    objectListKeys.add(KeyParser.parseKey(object));
-                                }
-                            }
-                            if(!objectListKeys.contains(KeyParser.parseKey(asyncData.getObject()))){
-                                objectList.add((T)asyncData.getObject());
-                            }
-                        }else if(asyncData.getOperType() == OperType.Delete){
-                            if(deleteObjecKeys == null){
-                                deleteObjecKeys = new HashSet<>();
-                            }
-                            deleteObjecKeys.add(asyncData.getKey());
-                        }
+            try {
+                // TODO 这里从异步数据获取满足条件(listKey)的数据，并在查询数据库之后放进对应的list中
+                List<AsyncService.AsyncData> asyncDataList = asyncService.getAsyncDataBelongListKey(listKey);
+                objectList = DataSet.selectListWithCondition(entityClass, condition, params);
+                if (objectList != null || (asyncDataList != null && asyncDataList.size() > 0)) { // 0个也缓存
+                    if (objectList == null) {
+                        objectList = new ArrayList<>();
                     }
-                    if(deleteObjecKeys != null){
-                        int count = deleteObjecKeys.size();
-                        if(count > 0){
-                            int delCount = 0;
-                            for(Iterator<T> iter = objectList.iterator();iter.hasNext();){ // 遍历一遍即可删除
-                                if(deleteObjecKeys.contains(KeyParser.parseKey(iter.next()))){
-                                    iter.remove();
-                                    if(++delCount>=count){
-                                        break;
+                    if (asyncDataList != null && asyncDataList.size() > 0) {
+                        // 放入objcetList
+                        Set<String> deleteObjecKeys = null;
+                        Set<String> objectListKeys = null;
+                        for (AsyncService.AsyncData asyncData : asyncDataList) {
+                            if (asyncData.getOperType() == OperType.Insert) {
+                                // TODO 为了防止重复数据，这样去除效率有点低，能通过其它方法提高吗，尽管发生的概率比较小，下面删除能否利用上?
+                                if (objectListKeys == null) {
+                                    objectListKeys = new HashSet<>(objectList.size());
+                                    for (Object object : objectList) {
+                                        objectListKeys.add(KeyParser.parseKey(object));
+                                    }
+                                }
+                                if (!objectListKeys.contains(KeyParser.parseKey(asyncData.getObject()))) {
+                                    objectList.add((T) asyncData.getObject());
+                                }
+                            } else if (asyncData.getOperType() == OperType.Delete) {
+                                if (deleteObjecKeys == null) {
+                                    deleteObjecKeys = new HashSet<>();
+                                }
+                                deleteObjecKeys.add(asyncData.getKey());
+                            }
+                        }
+                        if (deleteObjecKeys != null) {
+                            int count = deleteObjecKeys.size();
+                            if (count > 0) {
+                                int delCount = 0;
+                                for (Iterator<T> iter = objectList.iterator(); iter.hasNext(); ) { // 遍历一遍即可删除
+                                    if (deleteObjecKeys.contains(KeyParser.parseKey(iter.next()))) {
+                                        iter.remove();
+                                        if (++delCount >= count) {
+                                            break;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                    // 缓存两步,一步缓存keys,一步缓存内容
+                    List<String> keys = new ArrayList<>();
+                    Map<String, CacheEntity> cacheEntityMap = new HashMap<>();
+                    for (T t : objectList) {
+                        String key = KeyParser.parseKey(t);
+                        cacheEntityMap.put(key, new CacheEntity(t));
+                        keys.add(key);
+                    }
+                    // 缓存keys
+                    entity = new CacheEntity(keys);
+                    cacheService.putIfAbsent(listKey, entity);
+                    // 缓存内容
+                    if (cacheEntityMap.size() > 0) {
+                        cacheService.putList(cacheEntityMap);
+                    }
                 }
-                // 缓存两步,一步缓存keys,一步缓存内容
-                List<String> keys = new ArrayList<>();
-                Map<String,CacheEntity> cacheEntityMap = new HashMap<>();
-                for(T t : objectList){
-                    String key = KeyParser.parseKey(t);
-                    cacheEntityMap.put(key,new CacheEntity(t));
-                    keys.add(key);
+            }finally {
+                if(lock) {
+                    // TODO 解锁listKey
+                    lockerService.unlockKeys(listKey);
                 }
-                // 缓存keys
-                entity = new CacheEntity(keys);
-                cacheService.putIfAbsent(listKey,entity);
-                // 缓存内容
-                if(cacheEntityMap.size() > 0) {
-                    cacheService.putList(cacheEntityMap);
-                }
-                // TODO 解锁listKey
-                lockerService.unlockKeys(listKey);
             }
         }
         if(objectList == null && entity != null){ // 从缓存中取出了对应的keys,需要从缓存中取出指

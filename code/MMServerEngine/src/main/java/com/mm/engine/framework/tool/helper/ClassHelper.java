@@ -4,6 +4,7 @@ import com.mm.engine.framework.security.exception.MMException;
 import com.mm.engine.framework.server.Server;
 import com.mm.engine.framework.tool.AnnotationClassTemplate;
 import com.mm.engine.framework.tool.ClassTemplate;
+import com.mm.engine.framework.tool.EndWithClassTemplate;
 import com.mm.engine.framework.tool.SupperClassTemplate;
 
 import java.lang.annotation.Annotation;
@@ -120,5 +121,17 @@ public class ClassHelper {
 //                return cls.isAnnotationPresent(annotationClass);
 //            }
 //        }.getClassList();
+    }
+    /**
+     * 获取以某个字符串结尾的类
+     */
+    public static List<Class<?>> getClassListEndWith(String packet,String endWith) {
+        List<Class<?>> result=new EndWithClassTemplate(packet, endWith) {
+            @Override
+            public boolean checkAddClass(Class<?> cls) {
+                return cls.getName().endsWith(endWithString);
+            }
+        }.getClassList();
+        return result;
     }
 }

@@ -6,6 +6,7 @@ package com.mm.engine.framework.security.exception;
  */
 public class MMException extends RuntimeException {
     private static final long serialVersionUID = 5908169566019016047L;
+    private ExceptionType exceptionType = ExceptionType.Common;
     private String errMsg = null;
 
     public MMException(){
@@ -14,7 +15,13 @@ public class MMException extends RuntimeException {
     public MMException(String msg) {
         super(msg);
         this.errMsg = msg;
-        printStackTrace();
+//        printStackTrace();
+    }
+    public MMException(ExceptionType exceptionType,String msg) {
+        super(msg);
+        this.exceptionType = exceptionType;
+        this.errMsg = msg;
+//        printStackTrace();
     }
 
     public MMException(String msg,Throwable cause) {
@@ -37,5 +44,12 @@ public class MMException extends RuntimeException {
             tmp = this.getCause().getMessage();
         }
         return tmp;
+    }
+    public ExceptionType getExceptionType(){
+        return exceptionType;
+    }
+    public enum ExceptionType{
+        Common,
+        TxCommitFail // 事务提交失败
     }
 }

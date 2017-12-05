@@ -30,4 +30,9 @@ public class EntranceProxy extends AspectProxy {
         eventData.setData(object);
         eventService.fireEvent(eventData);
     }
+
+    @Override
+    public void exceptionCatch(Throwable e) {
+
+    }
 }

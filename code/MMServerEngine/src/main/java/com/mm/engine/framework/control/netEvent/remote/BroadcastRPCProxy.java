@@ -26,4 +26,9 @@ public class BroadcastRPCProxy extends AspectProxy {
     public void after(Object object, Class<?> cls, Method method, Object[] params, Object result) {
         broadcastRPCService.afterMethod(object,cls,method,params,result);
     }
+
+    @Override
+    public void exceptionCatch(Throwable e) {
+
+    }
 }

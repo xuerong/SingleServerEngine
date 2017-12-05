@@ -209,8 +209,9 @@ message CSMove
 {
 	required float posX 			= 1; // 当前位置
 	required float posY 			= 2; // 当前位置
-	required int32 dir 			= 3; // 方向
-	required int32 speed 			= 4; // 速度
+	required float dirX 			= 3; // 方向
+	required float dirY 			= 4; // 方向
+	required int32 speed 			= 5; // 速度
 }
 message SCMove
 {
@@ -225,9 +226,10 @@ message PBUserMoveInfo
 	required string userId 			= 1; // 当前位置
 	required float posX 			= 2; // 当前位置
 	required float posY 			= 3; // 当前位置
-	required int32 dir 			= 4; // 方向
-	required int32 speed 			= 5; // 速度
-	required int32 frame 			= 6; // 帧数
+	required float dirX 			= 4; // 方向
+	required float dirY 			= 5; // 方向
+	required int32 speed 			= 6; // 速度
+	required int32 frame 			= 7; // 帧数
 }
 // 玩家吃豆
 message CSEatBean

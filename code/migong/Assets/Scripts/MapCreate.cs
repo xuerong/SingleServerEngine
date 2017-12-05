@@ -146,7 +146,7 @@ public class MapCreate : MonoBehaviour{
 				//				transform.localPosition = new Vector3 (userMoveInfo.PosX,userMoveInfo.PosY,transform.localPosition.z);
 			}else{
 				Pacman pacman = pacmanMap [userMoveInfo.UserId];
-				pacman.Dir = userMoveInfo.Dir;
+				pacman.MovePosiNorm = new Vector3(userMoveInfo.DirX,userMoveInfo.DirY,0);
 				Debug.Log ("receive:"+userMoveInfo.PosX+","+userMoveInfo.PosY);
 				pacman.transform.localPosition = new Vector3 (userMoveInfo.PosX,userMoveInfo.PosY,pacman.transform.localPosition.z);
 			}

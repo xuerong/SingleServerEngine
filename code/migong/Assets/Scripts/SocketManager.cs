@@ -66,7 +66,7 @@ public class SocketManager : MonoBehaviour {
 
 	private static bool needConnectOnce = false;
 
-	private static string localization;
+	private static string localization = "Chinese";
 
 	static Dictionary<int,long> lastSendTime = new Dictionary<int, long>();
 	static Dictionary<int,int> needCheckOpcode = new Dictionary<int, int>(){ // 
@@ -155,8 +155,8 @@ public class SocketManager : MonoBehaviour {
 //		}      
 //
 
-//		string url = "http://10.1.6.254:8083";  
-		string url = "http://111.230.144.111:8083";  // 腾讯云
+		string url = "http://10.1.6.254:8083";  
+//		string url = "http://111.230.144.111:8083";  // 腾讯云
 		UnityWebRequest request = new UnityWebRequest(url, "POST");  
 		byte[] postBytes = CSGetLoginInfo.SerializeToBytes(loginInfo);  
 		request.uploadHandler = (UploadHandler)new UploadHandlerRaw(postBytes);
