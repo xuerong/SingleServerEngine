@@ -38,6 +38,9 @@ namespace Example
         /// <summary> 新手引导信息</summary>
         public int OpenPass { get; set; }
 
+        /// <summary> 推图过了多少关</summary>
+        public List<Example.PBItemTable> ItemTable { get; set; }
+
     }
 
     public partial class PBNewGuide
@@ -53,6 +56,20 @@ namespace Example
         public string Key { get; set; }
 
         public string Value { get; set; }
+
+    }
+
+    public partial class PBItemTable
+    {
+        public int Id { get; set; }
+
+        public int ItemType { get; set; }
+
+        public int Para1 { get; set; }
+
+        public int Para2 { get; set; }
+
+        public int Price { get; set; }
 
     }
 
@@ -79,6 +96,52 @@ namespace Example
 
         /// <summary> 已经过的关卡的星数</summary>
         public int PassCount { get; set; }
+
+    }
+
+    /// <summary> 过关奖励：已经奖励的就不奖励了</summary>
+    public partial class CSGetPassReward
+    {
+        public int Pass { get; set; }
+
+    }
+
+    public partial class SCGetPassReward
+    {
+        public int Energy { get; set; }
+
+        /// <summary> 消耗体力</summary>
+        public Example.PBPassReward PassRewardStar1 { get; set; }
+
+        /// <summary> 一星奖励</summary>
+        public Example.PBPassReward PassRewardStar2 { get; set; }
+
+        /// <summary> 二星奖励</summary>
+        public Example.PBPassReward PassRewardStar3 { get; set; }
+
+        /// <summary> 三星奖励</summary>
+        public Example.PBPassReward PassRewardStar4 { get; set; }
+
+    }
+
+    public partial class PBPassReward
+    {
+        public int Gold { get; set; }
+
+        /// <summary> 奖励金币</summary>
+        public List<Example.PBPassRewardItem> PassRewardItem { get; set; }
+
+        /// <summary> 奖励道具</summary>
+        public int Energy { get; set; }
+
+    }
+
+    public partial class PBPassRewardItem
+    {
+        public int ItemId { get; set; }
+
+        /// <summary> 道具id</summary>
+        public int Count { get; set; }
 
     }
 
@@ -160,6 +223,9 @@ namespace Example
         /// <summary> 已经开启的关卡</summary>
         public int Success { get; set; }
 
+        /// <summary> 服务器判定是否过关</summary>
+        public Example.PBPassReward PassReward { get; set; }
+
     }
 
     /// <summary> 使用道具</summary>
@@ -167,10 +233,14 @@ namespace Example
     {
         public int ItemId { get; set; }
 
+        public int Count { get; set; }
+
     }
 
     public partial class SCUseItem
     {
+        public string Ret { get; set; }
+
     }
 
     /// <summary>无尽版///////////////////////////////////////</summary>
@@ -277,7 +347,7 @@ namespace Example
     /// <para>联机对战///////////////////////////////////////</para>
     /// <para> 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳</para>
     /// <para> 请求匹配，返回房间及信息，开始游戏，发送操作（移动，道具），接收操作，发送到达终点，接收到达终点，接收游戏结束，房间心跳</para>
-    /// <para> 请求匹配 TODO 取消匹配</para>
+    /// <para> 请求匹配 取消匹配</para>
     /// <para> 获取在线信息</para>
     /// </summary>
     public partial class CSGetOnlineInfo

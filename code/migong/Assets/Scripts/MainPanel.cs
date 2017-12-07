@@ -49,29 +49,34 @@ public class MainPanel : MonoBehaviour {
 		levelButton.onClick.AddListener (delegate() {
 			// 打开level 界面
 //			Debug.Log("open level window");
+			Sound.playSound(SoundType.Click);
 			openLevelWindow();
 		});
 		unlimitButton = GameObject.Find (canvasPath+"unlimit2").GetComponent<Button>();
 		unlimitButton.onClick.AddListener (delegate() {
 			// 打开unlimit 界面
 			Debug.Log("open unlimit window");
+			Sound.playSound(SoundType.Click);
 			openUnlimitWindow();
 		});
 		onlineButton = GameObject.Find (canvasPath+"online2").GetComponent<Button>();
 		onlineButton.onClick.AddListener (delegate() {
 			// 打开online 界面
 			Debug.Log("open online window");
+			Sound.playSound(SoundType.Click);
 			openOnlineWindow();
 		});
 		// uiLevel 关闭按钮
 		GameObject closeGo = GameObject.Find ("main/ui/uiLevel/Canvas/close");
 		Button closeButton = closeGo.GetComponent<Button> ();
 		closeButton.onClick.AddListener (delegate() {
+			Sound.playSound(SoundType.Click);
 			show (uiMain);
 		});
 		// uiUnlimit 关闭按钮和进入按钮
 		Button go = GameObject.Find ("main/ui/uiUnlimit/Canvas/go").GetComponent<Button>();
 		go.onClick.AddListener (delegate() {
+			Sound.playSound(SoundType.Click);
 			CSUnlimitedGo unlimitedGo = new CSUnlimitedGo();
 			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSUnlimitedGo,CSUnlimitedGo.SerializeToBytes(unlimitedGo),delegate(int opcode, byte[] data) {
 				ui.SetActive (false);
@@ -84,15 +89,18 @@ public class MainPanel : MonoBehaviour {
 		});
 		closeButton = GameObject.Find ("main/ui/uiUnlimit/Canvas/close").GetComponent<Button>();
 		closeButton.onClick.AddListener (delegate() {
+			Sound.playSound(SoundType.Click);
 			show (uiMain);
 		});
 		// uiOnline 关闭按钮和进入按钮
 		go = GameObject.Find ("main/ui/uiOnline/Canvas/go").GetComponent<Button>();
 		go.onClick.AddListener (delegate() {
+			Sound.playSound(SoundType.Click);
 			OnPvpClick();
 		});
 		closeButton = GameObject.Find ("main/ui/uiOnline/Canvas/close").GetComponent<Button>();
 		closeButton.onClick.AddListener (delegate() {
+			Sound.playSound(SoundType.Click);
 			show (uiMain);
 		});
 		// 获取登陆基本信息
@@ -120,6 +128,7 @@ public class MainPanel : MonoBehaviour {
 		Button accountButton = GameObject.Find (canvasPath+"account").GetComponent<Button>();
 		accountButton.onClick.AddListener (delegate() {
 			Debug.Log("account");
+			Sound.playSound(SoundType.Click);
 			doAccount();
 		});
 		ssdk.showUserHandler = GetUserInfoResultHandler;
@@ -127,23 +136,28 @@ public class MainPanel : MonoBehaviour {
 		shareButton.onClick.AddListener (delegate() {
 			Debug.Log("share");
 //			doShare();
+			Sound.playSound(SoundType.Click);
 			shareWeChat1.transform.parent.gameObject.SetActive(true);
 		});
 		ssdk.shareHandler = ShareResultHandler;
 		// 分享的三个按钮就
 		shareWeChat1.onClick.AddListener (delegate() {
 			Debug.Log("share WeChat");
+			Sound.playSound(SoundType.Click);
 			doShare(PlatformType.WeChat);
 		});
 		shareWeChat2.onClick.AddListener (delegate() {
 			Debug.Log("share WeChatMoments");
+			Sound.playSound(SoundType.Click);
 			doShare(PlatformType.WeChatMoments);
 		});
 		closeShare.onClick.AddListener (delegate() {
+			Sound.playSound(SoundType.Click);
 			shareWeChat1.transform.parent.gameObject.SetActive(false);
 		});
 
 		exit.onClick.AddListener (delegate() {
+			Sound.playSound(SoundType.Click);
 			Application.Quit();
 		});
 
@@ -152,6 +166,7 @@ public class MainPanel : MonoBehaviour {
 		helpButton.onClick.AddListener (delegate() {
 			Debug.Log("help");
 //			WarnDialog.showWarnDialog("test",null,false,10,20);
+			Sound.playSound(SoundType.Click);
 			GuideControl guideControl = uiHelp.GetComponent<GuideControl>();
 			guideControl.showHelp(false);
 		});
@@ -285,6 +300,10 @@ public class MainPanel : MonoBehaviour {
 			int count = level.PassCount;
 			float dis = 20f;
 
+			GameObject energyTextGo = GameObject.Find ("main/ui/uiLevel/Canvas/energy/Text");
+			Text energyText = energyTextGo.GetComponent<Text>();
+			energyText.text = this.energy.ToString();
+
 			GameObject up = Instantiate(button) as GameObject;
 			RectTransform buRec = up.GetComponent<RectTransform> ();
 			Destroy(up);
@@ -308,7 +327,10 @@ public class MainPanel : MonoBehaviour {
 				if(level.StarInLevel.Count>i){
 					buttonIndex.star = level.StarInLevel[i];
 				}
-				b1.onClick.AddListener (delegate() {OnClick(buttonIndex);});
+				b1.onClick.AddListener (delegate() {
+					Sound.playSound(SoundType.Click);
+					OnClick(buttonIndex);
+				});
 
 				GameObject textGo = up.transform.Find ("Text").gameObject;
 				Text text = textGo.GetComponent<Text> ();
@@ -336,7 +358,10 @@ public class MainPanel : MonoBehaviour {
 			//
 			Text passText = GameObject.Find ("main/ui/uiUnlimit/Canvas/pass").GetComponent<Text>();
 			passText.text = Message.getText("unlimitRankSelf",ret.Pass,ret.Star,ret.Rank);
-
+			//
+			GameObject energyTextGo = GameObject.Find ("main/ui/uiUnlimit/Canvas/energy/Text");
+			Text energyText = energyTextGo.GetComponent<Text>();
+			energyText.text = this.energy.ToString();
 			// 列表
 			int count = ret.UnlimitedRankInfo.Count;
 			float dis = 20f;

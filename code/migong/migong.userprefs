@@ -1,17 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\util\LocalizationText.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SocketManager.cs">
     <Files>
       <File FileName="Assets\Scripts\MainPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SocketManager.cs" Line="81" Column="56" />
-      <File FileName="Assets\Scripts\MapCreate.cs" Line="149" Column="76" />
-      <File FileName="Assets\Scripts\protobuf\MiGongOpcode.cs" Line="33" Column="22" />
+      <File FileName="Assets\Scripts\SocketManager.cs" Line="158" Column="43" />
+      <File FileName="Assets\Scripts\MapCreate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\protobuf\MiGongOpcode.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\util\Sound.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\protobuf\AccountPB.Serializer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Pacman.cs" Line="246" Column="21" />
+      <File FileName="Assets\Scripts\Pacman.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WarnDialog.cs" Line="1" Column="1" />
       <File FileName="Assets\Plugins\ShareSDK\ShareSDKDevInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Plugins\ShareSDK\ShareSDK.cs" Line="18" Column="39" />
+      <File FileName="Assets\Plugins\ShareSDK\ShareSDK.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\DragControl.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GuideControl.cs" Line="1" Column="1" />
       <File FileName="Assets\Plugins\ShareSDK\ShareSDKConfig.cs" Line="1" Column="1" />
@@ -19,10 +19,10 @@
       <File FileName="Assets\Plugins\ShareSDK\PlatformType.cs" Line="1" Column="1" />
       <File FileName="Assets\Plugins\ShareSDK\ShareSDKImpl.cs" Line="1" Column="1" />
       <File FileName="Assets\Plugins\ShareSDK\ContentType.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\JoystackCc.cs" Line="108" Column="39" />
+      <File FileName="Assets\Scripts\JoystackCc.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\SocketTest.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\util\Message.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\util\LocalizationText.cs" Line="13" Column="1" />
+      <File FileName="Assets\Scripts\util\LocalizationText.cs" Line="1" Column="1" />
       <File FileName="Assets\resources\Message\english.txt" Line="1" Column="1" />
       <File FileName="Assets\resources\Message\chinese.txt" Line="1" Column="1" />
       <File FileName="Assets\Scripts\util\LocalizationImage.cs" Line="1" Column="1" />
@@ -30,7 +30,12 @@
       <File FileName="Assets\resources\image\Chinese.txt" Line="1" Column="1" />
       <File FileName="Assets\resources\image\English.txt" Line="1" Column="1" />
       <File FileName="Assets\EasyTouchBundle\EasyTouch\Plugins\Components\QuickPinch.cs" Line="1" Column="1" />
-      <File FileName="Assets\Plugins\ShareSDK\Editor\ShareSDKConfigEditor.cs" Line="25" Column="28" />
+      <File FileName="Assets\Plugins\ShareSDK\Editor\ShareSDKConfigEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Job.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\EventTriggerListener.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ClientSocket.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ButtonIndex.cs" Line="1" Column="1" />
+      <File FileName="Assets\EasyTouchBundle\EasyTouchControls\Plugins\Editor\ETCMenu.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

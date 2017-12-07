@@ -21,7 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `pvpRecord`;
 CREATE TABLE `pvpRecord` (
   `id` bigint(20) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `grade` int(11) DEFAULT NULL,
   `record` text,
   PRIMARY KEY (`id`)

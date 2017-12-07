@@ -157,13 +157,15 @@ public class SocketManager : MonoBehaviour {
 
 		string url = "http://10.1.6.254:8083";  
 //		string url = "http://111.230.144.111:8083";  // 腾讯云
+//		string url = "http://47.95.219.97:8083";  // 阿里云
 		UnityWebRequest request = new UnityWebRequest(url, "POST");  
 		byte[] postBytes = CSGetLoginInfo.SerializeToBytes(loginInfo);  
 		request.uploadHandler = (UploadHandler)new UploadHandlerRaw(postBytes);
 		request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();  
-
 		request.SetRequestHeader ("opcode",(int)AccountOpcode.CSGetLoginInfo+"");
+		Debug.Log("sdfsdfsdfsd1");
 		yield return request.Send();  
+		Debug.Log("sdfsdfsdfsd2");
 		if (request.responseCode == 200) {
 			SCGetLoginInfo ret = SCGetLoginInfo.Deserialize (request.downloadHandler.data);
 			serverId = ret.ServerId;
@@ -176,9 +178,7 @@ public class SocketManager : MonoBehaviour {
 			PlayerPrefs.SetInt (SERVER_PORT_KEY, port);
 			PlayerPrefs.SetString (ACCOUNT_KEY, accountId);
 			PlayerPrefs.Save ();
-
 			ConnectServerAndLogin ();
-
 //			Debug.Log ("accountId = " + ret.AccountId);  
 //			Debug.Log ("serverId = " + ret.ServerId);  
 //			Debug.Log ("ip = " + ret.Ip);  
@@ -422,7 +422,7 @@ public class SocketManager : MonoBehaviour {
 
 	private static void resoveSCException(SCException exception){
 		Debug.LogError("error:errorCode = "+exception.ErrCode+",errorMsg = "+exception.ErrMsg+",csOpcode:"+exception.CsOpcode+",scOpcode:"+exception.ScOpcode);
-		WarnDialog.showWarnDialog (Message.getText("dataError")+exception.ErrMsg,delegate() {
+		WarnDialog.showWarnDialog (/*Message.getText("dataError")+*/exception.ErrMsg,delegate() {
 			//				ConnectServer();
 		});
 	}

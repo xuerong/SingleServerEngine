@@ -30,5 +30,6 @@ CREATE TABLE `userMiGong` (
   `energy` int(11) NOT NULL DEFAULT '0',
   `energyUpdateTime` bigint(20) NOT NULL DEFAULT '0',
   `newUserGuide` varchar(255) DEFAULT NULL,
+  `gold` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

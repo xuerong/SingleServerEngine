@@ -24,6 +24,7 @@ public class UserMiGong implements Serializable {
     private int energy; // 精力
     private long energyUpdateTime; // 精力刷新时间
     private String newUserGuide; // 新手引导相关，结构：id;step;id;step
+    private int gold; // 金币
 
     public String getUserId() {
         return userId;
@@ -103,5 +104,13 @@ public class UserMiGong implements Serializable {
 
     public void setNewUserGuide(String newUserGuide) {
         this.newUserGuide = newUserGuide;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 }

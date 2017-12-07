@@ -14,6 +14,7 @@ message SCBaseInfo
 	repeated PBSysPara sysParas 			= 2; // 系统参数
 	repeated PBNewGuide newGuide			= 3;  // 新手引导信息
 	required int32 openPass				= 4; // 推图过了多少关
+	repeated PBItemTable itemTable 			= 5; // 系统参数
 }
 message PBNewGuide
 {
@@ -24,6 +25,14 @@ message PBSysPara
 {
 	required string key				= 1;
 	required string value				= 2;
+}
+message PBItemTable // 道具表
+{
+	required int32 id				= 1;
+	required int32 itemType				= 2;
+	required int32 para1				= 3;
+	required int32 para2				= 4;
+	required int32 price				= 5;
 }
 // 完成新手引导
 message CSNewGuideFinish
@@ -42,6 +51,30 @@ message SCGetMiGongLevel
 {
     repeated int32 starInLevel 			= 1; // 已经过的关卡的星数
 	required int32 passCount            = 2; // 总共多少关卡
+}
+// 过关奖励：已经奖励的就不奖励了
+message CSGetPassReward
+{
+	required int32 pass            = 1;
+}
+message SCGetPassReward
+{
+	required int32 energy 			= 1; // 消耗体力
+	optional PBPassReward passRewardStar1 			= 2; // 一星奖励
+	optional PBPassReward passRewardStar2 			= 3; // 二星奖励
+	optional PBPassReward passRewardStar3 			= 4; // 三星奖励
+	optional PBPassReward passRewardStar4 			= 5; // 四星奖励
+}
+message PBPassReward
+{
+	required int32 gold 			= 1; // 奖励金币
+	repeated PBPassRewardItem passRewardItem 			= 2; // 奖励道具
+	required int32 energy 			= 3; // 奖励体力
+}
+message PBPassRewardItem
+{
+	required int32 itemId 			= 1; // 道具id
+	required int32 count 			= 2; // 道具数量
 }
 // 获取迷宫
 message CSGetMiGongMap
@@ -82,14 +115,17 @@ message SCPassFinish
 	required int32 openLevel           = 1; // 已经开启的leve
 	required int32 openPass            = 2; // 已经开启的关卡
 	required int32 success         = 3; // 服务器判定是否过关
+	optional PBPassReward passReward		=4;  // 过关奖励
 }
 // 使用道具
 message CSUseItem
 {
 	required int32 itemId           = 1;
+	required int32 count           = 2;
 }
 message SCUseItem
 {
+	optional string ret 			=1 ; // 返回值
 }
 /////////////////////////////////////////////////////////////////无尽版///////////////////////////////////////
 message CSUnlimitedInfo
@@ -143,7 +179,7 @@ message SCUnlimitedFinish
 /////////////////////////////////////////////////////////////////联机对战///////////////////////////////////////
 // 请求匹配（放入匹配队列），匹配完成创建房间并推送，操作（移动，道具），位置同步和校验（全缓存），到达终点请求和同步，结束推送同步，房间心跳
 // 请求匹配，返回房间及信息，开始游戏，发送操作（移动，道具），接收操作，发送到达终点，接收到达终点，接收游戏结束，房间心跳
-// 请求匹配 TODO 取消匹配
+// 请求匹配 取消匹配
 
 // 获取在线信息
 message CSGetOnlineInfo
@@ -301,4 +337,6 @@ message SCCommon
 	repeated string route 			= 1; //
 }
 
+/////////////////////////////////////////////////////////////////道具相关///////////////////////////////////////
+//
 

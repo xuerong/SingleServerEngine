@@ -156,11 +156,14 @@ public final class Util {
 
 
     public static <K> List<K> split2List(String content,Class<K> cls){
+        return split2List(content,cls,";");
+    }
+    public static <K> List<K> split2List(String content,Class<K> cls,String sp){
         List<K> ret = new LinkedList<>();
         if (StringUtils.isBlank(content)) {
             return ret;
         }
-        String[] entryArray = StringUtils.splitByWholeSeparator(content, ";");
+        String[] entryArray = StringUtils.splitByWholeSeparator(content, sp);
         for (String entry : entryArray) {
             ret.add(convert(cls, entry));
         }

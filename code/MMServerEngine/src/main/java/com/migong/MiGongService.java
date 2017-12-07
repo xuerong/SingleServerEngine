@@ -1,6 +1,9 @@
 package com.migong;
 
 import com.migong.entity.*;
+import com.migong.item.Item;
+import com.migong.item.ItemService;
+import com.migong.item.PassRewardData;
 import com.migong.map.CreateMap;
 import com.migong.map.Element;
 import com.migong.map.GetShortRoad;
@@ -26,6 +29,7 @@ import com.mm.engine.framework.tool.util.Util;
 import com.protocol.MiGongOpcode;
 import com.protocol.MiGongPB;
 import com.sys.SysPara;
+import com.table.ItemTable;
 import com.table.MiGongPass;
 import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
@@ -131,6 +135,7 @@ public class MiGongService {
     private SendMessageService sendMessageService;
     private SysParaService sysParaService;
     private IdService idService;
+    private ItemService itemService;
     /**
      * 这个是玩家获取迷宫后缓存的该迷宫信息，在玩家过关的时候用来校验是否正常过关。同时在如下几种情况下要清除：
      * 1、玩家断开连接
@@ -188,6 +193,16 @@ public class MiGongService {
             builder.addNewGuide(guideBuilder);
         }
         builder.setOpenPass(userMiGong.getPass());
+        //
+        for(ItemTable itemTable : ItemTable.datas){
+            MiGongPB.PBItemTable.Builder itemBuilder = MiGongPB.PBItemTable.newBuilder();
+            itemBuilder.setId(itemTable.getId());
+            itemBuilder.setItemType(itemTable.getItemtype());
+            itemBuilder.setPara1(itemTable.getPara1());
+            itemBuilder.setPara2(itemTable.getPara2());
+            itemBuilder.setPrice(itemTable.getPrice());
+            builder.addItemTable(itemBuilder);
+        }
         return new RetPacketImpl(MiGongOpcode.SCBaseInfo, builder.build().toByteArray());
     }
     @Request(opcode = MiGongOpcode.CSNewGuideFinish)
@@ -227,6 +242,46 @@ public class MiGongService {
         builder.setPassCount(MiGongPass.datas.length);
         return new RetPacketImpl(MiGongOpcode.SCGetMiGongLevel, builder.build().toByteArray());
     }
+    @Request(opcode = MiGongOpcode.CSGetPassReward)
+    public RetPacket getPassReward(Object clientData, Session session) throws Throwable{
+        MiGongPB.CSGetPassReward getPassReward = MiGongPB.CSGetPassReward.parseFrom((byte[])clientData);
+        MiGongPass miGongPass = passMap.get(getPassReward.getPass());
+        miGongPass.getReward();
+
+        UserMiGong userMiGong = get(session.getAccountId());
+        //
+        MiGongPB.SCGetPassReward.Builder builder = MiGongPB.SCGetPassReward.newBuilder();
+        builder.setEnergy(miGongPass.getEnergy());
+        PassRewardData passRewardData = PassRewardData.parse(miGongPass.getReward());
+        if(passRewardData != null){
+            for(int i=0;i<4;i++){
+                MiGongPB.PBPassReward.Builder passRewardBuilder = MiGongPB.PBPassReward.newBuilder();
+                passRewardBuilder.setEnergy(passRewardData.getStarGold()[i]);
+                passRewardBuilder.setGold(passRewardData.getStarEnergy()[i]);
+                if(passRewardData.getItemReward() != null){
+                    for(Map.Entry<Integer, int[]> entry :passRewardData.getItemReward().entrySet()){
+                        MiGongPB.PBPassRewardItem.Builder psi = MiGongPB.PBPassRewardItem.newBuilder();
+                        psi.setItemId(entry.getKey());
+                        psi.setCount(entry.getValue()[i]);
+                        passRewardBuilder.addPassRewardItem(psi);
+                    }
+                }
+                if(i == 0){
+                    builder.setPassRewardStar1(passRewardBuilder);
+                }else if(i == 1){
+                    builder.setPassRewardStar2(passRewardBuilder);
+                }else if(i == 3){
+                    builder.setPassRewardStar3(passRewardBuilder);
+                }else{
+                    builder.setPassRewardStar4(passRewardBuilder);
+                }
+            }
+        }
+        return new RetPacketImpl(MiGongOpcode.SCGetPassReward, builder.build().toByteArray());
+    }
+
+
+
     @Tx()
     @Request(opcode = MiGongOpcode.CSGetMiGongMap)
     public RetPacket getMap(Object clientData, Session session) throws Throwable{
@@ -303,7 +358,7 @@ public class MiGongService {
             dataService.update(userMiGong);
         }
     }
-    private UserMiGong get(String userId){
+    public UserMiGong get(String userId){
         UserMiGong userMiGong = dataService.selectObject(UserMiGong.class,"userId=?",userId);
         if(userMiGong == null){
             userMiGong = new UserMiGong();
@@ -311,6 +366,26 @@ public class MiGongService {
             dataService.insert(userMiGong);
         }
         return userMiGong;
+    }
+    // 玩家使用道具
+    public void useSkillItem(String userId, Item.ItemType itemType , ItemTable itemTable){
+        MiGongPassInfo miGongPassInfo = miGongPassInfoMap.get(userId);
+        if(miGongPassInfo == null){
+            log.warn("not in room,but use item ,item type = {},item id = {},userId = {}",itemType.ordinal(),itemTable.getId(),userId);
+            return;
+        }
+        switch (itemType){
+            case AddTime:
+                miGongPassInfo.setTime(miGongPassInfo.getTime()*(100+itemTable.getPara1())/100);
+                break;
+            case MulBean:
+                miGongPassInfo.setMulBean(itemTable.getPara1());
+                break;
+        }
+        if(miGongPassInfo.getUseItems() == null){
+            miGongPassInfo.setUseItems(new ArrayList<>());
+        }
+        miGongPassInfo.getUseItems().add(itemTable);
     }
     @Tx()
     @Request(opcode = MiGongOpcode.CSPassFinish)
@@ -348,18 +423,34 @@ public class MiGongService {
                 System.out.println(sb.toString());
             }
         }
+        MiGongPB.SCPassFinish.Builder builder = MiGongPB.SCPassFinish.newBuilder();
         //
         if(isSuccess){
             // 根据路径和配置获取星级，，是否插入？是否更新？，更新userMiGong星级和关卡，
             int allScore = calScore(passFinish.getRouteList(),miGongPassInfo);
             int star = calStar(allScore,miGongPass);
             if(star > 0){
+                MiGongPB.PBPassReward.Builder passReward = MiGongPB.PBPassReward.newBuilder();
+                PassRewardData passRewardData = PassRewardData.parse(miGongPass.getReward());
                 if(miGongPassInfo.getPass() > userMiGong.getPass()){
                     createAndInsertUserPass(session.getAccountId(),miGongPassInfo.getPass(),star,allScore,
                             (int)(System.currentTimeMillis() - miGongPassInfo.getStartTime().getTime())/1000);
                     userMiGong.setPass(passFinish.getPass());
                     userMiGong.setStarCount(userMiGong.getStarCount() + star);
                     dataService.update(userMiGong);
+                    // 奖励：直接把对应星级的奖励给了
+                    if(passRewardData != null) {
+                        passReward.setGold(passRewardData.getStarGold()[star - 1]);
+                        passReward.setEnergy(passRewardData.getStarEnergy()[star - 1]);
+                        if(passRewardData.getItemReward() != null){
+                            for(Map.Entry<Integer,int[]> entry : passRewardData.getItemReward().entrySet()){
+                                MiGongPB.PBPassRewardItem.Builder passRewardItem = MiGongPB.PBPassRewardItem.newBuilder();
+                                passRewardItem.setItemId(entry.getKey());
+                                passRewardItem.setCount(entry.getValue()[star - 1]);
+                                passReward.addPassRewardItem(passRewardItem);
+                            }
+                        }
+                    }
                 }else{
                     UserPass userPass = dataService.selectObject(UserPass.class,"userId=? and passId=?",session.getAccountId(),miGongPassInfo.getPass());
                     if(userPass == null){
@@ -377,17 +468,49 @@ public class MiGongService {
                             userPass.setStar(star);
                             dataService.update(userPass);
                         }
+                        if (star > userPass.getStar()) {
+                            // 奖励：直接把对应星级的奖励给了
+                            if(passRewardData != null) {
+                                passReward.setGold(passRewardData.getStarGold()[star - 1] - passRewardData.getStarGold()[userPass.getStar() - 1]);
+                                passReward.setEnergy(passRewardData.getStarEnergy()[star - 1] -  passRewardData.getStarEnergy()[userPass.getStar() - 1]);
+                                if(passRewardData.getItemReward() != null){
+                                    for(Map.Entry<Integer,int[]> entry : passRewardData.getItemReward().entrySet()){
+                                        MiGongPB.PBPassRewardItem.Builder passRewardItem = MiGongPB.PBPassRewardItem.newBuilder();
+                                        passRewardItem.setItemId(entry.getKey());
+                                        passRewardItem.setCount(entry.getValue()[star - 1] - entry.getValue()[userPass.getStar() - 1]);
+                                        passReward.addPassRewardItem(passRewardItem);
+                                    }
+                                }
+                            }
+                            // ------
+                        }
                     }
                 }
+                // 添加进玩家的身上
+                if(passReward.getGold() > 0){
+                    userMiGong.setGold(userMiGong.getGold() + passReward.getGold());
+                    dataService.update(userMiGong);
+                }
+                if(passReward.getEnergy() > 0){
+                    userMiGong.setEnergy(userMiGong.getEnergy() + passReward.getEnergy());
+                    dataService.update(userMiGong);
+                }
+                if(passReward.getPassRewardItemCount() > 0){
+                    for(MiGongPB.PBPassRewardItem passRewardItem : passReward.getPassRewardItemList()){
+                        itemService.addItem(session.getAccountId(),passRewardItem.getItemId(),passRewardItem.getCount());
+                    }
+                }
+                //
+                builder.setPassReward(passReward);
             }else{
                 isSuccess = false;
             }
-
         }
-        MiGongPB.SCPassFinish.Builder builder = MiGongPB.SCPassFinish.newBuilder();
+
         builder.setOpenLevel(1);
         builder.setOpenPass(userMiGong.getPass());
         builder.setSuccess(isSuccess?1:0);
+
         return new RetPacketImpl(MiGongOpcode.SCGetMiGongLevel, builder.build().toByteArray());
     }
     private UserPass createAndInsertUserPass(String userId,int passId,int star,int allScore,int useTime){
@@ -412,7 +535,7 @@ public class MiGongService {
                 allScore += bean.getScore();
             }
         }
-        return allScore;
+        return allScore*(miGongPassInfo.getMulBean()>1?miGongPassInfo.getMulBean():0);
     }
     private int calStar(int score,MiGongPass miGongPass){
         return calStar(score,miGongPass.getStar1(),miGongPass.getStar2(),miGongPass.getStar3(),miGongPass.getStar4());
@@ -769,6 +892,7 @@ public class MiGongService {
         MiGongPB.SCMove.Builder builder = MiGongPB.SCMove.newBuilder();
         return new RetPacketImpl(MiGongOpcode.CSMove, builder.build().toByteArray());
     }
+
     /**
      * 玩家吃豆
      */

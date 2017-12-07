@@ -28,6 +28,7 @@ public class GuideControl : MonoBehaviour {
 		Button button = transform.Find ("Canvas/mask").GetComponent<Button> ();
 		button.onClick.RemoveAllListeners ();
 		button.onClick.AddListener(delegate {
+			Sound.playSound(SoundType.Click);
 			current = current.next;
 			if(current != null){
 				showImage(current.imageGo);

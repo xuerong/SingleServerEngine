@@ -2,8 +2,10 @@ package com.migong.entity;
 
 import com.migong.map.CreateMap;
 import com.migong.map.Element;
+import com.table.ItemTable;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/9/22.
@@ -23,6 +25,8 @@ public class MiGongPassInfo {
     private int bean1;
     private int bean5;
     private int bean10;
+    private int mulBean = 1; // 豆子的倍数
+    private List<ItemTable> useItems ; // 使用的item
 
 
     public CreateMap getCreateMap() {
@@ -132,7 +136,23 @@ public class MiGongPassInfo {
         this.bean10 = bean10;
     }
 
-    public void setBeanCount(int bean1,int bean5,int bean10){
+    public int getMulBean() {
+        return mulBean;
+    }
+
+    public void setMulBean(int mulBean) {
+        this.mulBean = mulBean;
+    }
+
+    public List<ItemTable> getUseItems() {
+        return useItems;
+    }
+
+    public void setUseItems(List<ItemTable> useItems) {
+        this.useItems = useItems;
+    }
+
+    public void setBeanCount(int bean1, int bean5, int bean10){
         this.bean1 = bean1;
         this.bean5 = bean5;
         this.bean10 = bean10;

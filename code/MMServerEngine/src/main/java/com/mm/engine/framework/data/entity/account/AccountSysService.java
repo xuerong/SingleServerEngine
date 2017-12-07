@@ -19,9 +19,11 @@ import com.mm.engine.framework.server.ServerType;
 import com.mm.engine.framework.server.SysConstantDefine;
 import com.mm.engine.framework.tool.helper.BeanHelper;
 import com.mm.engine.framework.tool.util.Util;
+import com.sys.SysPara;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -82,11 +84,13 @@ public class AccountSysService {
         Account account = dataService.selectObject(Account.class,"id=?",id);
         if(account == null){
             // 没有则创建
-            account = createAccount(id);
+            account = createAccount(id,ip);
             dataService.insert(account);
             eventService.fireEventSyn(account,SysConstantDefine.Event_AccountCreate);
 //            throw new MMException("account is not exist, id="+id);
         }
+        account.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
+
 
         Session session = applyForLogin(id,url,ip);
         if(session == null){
@@ -97,7 +101,7 @@ public class AccountSysService {
         loginSegment.setSession(session);
         loginSegment.setAccount(account);
 
-        log.info("accountId="+id+" loginMain success,nodeServerAdd="+",sessionId="+session.getSessionId());
+        log.info("accountId = {} login success,ip = {},sessionId = {}",id,session.getIp(),session.getSessionId());
 
         return loginSegment;
     }
@@ -168,6 +172,8 @@ public class AccountSysService {
         }else{
             Account account = dataService.selectObject(Account.class,"id="+session.getAccountId());
             if(account!=null){
+                account.setLastLogoutTime(new Timestamp(System.currentTimeMillis()));
+                dataService.update(account);
                 nodeServerLoginMark.remove(account.getId());
             }
         }
@@ -187,10 +193,14 @@ public class AccountSysService {
      * @param id
      * @return
      */
-    private Account createAccount(String id){
+    private Account createAccount(String id,String ip){
         Account account = new Account();
         account.setId(id);
         account.setName(id); // todo 暂时用这个
+        Timestamp curTime = new Timestamp(System.currentTimeMillis());
+        account.setCreateTime(curTime);
+        account.setLastLoginTime(curTime);
+
         return account;
     }
 

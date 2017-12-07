@@ -39,6 +39,8 @@ public class MonitorService {
         String state = eventService.getMonitorData();
         if(!state.equals("ok")){
             log.error(state);
+        }else{
+//            log.info("server is ok!");
         }
         if(conditions.size()>0){
             for(Map.Entry<String,String> entry : conditions.entrySet()){

@@ -77,8 +77,12 @@ public class AccountService {
     public RetPacket login(int opcode, Object data, ChannelHandlerContext ctx,AttributeKey<String> sessionKey) throws Throwable{
         AccountPB.CSLogin csLoginMain = AccountPB.CSLogin.parseFrom((byte[])data);
         String accountId = csLoginMain.getAccountId();
-
-        LoginSegment loginSegment = accountSysService.login(accountId,csLoginMain.getUrl(),ctx.channel().remoteAddress().toString());
+        String remoteAddress = ctx.channel().remoteAddress().toString();
+        String ip = remoteAddress;
+        if(remoteAddress != null){
+            ip = remoteAddress.split(":")[0].replace("/","");
+        }
+        LoginSegment loginSegment = accountSysService.login(accountId,csLoginMain.getUrl(),ip);
         Account account = loginSegment.getAccount();
 
         {

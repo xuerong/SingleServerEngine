@@ -83,9 +83,9 @@ public class Pacman : MonoBehaviour {
 			return;
 		}
 		isControl = false;
-		if (userId == SocketManager.accountId) {
-			keyboardDir ();
-		}
+//		if (userId == SocketManager.accountId) {
+//			keyboardDir ();
+//		}
 //		int dir = getDir ();
 //		if (dir > 0) {
 //			isControl = true;
@@ -180,6 +180,7 @@ public class Pacman : MonoBehaviour {
 
 		if (dest != (Vector2)transform.position) {
 			if (isControl && valid (dest)) {
+				Sound.playSound(SoundType.Move);
 				digidbody.MovePosition (dest);
 			} else {
 				dest = (Vector2)transform.position;

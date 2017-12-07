@@ -57,11 +57,13 @@ class WarnDialog : MonoBehaviour {
 	void Awake(){ 
 		close = transform.Find ("Canvas/Panel/close").GetComponent<Button> ();
 		close.onClick.AddListener (delegate() {
+			Sound.playSound(SoundType.Click);
 			canvas.SetActive(false);
 		});
 		ok = transform.Find ("Canvas/Panel/ok").GetComponent<Button> ();
 //		ok.onClick.AddListener (delegate() {
 //			canvas.SetActive(false);
+//		Sound.playSound(SoundType.Click);
 //			if(okAction != null){
 //				okAction.Invoke();
 //			}
@@ -84,6 +86,7 @@ class WarnDialog : MonoBehaviour {
 //				instance.okAction = w.okAction;
 
 				ok.onClick.AddListener (delegate() {
+					Sound.playSound(SoundType.Click);
 					canvas.SetActive(false);
 					if(w.okAction != null){
 						w.okAction.Invoke();
@@ -107,6 +110,7 @@ class WarnDialog : MonoBehaviour {
 //				instance.okAction = w.afterWaitAction;
 
 				ok.onClick.AddListener (delegate() {
+					Sound.playSound(SoundType.Click);
 					WarnDialog.closeWaitDialog(w.id);
 					if (w.cancelAction != null) {
 						w.cancelAction.Invoke ();

@@ -2,18 +2,19 @@ package com.table;
 //Auto Generate File, Do NOT Modify!!!!!!!!!!!!!!!
 public final class MiGongPass{
 	public static final MiGongPass[] datas={
-		new MiGongPass((int)1.0,(int)5.0,(int)40.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)2.0,(int)6.0,(int)45.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)3.0,(int)7.0,(int)50.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)4.0,(int)8.0,(int)55.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)5.0,(int)9.0,(int)60.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)6.0,(int)10.0,(int)65.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)7.0,(int)11.0,(int)70.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)8.0,(int)12.0,(int)75.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)9.0,(int)13.0,(int)80.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,""),
-		new MiGongPass((int)10.0,(int)14.0,(int)85.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)45.0,(int)5.0,"")
+		new MiGongPass((int)1.0,(int)0.0,(int)5.0,(int)40.0,(int)10.0,(int)11.0,(int)4.0,(int)1.0,(int)5.0,(int)10.0,(int)20.0,(int)30.0,(int)5.0,"0;0;1;2|0,2,5,10|1;1;2;3;4|2;1;2;3;4|3;1;2;3;4|4;1;2;3;4"),
+		new MiGongPass((int)2.0,(int)1.0,(int)6.0,(int)45.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)15.0,(int)20.0,(int)35.0,(int)5.0,"0;0;1;2|0,2,5,10|1;1;2;3;4|2;1;2;3;4|3;1;2;3;4|4;1;2;3;5"),
+		new MiGongPass((int)3.0,(int)2.0,(int)7.0,(int)50.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)35.0,(int)5.0,"0;0;1;2|0,2,5,10|1;1;2;3;4|2;1;2;3;4|3;1;2;3;4|4;1;2;3;6"),
+		new MiGongPass((int)4.0,(int)3.0,(int)8.0,(int)55.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)35.0,(int)5.0,"0;0;1;2|0,2,5,10|1;1;2;3;4|2;1;2;3;4|3;1;2;3;4|4;1;2;3;7"),
+		new MiGongPass((int)5.0,(int)4.0,(int)9.0,(int)60.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)35.0,(int)5.0,"0;0;1;2|0,2,5,10|1;1;2;3;4|2;1;2;3;4|3;1;2;3;4|4;1;2;3;8"),
+		new MiGongPass((int)6.0,(int)5.0,(int)10.0,(int)65.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)35.0,(int)5.0,"0;0;1;2|0,2,5,10|1;1;2;3;4|2;1;2;3;4|3;1;2;3;4|4;1;2;3;9"),
+		new MiGongPass((int)7.0,(int)6.0,(int)11.0,(int)70.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)35.0,(int)5.0,"0;0;1;2|0,2,5,10|1;1;2;3;4|2;1;2;3;4|3;1;2;3;4|4;1;2;3;10"),
+		new MiGongPass((int)8.0,(int)7.0,(int)12.0,(int)75.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)35.0,(int)5.0,"0;0;1;2|0,2,5,10|1;1;2;3;4|2;1;2;3;4|3;1;2;3;4|4;1;2;3;11"),
+		new MiGongPass((int)9.0,(int)8.0,(int)13.0,(int)80.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)35.0,(int)5.0,"0;0;1;2|0,2,5,10|1;1;2;3;4|2;1;2;3;4|3;1;2;3;4|4;1;2;3;12"),
+		new MiGongPass((int)10.0,(int)9.0,(int)14.0,(int)85.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)35.0,(int)5.0,"0;0;1;2|0,2,5,10|1;1;2;3;4|2;1;2;3;4|3;1;2;3;4|4;1;2;3;13")
 	};
 	private int id;
+	private int needStar;
 	private int size;
 	private int time;
 	private int speed;
@@ -27,8 +28,9 @@ public final class MiGongPass{
 	private int energy;
 	private String reward;
 
-	public MiGongPass(int id,int size,int time,int speed,int bean1,int bean5,int bean10,int star1,int star2,int star3,int star4,int energy,String reward){
+	public MiGongPass(int id,int needStar,int size,int time,int speed,int bean1,int bean5,int bean10,int star1,int star2,int star3,int star4,int energy,String reward){
 		this.id=id;
+		this.needStar=needStar;
 		this.size=size;
 		this.time=time;
 		this.speed=speed;
@@ -44,6 +46,8 @@ public final class MiGongPass{
 	}
 	public int getId(){return id;}
 	public void setId(int id){this.id=id;}
+	public int getNeedstar(){return needStar;}
+	public void setNeedstar(int needStar){this.needStar=needStar;}
 	public int getSize(){return size;}
 	public void setSize(int size){this.size=size;}
 	public int getTime(){return time;}

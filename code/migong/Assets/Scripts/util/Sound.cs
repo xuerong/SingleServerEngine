@@ -22,6 +22,8 @@ public class Sound : MonoBehaviour {
 		AudioSource[] audioSources = GetComponents<AudioSource>();
 		for (int i = 0; i < audioSources.Length; i++) {
 			soundDic [(SoundType)i] = audioSources [i];
+//			AudioClip audioClip = audioSources [i].GetComponent<AudioClip> ();
+//			audioClip.
 		}
 	}
 
@@ -36,7 +38,9 @@ public class Sound : MonoBehaviour {
 	}
 
 	public static void playSound(SoundType soundType){
-		soundDic [soundType].Play ();
+		if (!soundDic [soundType].isPlaying) {
+			soundDic [soundType].Play ();
+		}
 	}
 }
 

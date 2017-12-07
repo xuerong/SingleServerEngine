@@ -77,6 +77,7 @@ public class MapCreate : MonoBehaviour{
 	void Start () {
 		// 设置button
 		closeButton.onClick.AddListener(delegate {
+			Sound.playSound(SoundType.Click);
 			WarnDialog.showWarnDialog(Message.getText("exit?"),delegate {
 				selfArrive(false,null,false);
 				Destroy(transform.parent.parent.gameObject);
@@ -86,6 +87,7 @@ public class MapCreate : MonoBehaviour{
 			});
 		});
 		okButton.onClick.AddListener(delegate {
+			Sound.playSound(SoundType.Click);
 			Destroy(transform.parent.parent.gameObject);
 			GameObject mainGo = GameObject.Find ("main");
 			MainPanel mainPanel = mainGo.GetComponent<MainPanel>();
@@ -205,6 +207,7 @@ public class MapCreate : MonoBehaviour{
 		int y = pos % size;
 
 		if (beanMap [x] [y] != null) {
+			Sound.playSound (SoundType.EatBean);
 			Destroy (beanMap [x] [y].go); // 计算在玩家身上，并做出相应的效果
 			if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {
 				float old = starSlider.value;
@@ -213,7 +216,7 @@ public class MapCreate : MonoBehaviour{
 				scoreText.text = starSlider.value + "";
 				// 点亮星星
 				for(int i=1;i<5;i++){
-					int score = i * 10;
+					int score = stars [i-1];
 					if (score > old && score <= starSlider.value) { // 0的自然就不会点亮
 						// 点亮
 						Image image = starSlider.transform.parent.Find ("star" + i).GetComponent<Image>();
@@ -287,13 +290,13 @@ public class MapCreate : MonoBehaviour{
 			starSlider.maxValue = maxScore;
 			starSlider.transform.Find ("maxScore").GetComponent<Text> ().text = "/"+maxScore;
 			RectTransform buRec = starSlider.GetComponent<RectTransform> ();
-			float perStarDelta = buRec.rect.width * 10 / maxScore; // 每个星星的像素便宜
+			float perStarDelta = buRec.rect.width / maxScore; // 每个星星的像素便宜
 			for (int i = 1; i < stars.Length+1; i++) {
 				RectTransform starRec = starSlider.transform.parent.Find ("star" + i).GetComponent<RectTransform> ();
 				if (stars [i-1] <= 0) {
 					starRec.gameObject.SetActive (false);
 				} else {
-					starRec.anchoredPosition = new Vector2 (i * perStarDelta, -40);
+					starRec.anchoredPosition = new Vector2 (stars [i-1] * perStarDelta, -40);
 				}
 			}
 		}
@@ -342,6 +345,7 @@ public class MapCreate : MonoBehaviour{
 	}
 
 	public void selfArrive(bool success,List<int> route,bool showSettle){
+		Sound.playSound (SoundType.Arrive);
 		if (Mode == MapMode.Level) {
 			this.gameOver = true;
 			CSPassFinish pf = new CSPassFinish ();
@@ -409,6 +413,7 @@ public class MapCreate : MonoBehaviour{
 	}
 
 	public void doGameOver(int opcode,byte[] data){
+		Sound.playSound (SoundType.Over);
 		SCGameOver gameOver = SCGameOver.Deserialize (data);
 		//gameOver.OverType // 0其它，1都抵达终点，2时间到
 

@@ -3,6 +3,7 @@
 APP ID:1106478351
 APP KEY:kb41UWHaAJ3YTGcW
 
+
 微信社会化：
 AppID：wx4441fcf39f0e24e0
 AppSecret：ce51278665d747db197044ea5482d888
@@ -13,10 +14,18 @@ app：3344c1180ab5eed4f6aed6f2a002008b
 root ppdDg7WacPxDb6H
 服务器名称	云主机ID	所在网络ID	内网IP	公网IP
 u672au547du540d	ins-6u87cn62	vpc-0j72voq7	172.16.0.4	111.230.144.111
+阿里云6个月使用
+实例名称：migong,密码：Zyz[861180416]
+47.95.219.97(公)
+172.17.38.67(私有)
 
+实例规格: 1核 1GB
+网络类型: 专有网络
+公网带宽: 1Mbps（按固定带宽）
+镜像: CentOS 7.4 64位
+系统盘: 40GB 高效云盘
+数据盘: 20GB（高效云盘，随实例释放，非加密）
 
-安装mariaDB(myslq)：http://blog.csdn.net/eclothy/article/details/52733891
-安装cronolog:http://blog.51cto.com/freeloda/1346076
 
 
 
@@ -24,13 +33,27 @@ u672au547du540d	ins-6u87cn62	vpc-0j72voq7	172.16.0.4	111.230.144.111
 more -1000 /usr/local/migong/logs/dynasty2.out.$(date "+%Y%m%d%H")
 查看当前日志输出：tail -f /usr/local/migong/logs/dynasty2.out.$(date "+%Y%m%d%H")
 
-
-
-
-
 //--------------------------------------------------------------------其它
-mysql相关:
-设置密码：set password for root@localhost = password('123'); 
 
-解决执行sh:Permission denied
-chmod 777 xxx.sh
+
+//-------------------------------------------------------------配置和启动服务器步骤：
+1、下载和安装jdk
+wget --no-check-certificate --no-cookie --header "Cookie: oraclelicense=accept-securebackup-cookie;" http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/jdk-9.0.1_linux-x64_bin.rpm
+rpm -ivh jdk-9.0.1_linux-x64_bin.rpm
+2、下载和安装mysql
+安装mariaDB(myslq)：http://blog.csdn.net/eclothy/article/details/52733891
+启动MariaDB：systemctl start mariadb
+设置开机启动：systemctl enable mariadb
+连接：mysql -uroot -p
+设置密码：set password for root@localhost = password('admin'); 
+3、创建表和添加必要数据
+用navicat(v11.2)连接数据库，然后创建需要的表
+在serverInfo表中加入服务器的信息
+4、下载安装cronolog
+安装cronolog:http://blog.51cto.com/freeloda/1346076
+5、上传代码：
+下载安装：winSCP
+创建目录:mkdir /usr/migong
+6、设置.sh的执行
+shutdown.sh：chmod 777 shutdown.sh
+start.sh：chmod 777 start.sh
