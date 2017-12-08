@@ -221,6 +221,7 @@
      <Compile Include="Assets\Scripts\otherScripts\protobuf\ServiceModel\XmlProtoSerializer.cs" />
      <Compile Include="Assets\Scripts\otherScripts\protobuf\SubItemToken.cs" />
      <Compile Include="Assets\Scripts\otherScripts\protobuf\WireType.cs" />
+     <Compile Include="Assets\Scripts\params\Params.cs" />
      <Compile Include="Assets\Scripts\protobuf\AccountOpcode.cs" />
      <Compile Include="Assets\Scripts\protobuf\AccountPB.Serializer.cs" />
      <Compile Include="Assets\Scripts\protobuf\AccountPB.cs" />

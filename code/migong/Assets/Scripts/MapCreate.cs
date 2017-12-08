@@ -6,6 +6,7 @@ using com.protocol;
 using System.Threading;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Text;
 
 public enum MapMode{
 	Level,
@@ -52,6 +53,12 @@ public class MapCreate : MonoBehaviour{
 
 	public float totalTime;
 
+	 //加速道具数量
+	//加时间道具数量
+	//显示路线道具数量
+	//加速道具数量
+	public Dictionary<int,int> skillItemCount = new Dictionary<int, int>();
+	public Dictionary<ItemType,Text> skillItemText = new Dictionary<ItemType, Text>();
 
 	int x = 0,y = 0;
 	static float myScale = 1f;
@@ -83,7 +90,7 @@ public class MapCreate : MonoBehaviour{
 				Destroy(transform.parent.parent.gameObject);
 				GameObject mainGo = GameObject.Find ("main");
 				MainPanel mainPanel = mainGo.GetComponent<MainPanel>();
-				mainPanel.showMainPanel();;
+				mainPanel.showUi(this.Mode);
 			});
 		});
 		okButton.onClick.AddListener(delegate {
@@ -91,12 +98,17 @@ public class MapCreate : MonoBehaviour{
 			Destroy(transform.parent.parent.gameObject);
 			GameObject mainGo = GameObject.Find ("main");
 			MainPanel mainPanel = mainGo.GetComponent<MainPanel>();
-			mainPanel.showMainPanel();
+			mainPanel.showUi(this.Mode);
 		});
 		// 0.21 碰撞体的宽，1.9碰撞体的长
 		float wallWidth = 0.13f * myScale;
 		nodeX = 1.9f * myScale - wallWidth*2 ;nodeY = 1.9f * myScale - wallWidth*2;
 
+		// 显示当前的道具数量
+		showSkillCountAndAddClick("addSpeed",ItemType.AddSpeed);
+		showSkillCountAndAddClick("addTime",ItemType.AddTime);
+		showSkillCountAndAddClick("mulBean",ItemType.MulBean);
+		showSkillCountAndAddClick("showRoute",ItemType.ShowRoute);
 		//
 		if (Mode == MapMode.Online) {
 			SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCSendEatBean,delegate(int opcode, byte[] data) {
@@ -113,11 +125,63 @@ public class MapCreate : MonoBehaviour{
 		// 联网模式
 		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCUserMove, userMoveAction);
 
-
 		currentTime = totalTime;
 
 		createMap ();
 	}
+
+	private void showSkillCountAndAddClick(string path,ItemType itemType){
+		Text text = transform.parent.parent.Find ("Canvas/skills/"+path+"/count").GetComponent<Text>();
+		int count = getItemCountByType (itemType);
+		text.text = count.ToString ();
+		skillItemText.Add (itemType,text);
+		if (count == 0) {
+			transform.parent.parent.Find ("Canvas/skills/"+path).GetComponent<Button> ().enabled = false;
+		} else {
+			// 使用技能的事件
+			transform.parent.parent.Find ("Canvas/skills/"+path).GetComponent<Button>().onClick.AddListener(delegate {
+				useSkill(itemType);
+			});
+		}
+	}
+
+	private int getItemCountByType(ItemType itemType){
+		int itemId = Params.getItemId (ItemType.AddSpeed);
+		if (skillItemCount.ContainsKey (itemId)) {
+			return skillItemCount [itemId];
+		}
+		return 0;
+	}
+
+	//使用技能
+	public void useSkill(ItemType itemType){
+		int itemId = Params.getItemId (itemType);
+
+		if (!skillItemCount.ContainsKey (itemId) || skillItemCount [itemId] < 1) {
+			return;
+		}
+
+		CSUseItem useItem = new CSUseItem ();
+		PBItem item = new PBItem();
+		item.ItemId = itemId;
+		item.Count = 1;
+		useItem.Item = item;
+
+		if (itemType == ItemType.MulBean) {
+			Pacman pacman = pacmanMap [SocketManager.accountId];
+			useItem.Args = pacman.route.Count.ToString ();
+		}
+
+		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSUseItem, CSUseItem.SerializeToBytes (useItem), delegate(int opcode, byte[] data) {
+			// 如果能走到这里，说明道具使用正常
+			SCUseItem ret = SCUseItem.Deserialize(data);
+			skillItemCount[itemId] = skillItemCount[itemId] - 1;
+			skillItemText[itemType].text = skillItemCount[itemId].ToString();
+			// TODO 道具发挥效果
+		});
+	}
+
+
 
 	public void Update(){
 		if (currentTime == 0 || gameOver) {
@@ -358,8 +422,19 @@ public class MapCreate : MonoBehaviour{
 			SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSPassFinish, CSPassFinish.SerializeToBytes (pf), delegate(int opcode, byte[] data) {
 				SCPassFinish pas = SCPassFinish.Deserialize (data);
 				if (showSettle) {
+					StringBuilder sb = new StringBuilder(pas.Success == 1 ? Message.getText("success") : Message.getText("fail"));
+					if(pas.PassReward != null){
+						sb.Append("\n");
+						sb.Append("gold:"+pas.PassReward.Gold+"|energy:"+pas.PassReward.Energy);
+						if(pas.PassReward.Item != null && pas.PassReward.Item.Count > 0){
+							foreach(PBItem item in pas.PassReward.Item){
+								sb.Append("|"+item.ItemId+":"+item.Count);
+							}
+						}
+					}
+
 					GameObject go = transform.parent.parent.Find ("Canvas/settle").gameObject;
-					go.transform.Find ("Text").GetComponent<Text> ().text = pas.Success == 1 ? Message.getText("success") : Message.getText("fail");
+					go.transform.Find ("Text").GetComponent<Text> ().text = sb.ToString();
 				}
 				if(pas.Success == 1){ // 修改关卡并解锁
 					GameObject mainGo = GameObject.Find ("main");

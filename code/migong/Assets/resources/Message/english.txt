@@ -17,6 +17,11 @@ ok=ok
 cancel=cancel
 exit?=exit?
 timeTip=time:
+showPassReward=Pass Reward
+addSpeedSkill=Accelerate
+addTimeSkill=Add Time
+mulBeanSkill=Double Score
+showRouteSkill=Show Route
 
 levelItem=pass{0},star{1}
 unlimitRankSelf=pass:{0},star:{1},rank:{2}

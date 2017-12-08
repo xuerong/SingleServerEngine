@@ -41,6 +41,8 @@ public class MainPanel : MonoBehaviour {
 
 	public int openPass;
 
+	public int showRewardPass = 0;
+
 	void Start () {
 		show (uiMain);
 		// 给主界面按钮加事件
@@ -84,7 +86,7 @@ public class MainPanel : MonoBehaviour {
 				// 消耗精力
 				energy = ret.Energy;
 				int[] stars= {ret.Star1,ret.Star2,ret.Star3,ret.Star4};
-				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans,ret.Time, ret.Speed,ret.Start, ret.End, ret.Pass,null,stars,null);
+				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans,ret.Time, ret.Speed,ret.Start, ret.End, ret.Pass,null,stars,null,null);
 			});
 		});
 		closeButton = GameObject.Find ("main/ui/uiUnlimit/Canvas/close").GetComponent<Button>();
@@ -118,8 +120,9 @@ public class MainPanel : MonoBehaviour {
 				guideStep.Add(newGuide.Id,newGuide.Step);
 			}
 			this.openPass = ret.OpenPass;
+			// 道具表
+			Params.init(ret);
 			// 无尽版和pvp是否开启
-
 			doShowLock();
 		});
 
@@ -169,6 +172,18 @@ public class MainPanel : MonoBehaviour {
 			Sound.playSound(SoundType.Click);
 			GuideControl guideControl = uiHelp.GetComponent<GuideControl>();
 			guideControl.showHelp(false);
+		});
+
+		// 对战中显示奖励界面的进入地图按钮
+		Button showRewardOk = uiLevel.transform.Find("Canvas/showReward/dialog/ok").GetComponent<Button>();
+		showRewardOk.onClick.AddListener (delegate() {
+			Sound.playSound(SoundType.Click);
+			onIntoPassClick();
+		});
+		Button showRewardClose = uiLevel.transform.Find("Canvas/showReward/dialog/close").GetComponent<Button>();
+		showRewardClose.onClick.AddListener (delegate() {
+			Sound.playSound(SoundType.Click);
+			uiLevel.transform.Find("Canvas/showReward").gameObject.SetActive(false);
 		});
 
 		// 联网对战按钮
@@ -434,11 +449,22 @@ public class MainPanel : MonoBehaviour {
 
 		});
 	}
-		
-	public void showMainPanel(){
+
+	public void showUi(MapMode mode){
 		ui.SetActive (true);
-		show (uiMain);
+		switch (mode) {
+		case MapMode.Level:
+			openLevelWindow ();
+			break;
+		case MapMode.Unlimited:
+			openUnlimitWindow ();
+			break;
+		case MapMode.Online:
+			openOnlineWindow ();
+			break;
+		}
 	}
+
 	public void show(GameObject showUi){
 		uiMain.SetActive (false);
 		uiLevel.SetActive (false);
@@ -449,7 +475,7 @@ public class MainPanel : MonoBehaviour {
 
 	public void matchSuccess(int opcode, byte[] data){
 		SCMatchingSuccess matchingSuccess = SCMatchingSuccess.Deserialize (data);
-		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Time,matchingSuccess.Speed,matchingSuccess.Start,matchingSuccess.End,1,matchingSuccess.OtherInfos,null,null);
+		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Time,matchingSuccess.Speed,matchingSuccess.Start,matchingSuccess.End,1,matchingSuccess.OtherInfos,null,null,null);
 		ui.SetActive (false);
 		if (matchingDialogId > 0) {
 			WarnDialog.closeWaitDialog (matchingDialogId);
@@ -484,19 +510,51 @@ public class MainPanel : MonoBehaviour {
 	}
 
 	public void OnClick(ButtonIndex buttonIndex){
+
+		CSGetPassReward passReward = new CSGetPassReward ();
+		passReward.Pass = buttonIndex.pass;
+		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetPassReward, CSGetPassReward.SerializeToBytes(passReward), delegate(int opcode, byte[] data) {
+			uiLevel.transform.Find("Canvas/showReward").gameObject.SetActive(true);
+			SCGetPassReward ret = SCGetPassReward.Deserialize(data);
+//			ret.PassRewardStar1
+			showRewardStarInfo(1,ret.PassRewardStar1);
+			showRewardStarInfo(2,ret.PassRewardStar2);
+			showRewardStarInfo(3,ret.PassRewardStar3);
+			showRewardStarInfo(4,ret.PassRewardStar4);
+
+			this.showRewardPass = buttonIndex.pass;
+		});
+	}
+
+	private void showRewardStarInfo(int starIndex,PBPassReward passReward){
+		if(passReward != null){
+			StringBuilder sb = new StringBuilder();
+			if(passReward.Item!= null && passReward.Item.Count>0){
+				foreach(PBItem item in passReward.Item){
+					sb.Append(item.ItemId+":"+item.Count+"|");
+				}
+			}
+			Text starText = uiLevel.transform.Find("Canvas/showReward/dialog/star"+starIndex).GetComponent<Text>();
+			starText.text = "gold:"+passReward.Gold+"|energy:"+passReward.Energy+"|"+sb.ToString();
+		}
+	}
+
+	public void onIntoPassClick(){
 		CSGetMiGongMap miGongMap = new CSGetMiGongMap ();
-		miGongMap.Pass = buttonIndex.pass;
-		byte[] data = CSGetMiGongMap.SerializeToBytes (miGongMap);
-		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetMiGongMap, data,delegate(int opcode, byte[] ret) {
+		miGongMap.Pass = showRewardPass;
+		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSGetMiGongMap, CSGetMiGongMap.SerializeToBytes (miGongMap),delegate(int opcode, byte[] ret) {
+			uiLevel.transform.Find("Canvas/showReward").gameObject.SetActive(false);
 			ui.SetActive (false);
 			SCGetMiGongMap scmap = SCGetMiGongMap.Deserialize(ret);
 			// 消耗精力
 			energy = scmap.Energy;
 			int[] stars= {scmap.Star1,scmap.Star2,scmap.Star3,scmap.Star4};
-			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans,scmap.Time, scmap.Speed,scmap.Start, scmap.End, scmap.Pass,null,stars,scmap.Route);
+
+			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans,scmap.Time, scmap.Speed,scmap.Start, scmap.End, scmap.Pass,null,stars,scmap.Route,scmap.Items);
 		});
 	}
-	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int time,int speed,int start,int end,int pass,List<PBOtherInfo> otherInfos,int[] stars,string guideRoute){
+
+	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int time,int speed,int start,int end,int pass,List<PBOtherInfo> otherInfos,int[] stars,string guideRoute,List<PBItem> skillItems){
 		Object gamePanel = Resources.Load ("GamePanel");
 		GameObject gamePanelGo = Instantiate(gamePanel) as GameObject;
 		GameObject mapGo = gamePanelGo.transform.Find ("content/map").gameObject;
@@ -554,7 +612,11 @@ public class MainPanel : MonoBehaviour {
 		gamePanelGo.transform.parent = transform;
 		gamePanelGo.transform.localPosition = new Vector3(0,0,0);
 
-
+		if (skillItems != null) {
+			foreach (PBItem item in skillItems) {
+				mapCreate.skillItemCount.Add (item.ItemId,item.Count);
+			}
+		}
 		// 
 		if(mode == MapMode.Online && otherInfos != null){
 			Object pacmanIns = Resources.Load ("pacman");

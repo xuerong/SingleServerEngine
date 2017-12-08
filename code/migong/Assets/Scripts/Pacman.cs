@@ -41,7 +41,7 @@ public class Pacman : MonoBehaviour {
 	Animator animator;
 	Rigidbody2D digidbody;
 
-	List<int> route = new List<int>();
+	public List<int> route = new List<int>();
 
 	public bool finish;
 	void Start () {

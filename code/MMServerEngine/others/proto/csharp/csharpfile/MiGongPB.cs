@@ -129,19 +129,10 @@ namespace Example
         public int Gold { get; set; }
 
         /// <summary> 奖励金币</summary>
-        public List<Example.PBPassRewardItem> PassRewardItem { get; set; }
+        public List<Example.PBItem> Item { get; set; }
 
         /// <summary> 奖励道具</summary>
         public int Energy { get; set; }
-
-    }
-
-    public partial class PBPassRewardItem
-    {
-        public int ItemId { get; set; }
-
-        /// <summary> 道具id</summary>
-        public int Count { get; set; }
 
     }
 
@@ -190,6 +181,9 @@ namespace Example
         /// <summary> 消耗体力</summary>
         public string Route { get; set; }
 
+        /// <summary> 路线</summary>
+        public List<Example.PBItem> Items { get; set; }
+
     }
 
     /// <summary> 豆子信息</summary>
@@ -228,12 +222,31 @@ namespace Example
 
     }
 
-    /// <summary> 使用道具</summary>
-    public partial class CSUseItem
+    /// <summary>道具相关</summary>
+    public partial class CSGetItems
+    {
+    }
+
+    public partial class SCGetItems
+    {
+        public List<Example.PBItem> Items { get; set; }
+
+    }
+
+    public partial class PBItem
     {
         public int ItemId { get; set; }
 
         public int Count { get; set; }
+
+    }
+
+    /// <summary> 使用道具</summary>
+    public partial class CSUseItem
+    {
+        public Example.PBItem Item { get; set; }
+
+        public string Args { get; set; }
 
     }
 

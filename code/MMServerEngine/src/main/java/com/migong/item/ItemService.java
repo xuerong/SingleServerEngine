@@ -14,7 +14,9 @@ import com.protocol.MiGongOpcode;
 import com.protocol.MiGongPB;
 import com.table.ItemTable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,6 +51,22 @@ public class ItemService {
         }
     }
 
+    public List<Item> getSkillItems(String userId){
+        List<Item> list = dataService.selectList(Item.class,"userId=?",userId);
+        List<Item> ret = new ArrayList<>();
+        if(list != null) {
+            for (Item item : list) {
+                ItemTable itemTable = itemTableMap.get(item.getItemId());
+                if (itemTable != null) {
+                    if (Item.ItemType.values()[itemTable.getItemtype()].isSkill()) {
+                        ret.add(item);
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
     @Tx
     public void addItem(String userId,int itemId,int count){
         if(count <= 0){
@@ -78,17 +96,33 @@ public class ItemService {
         item.setCount(item.getCount() - count);
         dataService.update(item);
     }
+    @Request(opcode = MiGongOpcode.CSGetItems)
+    public RetPacket getItems(Object clientData, Session session) throws Throwable{
+        MiGongPB.CSGetItems getItems = MiGongPB.CSGetItems.parseFrom((byte[])clientData);
 
+        List<Item> items = dataService.selectList(Item.class,"userId=?",session.getAccountId());
+        MiGongPB.SCGetItems.Builder builder = MiGongPB.SCGetItems.newBuilder();
+        if(items != null){
+            for(Item item : items){
+                MiGongPB.PBItem.Builder itemBuilder = MiGongPB.PBItem.newBuilder();
+                itemBuilder.setItemId(item.getItemId());
+                itemBuilder.setCount(item.getCount());
+                builder.addItems(itemBuilder);
+            }
+        }
+
+        return new RetPacketImpl(MiGongOpcode.SCGetItems, builder.build().toByteArray());
+    }
     @Tx()
     @Request(opcode = MiGongOpcode.CSUseItem)
     public RetPacket useItem(Object clientData, Session session) throws Throwable{
         MiGongPB.CSUseItem useItem = MiGongPB.CSUseItem.parseFrom((byte[])clientData);
-        ItemTable itemTable = itemTableMap.get(useItem.getItemId());
+        ItemTable itemTable = itemTableMap.get(useItem.getItem().getItemId());
         if(itemTable == null){
             throw new ToClientException("item is not exist!");
         }
         UserMiGong userMiGong = miGongService.get(session.getAccountId());
-        decItem(session.getAccountId(),useItem.getItemId(),useItem.getCount());
+        decItem(session.getAccountId(),useItem.getItem().getItemId(),useItem.getItem().getCount());
 
         Item.ItemType itemType = Item.ItemType.values()[itemTable.getItemtype()];
         switch (itemType){
@@ -106,7 +140,7 @@ public class ItemService {
                 break;
         }
         if(itemType.isSkill()) {
-            miGongService.useSkillItem(session.getAccountId(), itemType, itemTable);
+            miGongService.useSkillItem(session.getAccountId(), itemType, itemTable,useItem.getArgs());
         }
 
         MiGongPB.SCUseItem.Builder builder = MiGongPB.SCUseItem.newBuilder();

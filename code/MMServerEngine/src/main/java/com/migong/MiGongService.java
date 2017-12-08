@@ -31,6 +31,7 @@ import com.protocol.MiGongPB;
 import com.sys.SysPara;
 import com.table.ItemTable;
 import com.table.MiGongPass;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -260,10 +261,10 @@ public class MiGongService {
                 passRewardBuilder.setGold(passRewardData.getStarEnergy()[i]);
                 if(passRewardData.getItemReward() != null){
                     for(Map.Entry<Integer, int[]> entry :passRewardData.getItemReward().entrySet()){
-                        MiGongPB.PBPassRewardItem.Builder psi = MiGongPB.PBPassRewardItem.newBuilder();
+                        MiGongPB.PBItem.Builder psi = MiGongPB.PBItem.newBuilder();
                         psi.setItemId(entry.getKey());
                         psi.setCount(entry.getValue()[i]);
-                        passRewardBuilder.addPassRewardItem(psi);
+                        passRewardBuilder.addItem(psi);
                     }
                 }
                 if(i == 0){
@@ -343,6 +344,15 @@ public class MiGongService {
 
 //        System.out.println("miGongPassInfo.getEnd():"+miGongPassInfo.getEnd());
         builder.setEnd(miGongPassInfo.getEnd().toInt(miGongPassInfo.getSize()));
+
+        List<Item> items = itemService.getSkillItems(session.getAccountId());
+        for(Item item :items){
+            MiGongPB.PBItem.Builder itemBuilder = MiGongPB.PBItem.newBuilder();
+            itemBuilder.setItemId(item.getItemId());
+            itemBuilder.setCount(item.getCount());
+            builder.addItems(itemBuilder);
+        }
+
         miGongPassInfoMap.put(session.getAccountId(),miGongPassInfo);
         byte[] sendData = builder.build().toByteArray();
         return new RetPacketImpl(MiGongOpcode.SCGetMiGongMap, sendData);
@@ -368,7 +378,7 @@ public class MiGongService {
         return userMiGong;
     }
     // 玩家使用道具
-    public void useSkillItem(String userId, Item.ItemType itemType , ItemTable itemTable){
+    public void useSkillItem(String userId, Item.ItemType itemType , ItemTable itemTable,String args){
         MiGongPassInfo miGongPassInfo = miGongPassInfoMap.get(userId);
         if(miGongPassInfo == null){
             log.warn("not in room,but use item ,item type = {},item id = {},userId = {}",itemType.ordinal(),itemTable.getId(),userId);
@@ -380,6 +390,7 @@ public class MiGongService {
                 break;
             case MulBean:
                 miGongPassInfo.setMulBean(itemTable.getPara1());
+                miGongPassInfo.setUseMulBeanStep(Integer.parseInt(args));
                 break;
         }
         if(miGongPassInfo.getUseItems() == null){
@@ -444,10 +455,10 @@ public class MiGongService {
                         passReward.setEnergy(passRewardData.getStarEnergy()[star - 1]);
                         if(passRewardData.getItemReward() != null){
                             for(Map.Entry<Integer,int[]> entry : passRewardData.getItemReward().entrySet()){
-                                MiGongPB.PBPassRewardItem.Builder passRewardItem = MiGongPB.PBPassRewardItem.newBuilder();
+                                MiGongPB.PBItem.Builder passRewardItem = MiGongPB.PBItem.newBuilder();
                                 passRewardItem.setItemId(entry.getKey());
                                 passRewardItem.setCount(entry.getValue()[star - 1]);
-                                passReward.addPassRewardItem(passRewardItem);
+                                passReward.addItem(passRewardItem);
                             }
                         }
                     }
@@ -475,10 +486,10 @@ public class MiGongService {
                                 passReward.setEnergy(passRewardData.getStarEnergy()[star - 1] -  passRewardData.getStarEnergy()[userPass.getStar() - 1]);
                                 if(passRewardData.getItemReward() != null){
                                     for(Map.Entry<Integer,int[]> entry : passRewardData.getItemReward().entrySet()){
-                                        MiGongPB.PBPassRewardItem.Builder passRewardItem = MiGongPB.PBPassRewardItem.newBuilder();
+                                        MiGongPB.PBItem.Builder passRewardItem = MiGongPB.PBItem.newBuilder();
                                         passRewardItem.setItemId(entry.getKey());
                                         passRewardItem.setCount(entry.getValue()[star - 1] - entry.getValue()[userPass.getStar() - 1]);
-                                        passReward.addPassRewardItem(passRewardItem);
+                                        passReward.addItem(passRewardItem);
                                     }
                                 }
                             }
@@ -495,8 +506,8 @@ public class MiGongService {
                     userMiGong.setEnergy(userMiGong.getEnergy() + passReward.getEnergy());
                     dataService.update(userMiGong);
                 }
-                if(passReward.getPassRewardItemCount() > 0){
-                    for(MiGongPB.PBPassRewardItem passRewardItem : passReward.getPassRewardItemList()){
+                if(passReward.getItemCount() > 0){
+                    for(MiGongPB.PBItem passRewardItem : passReward.getItemList()){
                         itemService.addItem(session.getAccountId(),passRewardItem.getItemId(),passRewardItem.getCount());
                     }
                 }
@@ -524,18 +535,24 @@ public class MiGongService {
         return userPass;
     }
     private int calScore(List<Integer> routes,MiGongPassInfo miGongPassInfo){
-        Set<Integer> posForBean = new HashSet<>();
+        Map<Integer,Integer> posForBean = new HashedMap();
+        int step=0;
         for(Integer pos : routes){
-            posForBean.add(pos);
+            posForBean.putIfAbsent(pos,step++);
         }
         int size = miGongPassInfo.getSize();
         int allScore = 0;
         for(Bean bean : miGongPassInfo.getBeans()){
-            if(posForBean.contains(bean.getX() * size + bean.getY())) {
-                allScore += bean.getScore();
+            Integer s = posForBean.get(bean.getX() * size + bean.getY());
+            if(s != null) {
+                if(miGongPassInfo.getMulBean()>1 && s > miGongPassInfo.getUseMulBeanStep()) {
+                    allScore += bean.getScore() * miGongPassInfo.getMulBean(); // 技能，都的加倍
+                }else{
+                    allScore += bean.getScore();
+                }
             }
         }
-        return allScore*(miGongPassInfo.getMulBean()>1?miGongPassInfo.getMulBean():0);
+        return allScore;
     }
     private int calStar(int score,MiGongPass miGongPass){
         return calStar(score,miGongPass.getStar1(),miGongPass.getStar2(),miGongPass.getStar3(),miGongPass.getStar4());

@@ -6,15 +6,9 @@ public final class ItemTable{
 		new ItemTable((int)2.0,(int)0.0,(int)5.0,(int)0.0,(int)3.0),
 		new ItemTable((int)3.0,(int)0.0,(int)30.0,(int)0.0,(int)15.0),
 		new ItemTable((int)4.0,(int)1.0,(int)5.0,(int)0.0,(int)2.0),
-		new ItemTable((int)5.0,(int)1.0,(int)10.0,(int)0.0,(int)5.0),
-		new ItemTable((int)6.0,(int)1.0,(int)15.0,(int)0.0,(int)10.0),
-		new ItemTable((int)7.0,(int)2.0,(int)50.0,(int)0.0,(int)2.0),
-		new ItemTable((int)8.0,(int)2.0,(int)100.0,(int)0.0,(int)5.0),
-		new ItemTable((int)9.0,(int)2.0,(int)200.0,(int)0.0,(int)10.0),
-		new ItemTable((int)10.0,(int)3.0,(int)1.0,(int)0.0,(int)5.0),
-		new ItemTable((int)11.0,(int)3.0,(int)2.0,(int)0.0,(int)10.0),
-		new ItemTable((int)12.0,(int)3.0,(int)3.0,(int)0.0,(int)20.0),
-		new ItemTable((int)13.0,(int)4.0,(int)0.0,(int)0.0,(int)15.0)
+		new ItemTable((int)5.0,(int)2.0,(int)30.0,(int)0.0,(int)5.0),
+		new ItemTable((int)6.0,(int)3.0,(int)1.0,(int)0.0,(int)10.0),
+		new ItemTable((int)7.0,(int)4.0,(int)0.0,(int)0.0,(int)15.0)
 	};
 	private int id;
 	private int itemType;

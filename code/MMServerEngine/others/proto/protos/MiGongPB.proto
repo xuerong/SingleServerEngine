@@ -14,7 +14,7 @@ message SCBaseInfo
 	repeated PBSysPara sysParas 			= 2; // 系统参数
 	repeated PBNewGuide newGuide			= 3;  // 新手引导信息
 	required int32 openPass				= 4; // 推图过了多少关
-	repeated PBItemTable itemTable 			= 5; // 系统参数
+	repeated PBItemTable itemTable 			= 5; // 道具配表
 }
 message PBNewGuide
 {
@@ -68,13 +68,8 @@ message SCGetPassReward
 message PBPassReward
 {
 	required int32 gold 			= 1; // 奖励金币
-	repeated PBPassRewardItem passRewardItem 			= 2; // 奖励道具
+	repeated PBItem item 			= 2; // 奖励道具
 	required int32 energy 			= 3; // 奖励体力
-}
-message PBPassRewardItem
-{
-	required int32 itemId 			= 1; // 道具id
-	required int32 count 			= 2; // 道具数量
 }
 // 获取迷宫
 message CSGetMiGongMap
@@ -96,6 +91,7 @@ message SCGetMiGongMap
 	required int32 star4 			= 11; // 四星目标分数
 	required int32 energy 			= 12; // 消耗体力
 	optional string route			= 13; // 路线
+	repeated PBItem items			= 14; // 道具
 }
 // 豆子信息
 message PBBeanInfo
@@ -117,11 +113,25 @@ message SCPassFinish
 	required int32 success         = 3; // 服务器判定是否过关
 	optional PBPassReward passReward		=4;  // 过关奖励
 }
-// 使用道具
-message CSUseItem
+//////////////////////////////////////////////////道具相关
+message CSGetItems
+{
+
+}
+message SCGetItems
+{
+	repeated PBItem items 			= 1;
+}
+message PBItem
 {
 	required int32 itemId           = 1;
 	required int32 count           = 2;
+}
+// 使用道具
+message CSUseItem
+{
+	required PBItem item			= 1;
+	optional string args			= 2; // 参数，如果需要的话
 }
 message SCUseItem
 {

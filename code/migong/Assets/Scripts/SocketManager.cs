@@ -74,7 +74,8 @@ public class SocketManager : MonoBehaviour {
 		{(int)MiGongOpcode.CSUnlimitedGo,(int)MiGongOpcode.CSUnlimitedGo},
 		{(int)MiGongOpcode.CSMatching,(int)MiGongOpcode.CSMatching},
 		{(int)MiGongOpcode.CSUnlimitedInfo,(int)MiGongOpcode.CSUnlimitedInfo},
-		{(int)MiGongOpcode.CSGetOnlineInfo,(int)MiGongOpcode.CSGetOnlineInfo}
+		{(int)MiGongOpcode.CSGetOnlineInfo,(int)MiGongOpcode.CSGetOnlineInfo},
+		{(int)MiGongOpcode.CSGetPassReward,(int)MiGongOpcode.CSGetPassReward}
 	};
 	// Use this for initialization
 	void Awake () {
