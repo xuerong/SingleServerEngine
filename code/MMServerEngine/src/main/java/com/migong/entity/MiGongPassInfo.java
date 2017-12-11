@@ -25,7 +25,7 @@ public class MiGongPassInfo {
     private int bean1;
     private int bean5;
     private int bean10;
-    private int mulBean = 1; // 豆子的倍数
+    private int mulBean; // 豆子的倍数
     private int useMulBeanStep; // 使用倍数的位置，之后的豆子加倍
     private List<ItemTable> useItems ; // 使用的item
 

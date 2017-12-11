@@ -25,7 +25,7 @@ CREATE TABLE `deviceAccount` (
   `ip` varchar(255) NOT NULL,
   `port` int(11) NOT NULL,
   `accountId` varchar(255) NOT NULL,
-  `createTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ,
-  `lastLoginTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `createTime` timestamp NULL DEFAULT NULL  ,
+  `lastLoginTime` timestamp NULL DEFAULT NULL ,
   PRIMARY KEY (`deviceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

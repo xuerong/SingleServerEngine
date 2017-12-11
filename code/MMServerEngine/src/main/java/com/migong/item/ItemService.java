@@ -13,6 +13,7 @@ import com.mm.engine.framework.security.exception.ToClientException;
 import com.protocol.MiGongOpcode;
 import com.protocol.MiGongPB;
 import com.table.ItemTable;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -125,10 +126,12 @@ public class ItemService {
         decItem(session.getAccountId(),useItem.getItem().getItemId(),useItem.getItem().getCount());
 
         Item.ItemType itemType = Item.ItemType.values()[itemTable.getItemtype()];
+        String ret = null;
         switch (itemType){
             case Energy:
                 userMiGong.setEnergy(userMiGong.getEnergy() + itemTable.getPara1());
                 dataService.update(userMiGong);
+                ret = String.valueOf(userMiGong.getEnergy());
                 break;
             case AddSpeed:
                 break;
@@ -139,12 +142,15 @@ public class ItemService {
             case ShowRoute:
                 break;
         }
+
         if(itemType.isSkill()) {
-            miGongService.useSkillItem(session.getAccountId(), itemType, itemTable,useItem.getArgs());
+            ret = miGongService.useSkillItem(session.getAccountId(), itemType, itemTable,useItem.getArgs());
         }
 
         MiGongPB.SCUseItem.Builder builder = MiGongPB.SCUseItem.newBuilder();
-//        builder.setRet()
+        if(ret != null){
+            builder.setRet(ret);
+        }
         return new RetPacketImpl(MiGongOpcode.SCUseItem, builder.build().toByteArray());
     }
 }

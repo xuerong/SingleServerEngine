@@ -44,6 +44,8 @@ import java.util.concurrent.*;
 
 /**
  *
+ * -source1.7问题可能到maven中设置
+ *
  * 0fa7ef61f78d1ba3be659bd746e4aea8
  *
  * 功能：
@@ -116,7 +118,7 @@ import java.util.concurrent.*;
  *
  * 付费总值，金币获取和消费，付费用户，付费次数，付费率，ARPU，ARPPU，
  *
- *
+ *TODO 缓存问题，这里用的map做缓存，满了不会自动清除，这个要处理的
  *
  * 微信：
  * AppID：wx4441fcf39f0e24e0
@@ -309,14 +311,7 @@ public class MiGongService {
 
         Map<Integer,Integer> guideMap = Util.split2Map(userMiGong.getNewUserGuide(),Integer.class,Integer.class);
         if(guideMap == null || !guideMap.containsKey(NewGuideType.Pass)) {
-            Element[] road = new GetShortRoad(myMap, false).getRoad();
-            StringBuilder sb = new StringBuilder();
-            String sp = "";
-            for(Element element : road){
-                sb.append(sp).append(element.toInt(miGongPassInfo.getSize()));
-                sp=";";
-            }
-            builder.setRoute(sb.toString());
+            builder.setRoute(getRoute(myMap,miGongPassInfo.getSize()));
         }
 
         List<Integer> integers = new ArrayList<>(miGongPassInfo.getSize()*miGongPassInfo.getSize());
@@ -357,6 +352,16 @@ public class MiGongService {
         byte[] sendData = builder.build().toByteArray();
         return new RetPacketImpl(MiGongOpcode.SCGetMiGongMap, sendData);
     }
+    private String getRoute(CreateMap myMap,int size){
+        Element[] road = new GetShortRoad(myMap, false).getRoad();
+        StringBuilder sb = new StringBuilder();
+        String sp = "";
+        for(Element element : road){
+            sb.append(sp).append(element.toInt(size));
+            sp=";";
+        }
+        return sb.toString();
+    }
     private void checkAndDecrEnergy(UserMiGong userMiGong,int delta){
         if(!debug) {
             int energy = getEnergyByRefresh(userMiGong);
@@ -378,12 +383,13 @@ public class MiGongService {
         return userMiGong;
     }
     // 玩家使用道具
-    public void useSkillItem(String userId, Item.ItemType itemType , ItemTable itemTable,String args){
+    public String useSkillItem(String userId, Item.ItemType itemType , ItemTable itemTable,String args){
         MiGongPassInfo miGongPassInfo = miGongPassInfoMap.get(userId);
         if(miGongPassInfo == null){
             log.warn("not in room,but use item ,item type = {},item id = {},userId = {}",itemType.ordinal(),itemTable.getId(),userId);
-            return;
+            return null;
         }
+        String ret = null;
         switch (itemType){
             case AddTime:
                 miGongPassInfo.setTime(miGongPassInfo.getTime()*(100+itemTable.getPara1())/100);
@@ -392,11 +398,15 @@ public class MiGongService {
                 miGongPassInfo.setMulBean(itemTable.getPara1());
                 miGongPassInfo.setUseMulBeanStep(Integer.parseInt(args));
                 break;
+            case ShowRoute:
+                ret = getRoute(miGongPassInfo.getCreateMap(),miGongPassInfo.getSize());
+                break;
         }
         if(miGongPassInfo.getUseItems() == null){
-            miGongPassInfo.setUseItems(new ArrayList<>());
+            miGongPassInfo.setUseItems(new ArrayList<ItemTable>());
         }
         miGongPassInfo.getUseItems().add(itemTable);
+        return ret;
     }
     @Tx()
     @Request(opcode = MiGongOpcode.CSPassFinish)
@@ -461,6 +471,7 @@ public class MiGongService {
                                 passReward.addItem(passRewardItem);
                             }
                         }
+                        builder.setPassReward(passReward);
                     }
                 }else{
                     UserPass userPass = dataService.selectObject(UserPass.class,"userId=? and passId=?",session.getAccountId(),miGongPassInfo.getPass());
@@ -492,6 +503,7 @@ public class MiGongService {
                                         passReward.addItem(passRewardItem);
                                     }
                                 }
+                                builder.setPassReward(passReward);
                             }
                             // ------
                         }
@@ -512,7 +524,7 @@ public class MiGongService {
                     }
                 }
                 //
-                builder.setPassReward(passReward);
+
             }else{
                 isSuccess = false;
             }
@@ -545,8 +557,8 @@ public class MiGongService {
         for(Bean bean : miGongPassInfo.getBeans()){
             Integer s = posForBean.get(bean.getX() * size + bean.getY());
             if(s != null) {
-                if(miGongPassInfo.getMulBean()>1 && s > miGongPassInfo.getUseMulBeanStep()) {
-                    allScore += bean.getScore() * miGongPassInfo.getMulBean(); // 技能，都的加倍
+                if(miGongPassInfo.getMulBean()>0 && s >= miGongPassInfo.getUseMulBeanStep()) {
+                    allScore += bean.getScore() * (1+miGongPassInfo.getMulBean()); // 技能，都的加倍
                 }else{
                     allScore += bean.getScore();
                 }

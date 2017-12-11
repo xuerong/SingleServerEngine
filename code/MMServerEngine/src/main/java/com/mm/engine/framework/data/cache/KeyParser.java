@@ -69,7 +69,7 @@ public class KeyParser {
                 if(pk.length!=2){
                     throw new MMException("condition 参数错误,resultCondition = "+resultCondition);
                 }
-                pksInConditions.put(pk[0],pk[1]);
+                pksInConditions.put(pk[0].trim(),pk[1].trim());
             }
         }
         if(pks.size() > pksInConditions.size()){
@@ -80,7 +80,7 @@ public class KeyParser {
         for (String pk:pks) {
             String pkStr = pksInConditions.get(pk);
             if(pkStr == null){
-                throw new MMException("condition 参数错误,缺少主键["+pk+"]+，resultCondition = "+resultCondition);
+                throw new MMException("condition 参数错误,缺少主键["+pk+"]，resultCondition = "+resultCondition+",class = "+entityClass.getName());
             }
             sb.append("_"+pksInConditions.get(pk));
         }

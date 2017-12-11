@@ -16,12 +16,14 @@ public class MainPanel : MonoBehaviour {
 
 	public GameObject uiHelp;
 
+	public GameObject uiPacket;
+	public GameObject uiShop;
+
 	public GameObject ui;
 	// 系统参数
 	private Dictionary<string,string> sysParas = new Dictionary<string, string> ();
 	private Dictionary<int,int> guideStep = new Dictionary<int, int> ();
 
-	private int energy;
 
 	private int matchingDialogId; // 匹配阶段弹窗的id
 
@@ -83,8 +85,8 @@ public class MainPanel : MonoBehaviour {
 			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSUnlimitedGo,CSUnlimitedGo.SerializeToBytes(unlimitedGo),delegate(int opcode, byte[] data) {
 				ui.SetActive (false);
 				SCUnlimitedGo ret = SCUnlimitedGo.Deserialize(data);
-				// 消耗精力
-				energy = ret.Energy;
+				// 剩余精力
+				Params.energy = ret.Energy;
 				int[] stars= {ret.Star1,ret.Star2,ret.Star3,ret.Star4};
 				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans,ret.Time, ret.Speed,ret.Start, ret.End, ret.Pass,null,stars,null,null);
 			});
@@ -109,7 +111,7 @@ public class MainPanel : MonoBehaviour {
 		CSBaseInfo baseInfo = new CSBaseInfo();
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSBaseInfo, CSBaseInfo.SerializeToBytes (baseInfo), delegate(int opcode, byte[] data) {
 			SCBaseInfo ret = SCBaseInfo.Deserialize(data);
-			this.energy = ret.Energy;
+			Params.energy = ret.Energy;
 			// TODO 显示精力
 			// 系统参数
 			foreach(PBSysPara sp in ret.SysParas){
@@ -172,6 +174,20 @@ public class MainPanel : MonoBehaviour {
 			Sound.playSound(SoundType.Click);
 			GuideControl guideControl = uiHelp.GetComponent<GuideControl>();
 			guideControl.showHelp(false);
+		});
+
+		// 背包，商店
+		Button packetButton = GameObject.Find (canvasPath+"packet").GetComponent<Button>();
+		packetButton.onClick.AddListener (delegate() {
+			Debug.Log("backet");
+			Sound.playSound(SoundType.Click);
+			uiPacket.GetComponent<Packet>().showPacket();
+		});
+		Button shopButton = GameObject.Find (canvasPath+"shop").GetComponent<Button>();
+		shopButton.onClick.AddListener (delegate() {
+			Debug.Log("shop");
+			Sound.playSound(SoundType.Click);
+			uiShop.GetComponent<Shop>().showShop();
 		});
 
 		// 对战中显示奖励界面的进入地图按钮
@@ -317,7 +333,7 @@ public class MainPanel : MonoBehaviour {
 
 			GameObject energyTextGo = GameObject.Find ("main/ui/uiLevel/Canvas/energy/Text");
 			Text energyText = energyTextGo.GetComponent<Text>();
-			energyText.text = this.energy.ToString();
+			energyText.text = Params.energy.ToString();
 
 			GameObject up = Instantiate(button) as GameObject;
 			RectTransform buRec = up.GetComponent<RectTransform> ();
@@ -376,7 +392,7 @@ public class MainPanel : MonoBehaviour {
 			//
 			GameObject energyTextGo = GameObject.Find ("main/ui/uiUnlimit/Canvas/energy/Text");
 			Text energyText = energyTextGo.GetComponent<Text>();
-			energyText.text = this.energy.ToString();
+			energyText.text = Params.energy.ToString();
 			// 列表
 			int count = ret.UnlimitedRankInfo.Count;
 			float dis = 20f;
@@ -546,8 +562,8 @@ public class MainPanel : MonoBehaviour {
 			uiLevel.transform.Find("Canvas/showReward").gameObject.SetActive(false);
 			ui.SetActive (false);
 			SCGetMiGongMap scmap = SCGetMiGongMap.Deserialize(ret);
-			// 消耗精力
-			energy = scmap.Energy;
+			// 剩余精力
+			Params.energy = scmap.Energy;
 			int[] stars= {scmap.Star1,scmap.Star2,scmap.Star3,scmap.Star4};
 
 			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans,scmap.Time, scmap.Speed,scmap.Start, scmap.End, scmap.Pass,null,stars,scmap.Route,scmap.Items);

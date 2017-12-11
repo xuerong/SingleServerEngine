@@ -66,7 +66,7 @@ public class PropsUtil {
             String[] fileList = file.list();
             for (String fileName : fileList) {
                 if(fileName.endsWith("properties")){
-                    result.put(fileName.replace(".properties",""),loadProps(dirPath+"\\"+fileName));
+                    result.put(fileName.replace(".properties",""),loadProps(dirPath+"/"+fileName));
                 }
             }
         }catch (Throwable e){

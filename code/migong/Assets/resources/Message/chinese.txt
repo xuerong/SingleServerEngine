@@ -6,6 +6,8 @@ online=对战模式
 account=账号
 share=分享
 help=帮助
+packet=背包
+shop=商店
 healthyWarn=抵制不良游戏 拒绝盗版游戏 注意自我保护 谨防受骗上当\n适度游戏益脑 沉迷游戏伤身 合理安排时间 享受健康生活
 unlimitGo=开始
 onlineGo=开始
@@ -46,3 +48,17 @@ guideContent1=引导一
 guideContent2=引导二
 guideContent3=引导三
 guideContent4=引导四
+
+use=使用
+
+itemEnergyIntroduce=精力瓶{0}
+itemAddSpeedIntroduce=加速{0}
+itemAddTimeIntroduce=加时间{0}
+itemMulBeanIntroduce=豆子加倍{0}
+itemShowRouteIntroduce=显示路线
+
+itemTab=道具
+suitTab=套装
+peckTab=礼包
+
+buy=购买

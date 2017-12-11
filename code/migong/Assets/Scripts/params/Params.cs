@@ -4,7 +4,12 @@ using UnityEngine;
 using Example;
 
 public class Params {
+
+	public static int energy = 0;
+
 	public static Dictionary<int,ItemTable> itemTables = new Dictionary<int, ItemTable> ();
+	public static Dictionary<int,UnitTable> unitTables = new Dictionary<int, UnitTable> ();
+	public static Dictionary<int,PeckTable> peckTables = new Dictionary<int, PeckTable> ();
 
 	public static void init(SCBaseInfo baseInfo){
 		foreach (PBItemTable it in baseInfo.ItemTable) {
@@ -46,4 +51,17 @@ public enum ItemType{
 	AddTime,
 	MulBean,
 	ShowRoute
+}
+// 商店套装
+public class UnitTable{
+	public int Id;
+	public Dictionary<int,int> Items;
+	public int Price; // 价格，这里只需要这一个价格，这是实际价格，原价是按照东西的价格叠加就可以，同时可以计算出来折扣
+}
+// 商店礼包
+public class PeckTable{
+	public int Id;
+	public int gold;
+	public Dictionary<int,int> Items;
+	public int Price; // 价格，这里只需要这一个价格，这是实际价格，原价是按照东西的价格叠加就可以，同时可以计算出来折扣
 }

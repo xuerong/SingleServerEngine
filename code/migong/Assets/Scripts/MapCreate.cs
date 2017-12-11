@@ -140,13 +140,14 @@ public class MapCreate : MonoBehaviour{
 		} else {
 			// 使用技能的事件
 			transform.parent.parent.Find ("Canvas/skills/"+path).GetComponent<Button>().onClick.AddListener(delegate {
-				useSkill(itemType);
+				Sound.playSound(SoundType.Click);
+				useSkill(path,itemType);
 			});
 		}
 	}
 
 	private int getItemCountByType(ItemType itemType){
-		int itemId = Params.getItemId (ItemType.AddSpeed);
+		int itemId = Params.getItemId (itemType);
 		if (skillItemCount.ContainsKey (itemId)) {
 			return skillItemCount [itemId];
 		}
@@ -154,7 +155,7 @@ public class MapCreate : MonoBehaviour{
 	}
 
 	//使用技能
-	public void useSkill(ItemType itemType){
+	public void useSkill(string path,ItemType itemType){
 		int itemId = Params.getItemId (itemType);
 
 		if (!skillItemCount.ContainsKey (itemId) || skillItemCount [itemId] < 1) {
@@ -173,11 +174,36 @@ public class MapCreate : MonoBehaviour{
 		}
 
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSUseItem, CSUseItem.SerializeToBytes (useItem), delegate(int opcode, byte[] data) {
+			// 不能再点
+			transform.parent.parent.Find ("Canvas/skills/"+path).GetComponent<Button>().enabled = false;
 			// 如果能走到这里，说明道具使用正常
 			SCUseItem ret = SCUseItem.Deserialize(data);
 			skillItemCount[itemId] = skillItemCount[itemId] - 1;
 			skillItemText[itemType].text = skillItemCount[itemId].ToString();
-			// TODO 道具发挥效果
+
+			// 道具发挥效果
+			switch(itemType){
+			case ItemType.AddSpeed:
+				Pacman pacman = pacmanMap [SocketManager.accountId];
+				pacman.addSpeed(Params.itemTables[itemId].Para1);
+				break;
+			case ItemType.AddTime:
+				currentTime += Params.itemTables[itemId].Para1;
+				break;
+			case ItemType.MulBean:
+				pacman = pacmanMap [SocketManager.accountId];
+				pacman.mulBean = 1+Params.itemTables[itemId].Para1;
+				break;
+			case ItemType.ShowRoute:
+				string[] routes = ret.Ret.Split (';');
+				int[] routeInt = new int[routes.Length];
+				for (int i = 0, len = routes.Length; i < len; i++) {
+					routeInt [i] = int.Parse (routes [i]);
+				}
+				this.route = routeInt;
+				showRoute();
+				break;
+			}
 		});
 	}
 
@@ -273,9 +299,10 @@ public class MapCreate : MonoBehaviour{
 		if (beanMap [x] [y] != null) {
 			Sound.playSound (SoundType.EatBean);
 			Destroy (beanMap [x] [y].go); // 计算在玩家身上，并做出相应的效果
+			int addScore = beanMap [x] [y].score * pacmanMap [userId].mulBean;
 			if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {
 				float old = starSlider.value;
-				starSlider.value = starSlider.value + beanMap [x] [y].score;
+				starSlider.value = starSlider.value + addScore;
 				Text scoreText = starSlider.transform.Find ("score").GetComponent<Text> ();
 				scoreText.text = starSlider.value + "";
 				// 点亮星星
@@ -285,13 +312,13 @@ public class MapCreate : MonoBehaviour{
 						// 点亮
 						Image image = starSlider.transform.parent.Find ("star" + i).GetComponent<Image>();
 						image.color = new Color (255,255,255);
-						break;
 					}
 				}
 			}else if(Mode == MapMode.Online){
-				scoreText [userId].text = int.Parse (scoreText [userId].text) + beanMap [x] [y].score + "";
+				scoreText [userId].text = int.Parse (scoreText [userId].text) + addScore + "";
 			}
-			pacmanMap [userId].score += beanMap [x] [y].score;
+			pacmanMap [userId].score += addScore;
+			Debug.Log ("score:"+pacmanMap [userId].score);
 			beanMap [x] [y] = null;
 		}
 	}
@@ -302,6 +329,23 @@ public class MapCreate : MonoBehaviour{
 			return true;
 		}
 		return false;
+	}
+
+	private void showRoute(){
+		Object bean10 = Resources.Load ("routeUnit");
+		float mapWidth = td * nodeX;
+
+		foreach (int r in this.route) {
+			Debug.Log (r);
+			int i = r / td;
+			int w = tr - i-1;
+			int j = r % td;
+			GameObject beanGo = Instantiate(bean10) as GameObject;
+			beanGo.transform.parent = transform;
+
+			beanGo.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,1f);
+			beanGo.transform.localScale = new Vector3 (1.05f,1.05f,1);
+		}
 	}
 
 	private void createMap(){
@@ -409,7 +453,9 @@ public class MapCreate : MonoBehaviour{
 	}
 
 	public void selfArrive(bool success,List<int> route,bool showSettle){
-		Sound.playSound (SoundType.Arrive);
+		if (success) {
+			Sound.playSound (SoundType.Arrive);
+		}
 		if (Mode == MapMode.Level) {
 			this.gameOver = true;
 			CSPassFinish pf = new CSPassFinish ();

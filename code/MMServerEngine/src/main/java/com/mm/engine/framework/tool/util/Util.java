@@ -1,9 +1,13 @@
 package com.mm.engine.framework.tool.util;
 
 import com.maxmind.geoip2.DatabaseReader;
+import com.maxmind.geoip2.model.CountryResponse;
+import com.maxmind.geoip2.record.Country;
 import com.mm.engine.framework.security.exception.MMException;
 import com.mm.engine.framework.server.Server;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.RemoteEndpoint;
@@ -21,25 +25,27 @@ import java.util.regex.Pattern;
  * Created by Administrator on 2015/11/16.
  */
 public final class Util {
-//    private static FileInputStream database = null;
-//    private static DatabaseReader reader = null;
-//
-//    static {
-//        try {
-//            database = new FileInputStream(PropertyFileReader.getItem("GeoIP2_Country_File"));
-//            reader = new DatabaseReader.Builder(database).build();
-//        } catch (Exception e) {
-//
-//        } finally {
-//            if (database != null) {
-//                try {
-//                    database.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//    }
+    private static final Logger log = LoggerFactory.getLogger(Util.class);
+
+    private static FileInputStream database = null;
+    private static DatabaseReader reader = null;
+
+    static {
+        try {
+            database = new FileInputStream("GeoIP2-Country.mmdb");
+            reader = new DatabaseReader.Builder(database).build();
+        } catch (Exception e) {
+
+        } finally {
+            if (database != null) {
+                try {
+                    database.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     // 获取http访问的ip
     public static String getIp(HttpServletRequest request) {
@@ -235,23 +241,23 @@ public final class Util {
         }
     }
 
-//    public static String getCountryCode(String ip) {
-//        String countryCode = null;
-//        if (reader != null) {
-//            try {
-//                InetAddress ipAddress = InetAddress.getByName(ip);
-//                CountryResponse response = reader.country(ipAddress);
-//
-//                Country country = response.getCountry();
-//                countryCode = country.getIsoCode();
-//            } catch (Exception e) {
-////                e.printStackTrace();
-//            }
-//        } else {
-//            LOGGER.info("GeoIP DatabaseReader is null");
-//        }
-//        return countryCode;
-//    }
+    public static String getCountryCode(String ip) {
+        String countryCode = null;
+        if (reader != null) {
+            try {
+                InetAddress ipAddress = InetAddress.getByName(ip);
+                CountryResponse response = reader.country(ipAddress);
+
+                Country country = response.getCountry();
+                countryCode = country.getIsoCode();
+            } catch (Exception e) {
+//                e.printStackTrace();
+            }
+        } else {
+            log.info("GeoIP DatabaseReader is null");
+        }
+        return countryCode;
+    }
 
     /** 获取服务器的utc时间的long值  单位ms**/
     public static long getSystemUtcTime(){

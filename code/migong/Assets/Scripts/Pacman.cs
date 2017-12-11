@@ -11,6 +11,7 @@ public class Pacman : MonoBehaviour {
 
 	public MapCreate mapCreate;
 	public float speed = 0.04f;
+	private float defaultSpeed ; // 默认速度，这个在使用道具之后，使得加速不能叠加
 
 	public int score = 0; // 用于记录分数，及对应星级
 
@@ -44,12 +45,16 @@ public class Pacman : MonoBehaviour {
 	public List<int> route = new List<int>();
 
 	public bool finish;
+
+	public int mulBean = 1;
+
 	void Start () {
 		pacmanColliders = mapCreate.pacmanColliders;
 		if (userId == null || userId.Length == 0) {
 			this.userId = SocketManager.accountId;
 		}
 		speed /= 100f;
+		defaultSpeed = speed;
 
 		transform.localPosition = mapCreate.getStartPointWithScale (inX,inY);
 
@@ -76,6 +81,10 @@ public class Pacman : MonoBehaviour {
 		mapCreate.setEndEffect (outX, outY);
 
 		Debug.Log (inX+","+inY+","+outX+","+outY+ "  ");
+	}
+
+	public void addSpeed(int delta){
+		speed = defaultSpeed + delta / 100f;
 	}
 
 	void FixedUpdate () {
