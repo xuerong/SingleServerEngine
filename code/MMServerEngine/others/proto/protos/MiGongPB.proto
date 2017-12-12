@@ -14,7 +14,10 @@ message SCBaseInfo
 	repeated PBSysPara sysParas 			= 2; // 系统参数
 	repeated PBNewGuide newGuide			= 3;  // 新手引导信息
 	required int32 openPass				= 4; // 推图过了多少关
-	repeated PBItemTable itemTable 			= 5; // 道具配表
+	required int32 gold				= 5; // 金币
+	repeated PBItemTable itemTable 			= 6; // 道具配表
+	repeated PBUnitTable unitTable 			= 7; // 套装配表
+	repeated PBPeckTable peckTable 			= 8; // 礼包配表
 }
 message PBNewGuide
 {
@@ -33,6 +36,24 @@ message PBItemTable // 道具表
 	required int32 para1				= 3;
 	required int32 para2				= 4;
 	required int32 price				= 5;
+}
+
+message PBUnitTable
+{
+	required int32 id				= 1;
+	required string name				= 2;
+	required string items				= 3;
+	required int32 price				= 4;
+	required int32 limit				= 5;
+}
+message PBPeckTable
+{
+	required int32 id				= 1;
+	required string name				= 2;
+	required int32 gold				= 3;
+	required string items				= 4;
+	required int32 price				= 5;
+	required int32 limit				= 6;
 }
 // 完成新手引导
 message CSNewGuideFinish
@@ -349,4 +370,36 @@ message SCCommon
 
 /////////////////////////////////////////////////////////////////道具相关///////////////////////////////////////
 //
+message CSGoldBuy
+{
+	 required int32 type 			= 1; // 类型 0道具，1套装
+	 required int32 id 				= 2; //
+	 required int32 num 			= 3; //
+}
+message SCGoldBuy
+{
+	required int32 success 			= 1; //
+	required int32 gold 				= 2; //
+}
+message CSMoneyBuyBefore
+{
+	required int32 id 				= 1; // 类型 0道具，1套装，
+	required int32 num 			= 2; //
+}
+message SCMoneyBuyBefore
+{
+	required int32 isOk 				= 1; // 是否可以购买
+	optional string reason 				= 2; // 不能购买的原因
+}
+message CSMoneyBuy
+{
+	required int32 id 				= 1; //
+	required int32 num 			= 2; //
+	optional string token 		= 3; // 当类型为礼包时，这个是购买的token
+}
+message SCMoneyBuy
+{
+	required int32 success 			= 1; //
+	required int32 gold 				= 2; //
+}
 

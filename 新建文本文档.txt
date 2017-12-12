@@ -26,6 +26,12 @@ u672au547du540d	ins-6u87cn62	vpc-0j72voq7	172.16.0.4	111.230.144.111
 系统盘: 40GB 高效云盘
 数据盘: 20GB（高效云盘，随实例释放，非加密）
 
+//国外登陆、支付接口
+http://blog.wing-analytics.com/archives/335.html
+unity facebook登陆：https://www.2cto.com/kf/201705/638522.html
+google支付：http://blog.csdn.net/lzp2015/article/details/51668852
+谷歌账号：zhengyuzhen2@gmail.com
+facebook账号:861180416@qq.com
 
 
 
