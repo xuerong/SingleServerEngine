@@ -1,22 +1,24 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/params/Params.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/util/LocalizationText.cs">
     <Files>
-      <File FileName="Assets/Scripts/SocketManager.cs" Line="166" Column="76" />
-      <File FileName="Assets/Scripts/Pacman.cs" Line="181" Column="33" />
-      <File FileName="Assets/Scripts/MainPanel.cs" Line="190" Column="40" />
-      <File FileName="Assets/Scripts/MapCreate.cs" Line="386" Column="106" />
-      <File FileName="Assets/resources/Message/chinese.txt" Line="64" Column="1" />
-      <File FileName="Assets/resources/Message/english.txt" Line="64" Column="8" />
-      <File FileName="Assets/Scripts/packet/PacketItem.cs" Line="6" Column="24" />
-      <File FileName="Assets/Scripts/packet/Packet.cs" Line="6" Column="15" />
-      <File FileName="Assets/Scripts/GuideControl.cs" Line="26" Column="23" />
-      <File FileName="Assets/Scripts/util/LocalizationImageManager.cs" Line="21" Column="11" />
-      <File FileName="Assets/Scripts/util/LocalizationImage.cs" Line="17" Column="38" />
-      <File FileName="Assets/Scripts/params/Params.cs" Line="68" Column="1" />
+      <File FileName="Assets/Scripts/SocketManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Pacman.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MainPanel.cs" Line="114" Column="31" />
+      <File FileName="Assets/Scripts/MapCreate.cs" Line="1" Column="1" />
+      <File FileName="Assets/resources/Message/chinese.txt" Line="66" Column="1" />
+      <File FileName="Assets/resources/Message/english.txt" Line="66" Column="8" />
+      <File FileName="Assets/Scripts/packet/PacketItem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/packet/Packet.cs" Line="74" Column="4" />
+      <File FileName="Assets/Scripts/GuideControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/util/LocalizationImageManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/util/LocalizationImage.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/params/Params.cs" Line="29" Column="21" />
       <File FileName="Assets/Scripts/DragControl.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/shop/Shop.cs" Line="42" Column="18" />
-      <File FileName="Assets/Scripts/shop/ShopItem.cs" Line="66" Column="4" />
+      <File FileName="Assets/Scripts/shop/Shop.cs" Line="162" Column="44" />
+      <File FileName="Assets/Scripts/shop/ShopItem.cs" Line="48" Column="101" />
+      <File FileName="Assets/Scripts/util/Message.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/util/LocalizationText.cs" Line="13" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -11,7 +11,12 @@ public class LocalizationText : MonoBehaviour {
 	void Start () {
 		if (messageKey == null || messageKey.Length==0) {
 			Debug.LogError ("message key is empty ,gameObject name = "+gameObject.name);
+			return;
 		}
-		GetComponent<Text> ().text = Message.getText (messageKey);
+		string text = Message.getText (messageKey);
+		if (text == null) {
+			return;
+		}
+		GetComponent<Text> ().text = text;
 	}
 }
