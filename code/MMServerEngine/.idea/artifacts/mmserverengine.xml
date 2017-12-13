@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact name="mmserverengine">
-    <output-path>$PROJECT_DIR$/../../bin</output-path>
+    <output-path>$PROJECT_DIR$/../../server</output-path>
     <root id="root">
       <element id="directory" name="lib">
         <element id="library" level="project" name="Maven: cglib:cglib:3.1" />
