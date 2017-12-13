@@ -7,6 +7,7 @@ import com.migong.item.PassRewardData;
 import com.migong.map.CreateMap;
 import com.migong.map.Element;
 import com.migong.map.GetShortRoad;
+import com.migong.shop.ShopService;
 import com.mm.engine.framework.control.annotation.EventListener;
 import com.mm.engine.framework.control.annotation.Request;
 import com.mm.engine.framework.control.annotation.Service;
@@ -31,6 +32,8 @@ import com.protocol.MiGongPB;
 import com.sys.SysPara;
 import com.table.ItemTable;
 import com.table.MiGongPass;
+import com.table.PeckTable;
+import com.table.UnitTable;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
@@ -139,6 +142,7 @@ public class MiGongService {
     private SysParaService sysParaService;
     private IdService idService;
     private ItemService itemService;
+    private ShopService shopService;
     /**
      * 这个是玩家获取迷宫后缓存的该迷宫信息，在玩家过关的时候用来校验是否正常过关。同时在如下几种情况下要清除：
      * 1、玩家断开连接
@@ -177,7 +181,7 @@ public class MiGongService {
         }
     }
     @Request(opcode = MiGongOpcode.CSBaseInfo)
-    public RetPacket getbaseInfo(Object clientData, Session session) throws Throwable{
+    public RetPacket getBaseInfo(Object clientData, Session session) throws Throwable{
         UserMiGong userMiGong = get(session.getAccountId());
         MiGongPB.SCBaseInfo.Builder builder = MiGongPB.SCBaseInfo.newBuilder();
         builder.setEnergy(getEnergyByRefresh(userMiGong));
@@ -196,7 +200,8 @@ public class MiGongService {
             builder.addNewGuide(guideBuilder);
         }
         builder.setOpenPass(userMiGong.getPass());
-        //
+        builder.setGold(userMiGong.getGold());
+        // 道具配表
         for(ItemTable itemTable : ItemTable.datas){
             MiGongPB.PBItemTable.Builder itemBuilder = MiGongPB.PBItemTable.newBuilder();
             itemBuilder.setId(itemTable.getId());
@@ -205,6 +210,27 @@ public class MiGongService {
             itemBuilder.setPara2(itemTable.getPara2());
             itemBuilder.setPrice(itemTable.getPrice());
             builder.addItemTable(itemBuilder);
+        }
+        // 套装配表
+        for(UnitTable unitTable : UnitTable.datas){
+            MiGongPB.PBUnitTable.Builder unitBuilder = MiGongPB.PBUnitTable.newBuilder();
+            unitBuilder.setId(unitTable.getId());
+            unitBuilder.setItems(unitTable.getItems());
+            unitBuilder.setLimit(unitTable.getLimit());
+            unitBuilder.setName(unitTable.getName());
+            unitBuilder.setPrice(unitTable.getPrice());
+            builder.addUnitTable(unitBuilder);
+        }
+        // 礼包配表
+        for(PeckTable peckTable : PeckTable.datas){
+            MiGongPB.PBPeckTable.Builder peckBuilder = MiGongPB.PBPeckTable.newBuilder();
+            peckBuilder.setId(peckTable.getId());
+            peckBuilder.setItems(peckTable.getItems());
+            peckBuilder.setLimit(peckTable.getLimit());
+            peckBuilder.setName(peckTable.getName());
+            peckBuilder.setPrice(peckTable.getPrice());
+            peckBuilder.setGold(peckTable.getGold());
+            builder.addPeckTable(peckBuilder);
         }
         return new RetPacketImpl(MiGongOpcode.SCBaseInfo, builder.build().toByteArray());
     }
@@ -511,8 +537,7 @@ public class MiGongService {
                 }
                 // 添加进玩家的身上
                 if(passReward.getGold() > 0){
-                    userMiGong.setGold(userMiGong.getGold() + passReward.getGold());
-                    dataService.update(userMiGong);
+                    shopService.addGold(userMiGong.getUserId(),passReward.getGold());
                 }
                 if(passReward.getEnergy() > 0){
                     userMiGong.setEnergy(userMiGong.getEnergy() + passReward.getEnergy());

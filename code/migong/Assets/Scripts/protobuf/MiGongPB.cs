@@ -39,7 +39,16 @@ namespace Example
         public int OpenPass { get; set; }
 
         /// <summary> 推图过了多少关</summary>
+        public int Gold { get; set; }
+
+        /// <summary> 金币</summary>
         public List<Example.PBItemTable> ItemTable { get; set; }
+
+        /// <summary> 道具配表</summary>
+        public List<Example.PBUnitTable> UnitTable { get; set; }
+
+        /// <summary> 套装配表</summary>
+        public List<Example.PBPeckTable> PeckTable { get; set; }
 
     }
 
@@ -70,6 +79,36 @@ namespace Example
         public int Para2 { get; set; }
 
         public int Price { get; set; }
+
+    }
+
+    public partial class PBUnitTable
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Items { get; set; }
+
+        public int Price { get; set; }
+
+        public int Limit { get; set; }
+
+    }
+
+    public partial class PBPeckTable
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public int Gold { get; set; }
+
+        public string Items { get; set; }
+
+        public int Price { get; set; }
+
+        public int Limit { get; set; }
 
     }
 
@@ -622,6 +661,62 @@ namespace Example
     public partial class SCCommon
     {
         public List<string> Route { get; set; }
+
+    }
+
+    /// <summary>道具相关///////////////////////////////////////</summary>
+    public partial class CSGoldBuy
+    {
+        public int Type { get; set; }
+
+        /// <summary> 类型 0道具，1套装</summary>
+        public int Id { get; set; }
+
+        public int Num { get; set; }
+
+    }
+
+    public partial class SCGoldBuy
+    {
+        public int Success { get; set; }
+
+        public int Gold { get; set; }
+
+    }
+
+    public partial class CSMoneyBuyBefore
+    {
+        public int Id { get; set; }
+
+        /// <summary> 类型 0道具，1套装，</summary>
+        public int Num { get; set; }
+
+    }
+
+    public partial class SCMoneyBuyBefore
+    {
+        public int IsOk { get; set; }
+
+        /// <summary> 是否可以购买</summary>
+        public string Reason { get; set; }
+
+    }
+
+    public partial class CSMoneyBuy
+    {
+        public int Id { get; set; }
+
+        public int Num { get; set; }
+
+        public string Token { get; set; }
+
+    }
+
+    public partial class SCMoneyBuy
+    {
+        public int Success { get; set; }
+
+        public int Gold { get; set; }
 
     }
 
