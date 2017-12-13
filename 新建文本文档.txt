@@ -14,6 +14,9 @@ app：3344c1180ab5eed4f6aed6f2a002008b
 root ppdDg7WacPxDb6H
 服务器名称	云主机ID	所在网络ID	内网IP	公网IP
 u672au547du540d	ins-6u87cn62	vpc-0j72voq7	172.16.0.4	111.230.144.111
+
+
+
 阿里云6个月使用
 实例名称：migong,密码：Zyz[861180416]
 47.95.219.97(公)
@@ -60,9 +63,21 @@ rpm -ivh jdk-9.0.1_linux-x64_bin.rpm
 在serverInfo表中加入服务器的信息
 4、下载安装cronolog
 安装cronolog:http://blog.51cto.com/freeloda/1346076
-5、上传代码：
-下载安装：winSCP
+5、上传代码，两种方案：
 创建目录:mkdir /usr/migong
+转到目录:cd /usr/migong
+安装git（实测阿里云上可以，不行参见：https://www.cnblogs.com/lhbryant/p/6928894.html）：
+yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker
+下载运行项目（可参考:https://jingyan.baidu.com/article/75ab0bcbac0e01d6864db221.html）
+	git init
+    git remote add -f origin https://github.com/xuerong/SingleServerEngine.git
+    #重点功能
+    git config core.sparseCheckout true
+    #加入你要导出的子目录
+    echo output>> .git/info/sparse-checkout
+    #开始pull下来，与正常使用git一样
+    git pull origin master
+
 6、设置.sh的执行
 shutdown.sh：chmod 777 shutdown.sh
 start.sh：chmod 777 start.sh
