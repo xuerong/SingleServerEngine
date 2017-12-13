@@ -84,3 +84,11 @@ chmod 777 start.sh
 chmod 777 update.sh
 
 // --------------------------------
+正常开发到上传服务器流程：
+开发代码-build到mmserver目录-上传github-服务器update.sh-服务器start.sh启动
+
+
+添加jar包，要在Project Structure-Artifacts-Output Layout-右击lib-Add Copy of-Library Files添加
+
+
+
