@@ -17,8 +17,8 @@ import java.sql.Timestamp;
  `gold` int(11) DEFAULT NULL,
  `items` varchar(255) DEFAULT NULL,
 **/
-@DBEntity(tableName = "order",pks = {"id"})
-public class Order implements Serializable{
+@DBEntity(tableName = "orderInfo",pks = {"id"})
+public class OrderInfo implements Serializable{
     private int id;
     private String token;
     private String userId;

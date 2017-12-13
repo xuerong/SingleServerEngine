@@ -74,12 +74,13 @@ yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc pe
     #重点功能
     git config core.sparseCheckout true
     #加入你要导出的子目录
-    echo server>> .git/info/sparse-checkout
+    echo mmserver>> .git/info/sparse-checkout
     #开始pull下来，与正常使用git一样
     git pull origin master
 
-6、设置.sh的执行
-shutdown.sh：chmod 777 shutdown.sh
-start.sh：chmod 777 start.sh
+6、设置.sh的执行（shutdown.sh,start.sh,update.sh）
+chmod 777 shutdown.sh
+chmod 777 start.sh
+chmod 777 update.sh
 
 // --------------------------------

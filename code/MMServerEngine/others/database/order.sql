@@ -18,10 +18,10 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
---  Table structure for `order`
+--  Table structure for `orderInfo`
 -- ----------------------------
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order` (
+DROP TABLE IF EXISTS `orderInfo`;
+CREATE TABLE `orderInfo` (
   `id` int(11) NOT NULL,
   `token` varchar(255) DEFAULT NULL,
   `userId` varchar(255) DEFAULT NULL,

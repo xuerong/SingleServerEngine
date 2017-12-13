@@ -1,7 +1,6 @@
 package com.migong.shop;
 
 import com.migong.MiGongService;
-import com.migong.entity.NewGuideType;
 import com.migong.entity.UserMiGong;
 import com.migong.item.ItemService;
 import com.mm.engine.framework.control.annotation.Request;
@@ -154,18 +153,18 @@ public class ShopService {
             throw e;
         }finally {
             // 添加订单记录
-            Order order = new Order();
-            order.setId(idService.acquireInt(Order.class));
-            order.setGold(peckTable.getGold() * moneyBuy.getNum());
-            order.setSuccess(success?1:0);
-            order.setUserId(session.getAccountId());
-            order.setItems(peckTable.getItems());
-            order.setMoney(money);
-            order.setNum(moneyBuy.getNum());
-            order.setPeckId(peckTable.getId());
-            order.setTime(new Timestamp(System.currentTimeMillis()));
-            order.setToken(moneyBuy.getToken());
-            dataService.insert(order);
+            OrderInfo orderInfo = new OrderInfo();
+            orderInfo.setId(idService.acquireInt(OrderInfo.class));
+            orderInfo.setGold(peckTable.getGold() * moneyBuy.getNum());
+            orderInfo.setSuccess(success?1:0);
+            orderInfo.setUserId(session.getAccountId());
+            orderInfo.setItems(peckTable.getItems());
+            orderInfo.setMoney(money);
+            orderInfo.setNum(moneyBuy.getNum());
+            orderInfo.setPeckId(peckTable.getId());
+            orderInfo.setTime(new Timestamp(System.currentTimeMillis()));
+            orderInfo.setToken(moneyBuy.getToken());
+            dataService.insert(orderInfo);
         }
         //
 
