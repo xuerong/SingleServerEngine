@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Example;
+using com.protocol;
 
 public class ShopItem: MonoBehaviour {
 	public Shop shop;
@@ -56,12 +58,14 @@ public class ShopItem: MonoBehaviour {
 		showPrice(1);
 		//
 		addNum.onClick.AddListener(delegate() {
+			Sound.playSound(SoundType.Click);
 			int num = int.Parse(showNum.text)+1;
 			showNum.text = num.ToString();
 			// 价格
 			showPrice(num);
 		});
 		decNum.onClick.AddListener(delegate() {
+			Sound.playSound(SoundType.Click);
 			int num = int.Parse(showNum.text);
 			if(num <= 1){
 				return;
@@ -74,9 +78,41 @@ public class ShopItem: MonoBehaviour {
 		//
 		buy.onClick.AddListener(delegate() {
 			Debug.Log("do buy");
+			Sound.playSound(SoundType.Click);
 			// 前段进行一系列购买操作，付钱成功通知服务器加道具，然后服务器推送前端道具加成功或者数量，前端加道具
 			// 买完回调
-			shop.buyFinish(true,(int)type,id,int.Parse(showNum.text));
+
+			if(type == ShopType.Item || type == ShopType.Unit){
+//				CSGold
+				CSGoldBuy goldBuy = new CSGoldBuy();
+				goldBuy.Type = (int)type;
+				goldBuy.Id = id;
+				goldBuy.Num = int.Parse(showNum.text);
+				SocketManager.SendMessageAsyc((int)MiGongOpcode.CSGoldBuy,CSGoldBuy.SerializeToBytes(goldBuy),delegate(int opcode, byte[] data) {
+					SCGoldBuy ret = SCGoldBuy.Deserialize(data);
+					shop.buyFinish(ret.Success>0,(int)type,id,int.Parse(showNum.text),ret.Gold);
+				});
+			}else if(type == ShopType.Peck){
+				CSMoneyBuyBefore moneyBuyBefore = new CSMoneyBuyBefore();
+				moneyBuyBefore.Id = id;
+				moneyBuyBefore.Num = int.Parse(showNum.text);
+				SocketManager.SendMessageAsyc((int)MiGongOpcode.CSMoneyBuyBefore,CSMoneyBuyBefore.SerializeToBytes(moneyBuyBefore),delegate(int opcode, byte[] data) {
+					SCMoneyBuyBefore ret = SCMoneyBuyBefore.Deserialize(data);
+					if(ret.IsOk>0){
+						CSMoneyBuy moneyBuy = new CSMoneyBuy();
+						moneyBuy.Id = id;
+						moneyBuy.Num = int.Parse(showNum.text);
+						moneyBuy.Token = System.DateTime.Now.Ticks.ToString();
+						SocketManager.SendMessageAsyc((int)MiGongOpcode.CSMoneyBuy,CSMoneyBuy.SerializeToBytes(moneyBuy),delegate(int opcode2, byte[] data2) {
+							SCMoneyBuy ret2 = SCMoneyBuy.Deserialize(data2);
+							shop.buyFinish(ret2.Success>0,(int)type,id,int.Parse(showNum.text),ret2.Gold);
+						});
+					}else{
+						Debug.Log(ret.Reason);
+						shop.buyFinish(false,(int)type,id,int.Parse(showNum.text),Params.gold);
+					}
+				});
+			}
 		});
 	}
 

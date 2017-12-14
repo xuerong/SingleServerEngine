@@ -14,6 +14,7 @@ public class Params {
 	public static Dictionary<int,PeckTable> peckTables = new Dictionary<int, PeckTable> ();
 
 	public static void init(SCBaseInfo baseInfo){
+		gold = baseInfo.Gold;
 		foreach (PBItemTable it in baseInfo.ItemTable) {
 			ItemTable itemTable = new ItemTable ();
 			itemTable.Id = it.Id;
@@ -24,26 +25,42 @@ public class Params {
 			itemTables.Add (itemTable.Id, itemTable);
 		}
 
-		for (int i = 0; i < 10; i++) {
+		foreach (PBUnitTable ut in baseInfo.UnitTable) {
 			UnitTable unitTable = new UnitTable ();
-			unitTable.Id = i;
-			unitTable.Items = new Dictionary<int, int> () {  
-				{ 1,2+i }, { 5,420 }, { 3,5 }
-			}; 
-			unitTable.Price = i * 2;
+			unitTable.Id = ut.Id;
+			string[] itemStrs = ut.Items.Split ('|');
+			unitTable.Items = new Dictionary<int, int> ();
+			foreach (string itemStr in itemStrs) {
+				if (itemStr.Length == 0) {
+					continue;
+				}
+				string[] strs = itemStr.Split (';');
+				unitTable.Items.Add (int.Parse(strs[0]),int.Parse(strs[1]));
+			}
+			unitTable.Price = ut.Price;
+			unitTables.Add (unitTable.Id,unitTable);
+		}
 
-			unitTables.Add (i,unitTable);
-
+		foreach (PBPeckTable pt in baseInfo.PeckTable) {
 			PeckTable peckTable = new PeckTable ();
-			peckTable.Id = i;
-			peckTable.gold = i + 1;
-			peckTable.goldNum = i + 2;
-			peckTable.Items = new Dictionary<int, int> () {  
-				{ 1,2+i }, { 5,42 }, { 3,5 }
-			}; 
-			peckTable.Price = i * 2;
+			peckTable.Id = pt.Id;
+			peckTable.gold = pt.Gold;
+			peckTable.goldNum = pt.Gold;
+			if (pt.Items != null && pt.Items.Length > 0) {
+				peckTable.Items = new Dictionary<int, int> ();
+				string[] itemStrs = pt.Items.Split ('|');
+				peckTable.Items = new Dictionary<int, int> ();
+				foreach (string itemStr in itemStrs) {
+					if (itemStr.Length == 0) {
+						continue;
+					}
+					string[] strs = itemStr.Split (';');
+					peckTable.Items.Add (int.Parse(strs[0]),int.Parse(strs[1]));
+				}
+			}
+			peckTable.Price = pt.Price;
 
-			peckTables.Add (i,peckTable);
+			peckTables.Add (peckTable.Id,peckTable);
 		}
 
 	}

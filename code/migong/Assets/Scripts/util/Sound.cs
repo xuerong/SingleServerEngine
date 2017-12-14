@@ -9,6 +9,9 @@ public class Sound : MonoBehaviour {
 	public GameObject off;
 
 	private static Dictionary<SoundType,AudioSource> soundDic = new Dictionary<SoundType, AudioSource> ();
+	private static Dictionary<SoundType,int> uncover = new Dictionary<SoundType, int> (){
+		{SoundType.Move,1}
+	};
 	// Use this for initialization
 	void Start () {
 		string canvasPath = "main/ui/uiMain/Canvas/sound";
@@ -38,7 +41,11 @@ public class Sound : MonoBehaviour {
 	}
 
 	public static void playSound(SoundType soundType){
-		if (!soundDic [soundType].isPlaying) {
+		if (uncover.ContainsKey (soundType)) {
+			if (!soundDic [soundType].isPlaying) {
+				soundDic [soundType].Play ();
+			}
+		} else {
 			soundDic [soundType].Play ();
 		}
 	}

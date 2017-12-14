@@ -146,20 +146,23 @@ public class Shop : MonoBehaviour {
 		}
 	}
 	// 买完回调
-	public void buyFinish(bool success,int shopType,int id,int num){
+	public void buyFinish(bool success,int shopType,int id,int num,int gold){
 		if (!success) {
 			WarnDialog.showWarnDialog (Message.getText("buyFail"));
 			return;
 		}
+		Params.gold = gold;
+		goldText.text = Params.gold.ToString ();
+
+		WarnDialog.showWarnDialog("buy success,type = "+shopType+",itemId = "+id+",num = "+num);
+
 		ShopType type = (ShopType)shopType;
 		if(type == ShopType.Item){ // 道具用的时候是实时获得的，所以，啥都不做
 			
 		}else if(type == ShopType.Unit){ // 道具用的时候是实时获得的，所以，啥都不做
 
-		}else if(type == ShopType.Peck){ // 金币需要在显示的地方加上
-			PeckTable peckTable = Params.peckTables[id];
-			Params.gold += peckTable.goldNum * num;
-			goldText.text = Params.gold.ToString ();
+		}else if(type == ShopType.Peck){ // 
+			
 		}
 	}
 	// 计算peck礼包的原价
