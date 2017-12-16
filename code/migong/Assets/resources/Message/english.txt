@@ -62,5 +62,5 @@ suitTab=suit
 peckTab=peck
 
 buy=buy
-
+buySuccess=Purchase Success
 buyFail=This purchase failed

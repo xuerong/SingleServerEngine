@@ -43,7 +43,7 @@ public class ShopItem: MonoBehaviour {
 			if (type == ShopType.Unit) {
 				
 			} else if (type == ShopType.Peck) {
-				addShopItemItem (Instantiate (shopItemImageObj) as GameObject,"itemImage/item1",goldNum,10 + 80 * index++);
+				addShopItemItem (Instantiate (shopItemImageObj) as GameObject,getGoldImage(),goldNum,10 + 80 * index++);
 			}
 			if (items != null && items.Count > 0) {
 				foreach (KeyValuePair<int,int> kv in items) {
@@ -144,7 +144,10 @@ public class ShopItem: MonoBehaviour {
 		}
 	}
 	// 根据type和id获取对应产品的图片
-	private string getImage(int itemId){
+	public static string getImage(int itemId){
+		return "itemImage/item1";
+	}
+	public static string getGoldImage(){
 		return "itemImage/item1";
 	}
 	// 根据type获取对应钱的图片

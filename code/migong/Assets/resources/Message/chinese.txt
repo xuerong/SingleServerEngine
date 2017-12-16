@@ -62,5 +62,5 @@ suitTab=套装
 peckTab=礼包
 
 buy=购买
-
+buySuccess=购买成功
 buyFail=本次购买失败

@@ -14,9 +14,7 @@ import javax.websocket.RemoteEndpoint;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -129,14 +127,50 @@ public final class Util {
     public static String getHostAddress(){
         if(hostAddress == null){
             try {
-                hostAddress = InetAddress.getLocalHost().getHostAddress();
-            }catch (UnknownHostException e){
+                hostAddress = getIpAdd();//InetAddress.getLocalHost().getHostAddress();
+            }catch (SocketException|UnknownHostException e){
                 throw new MMException(e);
             }
         }
 //        System.out.println(hostAddress);
         return hostAddress;
     }
+
+
+    /**
+     * 根据网卡获得IP地址
+     * @return
+     * @throws SocketException
+     * @throws UnknownHostException
+     */
+    public static  String getIpAdd() throws SocketException, UnknownHostException{
+        String ip="";
+        for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+            NetworkInterface intf = en.nextElement();
+            String name = intf.getName();
+            if (!name.contains("docker") && !name.contains("lo")) {
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                    //获得IP
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress()) {
+                        String ipaddress = inetAddress.getHostAddress().toString();
+                        if (!ipaddress.contains("::") && !ipaddress.contains("0:0:") && !ipaddress.contains("fe80")) {
+
+                            System.out.println(ipaddress);
+                            if(!"127.0.0.1".equals(ip)){
+                                ip = ipaddress;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return ip;
+    }
+
+
+
+
     public static String getLocalNetEventAdd(){
         return getHostAddress()+""+ Server.getEngineConfigure().getNetEventEntrance();
     }

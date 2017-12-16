@@ -34,12 +34,12 @@ public class IdService {
     private DataService dataService;
     private LockerService lockerService;
 
-    private ConcurrentHashMap<Class,IdSegment> intIdSegmentMap;
+//    private ConcurrentHashMap<Class,IdSegment> intIdSegmentMap;
     private ConcurrentHashMap<Class,IdSegmentLong> longIdSegmentMap;
 
     public void init(){
         remoteCallService = BeanHelper.getServiceBean(RemoteCallService.class);
-        intIdSegmentMap = new ConcurrentHashMap<>();
+//        intIdSegmentMap = new ConcurrentHashMap<>();
         longIdSegmentMap = new ConcurrentHashMap<>();
         //TODO 从数据库中载入当前各个id状态
         List<IdGenerator> idGenerators = dataService.selectList(IdGenerator.class,null);
@@ -88,21 +88,22 @@ public class IdService {
         }
     }
     public int acquireInt(Class<?> cls){
-        IdSegment IdSegment = intIdSegmentMap.get(cls);
-        if(IdSegment == null){
-            IdSegment = new IdSegment(cls);
-            intIdSegmentMap.putIfAbsent(cls, IdSegment);
-            IdSegment = intIdSegmentMap.get(cls);
-        }
-        return IdSegment.acquire();
+//        IdSegment IdSegment = intIdSegmentMap.get(cls);
+//        if(IdSegment == null){
+//            IdSegment = new IdSegment(cls);
+//            intIdSegmentMap.putIfAbsent(cls, IdSegment);
+//            IdSegment = intIdSegmentMap.get(cls);
+//        }
+//        return IdSegment.acquire();
+        return (int)acquireLong(cls);
     }
 
     public void releaseInt(Class<?> cls, int id){
-        IdSegment IdSegment = intIdSegmentMap.get(cls);
-        if(IdSegment == null){
-            throw new MMException("IdSegment is not exist,cls = "+cls.getName());
-        }
-        IdSegment.release(id);
+//        IdSegment IdSegment = intIdSegmentMap.get(cls);
+//        if(IdSegment == null){
+//            throw new MMException("IdSegment is not exist,cls = "+cls.getName());
+//        }
+//        IdSegment.release(id);
     }
 
     public void destroy(){

@@ -1,1 +1,2 @@
 将这些文件放在\jdk\jre\lib\ext目录中
+mac 系统可以通过idea找到对应的java目录

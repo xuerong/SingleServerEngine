@@ -23,6 +23,13 @@ public class Shop : MonoBehaviour {
 	public Text goldText;
 	public Button addGoldButton;
 
+	public GameObject show;
+	public GameObject[] showItem;
+	public Image[] showItemImage;
+	public Text[] showItemText;
+
+	public Button showButton;
+
 	void Awake(){
 		close.onClick.AddListener(delegate() {
 			Sound.playSound(SoundType.Click);
@@ -49,6 +56,11 @@ public class Shop : MonoBehaviour {
 		});
 		// 金币数量
 		goldText.text = Params.gold.ToString();
+		//
+		showButton.onClick.AddListener(delegate() {
+			Sound.playSound(SoundType.Click);
+			show.SetActive(false);
+		});
 	}
 
 	// 道具
@@ -122,7 +134,7 @@ public class Shop : MonoBehaviour {
 
 		Object shopItemObj = Resources.Load ("shopItem2");
 		RectTransform contentTrans = contentGo.GetComponent<RectTransform> ();
-		contentTrans.sizeDelta = new Vector2 (0,140 * Params.unitTables.Count);
+		contentTrans.sizeDelta = new Vector2 (0,140 * Params.peckTables.Count);
 
 		int index = 0;
 		foreach (PeckTable peckTable in Params.peckTables.Values) {
@@ -154,17 +166,53 @@ public class Shop : MonoBehaviour {
 		Params.gold = gold;
 		goldText.text = Params.gold.ToString ();
 
-		WarnDialog.showWarnDialog("buy success,type = "+shopType+",itemId = "+id+",num = "+num);
+//		WarnDialog.showWarnDialog("buy success,type = "+shopType+",itemId = "+id+",num = "+num);
+
+		show.SetActive (true);
 
 		ShopType type = (ShopType)shopType;
 		if(type == ShopType.Item){ // 道具用的时候是实时获得的，所以，啥都不做
-			
+			showItemByCount(1);
+			showIn (id, num,0);
 		}else if(type == ShopType.Unit){ // 道具用的时候是实时获得的，所以，啥都不做
-
+			UnitTable unitTable = Params.unitTables[id];
+			showItemByCount (unitTable.Items.Count);
+			int index = 0;
+			foreach(KeyValuePair<int,int> kv in unitTable.Items) {
+				showIn (kv.Key,kv.Value*num,index++);
+			}
 		}else if(type == ShopType.Peck){ // 
-			
+			PeckTable peckTable = Params.peckTables[id];
+			if (peckTable.gold > 0) {
+				Sprite sp = Resources.Load (ShopItem.getGoldImage(), typeof(Sprite)) as Sprite;
+				showItemImage[0].sprite = sp;
+				showItemText [0].text = "x" + (peckTable.gold*num);
+			}
+
+			int index = peckTable.gold > 0?1:0;
+			foreach(KeyValuePair<int,int> kv in peckTable.Items) {
+				showIn (kv.Key,kv.Value*num,index++);
+			}
+			showItemByCount (index);
 		}
 	}
+
+	public void showIn(int id,int num,int index){
+		Sprite sp = Resources.Load (ShopItem.getImage (id), typeof(Sprite)) as Sprite;
+		showItemImage[index].sprite = sp;
+		showItemText [index].text = "x" + num;
+	}
+
+	public void showItemByCount(int count){
+		for(int i = 0;i<showItem.Length;i++){
+			if (i < count) {
+				showItem [i].SetActive (true);
+			} else {
+				showItem [i].SetActive (false);
+			}
+		}
+	}
+
 	// 计算peck礼包的原价
 	private int calOriginPrice(int gold , Dictionary<int,int> items){
 		int allGold = gold + calOriginPrice (items);
