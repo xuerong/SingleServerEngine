@@ -73,6 +73,8 @@ public class MapCreate : MonoBehaviour{
 
 	float currentTime;
 	public Text showTime;
+	public Text showScore;
+	public Text showMaxScore;
 
 	private bool gameOver = false;
 
@@ -303,15 +305,16 @@ public class MapCreate : MonoBehaviour{
 			if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {
 				float old = starSlider.value;
 				starSlider.value = starSlider.value + addScore;
-				Text scoreText = starSlider.transform.Find ("score").GetComponent<Text> ();
-				scoreText.text = starSlider.value + "";
+//				Text scoreText = starSlider.transform.Find ("score").GetComponent<Text> ();
+				showScore.text = starSlider.value + "";
 				// 点亮星星
 				for(int i=1;i<5;i++){
 					int score = stars [i-1];
 					if (score > old && score <= starSlider.value) { // 0的自然就不会点亮
 						// 点亮
 						Image image = starSlider.transform.parent.Find ("star" + i).GetComponent<Image>();
-						image.color = new Color (255,255,255);
+//						image.color = new Color (255,255,255);
+						image.sprite = SpriteCache.getLightSprite();
 					}
 				}
 			}else if(Mode == MapMode.Online){
@@ -363,6 +366,7 @@ public class MapCreate : MonoBehaviour{
 		Object bean1 = Resources.Load ("bean1");
 		Object bean5 = Resources.Load ("bean5");
 		Object bean10 = Resources.Load ("bean10");
+		Debug.LogError (bean10);
 		int maxScore = 0;
 		float mapWidth = td * nodeX;
 		for (int i = 0; i < tr; i++) {										//绘制墙
@@ -396,7 +400,7 @@ public class MapCreate : MonoBehaviour{
 		// 设置单机版的最大值 和星星的位置
 		if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {
 			starSlider.maxValue = maxScore;
-			starSlider.transform.Find ("maxScore").GetComponent<Text> ().text = "/"+maxScore;
+			showMaxScore.text = "/"+maxScore;
 			RectTransform buRec = starSlider.GetComponent<RectTransform> ();
 			float perStarDelta = buRec.rect.width / maxScore; // 每个星星的像素便宜
 			for (int i = 1; i < stars.Length+1; i++) {
@@ -404,7 +408,7 @@ public class MapCreate : MonoBehaviour{
 				if (stars [i-1] <= 0) {
 					starRec.gameObject.SetActive (false);
 				} else {
-					starRec.anchoredPosition = new Vector2 (stars [i-1] * perStarDelta, -40);
+					starRec.anchoredPosition = new Vector2 (stars [i-1] * perStarDelta, 0);
 				}
 			}
 		}

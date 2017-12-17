@@ -148,11 +148,15 @@ public class ShopItem: MonoBehaviour {
 		return "itemImage/item1";
 	}
 	public static string getGoldImage(){
-		return "itemImage/item1";
+		return "itemImage/gold";
 	}
 	// 根据type获取对应钱的图片
 	private string getTypeImage(){
-		return "itemImage/item1";
+		if (type == ShopType.Item || type == ShopType.Unit) {
+			return "itemImage/gold";
+		} else {
+			return "itemImage/item1";
+		}
 	}
 }
 

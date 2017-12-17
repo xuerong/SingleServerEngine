@@ -127,7 +127,8 @@ public final class Util {
     public static String getHostAddress(){
         if(hostAddress == null){
             try {
-                hostAddress = getIpAdd();//InetAddress.getLocalHost().getHostAddress();
+                hostAddress = getIpAdd();//InetAddress.getLocalHost().getHostAddress();// 这种方式在linux中会有问题
+                log.info("self ip = "+ hostAddress);
             }catch (SocketException|UnknownHostException e){
                 throw new MMException(e);
             }
@@ -156,7 +157,7 @@ public final class Util {
                         String ipaddress = inetAddress.getHostAddress().toString();
                         if (!ipaddress.contains("::") && !ipaddress.contains("0:0:") && !ipaddress.contains("fe80")) {
 
-                            System.out.println(ipaddress);
+//                            System.out.println(ipaddress);
                             if(!"127.0.0.1".equals(ip)){
                                 ip = ipaddress;
                             }
@@ -164,6 +165,9 @@ public final class Util {
                     }
                 }
             }
+        }
+        if(ip.equals("")){
+            throw new MMException("get ip file");
         }
         return ip;
     }

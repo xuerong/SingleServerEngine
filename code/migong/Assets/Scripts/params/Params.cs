@@ -4,6 +4,8 @@ using UnityEngine;
 using Example;
 
 public class Params {
+	public static float uiWidth = 640f;
+	public static float uiHeight = 960;
 
 	public static int energy = 0;
 

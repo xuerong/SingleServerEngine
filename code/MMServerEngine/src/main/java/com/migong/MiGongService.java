@@ -130,6 +130,14 @@ import java.util.concurrent.*;
  * 3344c1180ab5eed4f6aed6f2a002008b
  *
  *todo  listKey is Illegal : listKey = com.migong.entity.UserMiGong#list
+ *
+ * 关于主服务器：
+ * 1、主服务器需要存在，且ip稳定，性能不足可以增加，但ip稳定
+ * 2、主服务器主要功能如下：
+ * 第一、作为玩家第一次登录注册，或者登录服务器数据被清理之后的登录
+ * 第二、gm：包括对主服务器的gm和对每个服务器都要执行的gm
+ * 第三、综合统计，包括主服务器本身要完成的，和主服务器要连接所有的数据库，然后做出的综合统计。
+ * 第四、作为运营平台，可以连接任意一台服务器并执行gm，数据统计等。
  */
 @Service(init = "init")
 public class MiGongService {

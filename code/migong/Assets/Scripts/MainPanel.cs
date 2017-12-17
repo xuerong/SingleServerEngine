@@ -315,8 +315,7 @@ public class MainPanel : MonoBehaviour {
 		show (uiLevel);
 		//
 
-		//获取按钮游戏对象
-		Object button = Resources.Load ("Button");
+
 
 		GameObject content = GameObject.Find ("main/ui/uiLevel/Canvas/scrollView/Viewport/Content");
 		for (int i = 0; i < content.transform.childCount; i++) {
@@ -330,25 +329,39 @@ public class MainPanel : MonoBehaviour {
 			SCGetMiGongLevel level = SCGetMiGongLevel.Deserialize (data);
 			int count = level.PassCount;
 			float dis = 20f;
-
+			// 体力
 			GameObject energyTextGo = GameObject.Find ("main/ui/uiLevel/Canvas/energy/Text");
 			Text energyText = energyTextGo.GetComponent<Text>();
 			energyText.text = Params.energy.ToString();
 
-			GameObject up = Instantiate(button) as GameObject;
+			//获取游戏对象
+			Object levelItem = Resources.Load ("levelItem");
+
+			GameObject up = Instantiate(levelItem) as GameObject;
 			RectTransform buRec = up.GetComponent<RectTransform> ();
 			Destroy(up);
 
-			RectTransform contentTrans = content.GetComponent<RectTransform> ();
-			contentTrans.sizeDelta = new Vector2 (0,(buRec.rect.height + dis) * count + dis);
-
 			Debug.Log("count:"+count);
 
+			RectTransform canvas = GameObject.Find ("main/ui/uiLevel/Canvas").GetComponent<RectTransform>();
+			float scale = canvas.rect.width/Params.uiWidth;
+			float be = (canvas.rect.width-(buRec.rect.width*scale * 3))/4;
+			float step = be+buRec.rect.width*scale;
+//			Debug.LogError(canvas.rect.width+","+Screen.width+","+buRec.rect.width+","+step+","+be);
+
+			RectTransform contentTrans = content.GetComponent<RectTransform> ();
+			float sizeHeight = be + (step*(count/3+(count%3>0?1:0)));
+			Debug.Log("sizeHeight:"+sizeHeight);
+			contentTrans.sizeDelta = new Vector2 (0,sizeHeight);
+			int allStarCount = 0;
 			for (int i = 0; i < count; i++) {
-				up = Instantiate(button) as GameObject;
-				up.transform.SetParent(content.transform);
-				up.transform.localPosition = new Vector3 (0, -((buRec.rect.height+dis)*i+dis),0);
+				int x = i%3;
+				int y = i/3;
+				up = Instantiate(levelItem) as GameObject;
+
+				up.transform.localPosition = new Vector3 (be+x*step, -be-y*step,0);
 				up.transform.localScale = new Vector3 (1,1,1);
+				up.transform.SetParent(content.transform,false);
 
 				Button b1 = up.GetComponent<Button> ();
 
@@ -357,16 +370,21 @@ public class MainPanel : MonoBehaviour {
 				buttonIndex.star = 0;
 				if(level.StarInLevel.Count>i){
 					buttonIndex.star = level.StarInLevel[i];
+					allStarCount += buttonIndex.star;
 				}
 				b1.onClick.AddListener (delegate() {
 					Sound.playSound(SoundType.Click);
 					OnClick(buttonIndex);
 				});
 
-				GameObject textGo = up.transform.Find ("Text").gameObject;
-				Text text = textGo.GetComponent<Text> ();
-				text.text = Message.getText("levelItem",buttonIndex.pass,buttonIndex.star);
+//				GameObject textGo = up.transform.Find ("Text").gameObject;
+//				Text text = textGo.GetComponent<Text> ();
+//				text.text = Message.getText("levelItem",buttonIndex.pass,buttonIndex.star);
 			}
+			// 星数
+			GameObject starTextGo = GameObject.Find ("main/ui/uiLevel/Canvas/star/Text");
+			Text starText = starTextGo.GetComponent<Text>();
+			starText.text = allStarCount.ToString();
 		});
 	}
 

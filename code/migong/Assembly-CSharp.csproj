@@ -226,6 +226,7 @@
      <Compile Include="Assets\Scripts\packet\PacketItem.cs" />
      <Compile Include="Assets\Scripts\Pacman.cs" />
      <Compile Include="Assets\Scripts\params\Params.cs" />
+     <Compile Include="Assets\Scripts\params\SpriteCache.cs" />
      <Compile Include="Assets\Scripts\protobuf\AccountOpcode.cs" />
      <Compile Include="Assets\Scripts\protobuf\AccountPB.cs" />
      <Compile Include="Assets\Scripts\protobuf\AccountPB.Serializer.cs" />

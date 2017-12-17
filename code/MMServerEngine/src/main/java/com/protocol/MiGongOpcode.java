@@ -68,5 +68,6 @@ public class MiGongOpcode {
 	public static final int SCMoneyBuyBefore = 12065;
 	public static final int CSMoneyBuy = 12066;
 	public static final int SCMoneyBuy = 12067;
+	public static final int Test = 12068;
 
 }

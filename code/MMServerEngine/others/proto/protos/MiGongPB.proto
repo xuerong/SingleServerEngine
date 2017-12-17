@@ -402,4 +402,7 @@ message SCMoneyBuy
 	required int32 success 			= 1; //
 	required int32 gold 				= 2; //
 }
-
+message Test
+{
+	required int32 success 			= 1; //
+}
