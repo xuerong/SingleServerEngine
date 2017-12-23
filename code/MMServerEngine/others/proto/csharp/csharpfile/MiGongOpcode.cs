@@ -2,7 +2,7 @@
 using System;
 namespace com.protocol
 {
-	public enum MiGongOpcode
+	public enum csharpfile/MiGongOpcode
 	{
 		CSBaseInfo = 12001,
 		SCBaseInfo = 12002,
@@ -71,6 +71,7 @@ namespace com.protocol
 		SCMoneyBuyBefore = 12065,
 		CSMoneyBuy = 12066,
 		SCMoneyBuy = 12067,
+		Test = 12068,
 
 	}
 }

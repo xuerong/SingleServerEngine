@@ -16,7 +16,7 @@ def createJavaFile(name,content):
     #删除旧文件
     if os.path.exists(java_class_path):
     	os.remove(java_class_path)
-    newJavaFile = open(java_class_path,"wb")
+    newJavaFile = open(java_class_path,"w")
     newJavaFile.write(content)
     newJavaFile.close()
     shutil.copy(java_class_path,  "../../src/main/java/"+java_class_path)
@@ -64,8 +64,8 @@ for table in tables:
     for cell in names:
         name = str(cell)
         typeStr = str(types[i])
-        if not typeStrs.has_key(typeStr):
-            print table.name +" is not table"
+        if typeStr not in typeStrs:
+            print (table.name +" is not table , typeStr= "+typeStr)
             error = 1
             break;
         type = typeStrs.get(typeStr)

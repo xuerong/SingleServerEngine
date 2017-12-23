@@ -250,8 +250,10 @@
      <Compile Include="Assets\Scripts\util\LocalizationImage.cs" />
      <Compile Include="Assets\Scripts\util\LocalizationImageManager.cs" />
      <Compile Include="Assets\Scripts\util\LocalizationText.cs" />
+     <Compile Include="Assets\Scripts\util\Matching.cs" />
      <Compile Include="Assets\Scripts\util\Message.cs" />
      <Compile Include="Assets\Scripts\util\Sound.cs" />
+     <Compile Include="Assets\Scripts\util\Util.cs" />
      <Compile Include="Assets\Scripts\WarnDialog.cs" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_strings.xml" />
      <None Include="Assets\resources\Message\chinese.txt" />

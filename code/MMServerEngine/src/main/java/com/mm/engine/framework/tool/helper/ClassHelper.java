@@ -74,6 +74,22 @@ public class ClassHelper {
     }
 
     /**
+     * 根据包名获取类
+     * @return
+     */
+    public static List<Class<?>> getClassList(String packet) {
+        List<Class<?>> result=new ClassTemplate(packet) {
+            @Override
+            public boolean checkAddClass(Class<?> cls) {
+                String className = cls.getName();
+                String pkgName = className.substring(0, className.lastIndexOf("."));
+                return pkgName.startsWith(packet);
+            }
+        }.getClassList();
+        return result;
+    }
+
+    /**
      * 获取基础包名中指定父类或接口的相关类
      */
     public static List<Class<?>> getClassListBySuper(Class<?> superClass) {

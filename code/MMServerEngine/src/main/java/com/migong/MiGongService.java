@@ -82,15 +82,14 @@ import java.util.concurrent.*;
  * 后面要做的（本着简单快速上线的原则）：
  * 一、游戏逻辑：
  * 要完成的：
- * 3、音乐、声音：（按钮，走动，吃豆，加星，结束）（到达终点，）
- * 4、帮助
- * 5、排行都包括：无尽版，天梯排行
- * 6、无尽版规则，天梯积分规则
- * 7、所有文字用汉语：后端弹框！
- * 8、打点：友盟or其它
+ * 星星的数量改为3个
+ * 1、优化：音乐，声音
+ * 2、帮助
+ * 3、无尽版规则，天梯积分规则
+ * 4、英语的文字优化！
+ * 5、打点统计，运营
+ * 6、接google play支付和Facebook分享和Facebook登录
  * 以后要做的：
- * 1、支付与货币、礼包
- * 2、道具与背包
  * 3、vip系统
  * 4、微信等的登录
  * 5、好友系统，聊天系统
@@ -99,8 +98,7 @@ import java.util.concurrent.*;
  * 8、分享打的关卡，星级等。
  * 9、账号相关：名字和头像
  * 二、框架功能：
- * 1、失败重试和重试失败之后的处理
- * 2、服务器分配：要有一个main server用来分配服务器
+ * 1、服务器分配：要有一个main server用来分配服务器
  * 以后要做的
  * 1、断线重连
  * 三、接入相关：
@@ -292,6 +290,9 @@ public class MiGongService {
         PassRewardData passRewardData = PassRewardData.parse(miGongPass.getReward());
         if(passRewardData != null){
             for(int i=0;i<4;i++){
+                if(i == 4 && miGongPass.getStar4()<=0){
+                    continue;
+                }
                 MiGongPB.PBPassReward.Builder passRewardBuilder = MiGongPB.PBPassReward.newBuilder();
                 passRewardBuilder.setEnergy(passRewardData.getStarGold()[i]);
                 passRewardBuilder.setGold(passRewardData.getStarEnergy()[i]);
@@ -605,11 +606,11 @@ public class MiGongService {
     private int calStar(int score,int star1,int star2,int star3,int star4){
         if(score < star1){
             return 0;
-        }else if(score < star2){
+        }else if(star2<=0 || score < star2){
             return 1;
-        }else if(score < star3){
+        }else if(star3<=0 || score < star3){
             return 2;
-        }else if(score < star4){
+        }else if(star4<=0 || score < star4){
             return 3;
         }
         return 4;

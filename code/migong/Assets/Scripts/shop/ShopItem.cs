@@ -35,19 +35,18 @@ public class ShopItem: MonoBehaviour {
 	void Start () {
 		// 图片
 		if (type == ShopType.Item) {
-			Sprite sp = Resources.Load (getImage (id), typeof(Sprite)) as Sprite;
-			image.sprite = sp;
+			image.sprite = getSprite(id);
 		} else {
 			Object shopItemImageObj = Resources.Load ("shopItemImage");
 			int index = 0;
 			if (type == ShopType.Unit) {
 				
 			} else if (type == ShopType.Peck) {
-				addShopItemItem (Instantiate (shopItemImageObj) as GameObject,getGoldImage(),goldNum,10 + 80 * index++);
+				addShopItemItem (Instantiate (shopItemImageObj) as GameObject,getGoldSprite(),goldNum,10 + 80 * index++);
 			}
 			if (items != null && items.Count > 0) {
 				foreach (KeyValuePair<int,int> kv in items) {
-					addShopItemItem (Instantiate (shopItemImageObj) as GameObject,getImage (kv.Key),kv.Value,10 + 80 * index++);
+					addShopItemItem (Instantiate (shopItemImageObj) as GameObject,getSprite (kv.Key),kv.Value,10 + 80 * index++);
 				}
 			}
 		}
@@ -117,11 +116,9 @@ public class ShopItem: MonoBehaviour {
 	}
 
 	// add shopitemimage
-	private void addShopItemItem(GameObject go,string imagepath,int num,int x){
-//		GameObject go = Instantiate (shopItemImageObj) as GameObject;
-
+	private void addShopItemItem(GameObject go,Sprite sp,int num,int x){
 		Image image = go.transform.Find ("image").GetComponent<Image> ();
-		Sprite sp = Resources.Load (imagepath, typeof(Sprite)) as Sprite;
+//		Sprite sp = Resources.Load (imagepath, typeof(Sprite)) as Sprite;
 		image.sprite = sp;
 
 		Text text = go.transform.Find ("num").GetComponent<Text> ();
@@ -143,12 +140,18 @@ public class ShopItem: MonoBehaviour {
 
 		}
 	}
-	// 根据type和id获取对应产品的图片
-	public static string getImage(int itemId){
-		return "itemImage/item1";
+
+	public static Sprite getGoldSprite(){
+		return SpriteCache.getSprite ("itemImage/gold");//Resources.Load ("itemImage/gold", typeof(Sprite)) as Sprite;
 	}
-	public static string getGoldImage(){
-		return "itemImage/gold";
+	// 根据type和id获取对应产品的图片
+	public static Sprite getSprite(int itemId){
+		string path = "itemImage/item1";
+		return SpriteCache.getSprite (path); //Resources.Load (path, typeof(Sprite)) as Sprite;
+	}
+
+	public static Sprite getEnergySprite(){
+		return SpriteCache.getSprite ("itemImage/energy"); //Resources.Load ("itemImage/energy", typeof(Sprite)) as Sprite;
 	}
 	// 根据type获取对应钱的图片
 	private string getTypeImage(){

@@ -41,6 +41,9 @@ public class Sound : MonoBehaviour {
 	}
 
 	public static void playSound(SoundType soundType){
+		if (!on) {
+			return;
+		}
 		if (uncover.ContainsKey (soundType)) {
 			if (!soundDic [soundType].isPlaying) {
 				soundDic [soundType].Play ();

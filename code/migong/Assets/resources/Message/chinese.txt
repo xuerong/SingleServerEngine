@@ -34,6 +34,7 @@ onlineRank=排名:{0}
 onlineRankItem=排行:{0},名字:{1},分数:{2},段位:{3}
 
 matching=匹配中...
+matchingFailWarning=匹配失败，请稍后重试
 getServerInfoFail=获取服务器信息失败！
 connectServerFail=连接服务器失败！
 
@@ -64,3 +65,5 @@ peckTab=礼包
 buy=购买
 buySuccess=购买成功
 buyFail=本次购买失败
+
+star=星

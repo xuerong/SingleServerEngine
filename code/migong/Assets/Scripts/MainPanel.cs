@@ -25,8 +25,6 @@ public class MainPanel : MonoBehaviour {
 	private Dictionary<int,int> guideStep = new Dictionary<int, int> ();
 
 
-	private int matchingDialogId; // 匹配阶段弹窗的id
-
 	public ShareSDK ssdk;
 
 	public Button shareWeChat1;
@@ -44,6 +42,9 @@ public class MainPanel : MonoBehaviour {
 	public int openPass;
 
 	public int showRewardPass = 0;
+
+
+	public Matching matching; // 匹配中的控制
 
 	void Start () {
 		show (uiMain);
@@ -207,6 +208,7 @@ public class MainPanel : MonoBehaviour {
 		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingSuccess, matchSuccess);
 		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCMatchingFail, delegate(int opcode, byte[] receiveData) {
 			Debug.Log("");
+			matching.matchFail();
 		});
 		SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCBegin, delegate(int opcode, byte[] receiveData) {
 			Debug.Log("");
@@ -511,10 +513,8 @@ public class MainPanel : MonoBehaviour {
 		SCMatchingSuccess matchingSuccess = SCMatchingSuccess.Deserialize (data);
 		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Time,matchingSuccess.Speed,matchingSuccess.Start,matchingSuccess.End,1,matchingSuccess.OtherInfos,null,null,null);
 		ui.SetActive (false);
-		if (matchingDialogId > 0) {
-			WarnDialog.closeWaitDialog (matchingDialogId);
-			matchingDialogId = 0;
-		}
+
+		matching.matchSuccess ();
 	}
 
 	// Update is called once per frame
@@ -522,24 +522,27 @@ public class MainPanel : MonoBehaviour {
 	}
 
 	public void OnPvpClick(){
-		CSMatching matching = new CSMatching ();
-		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSMatching, CSMatching.SerializeToBytes(matching),delegate(int opcode, byte[] data) {
+		
+
+		CSMatching csmatching = new CSMatching ();
+		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSMatching, CSMatching.SerializeToBytes(csmatching),delegate(int opcode, byte[] data) {
 			Debug.Log("send matching success,opcode = "+opcode);
+			matching.show (float.Parse (sysParas ["matchWaitTime"]));
 			//matchWaitTime
-			matchingDialogId = WarnDialog.showWaitDialog (Message.getText("matching"), int.Parse (sysParas ["matchWaitTime"]), delegate() {
-				WarnDialog.showWarnDialog("match fail , please try again later.",null);	
-				//
-				CSCancelMatching cancelMatching = new CSCancelMatching();
-				SocketManager.SendMessageAsyc((int)MiGongOpcode.CSCancelMatching,CSCancelMatching.SerializeToBytes(cancelMatching),delegate(int retOpcode, byte[] retData) {
-
-				});
-			},delegate() {
-				//
-				CSCancelMatching cancelMatching = new CSCancelMatching();
-				SocketManager.SendMessageAsyc((int)MiGongOpcode.CSCancelMatching,CSCancelMatching.SerializeToBytes(cancelMatching),delegate(int retOpcode, byte[] retData) {
-
-				});
-			});
+//			matchingDialogId = WarnDialog.showWaitDialog (Message.getText("matching"), int.Parse (sysParas ["matchWaitTime"]), delegate() {
+//				WarnDialog.showWarnDialog("match fail , please try again later.",null);	
+//				//
+//				CSCancelMatching cancelMatching = new CSCancelMatching();
+//				SocketManager.SendMessageAsyc((int)MiGongOpcode.CSCancelMatching,CSCancelMatching.SerializeToBytes(cancelMatching),delegate(int retOpcode, byte[] retData) {
+//
+//				});
+//			},delegate() {
+//				//
+//				CSCancelMatching cancelMatching = new CSCancelMatching();
+//				SocketManager.SendMessageAsyc((int)MiGongOpcode.CSCancelMatching,CSCancelMatching.SerializeToBytes(cancelMatching),delegate(int retOpcode, byte[] retData) {
+//
+//				});
+//			});
 		});
 	}
 
@@ -554,7 +557,9 @@ public class MainPanel : MonoBehaviour {
 			showRewardStarInfo(1,ret.PassRewardStar1);
 			showRewardStarInfo(2,ret.PassRewardStar2);
 			showRewardStarInfo(3,ret.PassRewardStar3);
-			showRewardStarInfo(4,ret.PassRewardStar4);
+//			if(ret.PassRewardStar4 != null){
+//				showRewardStarInfo(4,ret.PassRewardStar4);
+//			}
 
 			this.showRewardPass = buttonIndex.pass;
 		});
@@ -562,14 +567,41 @@ public class MainPanel : MonoBehaviour {
 
 	private void showRewardStarInfo(int starIndex,PBPassReward passReward){
 		if(passReward != null){
-			StringBuilder sb = new StringBuilder();
+			Transform parent = uiLevel.transform.Find ("Canvas/showReward/dialog/star" + starIndex+"/reward").transform;
+			Util.clearChildren (parent);
+			// 显示金币
+//			ShopItem.getGoldImage();
+			Object rewardItemObj = Resources.Load("rewardItem");
+			int step = 60;
+			int x0 = 20;
+			int index = 0;
+			if(passReward.Gold>0){
+				GameObject go = Instantiate (rewardItemObj) as GameObject;
+				Image image = go.GetComponent<Image> ();
+				image.sprite = ShopItem.getGoldSprite ();
+				image.transform.Find ("num").GetComponent<Text>().text ="x"+passReward.Gold;
+				go.transform.localPosition = new Vector3 (x0+step*index++,0,0);
+				go.transform.SetParent (parent,false);
+			}
+			if(passReward.Energy>0){
+				GameObject go = Instantiate (rewardItemObj) as GameObject;
+				Image image = go.GetComponent<Image> ();
+				image.sprite = ShopItem.getEnergySprite ();
+				image.transform.Find ("num").GetComponent<Text>().text ="x"+passReward.Energy;
+				go.transform.localPosition = new Vector3 (x0+step*index++,0,0);
+				go.transform.SetParent (parent,false);
+			}
+
 			if(passReward.Item!= null && passReward.Item.Count>0){
 				foreach(PBItem item in passReward.Item){
-					sb.Append(item.ItemId+":"+item.Count+"|");
+					GameObject go = Instantiate (rewardItemObj) as GameObject;
+					Image image = go.GetComponent<Image> ();
+					image.sprite = ShopItem.getSprite (item.ItemId);
+					image.transform.Find ("num").GetComponent<Text>().text ="x"+item.Count;
+					go.transform.localPosition = new Vector3 (x0+step*index++,0,0);
+					go.transform.SetParent (parent,false);
 				}
 			}
-			Text starText = uiLevel.transform.Find("Canvas/showReward/dialog/star"+starIndex).GetComponent<Text>();
-			starText.text = "gold:"+passReward.Gold+"|energy:"+passReward.Energy+"|"+sb.ToString();
 		}
 	}
 

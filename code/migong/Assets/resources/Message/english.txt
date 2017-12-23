@@ -34,6 +34,7 @@ onlineRank=rank:{0}
 onlineRankItem=rank:{0},name:{1},score:{2},title:{3}
 
 matching=matching...
+matchingFailWarning=match fail , please try again later
 getServerInfoFail=get server info fail !
 connectServerFail=connect server fial！
 
@@ -64,3 +65,5 @@ peckTab=peck
 buy=buy
 buySuccess=Purchase Success
 buyFail=This purchase failed
+
+star=star

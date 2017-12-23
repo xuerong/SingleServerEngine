@@ -184,7 +184,7 @@ public class Shop : MonoBehaviour {
 		}else if(type == ShopType.Peck){ // 
 			PeckTable peckTable = Params.peckTables[id];
 			if (peckTable.gold > 0) {
-				Sprite sp = Resources.Load (ShopItem.getGoldImage(), typeof(Sprite)) as Sprite;
+				Sprite sp = ShopItem.getGoldSprite ();
 				showItemImage[0].sprite = sp;
 				showItemText [0].text = "x" + (peckTable.gold*num);
 			}
@@ -198,7 +198,7 @@ public class Shop : MonoBehaviour {
 	}
 
 	public void showIn(int id,int num,int index){
-		Sprite sp = Resources.Load (ShopItem.getImage (id), typeof(Sprite)) as Sprite;
+		Sprite sp = ShopItem.getSprite(id);
 		showItemImage[index].sprite = sp;
 		showItemText [index].text = "x" + num;
 	}

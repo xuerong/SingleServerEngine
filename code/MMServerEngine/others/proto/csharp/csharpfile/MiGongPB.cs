@@ -720,4 +720,10 @@ namespace Example
 
     }
 
+    public partial class Test
+    {
+        public int Success { get; set; }
+
+    }
+
 }

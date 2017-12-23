@@ -68,6 +68,8 @@ public class SocketManager : MonoBehaviour {
 
 	private static string localization = "Chinese";
 
+	private static bool isPaused = false;
+
 	static Dictionary<int,long> lastSendTime = new Dictionary<int, long>();
 	static Dictionary<int,int> needCheckOpcode = new Dictionary<int, int>(){ // 
 		{(int)MiGongOpcode.CSGetMiGongMap,(int)MiGongOpcode.CSGetMiGongMap},
@@ -559,12 +561,27 @@ OnApplicationQuit  (IOS 有回调，android 没回调)
 跳出当前应用，然后Kill：
 OnApplicationQuit  (IOS和Android都没回调)
 	 */
-	void OnApplicationPause(){
-//		IsConnected = false;
+	void OnApplicationFocus(bool hasFocus)
+	{
+		Debug.Log ("OnApplicationPause ,hasFocus="+hasFocus);
+		isPaused = !hasFocus;
+		if (hasFocus) {
+			checkNeedReconnect ();
+		}
 	}
-	void OnApplicationFocus(){
-//		if (clientSocket.Connected) {
-//			
-//		}
+
+	void OnApplicationPause(bool pauseStatus)
+	{
+		Debug.Log ("OnApplicationPause ,pauseStatus="+pauseStatus);
+		isPaused = pauseStatus;
+		if (!pauseStatus) {
+			checkNeedReconnect ();
+		}
+	}
+
+	void checkNeedReconnect(){
+		if (IsConnected && !clientSocket.Connected) {
+			IsConnected = false;
+		}
 	}
 }
