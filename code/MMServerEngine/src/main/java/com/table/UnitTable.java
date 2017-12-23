@@ -1,9 +1,9 @@
 package com.table;
 //Auto Generate File, Do NOT Modify!!!!!!!!!!!!!!!
 public final class UnitTable{
-	public static final UnitTable[] datas={
-		new UnitTable((int)1.0,"first","1;2|5;3",(int)15.0,(int)0.0),
-		new UnitTable((int)2.0,"first","1;2|2;4|3;3",(int)36.0,(int)0.0),
+	public static UnitTable[] datas={
+		new UnitTable((int)1.0,"first","0;2|5;3",(int)15.0,(int)0.0),
+		new UnitTable((int)2.0,"first","1;2|2;4|3:3",(int)36.0,(int)0.0),
 		new UnitTable((int)3.0,"first","6;5",(int)47.0,(int)3.0),
 		new UnitTable((int)4.0,"first","4;2|5;6",(int)58.0,(int)0.0),
 		new UnitTable((int)5.0,"first","6;2|7;7",(int)69.0,(int)1.0)

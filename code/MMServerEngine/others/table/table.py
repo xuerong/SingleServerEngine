@@ -55,7 +55,7 @@ for table in tables:
     getSet = ""
     constructor = "\tpublic "+table.name+"("
     constructorContent = ""
-    dataStr = "\tpublic static final "+table.name+"[] datas={"
+    dataStr = "\tpublic static "+table.name+"[] datas={"
 
     error = 0
     names = table.row_values(0)

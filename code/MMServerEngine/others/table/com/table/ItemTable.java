@@ -1,7 +1,7 @@
 package com.table;
 //Auto Generate File, Do NOT Modify!!!!!!!!!!!!!!!
 public final class ItemTable{
-	public static final ItemTable[] datas={
+	public static ItemTable[] datas={
 		new ItemTable((int)1.0,(int)0.0,(int)1.0,(int)0.0,(int)1.0),
 		new ItemTable((int)2.0,(int)0.0,(int)5.0,(int)0.0,(int)3.0),
 		new ItemTable((int)3.0,(int)0.0,(int)30.0,(int)0.0,(int)15.0),

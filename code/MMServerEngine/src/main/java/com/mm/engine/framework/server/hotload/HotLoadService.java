@@ -35,9 +35,8 @@ public class HotLoadService {
     public void init(){
         List<Class<?>> classList = ClassHelper.getClassList("com.table");
         for(Class<?> cls : classList){
-//            System.out.println(cls.getName());
             try {
-                tableFields.put(cls.getName(), cls.getField("datas"));
+                tableFields.put(cls.getSimpleName(), cls.getField("datas"));
             }catch (NoSuchFieldException e){
                 log.error("no such field,class name = "+cls.getName(),e);
             }

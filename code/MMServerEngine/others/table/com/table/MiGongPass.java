@@ -1,7 +1,7 @@
 package com.table;
 //Auto Generate File, Do NOT Modify!!!!!!!!!!!!!!!
 public final class MiGongPass{
-	public static final MiGongPass[] datas={
+	public static MiGongPass[] datas={
 		new MiGongPass((int)1.0,(int)0.0,(int)5.0,(int)40.0,(int)10.0,(int)11.0,(int)4.0,(int)1.0,(int)5.0,(int)10.0,(int)20.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;4"),
 		new MiGongPass((int)2.0,(int)1.0,(int)6.0,(int)45.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)15.0,(int)20.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|7;1;2;3;5"),
 		new MiGongPass((int)3.0,(int)2.0,(int)7.0,(int)50.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;6"),

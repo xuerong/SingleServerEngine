@@ -1,7 +1,7 @@
 package com.table;
 //Auto Generate File, Do NOT Modify!!!!!!!!!!!!!!!
 public final class PeckTable{
-	public static final PeckTable[] datas={
+	public static PeckTable[] datas={
 		new PeckTable((int)1.0,"first",(int)180.0,"0;2|5;3",(int)6.0,(int)1.0),
 		new PeckTable((int)2.0,"second",(int)60.0,"0;2|5;3",(int)6.0,(int)0.0),
 		new PeckTable((int)3.0,"third",(int)240.0,"1;2|2;4|3;3",(int)24.0,(int)0.0),
