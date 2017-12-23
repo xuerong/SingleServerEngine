@@ -57,7 +57,6 @@ public class Params {
 						continue;
 					}
 					string[] strs = itemStr.Split (';');
-					Debug.Log (itemStr);
 					peckTable.Items.Add (int.Parse(strs[0]),int.Parse(strs[1]));
 				}
 			}
