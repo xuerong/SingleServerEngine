@@ -62,7 +62,7 @@ public class HotLoadService {
                 // 获取文件系统的WatchService对象
                 WatchService watchService = FileSystems.getDefault().newWatchService();
 
-                Path path = Paths.get("./");
+                Path path = Paths.get("./com/table");
                 System.out.println(path.toAbsolutePath());
                 path.register(watchService
 //                        , StandardWatchEventKinds.ENTRY_CREATE
