@@ -2,14 +2,18 @@ package com.migong.item;
 
 import com.migong.MiGongService;
 import com.migong.entity.UserMiGong;
+import com.mm.engine.framework.control.annotation.EventListener;
 import com.mm.engine.framework.control.annotation.Request;
 import com.mm.engine.framework.control.annotation.Service;
+import com.mm.engine.framework.control.event.EventData;
 import com.mm.engine.framework.data.DataService;
 import com.mm.engine.framework.data.entity.session.Session;
 import com.mm.engine.framework.data.tx.Tx;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.code.RetPacketImpl;
 import com.mm.engine.framework.security.exception.ToClientException;
+import com.mm.engine.framework.server.SysConstantDefine;
+import com.mm.engine.framework.tool.util.Util;
 import com.protocol.MiGongOpcode;
 import com.protocol.MiGongPB;
 import com.table.ItemTable;
@@ -51,6 +55,16 @@ public class ItemService {
             itemTableMap.put(itemTable.getId(),itemTable);
         }
     }
+    @EventListener(event = SysConstantDefine.Event_TableChange)
+    public void onTableChange(EventData data){
+        if(data.getData() == ItemTable.class){
+            Map<Integer,ItemTable> itemTableMap = new HashMap<>();
+            for(ItemTable itemTable : ItemTable.datas){
+                itemTableMap.put(itemTable.getId(),itemTable);
+            }
+            this.itemTableMap = itemTableMap;
+        }
+    }
 
     public List<Item> getSkillItems(String userId){
         List<Item> list = dataService.selectList(Item.class,"userId=?",userId);
@@ -66,6 +80,19 @@ public class ItemService {
             }
         }
         return ret;
+    }
+    @Tx
+    public void addItems(String userId,String rewardString){
+        Map<Integer, Integer> map = Util.split2Map(rewardString, Integer.class, Integer.class);
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            addItem(userId, entry.getKey(), entry.getValue());
+        }
+    }
+    @Tx
+    public void addItems(String userId,Map<Integer, Integer> map){
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            addItem(userId, entry.getKey(), entry.getValue());
+        }
     }
 
     @Tx
@@ -129,9 +156,9 @@ public class ItemService {
         String ret = null;
         switch (itemType){
             case Energy:
-                userMiGong.setEnergy(userMiGong.getEnergy() + itemTable.getPara1());
+                miGongService.checkAndAddEnergy(userMiGong,itemTable.getPara1());
                 dataService.update(userMiGong);
-                ret = String.valueOf(userMiGong.getEnergy());
+                ret = String.valueOf(miGongService.getEnergyByRefresh(userMiGong)+";"+userMiGong.getEnergyUpdateTime());
                 break;
             case AddSpeed:
                 break;

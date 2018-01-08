@@ -10,7 +10,7 @@ message CSBaseInfo
 }
 message SCBaseInfo
 {
-	required int32 energy 			= 1; // 玩家精力
+	required SCEnergyInfo energy 			= 1; // 玩家精力
 	repeated PBSysPara sysParas 			= 2; // 系统参数
 	repeated PBNewGuide newGuide			= 3;  // 新手引导信息
 	required int32 openPass				= 4; // 推图过了多少关
@@ -18,6 +18,7 @@ message SCBaseInfo
 	repeated PBItemTable itemTable 			= 6; // 道具配表
 	repeated PBUnitTable unitTable 			= 7; // 套装配表
 	repeated PBPeckTable peckTable 			= 8; // 礼包配表
+	repeated PBUnlimitedRewardTable unlimitedRewardTable 			= 9; // 无尽模式的奖励
 }
 message PBNewGuide
 {
@@ -54,6 +55,23 @@ message PBPeckTable
 	required string items				= 4;
 	required int32 price				= 5;
 	required int32 limit				= 6;
+}
+message PBUnlimitedRewardTable
+{
+	required int32 id				= 1;
+	required int32 star				= 2;
+	required int32 gold				= 3;
+	required string reward				= 4;
+}
+// 如果体力不满，要定时器获取体力信息
+message CSEnergyInfo
+{
+}
+// 体力信息，包括上次刷新时间和当前体力，如果体力是满的，上次刷新时间没用
+message SCEnergyInfo
+{
+	required int32 energy 			= 1; // 玩家精力
+	required int64 refreshTime 			= 2; // 上次刷新时间
 }
 // 完成新手引导
 message CSNewGuideFinish
@@ -110,9 +128,10 @@ message SCGetMiGongMap
 	required int32 star2 			= 9; // 二星目标分数
 	required int32 star3 			= 10; // 三星目标分数
 	required int32 star4 			= 11; // 四星目标分数
-	required int32 energy 			= 12; // 消耗体力
+	required SCEnergyInfo energy 			= 12; // 剩余体力
 	optional string route			= 13; // 路线
 	repeated PBItem items			= 14; // 道具
+	required int32 enemyCount 			= 15; // 敌人数量
 }
 // 豆子信息
 message PBBeanInfo
@@ -168,6 +187,16 @@ message SCUnlimitedInfo
 	required int32 pass 			= 2; // 关卡数
 	required int32 star 			= 3; // 无线关卡已经有的星数
 	required int32 rank 			= 4; // 排名
+	required int32 todayStar 			= 5; // 今日获取的星数
+	required string award 			= 6; // 每日星数奖励领取情况
+}
+message CSUnlimitedAward
+{
+	required int32 index 			= 1; // 排名
+}
+message SCUnlimitedAward
+{
+	required string award 			= 1; // 每日星数奖励领取情况
 }
 message PBUnlimitedRankInfo
 {
@@ -193,7 +222,8 @@ message SCUnlimitedGo
 	required int32 star2 			= 9; // 二星目标分数
 	required int32 star3 			= 10; // 三星目标分数
 	required int32 star4 			= 11; // 四星目标分数
-	required int32 energy 			= 12; // 消耗体力
+	required SCEnergyInfo energy 			= 12; // 剩余体力
+	required int32 enemyCount 			= 13; // 敌人数量
 }
 // 成功或失败 :
 message CSUnlimitedFinish

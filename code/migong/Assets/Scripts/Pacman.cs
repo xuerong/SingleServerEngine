@@ -306,4 +306,15 @@ public class Pacman : MonoBehaviour {
 //		return (hit.collider == c);
 		return true;
 	}
+
+	void OnTriggerEnter2D(Collider2D collider)
+	{
+		//进入触发器执行的代码
+		Debug.Log("OnTriggerEnter2D:"+collider);
+	}
+	void OnCollisionEnter2D(Collision2D collision)
+	{
+		//进入碰撞器执行的代码
+		Debug.Log("OnCollisionEnter2D:"+collision);
+	}
 }

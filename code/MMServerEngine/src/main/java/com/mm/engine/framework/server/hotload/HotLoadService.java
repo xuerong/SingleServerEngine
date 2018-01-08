@@ -1,8 +1,11 @@
 package com.mm.engine.framework.server.hotload;
 
 import com.mm.engine.framework.control.annotation.Service;
+import com.mm.engine.framework.control.event.EventData;
+import com.mm.engine.framework.control.event.EventService;
+import com.mm.engine.framework.server.SysConstantDefine;
 import com.mm.engine.framework.tool.helper.ClassHelper;
-import com.sun.corba.se.spi.ior.ObjectKey;
+import com.sys.SysPara;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +29,7 @@ import java.util.concurrent.ThreadFactory;
 public class HotLoadService {
     private static final Logger log = LoggerFactory.getLogger(HotLoadService.class);
 
-    ExecutorService executorService = Executors.newSingleThreadExecutor(new ThreadFactory() {
+    ExecutorService executorService = Executors.newCachedThreadPool(new ThreadFactory() {
         @Override
         public Thread newThread(Runnable r) {
             Thread thread = new Thread(r);
@@ -36,6 +39,8 @@ public class HotLoadService {
     });
 
     private Map<String,Field> tableFields = new HashMap<>();
+
+    private EventService eventService;
 
     public void init(){
         List<Class<?>> classList = ClassHelper.getClassList("com.table");
@@ -48,6 +53,7 @@ public class HotLoadService {
         }
 
         executorService.execute(new TableWatch());
+        executorService.execute(new SysParaWatch());
     }
 
     class HotLoadClassLoader extends URLClassLoader {
@@ -56,6 +62,68 @@ public class HotLoadService {
         }
         public HotLoadClassLoader(URL[] urls, ClassLoader parent) {
             super(urls, parent);
+        }
+    }
+    class SysParaWatch implements Runnable{
+
+        @Override
+        public void run() {
+            try {
+                String pathStr = "com/sys";
+                if(!new File(pathStr).exists()){
+                    pathStr = "target/classes/com/sys";
+                }
+                // 获取文件系统的WatchService对象
+                WatchService watchService = FileSystems.getDefault().newWatchService();
+
+                Path path = Paths.get(pathStr);
+                path.register(watchService
+//                        , StandardWatchEventKinds.ENTRY_CREATE
+                        , StandardWatchEventKinds.ENTRY_MODIFY
+//                        , StandardWatchEventKinds.ENTRY_DELETE
+                );
+
+                while(true)
+                {
+                    // 获取下一个文件改动事件
+                    WatchKey key = watchService.take();
+                    List<WatchEvent<?>> list = key.pollEvents();
+                    ClassLoader cl = null;
+                    for (WatchEvent<?> event : list)
+                    {
+                        if(!event.context().toString().equals("SysPara.class")){
+                            continue;
+                        }
+                        String className = event.context().toString().replace(".class","");
+                        Field field = SysPara.class.getField("paras");
+                        if(cl == null) {
+                            cl = new HotLoadClassLoader(pathStr.replace("com/sys",""), null);
+                        }
+
+                        System.out.println(SysPara.paras.get("ccc"));
+                        Class cls = cl.loadClass("com.sys."+className);
+                        Map<String,String> newDatas = (Map<String,String>)cls.getField("paras").get(null);
+                        field.set(newDatas,cls.getField("paras").get(null));
+
+                        EventData eventData = new EventData(SysConstantDefine.Event_SysParaChange);
+                        eventService.fireEvent(eventData);
+
+                    }
+                    // 重设WatchKey
+                    boolean valid = key.reset();
+                    // 如果重设失败，退出监听
+                    int resetTime = 0;
+                    while (!valid && resetTime<10)
+                    {
+                        valid = key.reset();
+                    }
+                    if(!valid){
+                        log.error("reset watch fail");
+                    }
+                }
+            }catch (Throwable e){
+                e.printStackTrace();
+            }
         }
     }
     class TableWatch implements Runnable{
@@ -140,14 +208,22 @@ public class HotLoadService {
 
                         long time3 = System.nanoTime();
 
-                        log.info("hot load table {} success,use time = {}",className,time3-time1);
+                        EventData eventData = new EventData(SysConstantDefine.Event_TableChange);
+                        eventData.setData(oldCls);
+                        eventService.fireEvent(eventData);
+
+                        log.info("hot load table {} success,use time:load class = {},parse = {}",className,time2-time1,time3 - time2);
                     }
                     // 重设WatchKey
                     boolean valid = key.reset();
                     // 如果重设失败，退出监听
-                    if (!valid)
+                    int resetTime = 0;
+                    while (!valid && resetTime<10)
                     {
-                        break;
+                        valid = key.reset();
+                    }
+                    if(!valid){
+                        log.error("reset watch fail");
                     }
                 }
 

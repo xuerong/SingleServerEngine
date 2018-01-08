@@ -13,6 +13,8 @@ import com.mm.engine.framework.control.annotation.Request;
 import com.mm.engine.framework.control.annotation.Service;
 import com.mm.engine.framework.control.annotation.Updatable;
 import com.mm.engine.framework.control.event.EventData;
+import com.mm.engine.framework.control.statistics.Statistics;
+import com.mm.engine.framework.control.statistics.StatisticsData;
 import com.mm.engine.framework.data.DataService;
 import com.mm.engine.framework.data.entity.account.Account;
 import com.mm.engine.framework.data.entity.account.LogoutEventData;
@@ -30,11 +32,9 @@ import com.mm.engine.framework.tool.util.Util;
 import com.protocol.MiGongOpcode;
 import com.protocol.MiGongPB;
 import com.sys.SysPara;
-import com.table.ItemTable;
-import com.table.MiGongPass;
-import com.table.PeckTable;
-import com.table.UnitTable;
+import com.table.*;
 import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,7 +140,7 @@ import java.util.concurrent.*;
 @Service(init = "init")
 public class MiGongService {
     private static final Logger log = LoggerFactory.getLogger(MiGongService.class);
-    static boolean debug = true;
+    static boolean debug = false;
 
     private MiGongRank miGongRank;
     private DataService dataService;
@@ -178,19 +178,51 @@ public class MiGongService {
      * 这里只针对匹配，放置多个匹配
      */
     ConcurrentHashMap<String,RoomUser> roomUsers = new ConcurrentHashMap<>();
+    /**
+     * 无尽版，每天有一定的星数阶梯奖励，每天被重置
+     */
+    UnlimitedStarRewardSegment[] unlimitedStarRewardSegments ;
 
-
-    private final Map<Integer,MiGongPass> passMap = new HashMap<>();
+    private Map<Integer,MiGongPass> passMap = new HashMap<>();
     public void init(){
         for(MiGongPass miGongPass : MiGongPass.datas){
             passMap.put(miGongPass.getId(), miGongPass);
         }
+        initUnlimitedStarRewardSegment();
+    }
+    private void initUnlimitedStarRewardSegment(){
+//        String star = sysParaService.get(SysPara.unlimitedAwardStar);
+//        String[] stars = star.split(";");
+        int awardCount = UnlimitedRewardTable.datas.length;
+        int starCount = UnlimitedRewardTable.datas[awardCount-1].getStar();
+        UnlimitedStarRewardSegment[] unlimitedStarRewardSegments = new UnlimitedStarRewardSegment[awardCount];
+        for(int i=0;i<awardCount;i++){
+            UnlimitedStarRewardSegment segments = unlimitedStarRewardSegments[i] = new UnlimitedStarRewardSegment();
+            segments.star = UnlimitedRewardTable.datas[i].getStar();
+            segments.gold = UnlimitedRewardTable.datas[i].getGold();
+            segments.reward = Util.split2Map(UnlimitedRewardTable.datas[i].getReward(),Integer.class,Integer.class);
+        }
+        this.unlimitedStarRewardSegments = unlimitedStarRewardSegments;
+    }
+    @EventListener(event = SysConstantDefine.Event_TableChange)
+    public void onTableChange(EventData data){
+        if(data.getData() == MiGongPass.class){
+            Map<Integer,MiGongPass> passMap = new HashMap<>();
+            for(MiGongPass miGongPass : MiGongPass.datas){
+                passMap.put(miGongPass.getId(), miGongPass);
+            }
+            this.passMap = passMap;
+        }
+    }
+    @EventListener(event = SysConstantDefine.Event_SysParaChange)
+    public void onSysParaChange(EventData data){
+        initUnlimitedStarRewardSegment();
     }
     @Request(opcode = MiGongOpcode.CSBaseInfo)
     public RetPacket getBaseInfo(Object clientData, Session session) throws Throwable{
         UserMiGong userMiGong = get(session.getAccountId());
         MiGongPB.SCBaseInfo.Builder builder = MiGongPB.SCBaseInfo.newBuilder();
-        builder.setEnergy(getEnergyByRefresh(userMiGong));
+        builder.setEnergy(getEnergyInfo(userMiGong));
         for(Map.Entry<String,String> sysPara : SysPara.paras.entrySet()){
             MiGongPB.PBSysPara.Builder sysParaBuilder = MiGongPB.PBSysPara.newBuilder();
             sysParaBuilder.setKey(sysPara.getKey());
@@ -209,6 +241,9 @@ public class MiGongService {
         builder.setGold(userMiGong.getGold());
         // 道具配表
         for(ItemTable itemTable : ItemTable.datas){
+            if(itemTable.getValid() == 0){
+                continue;
+            }
             MiGongPB.PBItemTable.Builder itemBuilder = MiGongPB.PBItemTable.newBuilder();
             itemBuilder.setId(itemTable.getId());
             itemBuilder.setItemType(itemTable.getItemtype());
@@ -219,6 +254,9 @@ public class MiGongService {
         }
         // 套装配表
         for(UnitTable unitTable : UnitTable.datas){
+            if(unitTable.getValid() == 0){
+                continue;
+            }
             MiGongPB.PBUnitTable.Builder unitBuilder = MiGongPB.PBUnitTable.newBuilder();
             unitBuilder.setId(unitTable.getId());
             unitBuilder.setItems(unitTable.getItems());
@@ -229,6 +267,9 @@ public class MiGongService {
         }
         // 礼包配表
         for(PeckTable peckTable : PeckTable.datas){
+            if(peckTable.getValid() == 0){
+                continue;
+            }
             MiGongPB.PBPeckTable.Builder peckBuilder = MiGongPB.PBPeckTable.newBuilder();
             peckBuilder.setId(peckTable.getId());
             peckBuilder.setItems(peckTable.getItems());
@@ -237,6 +278,16 @@ public class MiGongService {
             peckBuilder.setPrice(peckTable.getPrice());
             peckBuilder.setGold(peckTable.getGold());
             builder.addPeckTable(peckBuilder);
+        }
+        // 无尽版奖励配表
+        for(UnlimitedRewardTable unlimitedRewardTable : UnlimitedRewardTable.datas){
+//            if(unlimitedRewardTable)
+            MiGongPB.PBUnlimitedRewardTable.Builder unlimitedRewardBuilder = MiGongPB.PBUnlimitedRewardTable.newBuilder();
+            unlimitedRewardBuilder.setId(unlimitedRewardTable.getId());
+            unlimitedRewardBuilder.setGold(unlimitedRewardTable.getGold());
+            unlimitedRewardBuilder.setReward(unlimitedRewardTable.getReward());
+            unlimitedRewardBuilder.setStar(unlimitedRewardTable.getStar());
+            builder.addUnlimitedRewardTable(unlimitedRewardBuilder);
         }
         return new RetPacketImpl(MiGongOpcode.SCBaseInfo, builder.build().toByteArray());
     }
@@ -248,16 +299,36 @@ public class MiGongService {
         MiGongPB.SCNewGuideFinish.Builder builder = MiGongPB.SCNewGuideFinish.newBuilder();
         return new RetPacketImpl(MiGongOpcode.SCNewGuideFinish, builder.build().toByteArray());
     }
-
+    @Request(opcode = MiGongOpcode.CSEnergyInfo)
+    public RetPacket energyInfo(Object clientData, Session session) throws Throwable {
+        UserMiGong userMiGong = get(session.getAccountId());
+        return new RetPacketImpl(MiGongOpcode.SCEnergyInfo, getEnergyInfo(userMiGong).build().toByteArray());
+    }
+    /**
+     * 获取精力返回值
+     */
+    public MiGongPB.SCEnergyInfo.Builder getEnergyInfo(UserMiGong userMiGong){
+        MiGongPB.SCEnergyInfo.Builder ret = MiGongPB.SCEnergyInfo.newBuilder();
+        ret.setEnergy(getEnergyByRefresh(userMiGong));
+        ret.setRefreshTime(userMiGong.getEnergyUpdateTime());
+        return ret;
+    }
     /**
      * 获取玩家精力
      * @param userMiGong
      * @return 玩家精力
      */
     public int getEnergyByRefresh(UserMiGong userMiGong){
-        if(!DateUtils.isSameDay(new Timestamp(userMiGong.getEnergyUpdateTime()),new Timestamp(System.currentTimeMillis()))){
-            userMiGong.setEnergy(sysParaService.getInt(SysPara.energyPerDay));
+        int maxEnergy = sysParaService.getInt(SysPara.maxEnergy);
+        if(userMiGong.getEnergy() <  maxEnergy &&
+                System.currentTimeMillis() - userMiGong.getEnergyUpdateTime() > sysParaService.getLong(SysPara.energyRecoverTime)*1000){
+            int revoceNum = (int)((System.currentTimeMillis() - userMiGong.getEnergyUpdateTime())/1000l/sysParaService.getLong(SysPara.energyRecoverTime));
             userMiGong.setEnergyUpdateTime(System.currentTimeMillis());
+            userMiGong.setEnergy(userMiGong.getEnergy() + revoceNum);
+            if(userMiGong.getEnergy() >= maxEnergy){
+                userMiGong.setEnergy(maxEnergy);
+                userMiGong.setEnergyUpdateTime(0);
+            }
             dataService.update(userMiGong);
         }
         return userMiGong.getEnergy();
@@ -339,6 +410,8 @@ public class MiGongService {
         miGongPassInfo.setPass(getMiGongMap.getPass());
         miGongPassInfo.setStartTime(new Timestamp(System.currentTimeMillis()));
         miGongPassInfo.setBeanCount(miGongPass.getBean1(),miGongPass.getBean5(),miGongPass.getBean10());
+        //敌人的数量
+        miGongPassInfo.setEnemyCount(miGongPass.getEnergy());
         miGongPassInfo = miGongParamsByDifficulty(miGongPassInfo,miGongPass.getSize(),miGongPass.getTime(),miGongPass.getSpeed()); // 这个方法后面直接去掉
         MiGongPB.SCGetMiGongMap.Builder builder = MiGongPB.SCGetMiGongMap.newBuilder();
 
@@ -365,12 +438,13 @@ public class MiGongService {
             beanBuilder.setScore(bean.getScore());
             builder.addBeans(beanBuilder);
         }
-        builder.setEnergy(getEnergyByRefresh(userMiGong)); // 这个是剩余精力
+        builder.setEnergy(getEnergyInfo(userMiGong)); // 这个是剩余精力
         builder.setPass(miGongPass.getId());
         builder.setStar1(miGongPass.getStar1());
         builder.setStar2(miGongPass.getStar2());
         builder.setStar3(miGongPass.getStar3());
         builder.setStar4(miGongPass.getStar4());
+
 
 //        System.out.println("miGongPassInfo.getEnd():"+miGongPassInfo.getEnd());
         builder.setEnd(miGongPassInfo.getEnd().toInt(miGongPassInfo.getSize()));
@@ -382,7 +456,7 @@ public class MiGongService {
             itemBuilder.setCount(item.getCount());
             builder.addItems(itemBuilder);
         }
-
+        builder.setEnemyCount(miGongPassInfo.getEnemyCount());
         miGongPassInfoMap.put(session.getAccountId(),miGongPassInfo);
         byte[] sendData = builder.build().toByteArray();
         return new RetPacketImpl(MiGongOpcode.SCGetMiGongMap, sendData);
@@ -397,7 +471,7 @@ public class MiGongService {
         }
         return sb.toString();
     }
-    private void checkAndDecrEnergy(UserMiGong userMiGong,int delta){
+    public void checkAndDecrEnergy(UserMiGong userMiGong,int delta){
         if(!debug) {
             int energy = getEnergyByRefresh(userMiGong);
             int after = energy - delta;
@@ -405,8 +479,27 @@ public class MiGongService {
                 throw new ToClientException(LocalizationMessage.getText("energyNotEnough"));
             }
             userMiGong.setEnergy(after);
+            if(userMiGong.getEnergyUpdateTime() == 0){
+                userMiGong.setEnergyUpdateTime(System.currentTimeMillis());
+            }
             dataService.update(userMiGong);
         }
+    }
+    public void checkAndAddEnergy(UserMiGong userMiGong,int delta){
+        int energy = getEnergyByRefresh(userMiGong);
+        int max = sysParaService.getInt(SysPara.maxEnergy);
+        if(energy >= max){
+            throw new ToClientException(LocalizationMessage.getText("energyHasFull"));
+        }
+        int after = energy + delta;
+        if (after >= max) {
+            after = max;
+        }
+        userMiGong.setEnergy(after);
+        if(userMiGong.getEnergyUpdateTime() == max){
+            userMiGong.setEnergyUpdateTime(0);
+        }
+        dataService.update(userMiGong);
     }
     public UserMiGong get(String userId){
         UserMiGong userMiGong = dataService.selectObject(UserMiGong.class,"userId=?",userId);
@@ -549,7 +642,7 @@ public class MiGongService {
                     shopService.addGold(userMiGong.getUserId(),passReward.getGold());
                 }
                 if(passReward.getEnergy() > 0){
-                    userMiGong.setEnergy(userMiGong.getEnergy() + passReward.getEnergy());
+                    checkAndAddEnergy(userMiGong,passReward.getEnergy());
                     dataService.update(userMiGong);
                 }
                 if(passReward.getItemCount() > 0){
@@ -639,7 +732,63 @@ public class MiGongService {
             info.setUserName(dataService.selectObject(Account.class,"id=?",rankMiGong.getUserId()).getName());
             builder.addUnlimitedRankInfo(info);
         }
+        // 每日星数
+        UnlimitedStarAward award = getUnlimitedStarAward(session.getAccountId());
+        builder.setTodayStar(award.getStar());
+        builder.setAward(award.getAward()==null?"":award.getAward());
+
         return new RetPacketImpl(MiGongOpcode.SCUnlimitedInfo, builder.build().toByteArray());
+    }
+    @Request(opcode = MiGongOpcode.CSUnlimitedAward)
+    public RetPacket unlimitedAward(Object clientData, Session session) throws Throwable{
+        MiGongPB.CSUnlimitedAward unlimitedAward = MiGongPB.CSUnlimitedAward.parseFrom((byte[])clientData);
+        int index = unlimitedAward.getIndex();
+        //是否越界
+        if(index<0 || index > unlimitedStarRewardSegments.length - 1){
+            throw new ToClientException(LocalizationMessage.getText("InvalidParams"));
+        }
+        UnlimitedStarRewardSegment segment = unlimitedStarRewardSegments[index];
+        UnlimitedStarAward unlimitedStarAward = getUnlimitedStarAward(session.getAccountId());
+        // 是否达到指标
+        if(unlimitedStarAward.getStar() < segment.star){
+            throw new ToClientException(LocalizationMessage.getText("ConditionNot"));
+        }
+        // 是否已经领取
+        List<Integer> list = null;
+        if(StringUtils.isNotEmpty(unlimitedStarAward.getAward())){
+            list = Util.split2List(unlimitedStarAward.getAward(),Integer.class);
+            if(list.get(index) > 0){
+                throw new ToClientException(LocalizationMessage.getText("HasAwarded"));
+            }
+        }
+        // 领奖
+        if(segment.gold > 0) {
+            shopService.addGold(session.getAccountId(), segment.gold);
+        }
+        if(segment.reward.size() > 0) {
+            itemService.addItems(session.getAccountId(), segment.reward);
+        }
+        // 设置领取
+        if(list == null){
+            Integer[] zero = new Integer[unlimitedStarRewardSegments.length];
+            for(int i=0;i<unlimitedStarRewardSegments.length;i++){
+                zero[i] = 0;
+            }
+            list=Arrays.asList(zero);
+        }
+        list.set(index,1);
+        String award = Util.list2String(list);
+        unlimitedStarAward.setAward(award);
+        dataService.update(unlimitedStarAward);
+        //返回
+        MiGongPB.SCUnlimitedAward.Builder builder = MiGongPB.SCUnlimitedAward.newBuilder();
+        builder.setAward(award);
+        return new RetPacketImpl(MiGongOpcode.SCUnlimitedAward, builder.build().toByteArray());
+    }
+    class UnlimitedStarRewardSegment{
+        protected int star;
+        protected int gold;
+        protected Map<Integer,Integer> reward;
     }
     @Request(opcode = MiGongOpcode.CSUnlimitedGo)
     public RetPacket unlimitedGo(Object clientData, Session session) throws Throwable{
@@ -653,6 +802,7 @@ public class MiGongService {
         MiGongPassInfo miGongPassInfo = new MiGongPassInfo();
         miGongPassInfo.setBeanCount(40,5,1);
         miGongPassInfo.setStartTime(new Timestamp(System.currentTimeMillis()));
+        miGongPassInfo.setEnemyCount(userMiGong.getUnlimitedPass()>10?10:userMiGong.getUnlimitedPass()); //  TODO 根据关卡数生成敌人数量
         miGongPassInfo = miGongParamsByDifficulty(miGongPassInfo,10,400,sysParaService.getInt(SysPara.unlimitedSpeed));
         MiGongPB.SCUnlimitedGo.Builder builder = MiGongPB.SCUnlimitedGo.newBuilder();
 
@@ -680,7 +830,9 @@ public class MiGongService {
         builder.setStar3(30);
         builder.setStar4(40);
         builder.setPass(userMiGong.getUnlimitedPass() + 1);
-        builder.setEnergy(getEnergyByRefresh(userMiGong));// 精力，系统参数
+        builder.setEnergy(getEnergyInfo(userMiGong));// 精力，系统参数
+        builder.setEnemyCount(miGongPassInfo.getEnemyCount());
+
 
         miGongPassInfoMap.put(session.getAccountId(),miGongPassInfo);
 
@@ -712,14 +864,40 @@ public class MiGongService {
                 userMiGong.setUnlimitedStar(userMiGong.getUnlimitedStar() + star);
                 dataService.update(userMiGong);
                 miGongRank.putUnlimited(userMiGong);
+                //
+                // 保存今日无尽版星数
+                UnlimitedStarAward award = getUnlimitedStarAward(session.getAccountId());
+                award.setStar(award.getStar() + star);
+                dataService.update(award);
             }else{
                 isSuccess = false;
             }
         }
+
+
         MiGongPB.SCUnlimitedFinish.Builder builder = MiGongPB.SCUnlimitedFinish.newBuilder();
         builder.setOpenPass(userMiGong.getUnlimitedPass());
         builder.setSuccess(isSuccess?1:0);
         return new RetPacketImpl(MiGongOpcode.SCUnlimitedFinish, builder.build().toByteArray());
+    }
+
+    public UnlimitedStarAward getUnlimitedStarAward(String userId){
+        UnlimitedStarAward award = dataService.selectObject(UnlimitedStarAward.class,"userId=?",userId);
+        if(award == null){
+            award = new UnlimitedStarAward();
+            award.setUserId(userId);
+            award.setResetTime(System.currentTimeMillis());
+//            award.setStar(star);
+            dataService.insert(award);
+        }else{
+            if(!DateUtils.isSameDay(new Date(award.getResetTime()),new Date())){
+                award.setResetTime(System.currentTimeMillis());
+                award.setStar(0);
+                award.setAward("");
+                dataService.update(award);
+            }
+        }
+        return award;
     }
 
     /**
@@ -784,6 +962,7 @@ public class MiGongService {
         //生成豆子的位置
         Bean[] beans = createBeans(size,miGongPassInfo.getBean1(),miGongPassInfo.getBean5(),miGongPassInfo.getBean10()); // todo 创建豆子pass和unlimited要根据配置
         miGongPassInfo.setBeans(beans);
+
 
         return miGongPassInfo;
     }
@@ -1188,6 +1367,32 @@ public class MiGongService {
         return 1;
     }
 
+    @Statistics(id = "jsjsjsj",name = "sssss")
+    public StatisticsData statisticsData(){
+        StatisticsData ret = new StatisticsData();
+        List<String> heads = Arrays.asList("head","first","second");
+        ret.setHeads(heads);
+        List<List<String>> datas = Arrays.asList(
+                Arrays.asList("day1","aaa","bbb"),
+                Arrays.asList("day2","ccc","ddd")
+        );
+        ret.setDatas(datas);
+        return ret;
+    }
+    @Statistics(id = "jsjsjsjee",name = "sssssee")
+    public StatisticsData statisticsData2(){
+        StatisticsData ret = new StatisticsData();
+
+        List<String> heads = Arrays.asList("head","first2","second2","first2","second2","first2","second2","first2","second2","first2","second2");
+        ret.setHeads(heads);
+        List<List<String>> datas = Arrays.asList(
+                Arrays.asList("day1","aaa2","bbb2","aaa2","bbb2","aaa2","bbb2","aaa2","bbb2","aaa2","bbb2"),
+                Arrays.asList("day2","ccc2","ddd2","ccc2","ddd2","ccc2","ddd2","ccc2","ddd2","ccc2","ddd2")
+        );
+        ret.setDatas(datas);
+
+        return ret;
+    }
 
 }
 

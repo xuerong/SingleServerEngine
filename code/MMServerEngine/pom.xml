@@ -241,7 +241,7 @@
             </resource>
           </webResources>
           <warSourceDirectory>src/main/webapp</warSourceDirectory>
-          <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+          <webXml>src/main/webapp/WEB-INF/webGm.xml</webXml>
         </configuration>
       </plugin>
     </plugins>

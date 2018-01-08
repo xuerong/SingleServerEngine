@@ -1054,6 +1054,24 @@ public final class AccountPB {
      */
     com.google.protobuf.ByteString
         getSessionIdBytes();
+
+    // required int64 serverTime = 2;
+    /**
+     * <code>required int64 serverTime = 2;</code>
+     *
+     * <pre>
+     * 服务器时间，用它在客户端计算出时间差
+     * </pre>
+     */
+    boolean hasServerTime();
+    /**
+     * <code>required int64 serverTime = 2;</code>
+     *
+     * <pre>
+     * 服务器时间，用它在客户端计算出时间差
+     * </pre>
+     */
+    long getServerTime();
   }
   /**
    * Protobuf type {@code SCLogin}
@@ -1109,6 +1127,11 @@ public final class AccountPB {
             case 10: {
               bitField0_ |= 0x00000001;
               sessionId_ = input.readBytes();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              serverTime_ = input.readInt64();
               break;
             }
           }
@@ -1194,8 +1217,33 @@ public final class AccountPB {
       }
     }
 
+    // required int64 serverTime = 2;
+    public static final int SERVERTIME_FIELD_NUMBER = 2;
+    private long serverTime_;
+    /**
+     * <code>required int64 serverTime = 2;</code>
+     *
+     * <pre>
+     * 服务器时间，用它在客户端计算出时间差
+     * </pre>
+     */
+    public boolean hasServerTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 serverTime = 2;</code>
+     *
+     * <pre>
+     * 服务器时间，用它在客户端计算出时间差
+     * </pre>
+     */
+    public long getServerTime() {
+      return serverTime_;
+    }
+
     private void initFields() {
       sessionId_ = "";
+      serverTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1203,6 +1251,10 @@ public final class AccountPB {
       if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasSessionId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasServerTime()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -1216,6 +1268,9 @@ public final class AccountPB {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(1, getSessionIdBytes());
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, serverTime_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1228,6 +1283,10 @@ public final class AccountPB {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, getSessionIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, serverTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1347,6 +1406,8 @@ public final class AccountPB {
         super.clear();
         sessionId_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
+        serverTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -1379,6 +1440,10 @@ public final class AccountPB {
           to_bitField0_ |= 0x00000001;
         }
         result.sessionId_ = sessionId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.serverTime_ = serverTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1400,12 +1465,19 @@ public final class AccountPB {
           sessionId_ = other.sessionId_;
           onChanged();
         }
+        if (other.hasServerTime()) {
+          setServerTime(other.getServerTime());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasSessionId()) {
+          
+          return false;
+        }
+        if (!hasServerTime()) {
           
           return false;
         }
@@ -1501,6 +1573,55 @@ public final class AccountPB {
   }
   bitField0_ |= 0x00000001;
         sessionId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required int64 serverTime = 2;
+      private long serverTime_ ;
+      /**
+       * <code>required int64 serverTime = 2;</code>
+       *
+       * <pre>
+       * 服务器时间，用它在客户端计算出时间差
+       * </pre>
+       */
+      public boolean hasServerTime() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int64 serverTime = 2;</code>
+       *
+       * <pre>
+       * 服务器时间，用它在客户端计算出时间差
+       * </pre>
+       */
+      public long getServerTime() {
+        return serverTime_;
+      }
+      /**
+       * <code>required int64 serverTime = 2;</code>
+       *
+       * <pre>
+       * 服务器时间，用它在客户端计算出时间差
+       * </pre>
+       */
+      public Builder setServerTime(long value) {
+        bitField0_ |= 0x00000002;
+        serverTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int64 serverTime = 2;</code>
+       *
+       * <pre>
+       * 服务器时间，用它在客户端计算出时间差
+       * </pre>
+       */
+      public Builder clearServerTime() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        serverTime_ = 0L;
         onChanged();
         return this;
       }
@@ -3979,13 +4100,13 @@ public final class AccountPB {
     java.lang.String[] descriptorData = {
       "\n\026protos/AccountPB.proto\"K\n\007CSLogin\022\021\n\ta" +
       "ccountId\030\001 \002(\t\022\013\n\003url\030\002 \002(\t\022\n\n\002ip\030\003 \002(\t\022" +
-      "\024\n\014localization\030\004 \002(\t\"\034\n\007SCLogin\022\021\n\tsess" +
-      "ionId\030\001 \002(\t\"\035\n\010CSLogout\022\021\n\taccountId\030\001 \002" +
-      "(\t\"\n\n\010SCLogout\"\017\n\rSCBeTakePlace\"\"\n\016CSGet" +
-      "LoginInfo\022\020\n\010deviceId\030\001 \002(\t\"O\n\016SCGetLogi" +
-      "nInfo\022\020\n\010serverId\030\001 \002(\005\022\n\n\002ip\030\002 \002(\t\022\014\n\004p" +
-      "ort\030\003 \002(\005\022\021\n\taccountId\030\004 \002(\tB\016\n\014com.prot" +
-      "ocol"
+      "\024\n\014localization\030\004 \002(\t\"0\n\007SCLogin\022\021\n\tsess" +
+      "ionId\030\001 \002(\t\022\022\n\nserverTime\030\002 \002(\003\"\035\n\010CSLog" +
+      "out\022\021\n\taccountId\030\001 \002(\t\"\n\n\010SCLogout\"\017\n\rSC" +
+      "BeTakePlace\"\"\n\016CSGetLoginInfo\022\020\n\010deviceI" +
+      "d\030\001 \002(\t\"O\n\016SCGetLoginInfo\022\020\n\010serverId\030\001 " +
+      "\002(\005\022\n\n\002ip\030\002 \002(\t\022\014\n\004port\030\003 \002(\005\022\021\n\taccount" +
+      "Id\030\004 \002(\tB\016\n\014com.protocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4003,7 +4124,7 @@ public final class AccountPB {
           internal_static_SCLogin_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCLogin_descriptor,
-              new java.lang.String[] { "SessionId", });
+              new java.lang.String[] { "SessionId", "ServerTime", });
           internal_static_CSLogout_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_CSLogout_fieldAccessorTable = new

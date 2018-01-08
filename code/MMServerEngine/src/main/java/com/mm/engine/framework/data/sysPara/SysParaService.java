@@ -1,10 +1,13 @@
 package com.mm.engine.framework.data.sysPara;
 
+import com.mm.engine.framework.control.annotation.EventListener;
 import com.mm.engine.framework.control.annotation.Service;
+import com.mm.engine.framework.control.event.EventData;
 import com.mm.engine.framework.control.gm.Gm;
 import com.mm.engine.framework.control.netEvent.remote.RemoteCallService;
 import com.mm.engine.framework.data.tx.LockerService;
 import com.mm.engine.framework.security.exception.MMException;
+import com.mm.engine.framework.server.SysConstantDefine;
 import com.mm.engine.framework.tool.helper.BeanHelper;
 import com.sys.SysPara;
 
@@ -25,7 +28,7 @@ import java.util.concurrent.*;
  *
  * mainServer接收gm指令
  */
-@Service(init = "init",initPriority = 4)
+@Service(init = "init",initPriority = 2)
 public class SysParaService {
 
     private Map<String,String> paraMap = new HashMap<>();
@@ -47,11 +50,11 @@ public class SysParaService {
          * 加载store数据，如果与策划配数冲突，替换掉策划配数
          * 启动一个线程池用于广播修改的系统变量
          */
-        sysParaStorage = BeanHelper.getFrameBean(SysParaStorage.class);
-
+        Map<String,String > paraMap = new HashMap<>();
         for(Map.Entry<String,String> entry : SysPara.paras.entrySet()){
             paraMap.put(entry.getKey(),entry.getValue());
         }
+        sysParaStorage = BeanHelper.getFrameBean(SysParaStorage.class);
         storageParaMap = sysParaStorage.getAllSysPara();
         if(storageParaMap != null) {
             for (Map.Entry<String, String> entry : storageParaMap.entrySet()) {
@@ -60,6 +63,11 @@ public class SysParaService {
         }else{
             storageParaMap = new HashMap<String, String>();
         }
+        this.paraMap = paraMap;
+    }
+    @EventListener(event = SysConstantDefine.Event_SysParaChange)
+    public void onSysParaChange(EventData data){
+        init();
     }
 
     /**
@@ -72,6 +80,9 @@ public class SysParaService {
     }
     public int getInt(String key){
         return Integer.parseInt(paraMap.get(key));
+    }
+    public long getLong(String key){
+        return Long.parseLong(paraMap.get(key));
     }
 
     /**

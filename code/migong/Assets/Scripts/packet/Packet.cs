@@ -41,7 +41,8 @@ public class Packet : MonoBehaviour {
 					useItem.Item = item;
 					SocketManager.SendMessageAsyc((int)MiGongOpcode.CSUseItem,CSUseItem.SerializeToBytes(useItem),delegate(int opcode, byte[] data) {
 						SCUseItem ret = SCUseItem.Deserialize(data);
-						Params.energy = int.Parse(ret.Ret);
+						string[] args = ret.Ret.Split(';');
+						Params.startEnergySchedule(int.Parse(args[0]),long.Parse(args[1]));
 						// 减少数量
 //						PacketItem pi = itemGo[item.ItemId].GetComponent<PacketItem>();
 						pi.decCount(1);

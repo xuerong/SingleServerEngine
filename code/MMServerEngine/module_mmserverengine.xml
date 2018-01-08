@@ -6,7 +6,7 @@
   <property name="module.jdk.bin.mmserverengine" value="${jdk.bin.1.8}"/>
   <property name="module.jdk.classpath.mmserverengine" value="jdk.classpath.1.8"/>
   
-  <property name="compiler.args.mmserverengine" value="-encoding UTF-8 -source 8 -target 1.8 ${compiler.args}"/>
+  <property name="compiler.args.mmserverengine" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
   
   <property name="mmserverengine.output.dir" value="${module.mmserverengine.basedir}/target/classes"/>
   <property name="mmserverengine.testoutput.dir" value="${module.mmserverengine.basedir}/target/test-classes"/>
@@ -18,17 +18,20 @@
   <path id="mmserverengine.module.production.classpath">
     <path refid="${module.jdk.classpath.mmserverengine}"/>
     <path refid="library.maven:_javax.servlet:javax.servlet-api:3.1.0.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:javax.servlet.jsp-api:2.3.1.classpath"/>
     <path refid="library.maven:_org.slf4j:slf4j-log4j12:1.7.13.classpath"/>
     <path refid="library.maven:_org.slf4j:slf4j-api:1.7.13.classpath"/>
     <path refid="library.maven:_log4j:log4j:1.2.17.classpath"/>
     <path refid="library.maven:_org.apache.commons:commons-lang3:3.4.classpath"/>
-    <path refid="library.maven:_cglib:cglib:3.1.classpath"/>
-    <path refid="library.maven:_org.ow2.asm:asm:4.2.classpath"/>
+    <path refid="library.maven:_cglib:cglib:3.2.5.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.2.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant:1.9.6.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant-launcher:1.9.6.classpath"/>
     <path refid="library.maven:_net.sf.json-lib:json-lib:jdk15:2.4.classpath"/>
     <path refid="library.maven:_commons-lang:commons-lang:2.5.classpath"/>
     <path refid="library.maven:_commons-logging:commons-logging:1.1.1.classpath"/>
     <path refid="library.maven:_net.sf.ezmorph:ezmorph:1.0.6.classpath"/>
-    <path refid="library.maven:_org.javassist:javassist:3.20.0-ga.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.22.0-ga.classpath"/>
     <path refid="library.maven:_net.sf.trove4j:trove4j:3.0.3.classpath"/>
     <path refid="library.maven:_org.ehcache:ehcache:3.0.0.m4.classpath"/>
     <path refid="library.maven:_org.terracotta:offheap-store:2.1.2.classpath"/>
@@ -53,28 +56,40 @@
     <path refid="library.maven:_org.eclipse.jetty:jetty-util:9.3.11.v20160721.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty:jetty-jsp:9.2.10.v20150310.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty.toolchain:jetty-schemas:3.1.m0.classpath"/>
-    <path refid="library.maven:_javax.servlet.jsp:javax.servlet.jsp-api:2.3.1.classpath"/>
     <path refid="library.maven:_org.glassfish.web:javax.servlet.jsp:2.3.2.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty.orbit:javax.servlet.jsp.jstl:1.2.0.v201105211821.classpath"/>
     <path refid="library.maven:_org.glassfish.web:javax.servlet.jsp.jstl:1.2.2.classpath"/>
     <path refid="library.maven:_org.glassfish:javax.el:3.0.0.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty.orbit:org.eclipse.jdt.core:3.8.2.v20130121.classpath"/>
+    <path refid="library.maven:_com.maxmind.geoip2:geoip2:2.3.0.classpath"/>
+    <path refid="library.maven:_com.maxmind.db:maxmind-db:1.0.0.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client:1.20.0.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:1.3.9.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.0.1.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.0.1.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.3.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.3.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.3.classpath"/>
   </path>
   
   <path id="mmserverengine.runtime.production.module.classpath">
     <pathelement location="${mmserverengine.output.dir}"/>
     <path refid="library.maven:_javax.servlet:javax.servlet-api:3.1.0.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:javax.servlet.jsp-api:2.3.1.classpath"/>
     <path refid="library.maven:_org.slf4j:slf4j-log4j12:1.7.13.classpath"/>
     <path refid="library.maven:_org.slf4j:slf4j-api:1.7.13.classpath"/>
     <path refid="library.maven:_log4j:log4j:1.2.17.classpath"/>
     <path refid="library.maven:_org.apache.commons:commons-lang3:3.4.classpath"/>
-    <path refid="library.maven:_cglib:cglib:3.1.classpath"/>
-    <path refid="library.maven:_org.ow2.asm:asm:4.2.classpath"/>
+    <path refid="library.maven:_cglib:cglib:3.2.5.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.2.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant:1.9.6.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant-launcher:1.9.6.classpath"/>
     <path refid="library.maven:_net.sf.json-lib:json-lib:jdk15:2.4.classpath"/>
     <path refid="library.maven:_commons-lang:commons-lang:2.5.classpath"/>
     <path refid="library.maven:_commons-logging:commons-logging:1.1.1.classpath"/>
     <path refid="library.maven:_net.sf.ezmorph:ezmorph:1.0.6.classpath"/>
-    <path refid="library.maven:_org.javassist:javassist:3.20.0-ga.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.22.0-ga.classpath"/>
     <path refid="library.maven:_net.sf.trove4j:trove4j:3.0.3.classpath"/>
     <path refid="library.maven:_org.ehcache:ehcache:3.0.0.m4.classpath"/>
     <path refid="library.maven:_org.terracotta:offheap-store:2.1.2.classpath"/>
@@ -99,12 +114,21 @@
     <path refid="library.maven:_org.eclipse.jetty:jetty-util:9.3.11.v20160721.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty:jetty-jsp:9.2.10.v20150310.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty.toolchain:jetty-schemas:3.1.m0.classpath"/>
-    <path refid="library.maven:_javax.servlet.jsp:javax.servlet.jsp-api:2.3.1.classpath"/>
     <path refid="library.maven:_org.glassfish.web:javax.servlet.jsp:2.3.2.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty.orbit:javax.servlet.jsp.jstl:1.2.0.v201105211821.classpath"/>
     <path refid="library.maven:_org.glassfish.web:javax.servlet.jsp.jstl:1.2.2.classpath"/>
     <path refid="library.maven:_org.glassfish:javax.el:3.0.0.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty.orbit:org.eclipse.jdt.core:3.8.2.v20130121.classpath"/>
+    <path refid="library.maven:_com.maxmind.geoip2:geoip2:2.3.0.classpath"/>
+    <path refid="library.maven:_com.maxmind.db:maxmind-db:1.0.0.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client:1.20.0.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:1.3.9.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.0.1.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.0.1.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.3.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.3.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.3.classpath"/>
   </path>
   
   <path id="mmserverengine.module.classpath">
@@ -113,17 +137,20 @@
     <path refid="library.maven:_junit:junit:4.12.classpath"/>
     <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
     <path refid="library.maven:_javax.servlet:javax.servlet-api:3.1.0.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:javax.servlet.jsp-api:2.3.1.classpath"/>
     <path refid="library.maven:_org.slf4j:slf4j-log4j12:1.7.13.classpath"/>
     <path refid="library.maven:_org.slf4j:slf4j-api:1.7.13.classpath"/>
     <path refid="library.maven:_log4j:log4j:1.2.17.classpath"/>
     <path refid="library.maven:_org.apache.commons:commons-lang3:3.4.classpath"/>
-    <path refid="library.maven:_cglib:cglib:3.1.classpath"/>
-    <path refid="library.maven:_org.ow2.asm:asm:4.2.classpath"/>
+    <path refid="library.maven:_cglib:cglib:3.2.5.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.2.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant:1.9.6.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant-launcher:1.9.6.classpath"/>
     <path refid="library.maven:_net.sf.json-lib:json-lib:jdk15:2.4.classpath"/>
     <path refid="library.maven:_commons-lang:commons-lang:2.5.classpath"/>
     <path refid="library.maven:_commons-logging:commons-logging:1.1.1.classpath"/>
     <path refid="library.maven:_net.sf.ezmorph:ezmorph:1.0.6.classpath"/>
-    <path refid="library.maven:_org.javassist:javassist:3.20.0-ga.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.22.0-ga.classpath"/>
     <path refid="library.maven:_net.sf.trove4j:trove4j:3.0.3.classpath"/>
     <path refid="library.maven:_org.ehcache:ehcache:3.0.0.m4.classpath"/>
     <path refid="library.maven:_org.terracotta:offheap-store:2.1.2.classpath"/>
@@ -148,12 +175,21 @@
     <path refid="library.maven:_org.eclipse.jetty:jetty-util:9.3.11.v20160721.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty:jetty-jsp:9.2.10.v20150310.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty.toolchain:jetty-schemas:3.1.m0.classpath"/>
-    <path refid="library.maven:_javax.servlet.jsp:javax.servlet.jsp-api:2.3.1.classpath"/>
     <path refid="library.maven:_org.glassfish.web:javax.servlet.jsp:2.3.2.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty.orbit:javax.servlet.jsp.jstl:1.2.0.v201105211821.classpath"/>
     <path refid="library.maven:_org.glassfish.web:javax.servlet.jsp.jstl:1.2.2.classpath"/>
     <path refid="library.maven:_org.glassfish:javax.el:3.0.0.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty.orbit:org.eclipse.jdt.core:3.8.2.v20130121.classpath"/>
+    <path refid="library.maven:_com.maxmind.geoip2:geoip2:2.3.0.classpath"/>
+    <path refid="library.maven:_com.maxmind.db:maxmind-db:1.0.0.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client:1.20.0.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:1.3.9.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.0.1.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.0.1.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.3.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.3.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.3.classpath"/>
   </path>
   
   <path id="mmserverengine.runtime.module.classpath">
@@ -162,17 +198,20 @@
     <path refid="library.maven:_junit:junit:4.12.classpath"/>
     <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
     <path refid="library.maven:_javax.servlet:javax.servlet-api:3.1.0.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:javax.servlet.jsp-api:2.3.1.classpath"/>
     <path refid="library.maven:_org.slf4j:slf4j-log4j12:1.7.13.classpath"/>
     <path refid="library.maven:_org.slf4j:slf4j-api:1.7.13.classpath"/>
     <path refid="library.maven:_log4j:log4j:1.2.17.classpath"/>
     <path refid="library.maven:_org.apache.commons:commons-lang3:3.4.classpath"/>
-    <path refid="library.maven:_cglib:cglib:3.1.classpath"/>
-    <path refid="library.maven:_org.ow2.asm:asm:4.2.classpath"/>
+    <path refid="library.maven:_cglib:cglib:3.2.5.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.2.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant:1.9.6.classpath"/>
+    <path refid="library.maven:_org.apache.ant:ant-launcher:1.9.6.classpath"/>
     <path refid="library.maven:_net.sf.json-lib:json-lib:jdk15:2.4.classpath"/>
     <path refid="library.maven:_commons-lang:commons-lang:2.5.classpath"/>
     <path refid="library.maven:_commons-logging:commons-logging:1.1.1.classpath"/>
     <path refid="library.maven:_net.sf.ezmorph:ezmorph:1.0.6.classpath"/>
-    <path refid="library.maven:_org.javassist:javassist:3.20.0-ga.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.22.0-ga.classpath"/>
     <path refid="library.maven:_net.sf.trove4j:trove4j:3.0.3.classpath"/>
     <path refid="library.maven:_org.ehcache:ehcache:3.0.0.m4.classpath"/>
     <path refid="library.maven:_org.terracotta:offheap-store:2.1.2.classpath"/>
@@ -197,12 +236,21 @@
     <path refid="library.maven:_org.eclipse.jetty:jetty-util:9.3.11.v20160721.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty:jetty-jsp:9.2.10.v20150310.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty.toolchain:jetty-schemas:3.1.m0.classpath"/>
-    <path refid="library.maven:_javax.servlet.jsp:javax.servlet.jsp-api:2.3.1.classpath"/>
     <path refid="library.maven:_org.glassfish.web:javax.servlet.jsp:2.3.2.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty.orbit:javax.servlet.jsp.jstl:1.2.0.v201105211821.classpath"/>
     <path refid="library.maven:_org.glassfish.web:javax.servlet.jsp.jstl:1.2.2.classpath"/>
     <path refid="library.maven:_org.glassfish:javax.el:3.0.0.classpath"/>
     <path refid="library.maven:_org.eclipse.jetty.orbit:org.eclipse.jdt.core:3.8.2.v20130121.classpath"/>
+    <path refid="library.maven:_com.maxmind.geoip2:geoip2:2.3.0.classpath"/>
+    <path refid="library.maven:_com.maxmind.db:maxmind-db:1.0.0.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client:1.20.0.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:1.3.9.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.0.1.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.0.1.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.3.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.3.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.3.classpath"/>
   </path>
   
   

@@ -226,7 +226,7 @@ public class MapCreate : MonoBehaviour{
 		if (currentTime == 0) {
 			if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {// pvp由服务器结束时间
 				//弹出结算界面，发送结束消息
-				selfArrive (false, null, true);
+				//selfArrive (false, null, true);
 			} 
 		}
 	}
@@ -271,6 +271,18 @@ public class MapCreate : MonoBehaviour{
 		int y = (int)((pos.y + nodeY / 2) / nodeY);
 		int i = (tr - y - 1);
 		return i * td + x;
+	}
+	public Vector2 getPointByPosition(float x,float y) { 
+		int x = (int)((pos.x + nodeX / 2) / nodeX);
+		int y = (int)((pos.y + nodeY / 2) / nodeY);
+		int i = (tr - y - 1);
+		return Vector2(i,x);
+	}
+	public Vector2 getPositionByPoint(int x,int y) {
+		float y_ = tr - x - 1;
+		float posY = y_ * nodeY - nodeY / 2;
+		float posX = y * nodeX - nodeX / 2;
+		return new Vector2(posX,posY);
 	}
 	// 检查吃豆子，如果有就吃掉---根据类型
 	public void checkEatBean(int pos){

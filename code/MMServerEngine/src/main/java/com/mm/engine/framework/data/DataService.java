@@ -5,6 +5,7 @@ import com.mm.engine.framework.data.cache.CacheCenter;
 import com.mm.engine.framework.data.cache.CacheEntity;
 import com.mm.engine.framework.data.cache.CacheService;
 import com.mm.engine.framework.data.cache.KeyParser;
+import com.mm.engine.framework.data.persistence.dao.DatabaseHelper;
 import com.mm.engine.framework.data.persistence.orm.DataSet;
 import com.mm.engine.framework.data.tx.AsyncService;
 import com.mm.engine.framework.data.tx.LockerService;
@@ -321,6 +322,20 @@ public class DataService {
             asyncService.delete(key, object);
         }
         return true;
+    }
+
+    public long selectCount(Class<?> entityClass, String condition, Object... params){
+        return DataSet.selectCount(entityClass,condition,params);
+    }
+    public long selectCountBySql(String sql, Object... params){
+        return DatabaseHelper.queryCount(sql, params);
+    }
+
+    //
+    public <T> List<T> selectListBySql(Class<T> entityClass, String sql, Object... params) {
+        List<T> objectList = null;
+        objectList = DatabaseHelper.queryEntityList(entityClass, sql, params);
+        return objectList;
     }
     /**
      * 删除一个实体,condition必须是主键

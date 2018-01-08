@@ -67,3 +67,6 @@ buySuccess=购买成功
 buyFail=本次购买失败
 
 star=星
+
+gainReward=获得奖励
+dailyReward=每日奖励

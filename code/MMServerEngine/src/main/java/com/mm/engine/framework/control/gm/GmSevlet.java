@@ -61,6 +61,8 @@ public class GmSevlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         try {
+            req.setCharacterEncoding("UTF-8");
+            resp.setContentType("text/html;charset=utf-8");
             doGm(req, resp);
         }catch (Throwable e){
             resp.getWriter().write("error:"+e.getMessage());

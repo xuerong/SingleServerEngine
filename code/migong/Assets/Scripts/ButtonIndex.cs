@@ -14,7 +14,7 @@ public class ButtonIndex : MonoBehaviour {
 	public Image[] starImages;
 
 	void Start(){
-		Debug.Log ("pass="+pass+",star="+star);
+		//Debug.Log ("pass="+pass+",star="+star);
 //		if (lightSprite == null) {
 //			Sprite sp = Resources.Load ("levelImage/lightSprite", typeof(Sprite)) as Sprite;
 //			lightSprite = sp;

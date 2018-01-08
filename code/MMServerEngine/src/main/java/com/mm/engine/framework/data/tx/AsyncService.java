@@ -317,7 +317,7 @@ public class AsyncService {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    while (running){
+                    while (true){
                         AsyncData asyncData = null;
                         try{
                             asyncData = asyncDataQueue.take();
@@ -357,6 +357,7 @@ public class AsyncService {
                         }catch (Throwable e){
                             if(e instanceof InterruptedException && asyncData == null && !running){
                                 // stop发生了
+                                log.info("async thread stop");
                                 break;
                             }
                             // 这里失败怎么办
@@ -383,12 +384,19 @@ public class AsyncService {
                     int SwallowExceptionTime = 0;
                     int waitTime = 0;
                     int lastSize = asyncDataQueue.size();
+                    if(lastSize > 0 && !dbThread.isAlive()){
+                        log.info("restart async thread---");
+                        dbThread.start(); // 重新启动更新线程
+                    }
                     while(!asyncDataQueue.isEmpty()){
                         try {
                             int size = asyncDataQueue.size();
                             if(waitTime++>MAXWAITTIMES && size >= lastSize){
                                 log.error("停止异步服务器出现异常，在指定时间内未处理完，并且至少"+WAITINTERVAL+"毫秒内没有处理数据，workerId = "+threadNum
                                         +",剩余未处理数据量："+asyncDataQueue.size());
+                                while(asyncDataQueue.size() > 0){
+                                    System.out.println(asyncDataQueue.take());
+                                }
                                 break;
                             }
                             lastSize = size;

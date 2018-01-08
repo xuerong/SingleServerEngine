@@ -228,6 +228,8 @@ namespace Example
                 instance.UnitTable = new List<Example.PBUnitTable>();
             if (instance.PeckTable == null)
                 instance.PeckTable = new List<Example.PBPeckTable>();
+            if (instance.UnlimitedRewardTable == null)
+                instance.UnlimitedRewardTable = new List<Example.PBUnlimitedRewardTable>();
             while (true)
             {
                 int keyByte = stream.ReadByte();
@@ -236,9 +238,12 @@ namespace Example
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 1 Varint
-                    case 8:
-                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 1 LengthDelimited
+                    case 10:
+                        if (instance.Energy == null)
+                            instance.Energy = Example.SCEnergyInfo.DeserializeLengthDelimited(stream);
+                        else
+                            Example.SCEnergyInfo.DeserializeLengthDelimited(stream, instance.Energy);
                         continue;
                     // Field 2 LengthDelimited
                     case 18:
@@ -272,6 +277,11 @@ namespace Example
                     case 66:
                         // repeated
                         instance.PeckTable.Add(Example.PBPeckTable.DeserializeLengthDelimited(stream));
+                        continue;
+                    // Field 9 LengthDelimited
+                    case 74:
+                        // repeated
+                        instance.UnlimitedRewardTable.Add(Example.PBUnlimitedRewardTable.DeserializeLengthDelimited(stream));
                         continue;
                 }
 
@@ -304,6 +314,8 @@ namespace Example
                 instance.UnitTable = new List<Example.PBUnitTable>();
             if (instance.PeckTable == null)
                 instance.PeckTable = new List<Example.PBPeckTable>();
+            if (instance.UnlimitedRewardTable == null)
+                instance.UnlimitedRewardTable = new List<Example.PBUnlimitedRewardTable>();
             long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
             limit += stream.Position;
             while (true)
@@ -321,9 +333,12 @@ namespace Example
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 1 Varint
-                    case 8:
-                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 1 LengthDelimited
+                    case 10:
+                        if (instance.Energy == null)
+                            instance.Energy = Example.SCEnergyInfo.DeserializeLengthDelimited(stream);
+                        else
+                            Example.SCEnergyInfo.DeserializeLengthDelimited(stream, instance.Energy);
                         continue;
                     // Field 2 LengthDelimited
                     case 18:
@@ -357,6 +372,11 @@ namespace Example
                     case 66:
                         // repeated
                         instance.PeckTable.Add(Example.PBPeckTable.DeserializeLengthDelimited(stream));
+                        continue;
+                    // Field 9 LengthDelimited
+                    case 74:
+                        // repeated
+                        instance.UnlimitedRewardTable.Add(Example.PBUnlimitedRewardTable.DeserializeLengthDelimited(stream));
                         continue;
                 }
 
@@ -389,6 +409,8 @@ namespace Example
                 instance.UnitTable = new List<Example.PBUnitTable>();
             if (instance.PeckTable == null)
                 instance.PeckTable = new List<Example.PBPeckTable>();
+            if (instance.UnlimitedRewardTable == null)
+                instance.UnlimitedRewardTable = new List<Example.PBUnlimitedRewardTable>();
             long limit = stream.Position + length;
             while (true)
             {
@@ -405,9 +427,12 @@ namespace Example
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 1 Varint
-                    case 8:
-                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 1 LengthDelimited
+                    case 10:
+                        if (instance.Energy == null)
+                            instance.Energy = Example.SCEnergyInfo.DeserializeLengthDelimited(stream);
+                        else
+                            Example.SCEnergyInfo.DeserializeLengthDelimited(stream, instance.Energy);
                         continue;
                     // Field 2 LengthDelimited
                     case 18:
@@ -442,6 +467,11 @@ namespace Example
                         // repeated
                         instance.PeckTable.Add(Example.PBPeckTable.DeserializeLengthDelimited(stream));
                         continue;
+                    // Field 9 LengthDelimited
+                    case 74:
+                        // repeated
+                        instance.UnlimitedRewardTable.Add(Example.PBUnlimitedRewardTable.DeserializeLengthDelimited(stream));
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -464,9 +494,17 @@ namespace Example
         public static void Serialize(Stream stream, SCBaseInfo instance)
         {
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
-            // Key for field: 1, Varint
-            stream.WriteByte(8);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Energy);
+            if (instance.Energy == null)
+                throw new ArgumentNullException("Energy", "Required by proto specification.");
+            // Key for field: 1, LengthDelimited
+            stream.WriteByte(10);
+            ﻿msField.SetLength(0);
+            Example.SCEnergyInfo.Serialize(msField, instance.Energy);
+            // Length delimited byte array
+            uint length1 = (uint)msField.Length;
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length1);
+            stream.Write(msField.GetBuffer(), 0, (int)length1);
+
             if (instance.SysParas != null)
             {
                 foreach (var i2 in instance.SysParas)
@@ -545,6 +583,21 @@ namespace Example
                     uint length8 = (uint)msField.Length;
                     global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length8);
                     stream.Write(msField.GetBuffer(), 0, (int)length8);
+
+                }
+            }
+            if (instance.UnlimitedRewardTable != null)
+            {
+                foreach (var i9 in instance.UnlimitedRewardTable)
+                {
+                    // Key for field: 9, LengthDelimited
+                    stream.WriteByte(74);
+                    ﻿msField.SetLength(0);
+                    Example.PBUnlimitedRewardTable.Serialize(msField, i9);
+                    // Length delimited byte array
+                    uint length9 = (uint)msField.Length;
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length9);
+                    stream.Write(msField.GetBuffer(), 0, (int)length9);
 
                 }
             }
@@ -1739,6 +1792,602 @@ namespace Example
         }
         /// <summary>Helper: Serialize with a varint length prefix</summary>
         public static void SerializeLengthDelimited(Stream stream, PBPeckTable instance)
+        {
+            var data = SerializeToBytes(instance);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
+            stream.Write(data, 0, data.Length);
+        }
+    }
+
+    [System.Serializable()]
+    public partial class PBUnlimitedRewardTable
+    {
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static PBUnlimitedRewardTable Deserialize(Stream stream)
+        {
+            PBUnlimitedRewardTable instance = new PBUnlimitedRewardTable();
+            Deserialize(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static PBUnlimitedRewardTable DeserializeLengthDelimited(Stream stream)
+        {
+            PBUnlimitedRewardTable instance = new PBUnlimitedRewardTable();
+            DeserializeLengthDelimited(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static PBUnlimitedRewardTable DeserializeLength(Stream stream, int length)
+        {
+            PBUnlimitedRewardTable instance = new PBUnlimitedRewardTable();
+            DeserializeLength(stream, length, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
+        public static PBUnlimitedRewardTable Deserialize(byte[] buffer)
+        {
+            PBUnlimitedRewardTable instance = new PBUnlimitedRewardTable();
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
+        public static Example.PBUnlimitedRewardTable Deserialize(byte[] buffer, Example.PBUnlimitedRewardTable instance)
+        {
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
+        public static Example.PBUnlimitedRewardTable Deserialize(Stream stream, Example.PBUnlimitedRewardTable instance)
+        {
+            while (true)
+            {
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    break;
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Id = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 2 Varint
+                    case 16:
+                        instance.Star = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 3 Varint
+                    case 24:
+                        instance.Gold = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 4 LengthDelimited
+                    case 34:
+                        instance.Reward = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.PBUnlimitedRewardTable DeserializeLengthDelimited(Stream stream, Example.PBUnlimitedRewardTable instance)
+        {
+            long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
+            limit += stream.Position;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Id = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 2 Varint
+                    case 16:
+                        instance.Star = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 3 Varint
+                    case 24:
+                        instance.Gold = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 4 LengthDelimited
+                    case 34:
+                        instance.Reward = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.PBUnlimitedRewardTable DeserializeLength(Stream stream, int length, Example.PBUnlimitedRewardTable instance)
+        {
+            long limit = stream.Position + length;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Id = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 2 Varint
+                    case 16:
+                        instance.Star = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 3 Varint
+                    case 24:
+                        instance.Gold = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 4 LengthDelimited
+                    case 34:
+                        instance.Reward = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Serialize the instance into the stream</summary>
+        public static void Serialize(Stream stream, PBUnlimitedRewardTable instance)
+        {
+            var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
+            // Key for field: 1, Varint
+            stream.WriteByte(8);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Id);
+            // Key for field: 2, Varint
+            stream.WriteByte(16);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star);
+            // Key for field: 3, Varint
+            stream.WriteByte(24);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Gold);
+            if (instance.Reward == null)
+                throw new ArgumentNullException("Reward", "Required by proto specification.");
+            // Key for field: 4, LengthDelimited
+            stream.WriteByte(34);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Reward));
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
+        }
+
+        /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
+        public static byte[] SerializeToBytes(PBUnlimitedRewardTable instance)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Serialize(ms, instance);
+                return ms.ToArray();
+            }
+        }
+        /// <summary>Helper: Serialize with a varint length prefix</summary>
+        public static void SerializeLengthDelimited(Stream stream, PBUnlimitedRewardTable instance)
+        {
+            var data = SerializeToBytes(instance);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
+            stream.Write(data, 0, data.Length);
+        }
+    }
+
+    [System.Serializable()]
+    public partial class CSEnergyInfo
+    {
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static CSEnergyInfo Deserialize(Stream stream)
+        {
+            CSEnergyInfo instance = new CSEnergyInfo();
+            Deserialize(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static CSEnergyInfo DeserializeLengthDelimited(Stream stream)
+        {
+            CSEnergyInfo instance = new CSEnergyInfo();
+            DeserializeLengthDelimited(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static CSEnergyInfo DeserializeLength(Stream stream, int length)
+        {
+            CSEnergyInfo instance = new CSEnergyInfo();
+            DeserializeLength(stream, length, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
+        public static CSEnergyInfo Deserialize(byte[] buffer)
+        {
+            CSEnergyInfo instance = new CSEnergyInfo();
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
+        public static Example.CSEnergyInfo Deserialize(byte[] buffer, Example.CSEnergyInfo instance)
+        {
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
+        public static Example.CSEnergyInfo Deserialize(Stream stream, Example.CSEnergyInfo instance)
+        {
+            while (true)
+            {
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    break;
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.CSEnergyInfo DeserializeLengthDelimited(Stream stream, Example.CSEnergyInfo instance)
+        {
+            long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
+            limit += stream.Position;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.CSEnergyInfo DeserializeLength(Stream stream, int length, Example.CSEnergyInfo instance)
+        {
+            long limit = stream.Position + length;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Serialize the instance into the stream</summary>
+        public static void Serialize(Stream stream, CSEnergyInfo instance)
+        {
+            var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
+        }
+
+        /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
+        public static byte[] SerializeToBytes(CSEnergyInfo instance)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Serialize(ms, instance);
+                return ms.ToArray();
+            }
+        }
+        /// <summary>Helper: Serialize with a varint length prefix</summary>
+        public static void SerializeLengthDelimited(Stream stream, CSEnergyInfo instance)
+        {
+            var data = SerializeToBytes(instance);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
+            stream.Write(data, 0, data.Length);
+        }
+    }
+
+    [System.Serializable()]
+    public partial class SCEnergyInfo
+    {
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static SCEnergyInfo Deserialize(Stream stream)
+        {
+            SCEnergyInfo instance = new SCEnergyInfo();
+            Deserialize(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static SCEnergyInfo DeserializeLengthDelimited(Stream stream)
+        {
+            SCEnergyInfo instance = new SCEnergyInfo();
+            DeserializeLengthDelimited(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static SCEnergyInfo DeserializeLength(Stream stream, int length)
+        {
+            SCEnergyInfo instance = new SCEnergyInfo();
+            DeserializeLength(stream, length, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
+        public static SCEnergyInfo Deserialize(byte[] buffer)
+        {
+            SCEnergyInfo instance = new SCEnergyInfo();
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
+        public static Example.SCEnergyInfo Deserialize(byte[] buffer, Example.SCEnergyInfo instance)
+        {
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
+        public static Example.SCEnergyInfo Deserialize(Stream stream, Example.SCEnergyInfo instance)
+        {
+            while (true)
+            {
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    break;
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 2 Varint
+                    case 16:
+                        instance.RefreshTime = (long)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.SCEnergyInfo DeserializeLengthDelimited(Stream stream, Example.SCEnergyInfo instance)
+        {
+            long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
+            limit += stream.Position;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 2 Varint
+                    case 16:
+                        instance.RefreshTime = (long)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.SCEnergyInfo DeserializeLength(Stream stream, int length, Example.SCEnergyInfo instance)
+        {
+            long limit = stream.Position + length;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 2 Varint
+                    case 16:
+                        instance.RefreshTime = (long)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Serialize the instance into the stream</summary>
+        public static void Serialize(Stream stream, SCEnergyInfo instance)
+        {
+            var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
+            // Key for field: 1, Varint
+            stream.WriteByte(8);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Energy);
+            // Key for field: 2, Varint
+            stream.WriteByte(16);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.RefreshTime);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
+        }
+
+        /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
+        public static byte[] SerializeToBytes(SCEnergyInfo instance)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Serialize(ms, instance);
+                return ms.ToArray();
+            }
+        }
+        /// <summary>Helper: Serialize with a varint length prefix</summary>
+        public static void SerializeLengthDelimited(Stream stream, SCEnergyInfo instance)
         {
             var data = SerializeToBytes(instance);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
@@ -3525,9 +4174,12 @@ namespace Example
                     case 88:
                         instance.Star4 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 12 Varint
-                    case 96:
-                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 12 LengthDelimited
+                    case 98:
+                        if (instance.Energy == null)
+                            instance.Energy = Example.SCEnergyInfo.DeserializeLengthDelimited(stream);
+                        else
+                            Example.SCEnergyInfo.DeserializeLengthDelimited(stream, instance.Energy);
                         continue;
                     // Field 13 LengthDelimited
                     case 106:
@@ -3537,6 +4189,10 @@ namespace Example
                     case 114:
                         // repeated
                         instance.Items.Add(Example.PBItem.DeserializeLengthDelimited(stream));
+                        continue;
+                    // Field 15 Varint
+                    case 120:
+                        instance.EnemyCount = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -3628,9 +4284,12 @@ namespace Example
                     case 88:
                         instance.Star4 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 12 Varint
-                    case 96:
-                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 12 LengthDelimited
+                    case 98:
+                        if (instance.Energy == null)
+                            instance.Energy = Example.SCEnergyInfo.DeserializeLengthDelimited(stream);
+                        else
+                            Example.SCEnergyInfo.DeserializeLengthDelimited(stream, instance.Energy);
                         continue;
                     // Field 13 LengthDelimited
                     case 106:
@@ -3640,6 +4299,10 @@ namespace Example
                     case 114:
                         // repeated
                         instance.Items.Add(Example.PBItem.DeserializeLengthDelimited(stream));
+                        continue;
+                    // Field 15 Varint
+                    case 120:
+                        instance.EnemyCount = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -3730,9 +4393,12 @@ namespace Example
                     case 88:
                         instance.Star4 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 12 Varint
-                    case 96:
-                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 12 LengthDelimited
+                    case 98:
+                        if (instance.Energy == null)
+                            instance.Energy = Example.SCEnergyInfo.DeserializeLengthDelimited(stream);
+                        else
+                            Example.SCEnergyInfo.DeserializeLengthDelimited(stream, instance.Energy);
                         continue;
                     // Field 13 LengthDelimited
                     case 106:
@@ -3742,6 +4408,10 @@ namespace Example
                     case 114:
                         // repeated
                         instance.Items.Add(Example.PBItem.DeserializeLengthDelimited(stream));
+                        continue;
+                    // Field 15 Varint
+                    case 120:
+                        instance.EnemyCount = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -3816,9 +4486,17 @@ namespace Example
             // Key for field: 11, Varint
             stream.WriteByte(88);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star4);
-            // Key for field: 12, Varint
-            stream.WriteByte(96);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Energy);
+            if (instance.Energy == null)
+                throw new ArgumentNullException("Energy", "Required by proto specification.");
+            // Key for field: 12, LengthDelimited
+            stream.WriteByte(98);
+            ﻿msField.SetLength(0);
+            Example.SCEnergyInfo.Serialize(msField, instance.Energy);
+            // Length delimited byte array
+            uint length12 = (uint)msField.Length;
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length12);
+            stream.Write(msField.GetBuffer(), 0, (int)length12);
+
             if (instance.Route != null)
             {
                 // Key for field: 13, LengthDelimited
@@ -3840,6 +4518,9 @@ namespace Example
 
                 }
             }
+            // Key for field: 15, Varint
+            stream.WriteByte(120);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.EnemyCount);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
@@ -5764,6 +6445,14 @@ namespace Example
                     case 32:
                         instance.Rank = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
+                    // Field 5 Varint
+                    case 40:
+                        instance.TodayStar = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 6 LengthDelimited
+                    case 50:
+                        instance.Award = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -5821,6 +6510,14 @@ namespace Example
                     case 32:
                         instance.Rank = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
+                    // Field 5 Varint
+                    case 40:
+                        instance.TodayStar = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 6 LengthDelimited
+                    case 50:
+                        instance.Award = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -5877,6 +6574,14 @@ namespace Example
                     case 32:
                         instance.Rank = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
+                    // Field 5 Varint
+                    case 40:
+                        instance.TodayStar = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 6 LengthDelimited
+                    case 50:
+                        instance.Award = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -5923,6 +6628,14 @@ namespace Example
             // Key for field: 4, Varint
             stream.WriteByte(32);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Rank);
+            // Key for field: 5, Varint
+            stream.WriteByte(40);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.TodayStar);
+            if (instance.Award == null)
+                throw new ArgumentNullException("Award", "Required by proto specification.");
+            // Key for field: 6, LengthDelimited
+            stream.WriteByte(50);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Award));
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
@@ -5937,6 +6650,384 @@ namespace Example
         }
         /// <summary>Helper: Serialize with a varint length prefix</summary>
         public static void SerializeLengthDelimited(Stream stream, SCUnlimitedInfo instance)
+        {
+            var data = SerializeToBytes(instance);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
+            stream.Write(data, 0, data.Length);
+        }
+    }
+
+    [System.Serializable()]
+    public partial class CSUnlimitedAward
+    {
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static CSUnlimitedAward Deserialize(Stream stream)
+        {
+            CSUnlimitedAward instance = new CSUnlimitedAward();
+            Deserialize(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static CSUnlimitedAward DeserializeLengthDelimited(Stream stream)
+        {
+            CSUnlimitedAward instance = new CSUnlimitedAward();
+            DeserializeLengthDelimited(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static CSUnlimitedAward DeserializeLength(Stream stream, int length)
+        {
+            CSUnlimitedAward instance = new CSUnlimitedAward();
+            DeserializeLength(stream, length, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
+        public static CSUnlimitedAward Deserialize(byte[] buffer)
+        {
+            CSUnlimitedAward instance = new CSUnlimitedAward();
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
+        public static Example.CSUnlimitedAward Deserialize(byte[] buffer, Example.CSUnlimitedAward instance)
+        {
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
+        public static Example.CSUnlimitedAward Deserialize(Stream stream, Example.CSUnlimitedAward instance)
+        {
+            while (true)
+            {
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    break;
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Index = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.CSUnlimitedAward DeserializeLengthDelimited(Stream stream, Example.CSUnlimitedAward instance)
+        {
+            long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
+            limit += stream.Position;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Index = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.CSUnlimitedAward DeserializeLength(Stream stream, int length, Example.CSUnlimitedAward instance)
+        {
+            long limit = stream.Position + length;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Index = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Serialize the instance into the stream</summary>
+        public static void Serialize(Stream stream, CSUnlimitedAward instance)
+        {
+            var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
+            // Key for field: 1, Varint
+            stream.WriteByte(8);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Index);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
+        }
+
+        /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
+        public static byte[] SerializeToBytes(CSUnlimitedAward instance)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Serialize(ms, instance);
+                return ms.ToArray();
+            }
+        }
+        /// <summary>Helper: Serialize with a varint length prefix</summary>
+        public static void SerializeLengthDelimited(Stream stream, CSUnlimitedAward instance)
+        {
+            var data = SerializeToBytes(instance);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
+            stream.Write(data, 0, data.Length);
+        }
+    }
+
+    [System.Serializable()]
+    public partial class SCUnlimitedAward
+    {
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static SCUnlimitedAward Deserialize(Stream stream)
+        {
+            SCUnlimitedAward instance = new SCUnlimitedAward();
+            Deserialize(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static SCUnlimitedAward DeserializeLengthDelimited(Stream stream)
+        {
+            SCUnlimitedAward instance = new SCUnlimitedAward();
+            DeserializeLengthDelimited(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static SCUnlimitedAward DeserializeLength(Stream stream, int length)
+        {
+            SCUnlimitedAward instance = new SCUnlimitedAward();
+            DeserializeLength(stream, length, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
+        public static SCUnlimitedAward Deserialize(byte[] buffer)
+        {
+            SCUnlimitedAward instance = new SCUnlimitedAward();
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
+        public static Example.SCUnlimitedAward Deserialize(byte[] buffer, Example.SCUnlimitedAward instance)
+        {
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
+        public static Example.SCUnlimitedAward Deserialize(Stream stream, Example.SCUnlimitedAward instance)
+        {
+            while (true)
+            {
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    break;
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 LengthDelimited
+                    case 10:
+                        instance.Award = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.SCUnlimitedAward DeserializeLengthDelimited(Stream stream, Example.SCUnlimitedAward instance)
+        {
+            long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
+            limit += stream.Position;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 LengthDelimited
+                    case 10:
+                        instance.Award = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.SCUnlimitedAward DeserializeLength(Stream stream, int length, Example.SCUnlimitedAward instance)
+        {
+            long limit = stream.Position + length;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 LengthDelimited
+                    case 10:
+                        instance.Award = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Serialize the instance into the stream</summary>
+        public static void Serialize(Stream stream, SCUnlimitedAward instance)
+        {
+            var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
+            if (instance.Award == null)
+                throw new ArgumentNullException("Award", "Required by proto specification.");
+            // Key for field: 1, LengthDelimited
+            stream.WriteByte(10);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Award));
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
+        }
+
+        /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
+        public static byte[] SerializeToBytes(SCUnlimitedAward instance)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Serialize(ms, instance);
+                return ms.ToArray();
+            }
+        }
+        /// <summary>Helper: Serialize with a varint length prefix</summary>
+        public static void SerializeLengthDelimited(Stream stream, SCUnlimitedAward instance)
         {
             var data = SerializeToBytes(instance);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
@@ -6459,9 +7550,16 @@ namespace Example
                     case 88:
                         instance.Star4 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 12 Varint
-                    case 96:
-                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 12 LengthDelimited
+                    case 98:
+                        if (instance.Energy == null)
+                            instance.Energy = Example.SCEnergyInfo.DeserializeLengthDelimited(stream);
+                        else
+                            Example.SCEnergyInfo.DeserializeLengthDelimited(stream, instance.Energy);
+                        continue;
+                    // Field 13 Varint
+                    case 104:
+                        instance.EnemyCount = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -6551,9 +7649,16 @@ namespace Example
                     case 88:
                         instance.Star4 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 12 Varint
-                    case 96:
-                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 12 LengthDelimited
+                    case 98:
+                        if (instance.Energy == null)
+                            instance.Energy = Example.SCEnergyInfo.DeserializeLengthDelimited(stream);
+                        else
+                            Example.SCEnergyInfo.DeserializeLengthDelimited(stream, instance.Energy);
+                        continue;
+                    // Field 13 Varint
+                    case 104:
+                        instance.EnemyCount = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -6642,9 +7747,16 @@ namespace Example
                     case 88:
                         instance.Star4 = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 12 Varint
-                    case 96:
-                        instance.Energy = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                    // Field 12 LengthDelimited
+                    case 98:
+                        if (instance.Energy == null)
+                            instance.Energy = Example.SCEnergyInfo.DeserializeLengthDelimited(stream);
+                        else
+                            Example.SCEnergyInfo.DeserializeLengthDelimited(stream, instance.Energy);
+                        continue;
+                    // Field 13 Varint
+                    case 104:
+                        instance.EnemyCount = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -6719,9 +7831,20 @@ namespace Example
             // Key for field: 11, Varint
             stream.WriteByte(88);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Star4);
-            // Key for field: 12, Varint
-            stream.WriteByte(96);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Energy);
+            if (instance.Energy == null)
+                throw new ArgumentNullException("Energy", "Required by proto specification.");
+            // Key for field: 12, LengthDelimited
+            stream.WriteByte(98);
+            ﻿msField.SetLength(0);
+            Example.SCEnergyInfo.Serialize(msField, instance.Energy);
+            // Length delimited byte array
+            uint length12 = (uint)msField.Length;
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length12);
+            stream.Write(msField.GetBuffer(), 0, (int)length12);
+
+            // Key for field: 13, Varint
+            stream.WriteByte(104);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.EnemyCount);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
@@ -14372,6 +15495,194 @@ namespace Example
         }
         /// <summary>Helper: Serialize with a varint length prefix</summary>
         public static void SerializeLengthDelimited(Stream stream, SCMoneyBuy instance)
+        {
+            var data = SerializeToBytes(instance);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);
+            stream.Write(data, 0, data.Length);
+        }
+    }
+
+    [System.Serializable()]
+    public partial class Test
+    {
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static Test Deserialize(Stream stream)
+        {
+            Test instance = new Test();
+            Deserialize(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static Test DeserializeLengthDelimited(Stream stream)
+        {
+            Test instance = new Test();
+            DeserializeLengthDelimited(stream, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: create a new instance to deserializing into</summary>
+        public static Test DeserializeLength(Stream stream, int length)
+        {
+            Test instance = new Test();
+            DeserializeLength(stream, length, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream and create a new instance to deserializing into</summary>
+        public static Test Deserialize(byte[] buffer)
+        {
+            Test instance = new Test();
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Helper: put the buffer into a MemoryStream before deserializing</summary>
+        public static Example.Test Deserialize(byte[] buffer, Example.Test instance)
+        {
+            using (var ms = new MemoryStream(buffer))
+                Deserialize(ms, instance);
+            return instance;
+        }
+
+        /// <summary>Takes the remaining content of the stream and deserialze it into the instance.</summary>
+        public static Example.Test Deserialize(Stream stream, Example.Test instance)
+        {
+            while (true)
+            {
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    break;
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the VarInt length prefix and the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.Test DeserializeLengthDelimited(Stream stream, Example.Test instance)
+        {
+            long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
+            limit += stream.Position;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Read the given number of bytes from the stream and deserialze it into the instance.</summary>
+        public static Example.Test DeserializeLength(Stream stream, int length, Example.Test instance)
+        {
+            long limit = stream.Position + length;
+            while (true)
+            {
+                if (stream.Position >= limit)
+                {
+                    if (stream.Position == limit)
+                        break;
+                    else
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Read past max limit");
+                }
+                int keyByte = stream.ReadByte();
+                if (keyByte == -1)
+                    throw new System.IO.EndOfStreamException();
+                // Optimized reading of known fields with field ID < 16
+                switch (keyByte)
+                {
+                    // Field 1 Varint
+                    case 8:
+                        instance.Success = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                }
+
+                var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
+
+                // Reading field ID > 16 and unknown field ID/wire type combinations
+                switch (key.Field)
+                {
+                    case 0:
+                        throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Invalid field id: 0, something went wrong in the stream");
+                    default:
+                        global::SilentOrbit.ProtocolBuffers.ProtocolParser.SkipKey(stream, key);
+                        break;
+                }
+            }
+
+            return instance;
+        }
+
+        /// <summary>Serialize the instance into the stream</summary>
+        public static void Serialize(Stream stream, Test instance)
+        {
+            var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
+            // Key for field: 1, Varint
+            stream.WriteByte(8);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Success);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
+        }
+
+        /// <summary>Helper: Serialize into a MemoryStream and return its byte array</summary>
+        public static byte[] SerializeToBytes(Test instance)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Serialize(ms, instance);
+                return ms.ToArray();
+            }
+        }
+        /// <summary>Helper: Serialize with a varint length prefix</summary>
+        public static void SerializeLengthDelimited(Stream stream, Test instance)
         {
             var data = SerializeToBytes(instance);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, (uint)data.Length);

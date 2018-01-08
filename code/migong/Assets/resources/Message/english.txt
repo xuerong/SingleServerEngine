@@ -67,3 +67,6 @@ buySuccess=Purchase Success
 buyFail=This purchase failed
 
 star=star
+
+gainReward=gain reward
+dailyReward=daily reward

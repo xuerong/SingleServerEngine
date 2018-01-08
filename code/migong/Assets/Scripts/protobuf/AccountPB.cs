@@ -33,6 +33,8 @@ namespace Example
     {
         public string SessionId { get; set; }
 
+        public long ServerTime { get; set; }
+
     }
 
     public partial class CSLogout

@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Example;
+using com.protocol;
 
 public class Params {
 	public static float uiWidth = 640f;
 	public static float uiHeight = 960;
 
+	public static int disFromServerTime = 0;
+
+	public static string energyJobKey = "energyJobKey";
 	public static int energy = 0;
+	public static long energyUpdateTime = 0;
+
+	public static int energyRecoverTime = 0;
 
 	public static int gold = 0;
 
@@ -79,6 +86,30 @@ public class Params {
 			return 7;
 		}
 		return 4;
+	}
+
+	public static void startEnergySchedule(int energy,long updaTime)
+	{
+		Params.energy = energy;
+		Params.energyUpdateTime = updaTime;
+
+		if (updaTime == 0) {
+			return;
+		}
+
+		long now = Util.ConvertDateTimeToInt(System.DateTime.Now);
+		float guole = (int)((now - Params.energyUpdateTime) / 1000f - Params.disFromServerTime);
+		float shengyu = Params.energyRecoverTime - guole;
+
+		Job.startJob(Params.energyJobKey, delegate ()
+		{
+			CSEnergyInfo info = new CSEnergyInfo();
+			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSEnergyInfo, CSEnergyInfo.SerializeToBytes(info), delegate (int o, byte[] d)
+			{
+				SCEnergyInfo ret = SCEnergyInfo.Deserialize(d);
+                startEnergySchedule(ret.Energy, ret.RefreshTime);
+			});
+		}, shengyu);	
 	}
 }
 public class ItemTable{

@@ -8,6 +8,11 @@ using Example;
 using cn.sharesdk.unity3d;
 using System.Text;
 
+class UnlimitedAwardSeg {
+	public Image image;
+	public int star;
+	public int state;
+}
 public class MainPanel : MonoBehaviour {
 	public GameObject uiMain;
 	public GameObject uiLevel;
@@ -46,6 +51,9 @@ public class MainPanel : MonoBehaviour {
 
 	public Matching matching; // 匹配中的控制
 
+	public GameObject unlimitedAwardGo;
+	private UnlimitedAwardSeg[] unlimitedAwardSegs;
+
 	void Start () {
 		show (uiMain);
 		// 给主界面按钮加事件
@@ -66,6 +74,9 @@ public class MainPanel : MonoBehaviour {
 		});
 		onlineButton = GameObject.Find (canvasPath+"online2").GetComponent<Button>();
 		onlineButton.onClick.AddListener (delegate() {
+			Job.startJob(Params.energyJobKey, delegate() {
+				Debug.Log("sdfsdfsdfs");
+			},10);
 			// 打开online 界面
 			Debug.Log("open online window");
 			Sound.playSound(SoundType.Click);
@@ -87,7 +98,7 @@ public class MainPanel : MonoBehaviour {
 				ui.SetActive (false);
 				SCUnlimitedGo ret = SCUnlimitedGo.Deserialize(data);
 				// 剩余精力
-				Params.energy = ret.Energy;
+				Params.startEnergySchedule(ret.Energy.Energy,ret.Energy.RefreshTime);
 				int[] stars= {ret.Star1,ret.Star2,ret.Star3,ret.Star4};
 				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans,ret.Time, ret.Speed,ret.Start, ret.End, ret.Pass,null,stars,null,null);
 			});
@@ -112,12 +123,14 @@ public class MainPanel : MonoBehaviour {
 		CSBaseInfo baseInfo = new CSBaseInfo();
 		SocketManager.SendMessageAsyc ((int)MiGongOpcode.CSBaseInfo, CSBaseInfo.SerializeToBytes (baseInfo), delegate(int opcode, byte[] data) {
 			SCBaseInfo ret = SCBaseInfo.Deserialize(data);
-			Params.energy = ret.Energy;
 			// TODO 显示精力
 			// 系统参数
 			foreach(PBSysPara sp in ret.SysParas){
 				sysParas.Add(sp.Key,sp.Value);
 			}
+			Params.energyRecoverTime = int.Parse(sysParas["energyRecoverTime"]);
+			// 精力相关
+            Params.startEnergySchedule(ret.Energy.Energy,ret.Energy.RefreshTime);
 
 			foreach(PBNewGuide newGuide in ret.NewGuide ){
 				guideStep.Add(newGuide.Id,newGuide.Step);
@@ -127,6 +140,52 @@ public class MainPanel : MonoBehaviour {
 			Params.init(ret);
 			// 无尽版和pvp是否开启
 			doShowLock();
+			// 初始化无尽版的每日星数奖励
+			//string para = sysParas["unlimitedAwardStar"];
+			//string[] paras = para.Split(';');
+			Slider slider = unlimitedAwardGo.transform.Find("starSlider").GetComponent<Slider>();
+			RectTransform buRec = unlimitedAwardGo.transform.Find("starSlider").GetComponent<RectTransform> ();
+			int len = ret.UnlimitedRewardTable.Count;
+			slider.maxValue = ret.UnlimitedRewardTable[len-1].Star;
+			Object ob = Resources.Load("chest");
+
+			unlimitedAwardSegs = new UnlimitedAwardSeg[len];
+			for (int i = 0; i < len; i++) {
+				GameObject chestGo = Instantiate(ob) as GameObject;
+				chestGo.transform.localPosition = new Vector3(
+					buRec.rect.width/slider.maxValue*ret.UnlimitedRewardTable[i].Star - buRec.rect.width/2,0,0);
+				chestGo.transform.SetParent(unlimitedAwardGo.transform, false);
+				UnlimitedAwardSeg unlimitedAward = unlimitedAwardSegs[i] = new UnlimitedAwardSeg();
+				unlimitedAward.star = ret.UnlimitedRewardTable[i].Star;
+				unlimitedAward.image = chestGo.GetComponent<Image>();
+				Button bt = chestGo.GetComponent<Button>();
+				int index = i;
+				PBUnlimitedRewardTable table = ret.UnlimitedRewardTable[i];
+				bt.onClick.AddListener(delegate
+				{
+					Sound.playSound(SoundType.Click);
+					// 如果达到了，就直接领取了，然后就是确定，否则就是显示，然后是确定
+					if (unlimitedAward.state == 1)
+					{
+						// 领取
+						Sound.playSound(SoundType.Click);
+						CSUnlimitedAward award = new CSUnlimitedAward();
+						award.Index = index;
+						SocketManager.SendMessageAsyc((int)MiGongOpcode.CSUnlimitedAward, CSUnlimitedAward.SerializeToBytes(award), (opcode2, data2) => {
+							SCUnlimitedAward retAward = SCUnlimitedAward.Deserialize(data2);
+							unlimitedAward.image.sprite = SpriteCache.getSprite("itemImage/item1");
+							unlimitedAward.state = 2;
+							// 显示
+							WarnDialog.reward(Message.getText("gainReward"),Message.getText("ok"),table.Gold,table.Reward,null);
+						});
+
+					}
+					else {
+						// 显示
+						WarnDialog.reward(Message.getText("dailyReward"),Message.getText("ok"),table.Gold,table.Reward,null);
+					}
+				});
+			}
 		});
 
 		// 账号，分享，帮助
@@ -219,6 +278,8 @@ public class MainPanel : MonoBehaviour {
 			},true);
 		});
 	}
+
+
 
 	public void doShowLock(){
 		showLock(MapMode.Unlimited,int.Parse(sysParas["openUnlimited"]) >= openPass);
@@ -332,9 +393,9 @@ public class MainPanel : MonoBehaviour {
 			int count = level.PassCount;
 			float dis = 20f;
 			// 体力
-			GameObject energyTextGo = GameObject.Find ("main/ui/uiLevel/Canvas/energy/Text");
-			Text energyText = energyTextGo.GetComponent<Text>();
-			energyText.text = Params.energy.ToString();
+			//GameObject energyTextGo = GameObject.Find ("main/ui/uiLevel/Canvas/energy/Text");
+			//Text energyText = energyTextGo.GetComponent<Text>();
+			//energyText.text = Params.energy.ToString();
 
 			//获取游戏对象
 			Object levelItem = Resources.Load ("levelItem");
@@ -392,7 +453,6 @@ public class MainPanel : MonoBehaviour {
 
 	private void openUnlimitWindow(){
 		//
-
 		//获取按钮游戏对象
 		Object button = Resources.Load ("UnlimitItem");
 
@@ -410,9 +470,43 @@ public class MainPanel : MonoBehaviour {
 			Text passText = GameObject.Find ("main/ui/uiUnlimit/Canvas/pass").GetComponent<Text>();
 			passText.text = Message.getText("unlimitRankSelf",ret.Pass,ret.Star,ret.Rank);
 			//
-			GameObject energyTextGo = GameObject.Find ("main/ui/uiUnlimit/Canvas/energy/Text");
-			Text energyText = energyTextGo.GetComponent<Text>();
-			energyText.text = Params.energy.ToString();
+			//GameObject energyTextGo = GameObject.Find ("main/ui/uiUnlimit/Canvas/energy/Text");
+			//Text energyText = energyTextGo.GetComponent<Text>();
+			//energyText.text = Params.energy.ToString();
+			// 每日星数奖励
+			//ret.TodayStar
+			Slider slider = unlimitedAwardGo.transform.Find("starSlider").GetComponent<Slider>();
+			slider.value = ret.TodayStar;
+			float step = slider.maxValue / unlimitedAwardSegs.Length;
+
+			string[] isLight = null;
+			if (ret.Award .Length > 0)
+			{
+				isLight = ret.Award.Split(';');
+			}
+
+			for (int i = 0; i < unlimitedAwardSegs.Length; i++)
+			{
+				//Debug.Log(ret.TodayStar + "," + unlimitedAwardSegs[i].star);
+				// 是否还没点亮
+				if (ret.TodayStar < unlimitedAwardSegs[i].star)
+				{
+					unlimitedAwardSegs[i].image.sprite = SpriteCache.getSprite("levelImage/offSprite");
+					unlimitedAwardSegs[i].state = 0;
+				}
+				else if (isLight != null && int.Parse(isLight[i]) > 0)
+				{
+					unlimitedAwardSegs[i].image.sprite = SpriteCache.getSprite("itemImage/item1");
+					unlimitedAwardSegs[i].state = 2;
+				}
+				else
+				{
+					unlimitedAwardSegs[i].image.sprite = SpriteCache.getSprite("levelImage/lightSprite");
+					unlimitedAwardSegs[i].state = 1;
+				}
+			}
+
+
 			// 列表
 			int count = ret.UnlimitedRankInfo.Count;
 			float dis = 20f;
@@ -613,7 +707,7 @@ public class MainPanel : MonoBehaviour {
 			ui.SetActive (false);
 			SCGetMiGongMap scmap = SCGetMiGongMap.Deserialize(ret);
 			// 剩余精力
-			Params.energy = scmap.Energy;
+			Params.startEnergySchedule(scmap.Energy.Energy,scmap.Energy.RefreshTime);
 			int[] stars= {scmap.Star1,scmap.Star2,scmap.Star3,scmap.Star4};
 
 			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans,scmap.Time, scmap.Speed,scmap.Start, scmap.End, scmap.Pass,null,stars,scmap.Route,scmap.Items);

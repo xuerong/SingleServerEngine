@@ -31,9 +31,9 @@ public class GmEntranceJetty extends Entrance{
      */
     private String contextPath = "/gm";
 //    private String resourceBase = "./src/main/webapp";// TODO 这个目录真是太蛋疼了，部署的时候要注意
-//    private String descriptor = "./src/main/webapp/WEB-INF/web.xml";
+//    private String descriptor = "./src/main/webapp/WEB-INF/webGm.xml";
     private String resourceBase = "./target/mmserverengine";// TODO 这个目录真是太蛋疼了，部署的时候要注意
-    private String descriptor = "./target/mmserverengine/WEB-INF/web.xml";
+    private String descriptor = "./target/mmserverengine/WEB-INF/webGm.xml";
 
 
 

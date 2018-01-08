@@ -32,4 +32,6 @@ public class SpriteCache {
 		sps.Add (path,sp);
 		return sp;
 	}
+
+
 }

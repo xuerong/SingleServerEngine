@@ -313,6 +313,10 @@ namespace Example
                     case 10:
                         instance.SessionId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
+                    // Field 2 Varint
+                    case 16:
+                        instance.ServerTime = (long)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -355,6 +359,10 @@ namespace Example
                     case 10:
                         instance.SessionId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
+                    // Field 2 Varint
+                    case 16:
+                        instance.ServerTime = (long)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -396,6 +404,10 @@ namespace Example
                     case 10:
                         instance.SessionId = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
+                    // Field 2 Varint
+                    case 16:
+                        instance.ServerTime = (long)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -423,6 +435,9 @@ namespace Example
             // Key for field: 1, LengthDelimited
             stream.WriteByte(10);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.SessionId));
+            // Key for field: 2, Varint
+            stream.WriteByte(16);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.ServerTime);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 

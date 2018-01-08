@@ -1,6 +1,8 @@
 package com.mm.engine.framework.control;
 
 import com.mm.engine.framework.control.gm.Gm;
+import com.mm.engine.framework.control.statistics.Statistics;
+import com.mm.engine.framework.control.statistics.StatisticsData;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.control.annotation.*;
 import com.mm.engine.framework.control.annotation.EventListener;
@@ -53,6 +55,7 @@ public final class ServiceHelper {
     private static Map<Integer,Map<Class<?>,Method>> initMethodMap = new TreeMap<>();
     private static Map<Integer,Map<Class<?>,Method>> destroyMethodMap = new TreeMap<>();
     private static Map<String,Method> gmMethod = new HashMap<>();
+    private static Map<String,Method> statisticsMethods = new HashMap<>();
 
     static{
         try {
@@ -126,6 +129,20 @@ public final class ServiceHelper {
                             throw new MMException("gm id duplicate,id="+gm.id()+" at "+method.getDeclaringClass().getName()+"."+method.getName()
                                     +" and "+old.getDeclaringClass().getName()+"."+old.getName());
                         }
+                    }
+                    Statistics statistics = method.getAnnotation(Statistics.class);
+                    if(statistics != null){
+                        Class[] parameterTypes= method.getParameterTypes();
+                        //检查方法的合法性
+                        // 检查参数
+                        if(parameterTypes.length > 0){
+                            throw new MMException("Method "+method.getName()+" Parameter Error");
+                        }
+                        // 检查返回值
+                        if(method.getReturnType()!=StatisticsData.class){
+                            throw new IllegalStateException("Method "+method.getName()+" ReturnType Error");
+                        }
+                        statisticsMethods.put(statistics.id(),method);
                     }
                 }
             }
@@ -356,6 +373,10 @@ public final class ServiceHelper {
 
     public static Map<String, Method> getGmMethod() {
         return gmMethod;
+    }
+
+    public static Map<String, Method> getStatisticsMethods() {
+        return statisticsMethods;
     }
 
     //

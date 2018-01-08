@@ -131,6 +131,7 @@
      <Compile Include="Assets\Scripts\ByteBuffer.cs" />
      <Compile Include="Assets\Scripts\ClientSocket.cs" />
      <Compile Include="Assets\Scripts\DragControl.cs" />
+     <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\EventTriggerListener.cs" />
      <Compile Include="Assets\Scripts\GuideControl.cs" />
      <Compile Include="Assets\Scripts\Job.cs" />
@@ -225,6 +226,7 @@
      <Compile Include="Assets\Scripts\packet\Packet.cs" />
      <Compile Include="Assets\Scripts\packet\PacketItem.cs" />
      <Compile Include="Assets\Scripts\Pacman.cs" />
+     <Compile Include="Assets\Scripts\params\EnergyUpdable.cs" />
      <Compile Include="Assets\Scripts\params\Params.cs" />
      <Compile Include="Assets\Scripts\params\SpriteCache.cs" />
      <Compile Include="Assets\Scripts\protobuf\AccountOpcode.cs" />
@@ -255,6 +257,7 @@
      <Compile Include="Assets\Scripts\util\Sound.cs" />
      <Compile Include="Assets\Scripts\util\Util.cs" />
      <Compile Include="Assets\Scripts\WarnDialog.cs" />
+     <Compile Include="Assets\TextCollision.cs" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_strings.xml" />
      <None Include="Assets\resources\Message\chinese.txt" />
      <None Include="Assets\Plugins\Android\ShareSDK\AndroidManifest.xml" />

@@ -4,25 +4,48 @@ using UnityEngine;
 using System;
 
 class JobAction{
+	public string key;
 	public Delegate d;
 	public float time;
 	public object[] args;
+	public bool cancel;
 }
+public delegate void VoidAction();
 
 public class Job : MonoBehaviour {
 	static int MaxPerUpdate = 10;
-	static Queue<JobAction> queue = new Queue<JobAction>();
+	static int keyIndex = 0;
+	static Dictionary<string,JobAction> dic = new Dictionary<string,JobAction>();
+	static Dictionary<string, JobAction> dic2 = new Dictionary<string, JobAction>();	
 	
 	// Update is called once per frame
 	void Update () {
-		if (queue.Count > 0) {
-			lock (queue) {
+		if (dic.Count > 0) { 
+			lock (dic)
+			{
 				int count = 0;
-				while (queue.Count > 0 && count++ < MaxPerUpdate) {
-					StartCoroutine (doAction (queue.Dequeue()));
+				List<string> delKeys = new List<string>();
+				foreach (string key in dic.Keys) {
+					JobAction jobAction = dic[key];
+					StartCoroutine(doAction (jobAction));
+
+					delKeys.Add(key);
+					if (count++ >= MaxPerUpdate) {
+						break;
+					}
 				}
+
+				foreach (string delKey in delKeys) { 
+					dic2.Add(delKey,dic[delKey]);
+					dic.Remove(delKey);
+				}
+
 			}
 		}
+	}
+
+	static string defaultKey() {
+		return "defaultKey_" + (keyIndex++);
 	}
 
 	public static void startJob(Delegate d,float time,object[] args){
@@ -30,8 +53,42 @@ public class Job : MonoBehaviour {
 		jobAction.d = d;
 		jobAction.time = time;
 		jobAction.args = args;
-		lock (queue) {
-			queue.Enqueue (jobAction);
+		jobAction.cancel = false;
+		lock (dic) {
+			dic.Add(defaultKey(),jobAction);
+		}
+	}
+
+
+	public static void startJob(string key, VoidAction d, float time) 
+	{
+		lock (dic) {
+			if (dic.ContainsKey(key)) {
+				dic.Remove(key);
+			}else if (dic2.ContainsKey(key)) {
+				dic2[key].cancel = true;
+				dic2.Remove(key);
+			}
+			JobAction jobAction = new JobAction();
+			jobAction.key = key;
+			jobAction.d = d;
+			jobAction.time = time;
+			jobAction.cancel = false;
+
+			dic.Add (key,jobAction);
+		}
+	}
+	public static void cancelJob(string key){
+		lock(dic)
+		{
+			if (dic.ContainsKey(key))
+			{
+				dic[key].cancel = true;
+			}
+			else if (dic2.ContainsKey(key))
+			{
+				dic2[key].cancel = true;
+			}
 		}
 	}
 
@@ -53,7 +110,13 @@ public class Job : MonoBehaviour {
 
 	IEnumerator doAction(JobAction jobAction){
 		yield return new WaitForSeconds (jobAction.time);
-		jobAction.d.DynamicInvoke (jobAction.args);
+		if (!jobAction.cancel)
+		{
+			jobAction.d.DynamicInvoke(jobAction.args);
+		}
+		lock(dic){
+			dic2.Remove(jobAction.key);
+		}
 	}
 
 }

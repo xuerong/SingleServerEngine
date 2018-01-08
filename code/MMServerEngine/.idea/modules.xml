@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/mmserverengine.iml" filepath="$PROJECT_DIR$/mmserverengine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/main/webapp/webapp.iml" filepath="$PROJECT_DIR$/src/main/webapp/webapp.iml" />
     </modules>
   </component>
 </project>

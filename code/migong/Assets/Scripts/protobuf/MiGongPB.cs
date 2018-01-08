@@ -27,7 +27,7 @@ namespace Example
 
     public partial class SCBaseInfo
     {
-        public int Energy { get; set; }
+        public Example.SCEnergyInfo Energy { get; set; }
 
         /// <summary> 玩家精力</summary>
         public List<Example.PBSysPara> SysParas { get; set; }
@@ -49,6 +49,9 @@ namespace Example
 
         /// <summary> 套装配表</summary>
         public List<Example.PBPeckTable> PeckTable { get; set; }
+
+        /// <summary> 礼包配表</summary>
+        public List<Example.PBUnlimitedRewardTable> UnlimitedRewardTable { get; set; }
 
     }
 
@@ -109,6 +112,33 @@ namespace Example
         public int Price { get; set; }
 
         public int Limit { get; set; }
+
+    }
+
+    public partial class PBUnlimitedRewardTable
+    {
+        public int Id { get; set; }
+
+        public int Star { get; set; }
+
+        public int Gold { get; set; }
+
+        public string Reward { get; set; }
+
+    }
+
+    /// <summary> 如果体力不满，要定时器获取体力信息</summary>
+    public partial class CSEnergyInfo
+    {
+    }
+
+    /// <summary> 体力信息，包括上次刷新时间和当前体力，如果体力是满的，上次刷新时间没用</summary>
+    public partial class SCEnergyInfo
+    {
+        public int Energy { get; set; }
+
+        /// <summary> 玩家精力</summary>
+        public long RefreshTime { get; set; }
 
     }
 
@@ -215,13 +245,16 @@ namespace Example
         public int Star4 { get; set; }
 
         /// <summary> 四星目标分数</summary>
-        public int Energy { get; set; }
+        public Example.SCEnergyInfo Energy { get; set; }
 
-        /// <summary> 消耗体力</summary>
+        /// <summary> 剩余体力</summary>
         public string Route { get; set; }
 
         /// <summary> 路线</summary>
         public List<Example.PBItem> Items { get; set; }
+
+        /// <summary> 道具</summary>
+        public int EnemyCount { get; set; }
 
     }
 
@@ -312,6 +345,24 @@ namespace Example
         /// <summary> 无线关卡已经有的星数</summary>
         public int Rank { get; set; }
 
+        /// <summary> 排名</summary>
+        public int TodayStar { get; set; }
+
+        /// <summary> 今日获取的星数</summary>
+        public string Award { get; set; }
+
+    }
+
+    public partial class CSUnlimitedAward
+    {
+        public int Index { get; set; }
+
+    }
+
+    public partial class SCUnlimitedAward
+    {
+        public string Award { get; set; }
+
     }
 
     public partial class PBUnlimitedRankInfo
@@ -370,7 +421,10 @@ namespace Example
         public int Star4 { get; set; }
 
         /// <summary> 四星目标分数</summary>
-        public int Energy { get; set; }
+        public Example.SCEnergyInfo Energy { get; set; }
+
+        /// <summary> 剩余体力</summary>
+        public int EnemyCount { get; set; }
 
     }
 
@@ -717,6 +771,12 @@ namespace Example
         public int Success { get; set; }
 
         public int Gold { get; set; }
+
+    }
+
+    public partial class Test
+    {
+        public int Success { get; set; }
 
     }
 

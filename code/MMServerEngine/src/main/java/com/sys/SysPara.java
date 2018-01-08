@@ -5,7 +5,8 @@ public final class SysPara{
 		{
 			put("aaa","b bb");
 			put("ccc","dddd");
-			put("energyPerDay","50");
+			put("energyRecoverTime","600");
+			put("maxEnergy","66");
 			put("star1Energy","0");
 			put("star2Energy","3");
 			put("star3Energy","5");
@@ -26,7 +27,8 @@ public final class SysPara{
 	};
 	public static final String aaa = "aaa";
 	public static final String ccc = "ccc";
-	public static final String energyPerDay = "energyPerDay";
+	public static final String energyRecoverTime = "energyRecoverTime";
+	public static final String maxEnergy = "maxEnergy";
 	public static final String star1Energy = "star1Energy";
 	public static final String star2Energy = "star2Energy";
 	public static final String star3Energy = "star3Energy";

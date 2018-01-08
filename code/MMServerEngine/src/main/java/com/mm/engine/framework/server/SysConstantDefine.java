@@ -37,6 +37,8 @@ public final class SysConstantDefine {
     public static final int Event_AccountLogin = 1206;
     public static final int Event_AccountLogout = 1207;
     public static final int Event_AccountCreate = 1208; // 创建账号事件
+    public static final int Event_TableChange = 1209; // 创建账号事件
+    public static final int Event_SysParaChange = 1210; // 创建账号事件
     // ----------------------------------------------------------------------------------------monitorService conditions
     public static final String NetEventServiceStart = "NetEventServiceStart";
     // ------------------------------------------------------------------------------------------request

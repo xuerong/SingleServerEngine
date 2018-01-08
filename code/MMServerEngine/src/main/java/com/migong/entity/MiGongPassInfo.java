@@ -28,7 +28,7 @@ public class MiGongPassInfo {
     private int mulBean; // 豆子的倍数
     private int useMulBeanStep; // 使用倍数的位置，之后的豆子加倍
     private List<ItemTable> useItems ; // 使用的item
-
+    private int enemyCount;
 
     public CreateMap getCreateMap() {
         return createMap;
@@ -159,6 +159,14 @@ public class MiGongPassInfo {
 
     public void setUseItems(List<ItemTable> useItems) {
         this.useItems = useItems;
+    }
+
+    public int getEnemyCount() {
+        return enemyCount;
+    }
+
+    public void setEnemyCount(int enemyCount) {
+        this.enemyCount = enemyCount;
     }
 
     public void setBeanCount(int bean1, int bean5, int bean10){

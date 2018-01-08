@@ -54,6 +54,18 @@ class WarnDialog : MonoBehaviour {
 	private static Button ok;
 
 	private static int id = 1; // from 1
+
+
+	// reward相关
+	static GameObject rewardCanvas;
+	private static Text rewardTitle;
+	private static GameObject item1;
+	private static GameObject item2;
+	private static GameObject item3;
+	private static GameObject item4;
+	private static Button rewardBt;
+	private static Text rewardBtText;
+
 	void Awake(){ 
 		close = transform.Find ("Canvas/Panel/close").GetComponent<Button> ();
 		close.onClick.AddListener (delegate() {
@@ -73,6 +85,15 @@ class WarnDialog : MonoBehaviour {
 		canvas = transform.Find ("Canvas").gameObject;
 		panelTras = transform.Find ("Canvas/Panel").GetComponent<RectTransform>();
 		closeDialog (0);
+		// reward相关
+		rewardCanvas = transform.Find ("reward").gameObject;
+		rewardTitle = transform.Find ("reward/showItem/bg/title").GetComponent<Text> ();
+		item1 = transform.Find ("reward/showItem/bg/showItem1").gameObject;
+		item2 = transform.Find("reward/showItem/bg/showItem2").gameObject;
+		item3 = transform.Find ("reward/showItem/bg/showItem3").gameObject;
+		item4 = transform.Find ("reward/showItem/bg/showItem4").gameObject;
+		rewardBt = transform.Find ("reward/showItem/bg/ok").GetComponent<Button>();
+		rewardBtText = transform.Find ("reward/showItem/bg/ok/text").GetComponent<Text>();
 	}
 
 	void Update(){
@@ -196,4 +217,51 @@ class WarnDialog : MonoBehaviour {
 	private static void openDialog(){
 		canvas.SetActive (true);
 	}
-}
+	/**
+	 * 领奖
+	 */
+	public static void reward(string title,string btText,int gold,string reward,DialogOkAction action) {
+		rewardTitle.text = title;
+		rewardBtText.text = btText;
+		string[] rewardStrs = reward.Split('|');
+		//int len = rewardStrs.Length;
+		if (gold > 0)
+		{
+			item1.transform.Find("image").GetComponent<Image>().sprite = ShopItem.getGoldSprite();
+			item1.transform.Find("num").GetComponent<Text>().text = "x"+gold;
+			item1.SetActive(true);
+			showItem(2, rewardStrs, item2);
+			showItem(3, rewardStrs, item3);
+			showItem(4, rewardStrs, item4);
+		}
+		else { 
+            showItem(1, rewardStrs, item1);
+        	showItem(2, rewardStrs, item2);
+			showItem(3, rewardStrs, item3);
+			showItem(4, rewardStrs, item4);
+		}
+		rewardBt.onClick.RemoveAllListeners();
+		rewardBt.onClick.AddListener(delegate {
+			Sound.playSound(SoundType.Click);
+			rewardCanvas.SetActive(false);
+			if (action != null)
+			{
+				action.Invoke();
+			}
+		});
+
+		rewardCanvas.SetActive(true);
+	}
+	private static void showItem(int index, string[] rewardStrs, GameObject item) {
+		if (index > rewardStrs.Length)
+		{
+			item.SetActive(false);
+		}
+		else {
+			item.SetActive(true);
+			string[] content = rewardStrs[index - 1].Split(';');
+			item.transform.Find("image").GetComponent<Image>().sprite = ShopItem.getSprite(int.Parse(content[0]));
+			item.transform.Find("num").GetComponent<Text>().text = "x"+content[1];
+		}
+	}
+}    

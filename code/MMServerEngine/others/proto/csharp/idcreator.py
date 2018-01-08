@@ -24,7 +24,7 @@ newCSharpFile.write("//Auto Generate File, Do NOT Modify!!!!!!!!!!!!!!!\n")
 newCSharpFile.write("using System;\n")
 newCSharpFile.write("namespace com.protocol\n")
 newCSharpFile.write("{\n")
-newCSharpFile.write("\tpublic enum %s\n" % (cs_class_name.replace("csharpfile\\","").split('.')[0]))
+newCSharpFile.write("\tpublic enum %s\n" % (cs_class_name.replace("csharpfile/","").split('.')[0]))
 newCSharpFile.write("\t{\n")
 
 

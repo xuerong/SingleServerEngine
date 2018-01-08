@@ -1,28 +1,37 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\shop\Shop.cs">
+﻿<Properties StartupConfiguration="{4C97B028-4E0E-3BB0-0CF6-3E7C49542E77}|Unit Tests">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Enemy.cs">
     <Files>
-      <File FileName="Assets\Scripts\SocketManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Pacman.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MainPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MapCreate.cs" Line="1" Column="1" />
-      <File FileName="Assets\resources\Message\chinese.txt" Line="1" Column="1" />
-      <File FileName="Assets\resources\Message\english.txt" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\packet\PacketItem.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\packet\Packet.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GuideControl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\util\LocalizationImageManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\util\LocalizationImage.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\params\Params.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DragControl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\shop\Shop.cs" Line="136" Column="29" />
-      <File FileName="Assets\Scripts\shop\ShopItem.cs" Line="11" Column="15" />
-      <File FileName="Assets\Scripts\util\Message.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\util\LocalizationText.cs" Line="13" Column="1" />
+      <File FileName="Assets/Scripts/util/Sound.cs" Line="40" Column="4" />
+      <File FileName="Assets/resources/Message/chinese.txt" Line="71" Column="1" />
+      <File FileName="Assets/resources/Message/english.txt" Line="71" Column="11" />
+      <File FileName="Assets/Scripts/util/LocalizationText.cs" Line="13" Column="1" />
+      <File FileName="Assets/Scripts/shop/Shop.cs" Line="235" Column="23" />
+      <File FileName="Assets/Scripts/util/Matching.cs" Line="24" Column="36" />
+      <File FileName="Assets/Scripts/util/Message.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/protobuf/MiGongOpcode.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ButtonIndex.cs" Line="17" Column="25" />
+      <File FileName="Assets/Scripts/params/SpriteCache.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MainPanel.cs" Line="725" Column="45" />
+      <File FileName="Assets/Scripts/shop/ShopItem.cs" Line="144" Column="23" />
+      <File FileName="Assets/Scripts/WarnDialog.cs" Line="143" Column="28" />
+      <File FileName="Assets/Scripts/Job.cs" Line="74" Column="20" />
+      <File FileName="Assets/Scripts/params/EnergyUpdable.cs" Line="14" Column="5" />
+      <File FileName="Assets/Scripts/SocketManager.cs" Line="249" Column="81" />
+      <File FileName="Assets/Scripts/params/Params.cs" Line="97" Column="11" />
+      <File FileName="Assets/Scripts/util/Util.cs" Line="22" Column="41" />
+      <File FileName="Assets/Scripts/packet/Packet.cs" Line="45" Column="24" />
+      <File FileName="Assets/Scripts/protobuf/MiGongPB.cs" Line="141" Column="21" />
+      <File FileName="Assets/Scripts/MapCreate.cs" Line="275" Column="49" />
+      <File FileName="Assets/Scripts/Pacman.cs" Line="58" Column="1" />
+      <File FileName="Assets/TextCollision.cs" Line="21" Column="25" />
+      <File FileName="Assets/Scripts/Enemy.cs" Line="51" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-firstpass PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
 </Properties>
