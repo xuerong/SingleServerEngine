@@ -151,7 +151,6 @@ public class RoomUser {
 
     public static enum UserState{
         None("idle"),
-        Cancel("cancel"),
         Matching("matching"),
         Playing("inRoom"),
         Offline("offline"); // 掉线

@@ -53,7 +53,7 @@ public class Pacman : MonoBehaviour {
 		if (userId == null || userId.Length == 0) {
 			this.userId = SocketManager.accountId;
 		}
-		speed /= 100f;
+		//speed /= 100f;
 		defaultSpeed = speed;
 
 		transform.localPosition = mapCreate.getStartPointWithScale (inX,inY);
@@ -84,10 +84,14 @@ public class Pacman : MonoBehaviour {
 	}
 
 	public void addSpeed(int delta){
-		speed = defaultSpeed + delta / 100f;
+		//speed = defaultSpeed + delta / 100f;
+        speed = defaultSpeed + delta;
 	}
 
-	void FixedUpdate () {
+	void Update () {
+        if(mapCreate.gameOver){
+            return;
+        }
 		if (finish) {
 			return;
 		}
@@ -148,9 +152,8 @@ public class Pacman : MonoBehaviour {
 
 		if (MovePosiNorm != Vector3.zero) {
 			isControl = true;
-
-			dest = (Vector2)transform.position + new Vector2(speed*MovePosiNorm.x,speed*MovePosiNorm.y);
-
+            float step = speed*Time.deltaTime;
+            dest = (Vector2)transform.position + new Vector2(step*MovePosiNorm.x,step*MovePosiNorm.y);
 			// Animation Parameters
 			Vector2 dirVec = dest - (Vector2)transform.position;
 			animator.SetFloat("DirX", dirVec.x);
@@ -310,11 +313,16 @@ public class Pacman : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collider)
 	{
 		//进入触发器执行的代码
+        if(mapCreate.gameOver){
+            //Debug.LogWarning("ok here!!");
+            return;
+        }
 		Debug.Log("OnTriggerEnter2D:"+collider);
+        mapCreate.selfArrive(false,route,true);
 	}
-	void OnCollisionEnter2D(Collision2D collision)
-	{
-		//进入碰撞器执行的代码
-		Debug.Log("OnCollisionEnter2D:"+collision);
-	}
+	//void OnCollisionEnter2D(Collision2D collision)
+	//{
+	//	//进入碰撞器执行的代码
+	//	Debug.Log("OnCollisionEnter2D:"+collision);
+	//}
 }

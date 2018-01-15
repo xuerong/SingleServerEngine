@@ -7,7 +7,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
-<% GmService gmService = BeanHelper.getServiceBean(GmService.class);
+<%
+    GmService gmService = BeanHelper.getServiceBean(GmService.class);
     Map<String, Method> gmMethods = ServiceHelper.getGmMethod();
     // 生成html string
     StringBuilder sb = new StringBuilder("<select onchange='show(this);' width = '400px' height='600px' size='10'>");

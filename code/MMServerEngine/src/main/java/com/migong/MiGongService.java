@@ -7,6 +7,7 @@ import com.migong.item.PassRewardData;
 import com.migong.map.CreateMap;
 import com.migong.map.Element;
 import com.migong.map.GetShortRoad;
+import com.migong.shop.MatchingManager;
 import com.migong.shop.ShopService;
 import com.mm.engine.framework.control.annotation.EventListener;
 import com.mm.engine.framework.control.annotation.Request;
@@ -82,7 +83,6 @@ import java.util.concurrent.*;
  * 后面要做的（本着简单快速上线的原则）：
  * 一、游戏逻辑：
  * 要完成的：
- * 星星的数量改为3个
  * 1、优化：音乐，声音
  * 2、帮助
  * 3、无尽版规则，天梯积分规则
@@ -98,14 +98,12 @@ import java.util.concurrent.*;
  * 8、分享打的关卡，星级等。
  * 9、账号相关：名字和头像
  * 二、框架功能：
- * 1、服务器分配：要有一个main server用来分配服务器
  * 以后要做的
  * 1、断线重连
  * 三、接入相关：
  * 四、运营维护相关：
  * 1、部署服务器套件
  * 2、游戏更新：后端热更，前段热更
- * 3、数据监控：友盟？还是自己来？
  * 4、异常监控
  *
  *
@@ -127,7 +125,6 @@ import java.util.concurrent.*;
  *
  * 3344c1180ab5eed4f6aed6f2a002008b
  *
- *todo  listKey is Illegal : listKey = com.migong.entity.UserMiGong#list
  *
  * 关于主服务器：
  * 1、主服务器需要存在，且ip稳定，性能不足可以增加，但ip稳定
@@ -137,7 +134,7 @@ import java.util.concurrent.*;
  * 第三、综合统计，包括主服务器本身要完成的，和主服务器要连接所有的数据库，然后做出的综合统计。
  * 第四、作为运营平台，可以连接任意一台服务器并执行gm，数据统计等。
  */
-@Service(init = "init")
+@Service(init = "init",destroy = "destroy")
 public class MiGongService {
     private static final Logger log = LoggerFactory.getLogger(MiGongService.class);
     static boolean debug = false;
@@ -158,8 +155,8 @@ public class MiGongService {
     /**
      * 匹配中的玩家，grade（段位）- （accountId-开始匹配时间）
      */
-    ConcurrentHashMap<Integer,ConcurrentLinkedQueue<RoomUser>> matchingUsers = new ConcurrentHashMap<>();
-
+//    ConcurrentHashMap<Integer,ConcurrentLinkedQueue<RoomUser>> matchingUsers = new ConcurrentHashMap<>();
+    MatchingManager matchingManager;
     /**
      * 匹配时间超时的消息推送
      */
@@ -189,6 +186,22 @@ public class MiGongService {
             passMap.put(miGongPass.getId(), miGongPass);
         }
         initUnlimitedStarRewardSegment();
+        matchingManager = new MatchingManager((uids)->{
+            // 加入匹配
+            List<RoomUser> roomUserList = new ArrayList<>(uids.size());
+            for(String uid : uids){
+                roomUserList.add(roomUsers.get(uid));
+            }
+            if (roomUserList.size() >= MiGongRoom.USER_COUNT) {
+                // 创建房间 TODO 这里grade参数没用
+                roomCreateExecutor.execute(new CreateRoomRunnable(1, roomUserList));
+            }
+        },(uid)->{
+            matchOutTimeExecutor.execute(new SendMatchFailRunnable(uid));
+        });
+    }
+    public void destroy(){
+        matchingManager.destroy();
     }
     private void initUnlimitedStarRewardSegment(){
 //        String star = sysParaService.get(SysPara.unlimitedAwardStar);
@@ -411,7 +424,7 @@ public class MiGongService {
         miGongPassInfo.setStartTime(new Timestamp(System.currentTimeMillis()));
         miGongPassInfo.setBeanCount(miGongPass.getBean1(),miGongPass.getBean5(),miGongPass.getBean10());
         //敌人的数量
-        miGongPassInfo.setEnemyCount(miGongPass.getEnergy());
+        miGongPassInfo.setEnemyCount(miGongPass.getEnemy());
         miGongPassInfo = miGongParamsByDifficulty(miGongPassInfo,miGongPass.getSize(),miGongPass.getTime(),miGongPass.getSpeed()); // 这个方法后面直接去掉
         MiGongPB.SCGetMiGongMap.Builder builder = MiGongPB.SCGetMiGongMap.newBuilder();
 
@@ -790,6 +803,9 @@ public class MiGongService {
         protected int gold;
         protected Map<Integer,Integer> reward;
     }
+    private int getUnlimitedEnemyCount(int pass){
+        return pass>10?10:pass;
+    }
     @Request(opcode = MiGongOpcode.CSUnlimitedGo)
     public RetPacket unlimitedGo(Object clientData, Session session) throws Throwable{
         // 判断无尽模式是否打开，
@@ -802,7 +818,7 @@ public class MiGongService {
         MiGongPassInfo miGongPassInfo = new MiGongPassInfo();
         miGongPassInfo.setBeanCount(40,5,1);
         miGongPassInfo.setStartTime(new Timestamp(System.currentTimeMillis()));
-        miGongPassInfo.setEnemyCount(userMiGong.getUnlimitedPass()>10?10:userMiGong.getUnlimitedPass()); //  TODO 根据关卡数生成敌人数量
+        miGongPassInfo.setEnemyCount(getUnlimitedEnemyCount(userMiGong.getUnlimitedPass())); //  TODO 根据关卡数生成敌人数量
         miGongPassInfo = miGongParamsByDifficulty(miGongPassInfo,10,400,sysParaService.getInt(SysPara.unlimitedSpeed));
         MiGongPB.SCUnlimitedGo.Builder builder = MiGongPB.SCUnlimitedGo.newBuilder();
 
@@ -940,7 +956,8 @@ public class MiGongService {
      */
     private MiGongPassInfo miGongParamsByDifficulty(MiGongPassInfo miGongPassInfo,int size,int time,int speed){
         size+=1;
-        int door = 0;
+        int door = sysParaService.getRandomInt(SysPara.doorCount);
+        door = Math.max(size/2,door); // 门不能太多
         miGongPassInfo.setSize(size);
         miGongPassInfo.setDoor(door);
         Element startElement = new Element(1,1); // todo 开始和结束可以考虑改成随机
@@ -1035,7 +1052,8 @@ public class MiGongService {
         // todo 从Matching的queue中移除，如果是房间最后一个，移除房间
         RoomUser roomUser = roomUsers.remove(logoutEventData.getSession().getAccountId());
         if(roomUser != null){
-            // 不用移除queue，那个session已经失效了
+            //
+            matchingManager.removeMatchUser(roomUser.getSession().getAccountId());
         }
         MultiMiGongRoom room = userRooms.remove(logoutEventData.getSession().getAccountId());
         if(room != null) {
@@ -1092,10 +1110,9 @@ public class MiGongService {
             roomUser = new RoomUser(session,System.currentTimeMillis());
             roomUser.setUserState(RoomUser.UserState.Matching);
             roomUsers.put(session.getAccountId(), roomUser);
-            ConcurrentLinkedQueue<RoomUser> queue = getMatchingQueue(scoreToGrade(userMiGong.getLadderScore()));
-            queue.offer(roomUser);
-        }else if(roomUser.getUserState() == RoomUser.UserState.Cancel || roomUser.getUserState() == RoomUser.UserState.None){
-            roomUser.setUserState(RoomUser.UserState.Matching);
+//            ConcurrentLinkedQueue<RoomUser> queue = getMatchingQueue(scoreToGrade(userMiGong.getLadderScore()));
+//            queue.offer(roomUser);
+            matchingManager.addMatchUser(roomUser.getSession().getAccountId(),userMiGong.getLadderScore());
         }else{
             throw new ToClientException(LocalizationMessage.getText("canNotMatch",roomUser.getUserState().getDescribe()));
         }
@@ -1107,9 +1124,9 @@ public class MiGongService {
      */
     @Request(opcode = MiGongOpcode.CSCancelMatching)
     public RetPacket cancelMatching(Object clientData, Session session) throws Throwable{
-        RoomUser roomUser = roomUsers.get(session.getAccountId());
+        RoomUser roomUser = roomUsers.remove(session.getAccountId());
         if(roomUser != null){
-            roomUser.setUserState(RoomUser.UserState.Cancel);
+            matchingManager.removeMatchUser(session.getAccountId());
         }
         MiGongPB.SCCancelMatching.Builder builder = MiGongPB.SCCancelMatching.newBuilder();
 
@@ -1177,58 +1194,58 @@ public class MiGongService {
 
     /**
      * 每秒执行一次匹配，如果小于匹配数量，检查等待时间
-     * @param interval
+//     * @param interval
      */
-    @Updatable(isAsynchronous = true,cycle = 1000)
-    public void doMatching(int interval){
-        if(matchingUsers.size() > 1000){
-            log.warn("grade count is too much! size = {}",matchingUsers.size());
-        }
-        long currentTime = System.currentTimeMillis();
-        for(Map.Entry<Integer,ConcurrentLinkedQueue<RoomUser>> entry : matchingUsers.entrySet()){
-            ConcurrentLinkedQueue<RoomUser> queue = entry.getValue();
-            List<RoomUser> roomUserList = new ArrayList<>();
-            while (!queue.isEmpty()){
-                RoomUser roomUser = queue.poll();
-                if((currentTime - roomUser.getBeginTime())/1000 > sysParaService.getInt(SysPara.matchWaitTime)){
-                    roomUsers.remove(roomUser.getSession().getAccountId());
-                    matchOutTimeExecutor.execute(new SendMatchFailRunnable(roomUser));
-                }else if(!roomUser.getSession().isAvailable()){
-                    log.warn("session is not available , user maybe logout");
-                    roomUsers.remove(roomUser.getSession().getAccountId());
-                }else{
-                    RoomUser.UserState userState = roomUsers.get(roomUser.getSession().getAccountId()).getUserState();
-                    if(userState == RoomUser.UserState.Matching) {
-                        // 加入匹配
-                        roomUserList.add(roomUser);
-                        if (roomUserList.size() >= MiGongRoom.USER_COUNT) {
-                            // 创建房间
-                            roomCreateExecutor.execute(new CreateRoomRunnable(entry.getKey(), roomUserList));
-                            // 创建新的容器
-                            roomUserList = new ArrayList<>();
-                        }
-                    }else{
-                        roomUsers.remove(roomUser.getSession().getAccountId());
-//                        log.error("user state is not matching,user state = "+userState);
-                    }
-                }
-            }
-            if(roomUserList.size() > 0){
-                for(RoomUser roomUser : roomUserList){
-                    queue.offer(roomUser); // 放回去
-                }
-            }
-        }
-    }
+//    @Updatable(isAsynchronous = true,cycle = 1000)
+//    public void doMatching(int interval){
+//        if(matchingUsers.size() > 1000){
+//            log.warn("grade count is too much! size = {}",matchingUsers.size());
+//        }
+//        long currentTime = System.currentTimeMillis();
+//        for(Map.Entry<Integer,ConcurrentLinkedQueue<RoomUser>> entry : matchingUsers.entrySet()){
+//            ConcurrentLinkedQueue<RoomUser> queue = entry.getValue();
+//            List<RoomUser> roomUserList = new ArrayList<>();
+//            while (!queue.isEmpty()){
+//                RoomUser roomUser = queue.poll();
+//                if((currentTime - roomUser.getBeginTime())/1000 > sysParaService.getInt(SysPara.matchWaitTime)){
+//                    roomUsers.remove(roomUser.getSession().getAccountId());
+//                    matchOutTimeExecutor.execute(new SendMatchFailRunnable(roomUser));
+//                }else if(!roomUser.getSession().isAvailable()){
+//                    log.warn("session is not available , user maybe logout");
+//                    roomUsers.remove(roomUser.getSession().getAccountId());
+//                }else{
+//                    RoomUser.UserState userState = roomUsers.get(roomUser.getSession().getAccountId()).getUserState();
+//                    if(userState == RoomUser.UserState.Matching) {
+//                        // 加入匹配
+//                        roomUserList.add(roomUser);
+//                        if (roomUserList.size() >= MiGongRoom.USER_COUNT) {
+//                            // 创建房间
+//                            roomCreateExecutor.execute(new CreateRoomRunnable(entry.getKey(), roomUserList));
+//                            // 创建新的容器
+//                            roomUserList = new ArrayList<>();
+//                        }
+//                    }else{
+//                        roomUsers.remove(roomUser.getSession().getAccountId());
+////                        log.error("user state is not matching,user state = "+userState);
+//                    }
+//                }
+//            }
+//            if(roomUserList.size() > 0){
+//                for(RoomUser roomUser : roomUserList){
+//                    queue.offer(roomUser); // 放回去
+//                }
+//            }
+//        }
+//    }
     class SendMatchFailRunnable implements Runnable{
-        RoomUser roomUser;
-        protected SendMatchFailRunnable(RoomUser roomUser){
-            this.roomUser = roomUser;
+        String uid;
+        protected SendMatchFailRunnable(String uid){
+            this.uid = uid;
         }
         @Override
         public void run() {
             MiGongPB.SCMatchingFail.Builder builder = MiGongPB.SCMatchingFail.newBuilder();
-            sendMessageService.sendMessage(roomUser.getSession().getAccountId(), MiGongOpcode.SCMatchingFail,builder.build().toByteArray());
+            sendMessageService.sendMessage(uid, MiGongOpcode.SCMatchingFail,builder.build().toByteArray());
         }
     }
     class CreateRoomRunnable implements Runnable{
@@ -1351,20 +1368,6 @@ public class MiGongService {
         pvpRecord.setTime(new Timestamp(System.currentTimeMillis()));
         pvpRecord.setRecord(room.toInfoString());
         dataService.insert(pvpRecord);
-    }
-
-    private ConcurrentLinkedQueue<RoomUser> getMatchingQueue(int grade){
-        ConcurrentLinkedQueue<RoomUser> queue = matchingUsers.get(grade);
-        if(queue == null){
-            ConcurrentLinkedQueue<RoomUser> _queue = new ConcurrentLinkedQueue<RoomUser>();
-            matchingUsers.putIfAbsent(grade,_queue);
-            queue = matchingUsers.get(grade);
-        }
-        return queue;
-    }
-    // todo 分数转段位，首先段位不能太多
-    private int scoreToGrade(int score){
-        return 1;
     }
 
     @Statistics(id = "jsjsjsj",name = "sssss")

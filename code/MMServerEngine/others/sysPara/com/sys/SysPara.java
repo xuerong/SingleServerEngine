@@ -11,18 +11,21 @@ public final class SysPara{
 			put("star2Energy","3");
 			put("star3Energy","5");
 			put("star4Energy","10");
-			put("defaultSpeed","10");
+			put("defaultSpeed","4");
+			put("doorCount","2-8");
 			put("ladder","10;");
 			put("matchWaitTime","30");
 			put("addEnergyInterval","360");
-			put("unlimitedSpeed","10");
+			put("unlimitedSpeed","4");
 			put("unlimitedEnergy","5");
 			put("ladderSize","15-25");
-			put("ladderSpeed","8-15");
+			put("ladderSpeed","2-4");
 			put("ladderTime","120-400");
 			put("ladderStar1","40-80");
 			put("openUnlimited","0");
 			put("openPvp","0");
+			put("enemyDefaultSpeed","2");
+			put("enemyUnlimitedCount","1");
 		}
 	};
 	public static final String aaa = "aaa";
@@ -34,6 +37,7 @@ public final class SysPara{
 	public static final String star3Energy = "star3Energy";
 	public static final String star4Energy = "star4Energy";
 	public static final String defaultSpeed = "defaultSpeed";
+	public static final String doorCount = "doorCount";
 	public static final String ladder = "ladder";
 	public static final String matchWaitTime = "matchWaitTime";
 	public static final String addEnergyInterval = "addEnergyInterval";
@@ -45,5 +49,7 @@ public final class SysPara{
 	public static final String ladderStar1 = "ladderStar1";
 	public static final String openUnlimited = "openUnlimited";
 	public static final String openPvp = "openPvp";
+	public static final String enemyDefaultSpeed = "enemyDefaultSpeed";
+	public static final String enemyUnlimitedCount = "enemyUnlimitedCount";
 
 }

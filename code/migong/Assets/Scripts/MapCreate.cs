@@ -53,6 +53,8 @@ public class MapCreate : MonoBehaviour{
 
 	public float totalTime;
 
+    public int enemyCount = 0;
+
 	 //加速道具数量
 	//加时间道具数量
 	//显示路线道具数量
@@ -76,7 +78,7 @@ public class MapCreate : MonoBehaviour{
 	public Text showScore;
 	public Text showMaxScore;
 
-	private bool gameOver = false;
+	public bool gameOver = false;
 
 
 	public Dictionary<string,Pacman> pacmanMap = new Dictionary<string, Pacman> ();
@@ -226,7 +228,7 @@ public class MapCreate : MonoBehaviour{
 		if (currentTime == 0) {
 			if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {// pvp由服务器结束时间
 				//弹出结算界面，发送结束消息
-				//selfArrive (false, null, true);
+				selfArrive (false, null, true);
 			} 
 		}
 	}
@@ -273,15 +275,15 @@ public class MapCreate : MonoBehaviour{
 		return i * td + x;
 	}
 	public Vector2 getPointByPosition(float x,float y) { 
-		int x = (int)((pos.x + nodeX / 2) / nodeX);
-		int y = (int)((pos.y + nodeY / 2) / nodeY);
-		int i = (tr - y - 1);
-		return Vector2(i,x);
+		int row = (int)((x + nodeX / 2) / nodeX);
+		int col = (int)((y + nodeY / 2) / nodeY);
+		int i = (tr - col - 1);
+		return new Vector2(i,row);
 	}
 	public Vector2 getPositionByPoint(int x,int y) {
 		float y_ = tr - x - 1;
-		float posY = y_ * nodeY - nodeY / 2;
-		float posX = y * nodeX - nodeX / 2;
+		float posY = y_ * nodeY;
+		float posX = y * nodeX;
 		return new Vector2(posX,posY);
 	}
 	// 检查吃豆子，如果有就吃掉---根据类型
@@ -409,6 +411,20 @@ public class MapCreate : MonoBehaviour{
 				}
 			}
 		}
+        // 设置野怪
+        for (int i = 0; i < enemyCount; i++)
+        {
+            Object enemyObj = Resources.Load("enemy");
+            GameObject enemyGo = Instantiate(enemyObj) as GameObject;
+            enemyGo.transform.parent = transform;
+            enemyGo.transform.localPosition = new Vector3(x + tr/2 * nodeX, y + (td-1)/2 * nodeY, 0);
+            enemyGo.transform.localScale = new Vector3(myScale * 0.6f, myScale * 0.6f, 1);
+
+            Enemy enemy = enemyGo.GetComponent<Enemy>();
+            enemy.mapCreate = this;
+            enemy.map = this.map;
+            enemy.speed = int.Parse(Params.sysParas["enemyDefaultSpeed"]);
+        }
 		// 设置单机版的最大值 和星星的位置
 		if (Mode == MapMode.Level || Mode == MapMode.Unlimited) {
 			starSlider.maxValue = maxScore;

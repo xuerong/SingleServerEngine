@@ -18,6 +18,8 @@ public class Params {
 
 	public static int gold = 0;
 
+    public static Dictionary<string, string> sysParas; // 系统参数
+
 	public static Dictionary<int,ItemTable> itemTables = new Dictionary<int, ItemTable> ();
 	public static Dictionary<int,UnitTable> unitTables = new Dictionary<int, UnitTable> ();
 	public static Dictionary<int,PeckTable> peckTables = new Dictionary<int, PeckTable> ();

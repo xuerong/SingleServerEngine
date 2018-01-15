@@ -100,7 +100,7 @@ public class MainPanel : MonoBehaviour {
 				// 剩余精力
 				Params.startEnergySchedule(ret.Energy.Energy,ret.Energy.RefreshTime);
 				int[] stars= {ret.Star1,ret.Star2,ret.Star3,ret.Star4};
-				createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans,ret.Time, ret.Speed,ret.Start, ret.End, ret.Pass,null,stars,null,null);
+                createMap (MapMode.Unlimited,ret.Map.ToArray (),ret.Beans,ret.Time, ret.Speed,ret.Start, ret.End, ret.Pass,ret.EnemyCount,null,stars,null,null);
 			});
 		});
 		closeButton = GameObject.Find ("main/ui/uiUnlimit/Canvas/close").GetComponent<Button>();
@@ -128,6 +128,8 @@ public class MainPanel : MonoBehaviour {
 			foreach(PBSysPara sp in ret.SysParas){
 				sysParas.Add(sp.Key,sp.Value);
 			}
+            Params.sysParas = sysParas;
+
 			Params.energyRecoverTime = int.Parse(sysParas["energyRecoverTime"]);
 			// 精力相关
             Params.startEnergySchedule(ret.Energy.Energy,ret.Energy.RefreshTime);
@@ -605,7 +607,7 @@ public class MainPanel : MonoBehaviour {
 
 	public void matchSuccess(int opcode, byte[] data){
 		SCMatchingSuccess matchingSuccess = SCMatchingSuccess.Deserialize (data);
-		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Time,matchingSuccess.Speed,matchingSuccess.Start,matchingSuccess.End,1,matchingSuccess.OtherInfos,null,null,null);
+		createMap(MapMode.Online,matchingSuccess.Map.ToArray(),matchingSuccess.Beans,matchingSuccess.Time,matchingSuccess.Speed,matchingSuccess.Start,matchingSuccess.End,1,0,matchingSuccess.OtherInfos,null,null,null);
 		ui.SetActive (false);
 
 		matching.matchSuccess ();
@@ -710,11 +712,12 @@ public class MainPanel : MonoBehaviour {
 			Params.startEnergySchedule(scmap.Energy.Energy,scmap.Energy.RefreshTime);
 			int[] stars= {scmap.Star1,scmap.Star2,scmap.Star3,scmap.Star4};
 
-			createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans,scmap.Time, scmap.Speed,scmap.Start, scmap.End, scmap.Pass,null,stars,scmap.Route,scmap.Items);
+            createMap (MapMode.Level,scmap.Map.ToArray (),scmap.Beans,scmap.Time, scmap.Speed,scmap.Start, scmap.End, scmap.Pass,scmap.EnemyCount,null,stars,scmap.Route,scmap.Items);
 		});
 	}
 
-	private void createMap(MapMode mode,int[] mapInt,List<PBBeanInfo> beans,int time,int speed,int start,int end,int pass,List<PBOtherInfo> otherInfos,int[] stars,string guideRoute,List<PBItem> skillItems){
+    private void createMap(MapMode mode, int[] mapInt, List<PBBeanInfo> beans, int time, int speed, int start, int end, int pass, int enemyCount,
+                           List<PBOtherInfo> otherInfos,int[] stars,string guideRoute,List<PBItem> skillItems){
 		Object gamePanel = Resources.Load ("GamePanel");
 		GameObject gamePanelGo = Instantiate(gamePanel) as GameObject;
 		GameObject mapGo = gamePanelGo.transform.Find ("content/map").gameObject;
@@ -733,6 +736,7 @@ public class MainPanel : MonoBehaviour {
 
 
 		mapCreate.Pass = pass;
+        mapCreate.enemyCount = enemyCount;
 
 		mapCreate.Mode = mode;
 		mapCreate.stars = stars;

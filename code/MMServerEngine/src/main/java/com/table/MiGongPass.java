@@ -2,18 +2,18 @@ package com.table;
 //Auto Generate File, Do NOT Modify!!!!!!!!!!!!!!!
 public final class MiGongPass{
 	public static MiGongPass[] datas={
-		new MiGongPass((int)1.0,(int)0.0,(int)5.0,(int)40.0,(int)10.0,(int)11.0,(int)4.0,(int)1.0,(int)5.0,(int)10.0,(int)20.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;4"),
-		new MiGongPass((int)2.0,(int)1.0,(int)6.0,(int)45.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)15.0,(int)20.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|7;1;2;3;5"),
-		new MiGongPass((int)3.0,(int)2.0,(int)7.0,(int)50.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;6"),
-		new MiGongPass((int)4.0,(int)3.0,(int)8.0,(int)55.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;7"),
-		new MiGongPass((int)5.0,(int)4.0,(int)9.0,(int)60.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;8"),
-		new MiGongPass((int)6.0,(int)5.0,(int)10.0,(int)65.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;9"),
-		new MiGongPass((int)7.0,(int)6.0,(int)11.0,(int)70.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;10"),
-		new MiGongPass((int)8.0,(int)7.0,(int)12.0,(int)75.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;11"),
-		new MiGongPass((int)9.0,(int)8.0,(int)13.0,(int)80.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;12"),
-		new MiGongPass((int)10.0,(int)9.0,(int)14.0,(int)85.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;13"),
-		new MiGongPass((int)11.0,(int)9.0,(int)14.0,(int)85.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;14"),
-		new MiGongPass((int)12.0,(int)9.0,(int)14.0,(int)85.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;15")
+		new MiGongPass((int)1.0,(int)0.0,(int)5.0,(int)40.0,(int)10.0,(int)11.0,(int)4.0,(int)1.0,(int)5.0,(int)10.0,(int)20.0,(int)-1.0,(int)0.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;4"),
+		new MiGongPass((int)2.0,(int)1.0,(int)6.0,(int)45.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)15.0,(int)20.0,(int)-1.0,(int)0.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|7;1;2;3;5"),
+		new MiGongPass((int)3.0,(int)2.0,(int)7.0,(int)50.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;6"),
+		new MiGongPass((int)4.0,(int)3.0,(int)8.0,(int)55.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;7"),
+		new MiGongPass((int)5.0,(int)4.0,(int)9.0,(int)60.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)2.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;8"),
+		new MiGongPass((int)6.0,(int)5.0,(int)10.0,(int)65.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;9"),
+		new MiGongPass((int)7.0,(int)6.0,(int)11.0,(int)70.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;10"),
+		new MiGongPass((int)8.0,(int)7.0,(int)12.0,(int)75.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;11"),
+		new MiGongPass((int)9.0,(int)8.0,(int)13.0,(int)80.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;12"),
+		new MiGongPass((int)10.0,(int)9.0,(int)14.0,(int)85.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;13"),
+		new MiGongPass((int)11.0,(int)9.0,(int)14.0,(int)85.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)1.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;14"),
+		new MiGongPass((int)12.0,(int)9.0,(int)14.0,(int)85.0,(int)10.0,(int)10.0,(int)4.0,(int)1.0,(int)10.0,(int)20.0,(int)30.0,(int)-1.0,(int)2.0,(int)5.0,"0;0;1;2|0;2;5;10|1;1;2;3;4|4;1;2;3;4|5;1;2;3;4|6;1;2;3;15")
 	};
 	private int id;
 	private int needStar;
@@ -27,10 +27,11 @@ public final class MiGongPass{
 	private int star2;
 	private int star3;
 	private int star4;
+	private int enemy;
 	private int energy;
 	private String reward;
 
-	public MiGongPass(int id,int needStar,int size,int time,int speed,int bean1,int bean5,int bean10,int star1,int star2,int star3,int star4,int energy,String reward){
+	public MiGongPass(int id,int needStar,int size,int time,int speed,int bean1,int bean5,int bean10,int star1,int star2,int star3,int star4,int enemy,int energy,String reward){
 		this.id=id;
 		this.needStar=needStar;
 		this.size=size;
@@ -43,6 +44,7 @@ public final class MiGongPass{
 		this.star2=star2;
 		this.star3=star3;
 		this.star4=star4;
+		this.enemy=enemy;
 		this.energy=energy;
 		this.reward=reward;
 	}
@@ -70,6 +72,8 @@ public final class MiGongPass{
 	public void setStar3(int star3){this.star3=star3;}
 	public int getStar4(){return star4;}
 	public void setStar4(int star4){this.star4=star4;}
+	public int getEnemy(){return enemy;}
+	public void setEnemy(int enemy){this.enemy=enemy;}
 	public int getEnergy(){return energy;}
 	public void setEnergy(int energy){this.energy=energy;}
 	public String getReward(){return reward;}
