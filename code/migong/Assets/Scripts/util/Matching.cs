@@ -19,7 +19,7 @@ public class Matching : MonoBehaviour {
 			Sound.playSound(SoundType.Click);
 			cancelMatching();
 		});
-		gameObject.SetActive(false);
+		//gameObject.SetActive(false);
 	}
 	// Update is called once per frame
 	void Update () {

@@ -84,7 +84,16 @@ public class JoystackCc : MonoBehaviour {
 //		}
 
 		if (Vector3.Distance (transform.localPosition, Origin) > ActiveMoveDistance) { //距离大于激活移动的距离
-			MovePosiNorm = (transform.localPosition - Origin).normalized;
+            Vector3 dir = transform.localPosition - Origin;
+            if(true){
+                if(Mathf.Abs(dir.x) > Mathf.Abs(dir.y)){
+                    dir = new Vector3(dir.x, 0, 0);
+                }else{
+                    dir = new Vector3(0, dir.y, 0);
+                }
+
+            }
+            MovePosiNorm = dir.normalized;
 		} else {
 			MovePosiNorm = Vector3.zero;
 		}

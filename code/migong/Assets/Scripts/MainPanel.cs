@@ -74,9 +74,9 @@ public class MainPanel : MonoBehaviour {
 		});
 		onlineButton = GameObject.Find (canvasPath+"online2").GetComponent<Button>();
 		onlineButton.onClick.AddListener (delegate() {
-			Job.startJob(Params.energyJobKey, delegate() {
-				Debug.Log("sdfsdfsdfs");
-			},10);
+			//Job.startJob(Params.energyJobKey, delegate() {
+			//	Debug.Log("sdfsdfsdfs");
+			//},10);
 			// 打开online 界面
 			Debug.Log("open online window");
 			Sound.playSound(SoundType.Click);

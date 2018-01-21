@@ -22,8 +22,8 @@ public final class SysPara{
 			put("ladderSpeed","2-4");
 			put("ladderTime","120-400");
 			put("ladderStar1","40-80");
-			put("openUnlimited","6");
-			put("openPvp","6");
+			put("openUnlimited","3");
+			put("openPvp","3");
 			put("enemyDefaultSpeed","2");
 			put("enemyUnlimitedCount","1");
 		}

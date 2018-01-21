@@ -119,6 +119,18 @@ import java.util.concurrent.*;
  *
  *TODO 缓存问题，这里用的map做缓存，满了不会自动清除，这个要处理的
  *
+ * TODO
+ * java.sql.SQLException: Communications link failure
+ The last packet successfully received from the server was 32,371,129 milliseconds ago.
+
+ LEAK: ByteBuf.release() was not called before it's garbage-colle
+ cted. Enable advanced leak reporting to find out where the leak occurred. To enable advanced leak reporting, specify the JVM option '-Dio.netty
+ .leakDetection.level=advanced' or call ResourceLeakDetector.setLevel() See http://netty.io/wiki/reference-counted-objects.html for more informa
+ tion.
+
+ java.sql.SQLException: Data truncation: Data too long for column 'record' at row 1 Query: insert into pvpRecord (id, time, grade, record) values (?, ?, ?, ?) Parameters: [100000, 2018-01-21 21:12:35.804,
+
+ *
  * 微信：
  * AppID：wx4441fcf39f0e24e0
  * AppSecret：ce51278665d747db197044ea5482d888
