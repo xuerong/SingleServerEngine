@@ -13,7 +13,8 @@ import java.util.Map;
  * 新手引导的类型
  */
 public enum NewGuideType {
-    Pass(1,1), // 闯关方式
+    Pass(0,1), // 闯关方式
+    Unlimited(1,1),
     Pvp(2,1) // 人打人
 
     ;

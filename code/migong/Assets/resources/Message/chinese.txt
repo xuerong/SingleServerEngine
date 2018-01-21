@@ -45,10 +45,18 @@ onlineSettleItem=排行:{0},名字:{1},分数:{2},段位:{3}
 
 dataError=数据错误:
 
-guideContent1=引导一
-guideContent2=引导二
-guideContent3=引导三
-guideContent4=引导四
+guideContent11=第1引导一
+guideContent12=第1引导二
+guideContent13=第1引导三
+guideContent14=第1引导四
+guideContent21=第2引导一
+guideContent22=第2引导二
+guideContent23=第2引导三
+guideContent24=第2引导四
+guideContent31=第3引导一
+guideContent32=第3引导二
+guideContent33=第3引导三
+guideContent34=第3引导四
 
 use=使用
 

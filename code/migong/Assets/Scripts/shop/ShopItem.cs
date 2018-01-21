@@ -20,6 +20,7 @@ public class ShopItem: MonoBehaviour {
 	public Image image;
 
 	public Image typeImage;
+    public Image typeImage2;
 
 	public Text priceText;
 	public Text price2Text;
@@ -53,6 +54,10 @@ public class ShopItem: MonoBehaviour {
 		//
 		Sprite spType = Resources.Load (getTypeImage(), typeof(Sprite)) as Sprite;
 		typeImage.sprite = spType;
+        if(typeImage2 != null){
+            typeImage2.sprite = spType;
+        }
+
 		//
 		showPrice(1);
 		//
@@ -146,7 +151,7 @@ public class ShopItem: MonoBehaviour {
 	}
 	// 根据type和id获取对应产品的图片
 	public static Sprite getSprite(int itemId){
-		string path = "itemImage/item1";
+        string path = getSpritePath(itemId);
 		return SpriteCache.getSprite (path); //Resources.Load (path, typeof(Sprite)) as Sprite;
 	}
 
@@ -158,10 +163,26 @@ public class ShopItem: MonoBehaviour {
 		if (type == ShopType.Item || type == ShopType.Unit) {
 			return "itemImage/gold";
 		} else {
-			return "itemImage/item1";
+			return "itemImage/money";
 		}
 	}
+
+    public static string getSpritePath(int itemId){
+        string ret = "itemImage/item1";
+        switch(itemId){
+            case 1:ret = "itemImage/energy1";break;
+            case 2: ret = "itemImage/energy5"; break;
+            case 3: ret = "itemImage/energy30"; break;
+            case 4: ret = "itemImage/s1"; break;
+            case 5: ret = "itemImage/s4"; break;
+            case 6: ret = "itemImage/s3"; break;
+            case 7: ret = "itemImage/s2"; break;
+        }
+        return ret;
+    }
 }
+
+
 
 public enum ShopType{
 	Item,

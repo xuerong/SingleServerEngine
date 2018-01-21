@@ -66,6 +66,7 @@ public class MapCreate : MonoBehaviour{
 	static float myScale = 1f;
 
 	public float nodeX = 0,nodeY = 0;
+    float wallWidth;
 
 	Camera ca;
 	float defaultOrthographicSize = 5;
@@ -105,7 +106,7 @@ public class MapCreate : MonoBehaviour{
 			mainPanel.showUi(this.Mode);
 		});
 		// 0.21 碰撞体的宽，1.9碰撞体的长
-		float wallWidth = 0.13f * myScale;
+		wallWidth = 0.13f * myScale;
 		nodeX = 1.9f * myScale - wallWidth*2 ;nodeY = 1.9f * myScale - wallWidth*2;
 
 		// 显示当前的道具数量
@@ -137,7 +138,7 @@ public class MapCreate : MonoBehaviour{
 	private void showSkillCountAndAddClick(string path,ItemType itemType){
 		Text text = transform.parent.parent.Find ("Canvas/skills/"+path+"/count").GetComponent<Text>();
 		int count = getItemCountByType (itemType);
-		text.text = count.ToString ();
+		text.text = "x"+count.ToString ();
 		skillItemText.Add (itemType,text);
 		if (count == 0) {
 			transform.parent.parent.Find ("Canvas/skills/"+path).GetComponent<Button> ().enabled = false;
@@ -183,7 +184,7 @@ public class MapCreate : MonoBehaviour{
 			// 如果能走到这里，说明道具使用正常
 			SCUseItem ret = SCUseItem.Deserialize(data);
 			skillItemCount[itemId] = skillItemCount[itemId] - 1;
-			skillItemText[itemType].text = skillItemCount[itemId].ToString();
+			skillItemText[itemType].text = "x"+skillItemCount[itemId].ToString();
 
 			// 道具发挥效果
 			switch(itemType){
@@ -360,7 +361,7 @@ public class MapCreate : MonoBehaviour{
 			GameObject beanGo = Instantiate(bean10) as GameObject;
 			beanGo.transform.parent = transform;
 
-			beanGo.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,1f);
+			beanGo.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,12f);
 			beanGo.transform.localScale = new Vector3 (1.05f,1.05f,1);
 		}
 	}
@@ -376,6 +377,13 @@ public class MapCreate : MonoBehaviour{
 
 //		Object downShadow = Resources.Load ("downShadow");
 //		Object rightShadow = Resources.Load ("rightShadow");
+
+        Vector3 center = new Vector3(x + tr / 2f * nodeX, y + (td - 2) / 2f * nodeY, 10);
+        Transform t = transform.parent.Find("migong_bg");
+        t.localPosition = center;
+        t.localScale = new Vector3(nodeX * (td - 0.4f) / 5.76f, nodeY * (tr - 0.4f) / 5.76f, 0);
+        //float scale = nodeX * tr / 5.76f;
+
 
 		Object bean1 = Resources.Load ("bean1");
 		Object bean5 = Resources.Load ("bean5");
@@ -404,7 +412,7 @@ public class MapCreate : MonoBehaviour{
 					GameObject beanGo = Instantiate(beanMap [i] [j].score == 10?bean10:(beanMap [i] [j].score == 5?bean5:bean1)) as GameObject;
 					beanGo.transform.parent = transform;
 					beanGo.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,0);
-					beanGo.transform.localScale = new Vector3 (myScale* 0.6f,myScale* 0.6f,1);
+					//beanGo.transform.localScale = new Vector3 (myScale* 0.6f,myScale* 0.6f,1);
 					beanMap [i] [j].go = beanGo;
 
 					maxScore += beanMap [i] [j].score;
@@ -442,7 +450,7 @@ public class MapCreate : MonoBehaviour{
 		}
 		// 设置引导
 		if(needGuide){
-			initGuide ();
+            initGuide ((int)Mode);
 		}
 		// 修改相机位置
 		GameObject camera = transform.parent.parent.Find("mapCamera").gameObject;
@@ -610,10 +618,10 @@ public class MapCreate : MonoBehaviour{
 	}
 
 
-	private void initGuide(){
+	private void initGuide(int index){
 		GameObject main = GameObject.Find ("main");
-		GuideControl guideControl = main.transform.Find("uiHelp").GetComponent<GuideControl> ();
-		guideControl.showHelp (true);
+        Help guideControl = main.transform.Find("uiHelp").GetComponent<Help> ();
+        guideControl.showHelp (index,true);
 	}
 
 }

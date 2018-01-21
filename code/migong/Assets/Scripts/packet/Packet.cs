@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 public class Packet : MonoBehaviour {
 
 	private Dictionary<int,GameObject> itemGo = new Dictionary<int, GameObject> ();
+    public List<Image> showSelectImage = new List<Image>();
 
 	public GameObject contentGo;
 	public Button useButton;
@@ -58,6 +59,8 @@ public class Packet : MonoBehaviour {
 
 
 	private void init () {
+        showSelectImage.Clear();
+
 		for (int i = 0; i < contentGo.transform.childCount; i++) {
 			Destroy (contentGo.transform.GetChild(i).gameObject);		
 		}
@@ -106,8 +109,9 @@ public class Packet : MonoBehaviour {
 					btn.onClick.AddListener(delegate() {
 						Sound.playSound(SoundType.Click);
 						selectItemId = pi.itemId;
-						showInfoByItemType(pi.itemId);
+						showInfoByItemType(pi.itemId,btn);
 					});
+                    showSelectImage.Add(btn.GetComponent<Image>());
 
 					if(btn1 == null){
 						btn1 = btn;
@@ -119,7 +123,7 @@ public class Packet : MonoBehaviour {
 			}
 			//调用会触发Button的按钮变色  
 			if(btn1 != null){
-				showInfoByItemType(initSelectItemId);
+				showInfoByItemType(initSelectItemId,btn1);
 				btn1.Select();
 				selectItemId = initSelectItemId;
 			}else{
@@ -134,8 +138,16 @@ public class Packet : MonoBehaviour {
 		init ();
 	}
 
-	public void showInfoByItemType(int itemId){
-		
+    public void showInfoByItemType(int itemId,Button btn){
+        // 颜色
+        Image image = btn.gameObject.GetComponent<Image>();
+        image.color = new Color32(255, 255, 255, 255);
+        foreach (Image im in showSelectImage){
+            if(image != im){
+                im.color = new Color32(255,255,255,0);
+            }
+        }
+        //
 		ItemTable itemTable = Params.itemTables [itemId];
 		switch ((ItemType)(itemTable.ItemType)) {
 		case ItemType.Energy:

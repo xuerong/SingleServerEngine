@@ -767,6 +767,7 @@ MonoBehaviour:
   isDiscount: 0
   image: {fileID: 0}
   typeImage: {fileID: 114630049576912826}
+  typeImage2: {fileID: 114142638656186268}
   priceText: {fileID: 114839019418116892}
   price2Text: {fileID: 114541488820485770}
   addNum: {fileID: 114929349421279740}

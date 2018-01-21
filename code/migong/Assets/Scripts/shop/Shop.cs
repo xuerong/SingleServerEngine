@@ -63,8 +63,18 @@ public class Shop : MonoBehaviour {
 		});
 	}
 
+    private void showTabColor(ShopType type){
+        Image image = itemButtion.gameObject.GetComponent<Image>();
+        image.color = type == ShopType.Item?(new Color32(200, 200, 200, 255)):(new Color32(255, 255, 255, 255));
+        image = unitButton.gameObject.GetComponent<Image>();
+        image.color = type == ShopType.Unit ? (new Color32(200, 200, 200, 255)) : (new Color32(255, 255, 255, 255));
+        image = peckButton.gameObject.GetComponent<Image>();
+        image.color = type == ShopType.Peck ? (new Color32(200, 200, 200, 255)) : (new Color32(255, 255, 255, 255));
+    }
+
 	// 道具
 	private void initItem () {
+        showTabColor(ShopType.Item);
 		for (int i = 0; i < contentGo.transform.childCount; i++) {
 			Destroy (contentGo.transform.GetChild(i).gameObject);		
 		}
@@ -95,6 +105,7 @@ public class Shop : MonoBehaviour {
 	}
 	// 套装
 	private void initUnit () {
+        showTabColor(ShopType.Unit);
 		for (int i = 0; i < contentGo.transform.childCount; i++) {
 			Destroy (contentGo.transform.GetChild(i).gameObject);		
 		}
@@ -126,6 +137,7 @@ public class Shop : MonoBehaviour {
 	}
 	// 礼包
 	private void initPeck () {
+        showTabColor(ShopType.Peck);
 		for (int i = 0; i < contentGo.transform.childCount; i++) {
 			Destroy (contentGo.transform.GetChild(i).gameObject);		
 		}

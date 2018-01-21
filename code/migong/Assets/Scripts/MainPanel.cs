@@ -192,18 +192,20 @@ public class MainPanel : MonoBehaviour {
 
 		// 账号，分享，帮助
 
-		Button accountButton = GameObject.Find (canvasPath+"account").GetComponent<Button>();
+		Button accountButton = GameObject.Find (canvasPath+"more/account").GetComponent<Button>();
 		accountButton.onClick.AddListener (delegate() {
 			Debug.Log("account");
 			Sound.playSound(SoundType.Click);
+            closeMorePanel();
 			doAccount();
 		});
 		ssdk.showUserHandler = GetUserInfoResultHandler;
-		Button shareButton = GameObject.Find (canvasPath+"share").GetComponent<Button>();
+        Button shareButton = GameObject.Find (canvasPath+"more/share").GetComponent<Button>();
 		shareButton.onClick.AddListener (delegate() {
 			Debug.Log("share");
 //			doShare();
 			Sound.playSound(SoundType.Click);
+            closeMorePanel();
 			shareWeChat1.transform.parent.gameObject.SetActive(true);
 		});
 		ssdk.shareHandler = ShareResultHandler;
@@ -228,14 +230,26 @@ public class MainPanel : MonoBehaviour {
 			Application.Quit();
 		});
 
+        // show more
+        Button moreButton = GameObject.Find(canvasPath + "moreBt").GetComponent<Button>();
+        moreButton.onClick.AddListener(delegate () {
+            GameObject moreGo = GameObject.Find(canvasPath + "more");
+            moreGo.SetActive(!moreGo.activeSelf);
+        });
+        // hide more
+        Button hideMoreButton = GameObject.Find(canvasPath + "more/clickPanel").GetComponent<Button>();
+        hideMoreButton.onClick.AddListener(delegate () {
+            closeMorePanel();
+        });
 		//
-		Button helpButton = GameObject.Find (canvasPath+"help").GetComponent<Button>();
+        Button helpButton = GameObject.Find (canvasPath+"more/help").GetComponent<Button>();
 		helpButton.onClick.AddListener (delegate() {
 			Debug.Log("help");
 //			WarnDialog.showWarnDialog("test",null,false,10,20);
 			Sound.playSound(SoundType.Click);
-			GuideControl guideControl = uiHelp.GetComponent<GuideControl>();
-			guideControl.showHelp(false);
+            closeMorePanel();
+            Help guideControl = uiHelp.GetComponent<Help>();
+			guideControl.showHelp();
 		});
 
 		// 背包，商店
@@ -281,6 +295,13 @@ public class MainPanel : MonoBehaviour {
 		});
 	}
 
+    private void closeMorePanel(){
+        GameObject moreGo = GameObject.Find("main/ui/uiMain/Canvas/buttons/" + "more");
+        if (moreGo.activeSelf)
+        {
+            moreGo.SetActive(!moreGo.activeSelf);
+        }
+    }
 
 
 	public void doShowLock(){
@@ -393,14 +414,13 @@ public class MainPanel : MonoBehaviour {
 			Debug.Log("receive SCGetMiGongLevel:");
 			SCGetMiGongLevel level = SCGetMiGongLevel.Deserialize (data);
 			int count = level.PassCount;
-			float dis = 20f;
-			// 体力
-			//GameObject energyTextGo = GameObject.Find ("main/ui/uiLevel/Canvas/energy/Text");
-			//Text energyText = energyTextGo.GetComponent<Text>();
-			//energyText.text = Params.energy.ToString();
+            // 体力
+            //GameObject energyTextGo = GameObject.Find ("main/ui/uiLevel/Canvas/energy/Text");
+            //Text energyText = energyTextGo.GetComponent<Text>();
+            //energyText.text = Params.energy.ToString();
 
-			//获取游戏对象
-			Object levelItem = Resources.Load ("levelItem");
+            //获取游戏对象
+            Object levelItem = Resources.Load ("levelItem");
 
 			GameObject up = Instantiate(levelItem) as GameObject;
 			RectTransform buRec = up.GetComponent<RectTransform> ();
@@ -724,7 +744,7 @@ public class MainPanel : MonoBehaviour {
 		MapCreate mapCreate = mapGo.GetComponent<MapCreate> ();
 
 		// 创建引导
-		if (guideRoute != null && mode == MapMode.Level && guideStep[(int)GuideType.Pass] == 0) {
+        if (guideRoute != null && (!guideStep.ContainsKey((int)mode) || guideStep[(int)mode] == 0)) {
 			string[] routes = guideRoute.Split (';');
 			int[] routeInt = new int[routes.Length];
 			for (int i = 0, len = routes.Length; i < len; i++) {
@@ -813,6 +833,7 @@ public class MainPanel : MonoBehaviour {
 
 }
 public enum GuideType{
-	Pass = 1,
+	Pass = 0,
+    Unlimited = 1,
 	Pvp = 2
 }

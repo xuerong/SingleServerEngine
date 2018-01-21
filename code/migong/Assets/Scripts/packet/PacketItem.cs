@@ -13,7 +13,7 @@ public class PacketItem : MonoBehaviour {
 		transform.Find ("count").GetComponent<Text> ().text = count.ToString ();
 		Image image = transform.Find ("image").GetComponent<Image> ();
 
-		Sprite sp = Resources.Load ("itemImage/item" + itemId, typeof(Sprite)) as Sprite;
+        Sprite sp = Resources.Load (ShopItem.getSpritePath(itemId), typeof(Sprite)) as Sprite;
 		image.sprite = sp;
 	}
 

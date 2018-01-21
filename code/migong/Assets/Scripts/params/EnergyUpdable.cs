@@ -23,7 +23,7 @@ public class EnergyUpdable : MonoBehaviour {
 		long now = Util.ConvertDateTimeToInt(DateTime.Now);
 		float guole = (int)((now - Params.energyUpdateTime) / 1000f - Params.disFromServerTime);
 		shengyu = Params.energyRecoverTime - guole;
-		Debug.Log("iiiii:"+shengyu);
+		//Debug.Log("iiiii:"+shengyu);
 		if (shengyu <= 0)
 		{
 			shengyu = 0;
