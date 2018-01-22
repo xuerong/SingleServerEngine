@@ -4,6 +4,7 @@ import com.mm.engine.framework.control.annotation.Service;
 import com.mm.engine.framework.control.annotation.Updatable;
 import com.mm.engine.framework.control.event.EventService;
 import com.mm.engine.framework.tool.helper.BeanHelper;
+import com.sys.SysPara;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,6 +53,7 @@ public class MonitorService {
     @Updatable(isAsynchronous = true,cycle = 60000)
     public void monitorLog(int interval){
         log.info("server is ok!");
+        System.out.println("server is ok!");
     }
 
     public synchronized void addStartCondition(String key,String describe){
