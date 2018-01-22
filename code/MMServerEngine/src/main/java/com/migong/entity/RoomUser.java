@@ -1,13 +1,18 @@
 package com.migong.entity;
 
+import com.migong.MiGongRoom;
+import com.migong.MiGongService;
 import com.migong.map.Element;
 import com.mm.engine.framework.data.entity.session.Session;
 import com.mm.engine.framework.security.LocalizationMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoomUser {
+    private static final Logger log = LoggerFactory.getLogger(RoomUser.class);
     private Session session;
     private long beginTime; // 开始匹配的时间
 
@@ -58,6 +63,14 @@ public class RoomUser {
 
     public boolean checkState(float x,float y,float dirX,float dirY,int speed){
         // todo 检验位置
+        if(true){
+            if(dirX != 0 && dirY != 0){
+                if(MiGongService.debug2){
+                    log.warn("dirx!=0 && diry!=0,is auto dir open?");
+                }
+                return false;
+            }
+        }
         return true;
     }
 

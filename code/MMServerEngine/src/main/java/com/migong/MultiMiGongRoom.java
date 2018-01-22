@@ -306,6 +306,7 @@ public class MultiMiGongRoom extends MiGongRoom {
                 j++;
             }
             i++;
+            j=0;
         }
         if(sb.length() > 0) {
             return sb.substring(0, sb.length() - 1);

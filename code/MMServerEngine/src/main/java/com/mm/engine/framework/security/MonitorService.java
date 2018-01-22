@@ -48,6 +48,11 @@ public class MonitorService {
             }
         }
     }
+    // 10分钟输出一下
+    @Updatable(isAsynchronous = true,cycle = 600000)
+    public void monitorLog(int interval){
+        log.info("server is ok!");
+    }
 
     public synchronized void addStartCondition(String key,String describe){
         conditions.put(key,describe);

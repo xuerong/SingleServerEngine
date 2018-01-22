@@ -128,8 +128,10 @@ import java.util.concurrent.*;
  .leakDetection.level=advanced' or call ResourceLeakDetector.setLevel() See http://netty.io/wiki/reference-counted-objects.html for more informa
  tion.
 
- java.sql.SQLException: Data truncation: Data too long for column 'record' at row 1 Query: insert into pvpRecord (id, time, grade, record) values (?, ?, ?, ?) Parameters: [100000, 2018-01-21 21:12:35.804,
+ java.sql.SQLException: Data truncation: Data too long for column 'record' at row 1 Query: insert into pvpRecord (id, time, grade, record) values (?, ?, ?, ?)
+ Parameters: [100000, 2018-01-21 21:12:35.804,
 
+ TODO 为什么是英文
  *
  * 微信：
  * AppID：wx4441fcf39f0e24e0
@@ -149,7 +151,8 @@ import java.util.concurrent.*;
 @Service(init = "init",destroy = "destroy")
 public class MiGongService {
     private static final Logger log = LoggerFactory.getLogger(MiGongService.class);
-    static boolean debug = false;
+    public static boolean debug = false;
+    public static boolean debug2 = true;
 
     private MiGongRank miGongRank;
     private DataService dataService;

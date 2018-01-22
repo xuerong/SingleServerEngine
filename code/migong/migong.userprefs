@@ -1,16 +1,16 @@
 ﻿<Properties StartupConfiguration="{BEBDD387-0BA1-B4BF-4CF7-4288551F7D1D}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Help.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SocketManager.cs">
     <Files>
       <File FileName="Assets/Scripts/util/Sound.cs" Line="40" Column="4" />
-      <File FileName="Assets/resources/Message/chinese.txt" Line="71" Column="1" />
+      <File FileName="Assets/resources/Message/chinese.txt" Line="58" Column="21" />
       <File FileName="Assets/resources/Message/english.txt" Line="71" Column="11" />
       <File FileName="Assets/Scripts/util/LocalizationText.cs" Line="13" Column="1" />
-      <File FileName="Assets/Scripts/util/Matching.cs" Line="24" Column="36" />
+      <File FileName="Assets/Scripts/util/Matching.cs" Line="22" Column="20" />
       <File FileName="Assets/Scripts/util/Message.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/protobuf/MiGongOpcode.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/ButtonIndex.cs" Line="17" Column="25" />
-      <File FileName="Assets/Scripts/MainPanel.cs" Line="452" Column="27" />
+      <File FileName="Assets/Scripts/MainPanel.cs" Line="646" Column="15" />
       <File FileName="Assets/Scripts/WarnDialog.cs" Line="143" Column="28" />
       <File FileName="Assets/Scripts/Job.cs" Line="74" Column="20" />
       <File FileName="Assets/Scripts/params/EnergyUpdable.cs" Line="26" Column="1" />
@@ -20,15 +20,15 @@
       <File FileName="Assets/Scripts/protobuf/MiGongPB.cs" Line="141" Column="21" />
       <File FileName="Assets/Scripts/Pacman.cs" Line="57" Column="21" />
       <File FileName="Assets/TextCollision.cs" Line="21" Column="25" />
-      <File FileName="Assets/Scripts/MapCreate.cs" Line="370" Column="23" />
-      <File FileName="Assets/Scripts/JoystackCc.cs" Line="108" Column="32" />
+      <File FileName="Assets/Scripts/MapCreate.cs" Line="242" Column="19" />
+      <File FileName="Assets/Scripts/JoystackCc.cs" Line="87" Column="55" />
       <File FileName="Assets/Scripts/Enemy.cs" Line="21" Column="1" />
-      <File FileName="Assets/Scripts/SocketManager.cs" Line="409" Column="9" />
+      <File FileName="Assets/Scripts/SocketManager.cs" Line="160" Column="40" />
       <File FileName="Assets/Scripts/params/SpriteCache.cs" Line="27" Column="23" />
       <File FileName="Assets/Scripts/packet/PacketItem.cs" Line="6" Column="42" />
       <File FileName="Assets/Scripts/shop/ShopItem.cs" Line="58" Column="40" />
       <File FileName="Assets/Scripts/shop/Shop.cs" Line="108" Column="37" />
-      <File FileName="Assets/Scripts/Help.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Help.cs" Line="44" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
