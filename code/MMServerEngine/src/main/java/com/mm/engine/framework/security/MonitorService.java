@@ -49,7 +49,7 @@ public class MonitorService {
         }
     }
     // 10分钟输出一下
-    @Updatable(isAsynchronous = true,cycle = 600000)
+    @Updatable(isAsynchronous = true,cycle = 60000)
     public void monitorLog(int interval){
         log.info("server is ok!");
     }
