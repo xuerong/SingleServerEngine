@@ -15,34 +15,40 @@ public class RequestNettyPBDecoder extends ByteToMessageDecoder {
     boolean isReadHead = false;
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> list) throws Exception {
+        try {
 //        System.out.println(in.capacity()+";"+in.getClass());
-        int readAble =in.readableBytes();
+            int readAble = in.readableBytes();
 //        System.out.println("readAble:"+readAble);
-        if (readAble < size) {
-            return;
-        }
-        int opcode = 0,id = 0;
-        if(!isReadHead) {
-            size = in.readInt();
-            opcode = in.readInt();
-            id = in.readInt();
-
-            isReadHead = true;
-            if(size>readAble - headSize){
+            if (readAble < size) {
                 return;
             }
+            int opcode = 0, id = 0;
+            if (!isReadHead) {
+                size = in.readInt();
+                opcode = in.readInt();
+                id = in.readInt();
+
+                isReadHead = true;
+                if (size > readAble - headSize) {
+                    return;
+                }
+            }
+            ByteBuf b = in.readBytes(size); // 这里有data
+            byte[] bbb = new byte[size];
+            b.getBytes(0, bbb);
+            // add之后好像in就被重置了
+            NettyPBPacket nettyPBPacket = new NettyPBPacket();
+            nettyPBPacket.setData(bbb);
+            nettyPBPacket.setOpcode(opcode);
+            nettyPBPacket.setId(id);
+            list.add(nettyPBPacket);
+            // 清理临时变量
+            size = headSize;
+            isReadHead = false;
+        }catch (Throwable e){
+            throw e;
+        }finally {
+            in.release();
         }
-        ByteBuf b = in.readBytes(size); // 这里有data
-        byte[]  bbb = new byte[size];
-        b.getBytes(0,bbb);
-        // add之后好像in就被重置了
-        NettyPBPacket nettyPBPacket = new NettyPBPacket();
-        nettyPBPacket.setData(bbb);
-        nettyPBPacket.setOpcode(opcode);
-        nettyPBPacket.setId(id);
-        list.add(nettyPBPacket);
-        // 清理临时变量
-        size = headSize;
-        isReadHead = false;
     }
 }
