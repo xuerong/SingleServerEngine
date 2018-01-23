@@ -23,6 +23,6 @@ CREATE TABLE `pvpRecord` (
   `id` bigint(20) NOT NULL,
   `time` timestamp NULL DEFAULT NULL,
   `grade` int(11) DEFAULT NULL,
-  `record` text,
+  `record` mediumtext,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
