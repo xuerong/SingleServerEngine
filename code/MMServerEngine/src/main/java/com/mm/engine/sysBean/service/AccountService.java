@@ -14,6 +14,7 @@ import com.mm.engine.framework.data.entity.session.ConnectionClose;
 import com.mm.engine.framework.data.entity.session.Session;
 import com.mm.engine.framework.data.entity.session.SessionService;
 import com.mm.engine.framework.data.persistence.dao.DatabaseHelper;
+import com.mm.engine.framework.data.persistence.orm.DataSet;
 import com.mm.engine.framework.data.tx.Tx;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.code.RetPacketImpl;
@@ -52,7 +53,7 @@ public class AccountService {
     // account-session
     private ConcurrentHashMap<String,Session> sessionMap;
     // 系统启动的时候把所有的服务器加载到内存，然后，定期更新服务器列表，这样，新加的服务器就进来了
-    private List<ServerInfo> serverInfos;
+    private Map<Integer,ServerInfo> serverInfos;
     private ServerInfo currentServer; // 当前需要分配的server,一直分配到该服务器，直到不行的再重新设置当前服务器
 
     public AccountSysService accountSysService;
@@ -64,17 +65,22 @@ public class AccountService {
         Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                List<ServerInfo> serverInfos = dataService.selectList(ServerInfo.class,null);
+                List<ServerInfo> serverInfos = DataSet.selectListWithCondition(ServerInfo.class,null); // 直接从数据库中取
                 if(serverInfos == null || serverInfos.size() == 0){
                     throw new MMException("server info is empty");
                 }
-                serverInfos.sort(new Comparator<ServerInfo>() {
-                    @Override
-                    public int compare(ServerInfo o1, ServerInfo o2) {
-                        return o2.getAccountCount() - o1.getAccountCount();
-                    }
-                });
-                AccountService.this.serverInfos = serverInfos;
+//                serverInfos.sort(new Comparator<ServerInfo>() {
+//                    @Override
+//                    public int compare(ServerInfo o1, ServerInfo o2) {
+//                        return o2.getAccountCount() - o1.getAccountCount();
+//                    }
+//                });
+
+                Map<Integer,ServerInfo> serverInfoMap = new TreeMap<Integer, ServerInfo>();
+                for(ServerInfo serverInfo : serverInfos){
+                    serverInfoMap.put(serverInfo.getId(),serverInfo);
+                }
+                AccountService.this.serverInfos = serverInfoMap;
 
                 if(!refreshCurrentServer()){
                     throw new MMException("server is too full to add people!!!");
@@ -161,11 +167,22 @@ public class AccountService {
             dataService.update(serverInfo);
             log.info("new user register,device id = {},ip = {}",loginInfo.getDeviceId(),session.getIp());
         }
+
+        ServerInfo serverInfo = serverInfos.get(deviceAccount.getServerId());
+
+        switch (ServerInfo.ServerState.getStateByInt(serverInfo.getState())){
+            case Ok:break;
+            case Fixing:
+                
+                break;
+        }
+
         AccountPB.SCGetLoginInfo.Builder builder = AccountPB.SCGetLoginInfo.newBuilder();
         builder.setServerId(deviceAccount.getServerId());
         builder.setPort(deviceAccount.getPort());
         builder.setIp(deviceAccount.getIp());
         builder.setAccountId(deviceAccount.getAccountId());
+        builder.setServerState(serverInfo.getState());
         log.info("new user login,device id = {},ip = {}",loginInfo.getDeviceId(),session.getIp());
         RetPacket retPacket = new RetPacketImpl(AccountOpcode.SCGetLoginInfo,false,builder.build().toByteArray());
         return retPacket;
@@ -179,13 +196,15 @@ public class AccountService {
     }
     private synchronized boolean refreshCurrentServer(){ // 刷新当前分配server
         if(currentServer == null || currentServer.isFull()){
-            ServerInfo leastServerInfo = serverInfos.get(0);
-            for(ServerInfo serverInfo : serverInfos){
+            ServerInfo leastServerInfo = null;
+            for(ServerInfo serverInfo : serverInfos.values()){
                 if(!serverInfo.isFull()){
                     currentServer = serverInfo;
                     return true;
                 }
-                if(serverInfo.getAccountCount() < leastServerInfo.getAccountCount()){
+                if(leastServerInfo == null){
+                    leastServerInfo =serverInfo;
+                }else if(serverInfo.getAccountCount() < leastServerInfo.getAccountCount()){
                     leastServerInfo = serverInfo;
                 }
             }

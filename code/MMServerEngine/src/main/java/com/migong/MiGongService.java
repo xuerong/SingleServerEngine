@@ -117,21 +117,16 @@ import java.util.concurrent.*;
  *
  * 付费总值，金币获取和消费，付费用户，付费次数，付费率，ARPU，ARPPU，
  *
- *TODO 缓存问题，这里用的map做缓存，满了不会自动清除，这个要处理的
  *
- * TODO
- * java.sql.SQLException: Communications link failure
- The last packet successfully received from the server was 32,371,129 milliseconds ago.
 
- LEAK: ByteBuf.release() was not called before it's garbage-colle
- cted. Enable advanced leak reporting to find out where the leak occurred. To enable advanced leak reporting, specify the JVM option '-Dio.netty
- .leakDetection.level=advanced' or call ResourceLeakDetector.setLevel() See http://netty.io/wiki/reference-counted-objects.html for more informa
- tion.
-
- java.sql.SQLException: Data truncation: Data too long for column 'record' at row 1 Query: insert into pvpRecord (id, time, grade, record) values (?, ?, ?, ?)
- Parameters: [100000, 2018-01-21 21:12:35.804,
 
  TODO 为什么是英文
+
+ TODO :CSBaseInfo(12001)是不是有时候会不调用！！！！ 或者在登陆连接成功之前调用
+
+ TODO 删除：缓存中的标记为删除的数据，在数据库中删除之后要移除？可以先不做，因为缓存是lru的，时间长了自然就没有了
+
+
  *
  * 微信：
  * AppID：wx4441fcf39f0e24e0

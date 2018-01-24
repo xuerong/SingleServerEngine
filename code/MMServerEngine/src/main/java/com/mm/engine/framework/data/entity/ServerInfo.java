@@ -17,6 +17,7 @@ public class ServerInfo implements Serializable {
     private int port;
     private int accountCount;
     private int hot; // 火爆程度，根据最近的登陆情况计算
+    private int state; // 状态
 
     public boolean isFull(){
         return accountCount>FullAccountCount;
@@ -64,5 +65,22 @@ public class ServerInfo implements Serializable {
 
     public void setHot(int hot) {
         this.hot = hot;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public static enum  ServerState{
+        Ok,
+        Fixing;
+
+        public static ServerState getStateByInt(int state){
+            return values()[state];
+        }
     }
 }

@@ -2,7 +2,7 @@
 using System;
 namespace com.protocol
 {
-	public enum AccountOpcode
+	public enum csharpfile\AccountOpcode
 	{
 		CSLogin = 10001,
 		SCLogin = 10002,

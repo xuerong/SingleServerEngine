@@ -357,7 +357,7 @@ public class AsyncService {
                         }catch (Throwable e){
                             if(e instanceof InterruptedException && asyncData == null && !running){
                                 // stop发生了
-                                log.info("async thread stop");
+                                log.info("async thread stop success");
                                 break;
                             }
                             // 这里失败怎么办

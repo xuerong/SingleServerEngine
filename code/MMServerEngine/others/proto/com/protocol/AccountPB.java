@@ -3285,6 +3285,16 @@ public final class AccountPB {
      */
     com.google.protobuf.ByteString
         getAccountIdBytes();
+
+    // required int32 serverState = 5;
+    /**
+     * <code>required int32 serverState = 5;</code>
+     */
+    boolean hasServerState();
+    /**
+     * <code>required int32 serverState = 5;</code>
+     */
+    int getServerState();
   }
   /**
    * Protobuf type {@code SCGetLoginInfo}
@@ -3355,6 +3365,11 @@ public final class AccountPB {
             case 34: {
               bitField0_ |= 0x00000008;
               accountId_ = input.readBytes();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              serverState_ = input.readInt32();
               break;
             }
           }
@@ -3515,11 +3530,28 @@ public final class AccountPB {
       }
     }
 
+    // required int32 serverState = 5;
+    public static final int SERVERSTATE_FIELD_NUMBER = 5;
+    private int serverState_;
+    /**
+     * <code>required int32 serverState = 5;</code>
+     */
+    public boolean hasServerState() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 serverState = 5;</code>
+     */
+    public int getServerState() {
+      return serverState_;
+    }
+
     private void initFields() {
       serverId_ = 0;
       ip_ = "";
       port_ = 0;
       accountId_ = "";
+      serverState_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3542,6 +3574,10 @@ public final class AccountPB {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasServerState()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -3560,6 +3596,9 @@ public final class AccountPB {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(4, getAccountIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, serverState_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3585,6 +3624,10 @@ public final class AccountPB {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, getAccountIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, serverState_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3710,6 +3753,8 @@ public final class AccountPB {
         bitField0_ = (bitField0_ & ~0x00000004);
         accountId_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
+        serverState_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -3754,6 +3799,10 @@ public final class AccountPB {
           to_bitField0_ |= 0x00000008;
         }
         result.accountId_ = accountId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.serverState_ = serverState_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3786,6 +3835,9 @@ public final class AccountPB {
           accountId_ = other.accountId_;
           onChanged();
         }
+        if (other.hasServerState()) {
+          setServerState(other.getServerState());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -3804,6 +3856,10 @@ public final class AccountPB {
           return false;
         }
         if (!hasAccountId()) {
+          
+          return false;
+        }
+        if (!hasServerState()) {
           
           return false;
         }
@@ -4043,6 +4099,39 @@ public final class AccountPB {
         return this;
       }
 
+      // required int32 serverState = 5;
+      private int serverState_ ;
+      /**
+       * <code>required int32 serverState = 5;</code>
+       */
+      public boolean hasServerState() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required int32 serverState = 5;</code>
+       */
+      public int getServerState() {
+        return serverState_;
+      }
+      /**
+       * <code>required int32 serverState = 5;</code>
+       */
+      public Builder setServerState(int value) {
+        bitField0_ |= 0x00000010;
+        serverState_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 serverState = 5;</code>
+       */
+      public Builder clearServerState() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        serverState_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:SCGetLoginInfo)
     }
 
@@ -4104,9 +4193,10 @@ public final class AccountPB {
       "ionId\030\001 \002(\t\022\022\n\nserverTime\030\002 \002(\003\"\035\n\010CSLog" +
       "out\022\021\n\taccountId\030\001 \002(\t\"\n\n\010SCLogout\"\017\n\rSC" +
       "BeTakePlace\"\"\n\016CSGetLoginInfo\022\020\n\010deviceI" +
-      "d\030\001 \002(\t\"O\n\016SCGetLoginInfo\022\020\n\010serverId\030\001 " +
+      "d\030\001 \002(\t\"d\n\016SCGetLoginInfo\022\020\n\010serverId\030\001 " +
       "\002(\005\022\n\n\002ip\030\002 \002(\t\022\014\n\004port\030\003 \002(\005\022\021\n\taccount" +
-      "Id\030\004 \002(\tB\016\n\014com.protocol"
+      "Id\030\004 \002(\t\022\023\n\013serverState\030\005 \002(\005B\016\n\014com.pro" +
+      "tocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4154,7 +4244,7 @@ public final class AccountPB {
           internal_static_SCGetLoginInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_SCGetLoginInfo_descriptor,
-              new java.lang.String[] { "ServerId", "Ip", "Port", "AccountId", });
+              new java.lang.String[] { "ServerId", "Ip", "Port", "AccountId", "ServerState", });
           return null;
         }
       };

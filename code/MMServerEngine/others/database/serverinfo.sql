@@ -25,6 +25,7 @@ CREATE TABLE `serverInfo` (
   `port` int(11) NOT NULL,
   `accountCount` int(11) NOT NULL,
   `hot` int(11) NOT NULL,
+  `state` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
