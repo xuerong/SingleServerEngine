@@ -29,6 +29,7 @@ public abstract class AbstractDataSourceFactory<T extends DataSource> implements
         setPassword(ds, password);
         // 设置高级属性
         setAdvancedConfig(ds);
+
         return ds;
     }
 
