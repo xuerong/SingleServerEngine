@@ -15,6 +15,7 @@ public class RequestNettyPBDecoder extends ByteToMessageDecoder {
     boolean isReadHead = false;
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> list) throws Exception {
+        ByteBuf b = null;
         try {
 //        System.out.println(in.capacity()+";"+in.getClass());
             int readAble = in.readableBytes();
@@ -33,7 +34,7 @@ public class RequestNettyPBDecoder extends ByteToMessageDecoder {
                     return;
                 }
             }
-            ByteBuf b = in.readBytes(size); // 这里有data
+            b = in.readBytes(size); // 这里有data
             byte[] bbb = new byte[size];
             b.getBytes(0, bbb);
             // add之后好像in就被重置了
@@ -48,7 +49,10 @@ public class RequestNettyPBDecoder extends ByteToMessageDecoder {
         }catch (Throwable e){
             throw e;
         }finally {
-            in.release();
+            if(b != null){
+                b.release();
+            }
+//            in.release();
         }
     }
 }

@@ -17,39 +17,48 @@ public class RoomNettyPBDecoder extends ByteToMessageDecoder {
     boolean isReadHead = false;
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> list) throws Exception {
-        int readAble =in.readableBytes();
-        if (readAble < size) {
-            return;
-        }
-        int opcode = 0,id = 0,roomId = 0;
-        if(!isReadHead) {
-            size = in.readInt();
-            opcode = in.readInt();
-            id = in.readInt();
-            roomId = in.readInt();
-            if(opcode == 0){
-                System.out.println("");
-            }
-            isReadHead = true;
-            if(size>readAble - headSize){
+        ByteBuf b = null;
+        try {
+            int readAble = in.readableBytes();
+            if (readAble < size) {
                 return;
             }
+            int opcode = 0, id = 0, roomId = 0;
+            if (!isReadHead) {
+                size = in.readInt();
+                opcode = in.readInt();
+                id = in.readInt();
+                roomId = in.readInt();
+                if (opcode == 0) {
+                    System.out.println("");
+                }
+                isReadHead = true;
+                if (size > readAble - headSize) {
+                    return;
+                }
+            }
+            b = in.readBytes(size); // 这里有data
+            byte[] bbb = new byte[size];
+            if (opcode == 0) {
+                System.out.println(bbb);
+            }
+            b.getBytes(0, bbb);
+            // add之后好像in就被重置了
+            RoomNetData roomNetData = new RoomNetData();
+            roomNetData.setId(id);
+            roomNetData.setOpcode(opcode);
+            roomNetData.setRoomId(roomId);
+            roomNetData.setData(bbb);
+            list.add(roomNetData);
+            // 清理临时变量
+            size = headSize;
+            isReadHead = false;
+        }catch (Throwable e){
+            throw  e;
+        }finally {
+            if(b != null){
+                b.release();
+            }
         }
-        ByteBuf b = in.readBytes(size); // 这里有data
-        byte[]  bbb = new byte[size];
-        if(opcode == 0){
-            System.out.println(bbb);
-        }
-        b.getBytes(0,bbb);
-        // add之后好像in就被重置了
-        RoomNetData roomNetData = new RoomNetData();
-        roomNetData.setId(id);
-        roomNetData.setOpcode(opcode);
-        roomNetData.setRoomId(roomId);
-        roomNetData.setData(bbb);
-        list.add(roomNetData);
-        // 清理临时变量
-        size = headSize;
-        isReadHead = false;
     }
 }

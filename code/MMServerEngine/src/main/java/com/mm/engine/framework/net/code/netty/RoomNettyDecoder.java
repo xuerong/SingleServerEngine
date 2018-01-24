@@ -17,34 +17,43 @@ public class RoomNettyDecoder extends ByteToMessageDecoder {
     boolean isReadHead = false;
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> list) throws Exception {
-        int readAble =in.readableBytes();
-        if (readAble < size) {
-            return;
-        }
-        if(!isReadHead) {
-            size = in.readInt();
-            isReadHead = true;
-            if(size>readAble - headSize){
+        ByteBuf b = null;
+        try {
+            int readAble = in.readableBytes();
+            if (readAble < size) {
                 return;
             }
+            if (!isReadHead) {
+                size = in.readInt();
+                isReadHead = true;
+                if (size > readAble - headSize) {
+                    return;
+                }
+            }
+            b = in.readBytes(size); // 这里有data
+
+            int sceneId = b.readInt();
+            int opcode = b.readInt();
+
+            byte[] bbb = new byte[size - 8];
+            b.getBytes(0, bbb);
+
+            RoomNetData roomNetData = new RoomNetData();
+            roomNetData.setRoomId(sceneId);
+            roomNetData.setOpcode(opcode);
+            roomNetData.setData(bbb);
+
+            // add之后好像in就被重置了
+            list.add(roomNetData);
+            // 清理临时变量
+            size = headSize;
+            isReadHead = false;
+        }catch (Throwable e){
+            throw e;
+        }finally {
+            if(b != null){
+                b.release();
+            }
         }
-        ByteBuf b = in.readBytes(size); // 这里有data
-
-        int sceneId =  b.readInt();
-        int opcode = b.readInt();
-
-        byte[]  bbb = new byte[size - 8];
-        b.getBytes(0,bbb);
-
-        RoomNetData roomNetData = new RoomNetData();
-        roomNetData.setRoomId(sceneId);
-        roomNetData.setOpcode(opcode);
-        roomNetData.setData(bbb);
-
-        // add之后好像in就被重置了
-        list.add(roomNetData);
-        // 清理临时变量
-        size = headSize;
-        isReadHead = false;
     }
 }

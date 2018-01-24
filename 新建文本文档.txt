@@ -33,7 +33,12 @@ u672au547du540d	ins-6u87cn62	vpc-0j72voq7	172.16.0.4	111.230.144.111
 http://blog.wing-analytics.com/archives/335.html
 unity facebook登陆：https://www.2cto.com/kf/201705/638522.html
 google支付：http://blog.csdn.net/lzp2015/article/details/51668852
-unity接google支付:http://blog.csdn.net/ad_118/article/details/70139612
+unity接google支付:
+http://blog.csdn.net/ad_118/article/details/70139612
+http://blog.csdn.net/qq15233635728/article/details/44015225
+官方：https://developer.android.com/google/play/billing/api.html?hl=zh-cn
+详细讲解google购买流程：https://www.cnblogs.com/android-blogs/p/6398981.html
+
 谷歌账号：zhengyuzhen2@gmail.com
 facebook账号:861180416@qq.com
 
@@ -49,7 +54,7 @@ more -1000 /usr/local/migong/logs/dynasty2.out.$(date "+%Y%m%d%H")
 
 
 //-------------------------------------------------------------配置和启动服务器步骤：
-1、下载和安装jdk
+1、下载和安装jdk：安装1.8的吧，有些jar对1.9支持不好
 wget --no-check-certificate --no-cookie --header "Cookie: oraclelicense=accept-securebackup-cookie;" http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/jdk-9.0.1_linux-x64_bin.rpm
 rpm -ivh jdk-9.0.1_linux-x64_bin.rpm
 2、下载和安装mysql

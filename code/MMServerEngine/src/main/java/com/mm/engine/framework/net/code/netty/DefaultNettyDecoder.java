@@ -18,27 +18,36 @@ public class DefaultNettyDecoder extends ByteToMessageDecoder {
     boolean isReadHead = false;
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> list) throws Exception {
-        int readAble =in.readableBytes();
-        if (readAble < size) {
-            return;
-        }
-        if(!isReadHead) {
-            size = in.readInt();
-            isReadHead = true;
-            if(size>readAble - headSize){
+        ByteBuf b = null;
+        try {
+            int readAble = in.readableBytes();
+            if (readAble < size) {
                 return;
             }
+            if (!isReadHead) {
+                size = in.readInt();
+                isReadHead = true;
+                if (size > readAble - headSize) {
+                    return;
+                }
+            }
+            b = in.readBytes(size); // 这里有data
+            byte[] bbb = new byte[size];
+            b.getBytes(0, bbb);
+            // add之后好像in就被重置了
+            ByteArrayInputStream bis = new ByteArrayInputStream(bbb);
+            ObjectInputStream oin = new ObjectInputStream(bis);
+            list.add(oin.readObject());
+            oin.close();
+            // 清理临时变量
+            size = headSize;
+            isReadHead = false;
+        }catch (Throwable e){
+            throw e;
+        }finally {
+            if(b != null){
+                b.release();
+            }
         }
-        ByteBuf b = in.readBytes(size); // 这里有data
-        byte[]  bbb = new byte[size];
-        b.getBytes(0,bbb);
-        // add之后好像in就被重置了
-        ByteArrayInputStream bis = new ByteArrayInputStream(bbb);
-        ObjectInputStream oin = new ObjectInputStream(bis);
-        list.add(oin.readObject());
-        oin.close();
-        // 清理临时变量
-        size = headSize;
-        isReadHead = false;
     }
 }
