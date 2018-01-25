@@ -28,8 +28,13 @@ public class DatabaseHelper {
 
     /**
      * 定义一个局部线程变量（使每个线程都拥有自己的连接）
+     * 这个就不用了，因为：
+     * 如果将连接缓存在这里，就不会把连接放回连接池中，而连接池通过TestWhileIdle方式来解决mysql8小时问题，所以：
+     * 1、如果用他，那么，就要自己起一个线程解决8小时问题
+     * 2、不用他，统一用线程池（选这个）
+     * 另外，如果线程很多，就会导致很多连接被缓存
      */
-    private static final ThreadLocal<Connection> connContainer ;
+//    private static final ThreadLocal<Connection> connContainer ;
 
     /**
      * 获取数据访问器
@@ -43,7 +48,7 @@ public class DatabaseHelper {
     static {
         dataAccessor = BeanHelper.getFrameBean(DataAccessor.class);
         databaseType = Server.getEngineConfigure().getString("jdbc.type");
-        connContainer = new ThreadLocal<Connection>();
+//        connContainer = new ThreadLocal<Connection>();
     }
 
     /**
@@ -64,78 +69,78 @@ public class DatabaseHelper {
     /**
      * 获取数据库连接
      */
-    public static Connection getConnection() {
-        Connection conn;
-        try {
-            // 先从 ThreadLocal 中获取 Connection
-            conn = connContainer.get();
-            if (conn == null) {
-                // 若不存在，则从 DataSource 中获取 Connection
-                conn = getDataSource().getConnection();
-                // 将 Connection 放入 ThreadLocal 中
-                if (conn != null) {
-                    connContainer.set(conn);
-                }
-            }
-        } catch (SQLException e) {
-            logger.error("获取数据库连接出错！", e);
-            throw new RuntimeException(e);
-        }
-        return conn;
-    }
+//    public static Connection getConnection() {
+//        Connection conn;
+//        try {
+//            // 先从 ThreadLocal 中获取 Connection
+//            conn = connContainer.get();
+//            if (conn == null) {
+//                // 若不存在，则从 DataSource 中获取 Connection
+//                conn = getDataSource().getConnection();
+//                // 将 Connection 放入 ThreadLocal 中
+//                if (conn != null) {
+//                    connContainer.set(conn);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            logger.error("获取数据库连接出错！", e);
+//            throw new RuntimeException(e);
+//        }
+//        return conn;
+//    }
 
     /**
      * 开启事务
      */
-    public static void beginTransaction() {
-        Connection conn = getConnection();
-        if (conn != null) {
-            try {
-                conn.setAutoCommit(false);
-            } catch (SQLException e) {
-                logger.error("开启事务出错！", e);
-                throw new RuntimeException(e);
-            } finally {
-                connContainer.set(conn);
-            }
-        }
-    }
+//    public static void beginTransaction() {
+//        Connection conn = getConnection();
+//        if (conn != null) {
+//            try {
+//                conn.setAutoCommit(false);
+//            } catch (SQLException e) {
+//                logger.error("开启事务出错！", e);
+//                throw new RuntimeException(e);
+//            } finally {
+//                connContainer.set(conn);
+//            }
+//        }
+//    }
 
     /**
      * 提交事务
      */
-    public static void commitTransaction() {
-        Connection conn = getConnection();
-        if (conn != null) {
-            try {
-                conn.commit();
-                conn.close();
-            } catch (SQLException e) {
-                logger.error("提交事务出错！", e);
-                throw new RuntimeException(e);
-            } finally {
-                connContainer.remove();
-            }
-        }
-    }
+//    public static void commitTransaction() {
+//        Connection conn = getConnection();
+//        if (conn != null) {
+//            try {
+//                conn.commit();
+//                conn.close();
+//            } catch (SQLException e) {
+//                logger.error("提交事务出错！", e);
+//                throw new RuntimeException(e);
+//            } finally {
+//                connContainer.remove();
+//            }
+//        }
+//    }
 
     /**
      * 回滚事务
      */
-    public static void rollbackTransaction() {
-        Connection conn = getConnection();
-        if (conn != null) {
-            try {
-                conn.rollback();
-                conn.close();
-            } catch (SQLException e) {
-                logger.error("回滚事务出错！", e);
-                throw new RuntimeException(e);
-            } finally {
-                connContainer.remove();
-            }
-        }
-    }
+//    public static void rollbackTransaction() {
+//        Connection conn = getConnection();
+//        if (conn != null) {
+//            try {
+//                conn.rollback();
+//                conn.close();
+//            } catch (SQLException e) {
+//                logger.error("回滚事务出错！", e);
+//                throw new RuntimeException(e);
+//            } finally {
+//                connContainer.remove();
+//            }
+//        }
+//    }
 
     /**
      * 初始化 SQL 脚本

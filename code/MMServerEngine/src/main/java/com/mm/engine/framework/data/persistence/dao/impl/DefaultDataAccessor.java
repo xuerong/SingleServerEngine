@@ -6,6 +6,7 @@ import com.mm.engine.framework.data.persistence.orm.EntityHelper;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.BeanProcessor;
+import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.*;
 import org.apache.commons.lang3.ArrayUtils;
@@ -198,8 +199,9 @@ public class DefaultDataAccessor implements DataAccessor {
     public int update(String sql, Object... params) {
         int result;
         try {
-            Connection conn = DatabaseHelper.getConnection();
-            result = queryRunner.update(conn, sql, params);
+//            Connection conn = DatabaseHelper.getConnection();
+//            result = queryRunner.update(conn, sql, params);
+            result = queryRunner.update( sql, params);
         } catch (SQLException e) {
             logger.error("更新出错！", e);
             throw new RuntimeException(e);
@@ -211,8 +213,10 @@ public class DefaultDataAccessor implements DataAccessor {
     @Override
     public Serializable insertReturnPK(String sql, Object... params) {
         Serializable key = null;
+        Connection conn = null;
         try {
-            Connection conn = DatabaseHelper.getConnection();
+            conn = queryRunner.getDataSource().getConnection();
+//            Connection conn = DatabaseHelper.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             if (ArrayUtils.isNotEmpty(params)) {
                 for (int i = 0; i < params.length; i++) {
@@ -229,6 +233,16 @@ public class DefaultDataAccessor implements DataAccessor {
         } catch (SQLException e) {
             logger.error("插入出错！", e);
             throw new RuntimeException(e);
+        }finally {
+            try {
+                if(conn != null) {
+                    DbUtils.close(conn);
+                }
+            } catch (SQLException e) {
+                logger.error("insertReturnPK error！", e);
+                throw new RuntimeException(e);
+            }
+
         }
         printSQL(sql);
         return key;
