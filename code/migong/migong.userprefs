@@ -10,8 +10,8 @@
       <File FileName="Assets/Scripts/util/Message.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/protobuf/MiGongOpcode.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/ButtonIndex.cs" Line="17" Column="25" />
-      <File FileName="Assets/Scripts/MainPanel.cs" Line="646" Column="15" />
-      <File FileName="Assets/Scripts/WarnDialog.cs" Line="143" Column="28" />
+      <File FileName="Assets/Scripts/MainPanel.cs" Line="99" Column="57" />
+      <File FileName="Assets/Scripts/WarnDialog.cs" Line="189" Column="12" />
       <File FileName="Assets/Scripts/Job.cs" Line="74" Column="20" />
       <File FileName="Assets/Scripts/params/EnergyUpdable.cs" Line="26" Column="1" />
       <File FileName="Assets/Scripts/params/Params.cs" Line="7" Column="14" />
@@ -23,12 +23,12 @@
       <File FileName="Assets/Scripts/MapCreate.cs" Line="242" Column="19" />
       <File FileName="Assets/Scripts/JoystackCc.cs" Line="87" Column="55" />
       <File FileName="Assets/Scripts/Enemy.cs" Line="21" Column="1" />
-      <File FileName="Assets/Scripts/SocketManager.cs" Line="160" Column="40" />
       <File FileName="Assets/Scripts/params/SpriteCache.cs" Line="27" Column="23" />
       <File FileName="Assets/Scripts/packet/PacketItem.cs" Line="6" Column="42" />
       <File FileName="Assets/Scripts/shop/ShopItem.cs" Line="58" Column="40" />
       <File FileName="Assets/Scripts/shop/Shop.cs" Line="108" Column="37" />
       <File FileName="Assets/Scripts/Help.cs" Line="44" Column="5" />
+      <File FileName="Assets/Scripts/SocketManager.cs" Line="163" Column="51" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

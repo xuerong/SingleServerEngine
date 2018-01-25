@@ -157,10 +157,10 @@ public class SocketManager : MonoBehaviour {
 //			Debug.Log ("port = " + ret.Port);  
 //		}      
 //
-		string url = "http://127.0.0.1:8083";
+		//string url = "http://127.0.0.1:8083";
 //		string url = "http://10.1.6.254:8083";  
 //		string url = "http://111.230.144.111:8083";  // 腾讯云
-		//string url = "http://47.95.219.97:8083";  // 阿里云
+		string url = "http://47.95.219.97:8083";  // 阿里云
 		UnityWebRequest request = new UnityWebRequest(url, "POST");  
 		byte[] postBytes = CSGetLoginInfo.SerializeToBytes(loginInfo);  
 		request.uploadHandler = (UploadHandler)new UploadHandlerRaw(postBytes);
@@ -173,6 +173,12 @@ public class SocketManager : MonoBehaviour {
 			accountId = ret.AccountId;
 			ip = ret.Ip;
 			port = ret.Port;
+            switch(ret.ServerState){
+                case 0:break;
+                case 1:
+                    WarnDialog.showWarnDialog("服务器正在维护");
+                    break;
+            }
 
 			PlayerPrefs.SetInt (SERVER_ID_KEY, serverId);
 			PlayerPrefs.SetString (SERVER_IP_KEY, ip);

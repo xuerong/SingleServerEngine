@@ -54,6 +54,7 @@ public class MonitorService {
     public void monitorLog(int interval){
         log.info("server is ok!");
         System.out.println("server is ok!");
+        // 下下策，每隔
     }
 
     public synchronized void addStartCondition(String key,String describe){

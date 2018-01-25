@@ -70,7 +70,7 @@ public class DefaultDataSourceFactory extends AbstractDataSourceFactory<BasicDat
         ds.setTimeBetweenEvictionRunsMillis(600000);
         ds.setMinEvictableIdleTimeMillis(600000);
         ds.setTestWhileIdle(true);
-        ds.setTestOnBorrow(false);
+        ds.setTestOnBorrow(true);
         ds.setTestOnReturn(false);
         ds.setValidationQuery("select 1");
         // 解决 java.sql.SQLException: Already closed. 的问题（连接池会自动关闭长时间没有使用的连接）

@@ -73,6 +73,8 @@ namespace Example
 
         public string AccountId { get; set; }
 
+        public int ServerState { get; set; }
+
     }
 
 }
