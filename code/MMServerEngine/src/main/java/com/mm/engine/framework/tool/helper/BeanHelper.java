@@ -3,6 +3,7 @@ package com.mm.engine.framework.tool.helper;
 import com.mm.engine.framework.control.ServiceHelper;
 import com.mm.engine.framework.control.annotation.Service;
 import com.mm.engine.framework.control.aop.AopHelper;
+import com.mm.engine.framework.data.persistence.dao.DataAccessor;
 import com.mm.engine.framework.net.entrance.Entrance;
 import com.mm.engine.framework.security.exception.MMException;
 import com.mm.engine.framework.server.configure.EngineConfigure;
@@ -16,6 +17,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Administrator on 2015/11/16.
@@ -25,7 +27,7 @@ import java.util.Map;
  */
 public final class BeanHelper {
     private static final Logger log = LoggerFactory.getLogger(BeanHelper.class);
-    private final static Map<Class<?>,Object> frameBeans=new HashMap<Class<?>,Object>();
+    private final static Map<Class<?>,Object> frameBeans=new ConcurrentHashMap<>();
     private final static Map<Class<?>,Object> engineBeans=new HashMap<Class<?>,Object>();
     private final static Map<Class<?>,Object> userBeans=new HashMap<Class<?>,Object>();
 
@@ -69,7 +71,7 @@ public final class BeanHelper {
                         frameBeans.put(entry.getKey(), object);
                     }else{
                         Object object = newAopInstance(entry.getValue());
-                        frameBeans.put(entry.getKey(), object);
+                        Object old = frameBeans.putIfAbsent(entry.getKey(), object);
                     }
                 }
             }

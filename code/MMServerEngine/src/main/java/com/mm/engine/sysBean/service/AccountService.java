@@ -173,7 +173,7 @@ public class AccountService {
         switch (ServerInfo.ServerState.getStateByInt(serverInfo.getState())){
             case Ok:break;
             case Fixing:
-                
+
                 break;
         }
 

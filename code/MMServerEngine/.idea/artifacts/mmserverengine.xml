@@ -59,6 +59,7 @@
         <element id="library" level="project" name="Maven: org.apache.ant:ant-launcher:1.9.6" />
         <element id="library" level="project" name="Maven: org.apache.ant:ant:1.9.6" />
         <element id="library" level="project" name="Maven: org.ow2.asm:asm:5.2" />
+        <element id="library" level="project" name="Maven: com.googlecode.concurrentlinkedhashmap:concurrentlinkedhashmap-lru:1.4.2" />
       </element>
       <element id="module-output" name="mmserverengine" />
       <element id="directory" name="target">
