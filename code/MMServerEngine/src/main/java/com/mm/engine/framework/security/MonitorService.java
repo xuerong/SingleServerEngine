@@ -12,6 +12,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Administrator on 2015/12/30.
@@ -24,17 +27,20 @@ import java.util.Map;
  * 3 关闭服务器的时候，判断所有正常关闭的条件
  * 4 平时监控并提示服务器的状态，如负载，瓶颈，网络状态等
  */
-@Service(init = "init")
+@Service(init = "init",destroy = "destroy")
 public class MonitorService {
     private static final Logger log = LoggerFactory.getLogger(MonitorService.class);
 
     private Map<String,String> conditions = new HashMap<>();
+    // 来校验一下是不是monitorLog停了
+    private ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
     private EventService eventService;
     private DataService dataService;
 
     public void init(){
         eventService = BeanHelper.getServiceBean(EventService.class);
+        scheduledExecutorService.scheduleAtFixedRate(()->System.out.println("scheduledExecutorService"),0,10, TimeUnit.MINUTES);
     }
 
     @Updatable(isAsynchronous = true,cycle = 6000)
@@ -53,7 +59,7 @@ public class MonitorService {
         }
     }
     // 10分钟输出一下
-    @Updatable(isAsynchronous = true,cycle = 300000)
+    @Updatable(isAsynchronous = true,cycle = 600000)
     public void monitorLog(int interval){
         log.info("server is ok!");
         System.out.println("server is ok!");
@@ -85,5 +91,9 @@ public class MonitorService {
 
     public void stopWait(){
 
+    }
+
+    public void destroy(){
+        scheduledExecutorService.shutdownNow();
     }
 }

@@ -55,6 +55,7 @@ public class NettyHelper {
             this.handlerClass = handlerClass;
             this.entranceName = entranceName;
             this.latch = latch;
+            setName("NettyThread,port:"+port+",entranceName:"+entranceName);
         }
         @Override
         public void run() {
