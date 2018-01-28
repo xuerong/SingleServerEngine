@@ -10,11 +10,15 @@ import java.io.InputStream;
 public class HttpDecoder {
     public static byte[] decode(HttpServletRequest request) throws IOException {
 //data
+        System.out.println("opcode:"+request.getHeader("opcode"));
         String ignoredata = request.getHeader("IGNORE_DATA");// 当是空包的时候，如，logout,unity发不出来，故设此参数
         byte[] buffer = null;
         if(ignoredata==null || ignoredata.length()<=0){
             InputStream is = request.getInputStream();
             int bufSize = request.getContentLength();
+            if(bufSize == -1 && request.getHeader("contentLength") != null){
+                bufSize = Integer.parseInt(request.getHeader("contentLength"));
+            }
             if(bufSize < 0){
                 buffer = new byte[0];
 //                log.error("request getContentLength={}",bufSize);

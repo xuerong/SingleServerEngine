@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio for Mac
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "migong", "migong.csproj", "{BEBDD387-0BA1-B4BF-4CF7-4288551F7D1D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "migong.Plugins", "migong.Plugins.csproj", "{AECAB872-0053-030A-1AD0-ECD12EAE7DF8}"

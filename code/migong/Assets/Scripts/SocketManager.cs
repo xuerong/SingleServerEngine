@@ -129,44 +129,49 @@ public class SocketManager : MonoBehaviour {
 			yield return 0.1f;
 		}
 		Debug.Log ("loginInfo.DeviceId = "+loginInfo.DeviceId);
-//		loginInfo.DeviceId = "shdfshksshfkk";
-//		WWW getData = new WWW("http://10.1.6.254:8083",CSGetLoginInfo.SerializeToBytes(loginInfo),headers);
-//		yield return getData;
+        //		loginInfo.DeviceId = "shdfshksshfkk";
+        //		WWW getData = new WWW("http://10.1.6.254:8083",CSGetLoginInfo.SerializeToBytes(loginInfo),headers);
+        //		yield return getData;
 
-//		if(getData.error!= null){  
-//			Debug.Log (getData.error);
-//			WarnDialog.showWarnDialog ("get server info fail !",null);
-//		}else{ 
-//			SCGetLoginInfo ret = SCGetLoginInfo.Deserialize (getData.bytes);
-//			serverId = ret.ServerId;
-//			accountId = ret.AccountId;
-//			ip = ret.Ip;
-//			port = ret.Port;
-//
-//			PlayerPrefs.SetInt (SERVER_ID_KEY,serverId);
-//			PlayerPrefs.SetString (SERVER_IP_KEY,ip);
-//			PlayerPrefs.SetInt (SERVER_PORT_KEY,port);
-//			PlayerPrefs.SetString (ACCOUNT_KEY,accountId);
-//			PlayerPrefs.Save ();
-//
-//			ConnectServerAndLogin ();
-//
-//			Debug.Log ("accountId = " + ret.AccountId);  
-//			Debug.Log ("serverId = " + ret.ServerId);  
-//			Debug.Log ("ip = " + ret.Ip);  
-//			Debug.Log ("port = " + ret.Port);  
-//		}      
-//
-		//string url = "http://127.0.0.1:8083";
-//		string url = "http://10.1.6.254:8083";  
-//		string url = "http://111.230.144.111:8083";  // 腾讯云
-		string url = "http://47.95.219.97:8083";  // 阿里云
-		UnityWebRequest request = new UnityWebRequest(url, "POST");  
-		byte[] postBytes = CSGetLoginInfo.SerializeToBytes(loginInfo);  
+        //		if(getData.error!= null){  
+        //			Debug.Log (getData.error);
+        //			WarnDialog.showWarnDialog ("get server info fail !",null);
+        //		}else{ 
+        //			SCGetLoginInfo ret = SCGetLoginInfo.Deserialize (getData.bytes);
+        //			serverId = ret.ServerId;
+        //			accountId = ret.AccountId;
+        //			ip = ret.Ip;
+        //			port = ret.Port;
+        //
+        //			PlayerPrefs.SetInt (SERVER_ID_KEY,serverId);
+        //			PlayerPrefs.SetString (SERVER_IP_KEY,ip);
+        //			PlayerPrefs.SetInt (SERVER_PORT_KEY,port);
+        //			PlayerPrefs.SetString (ACCOUNT_KEY,accountId);
+        //			PlayerPrefs.Save ();
+        //
+        //			ConnectServerAndLogin ();
+        //
+        //			Debug.Log ("accountId = " + ret.AccountId);  
+        //			Debug.Log ("serverId = " + ret.ServerId);  
+        //			Debug.Log ("ip = " + ret.Ip);  
+        //			Debug.Log ("port = " + ret.Port);  
+        //		}      
+        //
+        string url = "http://127.0.0.1:8083";
+        //		string url = "http://10.1.6.254:8083";  
+        //		string url = "http://111.230.144.111:8083";  // 腾讯云
+        //string url = "http://47.95.219.97:8083";  // 阿里云
+        UnityWebRequest request = new UnityWebRequest(url, "POST");  
+		byte[] postBytes = CSGetLoginInfo.SerializeToBytes(loginInfo);
+        Debug.Log(postBytes.Length);
 		request.uploadHandler = (UploadHandler)new UploadHandlerRaw(postBytes);
 		request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();  
 		request.SetRequestHeader ("opcode",(int)AccountOpcode.CSGetLoginInfo+"");
-		yield return request.Send();  
+        //request.SetRequestHeader("Content-Length", ""+postBytes.Length);
+        // 防止系统给出的request.getContentLength() = -1
+        request.SetRequestHeader("contentLength", ""+ postBytes.Length);
+        yield return request.SendWebRequest();
+        Debug.Log(request.uploadedBytes);
 		if (request.responseCode == 200) {
 			SCGetLoginInfo ret = SCGetLoginInfo.Deserialize (request.downloadHandler.data);
 			serverId = ret.ServerId;

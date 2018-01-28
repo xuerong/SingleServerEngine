@@ -32,4 +32,4 @@ CREATE TABLE `serverInfo` (
 -- ----------------------------
 -- Records of serverinfo
 -- ----------------------------
-INSERT INTO `serverinfo` VALUES ('1', '10.1.6.254', '8003', '11', '3');
+INSERT INTO `serverinfo` VALUES ('1', '127.0.0.1', '8003', '0', '0','0');

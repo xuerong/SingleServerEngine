@@ -33,14 +33,14 @@ public class MonitorService {
 
     private Map<String,String> conditions = new HashMap<>();
     // 来校验一下是不是monitorLog停了
-    private ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+//    private ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
     private EventService eventService;
     private DataService dataService;
 
     public void init(){
         eventService = BeanHelper.getServiceBean(EventService.class);
-        scheduledExecutorService.scheduleAtFixedRate(()->System.out.println("scheduledExecutorService"),0,10, TimeUnit.MINUTES);
+//        scheduledExecutorService.scheduleAtFixedRate(()->System.out.println("scheduledExecutorService"),0,10, TimeUnit.MINUTES);
     }
 
     @Updatable(isAsynchronous = true,cycle = 6000)
@@ -62,7 +62,7 @@ public class MonitorService {
     @Updatable(isAsynchronous = true,cycle = 600000)
     public void monitorLog(int interval){
         log.info("server is ok!");
-        System.out.println("server is ok!");
+//        System.out.println("server is ok!");
 
     }
 
@@ -94,6 +94,6 @@ public class MonitorService {
     }
 
     public void destroy(){
-        scheduledExecutorService.shutdownNow();
+//        scheduledExecutorService.shutdownNow();
     }
 }
