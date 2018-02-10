@@ -280,8 +280,8 @@ MonoBehaviour:
     y: 0
     width: 277
     height: 596
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -326,18 +326,18 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Sprites/images
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 52
   m_LastFolders:
-  - Assets/Sprites/images
+  - Assets/Scripts
   m_LastFoldersGridSize: 52
   m_LastProjectPath: D:\workspace\code\SingleServerEngine\code\migong
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: b62c0000
-    m_LastClickedID: 11446
+    m_SelectedIDs: e02d0000
+    m_LastClickedID: 11744
     m_ExpandedIDs: 000000001007000052290000e62a0000222b00009e2c0000b62c0000742d0000e02d0000bc2e0000c22e0000ec2e0000c2390000c439000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -393,7 +393,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000462600004a64feff2c26000000000000d62600007c41000076400200f62c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -418,7 +418,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 224}
     m_GridSize: 52
   m_DirectoriesAreaWidth: 143
 --- !u!114 &14
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
+    m_SelectedIDs: 92090000
     m_LastClickedID: 0
     m_ExpandedIDs: 9efbffff00000000
     m_RenameOverlay:
@@ -577,7 +577,7 @@ MonoBehaviour:
     x: 204
     y: 92
     width: 367
-    height: 438
+    height: 401
   m_PersistentViewDataDictionary: {fileID: 0}
   m_MaximizeOnPlay: 0
   m_Gizmos: 0
@@ -608,24 +608,24 @@ MonoBehaviour:
       x: 0
       y: 17
       width: 367
-      height: 421
-    m_Scale: {x: 0.4111328, y: 0.4111328}
-    m_Translation: {x: 183.5, y: 210.5}
+      height: 384
+    m_Scale: {x: 0.375, y: 0.375}
+    m_Translation: {x: 183.5, y: 192}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -446.3278
+      x: -489.33334
       y: -512
-      width: 892.6556
+      width: 978.6667
       height: 1024
     m_MinimalGUI: 1
-  m_defaultScale: 0.4111328
+  m_defaultScale: 0.375
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
-  m_LastWindowPixelSize: {x: 367, y: 438}
+  m_LastWindowPixelSize: {x: 367, y: 401}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000100000100
