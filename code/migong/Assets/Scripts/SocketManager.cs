@@ -170,7 +170,7 @@ public class SocketManager : MonoBehaviour {
         //request.SetRequestHeader("Content-Length", ""+postBytes.Length);
         // 防止系统给出的request.getContentLength() = -1
         request.SetRequestHeader("contentLength", ""+ postBytes.Length);
-        yield return request.SendWebRequest();
+        yield return request.Send();//.SendWebRequest();
         Debug.Log(request.uploadedBytes);
 		if (request.responseCode == 200) {
 			SCGetLoginInfo ret = SCGetLoginInfo.Deserialize (request.downloadHandler.data);
@@ -211,7 +211,7 @@ public class SocketManager : MonoBehaviour {
 					_SendMessageAsyc (asyncObject.Opcode, asyncObject.Data, asyncObject.action);
 				}
 			}
-		} else {
+        } else {
 			if (needConnectOnce) {
 				needConnectOnce = false;
 				getServerListAndConnectServerAndLogin (); //
