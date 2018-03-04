@@ -230,7 +230,7 @@ public class Pacman : MonoBehaviour {
 			move.DirY= movePosiNorm.y;
 			move.PosX = transform.localPosition.x;
 			move.PosY = transform.localPosition.y;
-			Debug.Log ("send:"+move.PosX+","+move.PosY);
+			//Debug.Log ("send:"+move.PosX+","+move.PosY);
 			move.Speed = 10;
 			byte[] data = CSMove.SerializeToBytes (move);
 			SocketManager.SendMessageAsyc((int)MiGongOpcode.CSMove,data,delegate(int opcode, byte[] reData) {

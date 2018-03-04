@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.sharesdk.demo"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="1.1"
+    android:versionName="1.1" >
 
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,6 +16,9 @@
     <!-- 蓝牙分享所需的权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    
+    <!-- 谷歌商店购买权限-->
+    <uses-permission android:name="com.android.vending.BILLING" />
     
     <uses-sdk
         android:minSdkVersion="8"

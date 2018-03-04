@@ -1613,7 +1613,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 640, y: 960}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2540,6 +2540,7 @@ GameObject:
   m_Component:
   - component: {fileID: 381732543}
   - component: {fileID: 381732544}
+  - component: {fileID: 381732545}
   m_Layer: 0
   m_Name: uiShop
   m_TagString: Untagged
@@ -2596,6 +2597,17 @@ MonoBehaviour:
   - {fileID: 1596582509}
   - {fileID: 391301811}
   showButton: {fileID: 627248089}
+--- !u!114 &381732545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381732542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1012d58f0899141ebaca1dafc6bc49b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &386121245
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ using com.protocol;
 
 public class ShopItem: MonoBehaviour {
 	public Shop shop;
+    public Purchaser purchaser;
 
 	public ShopType type; // 0道具，1套装，3礼包：决定钱的类型
 	public int id; // id决定图片
@@ -34,6 +35,8 @@ public class ShopItem: MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        //
+        this.purchaser = shop.gameObject.GetComponent<Purchaser>();
 		// 图片
 		if (type == ShopType.Item) {
 			image.sprite = getSprite(id);
@@ -103,6 +106,10 @@ public class ShopItem: MonoBehaviour {
 				SocketManager.SendMessageAsyc((int)MiGongOpcode.CSMoneyBuyBefore,CSMoneyBuyBefore.SerializeToBytes(moneyBuyBefore),delegate(int opcode, byte[] data) {
 					SCMoneyBuyBefore ret = SCMoneyBuyBefore.Deserialize(data);
 					if(ret.IsOk>0){
+                        // 支付
+                        purchaser.BuyProductID("s_2");
+                        //purchaser.get
+                        // 请求发货
 						CSMoneyBuy moneyBuy = new CSMoneyBuy();
 						moneyBuy.Id = id;
 						moneyBuy.Num = int.Parse(showNum.text);

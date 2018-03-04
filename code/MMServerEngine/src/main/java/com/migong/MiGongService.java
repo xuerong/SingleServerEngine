@@ -26,6 +26,7 @@ import com.mm.engine.framework.data.tx.Tx;
 import com.mm.engine.framework.net.code.RetPacket;
 import com.mm.engine.framework.net.code.RetPacketImpl;
 import com.mm.engine.framework.security.LocalizationMessage;
+import com.mm.engine.framework.security.exception.MMErrorCode;
 import com.mm.engine.framework.security.exception.ToClientException;
 import com.mm.engine.framework.server.IdService;
 import com.mm.engine.framework.server.SysConstantDefine;
@@ -1154,7 +1155,7 @@ public class MiGongService {
         // 操作
         MultiMiGongRoom room = userRooms.get(session.getAccountId());
         if(room == null){
-            throw new ToClientException(LocalizationMessage.getText("roomNotExist"));
+            throw new ToClientException(MMErrorCode.RoomNotExist,LocalizationMessage.getText("roomNotExist"));
         }
         room.userMove(session.getAccountId(),move.getPosX(),move.getPosY(),move.getDirX(),move.getDirY(),speed);
 
@@ -1173,7 +1174,7 @@ public class MiGongService {
 
         MultiMiGongRoom room = userRooms.get(session.getAccountId());
         if(room == null){
-            throw new ToClientException(LocalizationMessage.getText("roomNotExist"));
+            throw new ToClientException(MMErrorCode.RoomNotExist,LocalizationMessage.getText("roomNotExist"));
         }
         room.eatBean(session.getAccountId(),pos);
 //        RoomUser roomUser = room.getRoomUser(session.getAccountId());
@@ -1194,7 +1195,7 @@ public class MiGongService {
         // todo 校验pos是否正确，并校验玩家情况
         MultiMiGongRoom room = userRooms.get(session.getAccountId());
         if(room == null){
-            throw new ToClientException(LocalizationMessage.getText("roomNotExist"));
+            throw new ToClientException(MMErrorCode.RoomNotExist,LocalizationMessage.getText("roomNotExist"));
         }
         room.userArrived(session.getAccountId());
 

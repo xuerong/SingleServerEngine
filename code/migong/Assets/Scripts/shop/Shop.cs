@@ -144,7 +144,7 @@ public class Shop : MonoBehaviour {
 
 		itemGo.Clear ();
 
-		Object shopItemObj = Resources.Load ("shopItem2");
+		Object shopItemObj = Resources.Load ("shopItem3");
 		RectTransform contentTrans = contentGo.GetComponent<RectTransform> ();
 		contentTrans.sizeDelta = new Vector2 (0,140 * Params.peckTables.Count);
 

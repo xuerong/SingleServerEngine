@@ -57,6 +57,8 @@ public class Message {
 		systemLanguage = Application.systemLanguage.ToString();
 //		systemLanguage = "ddd";
 
+        //WarnDialog.showWarnDialog(systemLanguage);
+
 		TextAsset ta = Resources.Load<TextAsset> ("Message/"+systemLanguage);
 		if (ta == null) {
 			ta = Resources.Load<TextAsset> ("Message/English"); // 没配置的国家用英文

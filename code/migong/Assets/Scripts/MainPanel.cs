@@ -430,8 +430,8 @@ public class MainPanel : MonoBehaviour {
 
 			RectTransform canvas = GameObject.Find ("main/ui/uiLevel/Canvas").GetComponent<RectTransform>();
 			float scale = canvas.rect.width/Params.uiWidth;
-			float be = (canvas.rect.width-(buRec.rect.width*scale * 3))/4;
-			float step = be+buRec.rect.width*scale;
+			float be = (canvas.rect.width-(buRec.rect.width * 3))/4;
+			float step = be+buRec.rect.width;
 //			Debug.LogError(canvas.rect.width+","+Screen.width+","+buRec.rect.width+","+step+","+be);
 
 			RectTransform contentTrans = content.GetComponent<RectTransform> ();

@@ -370,6 +370,14 @@ public class SocketManager : MonoBehaviour {
 					buf.Clear();
 					isReadHead = false;
 					length = 0;
+                    if(opcode == (int)MiGongOpcode.SCSendEatBean){
+                        SCSendEatBean sc = SCSendEatBean.Deserialize(data);
+                        Debug.Log("opcode:MiGongOpcode.SCEatBean"+sc.Beans.Count);
+                        foreach (PBEatBeanInfo bean in sc.Beans)
+                        {
+                            Debug.Log(""+bean.UserId+","+bean.BeanPos); // 谁吃的
+                        }
+                    }
 					if(dic.ContainsKey(id)){
 						if(opcode == (int)BaseOpcode.SCException){
 							SCException exception = SCException.Deserialize(data);
@@ -381,7 +389,9 @@ public class SocketManager : MonoBehaviour {
 								o.Opcode = opcode;
 								o.Data = data;
 								o.action = action;
-								invokeQueue.Enqueue(o);
+                                lock(invokeQueue){
+                                    invokeQueue.Enqueue(o);
+                                }
 							}
 						}
 						dic.Remove(id);
@@ -411,7 +421,9 @@ public class SocketManager : MonoBehaviour {
 								o.Opcode = opcode;
 								o.Data = data;
 								o.action = action;
-								invokeQueue.Enqueue(o);
+                                lock (invokeQueue){
+                                    invokeQueue.Enqueue(o);
+                                }
 							}
 //							Debug.Log("opcode = "+opcode+",");
 						}
@@ -435,6 +447,10 @@ public class SocketManager : MonoBehaviour {
 	}
 
 	private static void resoveSCException(SCException exception){
+        // 有些exception不弹窗，不报警
+        if(exception.ErrCode == ErrorCode.RoomNotExist){
+            return;
+        }
 		Debug.LogError("error:errorCode = "+exception.ErrCode+",errorMsg = "+exception.ErrMsg+",csOpcode:"+exception.CsOpcode+",scOpcode:"+exception.ScOpcode);
 		WarnDialog.showWarnDialog (/*Message.getText("dataError")+*/exception.ErrMsg,delegate() {
 			//				ConnectServer();
