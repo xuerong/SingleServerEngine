@@ -8783,12 +8783,16 @@ namespace Example
                     case 24:
                         instance.Score = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 4 LengthDelimited
-                    case 34:
+                    // Field 4 Varint
+                    case 32:
+                        instance.PvpTime = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 5 LengthDelimited
+                    case 42:
                         instance.Title = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
-                    // Field 5 Varint
-                    case 40:
+                    // Field 6 Varint
+                    case 48:
                         instance.Rank = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -8841,12 +8845,16 @@ namespace Example
                     case 24:
                         instance.Score = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 4 LengthDelimited
-                    case 34:
+                    // Field 4 Varint
+                    case 32:
+                        instance.PvpTime = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 5 LengthDelimited
+                    case 42:
                         instance.Title = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
-                    // Field 5 Varint
-                    case 40:
+                    // Field 6 Varint
+                    case 48:
                         instance.Rank = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -8898,12 +8906,16 @@ namespace Example
                     case 24:
                         instance.Score = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 4 LengthDelimited
-                    case 34:
+                    // Field 4 Varint
+                    case 32:
+                        instance.PvpTime = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        continue;
+                    // Field 5 LengthDelimited
+                    case 42:
                         instance.Title = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
-                    // Field 5 Varint
-                    case 40:
+                    // Field 6 Varint
+                    case 48:
                         instance.Rank = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -8941,13 +8953,16 @@ namespace Example
             // Key for field: 3, Varint
             stream.WriteByte(24);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Score);
+            // Key for field: 4, Varint
+            stream.WriteByte(32);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.PvpTime);
             if (instance.Title == null)
                 throw new ArgumentNullException("Title", "Required by proto specification.");
-            // Key for field: 4, LengthDelimited
-            stream.WriteByte(34);
+            // Key for field: 5, LengthDelimited
+            stream.WriteByte(42);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Title));
-            // Key for field: 5, Varint
-            stream.WriteByte(40);
+            // Key for field: 6, Varint
+            stream.WriteByte(48);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Rank);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }

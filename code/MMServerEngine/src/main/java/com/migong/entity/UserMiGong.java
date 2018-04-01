@@ -20,6 +20,7 @@ public class UserMiGong implements Serializable {
     private int pass; // 推图关卡
     private int starCount; // 推图星数
     private int vip; // vip等级
+    private int pvpTimes; // 对战次数
     private int ladderScore; // 天梯分数
     private int energy; // 精力
     private long energyUpdateTime; // 精力刷新时间
@@ -72,6 +73,14 @@ public class UserMiGong implements Serializable {
 
     public void setVip(int vip) {
         this.vip = vip;
+    }
+
+    public int getPvpTimes() {
+        return pvpTimes;
+    }
+
+    public void setPvpTimes(int pvpTimes) {
+        this.pvpTimes = pvpTimes;
     }
 
     public int getLadderScore() {

@@ -486,6 +486,9 @@ namespace Example
         public int Score { get; set; }
 
         /// <summary> 天梯积分</summary>
+        public int PvpTime { get; set; }
+
+        /// <summary> 天梯次数</summary>
         public string Title { get; set; }
 
         /// <summary> 称谓</summary>

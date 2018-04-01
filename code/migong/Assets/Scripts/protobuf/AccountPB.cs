@@ -27,6 +27,9 @@ namespace Example
 
         public string Localization { get; set; }
 
+        /// <summary> 本地化，语言</summary>
+        public string ClientVersion { get; set; }
+
     }
 
     public partial class SCLogin
@@ -35,6 +38,33 @@ namespace Example
 
         public long ServerTime { get; set; }
 
+    }
+
+    /// <summary> 玩家信息</summary>
+    public partial class CSUserInfo
+    {
+    }
+
+    public partial class SCUserInfo
+    {
+        public string Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Icon { get; set; }
+
+    }
+
+    public partial class CSChangeUserInfo
+    {
+        public string Name { get; set; }
+
+        public string Icon { get; set; }
+
+    }
+
+    public partial class SCChangeUserInfo
+    {
     }
 
     public partial class CSLogout

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-proto_file_name=AccountPB.proto
-start_index=10001
+proto_file_name=MiGongPB.proto
+start_index=12001
 
 dir=csharpfile\
 

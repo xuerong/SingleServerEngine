@@ -26,6 +26,7 @@ CREATE TABLE `userMiGong` (
   `pass` int(11) NOT NULL DEFAULT '0',
   `starCount` int(11) NOT NULL DEFAULT '0',
   `vip` int(11) NOT NULL DEFAULT '0',
+  `pvpTimes` int(11) NOT NULL DEFAULT '0',
   `ladderScore` int(11) NOT NULL DEFAULT '0',
   `energy` int(11) NOT NULL DEFAULT '0',
   `energyUpdateTime` bigint(20) NOT NULL DEFAULT '0',

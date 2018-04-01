@@ -632,6 +632,9 @@ public class MainPanel : MonoBehaviour {
                 textGo = up.transform.Find("name").gameObject;
                 text = textGo.GetComponent<Text>();
                 text.text = info.Name + "";
+                textGo = up.transform.Find("pvpTimes").gameObject;
+                text = textGo.GetComponent<Text>();
+                text.text = info.PvpTime + "";
                 textGo = up.transform.Find("score").gameObject;
                 text = textGo.GetComponent<Text>();
                 text.text = info.Score + "";

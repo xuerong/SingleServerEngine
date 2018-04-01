@@ -2,15 +2,19 @@
 using System;
 namespace com.protocol
 {
-	public enum csharpfile\AccountOpcode
+	public enum AccountOpcode
 	{
 		CSLogin = 10001,
 		SCLogin = 10002,
-		CSLogout = 10003,
-		SCLogout = 10004,
-		SCBeTakePlace = 10005,
-		CSGetLoginInfo = 10006,
-		SCGetLoginInfo = 10007,
+		CSUserInfo = 10003,
+		SCUserInfo = 10004,
+		CSChangeUserInfo = 10005,
+		SCChangeUserInfo = 10006,
+		CSLogout = 10007,
+		SCLogout = 10008,
+		SCBeTakePlace = 10009,
+		CSGetLoginInfo = 10010,
+		SCGetLoginInfo = 10011,
 
 	}
 }

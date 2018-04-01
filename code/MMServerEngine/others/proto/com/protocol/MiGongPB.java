@@ -32201,9 +32201,27 @@ public final class MiGongPB {
      */
     int getScore();
 
-    // required string title = 4;
+    // required int32 pvpTime = 4;
     /**
-     * <code>required string title = 4;</code>
+     * <code>required int32 pvpTime = 4;</code>
+     *
+     * <pre>
+     * 天梯次数
+     * </pre>
+     */
+    boolean hasPvpTime();
+    /**
+     * <code>required int32 pvpTime = 4;</code>
+     *
+     * <pre>
+     * 天梯次数
+     * </pre>
+     */
+    int getPvpTime();
+
+    // required string title = 5;
+    /**
+     * <code>required string title = 5;</code>
      *
      * <pre>
      * 称谓
@@ -32211,7 +32229,7 @@ public final class MiGongPB {
      */
     boolean hasTitle();
     /**
-     * <code>required string title = 4;</code>
+     * <code>required string title = 5;</code>
      *
      * <pre>
      * 称谓
@@ -32219,7 +32237,7 @@ public final class MiGongPB {
      */
     java.lang.String getTitle();
     /**
-     * <code>required string title = 4;</code>
+     * <code>required string title = 5;</code>
      *
      * <pre>
      * 称谓
@@ -32228,9 +32246,9 @@ public final class MiGongPB {
     com.google.protobuf.ByteString
         getTitleBytes();
 
-    // required int32 rank = 5;
+    // required int32 rank = 6;
     /**
-     * <code>required int32 rank = 5;</code>
+     * <code>required int32 rank = 6;</code>
      *
      * <pre>
      * 排名
@@ -32238,7 +32256,7 @@ public final class MiGongPB {
      */
     boolean hasRank();
     /**
-     * <code>required int32 rank = 5;</code>
+     * <code>required int32 rank = 6;</code>
      *
      * <pre>
      * 排名
@@ -32312,13 +32330,18 @@ public final class MiGongPB {
               score_ = input.readInt32();
               break;
             }
-            case 34: {
+            case 32: {
               bitField0_ |= 0x00000008;
+              pvpTime_ = input.readInt32();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
               title_ = input.readBytes();
               break;
             }
-            case 40: {
-              bitField0_ |= 0x00000010;
+            case 48: {
+              bitField0_ |= 0x00000020;
               rank_ = input.readInt32();
               break;
             }
@@ -32496,21 +32519,45 @@ public final class MiGongPB {
       return score_;
     }
 
-    // required string title = 4;
-    public static final int TITLE_FIELD_NUMBER = 4;
+    // required int32 pvpTime = 4;
+    public static final int PVPTIME_FIELD_NUMBER = 4;
+    private int pvpTime_;
+    /**
+     * <code>required int32 pvpTime = 4;</code>
+     *
+     * <pre>
+     * 天梯次数
+     * </pre>
+     */
+    public boolean hasPvpTime() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 pvpTime = 4;</code>
+     *
+     * <pre>
+     * 天梯次数
+     * </pre>
+     */
+    public int getPvpTime() {
+      return pvpTime_;
+    }
+
+    // required string title = 5;
+    public static final int TITLE_FIELD_NUMBER = 5;
     private java.lang.Object title_;
     /**
-     * <code>required string title = 4;</code>
+     * <code>required string title = 5;</code>
      *
      * <pre>
      * 称谓
      * </pre>
      */
     public boolean hasTitle() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required string title = 4;</code>
+     * <code>required string title = 5;</code>
      *
      * <pre>
      * 称谓
@@ -32531,7 +32578,7 @@ public final class MiGongPB {
       }
     }
     /**
-     * <code>required string title = 4;</code>
+     * <code>required string title = 5;</code>
      *
      * <pre>
      * 称谓
@@ -32551,21 +32598,21 @@ public final class MiGongPB {
       }
     }
 
-    // required int32 rank = 5;
-    public static final int RANK_FIELD_NUMBER = 5;
+    // required int32 rank = 6;
+    public static final int RANK_FIELD_NUMBER = 6;
     private int rank_;
     /**
-     * <code>required int32 rank = 5;</code>
+     * <code>required int32 rank = 6;</code>
      *
      * <pre>
      * 排名
      * </pre>
      */
     public boolean hasRank() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required int32 rank = 5;</code>
+     * <code>required int32 rank = 6;</code>
      *
      * <pre>
      * 排名
@@ -32579,6 +32626,7 @@ public final class MiGongPB {
       userId_ = "";
       name_ = "";
       score_ = 0;
+      pvpTime_ = 0;
       title_ = "";
       rank_ = 0;
     }
@@ -32596,6 +32644,10 @@ public final class MiGongPB {
         return false;
       }
       if (!hasScore()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPvpTime()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -32624,10 +32676,13 @@ public final class MiGongPB {
         output.writeInt32(3, score_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getTitleBytes());
+        output.writeInt32(4, pvpTime_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, rank_);
+        output.writeBytes(5, getTitleBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, rank_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -32652,11 +32707,15 @@ public final class MiGongPB {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getTitleBytes());
+          .computeInt32Size(4, pvpTime_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, rank_);
+          .computeBytesSize(5, getTitleBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, rank_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -32780,10 +32839,12 @@ public final class MiGongPB {
         bitField0_ = (bitField0_ & ~0x00000002);
         score_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        title_ = "";
+        pvpTime_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        rank_ = 0;
+        title_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
+        rank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -32827,9 +32888,13 @@ public final class MiGongPB {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.title_ = title_;
+        result.pvpTime_ = pvpTime_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
+        }
+        result.title_ = title_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
         }
         result.rank_ = rank_;
         result.bitField0_ = to_bitField0_;
@@ -32861,8 +32926,11 @@ public final class MiGongPB {
         if (other.hasScore()) {
           setScore(other.getScore());
         }
+        if (other.hasPvpTime()) {
+          setPvpTime(other.getPvpTime());
+        }
         if (other.hasTitle()) {
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000010;
           title_ = other.title_;
           onChanged();
         }
@@ -32883,6 +32951,10 @@ public final class MiGongPB {
           return false;
         }
         if (!hasScore()) {
+          
+          return false;
+        }
+        if (!hasPvpTime()) {
           
           return false;
         }
@@ -33161,20 +33233,69 @@ public final class MiGongPB {
         return this;
       }
 
-      // required string title = 4;
+      // required int32 pvpTime = 4;
+      private int pvpTime_ ;
+      /**
+       * <code>required int32 pvpTime = 4;</code>
+       *
+       * <pre>
+       * 天梯次数
+       * </pre>
+       */
+      public boolean hasPvpTime() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int32 pvpTime = 4;</code>
+       *
+       * <pre>
+       * 天梯次数
+       * </pre>
+       */
+      public int getPvpTime() {
+        return pvpTime_;
+      }
+      /**
+       * <code>required int32 pvpTime = 4;</code>
+       *
+       * <pre>
+       * 天梯次数
+       * </pre>
+       */
+      public Builder setPvpTime(int value) {
+        bitField0_ |= 0x00000008;
+        pvpTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 pvpTime = 4;</code>
+       *
+       * <pre>
+       * 天梯次数
+       * </pre>
+       */
+      public Builder clearPvpTime() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        pvpTime_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required string title = 5;
       private java.lang.Object title_ = "";
       /**
-       * <code>required string title = 4;</code>
+       * <code>required string title = 5;</code>
        *
        * <pre>
        * 称谓
        * </pre>
        */
       public boolean hasTitle() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required string title = 4;</code>
+       * <code>required string title = 5;</code>
        *
        * <pre>
        * 称谓
@@ -33192,7 +33313,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>required string title = 4;</code>
+       * <code>required string title = 5;</code>
        *
        * <pre>
        * 称谓
@@ -33212,7 +33333,7 @@ public final class MiGongPB {
         }
       }
       /**
-       * <code>required string title = 4;</code>
+       * <code>required string title = 5;</code>
        *
        * <pre>
        * 称谓
@@ -33223,26 +33344,26 @@ public final class MiGongPB {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000010;
         title_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string title = 4;</code>
+       * <code>required string title = 5;</code>
        *
        * <pre>
        * 称谓
        * </pre>
        */
       public Builder clearTitle() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         title_ = getDefaultInstance().getTitle();
         onChanged();
         return this;
       }
       /**
-       * <code>required string title = 4;</code>
+       * <code>required string title = 5;</code>
        *
        * <pre>
        * 称谓
@@ -33253,26 +33374,26 @@ public final class MiGongPB {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000010;
         title_ = value;
         onChanged();
         return this;
       }
 
-      // required int32 rank = 5;
+      // required int32 rank = 6;
       private int rank_ ;
       /**
-       * <code>required int32 rank = 5;</code>
+       * <code>required int32 rank = 6;</code>
        *
        * <pre>
        * 排名
        * </pre>
        */
       public boolean hasRank() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required int32 rank = 5;</code>
+       * <code>required int32 rank = 6;</code>
        *
        * <pre>
        * 排名
@@ -33282,27 +33403,27 @@ public final class MiGongPB {
         return rank_;
       }
       /**
-       * <code>required int32 rank = 5;</code>
+       * <code>required int32 rank = 6;</code>
        *
        * <pre>
        * 排名
        * </pre>
        */
       public Builder setRank(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         rank_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 rank = 5;</code>
+       * <code>required int32 rank = 6;</code>
        *
        * <pre>
        * 排名
        * </pre>
        */
       public Builder clearRank() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         rank_ = 0;
         onChanged();
         return this;
@@ -53983,45 +54104,46 @@ public final class MiGongPB {
       "s\030\002 \002(\005\"\021\n\017CSGetOnlineInfo\"c\n\017SCGetOnlin" +
       "eInfo\022\r\n\005score\030\001 \002(\005\022\r\n\005title\030\002 \002(\t\022\014\n\004r" +
       "ank\030\003 \002(\005\022$\n\trankInfos\030\004 \003(\0132\021.PBOnlineR",
-      "ankInfo\"\\\n\020PBOnlineRankInfo\022\016\n\006userId\030\001 " +
-      "\002(\t\022\014\n\004name\030\002 \002(\t\022\r\n\005score\030\003 \002(\005\022\r\n\005titl" +
-      "e\030\004 \002(\t\022\014\n\004rank\030\005 \002(\005\"\014\n\nCSMatching\"\014\n\nS" +
-      "CMatching\"\022\n\020CSCancelMatching\"\022\n\020SCCance" +
-      "lMatching\"\227\001\n\021SCMatchingSuccess\022\013\n\003map\030\001" +
-      " \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005speed\030\003 \002(\005\022\r\n\005sta" +
-      "rt\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022 \n\notherInfos\030\006 \003(" +
-      "\0132\014.PBOtherInfo\022\032\n\005beans\030\007 \003(\0132\013.PBBeanI" +
-      "nfo\"K\n\013PBOtherInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010us" +
-      "erName\030\002 \002(\t\022\r\n\005start\030\003 \002(\005\022\013\n\003end\030\004 \002(\005",
-      "\"\020\n\016SCMatchingFail\"\t\n\007SCBegin\"O\n\006CSMove\022" +
-      "\014\n\004posX\030\001 \002(\002\022\014\n\004posY\030\002 \002(\002\022\014\n\004dirX\030\003 \002(" +
-      "\002\022\014\n\004dirY\030\004 \002(\002\022\r\n\005speed\030\005 \002(\005\"\010\n\006SCMove" +
-      "\"4\n\nSCUserMove\022&\n\ruserMoveInfos\030\001 \003(\0132\017." +
-      "PBUserMoveInfo\"v\n\016PBUserMoveInfo\022\016\n\006user" +
-      "Id\030\001 \002(\t\022\014\n\004posX\030\002 \002(\002\022\014\n\004posY\030\003 \002(\002\022\014\n\004" +
-      "dirX\030\004 \002(\002\022\014\n\004dirY\030\005 \002(\002\022\r\n\005speed\030\006 \002(\005\022" +
-      "\r\n\005frame\030\007 \002(\005\"\034\n\tCSEatBean\022\017\n\007beanPos\030\001" +
-      " \002(\005\"\013\n\tSCEatBean\".\n\rSCSendEatBean\022\035\n\005be" +
-      "ans\030\001 \003(\0132\016.PBEatBeanInfo\"0\n\rPBEatBeanIn",
-      "fo\022\016\n\006userId\030\001 \002(\t\022\017\n\007beanPos\030\002 \002(\005\"\030\n\tC" +
-      "SArrived\022\013\n\003pos\030\001 \002(\005\"\013\n\tSCArrived\"\037\n\rSC" +
-      "UserArrived\022\016\n\006userId\030\001 \002(\t\"F\n\nSCGameOve" +
-      "r\022\020\n\010overType\030\001 \002(\005\022&\n\tuserInfos\030\002 \003(\0132\023" +
-      ".PBGameOverUserInfo\"d\n\022PBGameOverUserInf" +
-      "o\022\016\n\006userId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\014\n\004r" +
-      "ank\030\003 \002(\005\022\r\n\005score\030\004 \002(\005\022\017\n\007arrived\030\005 \002(" +
-      "\005\"\r\n\013CSRoomHeart\"\r\n\013SCRoomHeart\"#\n\022CSSen" +
-      "dWalkingRoute\022\r\n\005route\030\001 \003(\005\"\024\n\022SCSendWa" +
-      "lkingRoute\"\031\n\010CSCommon\022\r\n\005route\030\001 \003(\t\"\031\n",
-      "\010SCCommon\022\r\n\005route\030\001 \003(\t\"2\n\tCSGoldBuy\022\014\n" +
-      "\004type\030\001 \002(\005\022\n\n\002id\030\002 \002(\005\022\013\n\003num\030\003 \002(\005\"*\n\t" +
-      "SCGoldBuy\022\017\n\007success\030\001 \002(\005\022\014\n\004gold\030\002 \002(\005" +
-      "\"+\n\020CSMoneyBuyBefore\022\n\n\002id\030\001 \002(\005\022\013\n\003num\030" +
-      "\002 \002(\005\"0\n\020SCMoneyBuyBefore\022\014\n\004isOk\030\001 \002(\005\022" +
-      "\016\n\006reason\030\002 \001(\t\"4\n\nCSMoneyBuy\022\n\n\002id\030\001 \002(" +
-      "\005\022\013\n\003num\030\002 \002(\005\022\r\n\005token\030\003 \001(\t\"+\n\nSCMoney" +
-      "Buy\022\017\n\007success\030\001 \002(\005\022\014\n\004gold\030\002 \002(\005\"\027\n\004Te" +
-      "st\022\017\n\007success\030\001 \002(\005B\016\n\014com.protocol"
+      "ankInfo\"m\n\020PBOnlineRankInfo\022\016\n\006userId\030\001 " +
+      "\002(\t\022\014\n\004name\030\002 \002(\t\022\r\n\005score\030\003 \002(\005\022\017\n\007pvpT" +
+      "ime\030\004 \002(\005\022\r\n\005title\030\005 \002(\t\022\014\n\004rank\030\006 \002(\005\"\014" +
+      "\n\nCSMatching\"\014\n\nSCMatching\"\022\n\020CSCancelMa" +
+      "tching\"\022\n\020SCCancelMatching\"\227\001\n\021SCMatchin" +
+      "gSuccess\022\013\n\003map\030\001 \003(\005\022\014\n\004time\030\002 \002(\005\022\r\n\005s" +
+      "peed\030\003 \002(\005\022\r\n\005start\030\004 \002(\005\022\013\n\003end\030\005 \002(\005\022 " +
+      "\n\notherInfos\030\006 \003(\0132\014.PBOtherInfo\022\032\n\005bean" +
+      "s\030\007 \003(\0132\013.PBBeanInfo\"K\n\013PBOtherInfo\022\016\n\006u" +
+      "serId\030\001 \002(\t\022\020\n\010userName\030\002 \002(\t\022\r\n\005start\030\003",
+      " \002(\005\022\013\n\003end\030\004 \002(\005\"\020\n\016SCMatchingFail\"\t\n\007S" +
+      "CBegin\"O\n\006CSMove\022\014\n\004posX\030\001 \002(\002\022\014\n\004posY\030\002" +
+      " \002(\002\022\014\n\004dirX\030\003 \002(\002\022\014\n\004dirY\030\004 \002(\002\022\r\n\005spee" +
+      "d\030\005 \002(\005\"\010\n\006SCMove\"4\n\nSCUserMove\022&\n\ruserM" +
+      "oveInfos\030\001 \003(\0132\017.PBUserMoveInfo\"v\n\016PBUse" +
+      "rMoveInfo\022\016\n\006userId\030\001 \002(\t\022\014\n\004posX\030\002 \002(\002\022" +
+      "\014\n\004posY\030\003 \002(\002\022\014\n\004dirX\030\004 \002(\002\022\014\n\004dirY\030\005 \002(" +
+      "\002\022\r\n\005speed\030\006 \002(\005\022\r\n\005frame\030\007 \002(\005\"\034\n\tCSEat" +
+      "Bean\022\017\n\007beanPos\030\001 \002(\005\"\013\n\tSCEatBean\".\n\rSC" +
+      "SendEatBean\022\035\n\005beans\030\001 \003(\0132\016.PBEatBeanIn",
+      "fo\"0\n\rPBEatBeanInfo\022\016\n\006userId\030\001 \002(\t\022\017\n\007b" +
+      "eanPos\030\002 \002(\005\"\030\n\tCSArrived\022\013\n\003pos\030\001 \002(\005\"\013" +
+      "\n\tSCArrived\"\037\n\rSCUserArrived\022\016\n\006userId\030\001" +
+      " \002(\t\"F\n\nSCGameOver\022\020\n\010overType\030\001 \002(\005\022&\n\t" +
+      "userInfos\030\002 \003(\0132\023.PBGameOverUserInfo\"d\n\022" +
+      "PBGameOverUserInfo\022\016\n\006userId\030\001 \002(\t\022\020\n\010us" +
+      "erName\030\002 \002(\t\022\014\n\004rank\030\003 \002(\005\022\r\n\005score\030\004 \002(" +
+      "\005\022\017\n\007arrived\030\005 \002(\005\"\r\n\013CSRoomHeart\"\r\n\013SCR" +
+      "oomHeart\"#\n\022CSSendWalkingRoute\022\r\n\005route\030" +
+      "\001 \003(\005\"\024\n\022SCSendWalkingRoute\"\031\n\010CSCommon\022",
+      "\r\n\005route\030\001 \003(\t\"\031\n\010SCCommon\022\r\n\005route\030\001 \003(" +
+      "\t\"2\n\tCSGoldBuy\022\014\n\004type\030\001 \002(\005\022\n\n\002id\030\002 \002(\005" +
+      "\022\013\n\003num\030\003 \002(\005\"*\n\tSCGoldBuy\022\017\n\007success\030\001 " +
+      "\002(\005\022\014\n\004gold\030\002 \002(\005\"+\n\020CSMoneyBuyBefore\022\n\n" +
+      "\002id\030\001 \002(\005\022\013\n\003num\030\002 \002(\005\"0\n\020SCMoneyBuyBefo" +
+      "re\022\014\n\004isOk\030\001 \002(\005\022\016\n\006reason\030\002 \001(\t\"4\n\nCSMo" +
+      "neyBuy\022\n\n\002id\030\001 \002(\005\022\013\n\003num\030\002 \002(\005\022\r\n\005token" +
+      "\030\003 \001(\t\"+\n\nSCMoneyBuy\022\017\n\007success\030\001 \002(\005\022\014\n" +
+      "\004gold\030\002 \002(\005\"\027\n\004Test\022\017\n\007success\030\001 \002(\005B\016\n\014" +
+      "com.protocol"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -54261,7 +54383,7 @@ public final class MiGongPB {
           internal_static_PBOnlineRankInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PBOnlineRankInfo_descriptor,
-              new java.lang.String[] { "UserId", "Name", "Score", "Title", "Rank", });
+              new java.lang.String[] { "UserId", "Name", "Score", "PvpTime", "Title", "Rank", });
           internal_static_CSMatching_descriptor =
             getDescriptor().getMessageTypes().get(39);
           internal_static_CSMatching_fieldAccessorTable = new

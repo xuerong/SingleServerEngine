@@ -258,8 +258,9 @@ message PBOnlineRankInfo
 	required string userId	= 1;// 玩家账号
 	required string name	= 2;// 玩家名
 	required int32 score	= 3;// 天梯积分
-	required string title	= 4;// 称谓
-	required int32 rank	= 5; // 排名
+	required int32 pvpTime  = 4;// 天梯次数
+	required string title	= 5;// 称谓
+	required int32 rank	= 6; // 排名
 }
 // 匹配
 message CSMatching

@@ -1097,6 +1097,7 @@ public class MiGongService {
             LadderTitle lt = LadderTitle.getLadderByScore(um.getLadderScore());
             rankInfo.setTitle(lt.getTitle());
             rankInfo.setRank(rank++);
+            rankInfo.setPvpTime(um.getPvpTimes());
             rankInfo.setScore(um.getLadderScore());
             rankInfo.setName(dataService.selectObject(Account.class,"id=?",um.getUserId()).getName()); // // TODO:  后面要把玩家名字也存储在UserMiGong中，修改通过事件
             rankInfo.setUserId(um.getUserId());
@@ -1359,6 +1360,7 @@ public class MiGongService {
             if(roomUser.isSuccess()){
                 UserMiGong userMiGong = dataService.selectObject(UserMiGong.class,"userId=?",roomUser.getSession().getAccountId());
                 userMiGong.setLadderScore(userMiGong.getLadderScore() + MultiMiGongRoom.USER_COUNT - roomUser.getRoomRank());
+                userMiGong.setPvpTimes(userMiGong.getPvpTimes()+1);
                 dataService.update(userMiGong);
                 // 修改排名
                 miGongRank.putLadder(userMiGong);

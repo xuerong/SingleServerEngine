@@ -7,11 +7,27 @@ message CSLogin
 	required string url      			= 2;
 	required string ip       			= 3;
 	required string localization       			= 4; // 本地化，语言
+	optional string clientVersion		= 5; // 客户端版本
 }
 message SCLogin
 {
 	required string sessionId		= 1;
 	required int64 serverTime			= 2; // 服务器时间，用它在客户端计算出时间差
+}
+// 玩家信息
+message CSUserInfo {
+}
+message SCUserInfo{
+	required string id				= 1;
+	required string name			= 2;
+	required string icon			= 3;
+}
+message CSChangeUserInfo{
+	optional string name			= 1;
+	optional string icon			= 2;
+}
+message SCChangeUserInfo{
+
 }
 message CSLogout
 {

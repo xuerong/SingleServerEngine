@@ -62,7 +62,7 @@ public class MapCreate : MonoBehaviour{
 	public Dictionary<int,int> skillItemCount = new Dictionary<int, int>();
 	public Dictionary<ItemType,Text> skillItemText = new Dictionary<ItemType, Text>();
 
-	int x = 0,y = 0;
+    float x = 0,y = 0;
 	static float myScale = 1f;
 
 	public float nodeX = 0,nodeY = 0;
@@ -131,7 +131,8 @@ public class MapCreate : MonoBehaviour{
             transform.parent.parent.Find("Canvas/skills").gameObject.SetActive(false);
             transform.parent.parent.Find("Canvas/score").gameObject.SetActive(false);
             // time居中
-            transform.parent.parent.Find("Canvas/time").gameObject.SetActive(false);
+            Vector3 old = transform.parent.parent.Find("Canvas/time").localPosition;
+            transform.parent.parent.Find("Canvas/time").localPosition = new Vector3(0,old.y,old.z);
             //
             foreach(KeyValuePair<string,Pacman> kv in pacmanMap){
                 int x = kv.Value.inX;
@@ -406,6 +407,7 @@ public class MapCreate : MonoBehaviour{
 		//		transform.localScale = new Vector3 (0.1f,0.1f,1); // 这样为啥不行
 		tr=map.Length;											//行数和列数
 		td=map[0].Length;
+
 		mapRect = new Rect (x, y, td * nodeX, tr * nodeY);
 
 		Object down = Resources.Load ("down");
@@ -414,7 +416,10 @@ public class MapCreate : MonoBehaviour{
 //		Object downShadow = Resources.Load ("downShadow");
 //		Object rightShadow = Resources.Load ("rightShadow");
 
-        Vector3 center = new Vector3(x + tr / 2f * nodeX, y + (td - 2) / 2f * nodeY, 10);
+        Vector3 pos = new Vector3(-x - tr * nodeX / 2f, -y - (td - 2) * nodeY / 2f, transform.localPosition.z);
+        transform.parent.transform.localPosition = pos;
+
+        Vector3 center = new Vector3(x + tr / 2f * nodeX, (td - 2) * nodeY / 2f, 10);
         Transform t = transform.parent.Find("migong_bg");
         t.localPosition = center;
         t.localScale = new Vector3(nodeX * (td - 0.4f) / 5.76f, nodeY * (tr - 0.4f) / 5.76f, 0);
@@ -499,15 +504,28 @@ public class MapCreate : MonoBehaviour{
 		}
 		// 修改相机位置
 		GameObject camera = transform.parent.parent.Find("mapCamera").gameObject;
-		camera.transform.position = new Vector3(nodeX*(tr)/2,nodeY * (td)/2,camera.transform.position.z);
+
+        //camera.transform.position = new Vector3(nodeX * (tr) / 2f, nodeY * (td) / 2f, camera.transform.position.z);
 		// 修改相机大小
 		ca = camera.GetComponent<Camera>();
 		defaultOrthographicSize = ca.orthographicSize;
 //		ca.orthographicSize = defaultOrthographicSize * Mathf.Max (tr, td) / mapWidth;
 		float hwRate = (float)Screen.height/Screen.width;
-		ca.orthographicSize = defaultOrthographicSize * Mathf.Max (tr, td) /1.2f * hwRate;
+        float newRate = Mathf.Max(tr, td) / 1.2f * hwRate;
+        ca.orthographicSize = defaultOrthographicSize * newRate;
+        if (Mode != MapMode.Online)
+        {
+            camera.transform.position = new Vector3(0, -Screen.height / 960f * ca.orthographicSize / 20f, camera.transform.position.z);
 
-		//
+        }
+        //Vector3 old =  transform.parent.transform.localPosition;
+
+
+        //transform.localPosition = pos;
+        //transform.parent.Find("doors").localPosition = pos
+        //transform.parent.Find("pacman").localPosition = pos;
+
+        //
 //		float defaultRate = 
 //		float hwRate = (float)Screen.height/Screen.width;
 

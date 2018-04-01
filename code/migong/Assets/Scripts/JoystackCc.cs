@@ -41,6 +41,8 @@ public class JoystackCc : MonoBehaviour {
 
 	private Pacman pacman;
 
+    public MapCreate mapCreate;
+
 	void Awake()
 
 	{
@@ -58,12 +60,21 @@ public class JoystackCc : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
+        mapCreate = transform.parent.parent.parent.Find("content/map").gameObject.GetComponent<MapCreate>();
+        if (mapCreate.Mode == MapMode.Online)
+        {
+            Vector3 old = transform.parent.localPosition;
+            transform.parent.localPosition = new Vector3(old.x,old.y - 20,old.z);
+        }
 
 		Origin = transform.localPosition;//设置原点
 
 		mTrans = transform;
 
-		pacman = transform.parent.parent.parent.Find("content/pacman").gameObject.GetComponent<Pacman>();;
+		pacman = transform.parent.parent.parent.Find("content/pacman").gameObject.GetComponent<Pacman>();
+
+
+
 	}
 
 
