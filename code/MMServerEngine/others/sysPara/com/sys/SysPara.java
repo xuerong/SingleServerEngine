@@ -18,10 +18,10 @@ public final class SysPara{
 			put("addEnergyInterval","360");
 			put("unlimitedSpeed","4");
 			put("unlimitedEnergy","5");
-			put("ladderSize","10-10");
+			put("ladderSize","10-20");
 			put("ladderSpeed","2-4");
 			put("ladderTime","120-400");
-			put("ladderStar1","40-80");
+			put("ladderStar1","40-70");
 			put("openUnlimited","3");
 			put("openPvp","3");
 			put("enemyDefaultSpeed","2");

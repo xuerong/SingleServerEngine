@@ -1,6 +1,8 @@
 package com.mm.engine.sysBean.service;
 
+import com.mm.engine.framework.control.request.RequestService;
 import com.mm.engine.framework.data.entity.account.MessageSender;
+import com.mm.engine.framework.tool.helper.BeanHelper;
 import com.mm.engine.sysBean.entrance.NettyPBPacket;
 import io.netty.channel.Channel;
 import org.slf4j.Logger;
@@ -28,9 +30,13 @@ public class NettyPBMessageSender implements MessageSender{
         }
     };
     private Channel channel;
+    private String accountId;
+    private RequestService requestService;
 
-    public NettyPBMessageSender(Channel channel){
+    public NettyPBMessageSender(Channel channel,String accountId){
         this.channel = channel;
+        requestService = BeanHelper.getServiceBean(RequestService.class);
+        this.accountId = accountId;
     }
 
     @Override
@@ -48,10 +54,13 @@ public class NettyPBMessageSender implements MessageSender{
     }
     @Override
     public void sendMessageSync(int opcode,byte[] data){
-        NettyPBPacket nettyPBPacket = new NettyPBPacket();
-        nettyPBPacket.setId(-1); // 没有的时候为-1
-        nettyPBPacket.setData(data);
-        nettyPBPacket.setOpcode(opcode);
-        channel.writeAndFlush(nettyPBPacket);
+        synchronized (this) {
+            NettyPBPacket nettyPBPacket = new NettyPBPacket();
+            nettyPBPacket.setId(-1); // 没有的时候为-1
+            nettyPBPacket.setData(data);
+            nettyPBPacket.setOpcode(opcode);
+            channel.writeAndFlush(nettyPBPacket);
+            log.info("send info,cmd = {}|accountId={}",requestService.getOpcodeNames().get(opcode),accountId);
+        }
     }
 }

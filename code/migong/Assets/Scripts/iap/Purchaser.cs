@@ -4,20 +4,39 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Security;
 
+public delegate void InitCallBack(bool success);
+public delegate void BuyCallBack(string id,bool success,string token);
+
+public class ProductInfo{
+    public int id;
+    public string storeId;
+    public decimal price;
+    public string priceString;
+    public bool available;
+}
+
 // Placing the Purchaser class in the CompleteProject namespace allows it to interact with ScoreManager, 
 // one of the existing Survival Shooter scripts.
 // Deriving the Purchaser class from IStoreListener enables it to receive messages from Unity Purchasing.
 //脚本需在调用购买方法之前初始化
-public class Purchaser : MonoBehaviour, IStoreListener
+public class Purchaser : IStoreListener
 
-{  
-    
+{
+    private static Purchaser _ins;
+
+    private InitCallBack initCallBack;
+    public BuyCallBack buyCallBack;
+
+    public Dictionary<int, ProductInfo> productInfos;
+    public decimal oneDollarToPrice; // 1美元对应的价格
+
+    public string currency = "$";
 
     //定义商品
-    private const string product_1 = "s_1";
-    private const string product_2 = "s_2";
-    private const string product_3 = "s_3";
-    private const string product_6 = "s_6";
+    //private const string product_1 = "s_1";
+    //private const string product_2 = "s_2";
+    //private const string product_3 = "s_3";
+    //private const string product_6 = "s_6";
 
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
@@ -31,43 +50,61 @@ public class Purchaser : MonoBehaviour, IStoreListener
     private static string kProductNameGooglePlaySubscription = "com.unity3d.subscription.original";
 
 
-    void Start()
-    {
-        // If we haven't set up the Unity Purchasing reference
-        if (m_StoreController == null)
-        {
-            // Begin to configure our connection to Purchasing
-            InitializePurchasing();
+    //void Start()
+    //{
+    //    // If we haven't set up the Unity Purchasing reference
+    //    if (m_StoreController == null)
+    //    {
+    //        // Begin to configure our connection to Purchasing
+    //        InitializePurchasing();
+    //    }
+    //}
+    private Purchaser(){}
+    public static Purchaser ins(){
+        if(_ins == null){
+            _ins = new Purchaser();
         }
+        return _ins;
     }
-    public void InitializePurchasing()
+    public void InitializePurchasing(InitCallBack initCallBack,Dictionary<int,string> products)
     {
         // If we have already connected to Purchasing ...
         if (IsInitialized())
         {
             // ... we are done here.
+            initCallBack.Invoke(true);
             return;
         }
+        this.initCallBack = initCallBack;
         // Create a builder, first passing in a suite of Unity provided stores.
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
         //添加商品ID和类型 对应定义的商品ID
-        builder.AddProduct(product_1, ProductType.Consumable, new IDs
+
+        foreach(KeyValuePair<int,string> kv in products){
+            builder.AddProduct(kv.Key.ToString(), ProductType.Consumable, new IDs
             {
-            {"s_1", GooglePlay.Name }
+                {kv.Value, GooglePlay.Name }
             });
-        builder.AddProduct(product_2, ProductType.Consumable, new IDs
-            {
-            {"s_2", GooglePlay.Name }
-            });
-        builder.AddProduct(product_3, ProductType.Consumable, new IDs
-            {
-            {"s_3", GooglePlay.Name }
-            });
-        builder.AddProduct(product_6, ProductType.Consumable, new IDs
-            {
-            {"s_6", GooglePlay.Name }
-            });
+        }
+
+
+        //builder.AddProduct(product_1, ProductType.Consumable, new IDs
+        //    {
+        //    {"s_1", GooglePlay.Name }
+        //    });
+        //builder.AddProduct(product_2, ProductType.Consumable, new IDs
+        //    {
+        //    {"s_2", GooglePlay.Name }
+        //    });
+        //builder.AddProduct(product_3, ProductType.Consumable, new IDs
+        //    {
+        //    {"s_3", GooglePlay.Name }
+        //    });
+        //builder.AddProduct(product_6, ProductType.Consumable, new IDs
+            //{
+            //{"s_6", GooglePlay.Name }
+            //});
 
 
         // Kick off the remainder of the set-up with an asynchrounous call, passing the configuration 
@@ -130,6 +167,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
             {
                 // ... report the product look-up failure situation  
                 Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
+                WarnDialog.showWarnDialog("BuyProductID FAIL. Not initialized.");
             }
         }
         // Otherwise ...
@@ -190,10 +228,23 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
         // Overall Purchasing system, configured with products for this application.
         m_StoreController = controller;
-
+        productInfos = new Dictionary<int, ProductInfo>();
 
         //把产品的价格显示在界面 
         foreach(Product product in controller.products.all){
+            ProductInfo productInfo = new ProductInfo();
+            productInfo.id = int.Parse(product.definition.id);
+            productInfo.storeId = product.definition.storeSpecificId;
+            productInfo.price = product.metadata.localizedPrice;
+            productInfo.priceString = product.metadata.localizedPriceString;
+            productInfo.available = product.availableToPurchase;
+            productInfos.Add(productInfo.id, productInfo);
+
+            if(productInfo.id == 1){
+                oneDollarToPrice = product.metadata.localizedPrice;
+
+                currency = product.metadata.localizedPriceString.Replace(product.metadata.localizedPrice.ToString(),"|").Split('|')[0];
+            }
             //product.
             //string log = "product.availableToPurchase:"+product.availableToPurchase+","+product.definition.
             Debug.Log("product.availableToPurchase:" + product.availableToPurchase);
@@ -213,12 +264,15 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
         // Store specific subsystem, for accessing device-specific store features.
         m_StoreExtensionProvider = extensions;
+
+        initCallBack.Invoke(true);
     }
 
 
     public void OnInitializeFailed(InitializationFailureReason error)
     {
-        WarnDialog.showWarnDialog("OnInitializeFailed InitializationFailureReason:" + error);
+        initCallBack.Invoke(false);
+        //WarnDialog.showWarnDialog("OnInitializeFailed InitializationFailureReason:" + error);
         // Purchasing set-up has not succeeded. Check error for reason. Consider sharing this reason with the user.
         Debug.Log("OnInitializeFailed InitializationFailureReason:" + error);
     }
@@ -256,6 +310,9 @@ public class Purchaser : MonoBehaviour, IStoreListener
         var validator = new CrossPlatformValidator(GooglePlayTangle.Data(),
             AppleTangle.Data(), Application.identifier);
 
+        string googleToken = null;
+        bool isGoogle = false;
+
         try
         {
             // On Google Play, result has a single product ID.
@@ -278,6 +335,8 @@ public class Purchaser : MonoBehaviour, IStoreListener
                     Debug.Log(google.transactionID);
                     Debug.Log(google.purchaseState);
                     Debug.Log(google.purchaseToken);
+                    isGoogle = true;
+                    googleToken = google.purchaseToken;
                 }
 
                 AppleInAppPurchaseReceipt apple = productReceipt as AppleInAppPurchaseReceipt;
@@ -297,9 +356,11 @@ public class Purchaser : MonoBehaviour, IStoreListener
         }
         #endif
 
-        if (validPurchase)
+        if (validPurchase && isGoogle)
         {
-            // Unlock the appropriate content here.
+            buyCallBack.Invoke(e.purchasedProduct.definition.id, true, googleToken);
+        }else{
+            buyCallBack.Invoke(e.purchasedProduct.definition.id, false, null);
         }
 
         //if (Application.platform == RuntimePlatform.Android){

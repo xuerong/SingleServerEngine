@@ -175,7 +175,7 @@ public class MainPanel : MonoBehaviour {
 						award.Index = index;
 						SocketManager.SendMessageAsyc((int)MiGongOpcode.CSUnlimitedAward, CSUnlimitedAward.SerializeToBytes(award), (opcode2, data2) => {
 							SCUnlimitedAward retAward = SCUnlimitedAward.Deserialize(data2);
-							unlimitedAward.image.sprite = SpriteCache.getSprite("itemImage/item1");
+							unlimitedAward.image.sprite = SpriteCache.getSprite("box/open");
 							unlimitedAward.state = 2;
 							// 显示
 							WarnDialog.reward(Message.getText("gainReward"),Message.getText("ok"),table.Gold,table.Reward,null);
@@ -439,7 +439,8 @@ public class MainPanel : MonoBehaviour {
 			Debug.Log("sizeHeight:"+sizeHeight);
 			contentTrans.sizeDelta = new Vector2 (0,sizeHeight);
 			int allStarCount = 0;
-			for (int i = 0; i < count; i++) {
+            Object lockPic = Resources.Load("lock");
+			for (int i = 0; i < count; i++) { // todo 这个地方要分段显示
 				int x = i%3;
 				int y = i/3;
 				up = Instantiate(levelItem) as GameObject;
@@ -453,14 +454,34 @@ public class MainPanel : MonoBehaviour {
 				ButtonIndex buttonIndex = up.GetComponent<ButtonIndex> ();
 				buttonIndex.pass = i+1;
 				buttonIndex.star = 0;
+                buttonIndex.isOpen = true;
 				if(level.StarInLevel.Count>i){
 					buttonIndex.star = level.StarInLevel[i];
 					allStarCount += buttonIndex.star;
-				}
-				b1.onClick.AddListener (delegate() {
-					Sound.playSound(SoundType.Click);
-					OnClick(buttonIndex);
-				});
+                }else if(level.StarInLevel.Count < i){
+                    GameObject lockOb = Instantiate(lockPic) as GameObject;
+                    //lockOb.transform.localPosition = new Vector3(0,0, 0);
+                    //lockOb.transform.localScale = new Vector3(1, 1, 1);
+                    lockOb.transform.SetParent(up.transform, false);
+                    buttonIndex.isOpen = false;
+                }
+                if (level.StarInLevel.Count >= i)
+                {
+                    b1.onClick.AddListener(delegate ()
+                    {
+                        Sound.playSound(SoundType.Click);
+                        OnClick(buttonIndex);
+                    });
+                }
+                else
+                {
+                    b1.onClick.AddListener(delegate ()
+                    {
+                        Sound.playSound(SoundType.Click);
+                        WarnDialog.showWarnDialog(Message.getText("passNotOpen"));
+                    });
+                }
+
 
 //				GameObject textGo = up.transform.Find ("Text").gameObject;
 //				Text text = textGo.GetComponent<Text> ();
@@ -513,17 +534,17 @@ public class MainPanel : MonoBehaviour {
 				// 是否还没点亮
 				if (ret.TodayStar < unlimitedAwardSegs[i].star)
 				{
-					unlimitedAwardSegs[i].image.sprite = SpriteCache.getSprite("levelImage/offSprite");
+					unlimitedAwardSegs[i].image.sprite = SpriteCache.getSprite("box/unreach");
 					unlimitedAwardSegs[i].state = 0;
 				}
 				else if (isLight != null && int.Parse(isLight[i]) > 0)
 				{
-					unlimitedAwardSegs[i].image.sprite = SpriteCache.getSprite("itemImage/item1");
+					unlimitedAwardSegs[i].image.sprite = SpriteCache.getSprite("box/open");
 					unlimitedAwardSegs[i].state = 2;
 				}
 				else
 				{
-					unlimitedAwardSegs[i].image.sprite = SpriteCache.getSprite("levelImage/lightSprite");
+					unlimitedAwardSegs[i].image.sprite = SpriteCache.getSprite("box/reach");
 					unlimitedAwardSegs[i].state = 1;
 				}
 			}
@@ -531,7 +552,7 @@ public class MainPanel : MonoBehaviour {
 
 			// 列表
 			int count = ret.UnlimitedRankInfo.Count;
-			float dis = 20f;
+			float dis = 0f;
 
 			GameObject up = Instantiate(button) as GameObject;
 			RectTransform buRec = up.GetComponent<RectTransform> ();
@@ -547,9 +568,19 @@ public class MainPanel : MonoBehaviour {
 				up.transform.localScale = new Vector3 (1,1,1);
 				up.transform.SetParent(content.transform,false);
 				// 生成各个玩家的排名item
-				GameObject textGo = up.transform.Find ("Text").gameObject;
-				Text text = textGo.GetComponent<Text> ();
-				text.text = Message.getText("unlimitRankItem",info.Rank,info.UserName,info.Star);
+				GameObject textGo = up.transform.Find ("rank").gameObject;
+                Text text = textGo.GetComponent<Text> ();
+                text.text = info.Rank+"";
+				//text.text = Message.getText("unlimitRankItem",info.Rank,info.UserName,info.Star);
+                textGo = up.transform.Find("name").gameObject;
+                text = textGo.GetComponent<Text>();
+                text.text = info.UserName + "";
+                textGo = up.transform.Find("pass").gameObject;
+                text = textGo.GetComponent<Text>();
+                text.text = info.Pass + "";
+                textGo = up.transform.Find("star").gameObject;
+                text = textGo.GetComponent<Text>();
+                text.text = info.Star + "";
 			}
 		});
 	}
@@ -563,7 +594,7 @@ public class MainPanel : MonoBehaviour {
 			Text titleText = GameObject.Find ("main/ui/uiOnline/Canvas/title").GetComponent<Text>();
 			Text rankText = GameObject.Find ("main/ui/uiOnline/Canvas/rank").GetComponent<Text>();
 
-			scoreText.text = Message.getText("onlineScorev",ret.Score);
+			scoreText.text = Message.getText("onlineScore",ret.Score);
 			titleText.text = Message.getText("onlineTitle",ret.Title);
 			rankText.text = Message.getText("onlineRank",ret.Rank);
 
@@ -574,11 +605,11 @@ public class MainPanel : MonoBehaviour {
 			}
 
 			//获取按钮游戏对象
-			Object button = Resources.Load ("UnlimitItem");
+            Object button = Resources.Load ("OnlineItem");
 
 			// 列表
 			int count = ret.RankInfos.Count;
-			float dis = 20f;
+			float dis = 0f;
 
 			GameObject up = Instantiate(button) as GameObject;
 			RectTransform buRec = up.GetComponent<RectTransform> ();
@@ -593,10 +624,20 @@ public class MainPanel : MonoBehaviour {
 				up.transform.localPosition = new Vector3 (0, -((buRec.rect.height+dis)*i+dis),0);
 				up.transform.localScale = new Vector3 (1,1,1);
 				up.transform.SetParent(content.transform,false);
-				// 生成各个玩家的排名item
-				GameObject textGo = up.transform.Find ("Text").gameObject;
-				Text text = textGo.GetComponent<Text> ();
-				text.text = Message.getText("onlineRankItem",info.Rank,info.Name,info.Score,info.Title);
+                // 生成各个玩家的排名item
+                GameObject textGo = up.transform.Find("rank").gameObject;
+                Text text = textGo.GetComponent<Text>();
+                text.text = info.Rank + "";
+                //text.text = Message.getText("unlimitRankItem",info.Rank,info.UserName,info.Star);
+                textGo = up.transform.Find("name").gameObject;
+                text = textGo.GetComponent<Text>();
+                text.text = info.Name + "";
+                textGo = up.transform.Find("score").gameObject;
+                text = textGo.GetComponent<Text>();
+                text.text = info.Score + "";
+                textGo = up.transform.Find("ladder").gameObject;
+                text = textGo.GetComponent<Text>();
+                text.text = info.Title + "";
 			}
 
 		});

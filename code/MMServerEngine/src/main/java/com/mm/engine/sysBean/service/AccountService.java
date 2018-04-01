@@ -106,7 +106,7 @@ public class AccountService {
         Session session = loginSegment.getSession();
         session.setLocalization(csLoginMain.getLocalization());
         LocalizationMessage.setThreadLocalization(session.getLocalization());
-        MessageSender messageSender = new NettyPBMessageSender(ctx.channel());
+        MessageSender messageSender = new NettyPBMessageSender(ctx.channel(),accountId);
         session.setMessageSender(messageSender);
         final ChannelHandlerContext _ctx = ctx;
         session.setConnectionClose(new ConnectionClose() {

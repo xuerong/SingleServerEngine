@@ -88,4 +88,8 @@ public class RequestService {
         }
         return ret;
     }
+
+    public Map<Integer, String> getOpcodeNames() {
+        return opcodeNames;
+    }
 }

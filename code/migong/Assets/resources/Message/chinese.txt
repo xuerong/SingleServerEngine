@@ -78,3 +78,12 @@ star=星
 
 gainReward=获得奖励
 dailyReward=每日奖励
+
+pass=关卡
+rank=排名
+player=玩家
+ladderScore=积分
+ladderTitle=天梯
+gameTimes=总场数
+
+passNotOpen=关卡还未开启

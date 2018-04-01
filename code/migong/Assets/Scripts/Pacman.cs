@@ -48,7 +48,33 @@ public class Pacman : MonoBehaviour {
 
 	public int mulBean = 1;
 
+    private float thisScale;
+
+    private Quaternion rq;
+    private Quaternion lq;
+    private Quaternion uq;
+    private Quaternion dq;
+
 	void Start () {
+        // 方向
+        rq = lq = new Quaternion(0,0,0,0);
+        uq = new Quaternion(0, 0, 0, 0);
+        uq.eulerAngles = new Vector3(0,0,90);
+        dq = new Quaternion(0, 0, 0, 0);
+        dq.eulerAngles = new Vector3(0, 0, -90);
+        // 动画用哪个
+        animator = GetComponent<Animator>();
+        if(inX <2 && inY < 2){ // blue
+            animator.runtimeAnimatorController = Instantiate(Resources.Load("pacman_ani/pacman_blue_ani")) as RuntimeAnimatorController;
+        }else if(inX <2 && inY > 2){ // green
+            animator.runtimeAnimatorController = Instantiate(Resources.Load("pacman_ani/pacman_green_ani")) as RuntimeAnimatorController;
+        }else if(inX >2 && inY > 2){ // red
+            animator.runtimeAnimatorController = Instantiate(Resources.Load("pacman_ani/pacman_red_ani")) as RuntimeAnimatorController;
+        }else if(inX >2 && inY < 2){ // yellow
+            animator.runtimeAnimatorController = Instantiate(Resources.Load("pacman_ani/pacman_yellow_ani")) as RuntimeAnimatorController;
+        }
+        //
+
 		pacmanColliders = mapCreate.pacmanColliders;
 		if (userId == null || userId.Length == 0) {
 			this.userId = SocketManager.accountId;
@@ -60,10 +86,11 @@ public class Pacman : MonoBehaviour {
 
 		dest = transform.localPosition;
 		transform.localScale = transform.localScale * 1f;
+        thisScale = transform.localScale.x;
 
 		c = GetComponent<CircleCollider2D> ();
 
-		animator = GetComponent<Animator> ();
+		
 		digidbody = GetComponent<Rigidbody2D> ();
 
 		// 联网模式
@@ -76,11 +103,11 @@ public class Pacman : MonoBehaviour {
 		}
 		pacmanColliders.Add (c);
 
-		mapCreate.addScoreShow (userId);
+		//mapCreate.addScoreShow (userId);
 
 		mapCreate.setEndEffect (outX, outY);
 
-		Debug.Log (inX+","+inY+","+outX+","+outY+ "  ");
+        Debug.Log(inX + "," + inY + "," + outX + "," + outY );
 	}
 
 	public void addSpeed(int delta){
@@ -156,8 +183,8 @@ public class Pacman : MonoBehaviour {
             dest = (Vector2)transform.position + new Vector2(step*MovePosiNorm.x,step*MovePosiNorm.y);
 			// Animation Parameters
 			Vector2 dirVec = dest - (Vector2)transform.position;
-			animator.SetFloat("DirX", dirVec.x);
-			animator.SetFloat("DirY", dirVec.y);
+			//animator.SetFloat("DirX", dirVec.x);
+			//animator.SetFloat("DirY", dirVec.y);
 
 			// 记录行踪:自己的人才记录
 			if (userId == SocketManager.accountId) {
@@ -220,6 +247,8 @@ public class Pacman : MonoBehaviour {
 		if (lastMovePosiNorm == movePosiNorm) {
 			return;
 		}
+        changePos(movePosiNorm);
+        // 位置
 		if (mapCreate.Mode == MapMode.Level || mapCreate.Mode == MapMode.Unlimited) {
 			this.MovePosiNorm = movePosiNorm;
 		} else {
@@ -239,6 +268,31 @@ public class Pacman : MonoBehaviour {
 		}
 		lastMovePosiNorm = movePosiNorm;
 	}
+
+    public void changePos(Vector3 movePosiNorm){
+        //动画
+        if (movePosiNorm.x > 0)
+        { // right
+            transform.localScale = new Vector3(thisScale, thisScale, thisScale);
+            transform.localRotation = rq;
+        }
+        else if (movePosiNorm.x < 0) //left
+        {
+            transform.localScale = new Vector3(-thisScale, thisScale, thisScale);
+            transform.localRotation = lq;
+        }
+        else if (movePosiNorm.y > 0) //up
+        {
+            transform.localScale = new Vector3(thisScale, thisScale, thisScale);
+            transform.localRotation = uq;
+        }
+        else if (movePosiNorm.y < 0) //down
+        {
+            transform.localScale = new Vector3(thisScale, thisScale, thisScale);
+            transform.localRotation = dq;
+        }
+    }
+
 	// 暫時不用
 	public void setDir(int dir,int mode){
 		if (mode == 1) {

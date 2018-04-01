@@ -321,6 +321,41 @@ public class SocketManager : MonoBehaviour {
 			}
 		}
 	}
+    /**
+     * if (length < 12)
+                        {
+                            continue;
+                        }
+
+                        if (!isReadHead)
+                        {
+                            size = buf.ReadInt();
+                            opcode = buf.ReadInt();
+                            id = buf.ReadInt();
+                            Debug.Log("size:" + size + ",opcode:" + opcode + ",id:" + id);
+                            isReadHead = true;
+                            if (size > length - 12)
+                            {
+                                continue;
+                            }
+                        }
+                        if (size > length - 12)
+                        {
+                            continue;
+                        }
+                        Debug.Log(length + "------" + size);
+                        if (length - size > 12)
+                        {
+                            Debug.Log("warn:--------------------------" + length + "------" + size);
+                        }
+                        byte[] data = new byte[size];
+                        buf.ReadBytes(data, 0, size);
+                        //buf.Clear();
+                        buf.DiscardReadBytes();
+                        isReadHead = false;
+                        length = buf.ReadableBytes();
+                        doReceivePacket(opcode, id, data);
+     */ 
 
 	/// <summary>
 	/// 接受网络数据
@@ -350,89 +385,47 @@ public class SocketManager : MonoBehaviour {
 				int receiveLength = clientSocket.Receive(_tmpReceiveBuff);
 				if (receiveLength > 0)
 				{
-					buf.WriteBytes(_tmpReceiveBuff);
+                    buf.WriteBytes(_tmpReceiveBuff,0,receiveLength);
 					length += receiveLength;
-					if(length < 12){
-						continue;
-					}
-
-					if(!isReadHead){
-						size = buf.ReadInt();
-						opcode = buf.ReadInt();
-						id = buf.ReadInt();
-//						Debug.Log("size:"+size+",opcode:"+opcode+",id:"+id);
-						isReadHead = true;
-						if(size > length-12){
-							continue;
-						}
-					}
-					if(size > length-12){
-						continue;
-					}
-
-					byte[] data = new byte[size];
-					buf.ReadBytes(data,0,size);
-					buf.Clear();
-					isReadHead = false;
-					length = 0;
-                    if(opcode == (int)MiGongOpcode.SCSendEatBean){
-                        SCSendEatBean sc = SCSendEatBean.Deserialize(data);
-                        Debug.Log("opcode:MiGongOpcode.SCEatBean"+sc.Beans.Count);
-                        foreach (PBEatBeanInfo bean in sc.Beans)
-                        {
-                            Debug.Log(""+bean.UserId+","+bean.BeanPos); // 谁吃的
+                    while(true){
+                        if (length < 12){
+                            break;
                         }
+
+                        if (!isReadHead){
+                            size = buf.ReadInt();
+                            opcode = buf.ReadInt();
+                            id = buf.ReadInt();
+                            isReadHead = true;
+                            if (size > length - 12){
+                                break;
+                            }
+                        }
+                        if (size > length - 12){
+                            break;
+                        }
+                        Debug.Log("size:" + size + ",opcode:" + opcode + ",id:" + id+","+length + "------" + size);
+                        if (length - size > 12){
+                            Debug.Log("warn:--------------------------" + length + "------" + size);
+                        }
+                        byte[] data = new byte[size];
+                        buf.ReadBytes(data, 0, size);
+                        doReceivePacket(opcode, id, data);
+                        // 下一个做准备
+                        if (length - size - 12 != buf.ReadableBytes()){
+                            Debug.LogError("hai xu yao yan jiu yan jiu a ! buf.ReadableBytes() = "+buf.ReadableBytes());
+                        }
+
+                        if(size == length - 12){
+                            buf.Clear();
+                            length = 0;
+                        }else{
+                            buf.DiscardReadBytes();
+                            //length = length - 12 - size;//buf.ReadableBytes();
+                            length = buf.ReadableBytes();
+                        }
+                        isReadHead = false;
                     }
-					if(dic.ContainsKey(id)){
-						if(opcode == (int)BaseOpcode.SCException){
-							SCException exception = SCException.Deserialize(data);
-							resoveSCException(exception);
-						}else{
-							ActionForReceive action = dic[id];
-							if(action!=null){
-								AsyncObject o = new AsyncObject();
-								o.Opcode = opcode;
-								o.Data = data;
-								o.action = action;
-                                lock(invokeQueue){
-                                    invokeQueue.Enqueue(o);
-                                }
-							}
-						}
-						dic.Remove(id);
-					}else if(syncObjects.ContainsKey(id)){
-						if(opcode == (int)BaseOpcode.SCException){
-							SCException exception = SCException.Deserialize(data);
-							resoveSCException(exception);
-						}else{
-							
-						}
-						SyncObject syncObject = syncObjects[id];
-						Monitor.Enter(syncObject);
-						syncObject.Data = data;
-						syncObject.Opcode = opcode;
-						syncObjects.Remove(id);
-						Monitor.Pulse(syncObject);
-						Monitor.Exit(syncObject);
-					}else{
-						// 推送消息
-						if(opcode == (int)BaseOpcode.SCException){
-							SCException exception = SCException.Deserialize(data);
-							resoveSCException(exception);
-						}else{
-							if(serverSendData.ContainsKey(opcode)){
-								ActionForReceive action = serverSendData[opcode];
-								AsyncObject o = new AsyncObject();
-								o.Opcode = opcode;
-								o.Data = data;
-								o.action = action;
-                                lock (invokeQueue){
-                                    invokeQueue.Enqueue(o);
-                                }
-							}
-//							Debug.Log("opcode = "+opcode+",");
-						}
-					}
 				}
 			}
 			catch (System.Exception e)
@@ -450,6 +443,86 @@ public class SocketManager : MonoBehaviour {
 			}
 		}
 	}
+
+    private static void doReceivePacket(int opcode,int id,byte[] data){
+        if (opcode == (int)MiGongOpcode.SCSendEatBean)
+        {
+            SCSendEatBean sc = SCSendEatBean.Deserialize(data);
+            Debug.Log("opcode:MiGongOpcode.SCEatBean" + sc.Beans.Count);
+            foreach (PBEatBeanInfo bean in sc.Beans)
+            {
+                Debug.Log("" + bean.UserId + "," + bean.BeanPos); // 谁吃的
+            }
+        }
+        if (dic.ContainsKey(id))
+        {
+            if (opcode == (int)BaseOpcode.SCException)
+            {
+                SCException exception = SCException.Deserialize(data);
+                resoveSCException(exception);
+            }
+            else
+            {
+                ActionForReceive action = dic[id];
+                if (action != null)
+                {
+                    AsyncObject o = new AsyncObject();
+                    o.Opcode = opcode;
+                    o.Data = data;
+                    o.action = action;
+                    lock (invokeQueue)
+                    {
+                        invokeQueue.Enqueue(o);
+                    }
+                }
+            }
+            dic.Remove(id);
+        }
+        else if (syncObjects.ContainsKey(id))
+        {
+            if (opcode == (int)BaseOpcode.SCException)
+            {
+                SCException exception = SCException.Deserialize(data);
+                resoveSCException(exception);
+            }
+            else
+            {
+
+            }
+            SyncObject syncObject = syncObjects[id];
+            Monitor.Enter(syncObject);
+            syncObject.Data = data;
+            syncObject.Opcode = opcode;
+            syncObjects.Remove(id);
+            Monitor.Pulse(syncObject);
+            Monitor.Exit(syncObject);
+        }
+        else
+        {
+            // 推送消息
+            if (opcode == (int)BaseOpcode.SCException)
+            {
+                SCException exception = SCException.Deserialize(data);
+                resoveSCException(exception);
+            }
+            else
+            {
+                if (serverSendData.ContainsKey(opcode))
+                {
+                    ActionForReceive action = serverSendData[opcode];
+                    AsyncObject o = new AsyncObject();
+                    o.Opcode = opcode;
+                    o.Data = data;
+                    o.action = action;
+                    lock (invokeQueue)
+                    {
+                        invokeQueue.Enqueue(o);
+                    }
+                }
+                //                          Debug.Log("opcode = "+opcode+",");
+            }
+        }
+    }
 
 	private static void resoveSCException(SCException exception){
         // 有些exception不弹窗，不报警

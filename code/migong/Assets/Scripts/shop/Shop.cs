@@ -7,7 +7,7 @@ using Example;
 using UnityEngine.EventSystems;
 
 public class Shop : MonoBehaviour {
-	private const int goldMoneyRate = 10;
+	private decimal goldMoneyRate = 10;
 
 	private Dictionary<int,GameObject> itemGo = new Dictionary<int, GameObject> ();
 
@@ -144,31 +144,94 @@ public class Shop : MonoBehaviour {
 
 		itemGo.Clear ();
 
-		Object shopItemObj = Resources.Load ("shopItem3");
-		RectTransform contentTrans = contentGo.GetComponent<RectTransform> ();
-		contentTrans.sizeDelta = new Vector2 (0,140 * Params.peckTables.Count);
+        Dictionary<int, string> products = new Dictionary<int, string>();
+        foreach (PeckTable peckTable in Params.peckTables.Values){
+            products.Add(peckTable.Id,"s_"+peckTable.Price);
+        }
 
-		int index = 0;
-		foreach (PeckTable peckTable in Params.peckTables.Values) {
-			GameObject go = Instantiate(shopItemObj) as GameObject;
+        Purchaser.ins().InitializePurchasing(delegate(bool success) {
+            if(success){
+                //
+                Purchaser.ins().buyCallBack = buyCallBack;
+                //
+                Object shopItemObj = Resources.Load("shopItem3");
+                RectTransform contentTrans = contentGo.GetComponent<RectTransform>();
+                contentTrans.sizeDelta = new Vector2(0, 140 * Params.peckTables.Count);
 
-			ShopItem si = go.GetComponent<ShopItem>();
-			si.shop = this;
-			si.type = ShopType.Peck;
-			si.id = peckTable.Id;
-			si.gold = peckTable.gold;
-			si.goldNum = peckTable.goldNum;
-			si.items = peckTable.Items;
-			si.price = calOriginPrice (peckTable.gold,peckTable.Items);
-			si.price2 = peckTable.Price;
-			si.isDiscount = true;
+                // goldMoneyRate
+                ProductInfo onePi = Purchaser.ins().productInfos[1];
+                PeckTable onePt = Params.peckTables[1];
+                goldMoneyRate = onePi.price / onePt.goldNum;
 
-			go.transform.localPosition = new Vector3 (0,-140 * index++,0);
+                int index = 0;
+                foreach(KeyValuePair<int,ProductInfo> pi in Purchaser.ins().productInfos){
+                    PeckTable peckTable = Params.peckTables[pi.Key];
+                    GameObject go = Instantiate(shopItemObj) as GameObject;
 
-			go.transform.localScale = new Vector3 (1,1,1);
-			go.transform.SetParent(contentGo.transform,false);
-		}
+                    ShopItem si = go.GetComponent<ShopItem>();
+                    si.shop = this;
+                    si.type = ShopType.Peck;
+                    si.id = peckTable.Id;
+                    si.gold = peckTable.gold;
+                    si.goldNum = peckTable.goldNum;
+                    si.items = peckTable.Items;
+                    //Mathf.
+                    si.price = decimal.Round(calOriginPrice(peckTable.gold, peckTable.Items),2);
+                    //si.price = calOriginPrice(peckTable.gold, peckTable.Items);
+                    si.price2 = decimal.Round(pi.Value.price,2);
+                    //si.price2 = pi.Value.price;//peckTable.Price;
+                    si.isDiscount = true;
+
+                    go.transform.localPosition = new Vector3(0, -140 * index++, 0);
+
+                    go.transform.localScale = new Vector3(1, 1, 1);
+                    go.transform.SetParent(contentGo.transform, false);
+                }
+
+                //int index = 0;
+                //foreach (PeckTable peckTable in Params.peckTables.Values)
+                //{
+                //    GameObject go = Instantiate(shopItemObj) as GameObject;
+
+                //    ShopItem si = go.GetComponent<ShopItem>();
+                //    si.shop = this;
+                //    si.type = ShopType.Peck;
+                //    si.id = peckTable.Id;
+                //    si.gold = peckTable.gold;
+                //    si.goldNum = peckTable.goldNum;
+                //    si.items = peckTable.Items;
+                //    si.price = calOriginPrice(peckTable.gold, peckTable.Items);
+                //    si.price2 = peckTable.Price;
+                //    si.isDiscount = true;
+
+                //    go.transform.localPosition = new Vector3(0, -140 * index++, 0);
+
+                //    go.transform.localScale = new Vector3(1, 1, 1);
+                //    go.transform.SetParent(contentGo.transform, false);
+                //}
+            }
+        },products);
 	}
+    //
+    public void buyCallBack(string id, bool success, string token)
+    {
+        if (success)
+        {
+            // 请求发货
+            CSMoneyBuy moneyBuy = new CSMoneyBuy();
+            moneyBuy.Id = int.Parse(id);
+            moneyBuy.Num = 1;//int.Parse(showNum.text);
+            moneyBuy.Token = token;//System.DateTime.Now.Ticks.ToString();
+            SocketManager.SendMessageAsyc((int)MiGongOpcode.CSMoneyBuy, CSMoneyBuy.SerializeToBytes(moneyBuy), delegate (int opcode2, byte[] data2) {
+                SCMoneyBuy ret2 = SCMoneyBuy.Deserialize(data2);
+                buyFinish(ret2.Success > 0, (int)ShopType.Peck, int.Parse(id), 1, ret2.Gold);
+            });
+        }
+        else
+        {
+            WarnDialog.showWarnDialog(Message.getText("buyFail"));
+        }
+    }
 	// 买完回调
 	public void buyFinish(bool success,int shopType,int id,int num,int gold){
 		if (!success) {
@@ -226,9 +289,9 @@ public class Shop : MonoBehaviour {
 	}
 
 	// 计算peck礼包的原价
-	private int calOriginPrice(int gold , Dictionary<int,int> items){
+    private decimal calOriginPrice(int gold , Dictionary<int,int> items){
 		int allGold = gold + calOriginPrice (items);
-		int ret = allGold / goldMoneyRate;
+		decimal ret = allGold * goldMoneyRate;
 		return ret;
 	}
 	// 计算unit套装的原价

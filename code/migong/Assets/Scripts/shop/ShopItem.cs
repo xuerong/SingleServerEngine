@@ -14,8 +14,8 @@ public class ShopItem: MonoBehaviour {
 	public int gold;
 	public int goldNum;
 	public Dictionary<int,int> items;
-	public int price; // 原价
-	public int price2; // 现价
+	public decimal price; // 原价
+    public decimal price2; // 现价
 	public bool isDiscount;
 
 	public Image image;
@@ -36,7 +36,7 @@ public class ShopItem: MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //
-        this.purchaser = shop.gameObject.GetComponent<Purchaser>();
+        this.purchaser = Purchaser.ins();//shop.gameObject.GetComponent<Purchaser>();
 		// 图片
 		if (type == ShopType.Item) {
 			image.sprite = getSprite(id);
@@ -107,17 +107,7 @@ public class ShopItem: MonoBehaviour {
 					SCMoneyBuyBefore ret = SCMoneyBuyBefore.Deserialize(data);
 					if(ret.IsOk>0){
                         // 支付
-                        purchaser.BuyProductID("s_2");
-                        //purchaser.get
-                        // 请求发货
-						CSMoneyBuy moneyBuy = new CSMoneyBuy();
-						moneyBuy.Id = id;
-						moneyBuy.Num = int.Parse(showNum.text);
-						moneyBuy.Token = System.DateTime.Now.Ticks.ToString();
-						SocketManager.SendMessageAsyc((int)MiGongOpcode.CSMoneyBuy,CSMoneyBuy.SerializeToBytes(moneyBuy),delegate(int opcode2, byte[] data2) {
-							SCMoneyBuy ret2 = SCMoneyBuy.Deserialize(data2);
-							shop.buyFinish(ret2.Success>0,(int)type,id,int.Parse(showNum.text),ret2.Gold);
-						});
+                        purchaser.BuyProductID(id.ToString());
 					}else{
 						Debug.Log(ret.Reason);
 						shop.buyFinish(false,(int)type,id,int.Parse(showNum.text),Params.gold);
@@ -127,6 +117,22 @@ public class ShopItem: MonoBehaviour {
 		});
 	}
 
+    public void buyBack(string id,bool success,string token){
+        if(success){
+            // 请求发货
+            CSMoneyBuy moneyBuy = new CSMoneyBuy();
+            moneyBuy.Id = int.Parse(id);
+            moneyBuy.Num = int.Parse(showNum.text);
+            moneyBuy.Token = token;//System.DateTime.Now.Ticks.ToString();
+            SocketManager.SendMessageAsyc((int)MiGongOpcode.CSMoneyBuy, CSMoneyBuy.SerializeToBytes(moneyBuy), delegate (int opcode2, byte[] data2) {
+                SCMoneyBuy ret2 = SCMoneyBuy.Deserialize(data2);
+                shop.buyFinish(ret2.Success > 0, (int)type, int.Parse(id), int.Parse(showNum.text), ret2.Gold);
+            });
+        }else{
+            WarnDialog.showWarnDialog(Message.getText("buyFail"));
+        }
+    }
+   
 	// add shopitemimage
 	private void addShopItemItem(GameObject go,Sprite sp,int num,int x){
 		Image image = go.transform.Find ("image").GetComponent<Image> ();
@@ -144,9 +150,9 @@ public class ShopItem: MonoBehaviour {
 	}
 	//
 	private void showPrice(int num){
-		priceText.text = (price*num).ToString();
+        priceText.text = Purchaser.ins().currency+(price*num).ToString();
 		if (isDiscount) {
-			price2Text.text = (price2 * num).ToString ();
+            price2Text.text = Purchaser.ins().currency+(price2 * num).ToString ();
 		} else {
 			// 调整位置
 

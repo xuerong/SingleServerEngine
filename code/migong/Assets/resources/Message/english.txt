@@ -70,3 +70,12 @@ star=star
 
 gainReward=gain reward
 dailyReward=daily reward
+
+pass=pass
+rank=rank
+player=player
+ladderScore=score
+ladderTitle=title
+gameTimes=times
+
+passNotOpen=pass not open

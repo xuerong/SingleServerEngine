@@ -81,6 +81,16 @@ public class MapCreate : MonoBehaviour{
 
 	public bool gameOver = false;
 
+    //doors
+    public GameObject door1;
+    public GameObject door2;
+    public GameObject door3;
+    public GameObject door4;
+    //door wall
+    private GameObject door1Wall;
+    private GameObject door2Wall;
+    private GameObject door3Wall;
+    private GameObject door4Wall;
 
 	public Dictionary<string,Pacman> pacmanMap = new Dictionary<string, Pacman> ();
 	private Dictionary<string,Text> scoreText = new Dictionary<string, Text> ();
@@ -116,6 +126,31 @@ public class MapCreate : MonoBehaviour{
 		showSkillCountAndAddClick("showRoute",ItemType.ShowRoute);
 		//
 		if (Mode == MapMode.Online) {
+            // 屏蔽
+            starSlider.transform.parent.gameObject.SetActive(false);
+            transform.parent.parent.Find("Canvas/skills").gameObject.SetActive(false);
+            transform.parent.parent.Find("Canvas/score").gameObject.SetActive(false);
+            // time居中
+            transform.parent.parent.Find("Canvas/time").gameObject.SetActive(false);
+            //
+            foreach(KeyValuePair<string,Pacman> kv in pacmanMap){
+                int x = kv.Value.inX;
+                int y = kv.Value.inY;
+                Transform scoreShowtransform = null;
+                if (x < 2 && y < 2){
+                    scoreShowtransform = transform.parent.parent.Find("Canvas/onlineScoreShow/blue");
+                }else if (y > 2 && x < 2){
+                    scoreShowtransform = transform.parent.parent.Find("Canvas/onlineScoreShow/green");
+                }else if (y > 2 && x > 2){
+                    scoreShowtransform = transform.parent.parent.Find("Canvas/onlineScoreShow/red");
+                }else if (x > 2 && y < 2){
+                    scoreShowtransform = transform.parent.parent.Find("Canvas/onlineScoreShow/yellow");
+                }
+                scoreShowtransform.gameObject.SetActive(true);
+                scoreText.Add(kv.Key, scoreShowtransform.Find("Text").GetComponent<Text>());
+            }
+
+            //
 			SocketManager.AddServerSendReceive ((int)MiGongOpcode.SCSendEatBean,delegate(int opcode, byte[] data) {
 				SCSendEatBean ret = SCSendEatBean.Deserialize(data);
 				foreach(PBEatBeanInfo bean in ret.Beans){
@@ -244,6 +279,7 @@ public class MapCreate : MonoBehaviour{
 			}else{
 				Pacman pacman = pacmanMap [userMoveInfo.UserId];
 				pacman.MovePosiNorm = new Vector3(userMoveInfo.DirX,userMoveInfo.DirY,0);
+                pacman.changePos(pacman.MovePosiNorm);
 				//Debug.Log ("receive:"+userMoveInfo.PosX+","+userMoveInfo.PosY);
 				pacman.transform.localPosition = new Vector3 (userMoveInfo.PosX,userMoveInfo.PosY,pacman.transform.localPosition.z);
 			}
@@ -406,6 +442,15 @@ public class MapCreate : MonoBehaviour{
 					up.transform.parent = transform;
 					up.transform.localPosition = new Vector3 (x + j * nodeX, y + w * nodeY,0);
 					up.transform.localScale = new Vector3 (myScale,myScale,1);
+                    if(i==1 && j == 0){
+                        door1Wall = up;
+                    }else if (i == 1 && j == td - 1){
+                        door2Wall = up;
+                    }else if (i == tr-1 && j == td-1){
+                        door3Wall = up;
+                    }else if (i == tr-1 && j == 0){
+                        door4Wall = up;
+                    }
 				}
 				if (beanMap!= null && beanMap [i] [j] != null) {
 					int w = tr - i-1;
@@ -473,11 +518,36 @@ public class MapCreate : MonoBehaviour{
 
 	public void setEndEffect(int x,int y){
 		// 设置终点特效
-		GameObject endEffectGo = Instantiate(Resources.Load("endEffect")) as GameObject;
-		endEffectGo.transform.parent = transform.parent;
+		//GameObject endEffectGo = Instantiate(Resources.Load("endEffect")) as GameObject;
+		//endEffectGo.transform.parent = transform.parent;
 		float localX = y * nodeY;
 		float localY = (tr - x - 1)* nodeX;
-		endEffectGo.transform.localPosition = new Vector3(localX,localY,1);
+        //endEffectGo.transform.localPosition = new Vector3(localX,localY,1);
+        float doorScale = myScale * 0.6f;
+        if(x <2 && y <2){
+            door1.SetActive(true);
+            door1.transform.localPosition = new Vector3(localX-nodeY/2, localY, 1);
+            door1.transform.localScale = new Vector3(doorScale,doorScale,1);
+            door1Wall.SetActive(false);
+        }else if (y > 2 && x < 2)
+        {
+            door2.SetActive(true);
+            door2.transform.localPosition = new Vector3(localX+ nodeY / 2, localY, 1);
+            door2.transform.localScale = new Vector3(doorScale, doorScale, 1);
+            door2Wall.SetActive(false);
+        }else if (y > 2 && x > 2)
+        {
+            door3.SetActive(true);
+            door3.transform.localPosition = new Vector3(localX+ nodeY / 2, localY, 1);
+            door3.transform.localScale = new Vector3(doorScale, doorScale, 1);
+            door3Wall.SetActive(false);
+        }else if (x > 2 && y < 2)
+        {
+            door4.SetActive(true);
+            door4.transform.localPosition = new Vector3(localX- nodeY / 2, localY, 1);
+            door4.transform.localScale = new Vector3(doorScale, doorScale, 1);
+            door4Wall.SetActive(false);
+        }
 	}
 
 	public void OnSliderChange(float value){
