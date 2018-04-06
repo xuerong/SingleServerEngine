@@ -4,6 +4,7 @@ import com.mm.engine.framework.control.annotation.Service;
 import com.mm.engine.framework.control.annotation.Updatable;
 import com.mm.engine.framework.control.event.EventService;
 import com.mm.engine.framework.data.DataService;
+import com.mm.engine.framework.data.entity.account.Account;
 import com.mm.engine.framework.tool.helper.BeanHelper;
 import com.sys.SysPara;
 import org.slf4j.Logger;
@@ -61,7 +62,7 @@ public class MonitorService {
     // 定时访问一下数据库
     @Updatable(isAsynchronous = true,cycle = 300000)
     public void monitorDataBase(int interval){
-        dataService.selectCountBySql("select 1");
+        dataService.selectListBySql(Account.class,"select * from account limit 1");
     }
 
     public synchronized void addStartCondition(String key,String describe){

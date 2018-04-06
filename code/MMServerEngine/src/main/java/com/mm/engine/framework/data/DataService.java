@@ -337,6 +337,7 @@ public class DataService {
         objectList = DatabaseHelper.queryEntityList(entityClass, sql, params);
         return objectList;
     }
+
     /**
      * 删除一个实体,condition必须是主键
      *

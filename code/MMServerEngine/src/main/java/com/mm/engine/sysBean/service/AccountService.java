@@ -261,7 +261,7 @@ public class AccountService {
         Account account = dataService.selectObject(Account.class,"id=?",session.getAccountId());
         AccountPB.SCUserInfo.Builder builder = AccountPB.SCUserInfo.newBuilder();
         builder.setIcon(account.getIcon());
-        builder.setName(account.getIcon());
+        builder.setName(account.getName());
         builder.setId(account.getId());
         RetPacket retPacket = new RetPacketImpl(AccountOpcode.SCUserInfo,false,builder.build().toByteArray());
         return retPacket;
