@@ -197,6 +197,7 @@ public class AccountSysService {
         Account account = new Account();
         account.setId(id);
         account.setName(id); // todo 暂时用这个
+        account.setIcon("default");
         Timestamp curTime = new Timestamp(System.currentTimeMillis());
         account.setCreateTime(curTime);
         account.setLastLoginTime(curTime);

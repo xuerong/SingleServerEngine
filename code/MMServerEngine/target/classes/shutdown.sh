@@ -20,3 +20,9 @@ else
         fi
     done
 fi
+pid=`ps -ef |grep "tail -f ./logs/dynasty2.out."|grep -v grep|awk '{print $2}'`
+if [[ -z $pid ]] ; then
+    echo "--"
+else
+    kill -9 $pid
+fi

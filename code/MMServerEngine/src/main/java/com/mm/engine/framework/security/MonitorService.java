@@ -3,6 +3,7 @@ package com.mm.engine.framework.security;
 import com.mm.engine.framework.control.annotation.Service;
 import com.mm.engine.framework.control.annotation.Updatable;
 import com.mm.engine.framework.control.event.EventService;
+import com.mm.engine.framework.data.DataService;
 import com.mm.engine.framework.tool.helper.BeanHelper;
 import com.sys.SysPara;
 import org.slf4j.Logger;
@@ -29,6 +30,7 @@ public class MonitorService {
     private Map<String,String> conditions = new HashMap<>();
 
     private EventService eventService;
+    private DataService dataService;
 
     public void init(){
         eventService = BeanHelper.getServiceBean(EventService.class);
@@ -55,6 +57,11 @@ public class MonitorService {
         log.info("server is ok!");
         System.out.println("server is ok!");
         // 下下策，每隔
+    }
+    // 定时访问一下数据库
+    @Updatable(isAsynchronous = true,cycle = 300000)
+    public void monitorDataBase(int interval){
+        dataService.selectCountBySql("select 1");
     }
 
     public synchronized void addStartCondition(String key,String describe){

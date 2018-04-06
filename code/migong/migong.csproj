@@ -343,6 +343,7 @@
     <Compile Include="Assets\Scripts\protobuf\RoomPB.Serializer.cs" />
     <Compile Include="Assets\Scripts\shop\Shop.cs" />
     <Compile Include="Assets\Scripts\shop\ShopItem.cs" />
+    <Compile Include="Assets\Scripts\ShowAccount.cs" />
     <Compile Include="Assets\Scripts\SocketManager.cs" />
     <Compile Include="Assets\Scripts\SocketTest.cs" />
     <Compile Include="Assets\Scripts\util\LocalizationImage.cs" />

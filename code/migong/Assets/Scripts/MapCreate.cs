@@ -545,25 +545,25 @@ public class MapCreate : MonoBehaviour{
         if(x <2 && y <2){
             door1.SetActive(true);
             door1.transform.localPosition = new Vector3(localX-nodeY/2, localY, 1);
-            door1.transform.localScale = new Vector3(doorScale,doorScale,1);
+            door1.transform.localScale = new Vector3(door1.transform.localScale.x * doorScale,doorScale,1);
             door1Wall.SetActive(false);
         }else if (y > 2 && x < 2)
         {
             door2.SetActive(true);
             door2.transform.localPosition = new Vector3(localX+ nodeY / 2, localY, 1);
-            door2.transform.localScale = new Vector3(doorScale, doorScale, 1);
+            door2.transform.localScale = new Vector3(door2.transform.localScale.x * doorScale, doorScale, 1);
             door2Wall.SetActive(false);
         }else if (y > 2 && x > 2)
         {
             door3.SetActive(true);
             door3.transform.localPosition = new Vector3(localX+ nodeY / 2, localY, 1);
-            door3.transform.localScale = new Vector3(doorScale, doorScale, 1);
+            door3.transform.localScale = new Vector3(door3.transform.localScale.x * doorScale, doorScale, 1);
             door3Wall.SetActive(false);
         }else if (x > 2 && y < 2)
         {
             door4.SetActive(true);
             door4.transform.localPosition = new Vector3(localX- nodeY / 2, localY, 1);
-            door4.transform.localScale = new Vector3(doorScale, doorScale, 1);
+            door4.transform.localScale = new Vector3(door4.transform.localScale.x * doorScale, doorScale, 1);
             door4Wall.SetActive(false);
         }
 	}

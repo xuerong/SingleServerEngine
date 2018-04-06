@@ -404,7 +404,7 @@ public class SocketManager : MonoBehaviour {
                         if (size > length - 12){
                             break;
                         }
-                        Debug.Log("size:" + size + ",opcode:" + opcode + ",id:" + id+","+length + "------" + size);
+                        //Debug.Log("size:" + size + ",opcode:" + opcode + ",id:" + id+","+length + "------" + size);
                         if (length - size > 12){
                             Debug.Log("warn:--------------------------" + length + "------" + size);
                         }

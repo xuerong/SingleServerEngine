@@ -1,6 +1,6 @@
 ﻿<Properties StartupConfiguration="{BEBDD387-0BA1-B4BF-4CF7-4288551F7D1D}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainPanel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/util/LocalizationImageManager.cs">
     <Files>
       <File FileName="Assets/Scripts/util/Sound.cs" Line="40" Column="4" />
       <File FileName="Assets/resources/Message/chinese.txt" Line="83" Column="8" />
@@ -10,20 +10,18 @@
       <File FileName="Assets/Scripts/WarnDialog.cs" Line="189" Column="12" />
       <File FileName="Assets/Scripts/Job.cs" Line="74" Column="20" />
       <File FileName="Assets/Scripts/params/EnergyUpdable.cs" Line="26" Column="1" />
-      <File FileName="Assets/Scripts/util/Util.cs" Line="22" Column="41" />
+      <File FileName="Assets/Scripts/util/Util.cs" Line="30" Column="1" />
       <File FileName="Assets/Scripts/packet/Packet.cs" Line="154" Column="21" />
       <File FileName="Assets/TextCollision.cs" Line="21" Column="25" />
       <File FileName="Assets/Scripts/JoystackCc.cs" Line="64" Column="29" />
       <File FileName="Assets/Scripts/Enemy.cs" Line="21" Column="1" />
       <File FileName="Assets/Scripts/packet/PacketItem.cs" Line="6" Column="42" />
-      <File FileName="Assets/Scripts/Help.cs" Line="44" Column="5" />
       <File FileName="Assets/resources/Message/english.txt" Line="81" Column="26" />
       <File FileName="Assets/Scripts/protobuf/MiGongOpcode.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/UnityPurchasing/script/IAPListener.cs" Line="39" Column="61" />
       <File FileName="Assets/Plugins/UnityPurchasing/script/IAPDemo.cs" Line="30" Column="44" />
       <File FileName="Assets/resources/Message/chinesesimplified.txt" Line="89" Column="19" />
       <File FileName="Assets/Scripts/ButtonIndex.cs" Line="36" Column="62" />
-      <File FileName="Assets/Scripts/MainPanel.cs" Line="641" Column="50" />
       <File FileName="Assets/Scripts/params/SpriteCache.cs" Line="12" Column="23" />
       <File FileName="Assets/Scripts/Pacman.cs" Line="217" Column="9" />
       <File FileName="Assets/Scripts/shop/ShopItem.cs" Line="134" Column="6" />
@@ -32,9 +30,14 @@
       <File FileName="Assets/Scripts/params/Params.cs" Line="25" Column="42" />
       <File FileName="Assets/Scripts/ByteBuffer.cs" Line="105" Column="14" />
       <File FileName="Assets/Scripts/protobuf/MiGongPB.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/SocketManager.cs" Line="436" Column="1" />
-      <File FileName="Assets/Scripts/MapCreate.cs" Line="519" Column="13" />
+      <File FileName="Assets/Scripts/SocketManager.cs" Line="413" Column="45" />
+      <File FileName="Assets/Scripts/MapCreate.cs" Line="336" Column="136" />
       <File FileName="Assets/Scripts/DragControl.cs" Line="36" Column="17" />
+      <File FileName="Assets/Scripts/Help.cs" Line="31" Column="12" />
+      <File FileName="Assets/Scripts/ShowAccount.cs" Line="68" Column="32" />
+      <File FileName="Assets/Scripts/MainPanel.cs" Line="591" Column="18" />
+      <File FileName="Assets/Scripts/util/LocalizationImage.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/util/LocalizationImageManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

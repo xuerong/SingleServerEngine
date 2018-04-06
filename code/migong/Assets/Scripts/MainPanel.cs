@@ -20,6 +20,7 @@ public class MainPanel : MonoBehaviour {
 	public GameObject uiOnline;
 
 	public GameObject uiHelp;
+    public GameObject uiAccount;
 
 	public GameObject uiPacket;
 	public GameObject uiShop;
@@ -324,8 +325,9 @@ public class MainPanel : MonoBehaviour {
 	}
 
 	void doAccount(){
-		// TODO 账号要开发者认证 300块/年
-//		ssdk.Authorize(PlatformType.WeChat);
+        // TODO 账号要开发者认证 300块/年
+        //		ssdk.Authorize(PlatformType.WeChat);
+        uiAccount.SetActive(true);
 	}
 	// 账号回调
 	void GetUserInfoResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)

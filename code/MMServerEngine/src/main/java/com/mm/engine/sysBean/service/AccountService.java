@@ -232,6 +232,41 @@ public class AccountService {
         return retPacket;
     }
 
+    @Tx
+    @Request(opcode = AccountOpcode.CSChangeUserInfo)
+    public RetPacket changeInfo(Object data,Session session) throws Throwable{
+        AccountPB.CSChangeUserInfo changeUserInfo = AccountPB.CSChangeUserInfo.parseFrom((byte[])data);
+        String name = changeUserInfo.getName();
+        String icon = changeUserInfo.getIcon();
+        if(StringUtils.isEmpty(name) && StringUtils.isEmpty(icon)){
+            throw new ToClientException(LocalizationMessage.getText("invalidOper"));
+        }
+        Account account = dataService.selectObject(Account.class,"id=?",session.getAccountId());
+        if(StringUtils.isNotEmpty(name)) {
+            account.setName(name);
+        }
+        if(StringUtils.isNotEmpty(icon)){
+            account.setIcon(icon);
+        }
+        dataService.update(account);
+
+        AccountPB.SCChangeUserInfo.Builder builder = AccountPB.SCChangeUserInfo.newBuilder();
+        RetPacket retPacket = new RetPacketImpl(AccountOpcode.SCLogout,false,builder.build().toByteArray());
+        return retPacket;
+    }
+
+    @Request(opcode = AccountOpcode.CSUserInfo)
+    public RetPacket getUserInfo(Object data,Session session) throws Throwable{
+        AccountPB.CSUserInfo userInfo = AccountPB.CSUserInfo.parseFrom((byte[])data);
+        Account account = dataService.selectObject(Account.class,"id=?",session.getAccountId());
+        AccountPB.SCUserInfo.Builder builder = AccountPB.SCUserInfo.newBuilder();
+        builder.setIcon(account.getIcon());
+        builder.setName(account.getIcon());
+        builder.setId(account.getId());
+        RetPacket retPacket = new RetPacketImpl(AccountOpcode.SCUserInfo,false,builder.build().toByteArray());
+        return retPacket;
+    }
+
     /**
      * 统计
      * 1玩家注册（新注册）
